@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lcyzh.nmerp.dao.TProdPlanMapper">
+
+    <resultMap id="tProdPlanResultMap" type="com.lcyzh.nmerp.entity.TProdPlan">
+        <id column="id" property="id" jdbcType="BIGINT"/> 
+        <result column="prod_plan_code" property="prodPlanCode" jdbcType="VARCHAR"/> 
+        <result column="ord_code" property="ordCode" jdbcType="VARCHAR"/> 
+        <result column="plan_status" property="planStatus" jdbcType="CHAR"/> 
+        <result column="oper_user_id" property="operUserId" jdbcType="BIGINT"/> 
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/> 
+
+        
+        
+    </resultMap>
+
+
+    <select id="get" resultMap="tProdPlanResultMap">
+        SELECT *
+        FROM T_PROD_PLAN
+        WHERE id = #{id}
+    </select>
+
+    <select id="findList" resultMap="tProdPlanResultMap">
+        SELECT *
+        FROM T_PROD_PLAN
+        <where>
+        </where>
+    </select>
+
+    <select id="findAllList" resultMap="tProdPlanResultMap">
+        SELECT *
+        FROM T_PROD_PLAN
+    </select>
+
+    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TProdPlan">
+        INSERT INTO T_PROD_PLAN(
+            id,
+            prod_plan_code,
+            ord_code,
+            plan_status,
+            oper_user_id,
+            create_time,
+            update_time
+        )
+        VALUES (
+            #{id,jdbcType=BIGINT},
+            #{prodPlanCode,jdbcType=VARCHAR},
+            #{ordCode,jdbcType=VARCHAR},
+            #{planStatus,jdbcType=CHAR},
+            #{operUserId,jdbcType=BIGINT},
+            #{createTime,jdbcType=TIMESTAMP},
+            #{updateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TProdPlan">
+        INSERT INTO T_PROD_PLAN(
+            id,
+            prod_plan_code,
+            ord_code,
+            plan_status,
+            oper_user_id,
+            create_time,
+            update_time
+        )
+        VALUES
+        <foreach collection ="list" item="tProdPlan" separator =",">
+        (
+            #{tProdPlan.id,jdbcType=BIGINT},
+            #{tProdPlan.prodPlanCode,jdbcType=VARCHAR},
+            #{tProdPlan.ordCode,jdbcType=VARCHAR},
+            #{tProdPlan.planStatus,jdbcType=CHAR},
+            #{tProdPlan.operUserId,jdbcType=BIGINT},
+            #{tProdPlan.createTime,jdbcType=TIMESTAMP},
+            #{tProdPlan.updateTime,jdbcType=TIMESTAMP}
+        )
+        </foreach>
+    </insert>
+
+    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TProdPlan">
+        UPDATE T_PROD_PLAN
+        SET
+        id = #{id},
+        prod_plan_code = #{prodPlanCode},
+        ord_code = #{ordCode},
+        plan_status = #{planStatus},
+        oper_user_id = #{operUserId},
+        create_time = #{createTime},
+        update_time = #{updateTime}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TProdPlan">
+        DELETE FROM T_PROD_PLAN
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

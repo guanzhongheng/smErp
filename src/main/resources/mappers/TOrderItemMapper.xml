@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lcyzh.nmerp.dao.TOrderItemMapper">
+
+    <resultMap id="tOrderItemResultMap" type="com.lcyzh.nmerp.entity.TOrderItem">
+        <id column="id" property="id" jdbcType="BIGINT"/> 
+        <result column="ord_code" property="ordCode" jdbcType="BIGINT"/> 
+        <result column="item_code" property="itemCode" jdbcType="VARCHAR"/> 
+        <result column="item_num" property="itemNum" jdbcType="DOUBLE"/> 
+        <result column="item_lenth" property="itemLenth" jdbcType="DOUBLE"/> 
+        <result column="item_width" property="itemWidth" jdbcType="DOUBLE"/> 
+        <result column="item_thick" property="itemThick" jdbcType="DOUBLE"/> 
+        <result column="item_color" property="itemColor" jdbcType="VARCHAR"/> 
+        <result column="item_weight" property="itemWeight" jdbcType="DOUBLE"/> 
+        <result column="item_owner" property="itemOwner" jdbcType="VARCHAR"/> 
+        <result column="remark" property="remark" jdbcType="VARCHAR"/> 
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
+
+        
+        
+    </resultMap>
+
+
+    <select id="get" resultMap="tOrderItemResultMap">
+        SELECT *
+        FROM T_ORDER_ITEM
+        WHERE id = #{id}
+    </select>
+
+    <select id="findList" resultMap="tOrderItemResultMap">
+        SELECT *
+        FROM T_ORDER_ITEM
+        <where>
+        </where>
+    </select>
+
+    <select id="findAllList" resultMap="tOrderItemResultMap">
+        SELECT *
+        FROM T_ORDER_ITEM
+    </select>
+
+    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TOrderItem">
+        INSERT INTO T_ORDER_ITEM(
+            id,
+            ord_code,
+            item_code,
+            item_num,
+            item_lenth,
+            item_width,
+            item_thick,
+            item_color,
+            item_weight,
+            item_owner,
+            remark,
+            create_time
+        )
+        VALUES (
+            #{id,jdbcType=BIGINT},
+            #{ordCode,jdbcType=BIGINT},
+            #{itemCode,jdbcType=VARCHAR},
+            #{itemNum,jdbcType=DOUBLE},
+            #{itemLenth,jdbcType=DOUBLE},
+            #{itemWidth,jdbcType=DOUBLE},
+            #{itemThick,jdbcType=DOUBLE},
+            #{itemColor,jdbcType=VARCHAR},
+            #{itemWeight,jdbcType=DOUBLE},
+            #{itemOwner,jdbcType=VARCHAR},
+            #{remark,jdbcType=VARCHAR},
+            #{createTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TOrderItem">
+        INSERT INTO T_ORDER_ITEM(
+            id,
+            ord_code,
+            item_code,
+            item_num,
+            item_lenth,
+            item_width,
+            item_thick,
+            item_color,
+            item_weight,
+            item_owner,
+            remark,
+            create_time
+        )
+        VALUES
+        <foreach collection ="list" item="tOrderItem" separator =",">
+        (
+            #{tOrderItem.id,jdbcType=BIGINT},
+            #{tOrderItem.ordCode,jdbcType=BIGINT},
+            #{tOrderItem.itemCode,jdbcType=VARCHAR},
+            #{tOrderItem.itemNum,jdbcType=DOUBLE},
+            #{tOrderItem.itemLenth,jdbcType=DOUBLE},
+            #{tOrderItem.itemWidth,jdbcType=DOUBLE},
+            #{tOrderItem.itemThick,jdbcType=DOUBLE},
+            #{tOrderItem.itemColor,jdbcType=VARCHAR},
+            #{tOrderItem.itemWeight,jdbcType=DOUBLE},
+            #{tOrderItem.itemOwner,jdbcType=VARCHAR},
+            #{tOrderItem.remark,jdbcType=VARCHAR},
+            #{tOrderItem.createTime,jdbcType=TIMESTAMP}
+        )
+        </foreach>
+    </insert>
+
+    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TOrderItem">
+        UPDATE T_ORDER_ITEM
+        SET
+        id = #{id},
+        ord_code = #{ordCode},
+        item_code = #{itemCode},
+        item_num = #{itemNum},
+        item_lenth = #{itemLenth},
+        item_width = #{itemWidth},
+        item_thick = #{itemThick},
+        item_color = #{itemColor},
+        item_weight = #{itemWeight},
+        item_owner = #{itemOwner},
+        remark = #{remark},
+        create_time = #{createTime}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TOrderItem">
+        DELETE FROM T_ORDER_ITEM
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

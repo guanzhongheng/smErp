@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lcyzh.nmerp.dao.TRetrunMaterialInfoMapper">
+
+    <resultMap id="tRetrunMaterialInfoResultMap" type="com.lcyzh.nmerp.entity.TRetrunMaterialInfo">
+        <id column="id" property="id" jdbcType="BIGINT"/> 
+        <result column="return_code" property="returnCode" jdbcType="VARCHAR"/> 
+        <result column="launch_user_id" property="launchUserId" jdbcType="BIGINT"/> 
+        <result column="status" property="status" jdbcType="CHAR"/> 
+        <result column="remark" property="remark" jdbcType="VARCHAR"/> 
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/> 
+
+        
+        
+    </resultMap>
+
+
+    <select id="get" resultMap="tRetrunMaterialInfoResultMap">
+        SELECT *
+        FROM T_RETRUN_MATERIAL_INFO
+        WHERE id = #{id}
+    </select>
+
+    <select id="findList" resultMap="tRetrunMaterialInfoResultMap">
+        SELECT *
+        FROM T_RETRUN_MATERIAL_INFO
+        <where>
+        </where>
+    </select>
+
+    <select id="findAllList" resultMap="tRetrunMaterialInfoResultMap">
+        SELECT *
+        FROM T_RETRUN_MATERIAL_INFO
+    </select>
+
+    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TRetrunMaterialInfo">
+        INSERT INTO T_RETRUN_MATERIAL_INFO(
+            id,
+            return_code,
+            launch_user_id,
+            status,
+            remark,
+            create_time,
+            update_time
+        )
+        VALUES (
+            #{id,jdbcType=BIGINT},
+            #{returnCode,jdbcType=VARCHAR},
+            #{launchUserId,jdbcType=BIGINT},
+            #{status,jdbcType=CHAR},
+            #{remark,jdbcType=VARCHAR},
+            #{createTime,jdbcType=TIMESTAMP},
+            #{updateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TRetrunMaterialInfo">
+        INSERT INTO T_RETRUN_MATERIAL_INFO(
+            id,
+            return_code,
+            launch_user_id,
+            status,
+            remark,
+            create_time,
+            update_time
+        )
+        VALUES
+        <foreach collection ="list" item="tRetrunMaterialInfo" separator =",">
+        (
+            #{tRetrunMaterialInfo.id,jdbcType=BIGINT},
+            #{tRetrunMaterialInfo.returnCode,jdbcType=VARCHAR},
+            #{tRetrunMaterialInfo.launchUserId,jdbcType=BIGINT},
+            #{tRetrunMaterialInfo.status,jdbcType=CHAR},
+            #{tRetrunMaterialInfo.remark,jdbcType=VARCHAR},
+            #{tRetrunMaterialInfo.createTime,jdbcType=TIMESTAMP},
+            #{tRetrunMaterialInfo.updateTime,jdbcType=TIMESTAMP}
+        )
+        </foreach>
+    </insert>
+
+    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TRetrunMaterialInfo">
+        UPDATE T_RETRUN_MATERIAL_INFO
+        SET
+        id = #{id},
+        return_code = #{returnCode},
+        launch_user_id = #{launchUserId},
+        status = #{status},
+        remark = #{remark},
+        create_time = #{createTime},
+        update_time = #{updateTime}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TRetrunMaterialInfo">
+        DELETE FROM T_RETRUN_MATERIAL_INFO
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

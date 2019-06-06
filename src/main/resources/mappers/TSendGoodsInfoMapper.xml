@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lcyzh.nmerp.dao.TSendGoodsInfoMapper">
+
+    <resultMap id="tSendGoodsInfoResultMap" type="com.lcyzh.nmerp.entity.TSendGoodsInfo">
+        <id column="id" property="id" jdbcType="BIGINT"/> 
+        <result column="sgi_code" property="sgiCode" jdbcType="VARCHAR"/> 
+        <result column="driver_name" property="driverName" jdbcType="VARCHAR"/> 
+        <result column="driver_phone" property="driverPhone" jdbcType="VARCHAR"/> 
+        <result column="driver_car_no" property="driverCarNo" jdbcType="VARCHAR"/> 
+        <result column="ord_code" property="ordCode" jdbcType="VARCHAR"/> 
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
+
+        
+        
+    </resultMap>
+
+
+    <select id="get" resultMap="tSendGoodsInfoResultMap">
+        SELECT *
+        FROM T_SEND_GOODS_INFO
+        WHERE id = #{id}
+    </select>
+
+    <select id="findList" resultMap="tSendGoodsInfoResultMap">
+        SELECT *
+        FROM T_SEND_GOODS_INFO
+        <where>
+        </where>
+    </select>
+
+    <select id="findAllList" resultMap="tSendGoodsInfoResultMap">
+        SELECT *
+        FROM T_SEND_GOODS_INFO
+    </select>
+
+    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TSendGoodsInfo">
+        INSERT INTO T_SEND_GOODS_INFO(
+            id,
+            sgi_code,
+            driver_name,
+            driver_phone,
+            driver_car_no,
+            ord_code,
+            create_time
+        )
+        VALUES (
+            #{id,jdbcType=BIGINT},
+            #{sgiCode,jdbcType=VARCHAR},
+            #{driverName,jdbcType=VARCHAR},
+            #{driverPhone,jdbcType=VARCHAR},
+            #{driverCarNo,jdbcType=VARCHAR},
+            #{ordCode,jdbcType=VARCHAR},
+            #{createTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TSendGoodsInfo">
+        INSERT INTO T_SEND_GOODS_INFO(
+            id,
+            sgi_code,
+            driver_name,
+            driver_phone,
+            driver_car_no,
+            ord_code,
+            create_time
+        )
+        VALUES
+        <foreach collection ="list" item="tSendGoodsInfo" separator =",">
+        (
+            #{tSendGoodsInfo.id,jdbcType=BIGINT},
+            #{tSendGoodsInfo.sgiCode,jdbcType=VARCHAR},
+            #{tSendGoodsInfo.driverName,jdbcType=VARCHAR},
+            #{tSendGoodsInfo.driverPhone,jdbcType=VARCHAR},
+            #{tSendGoodsInfo.driverCarNo,jdbcType=VARCHAR},
+            #{tSendGoodsInfo.ordCode,jdbcType=VARCHAR},
+            #{tSendGoodsInfo.createTime,jdbcType=TIMESTAMP}
+        )
+        </foreach>
+    </insert>
+
+    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TSendGoodsInfo">
+        UPDATE T_SEND_GOODS_INFO
+        SET
+        id = #{id},
+        sgi_code = #{sgiCode},
+        driver_name = #{driverName},
+        driver_phone = #{driverPhone},
+        driver_car_no = #{driverCarNo},
+        ord_code = #{ordCode},
+        create_time = #{createTime}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TSendGoodsInfo">
+        DELETE FROM T_SEND_GOODS_INFO
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lcyzh.nmerp.dao.TRetrunProdDetailMapper">
+
+    <resultMap id="tRetrunProdDetailResultMap" type="com.lcyzh.nmerp.entity.TRetrunProdDetail">
+        <id column="id" property="id" jdbcType="BIGINT"/> 
+        <result column="return_code" property="returnCode" jdbcType="VARCHAR"/> 
+        <result column="prod_code" property="prodCode" jdbcType="VARCHAR"/> 
+        <result column="prod_num" property="prodNum" jdbcType="DOUBLE"/> 
+        <result column="prod_spec" property="prodSpec" jdbcType="VARCHAR"/> 
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
+
+        
+        
+    </resultMap>
+
+
+    <select id="get" resultMap="tRetrunProdDetailResultMap">
+        SELECT *
+        FROM T_RETRUN_PROD_DETAIL
+        WHERE id = #{id}
+    </select>
+
+    <select id="findList" resultMap="tRetrunProdDetailResultMap">
+        SELECT *
+        FROM T_RETRUN_PROD_DETAIL
+        <where>
+        </where>
+    </select>
+
+    <select id="findAllList" resultMap="tRetrunProdDetailResultMap">
+        SELECT *
+        FROM T_RETRUN_PROD_DETAIL
+    </select>
+
+    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TRetrunProdDetail">
+        INSERT INTO T_RETRUN_PROD_DETAIL(
+            id,
+            return_code,
+            prod_code,
+            prod_num,
+            prod_spec,
+            create_time
+        )
+        VALUES (
+            #{id,jdbcType=BIGINT},
+            #{returnCode,jdbcType=VARCHAR},
+            #{prodCode,jdbcType=VARCHAR},
+            #{prodNum,jdbcType=DOUBLE},
+            #{prodSpec,jdbcType=VARCHAR},
+            #{createTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TRetrunProdDetail">
+        INSERT INTO T_RETRUN_PROD_DETAIL(
+            id,
+            return_code,
+            prod_code,
+            prod_num,
+            prod_spec,
+            create_time
+        )
+        VALUES
+        <foreach collection ="list" item="tRetrunProdDetail" separator =",">
+        (
+            #{tRetrunProdDetail.id,jdbcType=BIGINT},
+            #{tRetrunProdDetail.returnCode,jdbcType=VARCHAR},
+            #{tRetrunProdDetail.prodCode,jdbcType=VARCHAR},
+            #{tRetrunProdDetail.prodNum,jdbcType=DOUBLE},
+            #{tRetrunProdDetail.prodSpec,jdbcType=VARCHAR},
+            #{tRetrunProdDetail.createTime,jdbcType=TIMESTAMP}
+        )
+        </foreach>
+    </insert>
+
+    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TRetrunProdDetail">
+        UPDATE T_RETRUN_PROD_DETAIL
+        SET
+        id = #{id},
+        return_code = #{returnCode},
+        prod_code = #{prodCode},
+        prod_num = #{prodNum},
+        prod_spec = #{prodSpec},
+        create_time = #{createTime}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TRetrunProdDetail">
+        DELETE FROM T_RETRUN_PROD_DETAIL
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lcyzh.nmerp.dao.TOrderMapper">
+
+    <resultMap id="tOrderResultMap" type="com.lcyzh.nmerp.entity.TOrder">
+        <id column="id" property="id" jdbcType="BIGINT"/> 
+        <result column="ord_code" property="ordCode" jdbcType="VARCHAR"/> 
+        <result column="cont_code" property="contCode" jdbcType="VARCHAR"/> 
+        <result column="ord_address" property="ordAddress" jdbcType="VARCHAR"/> 
+        <result column="cus_id" property="cusId" jdbcType="BIGINT"/> 
+        <result column="ord_status" property="ordStatus" jdbcType="CHAR"/> 
+        <result column="delivery_date" property="deliveryDate" jdbcType="VARCHAR"/> 
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/> 
+
+        
+        
+    </resultMap>
+
+
+    <select id="get" resultMap="tOrderResultMap">
+        SELECT *
+        FROM T_ORDER
+        WHERE id = #{id}
+    </select>
+
+    <select id="findList" resultMap="tOrderResultMap">
+        SELECT *
+        FROM T_ORDER
+        <where>
+        </where>
+    </select>
+
+    <select id="findAllList" resultMap="tOrderResultMap">
+        SELECT *
+        FROM T_ORDER
+    </select>
+
+    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TOrder">
+        INSERT INTO T_ORDER(
+            id,
+            ord_code,
+            cont_code,
+            ord_address,
+            cus_id,
+            ord_status,
+            delivery_date,
+            create_time,
+            update_time
+        )
+        VALUES (
+            #{id,jdbcType=BIGINT},
+            #{ordCode,jdbcType=VARCHAR},
+            #{contCode,jdbcType=VARCHAR},
+            #{ordAddress,jdbcType=VARCHAR},
+            #{cusId,jdbcType=BIGINT},
+            #{ordStatus,jdbcType=CHAR},
+            #{deliveryDate,jdbcType=VARCHAR},
+            #{createTime,jdbcType=TIMESTAMP},
+            #{updateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TOrder">
+        INSERT INTO T_ORDER(
+            id,
+            ord_code,
+            cont_code,
+            ord_address,
+            cus_id,
+            ord_status,
+            delivery_date,
+            create_time,
+            update_time
+        )
+        VALUES
+        <foreach collection ="list" item="tOrder" separator =",">
+        (
+            #{tOrder.id,jdbcType=BIGINT},
+            #{tOrder.ordCode,jdbcType=VARCHAR},
+            #{tOrder.contCode,jdbcType=VARCHAR},
+            #{tOrder.ordAddress,jdbcType=VARCHAR},
+            #{tOrder.cusId,jdbcType=BIGINT},
+            #{tOrder.ordStatus,jdbcType=CHAR},
+            #{tOrder.deliveryDate,jdbcType=VARCHAR},
+            #{tOrder.createTime,jdbcType=TIMESTAMP},
+            #{tOrder.updateTime,jdbcType=TIMESTAMP}
+        )
+        </foreach>
+    </insert>
+
+    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TOrder">
+        UPDATE T_ORDER
+        SET
+        id = #{id},
+        ord_code = #{ordCode},
+        cont_code = #{contCode},
+        ord_address = #{ordAddress},
+        cus_id = #{cusId},
+        ord_status = #{ordStatus},
+        delivery_date = #{deliveryDate},
+        create_time = #{createTime},
+        update_time = #{updateTime}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TOrder">
+        DELETE FROM T_ORDER
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

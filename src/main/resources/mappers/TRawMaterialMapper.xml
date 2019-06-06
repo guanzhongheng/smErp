@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lcyzh.nmerp.dao.TRawMaterialMapper">
+
+    <resultMap id="tRawMaterialResultMap" type="com.lcyzh.nmerp.entity.TRawMaterial">
+        <id column="id" property="id" jdbcType="BIGINT"/> 
+        <result column="rawm_code" property="rawmCode" jdbcType="VARCHAR"/> 
+        <result column="rawm_name" property="rawmName" jdbcType="VARCHAR"/> 
+        <result column="rawn_specs" property="rawnSpecs" jdbcType="VARCHAR"/> 
+        <result column="rawn_supplier" property="rawnSupplier" jdbcType="VARCHAR"/> 
+        <result column="rawn_cty_code" property="rawnCtyCode" jdbcType="VARCHAR"/> 
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/> 
+
+        
+        
+    </resultMap>
+
+
+    <select id="get" resultMap="tRawMaterialResultMap">
+        SELECT *
+        FROM T_RAW_MATERIAL
+        WHERE id = #{id}
+    </select>
+
+    <select id="findList" resultMap="tRawMaterialResultMap">
+        SELECT *
+        FROM T_RAW_MATERIAL
+        <where>
+        </where>
+    </select>
+
+    <select id="findAllList" resultMap="tRawMaterialResultMap">
+        SELECT *
+        FROM T_RAW_MATERIAL
+    </select>
+
+    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TRawMaterial">
+        INSERT INTO T_RAW_MATERIAL(
+            id,
+            rawm_code,
+            rawm_name,
+            rawn_specs,
+            rawn_supplier,
+            rawn_cty_code,
+            create_time,
+            update_time
+        )
+        VALUES (
+            #{id,jdbcType=BIGINT},
+            #{rawmCode,jdbcType=VARCHAR},
+            #{rawmName,jdbcType=VARCHAR},
+            #{rawnSpecs,jdbcType=VARCHAR},
+            #{rawnSupplier,jdbcType=VARCHAR},
+            #{rawnCtyCode,jdbcType=VARCHAR},
+            #{createTime,jdbcType=TIMESTAMP},
+            #{updateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TRawMaterial">
+        INSERT INTO T_RAW_MATERIAL(
+            id,
+            rawm_code,
+            rawm_name,
+            rawn_specs,
+            rawn_supplier,
+            rawn_cty_code,
+            create_time,
+            update_time
+        )
+        VALUES
+        <foreach collection ="list" item="tRawMaterial" separator =",">
+        (
+            #{tRawMaterial.id,jdbcType=BIGINT},
+            #{tRawMaterial.rawmCode,jdbcType=VARCHAR},
+            #{tRawMaterial.rawmName,jdbcType=VARCHAR},
+            #{tRawMaterial.rawnSpecs,jdbcType=VARCHAR},
+            #{tRawMaterial.rawnSupplier,jdbcType=VARCHAR},
+            #{tRawMaterial.rawnCtyCode,jdbcType=VARCHAR},
+            #{tRawMaterial.createTime,jdbcType=TIMESTAMP},
+            #{tRawMaterial.updateTime,jdbcType=TIMESTAMP}
+        )
+        </foreach>
+    </insert>
+
+    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TRawMaterial">
+        UPDATE T_RAW_MATERIAL
+        SET
+        id = #{id},
+        rawm_code = #{rawmCode},
+        rawm_name = #{rawmName},
+        rawn_specs = #{rawnSpecs},
+        rawn_supplier = #{rawnSupplier},
+        rawn_cty_code = #{rawnCtyCode},
+        create_time = #{createTime},
+        update_time = #{updateTime}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TRawMaterial">
+        DELETE FROM T_RAW_MATERIAL
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

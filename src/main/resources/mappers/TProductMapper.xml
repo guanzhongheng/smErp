@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lcyzh.nmerp.dao.TProductMapper">
+
+    <resultMap id="tProductResultMap" type="com.lcyzh.nmerp.entity.TProduct">
+        <id column="id" property="id" jdbcType="BIGINT"/> 
+        <result column="prod_code" property="prodCode" jdbcType="VARCHAR"/> 
+        <result column="prod_name" property="prodName" jdbcType="VARCHAR"/> 
+        <result column="prod_cgy_code" property="prodCgyCode" jdbcType="VARCHAR"/> 
+        <result column="prod_spec" property="prodSpec" jdbcType="VARCHAR"/> 
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
+        <result column="prod_type" property="prodType" jdbcType="CHAR"/> 
+
+        
+        
+    </resultMap>
+
+
+    <select id="get" resultMap="tProductResultMap">
+        SELECT *
+        FROM T_PRODUCT
+        WHERE id = #{id}
+    </select>
+
+    <select id="findList" resultMap="tProductResultMap">
+        SELECT *
+        FROM T_PRODUCT
+        <where>
+        </where>
+    </select>
+
+    <select id="findAllList" resultMap="tProductResultMap">
+        SELECT *
+        FROM T_PRODUCT
+    </select>
+
+    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TProduct">
+        INSERT INTO T_PRODUCT(
+            id,
+            prod_code,
+            prod_name,
+            prod_cgy_code,
+            prod_spec,
+            create_time,
+            prod_type
+        )
+        VALUES (
+            #{id,jdbcType=BIGINT},
+            #{prodCode,jdbcType=VARCHAR},
+            #{prodName,jdbcType=VARCHAR},
+            #{prodCgyCode,jdbcType=VARCHAR},
+            #{prodSpec,jdbcType=VARCHAR},
+            #{createTime,jdbcType=TIMESTAMP},
+            #{prodType,jdbcType=CHAR}
+        )
+    </insert>
+
+    <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TProduct">
+        INSERT INTO T_PRODUCT(
+            id,
+            prod_code,
+            prod_name,
+            prod_cgy_code,
+            prod_spec,
+            create_time,
+            prod_type
+        )
+        VALUES
+        <foreach collection ="list" item="tProduct" separator =",">
+        (
+            #{tProduct.id,jdbcType=BIGINT},
+            #{tProduct.prodCode,jdbcType=VARCHAR},
+            #{tProduct.prodName,jdbcType=VARCHAR},
+            #{tProduct.prodCgyCode,jdbcType=VARCHAR},
+            #{tProduct.prodSpec,jdbcType=VARCHAR},
+            #{tProduct.createTime,jdbcType=TIMESTAMP},
+            #{tProduct.prodType,jdbcType=CHAR}
+        )
+        </foreach>
+    </insert>
+
+    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TProduct">
+        UPDATE T_PRODUCT
+        SET
+        id = #{id},
+        prod_code = #{prodCode},
+        prod_name = #{prodName},
+        prod_cgy_code = #{prodCgyCode},
+        prod_spec = #{prodSpec},
+        create_time = #{createTime},
+        prod_type = #{prodType}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TProduct">
+        DELETE FROM T_PRODUCT
+        WHERE id = #{id}
+    </delete>
+
+</mapper>
