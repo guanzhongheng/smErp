@@ -25,5 +25,5 @@
     };
     websocket.onclose = function (evnt) {
         console.log("与服务器断开了链接");
-    }
+    } 
 </script>
