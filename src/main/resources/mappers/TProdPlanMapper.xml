@@ -10,9 +10,6 @@
         <result column="oper_user_id" property="operUserId" jdbcType="BIGINT"/> 
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/> 
-
-        
-        
     </resultMap>
 
 
@@ -25,8 +22,6 @@
     <select id="findList" resultMap="tProdPlanResultMap">
         SELECT *
         FROM T_PROD_PLAN
-        <where>
-        </where>
     </select>
 
     <select id="findAllList" resultMap="tProdPlanResultMap">

@@ -11,7 +11,7 @@
         <result column="item_width" property="itemWidth" jdbcType="DOUBLE"/> 
         <result column="item_thick" property="itemThick" jdbcType="DOUBLE"/> 
         <result column="item_color" property="itemColor" jdbcType="VARCHAR"/> 
-        <result column="item_weight" property="itemWeight" jdbcType="DOUBLE"/> 
+        <result column="item_unit" property="itemUnit" jdbcType="VARCHAR"/>
         <result column="item_owner" property="itemOwner" jdbcType="VARCHAR"/> 
         <result column="remark" property="remark" jdbcType="VARCHAR"/> 
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
@@ -49,7 +49,7 @@
             item_width,
             item_thick,
             item_color,
-            item_weight,
+            item_unit,
             item_owner,
             remark,
             create_time
@@ -63,7 +63,7 @@
             #{itemWidth,jdbcType=DOUBLE},
             #{itemThick,jdbcType=DOUBLE},
             #{itemColor,jdbcType=VARCHAR},
-            #{itemWeight,jdbcType=DOUBLE},
+            #{itemUnit,jdbcType=VARCHAR},
             #{itemOwner,jdbcType=VARCHAR},
             #{remark,jdbcType=VARCHAR},
             #{createTime,jdbcType=TIMESTAMP}
@@ -80,7 +80,7 @@
             item_width,
             item_thick,
             item_color,
-            item_weight,
+            item_unit,
             item_owner,
             remark,
             create_time
@@ -96,7 +96,7 @@
             #{tOrderItem.itemWidth,jdbcType=DOUBLE},
             #{tOrderItem.itemThick,jdbcType=DOUBLE},
             #{tOrderItem.itemColor,jdbcType=VARCHAR},
-            #{tOrderItem.itemWeight,jdbcType=DOUBLE},
+            #{tOrderItem.itemUnit,jdbcType=DOUBLE},
             #{tOrderItem.itemOwner,jdbcType=VARCHAR},
             #{tOrderItem.remark,jdbcType=VARCHAR},
             #{tOrderItem.createTime,jdbcType=TIMESTAMP}
@@ -115,7 +115,7 @@
         item_width = #{itemWidth},
         item_thick = #{itemThick},
         item_color = #{itemColor},
-        item_weight = #{itemWeight},
+        item_unit = #{itemUnit},
         item_owner = #{itemOwner},
         remark = #{remark},
         create_time = #{createTime}

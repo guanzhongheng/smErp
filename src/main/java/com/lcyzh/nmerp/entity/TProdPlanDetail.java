@@ -10,25 +10,18 @@ import java.util.Date;
  */
 public class TProdPlanDetail implements Serializable {
     private static final long serialVersionUID = 1L;
-    private Long id;
+    private Long ordItemId;
     private String prodPlanCode;
-    private String prodCode;
-    private String prodSpec;
-    private Integer prodNum;
     private Double leastTime;
     private Double mostTime;
     private Date createTime;
 
-
-    public TProdPlanDetail() {
+    public Long getOrdItemId() {
+        return ordItemId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
+    public void setOrdItemId(Long ordItemId) {
+        this.ordItemId = ordItemId;
     }
 
     public void setProdPlanCode(String prodPlanCode) {
@@ -37,30 +30,6 @@ public class TProdPlanDetail implements Serializable {
 
     public String getProdPlanCode() {
         return prodPlanCode;
-    }
-
-    public void setProdCode(String prodCode) {
-        this.prodCode = prodCode;
-    }
-
-    public String getProdCode() {
-        return prodCode;
-    }
-
-    public void setProdSpec(String prodSpec) {
-        this.prodSpec = prodSpec;
-    }
-
-    public String getProdSpec() {
-        return prodSpec;
-    }
-
-    public Integer getProdNum() {
-        return prodNum;
-    }
-
-    public void setProdNum(Integer prodNum) {
-        this.prodNum = prodNum;
     }
 
     public void setLeastTime(Double leastTime) {

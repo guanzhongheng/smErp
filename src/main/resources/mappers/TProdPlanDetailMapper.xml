@@ -3,24 +3,19 @@
 <mapper namespace="com.lcyzh.nmerp.dao.TProdPlanDetailMapper">
 
     <resultMap id="tProdPlanDetailResultMap" type="com.lcyzh.nmerp.entity.TProdPlanDetail">
-        <id column="id" property="id" jdbcType="BIGINT"/> 
+        <id column="ord_item_id" property="ordItemId" jdbcType="BIGINT"/>
         <result column="prod_plan_code" property="prodPlanCode" jdbcType="VARCHAR"/> 
-        <result column="prod_code" property="prodCode" jdbcType="VARCHAR"/> 
-        <result column="prod_spec" property="prodSpec" jdbcType="VARCHAR"/> 
-        <result column="prod_num" property="prodNum" jdbcType="DECIMAL"/> 
-        <result column="least_time" property="leastTime" jdbcType="DOUBLE"/> 
+        <result column="least_time" property="leastTime" jdbcType="DOUBLE"/>
         <result column="most_time" property="mostTime" jdbcType="DOUBLE"/> 
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
 
-        
-        
     </resultMap>
 
 
     <select id="get" resultMap="tProdPlanDetailResultMap">
         SELECT *
         FROM T_PROD_PLAN_DETAIL
-        WHERE id = #{id}
+        WHERE ord_item_id = #{ordItemId}
     </select>
 
     <select id="findList" resultMap="tProdPlanDetailResultMap">
@@ -37,21 +32,15 @@
 
     <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TProdPlanDetail">
         INSERT INTO T_PROD_PLAN_DETAIL(
-            id,
+            ord_item_id,
             prod_plan_code,
-            prod_code,
-            prod_spec,
-            prod_num,
             least_time,
             most_time,
             create_time
         )
         VALUES (
-            #{id,jdbcType=BIGINT},
+            #{ordItemId,jdbcType=BIGINT},
             #{prodPlanCode,jdbcType=VARCHAR},
-            #{prodCode,jdbcType=VARCHAR},
-            #{prodSpec,jdbcType=VARCHAR},
-            #{prodNum,jdbcType=DECIMAL},
             #{leastTime,jdbcType=DOUBLE},
             #{mostTime,jdbcType=DOUBLE},
             #{createTime,jdbcType=TIMESTAMP}
@@ -60,11 +49,8 @@
 
     <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TProdPlanDetail">
         INSERT INTO T_PROD_PLAN_DETAIL(
-            id,
+            ord_item_id,
             prod_plan_code,
-            prod_code,
-            prod_spec,
-            prod_num,
             least_time,
             most_time,
             create_time
@@ -72,11 +58,8 @@
         VALUES
         <foreach collection ="list" item="tProdPlanDetail" separator =",">
         (
-            #{tProdPlanDetail.id,jdbcType=BIGINT},
+            #{tProdPlanDetail.ordItemId,jdbcType=BIGINT},
             #{tProdPlanDetail.prodPlanCode,jdbcType=VARCHAR},
-            #{tProdPlanDetail.prodCode,jdbcType=VARCHAR},
-            #{tProdPlanDetail.prodSpec,jdbcType=VARCHAR},
-            #{tProdPlanDetail.prodNum,jdbcType=DECIMAL},
             #{tProdPlanDetail.leastTime,jdbcType=DOUBLE},
             #{tProdPlanDetail.mostTime,jdbcType=DOUBLE},
             #{tProdPlanDetail.createTime,jdbcType=TIMESTAMP}
@@ -84,23 +67,5 @@
         </foreach>
     </insert>
 
-    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TProdPlanDetail">
-        UPDATE T_PROD_PLAN_DETAIL
-        SET
-        id = #{id},
-        prod_plan_code = #{prodPlanCode},
-        prod_code = #{prodCode},
-        prod_spec = #{prodSpec},
-        prod_num = #{prodNum},
-        least_time = #{leastTime},
-        most_time = #{mostTime},
-        create_time = #{createTime}
-        WHERE id = #{id}
-    </update>
-
-    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TProdPlanDetail">
-        DELETE FROM T_PROD_PLAN_DETAIL
-        WHERE id = #{id}
-    </delete>
 
 </mapper>

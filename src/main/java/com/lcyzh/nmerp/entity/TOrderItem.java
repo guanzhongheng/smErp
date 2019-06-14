@@ -13,12 +13,12 @@ public class TOrderItem implements Serializable {
     private Long id;
     private Long ordCode;
     private String itemCode;
-    private Double itemNum;
     private Double itemLenth;
     private Double itemWidth;
     private Double itemThick;
     private String itemColor;
-    private Double itemWeight;
+    private Double itemNum;
+    private String itemUnit;
     private String itemOwner;
     private String remark;
     private Date createTime;
@@ -91,12 +91,12 @@ public class TOrderItem implements Serializable {
         return itemColor;
     }
 
-    public void setItemWeight(Double itemWeight) {
-        this.itemWeight = itemWeight;
+    public String getItemUnit() {
+        return itemUnit;
     }
 
-    public Double getItemWeight() {
-        return itemWeight;
+    public void setItemUnit(String itemUnit) {
+        this.itemUnit = itemUnit;
     }
 
     public void setItemOwner(String itemOwner) {

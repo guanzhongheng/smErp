@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lcyzh.nmerp.dao.TProdplanExeMapper">
+
+    <resultMap id="resultMap" type="com.lcyzh.nmerp.entity.TProdplanExe">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="ord_item_id" property="ordItemId" jdbcType="BIGINT"/>
+        <result column="mac_code" property="macCode" jdbcType="VARCHAR"/>
+        <result column="item_num" property="itemNum" jdbcType="DOUBLE"/>
+        <result column="item_unit" property="itemUnit" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="CHAR"/>
+        <result column="finish_time" property="finishTime" jdbcType="TIMESTAMP"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="get" resultMap="resultMap">
+        SELECT *
+        FROM T_PRODPLAN_EXE
+        WHERE id = #{id}
+    </select>
+
+    <select id="findList" resultMap="resultMap">
+        SELECT *
+        FROM T_PRODPLAN_EXE
+        <where>
+        </where>
+    </select>
+
+    <select id="findAllList" resultMap="resultMap">
+        SELECT *
+        FROM T_PRODPLAN_EXE
+    </select>
+
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TProdplanExe">
+        INSERT INTO T_PRODPLAN_EXE(
+            id,
+            ord_item_id,
+            mac_code,
+            item_num,
+            item_unit,
+            status,
+            finish_time,
+            create_time,
+            update_time
+        )
+        VALUES (
+            #{id,jdbcType=BIGINT},
+            #{ordItemId,jdbcType=BIGINT},
+            #{macCode,jdbcType=VARCHAR},
+            #{itemNum,jdbcType=DOUBLE},
+            #{itemUnit,jdbcType=VARCHAR},
+            #{status,jdbcType=CHAR},
+            #{finishTime,jdbcType=TIMESTAMP},
+            #{createTime,jdbcType=TIMESTAMP},
+            #{updateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TProdplanExe">
+        INSERT INTO T_PRODPLAN_EXE(
+        id,
+        ord_item_id,
+        mac_code,
+        item_num,
+        item_unit,
+        status,
+        finish_time,
+        create_time,
+        update_time
+        )
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.id,jdbcType=BIGINT},
+            #{item.ordItemId,jdbcType=BIGINT},
+            #{item.macCode,jdbcType=VARCHAR},
+            #{item.itemNum,jdbcType=DOUBLE},
+            #{item.itemUnit,jdbcType=VARCHAR},
+            #{item.status,jdbcType=CHAR},
+            #{item.finishTime,jdbcType=TIMESTAMP},
+            #{item.createTime,jdbcType=TIMESTAMP},
+            #{item.updateTime,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+
+    <update id="updateBySelectKey" parameterType="com.lcyzh.nmerp.entity.TProdplanExe">
+        UPDATE T_PRODPLAN_EXE
+        <set>
+            <if test="macCode">
+                mac_code = #{macCode,jdbcType=VARCHAR},
+            </if>
+
+            <if test="itemNum">
+                item_num = #{itemNum,jdbcType=DOUBLE},
+            </if>
+
+            <if test="itemUnit">
+                item_unit = #{itemUnit,jdbcType=VARCHAR},
+            </if>
+
+            <if test="status">
+                status = #{status,jdbcType=CHAR},
+            </if>
+
+            <if test="updateTime">
+                update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+
+        </set>
+
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="com.lcyzh.nmerp.entity.TProdplanExe">
+        DELETE FROM T_PRODPLAN_EXE
+        WHERE id = #{id}
+    </delete>
+
+</mapper>
