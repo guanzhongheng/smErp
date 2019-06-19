@@ -3,11 +3,8 @@ package com.lcyzh.nmerp.controller;
 import com.lcyzh.nmerp.entity.TContract;
 import com.lcyzh.nmerp.service.TContractService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,14 +12,15 @@ import java.util.List;
  * Author ljk
  * Date  2019-06-06
  */
-@RestController
-@RequestMapping(value = "/tContract")
+@Controller
+@RequestMapping(value = "/contract")
 public class TContractController {
     @Autowired
     private TContractService tContractService;
 
-    @RequestMapping(value = {"/list", ""}, method = RequestMethod.GET)
-    public Object list() {
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @ResponseBody
+    public List<TContract> list() {
         List<TContract> tContracts = tContractService.findAllList();
         return tContracts;
     }

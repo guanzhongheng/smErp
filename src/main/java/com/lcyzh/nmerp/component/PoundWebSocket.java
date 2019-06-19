@@ -26,8 +26,8 @@ import java.util.Map;
  * ----------   ------------- -----------------------------------
  * lijinku          2019/06/05    create
  */
-@ServerEndpoint(value = "/websocket")
-@Component
+//@ServerEndpoint(value = "/websocket")
+//@Component
 public class PoundWebSocket {
     private Logger LOGGER = LoggerFactory.getLogger(PoundWebSocket.class);
 
