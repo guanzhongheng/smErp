@@ -11,15 +11,18 @@
         if(window.WebSocket){
             socket = new WebSocket("ws://127.0.0.1:12345/ws");
             socket.onmessage = function(event){
-                var ta = document.getElementById('responseText');
-                ta.value += event.data+"\r\n";
+                // var ta = document.getElementById('responseText');
+                document.getElementById('ttt').value =  event.data;
+                // ta.value += event.data+"\r\n";
             };
             socket.onopen = function(event){
                 var ta = document.getElementById('responseText');
+               // document.getElementById('ttt').value = ta;
                 ta.value = "Netty-WebSocket服务器。。。。。。连接  \r\n";
             };
             socket.onclose = function(event){
                 var ta = document.getElementById('responseText');
+                //document.getElementById('ttt').value = ta;
                 ta.value = "Netty-WebSocket服务器。。。。。。关闭 \r\n";
             };
         }else{
@@ -39,14 +42,15 @@
 </head>
 <body>
 <form onSubmit="return false;">
-    <label>ID</label><input type="text" name="uid" value="${uid!!}" /> <br />
-    <label>TEXT</label><input type="text" name="message" value="这里输入消息" /> <br />
+    <!--<label>ID</label><input type="text" name="uid" value="${uid!!}" /> <br />-->
+    <label>TEXT</label><input type="text" name="message" value="这里输入命令" /> <br />
     <br /> <input type="button" value="发送ws消息"
                   onClick="send(this.form.message.value)" />
     <!--onClick="send(this.form.uid.value+':'+this.form.message.value)" />-->
     <hr color="black" />
     <h3>服务端返回的应答消息</h3>
-    <textarea id="responseText" style="width: 1024px;height: 300px;"></textarea>
+    <!--<textarea id="responseText" style="width: 1024px;height: 300px;"></textarea>-->
+    <input type="text" id="ttt" value="0.00"/>kg
 </form>
 </body>
 </html>

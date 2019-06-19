@@ -3,6 +3,7 @@ package com.lcyzh.nmerp.component;
 import com.lcyzh.nmerp.configuration.ParamConfig;
 import com.lcyzh.nmerp.utils.CustException;
 import gnu.io.*;
+import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,6 +24,9 @@ import java.util.TooManyListenersException;
  * lijinku          2019/06/17    create
  */
 public class SerialPortUtils implements SerialPortEventListener {
+    //挂起
+    private static volatile boolean suspend = false;
+    private  boolean isOpen =false;
     // 检测系统中可用的通讯端口类
     private CommPortIdentifier commPortId;
     // 枚举类型
@@ -37,6 +41,15 @@ public class SerialPortUtils implements SerialPortEventListener {
     private String data;
     // 保存串口返回信息十六进制
     private String dataHex;
+
+
+    public void setSuspend(boolean suspend) {
+        SerialPortUtils.suspend = suspend;
+    }
+
+    public boolean isOpen() {
+        return isOpen;
+    }
 
     /**
      * @Description: 初始化串口
@@ -72,6 +85,7 @@ public class SerialPortUtils implements SerialPortEventListener {
                         // 设置串口通讯参数:波特率，数据位，停止位,校验方式
                         serialPort.setSerialPortParams(paramConfig.getBaudRate(), paramConfig.getDataBit(),
                                 paramConfig.getStopBit(), paramConfig.getCheckoutBit());
+                        isOpen = true;
                     } catch (PortInUseException e) {
                         throw new CustException("端口被占用");
                     } catch (TooManyListenersException e) {
@@ -108,7 +122,9 @@ public class SerialPortUtils implements SerialPortEventListener {
                 break;
             case SerialPortEvent.DATA_AVAILABLE: // 有数据到达
                 // 调用读取数据的方法
-                readComm();
+                if(!suspend){
+                    readComm();
+                }
                 break;
             default:
                 break;
@@ -133,7 +149,11 @@ public class SerialPortUtils implements SerialPortEventListener {
             while ((len = inputStream.read(readBuffer)) != -1) {
 //　　　　　　　　　 直接获取到的数据,转为十六进制数据
                 data = new String(readBuffer, 0, len).trim();
-                dataHex = bytesToHexString(readBuffer);
+                if(data.length()>6){
+                    //回显数据
+                    MyChannelHandlerPool.channelGroup.writeAndFlush(new TextWebSocketFrame(data));
+                }
+//                dataHex = bytesToHexString(readBuffer);
                 inputStream.close();
                 inputStream = null;
                 break;
