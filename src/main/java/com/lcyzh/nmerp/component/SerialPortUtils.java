@@ -134,8 +134,6 @@ public class SerialPortUtils implements SerialPortEventListener {
 //　　　　　　　　　 直接获取到的数据,转为十六进制数据
                 data = new String(readBuffer, 0, len).trim();
                 dataHex = bytesToHexString(readBuffer);
-                System.out.println("data:" + data);
-                System.out.println("dataHex:" + dataHex);// 读取后置空流对象
                 inputStream.close();
                 inputStream = null;
                 break;
