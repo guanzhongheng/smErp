@@ -23,6 +23,8 @@ public class TBarCodeInfo implements Serializable {
     private String itemId;
     //入库状态
     private Character status;
+    //入库参数
+    private Character statusParam;
     //计量
     private Double num;
     //单位
@@ -60,6 +62,14 @@ public class TBarCodeInfo implements Serializable {
 
     public void setStatus(Character status) {
         this.status = status;
+    }
+
+    public Character getStatusParam() {
+        return statusParam;
+    }
+
+    public void setStatusParam(Character statusParam) {
+        this.statusParam = statusParam;
     }
 
     public Double getNum() {

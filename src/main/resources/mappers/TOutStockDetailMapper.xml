@@ -3,49 +3,55 @@
 <mapper namespace="com.lcyzh.nmerp.dao.TOutStockDetailMapper">
 
     <resultMap id="tOutStockDetailResultMap" type="com.lcyzh.nmerp.entity.TOutStockDetail">
-        <id column="id" property="id" jdbcType="BIGINT"/> 
-        <result column="out_code" property="outCode" jdbcType="VARCHAR"/> 
-        <result column="item_spec" property="itemSpec" jdbcType="VARCHAR"/> 
-        <result column="item_code" property="itemCode" jdbcType="VARCHAR"/> 
-        <result column="item_type" property="itemType" jdbcType="CHAR"/> 
-        <result column="out_num" property="outNum" jdbcType="DOUBLE"/> 
-        <result column="unit" property="unit" jdbcType="VARCHAR"/> 
-        <result column="quality_status" property="qualityStatus" jdbcType="CHAR"/> 
-        <result column="quality_us_code" property="qualityUsCode" jdbcType="VARCHAR"/> 
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
-
-        
-        
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="out_code" property="outCode" jdbcType="VARCHAR"/>
+        <result column="bar_code" property="barCode" jdbcType="VARCHAR"/>
+        <result column="quality_status" property="qualityStatus" jdbcType="CHAR"/>
+        <result column="quality_us_code" property="qualityUsCode" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
 
-    <select id="get" resultMap="tOutStockDetailResultMap">
-        SELECT *
-        FROM T_OUT_STOCK_DETAIL
-        WHERE id = #{id}
+    <select id="findListByCondition" resultType="com.lcyzh.nmerp.model.vo.OutStockVo" parameterType="java.lang.String">
+        SELECT
+        osd.bar_code barCode,
+        bi.ord_code ordCode,
+        bi.item_id itemId
+        FROM
+        T_OUT_STOCK_DETAIL osd
+        LEFT JOIN T_BARCODE_INFO bi ON osd.bar_code = bi.bar_code
+        <where>
+            <if test="outCode!=null">
+                osd.out_code = #{outCode,jdbcType=VARCHAR}
+            </if>
+            <if test="ordCode!=null">
+                bi.ord_code = #{ordCode,jdbcType=VARCHAR}
+            </if>
+            <if test="itemId!=null">
+                bi.item_id = #{itemId,jdbcType=VARCHAR}
+            </if>
+        </where>
+
+
     </select>
 
-    <select id="findList" resultMap="tOutStockDetailResultMap">
+    <select id="findByPrimaryKey" parameterType="java.lang.Long" resultMap="tOutStockDetailResultMap">
         SELECT *
         FROM T_OUT_STOCK_DETAIL
-        <where>
-        </where>
+        WHERE id = #{id,jdbcType=BIGINT}
     </select>
+
 
     <select id="findAllList" resultMap="tOutStockDetailResultMap">
         SELECT *
         FROM T_OUT_STOCK_DETAIL
     </select>
 
-    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TOutStockDetail">
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TOutStockDetail">
         INSERT INTO T_OUT_STOCK_DETAIL(
             id,
             out_code,
-            item_spec,
-            item_code,
-            item_type,
-            out_num,
-            unit,
+            bar_code,
             quality_status,
             quality_us_code,
             create_time
@@ -53,11 +59,7 @@
         VALUES (
             #{id,jdbcType=BIGINT},
             #{outCode,jdbcType=VARCHAR},
-            #{itemSpec,jdbcType=VARCHAR},
-            #{itemCode,jdbcType=VARCHAR},
-            #{itemType,jdbcType=CHAR},
-            #{outNum,jdbcType=DOUBLE},
-            #{unit,jdbcType=VARCHAR},
+            #{barCode,jdbcType=VARCHAR},
             #{qualityStatus,jdbcType=CHAR},
             #{qualityUsCode,jdbcType=VARCHAR},
             #{createTime,jdbcType=TIMESTAMP}
@@ -66,53 +68,30 @@
 
     <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TOutStockDetail">
         INSERT INTO T_OUT_STOCK_DETAIL(
-            id,
-            out_code,
-            item_spec,
-            item_code,
-            item_type,
-            out_num,
-            unit,
-            quality_status,
-            quality_us_code,
-            create_time
+        id,
+        out_code,
+        bar_code,
+        quality_status,
+        quality_us_code,
+        create_time
         )
         VALUES
-        <foreach collection ="list" item="tOutStockDetail" separator =",">
-        (
-            #{tOutStockDetail.id,jdbcType=BIGINT},
-            #{tOutStockDetail.outCode,jdbcType=VARCHAR},
-            #{tOutStockDetail.itemSpec,jdbcType=VARCHAR},
-            #{tOutStockDetail.itemCode,jdbcType=VARCHAR},
-            #{tOutStockDetail.itemType,jdbcType=CHAR},
-            #{tOutStockDetail.outNum,jdbcType=DOUBLE},
-            #{tOutStockDetail.unit,jdbcType=VARCHAR},
-            #{tOutStockDetail.qualityStatus,jdbcType=CHAR},
-            #{tOutStockDetail.qualityUsCode,jdbcType=VARCHAR},
-            #{tOutStockDetail.createTime,jdbcType=TIMESTAMP}
-        )
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.id,jdbcType=BIGINT},
+            #{item.outCode,jdbcType=VARCHAR},
+            #{item.barCode,jdbcType=VARCHAR},
+            #{item.qualityStatus,jdbcType=CHAR},
+            #{item.qualityUsCode,jdbcType=VARCHAR},
+            #{item.createTime,jdbcType=TIMESTAMP}
+            )
         </foreach>
     </insert>
 
-    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TOutStockDetail">
-        UPDATE T_OUT_STOCK_DETAIL
-        SET
-        id = #{id},
-        out_code = #{outCode},
-        item_spec = #{itemSpec},
-        item_code = #{itemCode},
-        item_type = #{itemType},
-        out_num = #{outNum},
-        unit = #{unit},
-        quality_status = #{qualityStatus},
-        quality_us_code = #{qualityUsCode},
-        create_time = #{createTime}
-        WHERE id = #{id}
-    </update>
 
-    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TOutStockDetail">
+    <delete id="deleteByBarCode" parameterType="java.lang.String">
         DELETE FROM T_OUT_STOCK_DETAIL
-        WHERE id = #{id}
+        WHERE bar_code = #{barCode,jdbcType=VARCHAR}
     </delete>
 
 </mapper>

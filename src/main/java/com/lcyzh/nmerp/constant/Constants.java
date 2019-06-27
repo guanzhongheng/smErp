@@ -17,6 +17,8 @@ public class Constants {
 
     public static final String CUS_PRE_FIX="CS";
 
+    public static final String OUT_STORE_PRE_FIX="OST";
+
     //新建
     public static final char CONT_STATUS_NEW='0';
     //已完善

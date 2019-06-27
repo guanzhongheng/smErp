@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.dao;
 
 import com.lcyzh.nmerp.entity.TProdCategory;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -8,6 +9,7 @@ import java.util.List;
 * Author ljk
 * Date  2019-06-06
 */
+@Repository
 public interface TProdCategoryMapper {
 
     TProdCategory get(String id);

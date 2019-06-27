@@ -12,11 +12,7 @@ public class TOutStockDetail implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long id;
     private String outCode;
-    private String itemSpec;
-    private String itemCode;
-    private Character itemType;
-    private Double outNum;
-    private String unit;
+    private String barCode;
     private Character qualityStatus;
     private String qualityUsCode;
     private Date createTime;
@@ -41,44 +37,12 @@ public class TOutStockDetail implements Serializable {
         return outCode;
     }
 
-    public void setItemSpec(String itemSpec) {
-        this.itemSpec = itemSpec;
+    public String getBarCode() {
+        return barCode;
     }
 
-    public String getItemSpec() {
-        return itemSpec;
-    }
-
-    public void setItemCode(String itemCode) {
-        this.itemCode = itemCode;
-    }
-
-    public String getItemCode() {
-        return itemCode;
-    }
-
-    public void setItemType(Character itemType) {
-        this.itemType = itemType;
-    }
-
-    public Character getItemType() {
-        return itemType;
-    }
-
-    public void setOutNum(Double outNum) {
-        this.outNum = outNum;
-    }
-
-    public Double getOutNum() {
-        return outNum;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
-    public String getUnit() {
-        return unit;
+    public void setBarCode(String barCode) {
+        this.barCode = barCode;
     }
 
     public void setQualityStatus(Character qualityStatus) {

@@ -12,9 +12,6 @@
         <result column="delivery_date" property="deliveryDate" jdbcType="VARCHAR"/> 
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/> 
-
-        
-        
     </resultMap>
 
 

@@ -11,7 +11,7 @@
 	<groupId>com.lcyzh</groupId>
 	<artifactId>nm-erp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>nm-erp</name>
+	<name>smErp</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

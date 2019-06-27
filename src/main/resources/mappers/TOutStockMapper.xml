@@ -3,104 +3,102 @@
 <mapper namespace="com.lcyzh.nmerp.dao.TOutStockMapper">
 
     <resultMap id="tOutStockResultMap" type="com.lcyzh.nmerp.entity.TOutStock">
-        <id column="id" property="id" jdbcType="BIGINT"/> 
-        <result column="out_code" property="outCode" jdbcType="VARCHAR"/> 
-        <result column="out_status" property="outStatus" jdbcType="CHAR"/> 
-        <result column="apply_user_id" property="applyUserId" jdbcType="BIGINT"/> 
-        <result column="oper_user_id" property="operUserId" jdbcType="BIGINT"/> 
-        <result column="renark" property="renark" jdbcType="VARCHAR"/> 
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
-        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/> 
-
-        
-        
+        <id column="out_code" property="outCode" jdbcType="VARCHAR"/>
+        <result column="ord_code" property="ordCode" jdbcType="VARCHAR"/>
+        <result column="out_status" property="outStatus" jdbcType="CHAR"/>
+        <result column="out_count" property="outCount" jdbcType="INTEGER"/>
+        <result column="apply_user_id" property="applyUserId" jdbcType="BIGINT"/>
+        <result column="oper_user_id" property="operUserId" jdbcType="BIGINT"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
 
-    <select id="get" resultMap="tOutStockResultMap">
+    <select id="findByPrimaryKey" parameterType="java.lang.String" resultMap="tOutStockResultMap">
         SELECT *
         FROM T_OUT_STOCK
-        WHERE id = #{id}
+        WHERE out_code = #{outCode,jdbcType=VARCHAR}
     </select>
 
-    <select id="findList" resultMap="tOutStockResultMap">
+
+    <select id="findByOrdCode" parameterType="java.lang.String" resultMap="tOutStockResultMap">
+        SELECT *
+        FROM T_OUT_STOCK
+        WHERE find_in_set(#{ordCode,jdbcType=VARCHAR},ord_code)
+    </select>
+
+
+    <select id="findList" parameterType="com.lcyzh.nmerp.entity.TOutStock" resultMap="tOutStockResultMap">
         SELECT *
         FROM T_OUT_STOCK
         <where>
+            <if test="status!=null">
+                and status = #{status,jdbcType=CHAR}
+            </if>
+            <if test="createTime!=null">
+                and create_time = createTime like concat(concat('%', #{createTime}), '%')
+            </if>
         </where>
     </select>
 
-    <select id="findAllList" resultMap="tOutStockResultMap">
-        SELECT *
-        FROM T_OUT_STOCK
-    </select>
-
-    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TOutStock">
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TOutStock">
         INSERT INTO T_OUT_STOCK(
-            id,
             out_code,
             out_status,
+            ord_code,
+            out_count,
             apply_user_id,
             oper_user_id,
-            renark,
+            remark,
             create_time,
             update_time
         )
         VALUES (
-            #{id,jdbcType=BIGINT},
             #{outCode,jdbcType=VARCHAR},
             #{outStatus,jdbcType=CHAR},
+            #{ordCode,jdbcType=VARCHAR},
+            #{outCount,jdbcType=INTEGER},
             #{applyUserId,jdbcType=BIGINT},
             #{operUserId,jdbcType=BIGINT},
-            #{renark,jdbcType=VARCHAR},
+            #{remark,jdbcType=VARCHAR},
             #{createTime,jdbcType=TIMESTAMP},
             #{updateTime,jdbcType=TIMESTAMP}
         )
     </insert>
 
-    <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TOutStock">
-        INSERT INTO T_OUT_STOCK(
-            id,
-            out_code,
-            out_status,
-            apply_user_id,
-            oper_user_id,
-            renark,
-            create_time,
-            update_time
-        )
-        VALUES
-        <foreach collection ="list" item="tOutStock" separator =",">
-        (
-            #{tOutStock.id,jdbcType=BIGINT},
-            #{tOutStock.outCode,jdbcType=VARCHAR},
-            #{tOutStock.outStatus,jdbcType=CHAR},
-            #{tOutStock.applyUserId,jdbcType=BIGINT},
-            #{tOutStock.operUserId,jdbcType=BIGINT},
-            #{tOutStock.renark,jdbcType=VARCHAR},
-            #{tOutStock.createTime,jdbcType=TIMESTAMP},
-            #{tOutStock.updateTime,jdbcType=TIMESTAMP}
-        )
-        </foreach>
-    </insert>
 
-    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TOutStock">
+    <update id="update" parameterType="com.lcyzh.nmerp.entity.TOutStock">
         UPDATE T_OUT_STOCK
-        SET
-        id = #{id},
-        out_code = #{outCode},
-        out_status = #{outStatus},
-        apply_user_id = #{applyUserId},
-        oper_user_id = #{operUserId},
-        renark = #{renark},
-        create_time = #{createTime},
-        update_time = #{updateTime}
-        WHERE id = #{id}
+        <set>
+            <if test="outStatus!=null">
+                out_status = #{outStatus,jdbcType=CHAR},
+            </if>
+            <if test="ordCode!=null">
+                ord_code = #{ordCode,jdbcType=VARCHAR},
+            </if>
+            <if test="remark!=null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="outCount!=null">
+                out_count = out_count + #{outCount,jdbcType=INTEGER},
+            </if>
+            <if test="applyUserId!=null">
+                apply_user_id = #{applyUserId,jdbcType=BIGINT},
+            </if>
+            <if test="operUserId!=null">
+                oper_user_id = #{operUserId,jdbcType=BIGINT},
+            </if>
+            <if test="remark!=null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        WHERE out_code = #{outCode,jdbcType=VARCHAR}
     </update>
 
-    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TOutStock">
+    <delete id="delete" parameterType="java.lang.String">
         DELETE FROM T_OUT_STOCK
-        WHERE id = #{id}
+        WHERE out_code = #{outCode,jdbcType=VARCHAR}
     </delete>
 
 </mapper>

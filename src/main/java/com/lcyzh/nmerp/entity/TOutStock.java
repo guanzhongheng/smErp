@@ -10,26 +10,16 @@ import java.util.Date;
  */
 public class TOutStock implements Serializable {
     private static final long serialVersionUID = 1L;
-    private Long id;
     private String outCode;
     private Character outStatus;
+    private String ordCode;
+    private Integer outCount;
     private Long applyUserId;
     private Long operUserId;
-    private String renark;
+    private String remark;
     private Date createTime;
     private Date updateTime;
 
-
-    public TOutStock() {
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
 
     public void setOutCode(String outCode) {
         this.outCode = outCode;
@@ -45,6 +35,22 @@ public class TOutStock implements Serializable {
 
     public Character getOutStatus() {
         return outStatus;
+    }
+
+    public String getOrdCode() {
+        return ordCode;
+    }
+
+    public void setOrdCode(String ordCode) {
+        this.ordCode = ordCode;
+    }
+
+    public Integer getOutCount() {
+        return outCount;
+    }
+
+    public void setOutCount(Integer outCount) {
+        this.outCount = outCount;
     }
 
     public void setApplyUserId(Long applyUserId) {
@@ -63,12 +69,12 @@ public class TOutStock implements Serializable {
         return operUserId;
     }
 
-    public void setRenark(String renark) {
-        this.renark = renark;
+    public String getRemark() {
+        return remark;
     }
 
-    public String getRenark() {
-        return renark;
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public void setCreateTime(Date createTime) {

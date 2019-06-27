@@ -44,8 +44,30 @@
                 update_time = #{updateTime,jdbcType=TIMESTAMP},
             </if>
         </set>
+        <where>
+            <if test="barCode!=null">
+                and bar_code = #{barCode,jdbcType=VARCHAR}
+            </if>
 
-        where bar_code = #{barCode,jdbcType=VARCHAR}
+            <if test="ordCode!=null">
+                and ord_code = #{ordCode,jdbcType=VARCHAR}
+            </if>
+
+            <if test="statusParam!=null">
+                and status = #{statusParam,jdbcType=CHAR}
+            </if>
+        </where>
+    </update>
+
+
+    <update id="updateBatch" parameterType="java.util.List">
+        update T_BARCODE_INFO
+        set
+        status = #{status,jdbcType=CHAR}
+        where bar_code in
+        <foreach collection="list" separator="," item="i" index="index">
+            #{i.barCode}
+        </foreach>
     </update>
 
     <select id="findBySelectKey" resultMap="resultMap" parameterType="com.lcyzh.nmerp.entity.TBarCodeInfo">

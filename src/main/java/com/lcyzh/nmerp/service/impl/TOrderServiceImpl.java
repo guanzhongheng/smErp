@@ -15,6 +15,8 @@ import com.lcyzh.nmerp.service.TOrderService;
 import com.lcyzh.nmerp.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,11 +24,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
-* Author ljk
-* Date  2019-06-06
-*/
+ * Author ljk
+ * Date  2019-06-06
+ */
 @Service
-public class TOrderServiceImpl implements TOrderService{
+public class TOrderServiceImpl implements TOrderService {
     @Autowired
     private TOrderMapper tOrderMapper;
     @Autowired
@@ -37,7 +39,7 @@ public class TOrderServiceImpl implements TOrderService{
     private TCustomerMapper tCustomerMapper;
 
     @Override
-    public TOrder get(String id){
+    public TOrder get(String id) {
         return tOrderMapper.get(id);
     }
 
@@ -51,13 +53,14 @@ public class TOrderServiceImpl implements TOrderService{
         return tOrderMapper.findAllList();
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
     @Override
     public int insert(OrderVo vo) {
         //生成订单信息，及订单明细;如果合同号不存在，则生成新的合同，存在则关联合同号
         Date date = new Date();
         TOrder tOrder = new TOrder();
         String contCode = vo.getContCode();
-        if(contCode==null){
+        if (contCode == null) {
             contCode = StringUtils.genFixPreFixStr(Constants.CONT_PRE_FIX);
             TContract tContract = new TContract();
             tContract.setContCode(contCode);
@@ -68,9 +71,9 @@ public class TOrderServiceImpl implements TOrderService{
         tOrder.setContCode(contCode);
         TCustomer cus = tCustomerMapper.findByCusName(vo.getCusName());
         String cusCode;
-        if(cus!=null){
+        if (cus != null) {
             cusCode = cus.getCusCode();
-        }else{
+        } else {
             TCustomer tCustomer = new TCustomer();
             tCustomer.setCusName(vo.getCusName());
             tCustomer.setCreateTime(date);
@@ -84,14 +87,14 @@ public class TOrderServiceImpl implements TOrderService{
         tOrder.setOrdAddress(vo.getOrdAddress());
         tOrder.setOrdCode(StringUtils.genFixPreFixStr(Constants.ORD_PRE_FIX));
         //根据客户资料类型设置订单状态
-        if(cus.getStatus().equals(Constants.CUS_STATUS_SPEC)){
+        if (cus.getStatus().equals(Constants.CUS_STATUS_SPEC)) {
             tOrder.setOrdStatus(Constants.ORD_STATUS_UN_ASSIGN);
-        }else{
+        } else {
             tOrder.setOrdStatus(Constants.ORD_STATUS_NEW);
         }
         tOrder.setCreateTime(date);
         List<OrderItemVo> itemVos = vo.getItemVos();
-        if(itemVos!=null && !itemVos.isEmpty()){
+        if (itemVos != null && !itemVos.isEmpty()) {
             List<TOrderItem> orderItems = itemVos.stream().map(itv -> {
                 TOrderItem tOrderItem = new TOrderItem();
                 tOrderItem.setCreateTime(date);
@@ -114,7 +117,7 @@ public class TOrderServiceImpl implements TOrderService{
     }
 
     @Override
-    public int insertBatch(List<OrderVo> voList){
+    public int insertBatch(List<OrderVo> voList) {
         List<TOrder> orders = new ArrayList<>(voList.size());
         return tOrderMapper.insertBatch(orders);
     }

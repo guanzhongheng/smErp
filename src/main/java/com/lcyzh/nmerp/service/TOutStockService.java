@@ -1,6 +1,8 @@
 package com.lcyzh.nmerp.service;
 
 import com.lcyzh.nmerp.entity.TOutStock;
+import com.lcyzh.nmerp.model.vo.OutStockDetailVo;
+import com.lcyzh.nmerp.model.vo.OutStockVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,18 +13,19 @@ import java.util.List;
 * Date  2019-06-06
 */
 public interface TOutStockService {
-    TOutStock get(String id);
+
+    TOutStock findByOutCode(String outCode);
+
+    TOutStock findByOrdCode(String ordCode);
 
     List<TOutStock> findList(TOutStock tOutStock);
 
-    List<TOutStock> findAllList();
+    int insertStore(OutStockDetailVo vo);
 
-    int insert(TOutStock tOutStock);
+    String createAndReturnOutCode(Long applyUserId,String remark);
 
-    int insertBatch(List<TOutStock> tOutStocks);
+    int update(OutStockVo vo);
 
-    int update(TOutStock tOutStock);
-
-    int delete(TOutStock tOutStock);
+    int delete(OutStockVo vo);
 
 }
