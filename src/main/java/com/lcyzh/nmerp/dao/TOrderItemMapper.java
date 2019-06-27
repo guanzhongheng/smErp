@@ -12,8 +12,6 @@ import java.util.List;
 @Repository
 public interface TOrderItemMapper {
 
-    TOrderItem get(String id);
-
     List<TOrderItem> findList(TOrderItem tOrderItem);
 
     List<TOrderItem> findAllList();
@@ -26,4 +24,5 @@ public interface TOrderItemMapper {
 
     int delete(TOrderItem tOrderItem);
 
+    List<TOrderItem> findByOrdCode(String ordCode);
 }

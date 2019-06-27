@@ -12,8 +12,6 @@ import java.util.List;
 @Repository
 public interface TOrderMapper {
 
-    TOrder get(String id);
-
     List<TOrder> findList(TOrder tOrder);
 
     List<TOrder> findAllList();

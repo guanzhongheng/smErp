@@ -1,14 +1,9 @@
 package com.lcyzh.nmerp.service.impl;
 
 import com.lcyzh.nmerp.constant.Constants;
-import com.lcyzh.nmerp.dao.TContractMapper;
-import com.lcyzh.nmerp.dao.TCustomerMapper;
-import com.lcyzh.nmerp.dao.TOrderItemMapper;
-import com.lcyzh.nmerp.dao.TOrderMapper;
-import com.lcyzh.nmerp.entity.TContract;
-import com.lcyzh.nmerp.entity.TCustomer;
-import com.lcyzh.nmerp.entity.TOrder;
-import com.lcyzh.nmerp.entity.TOrderItem;
+import com.lcyzh.nmerp.dao.*;
+import com.lcyzh.nmerp.entity.*;
+import com.lcyzh.nmerp.model.vo.OrderItemAssignVo;
 import com.lcyzh.nmerp.model.vo.OrderItemVo;
 import com.lcyzh.nmerp.model.vo.OrderVo;
 import com.lcyzh.nmerp.service.TOrderService;
@@ -37,15 +32,46 @@ public class TOrderServiceImpl implements TOrderService {
     private TContractMapper tContractMapper;
     @Autowired
     private TCustomerMapper tCustomerMapper;
+    @Autowired
+    private TProdplanExeMapper tProdplanExeMapper;
 
-    @Override
-    public TOrder get(String id) {
-        return tOrderMapper.get(id);
-    }
 
     @Override
     public List<TOrder> findList(TOrder tOrder) {
         return tOrderMapper.findList(tOrder);
+    }
+
+    @Override
+    public List<TOrderItem> findByOrdCode(String ordCode) {
+        return tOrderItemMapper.findByOrdCode(ordCode);
+    }
+
+    @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
+    @Override
+    public int ordProduceAssign(List<OrderItemAssignVo> voList,String ordCode) {
+        int res = -1;
+        if(voList!=null && !voList.isEmpty()){
+            Date current = new Date();
+            List<TProdplanExe> prodplanExes = voList.stream().map(vo -> {
+                TProdplanExe prodplanExe = new TProdplanExe();
+                prodplanExe.setOrdItemId(vo.getOrdItemId());
+                prodplanExe.setItemNum(vo.getItemNum());
+                prodplanExe.setItemUnit(vo.getItemUnit());
+                prodplanExe.setStatus('0');
+                prodplanExe.setMacCode(vo.getMacCode());
+                prodplanExe.setCreateTime(current);
+                return prodplanExe;
+            }).collect(Collectors.toList());
+            res = tProdplanExeMapper.insertBatch(prodplanExes);
+            if(res>0){
+                TOrder tOrder = new TOrder();
+                tOrder.setOrdCode(ordCode);
+                tOrder.setOrdStatus(Constants.ORD_STATUS_ASSIGNED);
+                tOrder.setUpdateTime(current);
+                res =tOrderMapper.update(tOrder);
+            }
+        }
+        return res;
     }
 
     @Override
@@ -88,7 +114,7 @@ public class TOrderServiceImpl implements TOrderService {
         tOrder.setOrdCode(StringUtils.genFixPreFixStr(Constants.ORD_PRE_FIX));
         //根据客户资料类型设置订单状态
         if (cus.getStatus().equals(Constants.CUS_STATUS_SPEC)) {
-            tOrder.setOrdStatus(Constants.ORD_STATUS_UN_ASSIGN);
+            tOrder.setOrdStatus(Constants.ORD_STATUS_TOASSIGN);
         } else {
             tOrder.setOrdStatus(Constants.ORD_STATUS_NEW);
         }

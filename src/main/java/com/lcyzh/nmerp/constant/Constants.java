@@ -28,14 +28,14 @@ public class Constants {
     //新建
     public static final char ORD_STATUS_NEW='0';
     /**
-     * @Description: 未分配
+     * @Description: 待分配
      * @Param:
      * @return:
      * @Author: lijinku
      * @Iteration : 1.0
      * @Date: 2019/6/27 9:40 AM
      */
-    public static final char ORD_STATUS_UN_ASSIGN='1';
+    public static final char ORD_STATUS_TOASSIGN='1';
     /**
      * @Description: 已分配
      * @Param:

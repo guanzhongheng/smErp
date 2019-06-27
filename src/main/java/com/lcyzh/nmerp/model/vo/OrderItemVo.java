@@ -11,8 +11,10 @@ package com.lcyzh.nmerp.model.vo;
  * lijinku          2019/06/19    create
  */
 public class OrderItemVo {
-    private String itemName;
     private String itemCode;
+    private String itemName;
+    private String itemSpec;
+    private String itemType;
     private Double itemLenth;
     private Double itemWidth;
     private Double itemThick;
@@ -36,6 +38,22 @@ public class OrderItemVo {
 
     public void setItemCode(String itemCode) {
         this.itemCode = itemCode;
+    }
+
+    public String getItemSpec() {
+        return itemSpec;
+    }
+
+    public void setItemSpec(String itemSpec) {
+        this.itemSpec = itemSpec;
+    }
+
+    public String getItemType() {
+        return itemType;
+    }
+
+    public void setItemType(String itemType) {
+        this.itemType = itemType;
     }
 
     public Double getItemLenth() {

@@ -3,28 +3,39 @@
 <mapper namespace="com.lcyzh.nmerp.dao.TOrderItemMapper">
 
     <resultMap id="tOrderItemResultMap" type="com.lcyzh.nmerp.entity.TOrderItem">
-        <id column="id" property="id" jdbcType="BIGINT"/> 
-        <result column="ord_code" property="ordCode" jdbcType="BIGINT"/> 
-        <result column="item_code" property="itemCode" jdbcType="VARCHAR"/> 
-        <result column="item_num" property="itemNum" jdbcType="DOUBLE"/> 
-        <result column="item_lenth" property="itemLenth" jdbcType="DOUBLE"/> 
-        <result column="item_width" property="itemWidth" jdbcType="DOUBLE"/> 
-        <result column="item_thick" property="itemThick" jdbcType="DOUBLE"/> 
-        <result column="item_color" property="itemColor" jdbcType="VARCHAR"/> 
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="ord_code" property="ordCode" jdbcType="BIGINT"/>
+        <result column="item_code" property="itemCode" jdbcType="VARCHAR"/>
+        <result column="item_num" property="itemNum" jdbcType="DOUBLE"/>
+        <result column="item_lenth" property="itemLenth" jdbcType="DOUBLE"/>
+        <result column="item_width" property="itemWidth" jdbcType="DOUBLE"/>
+        <result column="item_thick" property="itemThick" jdbcType="DOUBLE"/>
+        <result column="item_color" property="itemColor" jdbcType="VARCHAR"/>
         <result column="item_unit" property="itemUnit" jdbcType="VARCHAR"/>
-        <result column="item_owner" property="itemOwner" jdbcType="VARCHAR"/> 
-        <result column="remark" property="remark" jdbcType="VARCHAR"/> 
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
-
-        
-        
+        <result column="item_owner" property="itemOwner" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
 
-    <select id="get" resultMap="tOrderItemResultMap">
-        SELECT *
-        FROM T_ORDER_ITEM
-        WHERE id = #{id}
+    <select id="findByOrdCode" parameterType="java.lang.String" resultType="com.lcyzh.nmerp.model.vo.OrderItemVo">
+       SELECT
+        tt.prod_code itemCode,
+        tt.prod_name itemName,
+        tt.prod_spec itemSpec,
+        tt.prod_type  itemType,
+        toi.item_color itemColor,
+        toi.item_lenth itemLenth,
+        toi.item_owner itemOwner,
+        toi.item_thick itemThick,
+        toi.item_width itemWidth,
+        toi.item_num itemNum,
+        toi.remark  remark
+    FROM
+        T_ORDER_ITEM toi
+        LEFT JOIN T_PRODUCT tt ON toi.item_code = tt.prod_code
+    WHERE
+	toi.ord_code = #{ordCode,jdbcType=VARCHAR}
     </select>
 
     <select id="findList" resultMap="tOrderItemResultMap">
@@ -39,7 +50,7 @@
         FROM T_ORDER_ITEM
     </select>
 
-    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TOrderItem">
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TOrderItem">
         INSERT INTO T_ORDER_ITEM(
             id,
             ord_code,
@@ -72,22 +83,22 @@
 
     <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TOrderItem">
         INSERT INTO T_ORDER_ITEM(
-            id,
-            ord_code,
-            item_code,
-            item_num,
-            item_lenth,
-            item_width,
-            item_thick,
-            item_color,
-            item_unit,
-            item_owner,
-            remark,
-            create_time
+        id,
+        ord_code,
+        item_code,
+        item_num,
+        item_lenth,
+        item_width,
+        item_thick,
+        item_color,
+        item_unit,
+        item_owner,
+        remark,
+        create_time
         )
         VALUES
-        <foreach collection ="list" item="tOrderItem" separator =",">
-        (
+        <foreach collection="list" item="tOrderItem" separator=",">
+            (
             #{tOrderItem.id,jdbcType=BIGINT},
             #{tOrderItem.ordCode,jdbcType=BIGINT},
             #{tOrderItem.itemCode,jdbcType=VARCHAR},
@@ -100,11 +111,11 @@
             #{tOrderItem.itemOwner,jdbcType=VARCHAR},
             #{tOrderItem.remark,jdbcType=VARCHAR},
             #{tOrderItem.createTime,jdbcType=TIMESTAMP}
-        )
+            )
         </foreach>
     </insert>
 
-    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TOrderItem">
+    <update id="update" parameterType="com.lcyzh.nmerp.entity.TOrderItem">
         UPDATE T_ORDER_ITEM
         SET
         id = #{id},
@@ -122,7 +133,7 @@
         WHERE id = #{id}
     </update>
 
-    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TOrderItem">
+    <delete id="delete" parameterType="com.lcyzh.nmerp.entity.TOrderItem">
         DELETE FROM T_ORDER_ITEM
         WHERE id = #{id}
     </delete>
