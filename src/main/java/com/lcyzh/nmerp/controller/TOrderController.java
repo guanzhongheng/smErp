@@ -1,6 +1,8 @@
 package com.lcyzh.nmerp.controller;
 
 import com.lcyzh.nmerp.entity.TOrder;
+import com.lcyzh.nmerp.model.vo.OrderItemVo;
+import com.lcyzh.nmerp.model.vo.OrderVo;
 import com.lcyzh.nmerp.service.TOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,8 +36,8 @@ public class TOrderController {
     }
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public String insert(@RequestBody TOrder tOrder) {
-        if (tOrderService.insert(tOrder) > 0) {
+    public String insert(@RequestBody OrderVo vo) {
+        if (tOrderService.insert(vo) > 0) {
             return "success";
         } else {
             return "failed";
@@ -43,7 +45,7 @@ public class TOrderController {
     }
 
     @RequestMapping(value = "/insertBatch", method = RequestMethod.POST)
-    public String insertBatch(@RequestBody List<TOrder> tOrders) {
+    public String insertBatch(@RequestBody List<OrderVo> tOrders) {
         if (tOrderService.insertBatch(tOrders) > 0) {
             return "success";
         } else {

@@ -29,8 +29,8 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping("/index")
-    public ModelAndView index2(){
+    @GetMapping("/webSocket")
+    public ModelAndView goToWeight(){
         ModelAndView mav=new ModelAndView("socket");
         mav.addObject("uid", RandomUtil.randomNumbers(6));
         return mav;

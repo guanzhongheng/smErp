@@ -3,18 +3,16 @@
 <mapper namespace="com.lcyzh.nmerp.dao.TCustomerMapper">
 
     <resultMap id="tCustomerResultMap" type="com.lcyzh.nmerp.entity.TCustomer">
-        <id column="id" property="id" jdbcType="BIGINT"/> 
-        <result column="cus_code" property="cusCode" jdbcType="VARCHAR"/> 
-        <result column="cus_name" property="cusName" jdbcType="VARCHAR"/> 
-        <result column="cus_grade" property="cusGrade" jdbcType="CHAR"/> 
-        <result column="cus_phone" property="cusPhone" jdbcType="VARCHAR"/> 
-        <result column="cus_birth" property="cusBirth" jdbcType="VARCHAR"/> 
-        <result column="cus_address" property="cusAddress" jdbcType="VARCHAR"/> 
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
-        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/> 
+        <id column="cus_code" property="cusCode" jdbcType="VARCHAR"/>
+        <result column="cus_name" property="cusName" jdbcType="VARCHAR"/>
+        <result column="cus_grade" property="cusGrade" jdbcType="CHAR"/>
+        <result column="status" property="status" jdbcType="CHAR"/>
+        <result column="cus_phone" property="cusPhone" jdbcType="VARCHAR"/>
+        <result column="cus_birth" property="cusBirth" jdbcType="VARCHAR"/>
+        <result column="cus_address" property="cusAddress" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
 
-        
-        
     </resultMap>
 
 
@@ -22,6 +20,12 @@
         SELECT *
         FROM T_CUSTOMER
         WHERE id = #{id}
+    </select>
+
+    <select id="findByCusName" parameterType="java.lang.String" resultMap="tCustomerResultMap">
+        SELECT *
+        FROM T_CUSTOMER
+       where cus_name = #{cusName,jdbcType=VARCHAR}
     </select>
 
     <select id="findList" resultMap="tCustomerResultMap">
@@ -36,9 +40,8 @@
         FROM T_CUSTOMER
     </select>
 
-    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TCustomer">
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TCustomer">
         INSERT INTO T_CUSTOMER(
-            id,
             cus_code,
             cus_name,
             cus_grade,
@@ -49,7 +52,6 @@
             update_time
         )
         VALUES (
-            #{id,jdbcType=BIGINT},
             #{cusCode,jdbcType=VARCHAR},
             #{cusName,jdbcType=VARCHAR},
             #{cusGrade,jdbcType=CHAR},
@@ -63,20 +65,18 @@
 
     <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TCustomer">
         INSERT INTO T_CUSTOMER(
-            id,
-            cus_code,
-            cus_name,
-            cus_grade,
-            cus_phone,
-            cus_birth,
-            cus_address,
-            create_time,
-            update_time
+        cus_code,
+        cus_name,
+        cus_grade,
+        cus_phone,
+        cus_birth,
+        cus_address,
+        create_time,
+        update_time
         )
         VALUES
-        <foreach collection ="list" item="tCustomer" separator =",">
-        (
-            #{tCustomer.id,jdbcType=BIGINT},
+        <foreach collection="list" item="tCustomer" separator=",">
+            (
             #{tCustomer.cusCode,jdbcType=VARCHAR},
             #{tCustomer.cusName,jdbcType=VARCHAR},
             #{tCustomer.cusGrade,jdbcType=CHAR},
@@ -85,28 +85,39 @@
             #{tCustomer.cusAddress,jdbcType=VARCHAR},
             #{tCustomer.createTime,jdbcType=TIMESTAMP},
             #{tCustomer.updateTime,jdbcType=TIMESTAMP}
-        )
+            )
         </foreach>
     </insert>
 
-    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TCustomer">
+    <update id="update" parameterType="com.lcyzh.nmerp.entity.TCustomer">
         UPDATE T_CUSTOMER
-        SET
-        id = #{id},
-        cus_code = #{cusCode},
-        cus_name = #{cusName},
-        cus_grade = #{cusGrade},
-        cus_phone = #{cusPhone},
-        cus_birth = #{cusBirth},
-        cus_address = #{cusAddress},
-        create_time = #{createTime},
-        update_time = #{updateTime}
-        WHERE id = #{id}
+        <set>
+            <if test="cusName!=null">
+                cus_name = #{cusName,jdbcType=VARCHAR},
+            </if>
+            <if test="cusGrade!=null">
+                cus_grade = #{cusGrade,jdbcType=CHAR},
+            </if>
+            <if test="cusPhone!=null">
+                cus_phone = #{cusPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="cusBirth!=null">
+                cus_birth = #{cusBirth,jdbcType=VARCHAR},
+            </if>
+            <if test="cusAddress!=null">
+                cus_address = #{cusAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime!=null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+
+        WHERE cus_code = #{cusCode,jdbcType=VARCHAR}
     </update>
 
-    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TCustomer">
+    <delete id="delete" parameterType="com.lcyzh.nmerp.entity.TCustomer">
         DELETE FROM T_CUSTOMER
-        WHERE id = #{id}
+        WHERE cus_code = #{cusCode,jdbcType=VARCHAR}
     </delete>
 
 </mapper>

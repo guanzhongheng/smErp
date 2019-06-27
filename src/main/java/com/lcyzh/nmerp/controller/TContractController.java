@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.controller;
 
 import com.lcyzh.nmerp.entity.TContract;
+import com.lcyzh.nmerp.model.vo.ContractVo;
 import com.lcyzh.nmerp.service.TContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,8 +33,8 @@ public class TContractController {
     }
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public String insert(@RequestBody TContract tContract) {
-        if (tContractService.insert(tContract) > 0) {
+    public String insert(@RequestBody ContractVo vo) {
+        if (tContractService.insert(vo) > 0) {
             return "success";
         } else {
             return "failed";
@@ -50,8 +51,8 @@ public class TContractController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@RequestBody TContract tContract) {
-        if (tContractService.update(tContract) > 0) {
+    public String update(@RequestBody ContractVo vo) {
+        if (tContractService.update(vo) > 0) {
             return "success";
         } else {
             return "failed";

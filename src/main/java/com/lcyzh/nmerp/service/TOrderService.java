@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.service;
 
 import com.lcyzh.nmerp.entity.TOrder;
+import com.lcyzh.nmerp.model.vo.OrderVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +18,9 @@ public interface TOrderService {
 
     List<TOrder> findAllList();
 
-    int insert(TOrder tOrder);
+    int insert(OrderVo vo);
 
-    int insertBatch(List<TOrder> tOrders);
+    int insertBatch(List<OrderVo> voList);
 
     int update(TOrder tOrder);
 

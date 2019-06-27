@@ -7,7 +7,7 @@
         <result column="ord_code" property="ordCode" jdbcType="VARCHAR"/> 
         <result column="cont_code" property="contCode" jdbcType="VARCHAR"/> 
         <result column="ord_address" property="ordAddress" jdbcType="VARCHAR"/> 
-        <result column="cus_id" property="cusId" jdbcType="BIGINT"/> 
+        <result column="cus_code" property="cusCode" jdbcType="VARCHAR"/>
         <result column="ord_status" property="ordStatus" jdbcType="CHAR"/> 
         <result column="delivery_date" property="deliveryDate" jdbcType="VARCHAR"/> 
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
@@ -42,7 +42,7 @@
             ord_code,
             cont_code,
             ord_address,
-            cus_id,
+            cus_code,
             ord_status,
             delivery_date,
             create_time,
@@ -53,7 +53,7 @@
             #{ordCode,jdbcType=VARCHAR},
             #{contCode,jdbcType=VARCHAR},
             #{ordAddress,jdbcType=VARCHAR},
-            #{cusId,jdbcType=BIGINT},
+            #{cusCode,jdbcType=VARCHAR},
             #{ordStatus,jdbcType=CHAR},
             #{deliveryDate,jdbcType=VARCHAR},
             #{createTime,jdbcType=TIMESTAMP},
@@ -67,7 +67,7 @@
             ord_code,
             cont_code,
             ord_address,
-            cus_id,
+            cus_code,
             ord_status,
             delivery_date,
             create_time,
@@ -80,7 +80,7 @@
             #{tOrder.ordCode,jdbcType=VARCHAR},
             #{tOrder.contCode,jdbcType=VARCHAR},
             #{tOrder.ordAddress,jdbcType=VARCHAR},
-            #{tOrder.cusId,jdbcType=BIGINT},
+            #{tOrder.cusCode,jdbcType=VARCHAR},
             #{tOrder.ordStatus,jdbcType=CHAR},
             #{tOrder.deliveryDate,jdbcType=VARCHAR},
             #{tOrder.createTime,jdbcType=TIMESTAMP},
@@ -96,7 +96,6 @@
         ord_code = #{ordCode},
         cont_code = #{contCode},
         ord_address = #{ordAddress},
-        cus_id = #{cusId},
         ord_status = #{ordStatus},
         delivery_date = #{deliveryDate},
         create_time = #{createTime},

@@ -14,7 +14,7 @@ public class TOrder implements Serializable {
     private String ordCode;
     private String contCode;
     private String ordAddress;
-    private Long cusId;
+    private String cusCode;
     private Character ordStatus;
     private String deliveryDate;
     private Date createTime;
@@ -56,12 +56,12 @@ public class TOrder implements Serializable {
         return ordAddress;
     }
 
-    public void setCusId(Long cusId) {
-        this.cusId = cusId;
+    public String getCusCode() {
+        return cusCode;
     }
 
-    public Long getCusId() {
-        return cusId;
+    public void setCusCode(String cusCode) {
+        this.cusCode = cusCode;
     }
 
     public void setOrdStatus(Character ordStatus) {

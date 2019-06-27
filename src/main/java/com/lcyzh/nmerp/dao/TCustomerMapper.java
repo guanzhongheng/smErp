@@ -12,6 +12,8 @@ public interface TCustomerMapper {
 
     TCustomer get(String id);
 
+    TCustomer findByCusName(String cusName);
+
     List<TCustomer> findList(TCustomer tCustomer);
 
     List<TCustomer> findAllList();

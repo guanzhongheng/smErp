@@ -62,8 +62,8 @@ public class SerialPortUtils implements SerialPortEventListener {
     @SuppressWarnings("unchecked")
     public void init(ParamConfig paramConfig) {
         // 获取系统中所有的通讯端口
-        portList = CommPortIdentifier.getPortIdentifiers();
-        // 记录是否含有指定串口
+        //        portList = CommPortIdentifier.getPortIdentifiers();
+        //        // 记录是否含有指定串口
         boolean isExsist = false;
         // 循环通讯端口
         while (portList.hasMoreElements()) {

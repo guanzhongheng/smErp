@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.service;
 
 import com.lcyzh.nmerp.entity.TContract;
+import com.lcyzh.nmerp.model.vo.ContractVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +18,11 @@ public interface TContractService {
 
     List<TContract> findAllList();
 
-    int insert(TContract tContract);
+    int insert(ContractVo vo);
 
     int insertBatch(List<TContract> tContracts);
 
-    int update(TContract tContract);
+    int update(ContractVo vo);
 
     int delete(TContract tContract);
 

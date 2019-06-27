@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lcyzh.nmerp.dao.TBarCodeInfoMapper">
+
+    <resultMap id="resultMap" type="com.lcyzh.nmerp.entity.TBarCodeInfo">
+        <id column="bar_code" property="barCode" jdbcType="VARCHAR"/>
+        <result column="ord_code" property="ordCode" jdbcType="VARCHAR"/>
+        <result column="item_id" property="itemId" jdbcType="BIGINT"/>
+        <result column="num" property="num" jdbcType="DOUBLE"/>
+        <result column="unit" property="unit" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="CHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TBarCodeInfo">
+        insert into T_BARCODE_INFO(
+            bar_code,
+            ord_code,
+            item_id,
+            num,
+            unit,
+            status,
+            create_time
+        )values (
+            #{barCode,jdbcType=VARCHAR},
+            #{ordCode,jdbcType=VARCHAR},
+            #{itemId,jdbcType=BIGINT},
+            #{num,jdbcType=DOUBLE},
+            #{unit,jdbcType=VARCHAR},
+            #{status,jdbcType=VARCHAR},
+            #{createTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+
+    <update id="update" parameterType="com.lcyzh.nmerp.entity.TBarCodeInfo">
+        update T_BARCODE_INFO
+        <set>
+            <if test="status!=null">
+                status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="updateTime!=null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+
+        where bar_code = #{barCode,jdbcType=VARCHAR}
+    </update>
+
+    <select id="findBySelectKey" resultMap="resultMap" parameterType="com.lcyzh.nmerp.entity.TBarCodeInfo">
+        select * from T_BARCODE_INFO
+        <where>
+            <if test="ordCode!=null">
+                and ord_code = #{ordCode,jdbcType=VARCHAR}
+            </if>
+
+            <if test="itemId!=null">
+                and item_id = #{itemId,jdbcType=BIGINT}
+            </if>
+
+            <if test="status!=null">
+                and status = #{status,jdbcType=CHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="findByPrimaryKey" resultMap="resultMap" parameterType="java.lang.String">
+       select * from T_BARCODE_INFO where bar_code = #{barCode,jdbcType=VARCHAR}
+    </select>
+</mapper>

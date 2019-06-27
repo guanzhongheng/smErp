@@ -1,11 +1,15 @@
 package com.lcyzh.nmerp.service.impl;
 
+import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.dao.TContractMapper;
 import com.lcyzh.nmerp.entity.TContract;
+import com.lcyzh.nmerp.model.vo.ContractVo;
 import com.lcyzh.nmerp.service.TContractService;
+import com.lcyzh.nmerp.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,7 +37,15 @@ public class TContractServiceImpl implements TContractService {
     }
 
     @Override
-    public int insert(TContract tContract) {
+    public int insert(ContractVo vo) {
+        Date current = new Date();
+        TContract tContract = new TContract();
+        tContract.setContCode(StringUtils.genFixPreFixStr(Constants.CONT_PRE_FIX));
+        tContract.setContAttach(vo.getContAttach());
+        tContract.setContManager(vo.getContManager());
+        tContract.setContSignDate(vo.getContSignDate());
+        tContract.setContStatus('0');
+        tContract.setCreateTime(current);
         return tContractMapper.insert(tContract);
     }
 
@@ -43,7 +55,15 @@ public class TContractServiceImpl implements TContractService {
     }
 
     @Override
-    public int update(TContract tContract) {
+    public int update(ContractVo vo) {
+        Date date = new Date();
+        TContract tContract = new TContract();
+        tContract.setContCode(vo.getContCode());
+        tContract.setContAttach(vo.getContAttach());
+        tContract.setContManager(vo.getContManager());
+        tContract.setContSignDate(vo.getContSignDate());
+        tContract.setContStatus(Constants.CONT_STATUS_FINISH);
+        tContract.setUpdateTime(date);
         return tContractMapper.update(tContract);
     }
 

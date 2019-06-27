@@ -10,10 +10,10 @@ import java.util.Date;
  */
 public class TCustomer implements Serializable {
     private static final long serialVersionUID = 1L;
-    private Long id;
     private String cusCode;
     private String cusName;
     private Character cusGrade;
+    private Character status;
     private String cusPhone;
     private String cusBirth;
     private String cusAddress;
@@ -24,13 +24,6 @@ public class TCustomer implements Serializable {
     public TCustomer() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
 
     public void setCusCode(String cusCode) {
         this.cusCode = cusCode;
@@ -50,6 +43,14 @@ public class TCustomer implements Serializable {
 
     public void setCusGrade(Character cusGrade) {
         this.cusGrade = cusGrade;
+    }
+
+    public Character getStatus() {
+        return status;
+    }
+
+    public void setStatus(Character status) {
+        this.status = status;
     }
 
     public Character getCusGrade() {
