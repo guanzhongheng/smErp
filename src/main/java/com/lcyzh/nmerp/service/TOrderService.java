@@ -15,17 +15,15 @@ import java.util.List;
 */
 public interface TOrderService {
 
+    TOrder get(String id);
+
     List<TOrder> findList(TOrder tOrder);
-
-    List<TOrderItem> findByOrdCode(String ordCode);
-
-    int ordProduceAssign(List<OrderItemAssignVo> voList,String ordCode);
 
     List<TOrder> findAllList();
 
-    int insert(OrderVo vo);
+    int insert(TOrder tOrder);
 
-    int insertBatch(List<OrderVo> voList);
+    int insertBatch(List<TOrder> tOrders);
 
     int update(TOrder tOrder);
 

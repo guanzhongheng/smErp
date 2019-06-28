@@ -14,18 +14,18 @@ import java.util.List;
 */
 public interface TOutStockService {
 
-    TOutStock findByOutCode(String outCode);
-
-    TOutStock findByOrdCode(String ordCode);
+    TOutStock get(String id);
 
     List<TOutStock> findList(TOutStock tOutStock);
 
-    int insertStore(OutStockDetailVo vo);
+    List<TOutStock> findAllList();
 
-    String createAndReturnOutCode(Long applyUserId,String remark);
+    int insert(TOutStock tOutStock);
 
-    int update(OutStockVo vo);
+    int insertBatch(List<TOutStock> tOutStocks);
 
-    int delete(OutStockVo vo);
+    int update(TOutStock tOutStock);
+
+    int delete(TOutStock tOutStock);
 
 }

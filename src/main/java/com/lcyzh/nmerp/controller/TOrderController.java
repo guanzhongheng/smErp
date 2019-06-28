@@ -36,8 +36,8 @@ public class TOrderController {
     }
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public String insert(@RequestBody OrderVo vo) {
-        if (tOrderService.insert(vo) > 0) {
+    public String insert(@RequestBody TOrder tOrder) {
+        if (tOrderService.insert(tOrder) > 0) {
             return "success";
         } else {
             return "failed";
@@ -45,7 +45,7 @@ public class TOrderController {
     }
 
     @RequestMapping(value = "/insertBatch", method = RequestMethod.POST)
-    public String insertBatch(@RequestBody List<OrderVo> tOrders) {
+    public String insertBatch(@RequestBody List<TOrder> tOrders) {
         if (tOrderService.insertBatch(tOrders) > 0) {
             return "success";
         } else {
