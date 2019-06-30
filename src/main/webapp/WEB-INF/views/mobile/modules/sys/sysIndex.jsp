@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <section id="index_section">
 	<header>
-        <h1 class="title">${fns:getConfig('productName')}</h1>
+        <h1 class="title">农膜ERP管理系统</h1>
         <nav class="right">
             <a data-icon="arrow-down-left-2" href="#" id="btnLogout">退出</a>
         </nav>

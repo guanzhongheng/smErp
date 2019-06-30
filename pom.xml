@@ -38,6 +38,8 @@
         <shiro.version>1.4.0</shiro.version>
         <sitemesh.version>3.0.1</sitemesh.version>
         <UserAgentUtils.version>1.21</UserAgentUtils.version>
+        <xstream.version>1.4.7</xstream.version>
+        <activiti.version>6.0.0</activiti.version>
 
     </properties>
 
@@ -107,11 +109,13 @@
         <!--<version>1.2.5.RELEASE</version>-->
         <!--</dependency>-->
 
+
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
             <version>4.1.36.Final</version>
         </dependency>
+
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
@@ -158,6 +162,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>objenesis</artifactId>
+                    <groupId>org.objenesis</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!--表格导出-->
         <!-- Jackson json -->
@@ -181,17 +191,42 @@
             <version>${UserAgentUtils.version}</version>
         </dependency>
 
-
+        <!-- xstream xml -->
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>${xstream.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.jxls</groupId>
             <artifactId>jxls</artifactId>
             <version>[2.6.0-SNAPSHOT,)</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.jxls</groupId>
             <artifactId>jxls-poi</artifactId>
             <version>[1.2.0-SNAPSHOT,)</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jxls</artifactId>
+                    <groupId>org.jxls</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>poi-ooxml</artifactId>
+                    <groupId>org.apache.poi</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>poi</artifactId>
+                    <groupId>org.apache.poi</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.jxls</groupId>
@@ -202,6 +237,36 @@
             <groupId>org.jxls</groupId>
             <artifactId>jxls-reader</artifactId>
             <version>[2.0.5,)</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>poi</artifactId>
+                    <groupId>org.apache.poi</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>poi-ooxml</artifactId>
+                    <groupId>org.apache.poi</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-beanutils</artifactId>
+                    <groupId>commons-beanutils</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>tomcat-embed-el</artifactId>
+                    <groupId>org.apache.tomcat.embed</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -211,13 +276,10 @@
             <type>jar</type>
         </dependency>
         <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-jasper</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
+            <version>1.2</version>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -225,12 +287,12 @@
             <version>2.5</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>jsp-api</artifactId>
-            <version>2.1</version>
-            <scope>provided</scope>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>javax.servlet.jsp</groupId>-->
+            <!--<artifactId>jsp-api</artifactId>-->
+            <!--<version>2.1</version>-->
+            <!--<scope>provided</scope>-->
+        <!--</dependency>-->
 
         <!-- google java lib -->
         <dependency>
@@ -339,11 +401,11 @@
         </dependency>
 
         <!-- Email -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-email</artifactId>
-            <version>${commons-email.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.apache.commons</groupId>-->
+            <!--<artifactId>commons-email</artifactId>-->
+            <!--<version>${commons-email.version}</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>javax.activation</groupId>
             <artifactId>activation</artifactId>
@@ -396,6 +458,10 @@
                     <artifactId>log4j</artifactId>
                     <groupId>log4j</groupId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>commons-io</artifactId>
+                    <groupId>commons-io</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
 
@@ -446,10 +512,22 @@
             <version>${zxing.version}</version>
         </dependency>
 
+
+        <!-- Activiti -->
+        <!--<dependency>-->
+            <!--<groupId>org.activiti</groupId>-->
+            <!--<artifactId>activiti-engine</artifactId>-->
+            <!--<version>${activiti.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.activiti</groupId>-->
+            <!--<artifactId>activiti-spring</artifactId>-->
+            <!--<version>${activiti.version}</version>-->
+        <!--</dependency>-->
     </dependencies>
 
     <build>
-        <finalName>fhadmin</finalName>
+        <finalName>hhadmin</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

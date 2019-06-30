@@ -1,9 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
+
 <html>
 <head>
     <title>图标选择</title>
+
 	<meta name="decorator" content="blank"/>
+
     <style type="text/css">
     	.page-header {clear:both;margin:0 20px;padding-top:20px;}
 		.the-icons {padding:25px 10px 15px;list-style:none;}

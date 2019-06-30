@@ -1,6 +1,4 @@
-/**
- * Copyright (c) 2013-Now  All rights reserved.
- */
+
 package com.lcyzh.nmerp.common.mapper;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;

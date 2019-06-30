@@ -20,9 +20,14 @@ public class DecoratorController {
         return "layouts/default";
     }
 
+    @RequestMapping("newLayout")
+    public String newLayout() {
+
+        return "layouts/newLayout";
+    }
+
     @RequestMapping("blank")
     public String blank() {
-
         return "layouts/blank";
     }
 }

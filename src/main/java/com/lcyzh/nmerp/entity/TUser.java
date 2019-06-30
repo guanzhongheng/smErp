@@ -13,6 +13,7 @@ public class TUser implements Serializable {
     private Long id;
     private String usCode;
     private String usName;
+    private String name;
     private String usBirth;
     private String usPhone;
     private String usPosition;
@@ -20,6 +21,13 @@ public class TUser implements Serializable {
     private Date createTime;
     private Date updateTime;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public TUser() {
     }

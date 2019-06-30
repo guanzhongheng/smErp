@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>${fns:getConfig('productName')}</title>
+    <title>农膜ERP管理系统</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -17,7 +17,7 @@
 <div id="section_container">
     <section id="login_section" class="active">
         <header>
-            <h1 class="title">${fns:getConfig('productName')}</h1>
+            <h1 class="title">农膜ERP管理系统</h1>
             <!-- <nav class="right">
                 <a data-target="section" data-icon="info" href="#about_section"></a>
             </nav> -->

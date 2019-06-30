@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>${fns:getConfig('productName')}</title>
+	<title>农膜ERP管理系统</title>
 	<meta name="decorator" content="blank"/>
     <c:if test="${cookie.tabmode.value eq '1'}"><link rel="Stylesheet" href="${ctxStatic}/jerichotab/css/jquery.jerichotab.css" />
     <script type="text/javascript" src="${ctxStatic}/jerichotab/js/jquery.jerichotab.js"></script></c:if>
@@ -143,7 +143,7 @@
 	<div id="main">
 		<div id="header" class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
-				<div class="brand"><span id="productName">${fns:getConfig('productName')}</span></div>
+				<div class="brand"><span id="productName">农膜ERP管理系统</span></div>
 				<ul id="userControl" class="nav pull-right"><%--
 					<li><a href="${pageContext.request.contextPath}${fns:getFrontPath()}/index-${fnc:getCurrentSiteId()}.html" target="_blank" title="访问网站主页"><i class="icon-home"></i></a></li>--%>
 					<li id="themeSwitch" class="dropdown">
@@ -216,7 +216,7 @@
 				</div>
 			</div>
 		    <div id="footer" class="row-fluid">
-	            Copyright &copy; 2012-${fns:getConfig('copyrightYear')} ${fns:getConfig('productName')}<!--  - Powered By <a href="https://github.com/thinkgem/jeesite" target="_blank">JeeSite</a> ${fns:getConfig('version')} -->
+	            Copyright &copy; 2012-${fns:getConfig('copyrightYear')} 农膜ERP管理系统<!--  - Powered By <a href="https://github.com/thinkgem/jeesite" target="_blank">JeeSite</a> ${fns:getConfig('version')} -->
 			</div>
 		</div>
 	</div>

@@ -1,6 +1,4 @@
-/**
- * Copyright (c) 2013-Now  All rights reserved.
- */
+
 package com.lcyzh.nmerp.common.lang;
 
 import org.apache.commons.lang3.StringUtils;

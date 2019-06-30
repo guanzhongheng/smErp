@@ -2,10 +2,12 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <html>
 <head>
-	<title>${fns:getConfig('productName')}</title>
-	<meta name="decorator" content="blank"/><c:set var="tabmode" value="${empty cookie.tabmode.value ? '0' : cookie.tabmode.value}"/>
-    <c:if test="${tabmode eq '1'}"><link rel="Stylesheet" href="${ctxStatic}/jerichotab/css/jquery.jerichotab.css" />
-    <script type="text/javascript" src="${ctxStatic}/jerichotab/js/jquery.jerichotab.js"></script></c:if>
+	<title>农膜ERP管理系统</title>
+	<c:set var="tabmode" value="${empty cookie.tabmode.value ? '0' : cookie.tabmode.value}"/>
+    <c:if test="${tabmode eq '1'}">
+		<link rel="Stylesheet" href="${ctxStatic}/jerichotab/css/jquery.jerichotab.css" />
+        <script type="text/javascript" src="${ctxStatic}/jerichotab/js/jquery.jerichotab.js"></script>
+	</c:if>
 	<style type="text/css">
 		#main {padding:0;margin:0;} #main .container-fluid{padding:0 4px 0 6px;}
 		#header {margin:0 0 8px;position:static;} #header li {font-size:14px;_font-size:12px;}
@@ -16,6 +18,7 @@
 	</style>
 	<script type="text/javascript">
 		$(document).ready(function() {
+		    debugger;
 			// <c:if test="${tabmode eq '1'}"> 初始化页签
 			$.fn.initJerichoTab({
                 renderTo: '#right', uniqueId: 'jerichotab',
@@ -114,7 +117,8 @@
 					$(this).click();
 				}
 			});
-			// 获取通知数目  <c:set var="oaNotifyRemindInterval" value="${fns:getConfig('oa.notify.remind.interval')}"/>
+			// 获取通知数目
+			<c:set var="oaNotifyRemindInterval" value=""/>
 			function getNotifyNum(){
 				$.get("${ctx}/oa/oaNotify/self/count?updateSession=0&t="+new Date().getTime(),function(data){
 					var num = parseFloat(data);
@@ -149,19 +153,17 @@
 	<div id="main">
 		<div id="header" class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
-				<div class="brand"><span id="productName">${fns:getConfig('productName')}</span></div>
+				<div class="brand"><span id="productName">农膜ERP管理系统</span></div>
 				<ul id="userControl" class="nav pull-right">
-					<li><a href="${pageContext.request.contextPath}${fns:getFrontPath()}/index-${fnc:getCurrentSiteId()}.html" target="_blank" title="访问网站主页"><i class="icon-home"></i></a></li>
 					<li id="themeSwitch" class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#" title="主题切换"><i class="icon-th-large"></i></a>
-						<ul class="dropdown-menu">
-							<c:forEach items="${fns:getDictList('theme')}" var="dict"><li><a href="#" onclick="location='${pageContext.request.contextPath}/theme/${dict.value}?url='+location.href">${dict.label}</a></li></c:forEach>
-							<li><a href="javascript:cookie('tabmode','${tabmode eq '1' ? '0' : '1'}');location=location.href">${tabmode eq '1' ? '关闭' : '开启'}页签模式</a></li>
-						</ul>
-						<!--[if lte IE 6]><script type="text/javascript">$('#themeSwitch').hide();</script><![endif]-->
+						<%--<a class="dropdown-toggle" data-toggle="dropdown" href="#" title="主题切换"><i class="icon-th-large"></i></a>--%>
+						<%--<ul class="dropdown-menu">--%>
+							<%--<c:forEach items="${fns:getDictList('theme')}" var="dict"><li><a href="#" onclick="location='${pageContext.request.contextPath}/theme/${dict.value}?url='+location.href">${dict.label}</a></li></c:forEach>--%>
+							<%--<li><a href="javascript:cookie('tabmode','${tabmode eq '1' ? '0' : '1'}');location=location.href">${tabmode eq '1' ? '关闭' : '开启'}页签模式</a></li>--%>
+						<%--</ul>--%>
 					</li>
 					<li id="userInfo" class="dropdown">
-						<a class="dropdown-toggle" data-toggle="dropdown" href="#" title="个人信息">您好, ${fns:getUser().name}&nbsp;<span id="notifyNum" class="label label-info hide"></span></a>
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#" title="个人信息">您好, &nbsp;<span id="notifyNum" class="label label-info hide"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="${ctx}/sys/user/info" target="mainFrame"><i class="icon-user"></i>&nbsp; 个人信息</a></li>
 							<li><a href="${ctx}/sys/user/modifyPwd" target="mainFrame"><i class="icon-lock"></i>&nbsp;  修改密码</a></li>
@@ -182,23 +184,33 @@
 				</c:if> --%>
 				<div class="nav-collapse">
 					<ul id="menu" class="nav" style="*white-space:nowrap;float:none;">
-						<c:set var="firstMenu" value="true"/>
-						<c:forEach items="${fns:getMenuList()}" var="menu" varStatus="idxStatus">
-							<c:if test="${menu.parent.id eq '1'&&menu.isShow eq '1'}">
-								<li class="menu ${not empty firstMenu && firstMenu ? ' active' : ''}">
-									<c:if test="${empty menu.href}">
-										<a class="menu" href="javascript:" data-href="${ctx}/sys/menu/tree?parentId=${menu.id}" data-id="${menu.id}"><span>${menu.name}</span></a>
-									</c:if>
-									<c:if test="${not empty menu.href}">
-										<a class="menu" href="${fn:indexOf(menu.href, '://') eq -1 ? ctx : ''}${menu.href}" data-id="${menu.id}" target="mainFrame"><span>${menu.name}</span></a>
-									</c:if>
-								</li>
-								<c:if test="${firstMenu}">
-									<c:set var="firstMenuId" value="${menu.id}"/>
-								</c:if>
-								<c:set var="firstMenu" value="false"/>
-							</c:if>
-						</c:forEach><%--
+						<li class="menu active">
+							<a class="menu" href="/crm/list" data-id="1" target="mainFrame"><span>测试</span></a>
+						</li>
+						<li class="menu ">
+							<a class="menu" href="/crm/test" data-id="2" ><span>测试2</span></a>
+						</li>
+
+
+
+						<%--<c:set var="firstMenu" value="true"/>--%>
+						<%--<c:forEach items="${fns:getMenuList()}" var="menu" varStatus="idxStatus">--%>
+							<%--<c:if test="${menu.parent.id eq '1'&&menu.isShow eq '1'}">--%>
+								<%--<li class="menu ${not empty firstMenu && firstMenu ? ' active' : ''}">--%>
+									<%--<c:if test="${empty menu.href}">--%>
+										<%--<a class="menu" href="javascript:" data-href="${ctx}/sys/menu/tree?parentId=${menu.id}" data-id="${menu.id}"><span>${menu.name}</span></a>--%>
+									<%--</c:if>--%>
+									<%--<c:if test="${not empty menu.href}">--%>
+										<%--<a class="menu" href="${fn:indexOf(menu.href, '://') eq -1 ? ctx : ''}${menu.href}" data-id="${menu.id}" target="mainFrame"><span>${menu.name}</span></a>--%>
+									<%--</c:if>--%>
+								<%--</li>--%>
+								<%--<c:if test="${firstMenu}">--%>
+									<%--<c:set var="firstMenuId" value="${menu.id}"/>--%>
+								<%--</c:if>--%>
+								<%--<c:set var="firstMenu" value="false"/>--%>
+							<%--</c:if>--%>
+						<%--</c:forEach>--%>
+						<%--
 						<shiro:hasPermission name="cms:site:select">
 						<li class="dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" href="#">${fnc:getSite(fnc:getCurrentSiteId()).name}<b class="caret"></b></a>
@@ -214,6 +226,7 @@
 	    <div class="container-fluid">
 			<div id="content" class="row-fluid">
 				<div id="left">
+
 				</div>
 				<div id="openClose" class="close">&nbsp;</div>
 				<div id="right">
@@ -221,7 +234,7 @@
 				</div>
 			</div>
 		    <div id="footer" class="row-fluid">
-	            Copyright &copy; 2012-${fns:getConfig('copyrightYear')} ${fns:getConfig('productName')} - Powered By <a href="http://jeesite.com" target="_blank">JeeSite</a> ${fns:getConfig('version')}
+	            Copyright &copy; 2019-2020 农膜ERP管理系统 - Powered By <a href="#" target="_blank">erp</a> Ver 1.0.0
 			</div>
 		</div>
 	</div>

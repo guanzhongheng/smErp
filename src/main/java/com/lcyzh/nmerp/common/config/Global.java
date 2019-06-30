@@ -1,7 +1,6 @@
-/**
- * Copyright &copy; 2012-2016  All rights reserved.
- */
+
 package com.lcyzh.nmerp.common.config;
+
 
 import com.google.common.collect.Maps;
 import com.lcyzh.nmerp.common.lang.StringUtils;
@@ -14,7 +13,7 @@ import java.util.Map;
 
 /**
  * 全局配置类 懒汉式单例类.在第一次调用的时候实例化自己
- * @author ThinkGem,长春叭哥
+ * @author
  * @version 2018年1月5日
  */
 public class Global {
