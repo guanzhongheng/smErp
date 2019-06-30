@@ -29,12 +29,6 @@ public class TOrderController {
         return tOrders;
     }
 
-    @RequestMapping(value = {"/get"}, method = RequestMethod.GET)
-    public Object get(@RequestParam String id) {
-        TOrder tOrder = tOrderService.get(id);
-        return tOrder;
-    }
-
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public String insert(@RequestBody TOrder tOrder) {
         if (tOrderService.insert(tOrder) > 0) {

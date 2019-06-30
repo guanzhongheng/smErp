@@ -61,4 +61,32 @@ public class Constants {
     //拒绝
     public static final char CUS_STATUS_RJCT='3';
 
+    /**
+     * @Description: 产品大类字典编号
+     * @Param:
+     * @return: 
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/6/28 12:06 PM
+     */
+    public static final String DICT_PROD_BIG_CGY = "PD0001";
+    /**
+     * @Description: 半产品大类字典编号
+     * @Param:
+     * @return: 
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/6/28 12:07 PM
+     */
+    public static final String DICT_SEM_BIG_CGY = "SEM0001";
+    /**
+     * @Description: 原材料大类字典编号
+     * @Param:
+     * @return: 
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/6/28 12:07 PM
+     */
+    public static final String DICT_RAM_BIG_CGY = "RAM0001";
+
 }
