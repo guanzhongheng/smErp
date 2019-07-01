@@ -1,18 +1,13 @@
 package com.lcyzh.nmerp.controller;
 
 import com.google.common.collect.Maps;
-import com.lcyzh.nmerp.common.config.Global;
-import com.lcyzh.nmerp.common.lang.StringUtils;
 import com.lcyzh.nmerp.common.utils.CacheUtils;
-import com.lcyzh.nmerp.common.web.CookieUtils;
 import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.controller.system.security.SystemAuthorizingRealm.Principal;
 import com.lcyzh.nmerp.controller.system.util.UserUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

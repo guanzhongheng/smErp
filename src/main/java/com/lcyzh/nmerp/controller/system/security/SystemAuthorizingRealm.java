@@ -1,18 +1,12 @@
 package com.lcyzh.nmerp.controller.system.security;
 
-import com.lcyzh.nmerp.common.config.Global;
 import com.lcyzh.nmerp.controller.LoginController;
 import com.lcyzh.nmerp.entity.TUser;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.*;
-import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.Permission;
-import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
-import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.ByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

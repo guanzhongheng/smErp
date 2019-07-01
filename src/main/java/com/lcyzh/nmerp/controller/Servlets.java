@@ -7,7 +7,7 @@ package com.lcyzh.nmerp.controller;
 
 import com.google.common.net.HttpHeaders;
 
-import com.lcyzh.nmerp.common.config.Global;
+import com.lcyzh.nmerp.common.utils.Global;
 import com.lcyzh.nmerp.common.lang.StringUtils;
 import com.lcyzh.nmerp.utils.Encodes;
 import org.apache.commons.lang3.Validate;

@@ -4,7 +4,6 @@
 package com.lcyzh.nmerp.common.persistence;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.lcyzh.nmerp.common.config.Global;
 import com.lcyzh.nmerp.common.web.CookieUtils;
 import org.apache.commons.lang3.StringUtils;
 

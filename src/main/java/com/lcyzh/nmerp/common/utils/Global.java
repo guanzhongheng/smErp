@@ -1,5 +1,5 @@
 
-package com.lcyzh.nmerp.common.config;
+package com.lcyzh.nmerp.common.utils;
 
 
 import com.google.common.collect.Maps;

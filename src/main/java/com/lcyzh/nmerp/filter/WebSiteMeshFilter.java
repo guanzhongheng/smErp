@@ -22,6 +22,7 @@ public class WebSiteMeshFilter extends ConfigurableSiteMeshFilter {
                 .addDecoratorPath("/order/*","/decoratorFilter/newLayout")
                 .addDecoratorPath("/cus/*","/decoratorFilter/newLayout")
                 .addDecoratorPath("/*", "/decoratorFilter/blank")
-                .addExcludedPath("/logout").addExcludedPath("/crm/test");
+                .addDecoratorPath("/common/*", "/decoratorFilter/blank")
+                .addExcludedPath("/logout").addExcludedPath("/crm/test").addExcludedPath("/crmAjax/*");
     }
 }

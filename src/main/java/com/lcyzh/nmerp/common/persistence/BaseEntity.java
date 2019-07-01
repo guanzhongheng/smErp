@@ -5,7 +5,7 @@ package com.lcyzh.nmerp.common.persistence;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Maps;
-import com.lcyzh.nmerp.common.config.Global;
+import com.lcyzh.nmerp.common.utils.Global;
 import com.lcyzh.nmerp.common.lang.StringUtils;
 import com.lcyzh.nmerp.common.supcan.annotation.treelist.SupTreeList;
 import com.lcyzh.nmerp.common.supcan.annotation.treelist.cols.SupCol;

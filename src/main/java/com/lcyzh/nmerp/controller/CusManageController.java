@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("cus")
 public class CusManageController  extends BaseController {
 
+
+
+
     @RequestMapping(value = {"test"})
     public String test(){
         return "modules/crm/customerTest";
@@ -25,9 +28,18 @@ public class CusManageController  extends BaseController {
 
     @RequestMapping(value = {"customer_add"})
     public String customerAdd(Model model){
-        //   Page<Customer> page = commentService.findPage(new Page<Comment>(request, response), comment);
+       // Page<Customer> page = commentService.findPage(new Page<Comment>(request, response), comment);
         Page<Customer> page = new Page<Customer>();
         model.addAttribute("page", page);
         return "modules/crm/customerAdd";
+    }
+
+
+    @RequestMapping(value = {"customer_info"})
+    public String customerInfo(Model model){
+        // Page<Customer> page = commentService.findPage(new Page<Comment>(request, response), comment);
+        Page<Customer> page = new Page<Customer>();
+        model.addAttribute("page", page);
+        return "modules/crm/customerInfo";
     }
 }

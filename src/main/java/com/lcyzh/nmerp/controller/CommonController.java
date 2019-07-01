@@ -9,17 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * 项目名称：nm-erp
- * 类 名 称：tagController
+ * 类 名 称：CommonController
  * 类 描 述：TODO
- * 创建时间：2019/6/30 3:15 PM
+ * 创建时间：2019/6/30 3:38 PM
  * 创 建 人：guan
  */
 @Controller
-@RequestMapping("tag")
-public class tagController extends BaseController {
+@RequestMapping("common")
+public class CommonController extends BaseController {
 
-    @RequestMapping("formSubmit")
-    public String formInfo(HttpServletRequest request, Model model){
-        return "";
-    }
+
+
+
 }

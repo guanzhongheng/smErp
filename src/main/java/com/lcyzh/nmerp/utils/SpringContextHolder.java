@@ -4,7 +4,7 @@
 package com.lcyzh.nmerp.utils;
 
 
-import com.lcyzh.nmerp.common.config.Global;
+import com.lcyzh.nmerp.common.utils.Global;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
