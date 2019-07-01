@@ -4,15 +4,19 @@
 
     <resultMap id="tOrderResultMap" type="com.lcyzh.nmerp.entity.TOrder">
         <id column="ord_code" property="ordCode" jdbcType="VARCHAR"/>
-        <result column="cont_code" property="contCode" jdbcType="VARCHAR"/> 
-        <result column="ord_address" property="ordAddress" jdbcType="VARCHAR"/> 
-        <result column="cus_code" property="cusCode" jdbcType="VARCHAR"/>
-        <result column="ord_status" property="ordStatus" jdbcType="CHAR"/> 
-        <result column="delivery_date" property="deliveryDate" jdbcType="VARCHAR"/> 
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
-        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/> 
+        <result column="ord_title" property="ordTitle" jdbcType="VARCHAR"/>
+        <result column="ord_total_amount" property="ordTotalAmount" jdbcType="DOUBLE"/>
+        <result column="ord_type" property="ordType" jdbcType="BIGINT"/>
+        <result column="ord_sign_date" property="ordSignDate" jdbcType="VARCHAR"/>
+        <result column="ord_status" property="ordStatus" jdbcType="BIGINT"/>
+        <result column="ord_delivery_date" property="ordDeliveryDate" jdbcType="VARCHAR"/>
+        <result column="pay_type" property="payType" jdbcType="BIGINT"/>
+        <result column="cus_contractor" property="cusContractor" jdbcType="VARCHAR"/>
+        <result column="com_contractor" property="comContractor" jdbcType="VARCHAR"/>
+        <result column="cont_attach_url" property="contAttachUrl" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
-
 
 
     <select id="findList" resultMap="tOrderResultMap">
@@ -27,24 +31,34 @@
         FROM T_ORDER
     </select>
 
-    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TOrder">
-        INSERT INTO T_ORDER(
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TOrder">
+           INSERT INTO T_ORDER(
             ord_code,
-            cont_code,
-            ord_address,
-            cus_code,
+            ord_title,
+            ord_total_amount,
+            ord_type,
+            ord_sign_date,
             ord_status,
-            delivery_date,
+            ord_delivery_date,
+            pay_type,
+            cus_contractor,
+            com_contractor,
+            cont_attach_url,
             create_time,
             update_time
         )
         VALUES (
             #{ordCode,jdbcType=VARCHAR},
-            #{contCode,jdbcType=VARCHAR},
-            #{ordAddress,jdbcType=VARCHAR},
-            #{cusCode,jdbcType=VARCHAR},
-            #{ordStatus,jdbcType=CHAR},
-            #{deliveryDate,jdbcType=VARCHAR},
+            #{ordTitle,jdbcType=VARCHAR},
+            #{ordTotalAmount,jdbcType=DOUBLE},
+            #{ordType,jdbcType=BIGINT},
+            #{ordSignDate,jdbcType=VARCHAR},
+            #{ordStatus,jdbcType=BIGINT},
+            #{ordDeliveryDate,jdbcType=VARCHAR},
+            #{payType,jdbcType=BIGINT},
+            #{cusContractor,jdbcType=VARCHAR},
+            #{comContractor,jdbcType=VARCHAR},
+            #{contAttachUrl,jdbcType=VARCHAR},
             #{createTime,jdbcType=TIMESTAMP},
             #{updateTime,jdbcType=TIMESTAMP}
         )
@@ -52,45 +66,67 @@
 
     <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TOrder">
         INSERT INTO T_ORDER(
-            ord_code,
-            cont_code,
-            ord_address,
-            cus_code,
-            ord_status,
-            delivery_date,
-            create_time,
-            update_time
+        ord_code,
+        ord_title,
+        ord_total_amount,
+        ord_type,
+        ord_sign_date,
+        ord_status,
+        ord_delivery_date,
+        pay_type,
+        cus_contractor,
+        com_contractor,
+        cont_attach_url,
+        create_time,
+        update_time
         )
         VALUES
-        <foreach collection ="list" item="tOrder" separator =",">
-        (
-            #{tOrder.ordCode,jdbcType=VARCHAR},
-            #{tOrder.contCode,jdbcType=VARCHAR},
-            #{tOrder.ordAddress,jdbcType=VARCHAR},
-            #{tOrder.cusCode,jdbcType=VARCHAR},
-            #{tOrder.ordStatus,jdbcType=CHAR},
-            #{tOrder.deliveryDate,jdbcType=VARCHAR},
-            #{tOrder.createTime,jdbcType=TIMESTAMP},
-            #{tOrder.updateTime,jdbcType=TIMESTAMP}
-        )
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.ordCode,jdbcType=VARCHAR},
+            #{item.ordTitle,jdbcType=VARCHAR},
+            #{item.ordTotalAmount,jdbcType=DOUBLE},
+            #{item.ordType,jdbcType=BIGINT},
+            #{item.ordSignDate,jdbcType=VARCHAR},
+            #{item.ordStatus,jdbcType=BIGINT},
+            #{item.ordDeliveryDate,jdbcType=VARCHAR},
+            #{item.payType,jdbcType=BIGINT},
+            #{item.cusContractor,jdbcType=VARCHAR},
+            #{item.comContractor,jdbcType=VARCHAR},
+            #{item.contAttachUrl,jdbcType=VARCHAR},
+            #{item.createTime,jdbcType=TIMESTAMP},
+            #{item.updateTime,jdbcType=TIMESTAMP}
+            )
         </foreach>
     </insert>
 
-    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TOrder">
+    <update id="update" parameterType="com.lcyzh.nmerp.entity.TOrder">
         UPDATE T_ORDER
         <set>
-            <if test="contCode!=null">
-                cont_code = #{contCode,jdbcType=VARCHAR},
+            <if test="ordTitle!=null">
+                ord_title = #{ordTitle,jdbcType=VARCHAR},
             </if>
-            <if test="ordAddress!=null">
-                ord_address = #{ordAddress,jdbcType=VARCHAR},
+            <if test="ordSignDate!=null">
+                ord_sign_date = #{ordSignDate,jdbcType=VARCHAR},
             </if>
             <if test="ordStatus!=null">
                 ord_status = #{ordStatus,jdbcType=CHAR},
             </if>
-            <if test="deliveryDate!=null">
-                delivery_date = #{deliveryDate,jdbcType=VARCHAR},
+            <if test="ordDeliveryDate!=null">
+                ord_delivery_date = #{ordDeliveryDate,jdbcType=VARCHAR},
             </if>
+            <if test="cusContractor!=null">
+                cus_contractor = #{cusContractor,jdbcType=VARCHAR},
+            </if>
+
+            <if test="comContractor!=null">
+                com_contractor = #{comContractor,jdbcType=VARCHAR},
+            </if>
+
+            <if test="contAttachUrl!=null">
+                cont_attach_url = #{contAttachUrl,jdbcType=VARCHAR},
+            </if>
+
             <if test="updateTime!=null">
                 update_time = #{updateTime,jdbcType=TIMESTAMP}
             </if>
@@ -99,7 +135,7 @@
         WHERE ord_code = #{ordCode,jdbcType=VARCHAR}
     </update>
 
-    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TOrder">
+    <delete id="delete" parameterType="com.lcyzh.nmerp.entity.TOrder">
         DELETE FROM T_ORDER
         WHERE id = #{id}
     </delete>

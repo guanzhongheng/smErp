@@ -46,11 +46,11 @@ public class Constants {
      */
     public static final long ORD_STATUS_ASSIGNED=12002l;
     //执行中
-    public static final char ORD_STATUS_EXE='3';
+    public static final long ORD_STATUS_EXE=12003l;
     //完成
-    public static final char ORD_STATUS_FINISH='4';
+    public static final long ORD_STATUS_FINISH=12004l;
     //废弃
-    public static final char ORD_STATUS_INVALID='5';
+    public static final long ORD_STATUS_INVALID=12005l;
 
     //正常
     public static final long CUS_STATUS_NOR=11000l;

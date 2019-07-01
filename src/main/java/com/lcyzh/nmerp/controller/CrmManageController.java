@@ -51,9 +51,8 @@ public class CrmManageController extends BaseController {
      * @return
      */
     @RequestMapping(value = {"order/list", "order"})
-    public String orderList(@ModelAttribute("order") TOrder order, Model model){
-        //   Page<Customer> page = commentService.findPage(new Page<Comment>(request, response), comment);
-        Page<Customer> page = new Page<Customer>();
+    public String orderList(@ModelAttribute("order") TOrder order, Model model, HttpServletRequest request, HttpServletResponse response){
+        Page<TOrder> page = orderService.findPage(new Page<TOrder>(request, response), order);
         model.addAttribute("page", page);
         return "modules/crm/orderList";
     }
