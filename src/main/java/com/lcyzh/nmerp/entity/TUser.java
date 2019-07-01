@@ -104,4 +104,12 @@ public class TUser implements Serializable {
         return updateTime;
     }
 
+    public boolean isAdmin(){
+        return isAdmin(this.id);
+    }
+
+    public static boolean isAdmin(Long id){
+        return id != null && id == 1;
+    }
+
 }

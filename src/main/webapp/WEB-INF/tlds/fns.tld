@@ -9,7 +9,7 @@
   <display-name>JSTL functions sys</display-name>
   <tlib-version>1.1</tlib-version>
   <short-name>fns</short-name>
-  <uri>http://java.sun.com/jsp/jstl/functions</uri>
+  <uri>http://java.sun.com/jsp/jstl/functionss</uri>
 
   <function>
     <description>获取管理路径</description>
@@ -73,13 +73,13 @@
     <!--<example>${fns:getPrincipal()}</example>-->
   <!--</function>-->
 
-  <!--<function>-->
-    <!--<description>获取当前用户的菜单对象列表</description>-->
-    <!--<name>getMenuList</name>-->
-    <!--<function-class>com.lcyzh.nmerp.controller.system.util.UserUtils</function-class>-->
-    <!--<function-signature>java.util.List getMenuList()</function-signature>-->
-    <!--<example>${fns:getMenuList()}</example>-->
-  <!--</function>-->
+  <function>
+    <description>获取当前用户的菜单对象列表</description>
+    <name>getMenuList</name>
+    <function-class>com.lcyzh.nmerp.controller.system.util.UserUtils</function-class>
+    <function-signature>java.util.List getMenuList()</function-signature>
+    <example>${fns:getMenuList()}</example>
+  </function>
 
   <!--<function>-->
     <!--<description>获取当前用户的区域对象列表</description>-->

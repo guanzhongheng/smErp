@@ -4,12 +4,17 @@
 package com.lcyzh.nmerp.controller.system.util;
 
 import com.lcyzh.nmerp.controller.system.security.SystemAuthorizingRealm.Principal;
+import com.lcyzh.nmerp.dao.TMenuMapper;
+import com.lcyzh.nmerp.entity.Menu;
 import com.lcyzh.nmerp.entity.TUser;
+import com.lcyzh.nmerp.utils.SpringContextHolder;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.UnavailableSecurityManagerException;
 import org.apache.shiro.session.InvalidSessionException;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+
+import java.util.List;
 
 /**
  * 用户工具类
@@ -20,7 +25,7 @@ public class UserUtils {
 
 //	private static UserDao userDao = SpringContextHolder.getBean(UserDao.class);
 //	private static RoleDao roleDao = SpringContextHolder.getBean(RoleDao.class);
-//	private static MenuDao menuDao = SpringContextHolder.getBean(MenuDao.class);
+	private static TMenuMapper menuDao = SpringContextHolder.getBean(TMenuMapper.class);
 //	private static AreaDao areaDao = SpringContextHolder.getBean(AreaDao.class);
 //	private static OfficeDao officeDao = SpringContextHolder.getBean(OfficeDao.class);
 
@@ -137,26 +142,29 @@ public class UserUtils {
 //		return roleList;
 //	}
 //
-//	/**
-//	 * 获取当前用户授权菜单
-//	 * @return
-//	 */
-//	public static List<Menu> getMenuList(){
-//		@SuppressWarnings("unchecked")
-//		List<Menu> menuList = (List<Menu>)getCache(CACHE_MENU_LIST);
-//		if (menuList == null){
-//			User user = getUser();
-//			if (user.isAdmin()){
-//				menuList = menuDao.findAllList(new Menu());
-//			}else{
-//				Menu m = new Menu();
-//				m.setUserId(user.getId());
-//				menuList = menuDao.findByUserId(m);
-//			}
-//			putCache(CACHE_MENU_LIST, menuList);
-//		}
-//		return menuList;
-//	}
+	/**
+	 * 获取当前用户授权菜单
+	 * @return
+	 */
+	public static List<Menu> getMenuList(){
+		@SuppressWarnings("unchecked")
+		// List<Menu> menuList = (List<Menu>)getCache(CACHE_MENU_LIST);
+		List<Menu> menuList = null;
+		if (menuList == null){
+			TUser user = getUser();
+			//	TODO测试用账号
+			user.setId(1L);
+			if (user.isAdmin()){
+				menuList = menuDao.findAllList(new Menu());
+			}else{
+				Menu m = new Menu();
+				m.setUserId(user.getId());
+				menuList = menuDao.findByUserId(m);
+			}
+		  //utCache(CACHE_MENU_LIST, menuList);
+		}
+		return menuList;
+	}
 //
 //	/**
 //	 * 获取当前用户授权的区域

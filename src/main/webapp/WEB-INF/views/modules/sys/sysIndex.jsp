@@ -27,6 +27,7 @@
             });//</c:if>
 			// 绑定菜单单击事件
 			$("#menu a.menu").click(function(){
+			    debugger;
 				// 一级菜单焦点
 				$("#menu li.menu").removeClass("active");
 				$(this).parent().addClass("active");
@@ -61,7 +62,8 @@
 				}else{
 					// 获取二级菜单数据
 					$.get($(this).attr("data-href"), function(data){
-						if (data.indexOf("id=\"loginForm\"") != -1){
+						debugger;
+					    if (data.indexOf("id=\"loginForm\"") != -1){
 							alert('未登录或登录超时。请重新登录，谢谢！');
 							top.location = "${ctx}";
 							return false;
@@ -106,7 +108,7 @@
 				return false;
 			});
 			// 初始化点击第一个一级菜单
-			$("#menu a.menu:first span").click();
+		 	$("#menu a.menu:first span").click();
 			// <c:if test="${tabmode eq '1'}"> 下拉菜单以选项卡方式打开
 			$("#userInfo .dropdown-menu a").mouseup(function(){
 				return addTab($(this), true);
@@ -118,19 +120,21 @@
 				}
 			});
 			// 获取通知数目
-			<c:set var="oaNotifyRemindInterval" value=""/>
-			function getNotifyNum(){
-				$.get("${ctx}/oa/oaNotify/self/count?updateSession=0&t="+new Date().getTime(),function(data){
-					var num = parseFloat(data);
-					if (num > 0){
-						$("#notifyNum,#notifyNum2").show().html("("+num+")");
-					}else{
-						$("#notifyNum,#notifyNum2").hide()
-					}
-				});
-			}
-			getNotifyNum(); //<c:if test="${oaNotifyRemindInterval ne '' && oaNotifyRemindInterval ne '0'}">
-			setInterval(getNotifyNum, ${oaNotifyRemindInterval}); //</c:if>
+			<%--<c:set var="oaNotifyRemindInterval" value=""/>--%>
+			<%--function getNotifyNum(){--%>
+				<%--$.get("${ctx}/oa/oaNotify/self/count?updateSession=0&t="+new Date().getTime(),function(data){--%>
+					<%--var num = parseFloat(data);--%>
+					<%--if (num > 0){--%>
+						<%--$("#notifyNum,#notifyNum2").show().html("("+num+")");--%>
+					<%--}else{--%>
+						<%--$("#notifyNum,#notifyNum2").hide()--%>
+					<%--}--%>
+				<%--});--%>
+			<%--}--%>
+			<%--getNotifyNum(); //--%>
+			<%--<c:if test="${oaNotifyRemindInterval ne '' && oaNotifyRemindInterval ne '0'}">--%>
+				<%--setInterval(getNotifyNum, ${oaNotifyRemindInterval}); //--%>
+			<%--</c:if>--%>
 		});
 		// <c:if test="${tabmode eq '1'}"> 添加一个页签
 		function addTab($this, refresh){
@@ -184,32 +188,23 @@
 				</c:if> --%>
 				<div class="nav-collapse">
 					<ul id="menu" class="nav" style="*white-space:nowrap;float:none;">
-						<li class="menu active">
-							<a class="menu" href="/crm/list" data-id="1" target="mainFrame"><span>测试</span></a>
-						</li>
-						<li class="menu ">
-							<a class="menu" href="/crm/test" data-id="2" ><span>测试2</span></a>
-						</li>
-
-
-
-						<%--<c:set var="firstMenu" value="true"/>--%>
-						<%--<c:forEach items="${fns:getMenuList()}" var="menu" varStatus="idxStatus">--%>
-							<%--<c:if test="${menu.parent.id eq '1'&&menu.isShow eq '1'}">--%>
-								<%--<li class="menu ${not empty firstMenu && firstMenu ? ' active' : ''}">--%>
-									<%--<c:if test="${empty menu.href}">--%>
-										<%--<a class="menu" href="javascript:" data-href="${ctx}/sys/menu/tree?parentId=${menu.id}" data-id="${menu.id}"><span>${menu.name}</span></a>--%>
-									<%--</c:if>--%>
-									<%--<c:if test="${not empty menu.href}">--%>
-										<%--<a class="menu" href="${fn:indexOf(menu.href, '://') eq -1 ? ctx : ''}${menu.href}" data-id="${menu.id}" target="mainFrame"><span>${menu.name}</span></a>--%>
-									<%--</c:if>--%>
-								<%--</li>--%>
-								<%--<c:if test="${firstMenu}">--%>
-									<%--<c:set var="firstMenuId" value="${menu.id}"/>--%>
-								<%--</c:if>--%>
-								<%--<c:set var="firstMenu" value="false"/>--%>
-							<%--</c:if>--%>
-						<%--</c:forEach>--%>
+						<c:set var="firstMenu" value="true"/>
+						<c:forEach items="${fns:getMenuList()}" var="menu" varStatus="idxStatus">
+							<c:if test="${menu.parent.id eq '1'&&menu.isShow eq '1'}">
+								<li class="menu ${not empty firstMenu && firstMenu ? ' active' : ''}">
+									<c:if test="${empty menu.href}">
+										<a class="menu" href="javascript:" data-href="${ctx}/sys/menu/tree?parentId=${menu.id}" data-id="${menu.id}"><span>${menu.name}</span></a>
+									</c:if>
+									<c:if test="${not empty menu.href}">
+										<a class="menu" href="${fn:indexOf(menu.href, '://') eq -1 ? ctx : ''}${menu.href}" data-id="${menu.id}" target="mainFrame"><span>${menu.name}</span></a>
+									</c:if>
+								</li>
+								<c:if test="${firstMenu}">
+									<c:set var="firstMenuId" value="${menu.id}"/>
+								</c:if>
+								<c:set var="firstMenu" value="false"/>
+							</c:if>
+						</c:forEach>
 						<%--
 						<shiro:hasPermission name="cms:site:select">
 						<li class="dropdown">
