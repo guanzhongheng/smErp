@@ -14,9 +14,9 @@ import java.util.Date;
  */
 public class TDict {
     private Long id;
-    private String dictKey;
+    private Long dictKey;
     private String dictValue;
-    private String subDictKey;
+    private Long subDictKey;
     private String subDictValue;
     private Date createTime;
 
@@ -28,12 +28,20 @@ public class TDict {
         this.id = id;
     }
 
-    public String getDictKey() {
+    public Long getDictKey() {
         return dictKey;
     }
 
-    public void setDictKey(String dictKey) {
+    public void setDictKey(Long dictKey) {
         this.dictKey = dictKey;
+    }
+
+    public Long getSubDictKey() {
+        return subDictKey;
+    }
+
+    public void setSubDictKey(Long subDictKey) {
+        this.subDictKey = subDictKey;
     }
 
     public String getDictValue() {
@@ -42,14 +50,6 @@ public class TDict {
 
     public void setDictValue(String dictValue) {
         this.dictValue = dictValue;
-    }
-
-    public String getSubDictKey() {
-        return subDictKey;
-    }
-
-    public void setSubDictKey(String subDictKey) {
-        this.subDictKey = subDictKey;
     }
 
     public String getSubDictValue() {

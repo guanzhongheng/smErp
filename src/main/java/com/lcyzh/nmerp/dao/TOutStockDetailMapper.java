@@ -14,17 +14,15 @@ import java.util.List;
 @Repository
 public interface TOutStockDetailMapper {
 
-    TOutStockDetail get(String id);
+    List<OutStockVo> findListByCondition(@Param("outCode") String outCode,@Param("ordCode") String ordCode,@Param("itemId") Long itemId);
 
-    List<TOutStockDetail> findList(TOutStockDetail tOutStockDetail);
+    TOutStockDetail findByPrimaryKey(Long id);
 
     List<TOutStockDetail> findAllList();
 
     int insert(TOutStockDetail tOutStockDetail);
 
     int insertBatch(List<TOutStockDetail> tOutStockDetails);
-
-    int update(TOutStockDetail tOutStockDetail);
 
     int delete(TOutStockDetail tOutStockDetail);
 

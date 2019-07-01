@@ -37,7 +37,7 @@ public class DictLoader implements CommandLineRunner {
             list.forEach(dict -> {
                 if (dict != null) {
                     DictUtils.getDictValueMaps().put(dict.getDictKey(), dict.getDictValue());
-                    List<String> keyList = DictUtils.getDictKeyMaps().get(dict.getDictKey());
+                    List<Long> keyList = DictUtils.getDictKeyMaps().get(dict.getDictKey());
                     if (keyList == null && dict.getSubDictKey() != null) {
                         keyList = new ArrayList<>();
                         DictUtils.getDictKeyMaps().put(dict.getDictKey(), keyList);

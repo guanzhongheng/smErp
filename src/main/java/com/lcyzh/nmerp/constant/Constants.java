@@ -26,7 +26,7 @@ public class Constants {
     //合同无效
     public static final char CONT_STATUS_INVALID='2';
     //新建
-    public static final char ORD_STATUS_NEW='0';
+    public static final long ORD_STATUS_NEW=12000l;
     /**
      * @Description: 待分配
      * @Param:
@@ -35,7 +35,7 @@ public class Constants {
      * @Iteration : 1.0
      * @Date: 2019/6/27 9:40 AM
      */
-    public static final char ORD_STATUS_TOASSIGN='1';
+    public static final long ORD_STATUS_TOASSIGN=12001l;
     /**
      * @Description: 已分配
      * @Param:
@@ -44,7 +44,7 @@ public class Constants {
      * @Iteration : 1.0
      * @Date: 2019/6/27 9:41 AM
      */
-    public static final char ORD_STATUS_ASSIGNED='2';
+    public static final long ORD_STATUS_ASSIGNED=12002l;
     //执行中
     public static final char ORD_STATUS_EXE='3';
     //完成
@@ -53,13 +53,13 @@ public class Constants {
     public static final char ORD_STATUS_INVALID='5';
 
     //正常
-    public static final char CUS_STATUS_NOR='0';
+    public static final long CUS_STATUS_NOR=11000l;
     //特别-无需审核
-    public static final char CUS_STATUS_SPEC='1';
+    public static final long CUS_STATUS_SPEC=11001l;
     //需审核
-    public static final char CUS_STATUS_CHECK='2';
+    public static final long CUS_STATUS_CHECK=11002l;
     //拒绝
-    public static final char CUS_STATUS_RJCT='3';
+    public static final long CUS_STATUS_RJCT=11003l;
 
     /**
      * @Description: 产品大类字典编号
@@ -87,6 +87,6 @@ public class Constants {
      * @Iteration : 1.0
      * @Date: 2019/6/28 12:07 PM
      */
-    public static final String DICT_RAM_BIG_CGY = "RAM0001";
+    public static final String DICT_RAW_BIG_CGY = "SEM0001";
 
 }

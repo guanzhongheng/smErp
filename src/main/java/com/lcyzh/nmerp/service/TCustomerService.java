@@ -1,8 +1,7 @@
 package com.lcyzh.nmerp.service;
 
-import com.lcyzh.nmerp.entity.TCustomer;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.lcyzh.nmerp.common.persistence.Page;
+import com.lcyzh.nmerp.entity.Customer;
 
 import java.util.List;
 
@@ -11,18 +10,17 @@ import java.util.List;
 * Date  2019-06-06
 */
 public interface TCustomerService {
-    TCustomer get(String id);
 
-    List<TCustomer> findList(TCustomer tCustomer);
+    List<Customer> findList(Customer tCustomer);
 
-    List<TCustomer> findAllList();
+    Page<Customer> findPage(Page<Customer> page,Customer customer);
 
-    int insert(TCustomer tCustomer);
+    int insert(Customer tCustomer);
 
-    int insertBatch(List<TCustomer> tCustomers);
+    int insertBatch(List<Customer> tCustomers);
 
-    int update(TCustomer tCustomer);
+    int update(Customer tCustomer);
 
-    int delete(TCustomer tCustomer);
+    int delete(Customer tCustomer);
 
 }

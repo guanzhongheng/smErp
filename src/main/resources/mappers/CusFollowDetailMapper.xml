@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lcyzh.nmerp.dao.CusFollowDetailMapper">
+
+    <resultMap id="cusFollowDetailResultMap" type="com.lcyzh.nmerp.entity.CusFollowDetail">
+        <id column="id" property="id" jdbcType="BIGINT"/> 
+        <result column="follow_id" property="followId" jdbcType="VARCHAR"/> 
+        <result column="emp_code" property="empCode" jdbcType="VARCHAR"/> 
+        <result column="follow_time" property="followTime" jdbcType="TIMESTAMP"/> 
+        <result column="follow_detail" property="followDetail" jdbcType="VARCHAR"/> 
+        <result column="remark" property="remark" jdbcType="VARCHAR"/> 
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
+
+        
+        
+    </resultMap>
+
+
+    <select id="get" resultMap="cusFollowDetailResultMap">
+        SELECT *
+        FROM T_CUS_FOLLOW_DETAIL
+        WHERE id = #{id}
+    </select>
+
+    <select id="findList" resultMap="cusFollowDetailResultMap">
+        SELECT *
+        FROM T_CUS_FOLLOW_DETAIL
+        <where>
+        </where>
+    </select>
+
+    <select id="findAllList" resultMap="cusFollowDetailResultMap">
+        SELECT *
+        FROM T_CUS_FOLLOW_DETAIL
+    </select>
+
+    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.CusFollowDetail">
+        INSERT INTO T_CUS_FOLLOW_DETAIL(
+            id,
+            follow_id,
+            emp_code,
+            follow_time,
+            follow_detail,
+            remark,
+            create_time
+        )
+        VALUES (
+            #{id,jdbcType=BIGINT},
+            #{followId,jdbcType=VARCHAR},
+            #{empCode,jdbcType=VARCHAR},
+            #{followTime,jdbcType=TIMESTAMP},
+            #{followDetail,jdbcType=VARCHAR},
+            #{remark,jdbcType=VARCHAR},
+            #{createTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.CusFollowDetail">
+        INSERT INTO T_CUS_FOLLOW_DETAIL(
+            id,
+            follow_id,
+            emp_code,
+            follow_time,
+            follow_detail,
+            remark,
+            create_time
+        )
+        VALUES
+        <foreach collection ="list" item="item" separator =",">
+        (
+            #{item.id,jdbcType=BIGINT},
+            #{item.followId,jdbcType=VARCHAR},
+            #{item.empCode,jdbcType=VARCHAR},
+            #{item.followTime,jdbcType=TIMESTAMP},
+            #{item.followDetail,jdbcType=VARCHAR},
+            #{item.remark,jdbcType=VARCHAR},
+            #{item.createTime,jdbcType=TIMESTAMP}
+        )
+        </foreach>
+    </insert>
+
+    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.CusFollowDetail">
+        UPDATE T_CUS_FOLLOW_DETAIL
+        SET
+        id = #{id},
+        follow_id = #{followId},
+        emp_code = #{empCode},
+        follow_time = #{followTime},
+        follow_detail = #{followDetail},
+        remark = #{remark},
+        create_time = #{createTime}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.CusFollowDetail">
+        DELETE FROM T_CUS_FOLLOW_DETAIL
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

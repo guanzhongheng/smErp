@@ -1,5 +1,6 @@
 package com.lcyzh.nmerp.service;
 
+import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.entity.TOrder;
 import com.lcyzh.nmerp.entity.TOrderItem;
 import com.lcyzh.nmerp.model.vo.OrderItemAssignVo;
@@ -15,15 +16,17 @@ import java.util.List;
 */
 public interface TOrderService {
 
-    TOrder get(String id);
-
     List<TOrder> findList(TOrder tOrder);
 
-    List<TOrder> findAllList();
+    List<TOrderItem> findByOrdCode(String ordCode);
 
-    int insert(TOrder tOrder);
+    int ordProduceAssign(List<OrderItemAssignVo> voList,String ordCode);
 
-    int insertBatch(List<TOrder> tOrders);
+    Page<TOrder> findPage(Page<TOrder> page,TOrder order);
+
+    int insert(OrderVo vo);
+
+    int insertBatch(List<OrderVo> voList);
 
     int update(TOrder tOrder);
 

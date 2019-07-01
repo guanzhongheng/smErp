@@ -1,5 +1,7 @@
 package com.lcyzh.nmerp.entity;
 
+import com.lcyzh.nmerp.common.persistence.DataEntity;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Date;
@@ -8,92 +10,123 @@ import java.util.Date;
  * Author ljk
  * Date  2019-06-06
  */
-public class TOrder implements Serializable {
-    private static final long serialVersionUID = 1L;
-    private Long id;
+public class TOrder extends DataEntity<TOrder> {
     private String ordCode;
-    private String contCode;
-    private String ordAddress;
-    private String cusCode;
-    private Character ordStatus;
-    private String deliveryDate;
+    private String ordTitle;
+    private Double ordTotalAmount;
+    private Long ordType;
+    private String ordSignDate;
+    private Long ordStatus;
+    private String ordDeliveryDate;
+    private Long payType;
+    private String cusContractor;
+    private String comContractor;
+    private String contAttachUrl;
     private Date createTime;
     private Date updateTime;
 
-
-    public TOrder() {
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
+    public String getOrdCode() {
+        return ordCode;
     }
 
     public void setOrdCode(String ordCode) {
         this.ordCode = ordCode;
     }
 
-    public String getOrdCode() {
-        return ordCode;
+    public String getOrdTitle() {
+        return ordTitle;
     }
 
-    public void setContCode(String contCode) {
-        this.contCode = contCode;
+    public void setOrdTitle(String ordTitle) {
+        this.ordTitle = ordTitle;
     }
 
-    public String getContCode() {
-        return contCode;
+    public Double getOrdTotalAmount() {
+        return ordTotalAmount;
     }
 
-    public void setOrdAddress(String ordAddress) {
-        this.ordAddress = ordAddress;
+    public void setOrdTotalAmount(Double ordTotalAmount) {
+        this.ordTotalAmount = ordTotalAmount;
     }
 
-    public String getOrdAddress() {
-        return ordAddress;
+
+    public String getOrdSignDate() {
+        return ordSignDate;
     }
 
-    public String getCusCode() {
-        return cusCode;
+    public void setOrdSignDate(String ordSignDate) {
+        this.ordSignDate = ordSignDate;
     }
 
-    public void setCusCode(String cusCode) {
-        this.cusCode = cusCode;
-    }
-
-    public void setOrdStatus(Character ordStatus) {
-        this.ordStatus = ordStatus;
-    }
-
-    public Character getOrdStatus() {
+    public Long getOrdStatus() {
         return ordStatus;
     }
 
-    public void setDeliveryDate(String deliveryDate) {
-        this.deliveryDate = deliveryDate;
+    public void setOrdStatus(Long ordStatus) {
+        this.ordStatus = ordStatus;
     }
 
-    public String getDeliveryDate() {
-        return deliveryDate;
+    public String getOrdDeliveryDate() {
+        return ordDeliveryDate;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setOrdDeliveryDate(String ordDeliveryDate) {
+        this.ordDeliveryDate = ordDeliveryDate;
+    }
+
+    public Long getOrdType() {
+        return ordType;
+    }
+
+    public void setOrdType(Long ordType) {
+        this.ordType = ordType;
+    }
+
+    public Long getPayType() {
+        return payType;
+    }
+
+    public void setPayType(Long payType) {
+        this.payType = payType;
+    }
+
+    public String getCusContractor() {
+        return cusContractor;
+    }
+
+    public void setCusContractor(String cusContractor) {
+        this.cusContractor = cusContractor;
+    }
+
+    public String getComContractor() {
+        return comContractor;
+    }
+
+    public void setComContractor(String comContractor) {
+        this.comContractor = comContractor;
+    }
+
+    public String getContAttachUrl() {
+        return contAttachUrl;
+    }
+
+    public void setContAttachUrl(String contAttachUrl) {
+        this.contAttachUrl = contAttachUrl;
     }
 
     public Date getCreateTime() {
         return createTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public Date getUpdateTime() {
         return updateTime;
     }
 
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
 }

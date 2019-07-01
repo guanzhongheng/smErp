@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lcyzh.nmerp.dao.EmployeeMapper">
+
+    <resultMap id="employeeResultMap" type="com.lcyzh.nmerp.entity.Employee">
+        <id column="emp_code" property="empCode" jdbcType="VARCHAR"/> 
+        <result column="emp_name" property="empName" jdbcType="VARCHAR"/> 
+        <result column="birth" property="birth" jdbcType="VARCHAR"/> 
+        <result column="emp_grade" property="empGrade" jdbcType="CHAR"/> 
+        <result column="department" property="department" jdbcType="VARCHAR"/> 
+        <result column="emp_phone" property="empPhone" jdbcType="VARCHAR"/> 
+        <result column="emp_email" property="empEmail" jdbcType="VARCHAR"/> 
+        <result column="emp_address" property="empAddress" jdbcType="VARCHAR"/> 
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/> 
+
+        
+        
+    </resultMap>
+
+
+    <select id="get" resultMap="employeeResultMap">
+        SELECT *
+        FROM T_EMPLOYEE
+        WHERE emp_code = #{empCode}
+    </select>
+
+    <select id="findList" resultMap="employeeResultMap">
+        SELECT *
+        FROM T_EMPLOYEE
+        <where>
+        </where>
+    </select>
+
+    <select id="findAllList" resultMap="employeeResultMap">
+        SELECT *
+        FROM T_EMPLOYEE
+    </select>
+
+    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.Employee">
+        INSERT INTO T_EMPLOYEE(
+            emp_code,
+            emp_name,
+            birth,
+            emp_grade,
+            department,
+            emp_phone,
+            emp_email,
+            emp_address,
+            create_time,
+            update_time
+        )
+        VALUES (
+            #{empCode,jdbcType=VARCHAR},
+            #{empName,jdbcType=VARCHAR},
+            #{birth,jdbcType=VARCHAR},
+            #{empGrade,jdbcType=CHAR},
+            #{department,jdbcType=VARCHAR},
+            #{empPhone,jdbcType=VARCHAR},
+            #{empEmail,jdbcType=VARCHAR},
+            #{empAddress,jdbcType=VARCHAR},
+            #{createTime,jdbcType=TIMESTAMP},
+            #{updateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.Employee">
+        INSERT INTO T_EMPLOYEE(
+            emp_code,
+            emp_name,
+            birth,
+            emp_grade,
+            department,
+            emp_phone,
+            emp_email,
+            emp_address,
+            create_time,
+            update_time
+        )
+        VALUES
+        <foreach collection ="list" item="item" separator =",">
+        (
+            #{item.empCode,jdbcType=VARCHAR},
+            #{item.empName,jdbcType=VARCHAR},
+            #{item.birth,jdbcType=VARCHAR},
+            #{item.empGrade,jdbcType=CHAR},
+            #{item.department,jdbcType=VARCHAR},
+            #{item.empPhone,jdbcType=VARCHAR},
+            #{item.empEmail,jdbcType=VARCHAR},
+            #{item.empAddress,jdbcType=VARCHAR},
+            #{item.createTime,jdbcType=TIMESTAMP},
+            #{item.updateTime,jdbcType=TIMESTAMP}
+        )
+        </foreach>
+    </insert>
+
+    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.Employee">
+        UPDATE T_EMPLOYEE
+        SET
+        emp_code = #{empCode},
+        emp_name = #{empName},
+        birth = #{birth},
+        emp_grade = #{empGrade},
+        department = #{department},
+        emp_phone = #{empPhone},
+        emp_email = #{empEmail},
+        emp_address = #{empAddress},
+        create_time = #{createTime},
+        update_time = #{updateTime}
+        WHERE emp_code = #{empCode}
+    </update>
+
+    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.Employee">
+        DELETE FROM T_EMPLOYEE
+        WHERE emp_code = #{empCode}
+    </delete>
+
+</mapper>

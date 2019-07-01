@@ -3,9 +3,9 @@
 <mapper namespace="com.lcyzh.nmerp.dao.TDictMapper">
     <resultMap id="resultMap" type="com.lcyzh.nmerp.entity.TDict">
         <id column="id" property="id" jdbcType="BIGINT"/>
-        <result column="dict_key" property="dictKey" jdbcType="VARCHAR"/>
+        <result column="dict_key" property="dictKey" jdbcType="BIGINT"/>
         <result column="dict_value" property="dictValue" jdbcType="VARCHAR"/>
-        <result column="sub_dict_key" property="subDictKey" jdbcType="VARCHAR"/>
+        <result column="sub_dict_key" property="subDictKey" jdbcType="BIGINT"/>
         <result column="sub_dict_value" property="subDictValue" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>

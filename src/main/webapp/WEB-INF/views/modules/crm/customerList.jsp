@@ -28,14 +28,14 @@
         </li>
         <li>
             &nbsp;&nbsp;
-            <form:select path="cusContent" class="input-medium" placeholder="客户类型">
+            <form:select path="cusType" class="input-medium" placeholder="客户类型">
                 <form:option value="" label=""/>
                 <%--<form:options items="${fns:getDictList('oa_notify_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
             </form:select>
         </li>
         <li>
             &nbsp;&nbsp;
-            <form:select path="cusStar" class="input-medium" placeholder="客户星级">
+            <form:select path="cusGrade" class="input-medium" placeholder="客户星级">
                 <form:option value="" label=""/>
                 <%--<form:options items="${fns:getDictList('oa_notify_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
             </form:select>

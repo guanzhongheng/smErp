@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lcyzh.nmerp.dao.CusEmpRelMapper">
+
+    <resultMap id="cusEmpRelResultMap" type="com.lcyzh.nmerp.entity.CusEmpRel">
+        <id column="id" property="id" jdbcType="BIGINT"/> 
+        <result column="cus_code" property="cusCode" jdbcType="VARCHAR"/> 
+        <result column="emp_code" property="empCode" jdbcType="VARCHAR"/> 
+        <result column="status" property="status" jdbcType="CHAR"/> 
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/> 
+    </resultMap>
+
+
+    <select id="get" resultMap="cusEmpRelResultMap">
+        SELECT *
+        FROM T_CUS_EMP_REL
+        WHERE id = #{id}
+    </select>
+
+    <select id="findList" resultMap="cusEmpRelResultMap">
+        SELECT *
+        FROM T_CUS_EMP_REL
+        <where>
+        </where>
+    </select>
+
+    <select id="findAllList" resultMap="cusEmpRelResultMap">
+        SELECT *
+        FROM T_CUS_EMP_REL
+    </select>
+
+    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.CusEmpRel">
+        INSERT INTO T_CUS_EMP_REL(
+            id,
+            cus_code,
+            emp_code,
+            status,
+            create_time,
+            update_time
+        )
+        VALUES (
+            #{id,jdbcType=BIGINT},
+            #{cusCode,jdbcType=VARCHAR},
+            #{empCode,jdbcType=VARCHAR},
+            #{status,jdbcType=CHAR},
+            #{createTime,jdbcType=TIMESTAMP},
+            #{updateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.CusEmpRel">
+        INSERT INTO T_CUS_EMP_REL(
+            id,
+            cus_code,
+            emp_code,
+            status,
+            create_time,
+            update_time
+        )
+        VALUES
+        <foreach collection ="list" item="item" separator =",">
+        (
+            #{item.id,jdbcType=BIGINT},
+            #{item.cusCode,jdbcType=VARCHAR},
+            #{item.empCode,jdbcType=VARCHAR},
+            #{item.status,jdbcType=CHAR},
+            #{item.createTime,jdbcType=TIMESTAMP},
+            #{item.updateTime,jdbcType=TIMESTAMP}
+        )
+        </foreach>
+    </insert>
+
+    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.CusEmpRel">
+        UPDATE T_CUS_EMP_REL
+        SET
+        id = #{id},
+        cus_code = #{cusCode},
+        emp_code = #{empCode},
+        status = #{status},
+        create_time = #{createTime},
+        update_time = #{updateTime}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.CusEmpRel">
+        DELETE FROM T_CUS_EMP_REL
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

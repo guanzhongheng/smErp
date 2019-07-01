@@ -1,23 +1,34 @@
 package com.lcyzh.nmerp.entity;
 
-
 import com.lcyzh.nmerp.common.persistence.DataEntity;
 
+import java.util.Date;
+
 /**
- * 项目名称：smErp
- * 类 名 称：Customer
- * 类 描 述：TODO
- * 创建时间：2019/6/26 11:24 PM
- * 创 建 人：guan
+ * Author ljk
+ * Date  2019-07-01
  */
 public class Customer extends DataEntity<Customer> {
-
     private static final long serialVersionUID = 1L;
+    private String cusCode;
     private String cusName;
-    private String cusStatus;
-    private String cusContent;
-    private String cusStar;
-    private String lastFollowTime;
+    private Long cusStatus;
+    private Long cusGrade;
+    private Long cusType;
+    private String industry;
+    private String cusAddress;
+    private Long cusSource;
+    private String remark;
+    private Date createTime;
+    private Date updateTime;
+
+    public String getCusCode() {
+        return cusCode;
+    }
+
+    public void setCusCode(String cusCode) {
+        this.cusCode = cusCode;
+    }
 
     public String getCusName() {
         return cusName;
@@ -27,35 +38,75 @@ public class Customer extends DataEntity<Customer> {
         this.cusName = cusName;
     }
 
-    public String getCusStatus() {
+    public Long getCusStatus() {
         return cusStatus;
     }
 
-    public void setCusStatus(String cusStatus) {
+    public void setCusStatus(Long cusStatus) {
         this.cusStatus = cusStatus;
     }
 
-    public String getCusContent() {
-        return cusContent;
+    public Long getCusGrade() {
+        return cusGrade;
     }
 
-    public void setCusContent(String cusContent) {
-        this.cusContent = cusContent;
+    public void setCusGrade(Long cusGrade) {
+        this.cusGrade = cusGrade;
     }
 
-    public String getCusStar() {
-        return cusStar;
+    public Long getCusType() {
+        return cusType;
     }
 
-    public void setCusStar(String cusStar) {
-        this.cusStar = cusStar;
+    public void setCusType(Long cusType) {
+        this.cusType = cusType;
     }
 
-    public String getLastFollowTime() {
-        return lastFollowTime;
+    public String getIndustry() {
+        return industry;
     }
 
-    public void setLastFollowTime(String lastFollowTime) {
-        this.lastFollowTime = lastFollowTime;
+    public void setIndustry(String industry) {
+        this.industry = industry;
+    }
+
+    public String getCusAddress() {
+        return cusAddress;
+    }
+
+    public void setCusAddress(String cusAddress) {
+        this.cusAddress = cusAddress;
+    }
+
+    public Long getCusSource() {
+        return cusSource;
+    }
+
+    public void setCusSource(Long cusSource) {
+        this.cusSource = cusSource;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }
