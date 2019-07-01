@@ -3,7 +3,8 @@ package com.lcyzh.nmerp.shiro.realm;
 import com.lcyzh.nmerp.entity.TSysMenu;
 import com.lcyzh.nmerp.entity.TSysRole;
 import com.lcyzh.nmerp.entity.TSysUser;
-import com.lcyzh.nmerp.service.TSysMenuService;
+import com.lcyzh.nmerp.entity.sys.Menu;
+import com.lcyzh.nmerp.service.SystemService;
 import com.lcyzh.nmerp.service.TSysRoleService;
 import com.lcyzh.nmerp.service.TSysUserService;
 import org.apache.log4j.Logger;
@@ -43,71 +44,81 @@ public class CustomRealm extends AuthorizingRealm {
     private TSysRoleService sysRoleService;
     @Autowired
     @Lazy
-    private TSysMenuService sysMenuService;
+    private SystemService systemService;
 
     {
         super.setName(ClassName);
     }
 
     @Override
-    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        TSysUser user  = (TSysUser)principals.getPrimaryPrincipal();
-        List<TSysRole> roles = sysRoleService.findByUserId(user.getUserId());
-        if(!roles.isEmpty()) {
-            for(TSysRole role : roles) {
-                authorizationInfo.addRole(role.getRoleName());
-            }
-            List<TSysMenu> menus = sysMenuService.findByUserId(user.getUserId());
-            if(!menus.isEmpty()) {
-                for(TSysMenu menu : menus) {
-                    authorizationInfo.addStringPermission(menu.getPermission());
-                }
-            }
-        }else{
-            if (logger.isDebugEnabled()) {
-                logger.debug(" user role not exist...");
-            }
-        }
-        return authorizationInfo;
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+        return null;
     }
 
-    /**
-     * 登录认证
-     * @param token
-     * @return
-     * @throws AuthenticationException
-     */
     @Override
-    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        //获取用户的输入的账号.
-        String username = (String)token.getPrincipal();
-        //通过username从数据库中查找 User对象，如果找到，没找到.
-        //实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
-        TSysUser user = sysUserService.findByUserName(username);
-        if(user == null){
-            if (logger.isDebugEnabled()) {
-                logger.debug("user not exist!");
-            }
-            return null;
-        }else{
-            List<TSysRole> roles = sysRoleService.findByUserId(user.getUserId());
-            if(!roles.isEmpty()) {
-                user.setRoles(roles);
-                List<TSysMenu> menus = sysMenuService.findByUserId(user.getUserId());
-                if(!menus.isEmpty()) {
-                    user.setMenus(menus);
-                }
-            }
-        }
-        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
-                user, //用户名
-                user.getPassword(), //密码
-                //ByteSource.Util.bytes(userInfo.getCredentialsSalt()),//salt=username+salt
-                this.getName()  //realm name
-        );
-        return authenticationInfo;
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+        return null;
     }
+    //    @Override
+//    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+//        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
+//        TSysUser user  = (TSysUser)principals.getPrimaryPrincipal();
+//        List<TSysRole> roles = sysRoleService.findByUserId(user.getUserId());
+//        if(!roles.isEmpty()) {
+//            for(TSysRole role : roles) {
+//                authorizationInfo.addRole(role.getRoleName());
+//            }
+//            List<TSysMenu> menus = systemService.getMenu(user.getUserId());
+//            List<Menu> menus = systemService.getMenu(user.getUserId());
+//            if(!menus.isEmpty()) {
+//                for(TSysMenu menu : menus) {
+//                    authorizationInfo.addStringPermission(menu.getPermission());
+//                }
+//            }
+//        }else{
+//            if (logger.isDebugEnabled()) {
+//                logger.debug(" user role not exist...");
+//            }
+//        }
+//        return authorizationInfo;
+//    }
+//
+//    /**
+//     * 登录认证
+//     * @param token
+//     * @return
+//     * @throws AuthenticationException
+//     */
+//    @Override
+//    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+//        //获取用户的输入的账号.
+//        String username = (String)token.getPrincipal();
+//        //通过username从数据库中查找 User对象，如果找到，没找到.
+//        //实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
+//        TSysUser user = sysUserService.findByUserName(username);
+//        if(user == null){
+//            if (logger.isDebugEnabled()) {
+//                logger.debug("user not exist!");
+//            }
+//            return null;
+//        }else{
+//            List<TSysRole> roles = sysRoleService.findByUserId(user.getUserId());
+//            if(!roles.isEmpty()) {
+//                user.setRoles(roles);
+//                List<TSysMenu> menus = sysMenuService.findByUserId(user.getUserId());
+//                if(!menus.isEmpty()) {
+//                    user.setMenus(menus);
+//                }
+//            }
+//        }
+//        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
+//                user, //用户名
+//                user.getPassword(), //密码
+//                //ByteSource.Util.bytes(userInfo.getCredentialsSalt()),//salt=username+salt
+//                this.getName()  //realm name
+//        );
+//        return authenticationInfo;
+//    }
 
     //清除缓存
     public void clearCached() {

@@ -2,9 +2,11 @@ package com.lcyzh.nmerp.controller;
 
 import com.google.common.collect.Maps;
 import com.lcyzh.nmerp.common.utils.CacheUtils;
+import com.lcyzh.nmerp.common.utils.Global;
+import com.lcyzh.nmerp.common.web.CookieUtils;
 import com.lcyzh.nmerp.controller.common.BaseController;
-import com.lcyzh.nmerp.controller.system.security.SystemAuthorizingRealm.Principal;
 import com.lcyzh.nmerp.controller.system.util.UserUtils;
+import com.lcyzh.nmerp.service.security.SystemAuthorizingRealm.Principal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,29 +31,18 @@ public class LoginController extends BaseController {
      */
     @RequestMapping(value = "login")
     public String login(HttpServletRequest request, HttpServletResponse response, Model model) {
-       // Principal principal = UserUtils.getPrincipal();
+        Principal principal = UserUtils.getPrincipal();
 
+        // 如果已登录，再次访问主页，则退出原账号。
+        if (Global.TRUE.equals(Global.getConfig("notAllowRefreshIndex"))){
+            CookieUtils.setCookie(response, "LOGINED", "false");
+        }
 
+        // 如果已经登录，则跳转到管理首页
+        if(principal != null && !principal.isMobileLogin()){
+            return "redirect:" + adminPath;
+        }
 
-//        if (logger.isDebugEnabled()){
-//            logger.debug("login, active session size: {}", sessionDAO.getActiveSessions(false).size());
-//        }
-//
-//        // 如果已登录，再次访问主页，则退出原账号。
-//        if (Global.TRUE.equals(Global.getConfig("notAllowRefreshIndex"))){
-//            CookieUtils.setCookie(response, "LOGINED", "false");
-//        }
-//
-//        // 如果已经登录，则跳转到管理首页
-//        if(principal != null && !principal.isMobileLogin()){
-//            return "redirect:" + adminPath;
-//        }
-//		String view;
-//		view = "/WEB-INF/views/modules/sys/sysLogin.jsp";
-//		view = "classpath:";
-//		view += "jar:file:/D:/GitHub/jeesite/src/main/webapp/WEB-INF/lib/jeesite.jar!";
-//		view += "/"+getClass().getName().replaceAll("\\.", "/").replace(getClass().getSimpleName(), "")+"view/sysLogin";
-//		view += ".jsp";
         return "modules/sys/sysLogin";
     }
 

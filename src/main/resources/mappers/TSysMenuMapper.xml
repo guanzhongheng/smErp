@@ -2,27 +2,146 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lcyzh.nmerp.dao.TSysMenuMapper">
 
-    <resultMap id="tSysMenuResultMap" type="com.lcyzh.nmerp.entity.TSysMenu">
-        <result column="menu_id" property="menuId" jdbcType="BIGINT"/>
-        <result column="parent_id" property="roleName" jdbcType="BIGINT"/>
-        <result column="parent_ids" property="roleType" jdbcType="VARCHAR"/>
-        <result column="name" property="roleSort" jdbcType="VARCHAR"/>
-        <result column="sort" property="isSys" jdbcType="DECIMAL"/>
-        <result column="href" property="userType" jdbcType="VARCHAR"/>
-        <result column="href" property="status" jdbcType="VARCHAR"/>
-        <result column="is_show" property="createBy" jdbcType="CHAR"/>
-        <result column="permission" property="createDate" jdbcType="VARCHAR"/>
-        <result column="create_by" property="remarks" jdbcType="VARCHAR"/>
-        <result column="create_date" property="remarks" jdbcType="TIMESTAMP"/>
-        <result column="create_date" property="remarks" jdbcType="VARCHAR"/>
-    </resultMap>
+    <sql id="menuColumns">
+		a.id,
+		a.parent_id AS "parent.id",
+		a.parent_ids,
+		a.name,
+		a.href,
+		a.target,
+		a.icon,
+		a.sort,
+		a.is_show,
+		a.permission,
+		a.remarks,
+		a.create_by AS "createBy.id",
+		a.create_date,
+		a.update_by AS "updateBy.id",
+		a.update_date,
+		a.del_flag,
+		p.name AS "parent.name"
+	</sql>
 
+    <sql id="menuJoins">
+		LEFT JOIN t_sys_menu p ON p.id = a.parent_id
+    </sql>
 
-    <select id="findByUserId"  parameterType="java.lang.Integer" resultMap="tSysMenuResultMap">
-        select * from t_sys_menu where menu_id in
-        (select DISTINCT rm.menu_id from t_sys_user_role ur, t_sys_role_menu rm where ur.user_id = #{userId}
-         and ur.role_id = rm.role_id)
-         ORDER BY sort
+    <select id="get" resultType="com.lcyzh.nmerp.entity.sys.Menu">
+        SELECT
+        <include refid="menuColumns"/>
+        FROM t_sys_menu a
+        <include refid="menuJoins"/>
+        WHERE a.id = #{id}
     </select>
+
+    <select id="findAllList" resultType="com.lcyzh.nmerp.entity.sys.Menu">
+        SELECT
+        <include refid="menuColumns"/>
+        FROM t_sys_menu a
+        <include refid="menuJoins"/>
+        WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+        ORDER BY a.sort
+    </select>
+
+    <select id="findByParentIdsLike" resultType="com.lcyzh.nmerp.entity.sys.Menu">
+		SELECT
+			a.id,
+			a.parent_id AS "parent.id",
+			a.parent_ids
+		FROM t_sys_menu a
+		WHERE a.del_flag = #{DEL_FLAG_NORMAL} AND a.parent_ids LIKE #{parentIds}
+		ORDER BY a.sort
+	</select>
+
+    <select id="findByUserId" resultType="com.lcyzh.nmerp.entity.sys.Menu">
+        SELECT DISTINCT
+        <include refid="menuColumns"/>
+        FROM t_sys_menu a
+        LEFT JOIN t_sys_menu p ON p.id = a.parent_id
+        JOIN t_sys_role_menu rm ON rm.menu_id = a.id
+        JOIN t_sys_role r ON r.id = rm.role_id AND r.useable='1'
+        JOIN t_sys_user_role ur ON ur.role_id = r.id
+        JOIN t_sys_user u ON u.id = ur.user_id AND u.id = #{userId}
+        WHERE a.del_flag = #{DEL_FLAG_NORMAL} AND r.del_flag = #{DEL_FLAG_NORMAL} AND u.del_flag = #{DEL_FLAG_NORMAL}
+        ORDER BY a.sort
+    </select>
+
+    <insert id="insert">
+		INSERT INTO t_sys_menu(
+			id,
+			parent_id,
+			parent_ids,
+			name,
+			href,
+			target,
+			icon,
+			sort,
+			is_show,
+			permission,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{parent.id},
+			#{parentIds},
+			#{name},
+			#{href},
+			#{target},
+			#{icon},
+			#{sort},
+			#{isShow},
+			#{permission},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+
+    <update id="update">
+		UPDATE t_sys_menu SET
+			parent_id = #{parent.id},
+			parent_ids = #{parentIds},
+			name = #{name},
+			href = #{href},
+			target = #{target},
+			icon = #{icon},
+			sort = #{sort},
+			is_show = #{isShow},
+			permission = #{permission},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+
+    <update id="updateParentIds">
+		UPDATE t_sys_menu SET
+			parent_id = #{parent.id},
+			parent_ids = #{parentIds}
+		WHERE id = #{id}
+	</update>
+
+    <update id="updateSort">
+		UPDATE t_sys_menu SET
+			sort = #{sort}
+		WHERE id = #{id}
+	</update>
+
+    <update id="delete">
+        UPDATE t_sys_menu SET
+        del_flag = #{DEL_FLAG_DELETE}
+        WHERE id = #{id} OR parent_ids LIKE
+        <if test="dbName == 'oracle'">'%,'||#{id}||',%'</if>
+        <if test="dbName == 'mssql'">'%,'+#{id}+',%'</if>
+        <if test="dbName == 'mysql'">CONCAT('%,', #{id}, ',%')</if>
+    </update>
+
 
 </mapper>

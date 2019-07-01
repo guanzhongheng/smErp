@@ -1,7 +1,7 @@
 /**
  * Copyright &copy; 2012-2016 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
  */
-package com.lcyzh.nmerp.entity;
+package com.lcyzh.nmerp.entity.sys;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -29,7 +29,7 @@ public class Menu extends DataEntity<Menu> {
 	private String isShow; 	// 是否在菜单中显示（1：显示；0：不显示）
 	private String permission; // 权限标识
 	
-	private Long userId;
+	private String userId;
 	
 	public Menu(){
 		super();
@@ -154,11 +154,11 @@ public class Menu extends DataEntity<Menu> {
 		return "1";
 	}
 	
-	public Long getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Long userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

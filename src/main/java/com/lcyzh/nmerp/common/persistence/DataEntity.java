@@ -3,7 +3,7 @@ package com.lcyzh.nmerp.common.persistence;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lcyzh.nmerp.controller.system.util.UserUtils;
-import com.lcyzh.nmerp.entity.TUser;
+import com.lcyzh.nmerp.entity.sys.User;
 import com.lcyzh.nmerp.utils.IdGen;
 import org.hibernate.validator.constraints.Length;
 
@@ -19,9 +19,9 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 	private static final long serialVersionUID = 1L;
 	
 	protected String remarks;	// 备注
-	protected TUser createBy;	// 创建者
+	protected User createBy;	// 创建者
 	protected Date createDate;	// 创建日期
-	protected TUser updateBy;	// 更新者
+	protected User updateBy;	// 更新者
 	protected Date updateDate;	// 更新日期
 	protected String delFlag; 	// 删除标记（0：正常；1：删除；2：审核）
 	
@@ -43,7 +43,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 		if (!this.isNewRecord){
 			setId(IdGen.uuid());
 		}
-		TUser user = UserUtils.getUser();
+		User user = UserUtils.getUser();
 		if (user.getId() != null){
 			this.updateBy = user;
 			this.createBy = user;
@@ -57,7 +57,7 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 	 */
 	@Override
 	public void preUpdate(){
-		TUser user = UserUtils.getUser();
+		User user = UserUtils.getUser();
 		if (user.getId() != null){
 			this.updateBy = user;
 		}
@@ -74,11 +74,11 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 	}
 	
 	@JsonIgnore
-	public TUser getCreateBy() {
+	public User getCreateBy() {
 		return createBy;
 	}
 
-	public void setCreateBy(TUser createBy) {
+	public void setCreateBy(User createBy) {
 		this.createBy = createBy;
 	}
 
@@ -92,11 +92,11 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 	}
 
 	@JsonIgnore
-	public TUser getUpdateBy() {
+	public User getUpdateBy() {
 		return updateBy;
 	}
 
-	public void setUpdateBy(TUser updateBy) {
+	public void setUpdateBy(User updateBy) {
 		this.updateBy = updateBy;
 	}
 

@@ -20,6 +20,6 @@ public class TSysUserServiceImpl implements TSysUserService {
     private TSysUserMapper sysUserMapper;
     @Override
     public TSysUser findByUserName(String username) {
-        return sysUserMapper.findByUserName(username);
+        return null;
     }
 }

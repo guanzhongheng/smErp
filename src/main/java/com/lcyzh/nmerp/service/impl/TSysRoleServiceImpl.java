@@ -23,6 +23,7 @@ public class TSysRoleServiceImpl implements TSysRoleService {
 
     @Override
     public List<TSysRole> findByUserId(Integer userId) {
-        return sysRoleMapper.findByUserId(userId);
+       // return sysRoleMapper.findByUserId(userId);
+        return null;
     }
 }

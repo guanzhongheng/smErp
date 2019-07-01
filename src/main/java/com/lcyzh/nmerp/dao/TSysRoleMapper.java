@@ -1,12 +1,23 @@
 package com.lcyzh.nmerp.dao;
 
-import com.lcyzh.nmerp.entity.TSysRole;
+import com.lcyzh.nmerp.dao.common.CrudDao;
+import com.lcyzh.nmerp.entity.sys.Role;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface TSysRoleMapper {
+public interface TSysRoleMapper extends CrudDao<Role> {
 
-    List<TSysRole> findByUserId(Integer userId);
+    public Role getByName(Role role);
+
+    public Role getByEnname(Role role);
+
+    /**
+     * 维护角色与菜单权限关系
+     * @param role
+     * @return
+     */
+    public int deleteRoleMenu(Role role);
+
+    public int insertRoleMenu(Role role);
+
 }

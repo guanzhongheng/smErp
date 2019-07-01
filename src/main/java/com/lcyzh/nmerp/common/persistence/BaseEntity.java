@@ -10,7 +10,7 @@ import com.lcyzh.nmerp.common.lang.StringUtils;
 import com.lcyzh.nmerp.common.supcan.annotation.treelist.SupTreeList;
 import com.lcyzh.nmerp.common.supcan.annotation.treelist.cols.SupCol;
 import com.lcyzh.nmerp.controller.system.util.UserUtils;
-import com.lcyzh.nmerp.entity.TUser;
+import com.lcyzh.nmerp.entity.sys.User;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import javax.xml.bind.annotation.XmlTransient;
@@ -35,7 +35,7 @@ public abstract class BaseEntity<T> implements Serializable {
 	/**
 	 * 当前用户
 	 */
-	protected TUser currentUser;
+	protected User currenUser;
 	
 	/**
 	 * 当前实体分页对象
@@ -73,15 +73,15 @@ public abstract class BaseEntity<T> implements Serializable {
 	
 	@JsonIgnore
 	@XmlTransient
-	public TUser getCurrentUser() {
-		if(currentUser == null){
-			currentUser = UserUtils.getUser();
+	public User getCurrentUser() {
+		if(currenUser == null){
+			currenUser = UserUtils.getUser();
 		}
-		return currentUser;
+		return currenUser;
 	}
 	
-	public void setCurrentUser(TUser currentUser) {
-		this.currentUser = currentUser;
+	public void setCurrenUser(User currenUser) {
+		this.currenUser = currenUser;
 	}
 
 	@JsonIgnore
