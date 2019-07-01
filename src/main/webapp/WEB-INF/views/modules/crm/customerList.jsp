@@ -11,9 +11,9 @@
 <body>
 <ul class="nav nav-tabs">
     <li class="active"><a href="${ctx}/crm/list/">客户列表</a></li>
-    <li class="active"><a href="${ctx}/crm/poollist/">公海列表</a></li>
+    <li><a href="${ctx}/crm/poollist/">公海列表</a></li>
 </ul>
-<form:form id="searchForm" modelAttribute="customer" action="${ctx}/crm/list" method="post" class="breadcrumb form-search">
+<form:form id="searchForm" modelAttribute="customer" action="${ctx}/crm/customer/list" method="post" class="breadcrumb form-search">
     <input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
     <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
     <ul class="ul-form">
@@ -42,7 +42,6 @@
         </li>
         &nbsp;&nbsp;
         <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
-        <li class="clearfix"></li>
     </ul>
 </form:form>
 <div class="control-group">&nbsp;&nbsp;&nbsp;&nbsp;
@@ -64,41 +63,29 @@
         <th>客户星级</th>
         <th>首联系人</th>
         <th>手机号码</th>
-        <th>最后跟进</th>
+        <th>客户维护人</th>
         <th>未跟进天数</th>
         <th>操作</th>
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${page.list}" var="customer">
+    <c:forEach items="${page.list}" var="cus">
         <tr>
-            <td><<input type="checkbox" name="cuscode" >${customer.customerCode}</td>
-            <td>${customer.status}</td>
-            <td><a href="${ctx}/sys/user/form?id=${user.id}">${user.loginName}</a></td>
-            <td>${user.name}</td>
-            <td>${user.phone}</td>
-            <td>${user.mobile}</td>
-                <a href="${ctx}/sys/user/form?id=${user.id}">修改</a>
-                <a href="${ctx}/sys/user/delete?id=${user.id}" onclick="return confirmx('确认要删除该用户吗？', this.href)">删除</a>
-            </td>
-        </tr>
-    </c:forEach>
-
-        <tr>
-            <td><input></td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
+            <td><input type="checkbox" name="cuscode" >${cus.cusCode}</td>
+            <td>${cus.cusCode}</td>
+            <td>${cus.cusStatus}</td>
+            <td>${cus.cusGrade}</td>
+            <td>${cus.cusAddress}</td>
+            <td>${cus.cusAddress}</td>
+            <td>${cus.cusAddress}</td>
+            <td>${cus.cusAddress}</td>
             <td>
                 <a href=""><i class="icon-comment">跟进</i></a>
                 <a href=""><i class="icon-pencil">编辑</i></a>
                 <a href="${ctx}/crm" onclick="return confirmx('确认要删除该客户吗？', this.href)"><i class="icon-trash">删除</i></a>
             </td>
         </tr>
+    </c:forEach>
     </tbody>
 </table>
 <div class="pagination">${page}</div>
