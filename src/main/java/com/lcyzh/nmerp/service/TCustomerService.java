@@ -15,9 +15,7 @@ public interface TCustomerService {
 
     Page<CustomerQueryVo> findPage(Page<CustomerQueryVo> page, CustomerQueryVo customer);
 
-    int insert(CustomerAddModifyVo tCustomer);
-
-    int update(CustomerAddModifyVo vo);
+    int save(CustomerAddModifyVo tCustomer);
 
     int updateBatch(CustomerUpdateVo vo);
 

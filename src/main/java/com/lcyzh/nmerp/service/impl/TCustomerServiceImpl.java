@@ -60,25 +60,34 @@ public class TCustomerServiceImpl implements TCustomerService {
 
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
     @Override
-    public int insert(CustomerAddModifyVo vo) {
+    public int save(CustomerAddModifyVo vo) {
         int res = -1;
         if (vo != null) {
             Date current = new Date();
-            String cusCode = StringUtils.genFixPreFixStr(Constants.CUS_PRE_FIX);
-            Customer customer = buildCustomerFromVo(vo, cusCode, current);
-            res = tCustomerMapper.insert(customer);
-            if (res > 0) {
-                PrimaryContact primaryContact = buidPrimaryContractor(vo, cusCode, current);
-                res = primaryContactMapper.insert(primaryContact);
+            Customer customer = buidCustomerFromVo(vo, current);
+            if (vo.getCusCode() != null) {
+                res = tCustomerMapper.update(customer);
                 if (res > 0) {
-                    CusEmpRel cusEmpRel = buildCusEmpRelFromVo(vo, cusCode, current);
-                    res = cusEmpRelMapper.insert(cusEmpRel);
+                    PrimaryContact primaryContact = buidPrimaryContractor(vo, vo.getCusCode(), current);
+                    res = primaryContactMapper.update(primaryContact);
+                }
+            } else {
+                String cusCode = StringUtils.genFixPreFixStr(Constants.CUS_PRE_FIX);
+                customer.setCusCode(cusCode);
+                res = tCustomerMapper.insert(customer);
+                if (res > 0) {
+                    PrimaryContact primaryContact = buidPrimaryContractor(vo, cusCode, current);
+                    res = primaryContactMapper.insert(primaryContact);
                     if (res > 0) {
-                        CusFollow cusFollow = new CusFollow();
-                        cusFollow.setCusCode(cusCode);
-                        cusFollow.setLatestFollowTime(current);
-                        cusFollow.setCreateTime(current);
-                        res = cusFollowMapper.insert(cusFollow);
+                        CusEmpRel cusEmpRel = buildCusEmpRelFromVo(vo, cusCode, current);
+                        res = cusEmpRelMapper.insert(cusEmpRel);
+                        if (res > 0) {
+                            CusFollow cusFollow = new CusFollow();
+                            cusFollow.setCusCode(cusCode);
+                            cusFollow.setLatestFollowTime(current);
+                            cusFollow.setCreateTime(current);
+                            res = cusFollowMapper.insert(cusFollow);
+                        }
                     }
                 }
             }
@@ -91,7 +100,6 @@ public class TCustomerServiceImpl implements TCustomerService {
         CusEmpRel cusEmpRel = new CusEmpRel();
         cusEmpRel.setCusCode(cusCode);
         cusEmpRel.setEmpCode(vo.getEmpCode());
-        cusEmpRel.setStatus('0');
         cusEmpRel.setCreateTime(current);
         cusEmpRel.setUpdateTime(current);
         return cusEmpRel;
@@ -108,42 +116,14 @@ public class TCustomerServiceImpl implements TCustomerService {
         primaryContact.setContactRole(vo.getPrimaryContactorRole());
         primaryContact.setContactSex(vo.getPrimaryContactorSex());
         primaryContact.setFixedPhone(vo.getPrimaryContactorFixedPhone());
+        primaryContact.setDepartment(vo.getPrimaryContactorDepartment());
+        primaryContact.setRemark(vo.getPrimaryContactorRemark());
         primaryContact.setCreateTime(current);
         primaryContact.setUpdateTime(current);
         return primaryContact;
     }
 
-    private Customer buildCustomerFromVo(CustomerAddModifyVo vo, String cusCode, Date current) {
-        Customer customer = new Customer();
-        customer.setIndustry(vo.getIndustry());
-        customer.setCusType(vo.getCusType());
-        customer.setCusGrade(vo.getCusGrade());
-        customer.setCusName(vo.getCusName());
-        customer.setCusSource(vo.getCusSource());
-        customer.setCusCode(cusCode);
-        customer.setCusAddress(vo.getCusAddress());
-        customer.setCusStatus(Constants.CUS_STATUS_NEW);
-        customer.setCreateTime(current);
-        return customer;
-    }
 
-
-    @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
-    @Override
-    public int update(CustomerAddModifyVo vo) {
-        int res = -1;
-        if (vo != null) {
-            Date current = new Date();
-            Customer customer = buidCustomerFromVo(vo, current);
-            res = tCustomerMapper.update(customer);
-            if (res > 0) {
-                PrimaryContact primaryContact = buidPrimaryContractor(vo, vo.getCusCode(), current);
-                res = primaryContactMapper.update(primaryContact);
-            }
-
-        }
-        return res;
-    }
 
     /**
      * @Description: Vo转换实体po
@@ -161,7 +141,10 @@ public class TCustomerServiceImpl implements TCustomerService {
         customer.setCusGrade(vo.getCusGrade());
         customer.setCusType(vo.getCusType());
         customer.setIndustry(vo.getIndustry());
+        customer.setRemark(vo.getRemarks());
+        customer.setCusStatus(vo.getCusStatus());
         customer.setUpdateTime(current);
+        customer.setCreateTime(current);
         return customer;
     }
 

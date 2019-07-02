@@ -42,11 +42,7 @@ public class CusManageController  extends BaseController {
         if (!beanValidator(model, customerAddModifyVo)){
             return customerAdd(customerAddModifyVo, model);
         }
-        if(customerAddModifyVo != null && StringUtils.isNotBlank(customerAddModifyVo.getCusCode())){
-            customerService.update(customerAddModifyVo);
-        }else{
-            customerService.insert(customerAddModifyVo);
-        }
+       customerService.save(customerAddModifyVo);
         addMessage(redirectAttributes, "保存客户'" + customerAddModifyVo.getCusName() + "'成功");
         return "redirect:/crm/customer/list?repage";
     }

@@ -513,6 +513,77 @@ public class Constants {
     public static final long CUS_TYPE_COM = 110002L;
 
     /**
+     * @Description: 行业
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 10:08 PM
+     */
+    public static final long INDUSTRY = 120000L;
+
+    /**
+     * @Description: 行业-制造业
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 10:08 PM
+     */
+    public static final long INDUSTRY_MAN = 120001L;
+
+    /**
+     * @Description: 行业-化工
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 10:08 PM
+     */
+    public static final long INDUSTRY_CHEM = 120002L;
+
+    /**
+     * @Description: 行业-其他
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 10:08 PM
+     */
+    public static final long INDUSTRY_OTHER = 120003L;
+
+    /**
+     * @Description: 首要联系人角色
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 10:08 PM
+     */
+    public static final long PRIM_CONTACTOR_ROLE = 130000L;
+
+    /**
+     * @Description: 首要联系人角色-决策人
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 10:08 PM
+     */
+    public static final long PRIM_CONTACTOR_ROLE_PMK = 130001L;
+
+    /**
+     * @Description: 首要联系人角色-影响人
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 10:08 PM
+     */
+    public static final long PRIM_CONTACTOR_ROLE_APN = 130001L;
+
+
+    /**
      * @Description: 产品大类字典编号
      * @Param:
      * @return: 
