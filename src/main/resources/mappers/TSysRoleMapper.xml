@@ -16,6 +16,15 @@
         </collection>
     </resultMap>
 
+    <select id="get" resultMap="roleResult">
+        SELECT
+        <include refid="roleColumns"/>,
+        rm.menu_id AS "menuList.id"
+        FROM T_SYS_ROLE a
+        LEFT JOIN T_SYS_ROLE_MENU rm ON rm.role_id = a.id
+        WHERE a.id = #{id}
+    </select>
+
     <sql id="roleColumns">
     	a.id,
     	a.name,
@@ -30,15 +39,6 @@
     	a.useable AS useable,
     	a.is_sys AS sysData
     </sql>
-
-    <select id="get" resultMap="roleResult">
-        SELECT
-        <include refid="roleColumns"/>,
-        rm.menu_id AS "menuList.id",
-        FROM T_SYS_ROLE a
-        LEFT JOIN T_SYS_ROLE_MENU rm ON rm.role_id = a.id
-        WHERE a.id = #{id}
-    </select>
 
     <select id="getByName" resultType="com.lcyzh.nmerp.entity.sys.Role">
         SELECT
@@ -56,7 +56,7 @@
 
     <select id="findList" resultMap="roleResult">
         SELECT <!-- DISTINCT -->
-        <include refid="roleColumns"/>,
+        <include refid="roleColumns"/>
         FROM T_SYS_ROLE a
         LEFT JOIN t_sys_user_role ur ON ur.role_id = a.id
         LEFT JOIN t_sys_user u ON u.id = ur.user_id
