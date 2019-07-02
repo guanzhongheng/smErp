@@ -12,7 +12,7 @@ import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.controller.system.util.UserUtils;
 import com.lcyzh.nmerp.entity.sys.Role;
 import com.lcyzh.nmerp.entity.sys.User;
-import com.lcyzh.nmerp.service.SystemService;
+import com.lcyzh.nmerp.service.security.SystemService;
 import com.lcyzh.nmerp.utils.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;

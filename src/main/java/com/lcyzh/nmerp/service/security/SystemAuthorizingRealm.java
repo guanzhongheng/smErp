@@ -55,10 +55,10 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) {
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
 
-		int activeSessionSize = getSystemService().getSessionDao().getActiveSessions(false).size();
-		if (logger.isDebugEnabled()){
-			logger.debug("login submit, active session size: {}, username: {}", activeSessionSize, token.getUsername());
-		}
+//		int activeSessionSize = getSystemService().getSessionDao().getActiveSessions(false).size();
+//		if (logger.isDebugEnabled()){
+//			logger.debug("login submit, active session size: {}, username: {}", activeSessionSize, token.getUsername());
+//		}
 
 		// 校验登录验证码
 		if (LoginController.isValidateCodeLogin(token.getUsername(), false, false)){
