@@ -1,4 +1,4 @@
-package com.lcyzh.nmerp.service;
+package com.lcyzh.nmerp.service.security;
 
 import com.google.common.collect.Lists;
 import com.lcyzh.nmerp.common.lang.StringUtils;

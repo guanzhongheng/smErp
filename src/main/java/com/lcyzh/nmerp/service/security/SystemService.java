@@ -1,4 +1,4 @@
-package com.lcyzh.nmerp.service;
+package com.lcyzh.nmerp.service.security;
 
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.common.utils.Digests;
@@ -12,7 +12,6 @@ import com.lcyzh.nmerp.entity.sys.Menu;
 import com.lcyzh.nmerp.entity.sys.Role;
 import com.lcyzh.nmerp.entity.sys.User;
 import com.lcyzh.nmerp.dao.common.SessionDAO;
-import com.lcyzh.nmerp.service.security.SystemAuthorizingRealm;
 import com.lcyzh.nmerp.utils.Encodes;
 import com.lcyzh.nmerp.utils.StringUtils;
 import org.apache.shiro.session.Session;

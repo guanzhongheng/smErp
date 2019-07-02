@@ -31,7 +31,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label"><i style="color: red">*</i> 所属行业：</label>
                                         <div class="col-sm-8">
-                                            <form:select path="industry" class="chosen-select" placeholder="所属行业"
+                                            <form:select path="industry" class="chosen-select"
                                                          cssStyle="min-width: 300px">
                                                 <form:option value="" label=""/>
                                                 <form:option value="1" label="12"/>
@@ -55,7 +55,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label"><i style="color: red">*</i> 客户状态：</label>
                                         <div class="col-sm-8">
-                                            <form:select path="cusStatus" class="chosen-select" placeholder="客户状态"
+                                            <form:select path="cusStatus" class="chosen-select"
                                                          cssStyle="min-width: 300px">
                                                 <form:option value="" label=""/>
                                                 <form:option value="1" label="12"/>
@@ -67,7 +67,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label"><i style="color: red">*</i> 客户星级：</label>
                                         <div class="col-sm-8">
-                                            <form:select path="cusGrade" class="chosen-select" placeholder="客户星级"
+                                            <form:select path="cusGrade" class="chosen-select"
                                                          cssStyle="min-width: 300px">
                                                 <form:option value="" label=""/>
                                                 <form:option value="1" label="1"/>
@@ -80,7 +80,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">客户来源：</label>
                                         <div class="col-sm-8">
-                                            <form:select path="cusSource" class="chosen-select" placeholder="客户来源"
+                                            <form:select path="cusSource" class="chosen-select"
                                                          cssStyle="min-width: 300px">
                                                 <form:option value="" label=""/>
                                                 <form:option value="1" label="1"/>
@@ -93,7 +93,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label"><i style="color: red">*</i> 归属人员：</label>
                                         <div class="col-sm-8">
-                                            <form:select path="empCode" class="chosen-select" placeholder="归属人员"
+                                            <form:select path="empCode" class="chosen-select"
                                                          cssStyle="min-width: 300px">
                                                 <form:option value="" label=""/>
                                                 <form:option value="1" label="2"/>
@@ -155,9 +155,9 @@
                                 <label class="col-sm-3 control-label">尊称：</label>
                                 <div class="col-sm-8">
                                     <div class="radio i-checks">
-                                        <input type="checkbox" name="primaryContactorSex" value="" checked=""> <i></i>未知
-                                        <input type="checkbox" name="primaryContactorSex" value=""> <i></i>先生
-                                        <input type="checkbox" name="primaryContactorSex" value=""> <i></i>女士
+                                        <input type="radio" name="primaryContactorSex" value="" checked=""> <i></i>未知
+                                        <input type="radio" name="primaryContactorSex" value=""> <i></i>先生
+                                        <input type="radio" name="primaryContactorSex" value=""> <i></i>女士
                                     </div>
                                 </div>
                             </div>
@@ -187,7 +187,7 @@
 
                                 <div class="col-sm-8">
                                     <form:input path="primaryContactorDepartment" htmlEscape="false" maxlength="200"
-                                                class="form-control" placeholder="首要联系人生日"/>
+                                                class="form-control" placeholder="首要联系人部门"/>
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
@@ -196,7 +196,7 @@
 
                                 <div class="col-sm-8">
                                     <form:input path="primaryContactorPhone" htmlEscape="false" maxlength="200"
-                                                class="form-control" placeholder="首要联系人生日"/>
+                                                class="form-control" placeholder="首要联系人手机号码"/>
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
@@ -205,7 +205,7 @@
 
                                 <div class="col-sm-8">
                                     <form:input path="primaryContactorEmail" htmlEscape="false" maxlength="200"
-                                                class="form-control" placeholder="首要联系人生日"/>
+                                                class="form-control" placeholder="首要联系人电子邮箱"/>
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
@@ -214,7 +214,7 @@
 
                                 <div class="col-sm-8">
                                     <form:input path="primaryContactorAddress" htmlEscape="false" maxlength="200"
-                                                class="form-control" placeholder="首要联系人生日"/>
+                                                class="form-control" placeholder="首要联系人详细地址"/>
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>

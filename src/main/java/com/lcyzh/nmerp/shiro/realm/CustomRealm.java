@@ -1,10 +1,6 @@
 package com.lcyzh.nmerp.shiro.realm;
 
-import com.lcyzh.nmerp.entity.TSysMenu;
-import com.lcyzh.nmerp.entity.TSysRole;
-import com.lcyzh.nmerp.entity.TSysUser;
-import com.lcyzh.nmerp.entity.sys.Menu;
-import com.lcyzh.nmerp.service.SystemService;
+import com.lcyzh.nmerp.service.security.SystemService;
 import com.lcyzh.nmerp.service.TSysRoleService;
 import com.lcyzh.nmerp.service.TSysUserService;
 import org.apache.log4j.Logger;
@@ -12,15 +8,11 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
-import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
-
-import java.util.List;
 
 /**
  * @Project : nm-erp

@@ -6,7 +6,7 @@ package com.lcyzh.nmerp.common.utils;
 import com.google.common.collect.Lists;
 import com.lcyzh.nmerp.common.lang.StringUtils;
 import com.lcyzh.nmerp.entity.sys.Role;
-import com.lcyzh.nmerp.service.SystemService;
+import com.lcyzh.nmerp.service.security.SystemService;
 import com.lcyzh.nmerp.utils.SpringContextHolder;
 
 import java.util.List;

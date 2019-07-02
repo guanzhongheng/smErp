@@ -8,7 +8,6 @@ import com.lcyzh.nmerp.controller.system.util.UserUtils;
 import com.lcyzh.nmerp.entity.sys.Menu;
 import com.lcyzh.nmerp.entity.sys.Role;
 import com.lcyzh.nmerp.entity.sys.User;
-import com.lcyzh.nmerp.service.SystemService;
 import com.lcyzh.nmerp.utils.Encodes;
 import com.lcyzh.nmerp.utils.SpringContextHolder;
 import com.lcyzh.nmerp.utils.StringUtils;
