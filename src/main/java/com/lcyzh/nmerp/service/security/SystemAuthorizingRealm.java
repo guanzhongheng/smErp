@@ -3,7 +3,7 @@ package com.lcyzh.nmerp.service.security;
 
 import com.lcyzh.nmerp.common.servlet.ValidateCodeServlet;
 import com.lcyzh.nmerp.common.utils.Global;
-import com.lcyzh.nmerp.controller.LoginController;
+import com.lcyzh.nmerp.controller.system.LoginController;
 import com.lcyzh.nmerp.controller.system.util.UserUtils;
 import com.lcyzh.nmerp.entity.sys.Menu;
 import com.lcyzh.nmerp.entity.sys.Role;
@@ -11,7 +11,7 @@ import com.lcyzh.nmerp.entity.sys.User;
 import com.lcyzh.nmerp.service.SystemService;
 import com.lcyzh.nmerp.utils.Encodes;
 import com.lcyzh.nmerp.utils.SpringContextHolder;
-import org.apache.commons.lang3.StringUtils;
+import com.lcyzh.nmerp.utils.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -87,6 +87,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 	/**
 	 * 获取权限授权信息，如果缓存中存在，则直接从缓存中获取，否则就重新获取， 登录成功后调用
 	 */
+	@Override
 	protected AuthorizationInfo getAuthorizationInfo(PrincipalCollection principals) {
 		if (principals == null) {
             return null;

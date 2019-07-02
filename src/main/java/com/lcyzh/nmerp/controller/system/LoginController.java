@@ -1,4 +1,4 @@
-package com.lcyzh.nmerp.controller;
+package com.lcyzh.nmerp.controller.system;
 
 import com.google.common.collect.Maps;
 import com.lcyzh.nmerp.common.utils.CacheUtils;
