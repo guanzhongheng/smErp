@@ -12,8 +12,10 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.filter.DelegatingFilterProxy;
 
 import javax.servlet.Filter;
 import java.util.LinkedHashMap;
@@ -21,6 +23,18 @@ import java.util.Map;
 
 @Configuration
 public class ShiroConfiguration {
+
+
+
+    @Bean
+    public FilterRegistrationBean delegatingFilterProxy(){
+        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
+        DelegatingFilterProxy proxy = new DelegatingFilterProxy();
+        proxy.setTargetFilterLifecycle(true);
+        proxy.setTargetBeanName("shiroFilter");
+        filterRegistrationBean.setFilter(proxy);
+        return filterRegistrationBean;
+    }
 
     /**
      * ShiroFilterFactoryBean 处理拦截资源文件问题
@@ -61,10 +75,9 @@ public class ShiroConfiguration {
          * authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问
          */
         filterChainMap.put("/static/**","anon");
-        filterChainMap.put("/login", "authc");
         filterChainMap.put("/logout", "logout");
         filterChainMap.put("/crm/**", "authc");
-        filterChainMap.put("/**", "authc");
+        filterChainMap.put("/**", "anon");
 
         factoryBean.setFilterChainDefinitionMap(filterChainMap);
     }

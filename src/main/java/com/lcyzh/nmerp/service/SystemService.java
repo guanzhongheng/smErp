@@ -47,8 +47,8 @@ public class SystemService extends BaseService {
     private TSysMenuMapper menuDao;
     @Autowired
     private SessionDAO sessionDao;
-    @Autowired
-    private SystemAuthorizingRealm systemRealm;
+//    @Autowired
+//    private SystemAuthorizingRealm systemRealm;
 
     public SessionDAO getSessionDao() {
         return sessionDao;

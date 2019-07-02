@@ -1,6 +1,3 @@
-/**
- * Copyright &copy; 2012-2016 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
- */
 package com.lcyzh.nmerp.controller.system.util;
 
 import com.lcyzh.nmerp.common.utils.CacheUtils;
@@ -23,8 +20,6 @@ import java.util.List;
 
 /**
  * 用户工具类
- * @author ThinkGem
- * @version 2013-12-05
  */
 public class UserUtils {
 
