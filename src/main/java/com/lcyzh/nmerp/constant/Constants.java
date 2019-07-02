@@ -2,7 +2,7 @@ package com.lcyzh.nmerp.constant;
 
 /**
  * @Project : nm-erp
- * @Description : TODO
+ * @Description : 常量类,字典：前三位表示一类，第四位表示小类，末尾表示具体参数
  * @Author : lijinku
  * @Iteration : 1.0
  * @Date : 2019/6/19  5:23 PM
@@ -18,121 +18,385 @@ public class Constants {
     public static final String CUS_PRE_FIX="CS";
 
     public static final String OUT_STORE_PRE_FIX="OST";
-
-    //新建
-    public static final char CONT_STATUS_NEW='0';
-    //已完善
-    public static final char CONT_STATUS_FINISH='1';
-    //合同无效
-    public static final char CONT_STATUS_INVALID='2';
-    //新建
-    public static final long ORD_STATUS_NEW=12000l;
-    /**
-     * @Description: 待分配
+    /***
+     * @Description: 订单状态
      * @Param:
      * @return:
      * @Author: lijinku
      * @Iteration : 1.0
-     * @Date: 2019/6/27 9:40 AM
+     * @Date: 2019/7/2 3:18 PM
      */
-    public static final long ORD_STATUS_TOASSIGN=12001l;
-    /**
-     * @Description: 已分配
+    public static final long ORD_STATUS = 100000L;
+
+    /***
+     * @Description: 订单状态-新建
      * @Param:
      * @return:
      * @Author: lijinku
      * @Iteration : 1.0
-     * @Date: 2019/6/27 9:41 AM
+     * @Date: 2019/7/2 3:18 PM
      */
-    public static final long ORD_STATUS_ASSIGNED=12002l;
-    //执行中
-    public static final long ORD_STATUS_EXE=12003l;
-    //完成
-    public static final long ORD_STATUS_FINISH=12004l;
-    //废弃
-    public static final long ORD_STATUS_INVALID=12005l;
+    public static final long ORD_STATUS_NEW = 100001L;
 
-    //正常
-    public static final long CUS_STATUS_NOR=11000l;
-    //特别-无需审核
-    public static final long CUS_STATUS_SPEC=11001l;
-    //需审核
-    public static final long CUS_STATUS_CHECK=11002l;
-    //拒绝
-    public static final long CUS_STATUS_RJCT=11003l;
-    //没人跟进
-    public static final long CUS_STATUS_IDEL=11004l;
-
-    /**
-     * @Description: 客户资料类型-个人
+    /***
+     * @Description: 订单状态-待审批
      * @Param:
      * @return:
      * @Author: lijinku
      * @Iteration : 1.0
-     * @Date: 2019/7/1 4:10 PM
+     * @Date: 2019/7/2 3:18 PM
      */
-    public static final long CUS_TYPE_PERSON=11101l;
+    public static final long ORD_STATUS_TOASSIGN = 100002L;
 
-    /**
-     * @Description: 客户资料类型-企业
+    /***
+     * @Description: 订单状态-已审批
      * @Param:
      * @return:
      * @Author: lijinku
      * @Iteration : 1.0
-     * @Date: 2019/7/1 4:10 PM
+     * @Date: 2019/7/2 3:18 PM
      */
-    public static final long CUS_TYPE_COM=11102l;
-    /**
-     * @Description: 客户星级-1
+    public static final long ORD_STATUS_ASSIGNED = 100003L;
+
+    /***
+     * @Description: 订单状态-审批驳回
      * @Param:
      * @return:
      * @Author: lijinku
      * @Iteration : 1.0
-     * @Date: 2019/7/1 4:26 PM
+     * @Date: 2019/7/2 3:18 PM
      */
-    public static final long CUS_GRADE_1=11201l;
+    public static final long ORD_STATUS_CHK_RJCT = 100004L;
 
     /**
-     * @Description: 客户星级-2
+     * @Description: 付款方式
      * @Param:
      * @return:
      * @Author: lijinku
      * @Iteration : 1.0
-     * @Date: 2019/7/1 4:26 PM
+     * @Date: 2019/7/2 3:28 PM
      */
-    public static final long CUS_GRADE_2=11202l;
+    public static final long PAY_TYPE = 101000L;
 
     /**
-     * @Description: 客户星级-3
+     * @Description: 付款方式-现金
      * @Param:
      * @return:
      * @Author: lijinku
      * @Iteration : 1.0
-     * @Date: 2019/7/1 4:26 PM
+     * @Date: 2019/7/2 3:28 PM
      */
-    public static final long CUS_GRADE_3=11203l;
-
+    public static final long PAY_TYPE_CASH = 101001L;
 
     /**
-     * @Description: 客户星级-4
+     * @Description: 付款方式-电子转账
      * @Param:
      * @return:
      * @Author: lijinku
      * @Iteration : 1.0
-     * @Date: 2019/7/1 4:26 PM
+     * @Date: 2019/7/2 3:28 PM
      */
-    public static final long CUS_GRADE_4=11204l;
-
+    public static final long PAY_TYPE_EFT = 101001L;
 
     /**
-     * @Description: 客户星级-5
+     * @Description: 订单执行状态
      * @Param:
      * @return:
      * @Author: lijinku
      * @Iteration : 1.0
-     * @Date: 2019/7/1 4:26 PM
+     * @Date: 2019/7/2 3:35 PM
      */
-    public static final long CUS_GRADE_5=11205l;
+    public static final long ORD_EXE_STATUS = 102000L;
+
+    /**
+     * @Description: 订单执行状态-待分配
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 3:35 PM
+     */
+    public static final long ORD_EXE_STATUS_TOASSIGN = 102001L;
+
+    /**
+     * @Description: 订单执行状态-已分配
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 3:35 PM
+     */
+    public static final long ORD_EXE_STATUS_ASSIGNED = 102002L;
+
+    /**
+     * @Description: 订单执行状态-执行中
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 3:35 PM
+     */
+    public static final long ORD_EXE_STATUS_EXING = 102003L;
+
+    /**
+     * @Description: 订单执行状态-未知
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 3:35 PM
+     */
+    public static final long ORD_EXE_STATUS_UNKNOWN = 102004L;
+
+    /**
+     * @Description: 产品单位
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 3:42 PM
+     */
+    public static final long PROD_UNIT = 103000L;
+
+    /**
+     * @Description: 产品单位-千克
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 3:42 PM
+     */
+    public static final long PROD_UNIT_KG = 103001L;
+
+    /**
+     * @Description: 产品单位-顿
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 3:42 PM
+     */
+    public static final long PROD_UNIT_TON = 103002L;
+
+    /**
+     * @Description: 客户状态
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 3:48 PM
+     */
+    public static final long CUS_STATUS = 104000L;
+
+    /**
+     * @Description: 客户状态-新建
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 3:48 PM
+     */
+    public static final long CUS_STATUS_NEW = 104001L;
+
+    /**
+     * @Description: 客户状态-正常（跟进）
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 3:48 PM
+     */
+    public static final long CUS_STATUS_FLLOW = 104002L;
+
+    /**
+     * @Description: 客户状态-正常（未跟进）
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 3:48 PM
+     */
+    public static final long CUS_STATUS_UNFLLOW = 104003L;
+
+    /**
+     * @Description: 客户状态-特别
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 3:48 PM
+     */
+    public static final long CUS_STATUS_SPEC = 104004L;
+
+    /**
+     * @Description: 客户状态-黑户
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 3:48 PM
+     */
+    public static final long CUS_STATUS_BH = 104005L;
+
+    /**
+     * @Description: 客户星级
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 3:48 PM
+     */
+    public static final long CUS_GRADE = 105000L;
+
+    /**
+     * @Description: 客户星级-1星
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 3:48 PM
+     */
+    public static final long CUS_GRADE_ONE = 105001L;
+
+    /**
+     * @Description: 客户星级-2星
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 3:48 PM
+     */
+    public static final long CUS_GRADE_TWO = 105002L;
+
+    /**
+     * @Description: 客户星级-3星
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 3:48 PM
+     */
+    public static final long CUS_GRADE_THR = 105003L;
+
+    /**
+     * @Description: 客户星级-4星
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 3:48 PM
+     */
+    public static final long CUS_GRADE_FOUR = 105004L;
+
+    /**
+     * @Description: 客户星级-5星
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 3:48 PM
+     */
+    public static final long CUS_GRADE_FIVE = 105005L;
+
+    /**
+     * @Description: 客户来源
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 3:58 PM
+     */
+    public static final long CUS_SOURCE = 106000L;
+
+    /**
+     * @Description: 客户来源-网络
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 3:58 PM
+     */
+    public static final long CUS_SOURCE_NETWORK = 106001L;
+
+    /**
+     * @Description: 客户来源-电话营销
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 3:58 PM
+     */
+    public static final long CUS_SOURCE_TMK = 106002L;
+
+    /**
+     * @Description: 客户来源-人际关系
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 3:58 PM
+     */
+    public static final long CUS_SOURCE_IR = 106003L;
+
+    /**
+     * @Description: 付款周期
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 4:09 PM
+     */
+    public static final long PAYMENT_PERIOD = 107000L;
+
+    /**
+     * @Description: 付款周期-1期
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 4:09 PM
+     */
+    public static final long PAYMENT_PERIOD_ONE = 107001L;
+
+    /**
+     * @Description: 付款周期-2期
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 4:09 PM
+     */
+    public static final long PAYMENT_PERIOD_TWO = 107002L;
+
+    /**
+     * @Description: 付款周期-3期
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 4:09 PM
+     */
+    public static final long PAYMENT_PERIOD_THR = 107003L;
+
+    /**
+     * @Description: 性别
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 4:09 PM
+     */
+    public static final long SEX = 108000L;
+
+    /**
+     * @Description: 性别-男
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 4:09 PM
+     */
+    public static final long SEX_MAN = 108001L;
 
     /**
      * @Description: 性别-女
@@ -140,50 +404,82 @@ public class Constants {
      * @return:
      * @Author: lijinku
      * @Iteration : 1.0
-     * @Date: 2019/7/1 3:48 PM
+     * @Date: 2019/7/2 4:09 PM
      */
-    public static final long SEX_LADY=13001L;
+    public static final long SEX_LADY = 108002L;
 
     /**
-     * @Description: 性别男
+     * @Description: 性别-未知
      * @Param:
      * @return:
      * @Author: lijinku
      * @Iteration : 1.0
-     * @Date: 2019/7/1 3:48 PM
+     * @Date: 2019/7/2 4:09 PM
      */
-    public static final long SEX_MAN=13002L;
-
+    public static final long SEX_UNKNOWN = 108003L;
 
     /**
-     * @Description: 订单类型
+     * @Description: 部门
      * @Param:
      * @return:
      * @Author: lijinku
      * @Iteration : 1.0
-     * @Date: 2019/7/1 3:50 PM
+     * @Date: 2019/7/2 5:08 PM
      */
-    public static final long ORD_TYPE_01=14000l;
+    public static final long DEPARTMENT = 109000L;
 
     /**
-     * @Description: 现金
+     * @Description: 部门-销售
      * @Param:
      * @return:
      * @Author: lijinku
      * @Iteration : 1.0
-     * @Date: 2019/7/1 3:51 PM
+     * @Date: 2019/7/2 5:08 PM
      */
-    public static final long PAY_TYPE_CASH=15001l;
+    public static final long DEPARTMENT_SALE = 109001L;
 
     /**
-     * @Description: 电子转账
+     * @Description: 部门-生产部
      * @Param:
      * @return:
      * @Author: lijinku
      * @Iteration : 1.0
-     * @Date: 2019/7/1 3:52 PM
+     * @Date: 2019/7/2 5:08 PM
      */
-    public static final long PAY_TYPE_EFT=15002l;
+    public static final long DEPARTMENT_PROD = 109002L;
+
+
+    /**
+     * @Description: 部门-品保部
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 5:08 PM
+     */
+    public static final long DEPARTMENT_QA = 109003L;
+
+
+    /**
+     * @Description: 部门-仓库
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 5:08 PM
+     */
+    public static final long DEPARTMENT_WH = 109004L;
+
+
+    /**
+     * @Description: 部门-内勤
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 5:08 PM
+     */
+    public static final long DEPARTMENT_OW = 109005L;
 
     /**
      * @Description: 产品大类字典编号

@@ -1,5 +1,6 @@
 package com.lcyzh.nmerp.utils;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -123,5 +124,13 @@ public class DictUtils {
         }
 
         return null;
+    }
+
+
+    //key-员工编号；value-员工名称
+    private static final Map<String,String>  empMaps = new HashMap<>(100);
+
+    public static Map<String, String> getEmpMaps() {
+        return empMaps;
     }
 }

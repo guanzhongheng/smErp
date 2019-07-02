@@ -7,14 +7,12 @@
         <result column="emp_name" property="empName" jdbcType="VARCHAR"/>
         <result column="birth" property="birth" jdbcType="VARCHAR"/>
         <result column="emp_grade" property="empGrade" jdbcType="CHAR"/>
-        <result column="department" property="department" jdbcType="VARCHAR"/>
+        <result column="department" property="department" jdbcType="BIGINT"/>
         <result column="emp_phone" property="empPhone" jdbcType="VARCHAR"/>
         <result column="emp_email" property="empEmail" jdbcType="VARCHAR"/>
         <result column="emp_address" property="empAddress" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
-
-
     </resultMap>
 
 
@@ -24,10 +22,31 @@
         WHERE emp_code = #{empCode}
     </select>
 
-    <select id="findList" resultMap="employeeResultMap">
+    <select id="findList" parameterType="com.lcyzh.nmerp.entity.Employee" resultMap="employeeResultMap">
         SELECT *
         FROM T_EMPLOYEE
         <where>
+            <if test="empName!= null">
+                and emp_name like concat('%', #{empName,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="birth!= null">
+                and birth like concat('%', #{birth,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="empGrade!= null">
+                and emp_grade like concat('%', #{empGrade,jdbcType=CHAR}, '%')
+            </if>
+            <if test="department!= null">
+                and department = #{department,jdbcType=VARCHAR}
+            </if>
+            <if test="empPhone!= null">
+                and emp_phone like concat('%', #{empPhone,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="empEmail!= null">
+                and emp_email like concat('%', #{empEmail,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="empAddress!= null">
+                and emp_address like concat('%', #{empAddress,jdbcType=VARCHAR}, '%')
+            </if>
         </where>
     </select>
 
@@ -54,7 +73,7 @@
             #{empName,jdbcType=VARCHAR},
             #{birth,jdbcType=VARCHAR},
             #{empGrade,jdbcType=CHAR},
-            #{department,jdbcType=VARCHAR},
+            #{department,jdbcType=BIGINT},
             #{empPhone,jdbcType=VARCHAR},
             #{empEmail,jdbcType=VARCHAR},
             #{empAddress,jdbcType=VARCHAR},
@@ -83,7 +102,7 @@
             #{item.empName,jdbcType=VARCHAR},
             #{item.birth,jdbcType=VARCHAR},
             #{item.empGrade,jdbcType=CHAR},
-            #{item.department,jdbcType=VARCHAR},
+            #{item.department,jdbcType=BIGINT},
             #{item.empPhone,jdbcType=VARCHAR},
             #{item.empEmail,jdbcType=VARCHAR},
             #{item.empAddress,jdbcType=VARCHAR},
@@ -95,18 +114,34 @@
 
     <update id="update" parameterType="com.lcyzh.nmerp.entity.Employee">
         UPDATE T_EMPLOYEE
-        SET
-        emp_code = #{empCode},
-        emp_name = #{empName},
-        birth = #{birth},
-        emp_grade = #{empGrade},
-        department = #{department},
-        emp_phone = #{empPhone},
-        emp_email = #{empEmail},
-        emp_address = #{empAddress},
-        create_time = #{createTime},
-        update_time = #{updateTime}
-        WHERE emp_code = #{empCode}
+        <set>
+
+            <if test="empName!= null">
+                emp_name = #{empName,jdbcType=VARCHAR},
+            </if>
+            <if test="birth!= null">
+                birth = #{birth,jdbcType=VARCHAR},
+            </if>
+            <if test="empGrade!= null">
+                emp_grade = #{empGrade,jdbcType=CHAR},
+            </if>
+            <if test="department!= null">
+                department = #{department,jdbcType=BIGINT},
+            </if>
+            <if test="empPhone!= null">
+                emp_phone = #{empPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="empEmail!= null">
+                emp_email = #{empEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="empAddress!= null">
+                emp_address = #{empAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime!= null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        WHERE emp_code = #{empCode,jdbcType=VARCHAR}
     </update>
 
     <delete id="delete" parameterType="com.lcyzh.nmerp.entity.Employee">

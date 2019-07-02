@@ -1,6 +1,8 @@
 package com.lcyzh.nmerp.component;
 
+import com.lcyzh.nmerp.dao.EmployeeMapper;
 import com.lcyzh.nmerp.dao.TDictMapper;
+import com.lcyzh.nmerp.entity.Employee;
 import com.lcyzh.nmerp.entity.TDict;
 import com.lcyzh.nmerp.utils.DictUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @Project : nm-erp
@@ -28,6 +31,8 @@ public class DictLoader implements CommandLineRunner {
 
     @Autowired
     private TDictMapper dictMapper;
+    @Autowired
+    private EmployeeMapper employeeMapper;
 
 
     @Override
@@ -47,6 +52,13 @@ public class DictLoader implements CommandLineRunner {
                         DictUtils.getDictValueMaps().put(dict.getSubDictKey(), dict.getSubDictValue());
                     }
                 }
+            });
+        }
+
+        List<Employee> employees = employeeMapper.findAllList();
+        if (employees != null && !employees.isEmpty()) {
+            employees.forEach(emp -> {
+                DictUtils.getEmpMaps().put(emp.getEmpCode(), emp.getEmpName());
             });
         }
     }

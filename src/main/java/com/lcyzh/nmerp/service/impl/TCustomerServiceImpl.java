@@ -122,7 +122,7 @@ public class TCustomerServiceImpl implements TCustomerService {
         customer.setCusSource(vo.getCusSource());
         customer.setCusCode(cusCode);
         customer.setCusAddress(vo.getCusAddress());
-        customer.setCusStatus(Constants.CUS_STATUS_NOR);
+        customer.setCusStatus(Constants.CUS_STATUS_NEW);
         customer.setCreateTime(current);
         return customer;
     }
@@ -190,7 +190,7 @@ public class TCustomerServiceImpl implements TCustomerService {
                         List<Customer> cusList = cusCodeList.stream().map(cusCode -> {
                             Customer customer = new Customer();
                             customer.setCusCode(cusCode);
-                            customer.setCusStatus(Constants.CUS_STATUS_IDEL);
+                            customer.setCusStatus(Constants.CUS_STATUS_UNFLLOW);
                             customer.setUpdateTime(current);
                             return customer;
                         }).collect(Collectors.toList());
@@ -212,7 +212,7 @@ public class TCustomerServiceImpl implements TCustomerService {
             List<Customer> cusList = cusCodeList.stream().map(cusCode -> {
                 Customer customer = new Customer();
                 customer.setCusCode(cusCode);
-                customer.setCusStatus(Constants.CUS_STATUS_RJCT);
+                customer.setCusStatus(Constants.CUS_STATUS_BH);
                 customer.setUpdateTime(new Date());
                 return customer;
             }).collect(Collectors.toList());
