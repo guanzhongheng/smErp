@@ -45,8 +45,38 @@ public class CustomerAddModifyVo {
     private String primaryContactorEmail;
     //首要联系人性别
     private Long primaryContactorSex;
+    //首要联系人备注
+    private String primaryContactorRemark;
     //员工编号
     private String empCode;
+    // 备注信息
+    private String remarks;
+    // 跟进内容
+    private String followDetail;
+
+    public String getPrimaryContactorRemark() {
+        return primaryContactorRemark;
+    }
+
+    public void setPrimaryContactorRemark(String primaryContactorRemark) {
+        this.primaryContactorRemark = primaryContactorRemark;
+    }
+
+    public String getFollowDetail() {
+        return followDetail;
+    }
+
+    public void setFollowDetail(String followDetail) {
+        this.followDetail = followDetail;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
 
     public String getCusCode() {
         return cusCode;

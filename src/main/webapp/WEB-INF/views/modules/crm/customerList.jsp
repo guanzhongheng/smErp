@@ -82,42 +82,49 @@
             <td><fmt:formatDate value="${cus.lastFollowDate}" pattern="yyyy-MM-dd"/></td>
             <td>${cus.unFollowDays}</td>
             <td>
-                <a href=""><i class="icon-comment">跟进</i></a>
-                <a href=""><i class="icon-pencil">编辑</i></a>
-                <a href="${ctx}/crm" onclick="return confirmx('确认要删除该客户吗？', this.href)"><i class="icon-trash">删除</i></a>
+                <a href=""><i class="icon-comment">&nbsp;跟进</i></a>
+                <a href="${ctx}/cus/customer_add"><i class="icon-pencil">&nbsp;编辑</i></a>
+                <a href="${ctx}/cus/customer_delete?cusCode=${cus.cusCode}" onclick="return confirmx('确认要删除该客户吗？', this.href)"><i class="icon-trash">&nbsp;删除</i></a>
             </td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
 <div class="pagination">${page}</div>
+
     <script>
         $("#toCustomer").click(function () {
             <!-- 针对选中客户进行操作 -->
-            top.$.jBox.open("iframe:${ctx}/crm/formSubmit?ids=1,2,3,4,", "转移客户", 500, $(top.document).height() - 300, {
-                buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
-                    debugger;
-                    var ids = h.find("iframe")[0].contentWindow.ids;
-                    var cusContent = h.find("iframe")[0].contentWindow.cusContent;
-                    var remarks = h.find("iframe")[0].contentWindow.remarks;
-                    if (v == "ok") {
-                        $.post('${ctx}/crmAjax/saveTransfer/', {
-                            cusIds: ids.value,
-                            userId: cusContent.value,
-                            remarks: remarks.value
-                        },function(data) {
-                            if(data = "success"){
-                                top.$.jBox.tip('保存成功');
-                            }else{
-                                top.$.jBox.tip('保存失败');
-                            }
-                        })
+            var checkValue = $(".td checkbox");
+            var str = '';
+
+            if(str.length > 0){
+                top.$.jBox.open("iframe:${ctx}/crm/formSubmit?ids=1,2,3,4,", "转移客户", 500, $(top.document).height() - 300, {
+                    buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
+                        debugger;
+                        var ids = h.find("iframe")[0].contentWindow.ids;
+                        var cusContent = h.find("iframe")[0].contentWindow.cusContent;
+                        var remarks = h.find("iframe")[0].contentWindow.remarks;
+                        if (v == "ok") {
+                            $.post('${ctx}/crmAjax/saveTransfer/', {
+                                cusIds: ids.value,
+                                userId: cusContent.value,
+                                remarks: remarks.value
+                            },function(data) {
+                                if(data = "success"){
+                                    top.$.jBox.tip('保存成功');
+                                }else{
+                                    top.$.jBox.tip('保存失败');
+                                }
+                            })
+                        }
+                    }, loaded: function (h) {
+                        debugger;
+                        $(".jbox-content", top.document).css("overflow-y", "hidden");
                     }
-                }, loaded: function (h) {
-                    debugger;
-                    $(".jbox-content", top.document).css("overflow-y", "hidden");
-                }
-            });
+                });
+            }
+
         });
 
         $("#toPoolCustomer").click(function () {
