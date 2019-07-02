@@ -1,7 +1,9 @@
 package com.lcyzh.nmerp.service;
 
 import com.lcyzh.nmerp.common.persistence.Page;
-import com.lcyzh.nmerp.entity.Customer;
+import com.lcyzh.nmerp.model.vo.CustomerAddModifyVo;
+import com.lcyzh.nmerp.model.vo.CustomerQueryVo;
+import com.lcyzh.nmerp.model.vo.CustomerUpdateVo;
 
 import java.util.List;
 
@@ -11,16 +13,14 @@ import java.util.List;
 */
 public interface TCustomerService {
 
-    List<Customer> findList(Customer tCustomer);
+    Page<CustomerQueryVo> findPage(Page<CustomerQueryVo> page, CustomerQueryVo customer);
 
-    Page<Customer> findPage(Page<Customer> page,Customer customer);
+    int insert(CustomerAddModifyVo tCustomer);
 
-    int insert(Customer tCustomer);
+    int update(CustomerAddModifyVo vo);
 
-    int insertBatch(List<Customer> tCustomers);
+    int updateBatch(CustomerUpdateVo vo);
 
-    int update(Customer tCustomer);
-
-    int delete(Customer tCustomer);
+    int delete(List<String> cusCodeList);
 
 }

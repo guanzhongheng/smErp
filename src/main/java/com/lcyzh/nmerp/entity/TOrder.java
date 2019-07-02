@@ -10,8 +10,12 @@ import java.util.Date;
  * Author ljk
  * Date  2019-06-06
  */
-public class TOrder extends DataEntity<TOrder> {
+public class TOrder{
     private String ordCode;
+    //客户资料编号
+    private String cusCode;
+    //代理商名称
+    private String proxyName;
     private String ordTitle;
     private Double ordTotalAmount;
     private Long ordType;
@@ -31,6 +35,22 @@ public class TOrder extends DataEntity<TOrder> {
 
     public void setOrdCode(String ordCode) {
         this.ordCode = ordCode;
+    }
+
+    public String getCusCode() {
+        return cusCode;
+    }
+
+    public void setCusCode(String cusCode) {
+        this.cusCode = cusCode;
+    }
+
+    public String getProxyName() {
+        return proxyName;
+    }
+
+    public void setProxyName(String proxyName) {
+        this.proxyName = proxyName;
     }
 
     public String getOrdTitle() {

@@ -3,14 +3,13 @@
 <mapper namespace="com.lcyzh.nmerp.dao.TReturnMaterDetailMapper">
 
     <resultMap id="tReturnMaterDetailResultMap" type="com.lcyzh.nmerp.entity.TReturnMaterDetail">
-        <id column="id" property="id" jdbcType="BIGINT"/> 
-        <result column="return_code" property="returnCode" jdbcType="VARCHAR"/> 
-        <result column="rawm_code" property="rawmCode" jdbcType="VARCHAR"/> 
-        <result column="return_num" property="returnNum" jdbcType="DOUBLE"/> 
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="return_code" property="returnCode" jdbcType="VARCHAR"/>
+        <result column="rawm_code" property="rawmCode" jdbcType="VARCHAR"/>
+        <result column="return_num" property="returnNum" jdbcType="DOUBLE"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
 
-        
-        
+
     </resultMap>
 
 
@@ -32,7 +31,7 @@
         FROM T_RETURN_MATER_DETAIL
     </select>
 
-    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TReturnMaterDetail">
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TReturnMaterDetail">
         INSERT INTO T_RETURN_MATER_DETAIL(
             id,
             return_code,
@@ -51,25 +50,25 @@
 
     <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TReturnMaterDetail">
         INSERT INTO T_RETURN_MATER_DETAIL(
-            id,
-            return_code,
-            rawm_code,
-            return_num,
-            create_time
+        id,
+        return_code,
+        rawm_code,
+        return_num,
+        create_time
         )
         VALUES
-        <foreach collection ="list" item="tReturnMaterDetail" separator =",">
-        (
+        <foreach collection="list" item="tReturnMaterDetail" separator=",">
+            (
             #{tReturnMaterDetail.id,jdbcType=BIGINT},
             #{tReturnMaterDetail.returnCode,jdbcType=VARCHAR},
             #{tReturnMaterDetail.rawmCode,jdbcType=VARCHAR},
             #{tReturnMaterDetail.returnNum,jdbcType=DOUBLE},
             #{tReturnMaterDetail.createTime,jdbcType=TIMESTAMP}
-        )
+            )
         </foreach>
     </insert>
 
-    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TReturnMaterDetail">
+    <update id="update" parameterType="com.lcyzh.nmerp.entity.TReturnMaterDetail">
         UPDATE T_RETURN_MATER_DETAIL
         SET
         id = #{id},
@@ -80,7 +79,7 @@
         WHERE id = #{id}
     </update>
 
-    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TReturnMaterDetail">
+    <delete id="delete" parameterType="com.lcyzh.nmerp.entity.TReturnMaterDetail">
         DELETE FROM T_RETURN_MATER_DETAIL
         WHERE id = #{id}
     </delete>

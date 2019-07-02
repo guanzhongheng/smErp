@@ -38,7 +38,7 @@
         </li>
         <li>
             &nbsp;&nbsp;
-            <input type="checkbox" name="type" id="type">归属模式
+            <input type="checkbox" name="followType" id="type">归属模式
         </li>
         &nbsp;&nbsp;
         <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
@@ -63,7 +63,8 @@
         <th>客户星级</th>
         <th>首联系人</th>
         <th>手机号码</th>
-        <th>客户维护人</th>
+        <%--<th>客户维护人</th>--%>
+        <th>最后跟进日期</th>
         <th>未跟进天数</th>
         <th>操作</th>
     </tr>
@@ -72,13 +73,14 @@
     <c:forEach items="${page.list}" var="cus">
         <tr>
             <td><input type="checkbox" name="cuscode" >${cus.cusCode}</td>
-            <td>${cus.cusCode}</td>
+            <td>${cus.cusName}</td>
             <td>${cus.cusStatus}</td>
             <td>${cus.cusGrade}</td>
-            <td>${cus.cusAddress}</td>
-            <td>${cus.cusAddress}</td>
-            <td>${cus.cusAddress}</td>
-            <td>${cus.cusAddress}</td>
+            <td>${cus.primaryContactorName}</td>
+            <td>${cus.primaryContactorPhone}</td>
+            <%--<td>${cus.cusAddress}</td>--%>
+            <td><fmt:formatDate value="${cus.lastFollowDate}" pattern="yyyy-MM-dd"/></td>
+            <td>${cus.unFollowDays}</td>
             <td>
                 <a href=""><i class="icon-comment">跟进</i></a>
                 <a href=""><i class="icon-pencil">编辑</i></a>

@@ -24,17 +24,57 @@
        where cus_name = #{cusName,jdbcType=VARCHAR}
     </select>
 
-    <select id="findList" resultMap="tCustomerResultMap">
-        SELECT *
-        FROM T_CUSTOMER
+    <select id="findList" resultType="com.lcyzh.nmerp.model.vo.CustomerQueryVo"
+            parameterType="com.lcyzh.nmerp.model.vo.CustomerQueryVo">
+        SELECT
+        cu.cus_name cusName,
+        cu.cus_code cusCode,
+        cu.cus_grade cusGrade,
+        cu.industry industry,
+        cu.cus_status cusStatus,
+        pc.contact_name primaryContactorName,
+        pc.contact_phone primaryContactorPhone,
+        cf.latest_follow_time lastFollowDate,
+        DATEDIFF( NOW( ), cf.latest_follow_time ) unFollowDays
+        FROM
+        T_CUSTOMER cu
+        LEFT JOIN T_PRIMARY_CONTACT pc ON cu.cus_code = pc.cus_code
+        LEFT JOIN T_CUS_FOLLOW cf ON cu.cus_code = cf.cus_code
+
         <where>
+            and cu.cus_status!=11004
+            <if test="cusName!= null">
+                and cus_name like concat('%', #{cusName,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="cusStatus!= null">
+                and cu.cus_status = #{cusStatus,jdbcType=BIGINT)
+            </if>
+            <if test="cusGrade!= null">
+                and cu.cus_grade = #{cusGrade,jdbcType=BIGINT)
+            </if>
+            <if test="cusType!= null">
+                and cu.cus_type = #{cusType,jdbcType=BIGINT)
+            </if>
+
+            <if test="cusSource!= null">
+                and cu.cus_source = #{cusSource,jdbcType=BIGINT)
+            </if>
+
+            <if test="lastFollowDate!= null">
+                and cf.latest_follow_time like concat('%', #{lastFollowDate,jdbcType=VARCHAR}, '%')
+            </if>
+
+            <if test="followType!= null and followType == 1">
+                and cf.cus_code is not null
+            </if>
+
+            <if test="followType!= null and followType == 0">
+                and cf.cus_code is null
+            </if>
+
         </where>
     </select>
 
-    <select id="findAllList" resultMap="tCustomerResultMap">
-        SELECT *
-        FROM T_CUSTOMER
-    </select>
 
     <insert id="insert" parameterType="com.lcyzh.nmerp.entity.Customer">
         INSERT INTO T_CUSTOMER(
@@ -80,7 +120,7 @@
         update_time
         )
         VALUES
-        <foreach collection ="list" item="item" separator =",">
+        <foreach collection="list" item="item" separator=",">
             (
             #{item.cusCode,jdbcType=VARCHAR},
             #{item.cusName,jdbcType=VARCHAR},
@@ -109,6 +149,9 @@
             <if test="cusType!=null">
                 cus_type = #{cusType,jdbcType=BIGINT},
             </if>
+            <if test="cusStatus!=null">
+                cus_status = #{cusStatus,jdbcType=BIGINT},
+            </if>
             <if test="industry!=null">
                 industry = #{industry,jdbcType=VARCHAR},
             </if>
@@ -126,9 +169,28 @@
         WHERE cus_code = #{cusCode,jdbcType=VARCHAR}
     </update>
 
-    <delete id="delete" parameterType="com.lcyzh.nmerp.entity.Customer">
-        DELETE FROM T_CUSTOMER
-        WHERE cus_code = #{cusCode,jdbcType=VARCHAR}
-    </delete>
+    <update id="updateBatch" parameterType="java.util.List">
+        update T_CUSTOMER
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="cus_status =case" suffix="end,">
+                <foreach collection="list" item="cus">
+                    <if test="cus.cusStatus!=null">
+                        when cus_code=#{cus.cusCode} then #{cus.cusStatus}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="update_time =case" suffix="end,">
+                <foreach collection="list" item="cus">
+                    <if test="cus.updateTime!=null">
+                        when cus_code=#{cus.cusCode} then #{cus.updateTime}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where cus_code in
+        <foreach collection="list" index="index" item="cus" separator="," open="(" close=")">
+            #{cus.cusCode,jdbcType=VARCHAR}
+        </foreach>
+    </update>
 
 </mapper>

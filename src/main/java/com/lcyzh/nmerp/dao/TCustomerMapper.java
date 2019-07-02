@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.dao;
 
 import com.lcyzh.nmerp.entity.Customer;
+import com.lcyzh.nmerp.model.vo.CustomerQueryVo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,13 +13,9 @@ import java.util.List;
 @Repository
 public interface TCustomerMapper {
 
-    Customer get(String id);
-
     Customer findByCusName(String cusName);
 
-    List<Customer> findList(Customer tCustomer);
-
-    List<Customer> findAllList();
+    List<CustomerQueryVo> findList(CustomerQueryVo tCustomer);
 
     int insert(Customer tCustomer);
 
@@ -26,6 +23,5 @@ public interface TCustomerMapper {
 
     int update(Customer tCustomer);
 
-    int delete(Customer tCustomer);
-
+    int updateBatch(List<Customer> cusList);
 }

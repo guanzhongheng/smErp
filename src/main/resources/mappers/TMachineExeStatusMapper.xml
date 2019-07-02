@@ -5,8 +5,8 @@
     <resultMap id="resultMap" type="com.lcyzh.nmerp.entity.TMachineExeStatus">
         <id column="mac_code" property="macCode" jdbcType="VARCHAR"/>
         <result column="status" property="prodCodes" jdbcType="CHAR"/>
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
-        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/> 
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
 
@@ -28,7 +28,7 @@
         FROM T_MACHINE_EXE_STATUS
     </select>
 
-    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TMachineExeStatus">
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TMachineExeStatus">
         INSERT INTO T_MACHINE_EXE_STATUS(
             id,
             mac_code,
@@ -47,24 +47,24 @@
 
     <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TMachineExeStatus">
         INSERT INTO T_MACHINE_EXE_STATUS(
-            id,
-            mac_code,
-            status,
-            create_time,
-            update_time
+        id,
+        mac_code,
+        status,
+        create_time,
+        update_time
         )
         VALUES
-        <foreach collection ="list" item="item" separator =",">
-        (
+        <foreach collection="list" item="item" separator=",">
+            (
             #{item.macCode,jdbcType=VARCHAR},
             #{item.status,jdbcType=CHAR},
             #{item.createTime,jdbcType=TIMESTAMP},
             #{item.updateTime,jdbcType=TIMESTAMP}
-        )
+            )
         </foreach>
     </insert>
 
-    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TMachineExeStatus">
+    <update id="update" parameterType="com.lcyzh.nmerp.entity.TMachineExeStatus">
         UPDATE T_MACHINE_EXE_STATUS
         SET
         mac_code = #{macCode,jdbcType=VARCHAR},
@@ -74,7 +74,7 @@
         WHERE mac_code = #{macCode,jdbcType=VARCHAR}
     </update>
 
-    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TMachineExeStatus">
+    <delete id="delete" parameterType="com.lcyzh.nmerp.entity.TMachineExeStatus">
         DELETE FROM T_MACHINE_EXE_STATUS
         WHERE imac_code = #{macCode,jdbcType=VARCHAR}
     </delete>

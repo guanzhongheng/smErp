@@ -3,16 +3,15 @@
 <mapper namespace="com.lcyzh.nmerp.dao.TRetrunMaterialInfoMapper">
 
     <resultMap id="tRetrunMaterialInfoResultMap" type="com.lcyzh.nmerp.entity.TRetrunMaterialInfo">
-        <id column="id" property="id" jdbcType="BIGINT"/> 
-        <result column="return_code" property="returnCode" jdbcType="VARCHAR"/> 
-        <result column="launch_user_id" property="launchUserId" jdbcType="BIGINT"/> 
-        <result column="status" property="status" jdbcType="CHAR"/> 
-        <result column="remark" property="remark" jdbcType="VARCHAR"/> 
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
-        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/> 
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="return_code" property="returnCode" jdbcType="VARCHAR"/>
+        <result column="launch_user_id" property="launchUserId" jdbcType="BIGINT"/>
+        <result column="status" property="status" jdbcType="CHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
 
-        
-        
+
     </resultMap>
 
 
@@ -34,7 +33,7 @@
         FROM T_RETRUN_MATERIAL_INFO
     </select>
 
-    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TRetrunMaterialInfo">
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TRetrunMaterialInfo">
         INSERT INTO T_RETRUN_MATERIAL_INFO(
             id,
             return_code,
@@ -57,17 +56,17 @@
 
     <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TRetrunMaterialInfo">
         INSERT INTO T_RETRUN_MATERIAL_INFO(
-            id,
-            return_code,
-            launch_user_id,
-            status,
-            remark,
-            create_time,
-            update_time
+        id,
+        return_code,
+        launch_user_id,
+        status,
+        remark,
+        create_time,
+        update_time
         )
         VALUES
-        <foreach collection ="list" item="tRetrunMaterialInfo" separator =",">
-        (
+        <foreach collection="list" item="tRetrunMaterialInfo" separator=",">
+            (
             #{tRetrunMaterialInfo.id,jdbcType=BIGINT},
             #{tRetrunMaterialInfo.returnCode,jdbcType=VARCHAR},
             #{tRetrunMaterialInfo.launchUserId,jdbcType=BIGINT},
@@ -75,11 +74,11 @@
             #{tRetrunMaterialInfo.remark,jdbcType=VARCHAR},
             #{tRetrunMaterialInfo.createTime,jdbcType=TIMESTAMP},
             #{tRetrunMaterialInfo.updateTime,jdbcType=TIMESTAMP}
-        )
+            )
         </foreach>
     </insert>
 
-    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TRetrunMaterialInfo">
+    <update id="update" parameterType="com.lcyzh.nmerp.entity.TRetrunMaterialInfo">
         UPDATE T_RETRUN_MATERIAL_INFO
         SET
         id = #{id},
@@ -92,7 +91,7 @@
         WHERE id = #{id}
     </update>
 
-    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TRetrunMaterialInfo">
+    <delete id="delete" parameterType="com.lcyzh.nmerp.entity.TRetrunMaterialInfo">
         DELETE FROM T_RETRUN_MATERIAL_INFO
         WHERE id = #{id}
     </delete>

@@ -3,16 +3,15 @@
 <mapper namespace="com.lcyzh.nmerp.dao.TStockMapper">
 
     <resultMap id="tStockResultMap" type="com.lcyzh.nmerp.entity.TStock">
-        <id column="id" property="id" jdbcType="BIGINT"/> 
-        <result column="prod_code" property="prodCode" jdbcType="VARCHAR"/> 
-        <result column="stock_num" property="stockNum" jdbcType="DOUBLE"/> 
-        <result column="aval_stock_num" property="avalStockNum" jdbcType="DOUBLE"/> 
-        <result column="stock_unit" property="stockUnit" jdbcType="VARCHAR"/> 
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
-        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/> 
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="prod_code" property="prodCode" jdbcType="VARCHAR"/>
+        <result column="stock_num" property="stockNum" jdbcType="DOUBLE"/>
+        <result column="aval_stock_num" property="avalStockNum" jdbcType="DOUBLE"/>
+        <result column="stock_unit" property="stockUnit" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
 
-        
-        
+
     </resultMap>
 
 
@@ -34,7 +33,7 @@
         FROM T_STOCK
     </select>
 
-    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TStock">
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TStock">
         INSERT INTO T_STOCK(
             id,
             prod_code,
@@ -57,17 +56,17 @@
 
     <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TStock">
         INSERT INTO T_STOCK(
-            id,
-            prod_code,
-            stock_num,
-            aval_stock_num,
-            stock_unit,
-            create_time,
-            update_time
+        id,
+        prod_code,
+        stock_num,
+        aval_stock_num,
+        stock_unit,
+        create_time,
+        update_time
         )
         VALUES
-        <foreach collection ="list" item="tStock" separator =",">
-        (
+        <foreach collection="list" item="tStock" separator=",">
+            (
             #{tStock.id,jdbcType=BIGINT},
             #{tStock.prodCode,jdbcType=VARCHAR},
             #{tStock.stockNum,jdbcType=DOUBLE},
@@ -75,11 +74,11 @@
             #{tStock.stockUnit,jdbcType=VARCHAR},
             #{tStock.createTime,jdbcType=TIMESTAMP},
             #{tStock.updateTime,jdbcType=TIMESTAMP}
-        )
+            )
         </foreach>
     </insert>
 
-    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TStock">
+    <update id="update" parameterType="com.lcyzh.nmerp.entity.TStock">
         UPDATE T_STOCK
         SET
         id = #{id},
@@ -92,7 +91,7 @@
         WHERE id = #{id}
     </update>
 
-    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TStock">
+    <delete id="delete" parameterType="com.lcyzh.nmerp.entity.TStock">
         DELETE FROM T_STOCK
         WHERE id = #{id}
     </delete>

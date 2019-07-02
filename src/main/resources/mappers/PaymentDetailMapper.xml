@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lcyzh.nmerp.dao.PaymentDetailMapper">
+
+    <resultMap id="paymentDetailResultMap" type="com.lcyzh.nmerp.entity.PaymentDetail">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="ord_code" property="ordCode" jdbcType="VARCHAR"/>
+        <result column="repay_amount" property="repayAmount" jdbcType="DOUBLE"/>
+        <result column="is_invoiced" property="isInvoiced" jdbcType="CHAR"/>
+        <result column="pay_type" property="payType" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+
+    <select id="findById" resultMap="paymentDetailResultMap">
+        SELECT *
+        FROM T_PAYMENT_DETAIL
+        WHERE id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="findList" resultMap="paymentDetailResultMap">
+        SELECT *
+        FROM T_PAYMENT_DETAIL
+        <where>
+
+            <if test="ordCode!= null">
+                and ord_code like concat('%', #{ordCode,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="isInvoiced!= null">
+                and is_invoiced = #{isInvoiced,jdbcType=CHAR}
+            </if>
+            <if test="payType!= null">
+                and pay_type = #{payType,jdbcType=BIGINT}
+            </if>
+
+        </where>
+    </select>
+
+    <select id="findAllList" resultMap="paymentDetailResultMap">
+        SELECT *
+        FROM T_PAYMENT_DETAIL
+    </select>
+
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.PaymentDetail">
+        INSERT INTO T_PAYMENT_DETAIL(
+            id,
+            ord_code,
+            repay_amount,
+            is_invoiced,
+            pay_type,
+            create_time
+        )
+        VALUES (
+            #{id,jdbcType=BIGINT},
+            #{ordCode,jdbcType=VARCHAR},
+            #{repayAmount,jdbcType=DOUBLE},
+            #{isInvoiced,jdbcType=CHAR},
+            #{payType,jdbcType=BIGINT},
+            #{createTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.PaymentDetail">
+        INSERT INTO T_PAYMENT_DETAIL(
+        id,
+        ord_code,
+        repay_amount,
+        is_invoiced,
+        pay_type,
+        create_time
+        )
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.id,jdbcType=BIGINT},
+            #{item.ordCode,jdbcType=VARCHAR},
+            #{item.repayAmount,jdbcType=DOUBLE},
+            #{item.isInvoiced,jdbcType=CHAR},
+            #{item.payType,jdbcType=BIGINT},
+            #{item.createTime,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+
+    <delete id="delete" parameterType="com.lcyzh.nmerp.entity.PaymentDetail">
+        DELETE FROM T_PAYMENT_DETAIL
+        WHERE id = #{id,jdbcType=BIGINT}
+    </delete>
+
+</mapper>

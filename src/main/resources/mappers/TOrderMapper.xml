@@ -4,6 +4,7 @@
 
     <resultMap id="tOrderResultMap" type="com.lcyzh.nmerp.entity.TOrder">
         <id column="ord_code" property="ordCode" jdbcType="VARCHAR"/>
+        <result column="cus_code" property="cusCode" jdbcType="VARCHAR"/>
         <result column="ord_title" property="ordTitle" jdbcType="VARCHAR"/>
         <result column="ord_total_amount" property="ordTotalAmount" jdbcType="DOUBLE"/>
         <result column="ord_type" property="ordType" jdbcType="BIGINT"/>
@@ -19,10 +20,55 @@
     </resultMap>
 
 
-    <select id="findList" resultMap="tOrderResultMap">
-        SELECT *
-        FROM T_ORDER
+    <select id="findList" parameterType="com.lcyzh.nmerp.model.vo.OrderQueryVo" resultType="com.lcyzh.nmerp.model.vo.OrderQueryVo">
+        SELECT
+        od.ord_code,
+        od.ord_title,
+        cs.cus_name,
+        od.ord_status,
+        od.ord_total_amount,
+        od.ord_sign_date,
+        od.ord_delivery_date,
+        od.pay_type,
+        od.ord_type,
+        pt.repay_amount,
+        pt.invoiced_amount,
+        pt.overdue_num
+        FROM
+        T_ORDER od
+        LEFT JOIN T_CUSTOMER cs ON od.cus_code = cs.cus_code
+        LEFT JOIN T_PAYMENT pt ON od.ord_code = pt.ord_code
         <where>
+            <if test="ordTitle!= null">
+                and ord_title like concat('%', #{ordTitle,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="ordType!= null">
+                and ord_type = #{ordType,jdbcType=BIGINT}
+            </if>
+            <if test="ordSignDate!= null">
+                and ord_sign_date like concat('%', #{ordSignDate,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="ordStatus!= null">
+                and ord_status = #{ordStatus,jdbcType=BIGINT}
+            </if>
+            <if test="ordDeliveryDate!= null">
+                and ord_delivery_date like concat('%', #{ordDeliveryDate,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="payType!= null">
+                and pay_type = #{payType,jdbcType=BIGINT}
+            </if>
+
+            <if test="cusName!= null">
+                and cus_name = like concat('%', #{cusName,jdbcType=VARCHAR}, '%')
+            </if>
+
+            <if test="followType!= null and followType == 1">
+                and cf.cus_code is not null
+            </if>
+
+            <if test="followType!= null and followType == 0">
+                and cf.cus_code is null
+            </if>
         </where>
     </select>
 
@@ -34,7 +80,9 @@
     <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TOrder">
            INSERT INTO T_ORDER(
             ord_code,
+            cus_code,
             ord_title,
+            proxy_name,
             ord_total_amount,
             ord_type,
             ord_sign_date,
@@ -49,7 +97,9 @@
         )
         VALUES (
             #{ordCode,jdbcType=VARCHAR},
+            #{cusCode,jdbcType=VARCHAR},
             #{ordTitle,jdbcType=VARCHAR},
+            #{proxyName,jdbcType=VARCHAR},
             #{ordTotalAmount,jdbcType=DOUBLE},
             #{ordType,jdbcType=BIGINT},
             #{ordSignDate,jdbcType=VARCHAR},
@@ -67,7 +117,9 @@
     <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TOrder">
         INSERT INTO T_ORDER(
         ord_code,
+        cus_code,
         ord_title,
+        proxy_name,
         ord_total_amount,
         ord_type,
         ord_sign_date,
@@ -84,7 +136,9 @@
         <foreach collection="list" item="item" separator=",">
             (
             #{item.ordCode,jdbcType=VARCHAR},
+            #{item.cusCode,jdbcType=VARCHAR},
             #{item.ordTitle,jdbcType=VARCHAR},
+            #{item.proxyName,jdbcType=VARCHAR},
             #{item.ordTotalAmount,jdbcType=DOUBLE},
             #{item.ordType,jdbcType=BIGINT},
             #{item.ordSignDate,jdbcType=VARCHAR},
@@ -105,6 +159,9 @@
         <set>
             <if test="ordTitle!=null">
                 ord_title = #{ordTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="proxyName!=null">
+                proxy_name = #{proxyName,jdbcType=VARCHAR},
             </if>
             <if test="ordSignDate!=null">
                 ord_sign_date = #{ordSignDate,jdbcType=VARCHAR},
@@ -137,7 +194,7 @@
 
     <delete id="delete" parameterType="com.lcyzh.nmerp.entity.TOrder">
         DELETE FROM T_ORDER
-        WHERE id = #{id}
+        WHERE ord_code = #{ordCode,jdbcType=VARCHAR}
     </delete>
 
 </mapper>

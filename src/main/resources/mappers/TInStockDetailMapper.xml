@@ -3,19 +3,18 @@
 <mapper namespace="com.lcyzh.nmerp.dao.TInStockDetailMapper">
 
     <resultMap id="tInStockDetailResultMap" type="com.lcyzh.nmerp.entity.TInStockDetail">
-        <id column="id" property="id" jdbcType="BIGINT"/> 
-        <result column="in_code" property="inCode" jdbcType="VARCHAR"/> 
-        <result column="item_code" property="itemCode" jdbcType="VARCHAR"/> 
-        <result column="item_spec" property="itemSpec" jdbcType="VARCHAR"/> 
-        <result column="in_num" property="inNum" jdbcType="DOUBLE"/> 
-        <result column="item_type" property="itemType" jdbcType="CHAR"/> 
-        <result column="unit" property="unit" jdbcType="VARCHAR"/> 
-        <result column="quality_status" property="qualityStatus" jdbcType="CHAR"/> 
-        <result column="quality_us_code" property="qualityUsCode" jdbcType="VARCHAR"/> 
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="in_code" property="inCode" jdbcType="VARCHAR"/>
+        <result column="item_code" property="itemCode" jdbcType="VARCHAR"/>
+        <result column="item_spec" property="itemSpec" jdbcType="VARCHAR"/>
+        <result column="in_num" property="inNum" jdbcType="DOUBLE"/>
+        <result column="item_type" property="itemType" jdbcType="CHAR"/>
+        <result column="unit" property="unit" jdbcType="VARCHAR"/>
+        <result column="quality_status" property="qualityStatus" jdbcType="CHAR"/>
+        <result column="quality_us_code" property="qualityUsCode" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
 
-        
-        
+
     </resultMap>
 
 
@@ -37,7 +36,7 @@
         FROM T_IN_STOCK_DETAIL
     </select>
 
-    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TInStockDetail">
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TInStockDetail">
         INSERT INTO T_IN_STOCK_DETAIL(
             id,
             in_code,
@@ -66,20 +65,20 @@
 
     <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TInStockDetail">
         INSERT INTO T_IN_STOCK_DETAIL(
-            id,
-            in_code,
-            item_code,
-            item_spec,
-            in_num,
-            item_type,
-            unit,
-            quality_status,
-            quality_us_code,
-            create_time
+        id,
+        in_code,
+        item_code,
+        item_spec,
+        in_num,
+        item_type,
+        unit,
+        quality_status,
+        quality_us_code,
+        create_time
         )
         VALUES
-        <foreach collection ="list" item="tInStockDetail" separator =",">
-        (
+        <foreach collection="list" item="tInStockDetail" separator=",">
+            (
             #{tInStockDetail.id,jdbcType=BIGINT},
             #{tInStockDetail.inCode,jdbcType=VARCHAR},
             #{tInStockDetail.itemCode,jdbcType=VARCHAR},
@@ -90,11 +89,11 @@
             #{tInStockDetail.qualityStatus,jdbcType=CHAR},
             #{tInStockDetail.qualityUsCode,jdbcType=VARCHAR},
             #{tInStockDetail.createTime,jdbcType=TIMESTAMP}
-        )
+            )
         </foreach>
     </insert>
 
-    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TInStockDetail">
+    <update id="update" parameterType="com.lcyzh.nmerp.entity.TInStockDetail">
         UPDATE T_IN_STOCK_DETAIL
         SET
         id = #{id},
@@ -110,7 +109,7 @@
         WHERE id = #{id}
     </update>
 
-    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TInStockDetail">
+    <delete id="delete" parameterType="com.lcyzh.nmerp.entity.TInStockDetail">
         DELETE FROM T_IN_STOCK_DETAIL
         WHERE id = #{id}
     </delete>

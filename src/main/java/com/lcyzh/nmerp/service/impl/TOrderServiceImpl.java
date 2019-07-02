@@ -6,6 +6,7 @@ import com.lcyzh.nmerp.dao.*;
 import com.lcyzh.nmerp.entity.*;
 import com.lcyzh.nmerp.model.vo.OrderItemAssignVo;
 import com.lcyzh.nmerp.model.vo.OrderItemVo;
+import com.lcyzh.nmerp.model.vo.OrderQueryVo;
 import com.lcyzh.nmerp.model.vo.OrderVo;
 import com.lcyzh.nmerp.service.TOrderService;
 import com.lcyzh.nmerp.utils.StringUtils;
@@ -33,12 +34,8 @@ public class TOrderServiceImpl implements TOrderService {
     private TCustomerMapper tCustomerMapper;
     @Autowired
     private TProdplanExeMapper tProdplanExeMapper;
-
-
-    @Override
-    public List<TOrder> findList(TOrder tOrder) {
-        return tOrderMapper.findList(tOrder);
-    }
+    @Autowired
+    private PrimaryContactMapper primaryContactMapper;
 
     @Override
     public List<TOrderItem> findByOrdCode(String ordCode) {
@@ -74,9 +71,9 @@ public class TOrderServiceImpl implements TOrderService {
     }
 
     @Override
-    public Page<TOrder> findPage(Page<TOrder> page, TOrder order) {
+    public Page<OrderQueryVo> findPage(Page<OrderQueryVo> page, OrderQueryVo order) {
         order.setPage(page);
-        List<TOrder> list = tOrderMapper.findList(order);
+        List<OrderQueryVo> list = tOrderMapper.findList(order);
         page.setList(list);
         return page;
     }
@@ -88,15 +85,22 @@ public class TOrderServiceImpl implements TOrderService {
         Date date = new Date();
         Customer cus = tCustomerMapper.findByCusName(vo.getCusName());
         if (cus == null) {
-            Customer tCustomer = new Customer();
-            tCustomer.setCusName(vo.getCusName());
-            tCustomer.setCreateTime(date);
-            tCustomer.setCusAddress(vo.getOrdAddress());
-            String cusCode = StringUtils.genFixPreFixStr(Constants.CUS_PRE_FIX);
-            tCustomer.setCusCode(cusCode);
+            cus = new Customer();
+            cus.setCusName(vo.getCusName());
+            cus.setCreateTime(date);
+            cus.setCusAddress(vo.getOrdAddress());
+            cus.setCusCode(StringUtils.genFixPreFixStr(Constants.CUS_PRE_FIX));
+            PrimaryContact contact = new PrimaryContact();
+            contact.setCusCode(cus.getCusCode());
+            contact.setContactName(vo.getCusName());
+            contact.setContactPhone(vo.getPhone());
+            contact.setUpdateTime(date);
+            primaryContactMapper.insert(contact);
         }
         TOrder tOrder = new TOrder();
+        tOrder.setCusCode(cus.getCusCode());
         tOrder.setOrdDeliveryDate(vo.getDeliveryDate());
+        tOrder.setProxyName(vo.getProxyName());
         tOrder.setOrdCode(StringUtils.genFixPreFixStr(Constants.ORD_PRE_FIX));
         //根据客户资料类型设置订单状态
         if (cus.getCusStatus().equals(Constants.CUS_STATUS_SPEC)) {

@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.dao;
 
 import com.lcyzh.nmerp.entity.TOrder;
+import com.lcyzh.nmerp.model.vo.OrderQueryVo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
 @Repository
 public interface TOrderMapper {
 
-    List<TOrder> findList(TOrder tOrder);
+    List<OrderQueryVo> findList(OrderQueryVo tOrder);
 
     List<TOrder> findAllList();
 

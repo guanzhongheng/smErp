@@ -3,16 +3,15 @@
 <mapper namespace="com.lcyzh.nmerp.dao.TSendGoodsInfoMapper">
 
     <resultMap id="tSendGoodsInfoResultMap" type="com.lcyzh.nmerp.entity.TSendGoodsInfo">
-        <id column="id" property="id" jdbcType="BIGINT"/> 
-        <result column="sgi_code" property="sgiCode" jdbcType="VARCHAR"/> 
-        <result column="driver_name" property="driverName" jdbcType="VARCHAR"/> 
-        <result column="driver_phone" property="driverPhone" jdbcType="VARCHAR"/> 
-        <result column="driver_car_no" property="driverCarNo" jdbcType="VARCHAR"/> 
-        <result column="ord_code" property="ordCode" jdbcType="VARCHAR"/> 
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="sgi_code" property="sgiCode" jdbcType="VARCHAR"/>
+        <result column="driver_name" property="driverName" jdbcType="VARCHAR"/>
+        <result column="driver_phone" property="driverPhone" jdbcType="VARCHAR"/>
+        <result column="driver_car_no" property="driverCarNo" jdbcType="VARCHAR"/>
+        <result column="ord_code" property="ordCode" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
 
-        
-        
+
     </resultMap>
 
 
@@ -34,7 +33,7 @@
         FROM T_SEND_GOODS_INFO
     </select>
 
-    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TSendGoodsInfo">
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TSendGoodsInfo">
         INSERT INTO T_SEND_GOODS_INFO(
             id,
             sgi_code,
@@ -57,17 +56,17 @@
 
     <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TSendGoodsInfo">
         INSERT INTO T_SEND_GOODS_INFO(
-            id,
-            sgi_code,
-            driver_name,
-            driver_phone,
-            driver_car_no,
-            ord_code,
-            create_time
+        id,
+        sgi_code,
+        driver_name,
+        driver_phone,
+        driver_car_no,
+        ord_code,
+        create_time
         )
         VALUES
-        <foreach collection ="list" item="tSendGoodsInfo" separator =",">
-        (
+        <foreach collection="list" item="tSendGoodsInfo" separator=",">
+            (
             #{tSendGoodsInfo.id,jdbcType=BIGINT},
             #{tSendGoodsInfo.sgiCode,jdbcType=VARCHAR},
             #{tSendGoodsInfo.driverName,jdbcType=VARCHAR},
@@ -75,11 +74,11 @@
             #{tSendGoodsInfo.driverCarNo,jdbcType=VARCHAR},
             #{tSendGoodsInfo.ordCode,jdbcType=VARCHAR},
             #{tSendGoodsInfo.createTime,jdbcType=TIMESTAMP}
-        )
+            )
         </foreach>
     </insert>
 
-    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TSendGoodsInfo">
+    <update id="update" parameterType="com.lcyzh.nmerp.entity.TSendGoodsInfo">
         UPDATE T_SEND_GOODS_INFO
         SET
         id = #{id},
@@ -92,7 +91,7 @@
         WHERE id = #{id}
     </update>
 
-    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TSendGoodsInfo">
+    <delete id="delete" parameterType="com.lcyzh.nmerp.entity.TSendGoodsInfo">
         DELETE FROM T_SEND_GOODS_INFO
         WHERE id = #{id}
     </delete>

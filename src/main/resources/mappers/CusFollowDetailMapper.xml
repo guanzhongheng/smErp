@@ -3,16 +3,15 @@
 <mapper namespace="com.lcyzh.nmerp.dao.CusFollowDetailMapper">
 
     <resultMap id="cusFollowDetailResultMap" type="com.lcyzh.nmerp.entity.CusFollowDetail">
-        <id column="id" property="id" jdbcType="BIGINT"/> 
-        <result column="follow_id" property="followId" jdbcType="VARCHAR"/> 
-        <result column="emp_code" property="empCode" jdbcType="VARCHAR"/> 
-        <result column="follow_time" property="followTime" jdbcType="TIMESTAMP"/> 
-        <result column="follow_detail" property="followDetail" jdbcType="VARCHAR"/> 
-        <result column="remark" property="remark" jdbcType="VARCHAR"/> 
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="follow_id" property="followId" jdbcType="VARCHAR"/>
+        <result column="emp_code" property="empCode" jdbcType="VARCHAR"/>
+        <result column="follow_time" property="followTime" jdbcType="TIMESTAMP"/>
+        <result column="follow_detail" property="followDetail" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
 
-        
-        
+
     </resultMap>
 
 
@@ -34,7 +33,7 @@
         FROM T_CUS_FOLLOW_DETAIL
     </select>
 
-    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.CusFollowDetail">
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.CusFollowDetail">
         INSERT INTO T_CUS_FOLLOW_DETAIL(
             id,
             follow_id,
@@ -57,17 +56,17 @@
 
     <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.CusFollowDetail">
         INSERT INTO T_CUS_FOLLOW_DETAIL(
-            id,
-            follow_id,
-            emp_code,
-            follow_time,
-            follow_detail,
-            remark,
-            create_time
+        id,
+        follow_id,
+        emp_code,
+        follow_time,
+        follow_detail,
+        remark,
+        create_time
         )
         VALUES
-        <foreach collection ="list" item="item" separator =",">
-        (
+        <foreach collection="list" item="item" separator=",">
+            (
             #{item.id,jdbcType=BIGINT},
             #{item.followId,jdbcType=VARCHAR},
             #{item.empCode,jdbcType=VARCHAR},
@@ -75,11 +74,11 @@
             #{item.followDetail,jdbcType=VARCHAR},
             #{item.remark,jdbcType=VARCHAR},
             #{item.createTime,jdbcType=TIMESTAMP}
-        )
+            )
         </foreach>
     </insert>
 
-    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.CusFollowDetail">
+    <update id="update" parameterType="com.lcyzh.nmerp.entity.CusFollowDetail">
         UPDATE T_CUS_FOLLOW_DETAIL
         SET
         id = #{id},
@@ -92,7 +91,7 @@
         WHERE id = #{id}
     </update>
 
-    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.CusFollowDetail">
+    <delete id="delete" parameterType="com.lcyzh.nmerp.entity.CusFollowDetail">
         DELETE FROM T_CUS_FOLLOW_DETAIL
         WHERE id = #{id}
     </delete>

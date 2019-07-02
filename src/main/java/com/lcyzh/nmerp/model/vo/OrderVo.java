@@ -14,31 +14,18 @@ import java.util.List;
  * lijinku          2019/06/19    create
  */
 public class OrderVo {
-    private String ordCode;
-    private String contCode;
+    //订单收货地址
     private String ordAddress;
+    //客户名称
     private String cusName;
-    private Character ordStatus;
+    //代理商名称
+    private String proxyName;
+    //订单交付日期
     private String deliveryDate;
+    //客户联系电话
     private String phone;
     private String remark;
     private List<OrderItemVo> itemVos = new ArrayList<>();
-
-    public String getOrdCode() {
-        return ordCode;
-    }
-
-    public void setOrdCode(String ordCode) {
-        this.ordCode = ordCode;
-    }
-
-    public String getContCode() {
-        return contCode;
-    }
-
-    public void setContCode(String contCode) {
-        this.contCode = contCode;
-    }
 
     public String getOrdAddress() {
         return ordAddress;
@@ -56,12 +43,12 @@ public class OrderVo {
         this.cusName = cusName;
     }
 
-    public Character getOrdStatus() {
-        return ordStatus;
+    public String getProxyName() {
+        return proxyName;
     }
 
-    public void setOrdStatus(Character ordStatus) {
-        this.ordStatus = ordStatus;
+    public void setProxyName(String proxyName) {
+        this.proxyName = proxyName;
     }
 
     public String getDeliveryDate() {

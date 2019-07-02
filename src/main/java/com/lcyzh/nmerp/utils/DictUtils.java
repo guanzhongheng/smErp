@@ -1,6 +1,5 @@
 package com.lcyzh.nmerp.utils;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +55,7 @@ public class DictUtils {
      * @Iteration : 1.0
      * @Date: 2019/6/28 11:50 AM
      */
-    public static String getValueByDictKey(String dictKey) {
+    public static String getValueByDictKey(Long dictKey) {
         if (dictKey != null) {
             return dictValueMaps.get(dictKey);
         }

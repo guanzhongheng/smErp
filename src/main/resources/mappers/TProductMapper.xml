@@ -3,16 +3,15 @@
 <mapper namespace="com.lcyzh.nmerp.dao.TProductMapper">
 
     <resultMap id="tProductResultMap" type="com.lcyzh.nmerp.entity.TProduct">
-        <id column="id" property="id" jdbcType="BIGINT"/> 
-        <result column="prod_code" property="prodCode" jdbcType="VARCHAR"/> 
-        <result column="prod_name" property="prodName" jdbcType="VARCHAR"/> 
-        <result column="prod_cgy_code" property="prodCgyCode" jdbcType="VARCHAR"/> 
-        <result column="prod_spec" property="prodSpec" jdbcType="VARCHAR"/> 
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
-        <result column="prod_type" property="prodType" jdbcType="CHAR"/> 
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="prod_code" property="prodCode" jdbcType="VARCHAR"/>
+        <result column="prod_name" property="prodName" jdbcType="VARCHAR"/>
+        <result column="prod_cgy_code" property="prodCgyCode" jdbcType="VARCHAR"/>
+        <result column="prod_spec" property="prodSpec" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="prod_type" property="prodType" jdbcType="CHAR"/>
 
-        
-        
+
     </resultMap>
 
 
@@ -34,7 +33,7 @@
         FROM T_PRODUCT
     </select>
 
-    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TProduct">
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TProduct">
         INSERT INTO T_PRODUCT(
             id,
             prod_code,
@@ -57,17 +56,17 @@
 
     <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TProduct">
         INSERT INTO T_PRODUCT(
-            id,
-            prod_code,
-            prod_name,
-            prod_cgy_code,
-            prod_spec,
-            create_time,
-            prod_type
+        id,
+        prod_code,
+        prod_name,
+        prod_cgy_code,
+        prod_spec,
+        create_time,
+        prod_type
         )
         VALUES
-        <foreach collection ="list" item="tProduct" separator =",">
-        (
+        <foreach collection="list" item="tProduct" separator=",">
+            (
             #{tProduct.id,jdbcType=BIGINT},
             #{tProduct.prodCode,jdbcType=VARCHAR},
             #{tProduct.prodName,jdbcType=VARCHAR},
@@ -75,11 +74,11 @@
             #{tProduct.prodSpec,jdbcType=VARCHAR},
             #{tProduct.createTime,jdbcType=TIMESTAMP},
             #{tProduct.prodType,jdbcType=CHAR}
-        )
+            )
         </foreach>
     </insert>
 
-    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TProduct">
+    <update id="update" parameterType="com.lcyzh.nmerp.entity.TProduct">
         UPDATE T_PRODUCT
         SET
         id = #{id},
@@ -92,7 +91,7 @@
         WHERE id = #{id}
     </update>
 
-    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TProduct">
+    <delete id="delete" parameterType="com.lcyzh.nmerp.entity.TProduct">
         DELETE FROM T_PRODUCT
         WHERE id = #{id}
     </delete>

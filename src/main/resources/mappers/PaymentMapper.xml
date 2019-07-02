@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lcyzh.nmerp.dao.PaymentMapper">
+
+    <resultMap id="paymentResultMap" type="com.lcyzh.nmerp.entity.Payment">
+        <id column="ord_code" property="ordCode" jdbcType="VARCHAR"/>
+        <result column="payment_period" property="paymentPeriod" jdbcType="BIGINT"/>
+        <result column="finished_period" property="finishedPeriod" jdbcType="INTEGER"/>
+        <result column="overdue_num" property="overdueNum" jdbcType="INTEGER"/>
+        <result column="repay_amount" property="repayAmount" jdbcType="DOUBLE"/>
+        <result column="un_repay_amount" property="unRepayAmount" jdbcType="DOUBLE"/>
+        <result column="invoiced_amount" property="invoicedAmount" jdbcType="DOUBLE"/>
+        <result column="un_invoiced_amount" property="unInvoicedAmount" jdbcType="DOUBLE"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+
+    <select id="findById" resultMap="paymentResultMap">
+        SELECT *
+        FROM T_PAYMENT
+        WHERE ord_code = #{ordCode,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findList" resultMap="paymentResultMap">
+        SELECT *
+        FROM T_PAYMENT
+        <where>
+
+            <if test="paymentPeriod!= null">
+                and payment_period = #{paymentPeriod,jdbcType=BIGINT}
+            </if>
+
+            <if test="overdueNum!= null">
+                and overdue_num = #{overdueNum,jdbcType=INTEGER}
+            </if>
+
+        </where>
+    </select>
+
+    <select id="findAllList" resultMap="paymentResultMap">
+        SELECT *
+        FROM T_PAYMENT
+    </select>
+
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.Payment">
+        INSERT INTO T_PAYMENT(
+            ord_code,
+            payment_period,
+            finished_period,
+            overdue_num,
+            repay_amount,
+            un_repay_amount,
+            invoiced_amount,
+            un_invoiced_amount,
+            create_time,
+            update_time
+        )
+        VALUES (
+            #{ordCode,jdbcType=VARCHAR},
+            #{paymentPeriod,jdbcType=BIGINT},
+            #{finishedPeriod,jdbcType=INTEGER},
+            #{overdueNum,jdbcType=INTEGER},
+            #{repayAmount,jdbcType=DOUBLE},
+            #{unRepayAmount,jdbcType=DOUBLE},
+            #{invoicedAmount,jdbcType=DOUBLE},
+            #{unInvoicedAmount,jdbcType=DOUBLE},
+            #{createTime,jdbcType=TIMESTAMP},
+            #{updateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.Payment">
+        INSERT INTO T_PAYMENT(
+        ord_code,
+        payment_period,
+        finished_period,
+        overdue_num,
+        repay_amount,
+        un_repay_amount,
+        invoiced_amount,
+        un_invoiced_amount,
+        create_time,
+        update_time
+        )
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+            #{item.ordCode,jdbcType=VARCHAR},
+            #{item.paymentPeriod,jdbcType=BIGINT},
+            #{item.finishedPeriod,jdbcType=INTEGER},
+            #{item.overdueNum,jdbcType=INTEGER},
+            #{item.repayAmount,jdbcType=DOUBLE},
+            #{item.unRepayAmount,jdbcType=DOUBLE},
+            #{item.invoicedAmount,jdbcType=DOUBLE},
+            #{item.unInvoicedAmount,jdbcType=DOUBLE},
+            #{item.createTime,jdbcType=TIMESTAMP},
+            #{item.updateTime,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+
+    <update id="update" parameterType="com.lcyzh.nmerp.entity.Payment">
+        UPDATE T_PAYMENT
+        <set>
+
+            <if test="paymentPeriod!= null">
+                payment_period = #{paymentPeriod,jdbcType=BIGINT},
+            </if>
+            <if test="finishedPeriod!= null">
+                finished_period = #{finishedPeriod,jdbcType=INTEGER},
+            </if>
+            <if test="overdueNum!= null">
+                overdue_num = #{overdueNum,jdbcType=INTEGER},
+            </if>
+            <if test="repayAmount!= null">
+                repay_amount = #{repayAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="unRepayAmount!= null">
+                un_repay_amount = #{unRepayAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="invoicedAmount!= null">
+                invoiced_amount = #{invoicedAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="unInvoicedAmount!= null">
+                un_invoiced_amount = #{unInvoicedAmount,jdbcType=DOUBLE},
+            </if>
+            <if test="updateTime!= null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        WHERE ord_code = #{ordCode,jdbcType=VARCHAR}
+    </update>
+
+    <delete id="delete" parameterType="com.lcyzh.nmerp.entity.Payment">
+        DELETE FROM T_PAYMENT
+        WHERE ord_code = #{ordCode,jdbcType=VARCHAR}
+    </delete>
+
+</mapper>

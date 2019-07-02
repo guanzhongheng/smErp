@@ -78,6 +78,7 @@ public class TOutStockServiceImpl implements TOutStockService {
         return res;
     }
 
+
     @Override
     public String createAndReturnOutCode(Long applyUserId, String remark) {
         TOutStock tOutStock = new TOutStock();

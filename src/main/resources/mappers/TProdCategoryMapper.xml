@@ -3,14 +3,13 @@
 <mapper namespace="com.lcyzh.nmerp.dao.TProdCategoryMapper">
 
     <resultMap id="tProdCategoryResultMap" type="com.lcyzh.nmerp.entity.TProdCategory">
-        <id column="id" property="id" jdbcType="BIGINT"/> 
-        <result column="cgy_code" property="cgyCode" jdbcType="VARCHAR"/> 
-        <result column="cgy_name" property="cgyName" jdbcType="VARCHAR"/> 
-        <result column="parent_cgy_code" property="parentCgyCode" jdbcType="VARCHAR"/> 
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="cgy_code" property="cgyCode" jdbcType="VARCHAR"/>
+        <result column="cgy_name" property="cgyName" jdbcType="VARCHAR"/>
+        <result column="parent_cgy_code" property="parentCgyCode" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
 
-        
-        
+
     </resultMap>
 
 
@@ -32,7 +31,7 @@
         FROM T_PROD_CATEGORY
     </select>
 
-    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TProdCategory">
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TProdCategory">
         INSERT INTO T_PROD_CATEGORY(
             id,
             cgy_code,
@@ -51,25 +50,25 @@
 
     <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TProdCategory">
         INSERT INTO T_PROD_CATEGORY(
-            id,
-            cgy_code,
-            cgy_name,
-            parent_cgy_code,
-            create_time
+        id,
+        cgy_code,
+        cgy_name,
+        parent_cgy_code,
+        create_time
         )
         VALUES
-        <foreach collection ="list" item="tProdCategory" separator =",">
-        (
+        <foreach collection="list" item="tProdCategory" separator=",">
+            (
             #{tProdCategory.id,jdbcType=BIGINT},
             #{tProdCategory.cgyCode,jdbcType=VARCHAR},
             #{tProdCategory.cgyName,jdbcType=VARCHAR},
             #{tProdCategory.parentCgyCode,jdbcType=VARCHAR},
             #{tProdCategory.createTime,jdbcType=TIMESTAMP}
-        )
+            )
         </foreach>
     </insert>
 
-    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TProdCategory">
+    <update id="update" parameterType="com.lcyzh.nmerp.entity.TProdCategory">
         UPDATE T_PROD_CATEGORY
         SET
         id = #{id},
@@ -80,7 +79,7 @@
         WHERE id = #{id}
     </update>
 
-    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TProdCategory">
+    <delete id="delete" parameterType="com.lcyzh.nmerp.entity.TProdCategory">
         DELETE FROM T_PROD_CATEGORY
         WHERE id = #{id}
     </delete>

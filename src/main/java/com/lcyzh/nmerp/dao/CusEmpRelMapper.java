@@ -12,8 +12,6 @@ import java.util.List;
 @Repository
 public interface CusEmpRelMapper {
 
-    CusEmpRel get(String id);
-
     List<CusEmpRel> findList(CusEmpRel cusEmpRel);
 
     List<CusEmpRel> findAllList();
@@ -24,6 +22,7 @@ public interface CusEmpRelMapper {
 
     int update(CusEmpRel cusEmpRel);
 
-    int delete(CusEmpRel cusEmpRel);
+    int delete(List<String> cusCodeList);
 
+    int updateBatch(List<CusEmpRel> cusEmpRelList);
 }

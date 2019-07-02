@@ -3,15 +3,14 @@
 <mapper namespace="com.lcyzh.nmerp.dao.TRetrunProdDetailMapper">
 
     <resultMap id="tRetrunProdDetailResultMap" type="com.lcyzh.nmerp.entity.TRetrunProdDetail">
-        <id column="id" property="id" jdbcType="BIGINT"/> 
-        <result column="return_code" property="returnCode" jdbcType="VARCHAR"/> 
-        <result column="prod_code" property="prodCode" jdbcType="VARCHAR"/> 
-        <result column="prod_num" property="prodNum" jdbcType="DOUBLE"/> 
-        <result column="prod_spec" property="prodSpec" jdbcType="VARCHAR"/> 
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="return_code" property="returnCode" jdbcType="VARCHAR"/>
+        <result column="prod_code" property="prodCode" jdbcType="VARCHAR"/>
+        <result column="prod_num" property="prodNum" jdbcType="DOUBLE"/>
+        <result column="prod_spec" property="prodSpec" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
 
-        
-        
+
     </resultMap>
 
 
@@ -33,7 +32,7 @@
         FROM T_RETRUN_PROD_DETAIL
     </select>
 
-    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TRetrunProdDetail">
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TRetrunProdDetail">
         INSERT INTO T_RETRUN_PROD_DETAIL(
             id,
             return_code,
@@ -54,27 +53,27 @@
 
     <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TRetrunProdDetail">
         INSERT INTO T_RETRUN_PROD_DETAIL(
-            id,
-            return_code,
-            prod_code,
-            prod_num,
-            prod_spec,
-            create_time
+        id,
+        return_code,
+        prod_code,
+        prod_num,
+        prod_spec,
+        create_time
         )
         VALUES
-        <foreach collection ="list" item="tRetrunProdDetail" separator =",">
-        (
+        <foreach collection="list" item="tRetrunProdDetail" separator=",">
+            (
             #{tRetrunProdDetail.id,jdbcType=BIGINT},
             #{tRetrunProdDetail.returnCode,jdbcType=VARCHAR},
             #{tRetrunProdDetail.prodCode,jdbcType=VARCHAR},
             #{tRetrunProdDetail.prodNum,jdbcType=DOUBLE},
             #{tRetrunProdDetail.prodSpec,jdbcType=VARCHAR},
             #{tRetrunProdDetail.createTime,jdbcType=TIMESTAMP}
-        )
+            )
         </foreach>
     </insert>
 
-    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TRetrunProdDetail">
+    <update id="update" parameterType="com.lcyzh.nmerp.entity.TRetrunProdDetail">
         UPDATE T_RETRUN_PROD_DETAIL
         SET
         id = #{id},
@@ -86,7 +85,7 @@
         WHERE id = #{id}
     </update>
 
-    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TRetrunProdDetail">
+    <delete id="delete" parameterType="com.lcyzh.nmerp.entity.TRetrunProdDetail">
         DELETE FROM T_RETRUN_PROD_DETAIL
         WHERE id = #{id}
     </delete>

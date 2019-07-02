@@ -4,10 +4,10 @@
 
     <resultMap id="tProdPlanDetailResultMap" type="com.lcyzh.nmerp.entity.TProdPlanDetail">
         <id column="ord_item_id" property="ordItemId" jdbcType="BIGINT"/>
-        <result column="prod_plan_code" property="prodPlanCode" jdbcType="VARCHAR"/> 
+        <result column="prod_plan_code" property="prodPlanCode" jdbcType="VARCHAR"/>
         <result column="least_time" property="leastTime" jdbcType="DOUBLE"/>
-        <result column="most_time" property="mostTime" jdbcType="DOUBLE"/> 
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
+        <result column="most_time" property="mostTime" jdbcType="DOUBLE"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
 
     </resultMap>
 
@@ -30,7 +30,7 @@
         FROM T_PROD_PLAN_DETAIL
     </select>
 
-    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TProdPlanDetail">
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TProdPlanDetail">
         INSERT INTO T_PROD_PLAN_DETAIL(
             ord_item_id,
             prod_plan_code,
@@ -49,21 +49,21 @@
 
     <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TProdPlanDetail">
         INSERT INTO T_PROD_PLAN_DETAIL(
-            ord_item_id,
-            prod_plan_code,
-            least_time,
-            most_time,
-            create_time
+        ord_item_id,
+        prod_plan_code,
+        least_time,
+        most_time,
+        create_time
         )
         VALUES
-        <foreach collection ="list" item="tProdPlanDetail" separator =",">
-        (
+        <foreach collection="list" item="tProdPlanDetail" separator=",">
+            (
             #{tProdPlanDetail.ordItemId,jdbcType=BIGINT},
             #{tProdPlanDetail.prodPlanCode,jdbcType=VARCHAR},
             #{tProdPlanDetail.leastTime,jdbcType=DOUBLE},
             #{tProdPlanDetail.mostTime,jdbcType=DOUBLE},
             #{tProdPlanDetail.createTime,jdbcType=TIMESTAMP}
-        )
+            )
         </foreach>
     </insert>
 

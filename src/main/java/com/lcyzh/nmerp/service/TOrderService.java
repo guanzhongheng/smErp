@@ -4,6 +4,7 @@ import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.entity.TOrder;
 import com.lcyzh.nmerp.entity.TOrderItem;
 import com.lcyzh.nmerp.model.vo.OrderItemAssignVo;
+import com.lcyzh.nmerp.model.vo.OrderQueryVo;
 import com.lcyzh.nmerp.model.vo.OrderVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,16 +17,46 @@ import java.util.List;
 */
 public interface TOrderService {
 
-    List<TOrder> findList(TOrder tOrder);
-
+    /**
+     * @Description: 根据订单号查询订单详情
+     * @Param: [ordCode]
+     * @return: java.util.List<com.lcyzh.nmerp.entity.TOrderItem>
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 11:16 AM
+     */
     List<TOrderItem> findByOrdCode(String ordCode);
 
+    /**
+     * @Description: 产品计划分配
+     * @Param: [voList, ordCode]
+     * @return: int
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 10:53 AM
+     */
     int ordProduceAssign(List<OrderItemAssignVo> voList,String ordCode);
 
-    Page<TOrder> findPage(Page<TOrder> page,TOrder order);
+    /**
+     * @Description: 多条件分页查询
+     * @Param: [page, order]
+     * @return: com.lcyzh.nmerp.common.persistence.Page<com.lcyzh.nmerp.model.vo.OrderQueryVo>
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 10:53 AM
+     */
+    Page<OrderQueryVo> findPage(Page<OrderQueryVo> page, OrderQueryVo order);
 
     int insert(OrderVo vo);
 
+    /**
+     * @Description: 批量录入订单
+     * @Param: [voList]
+     * @return: int
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 10:53 AM
+     */
     int insertBatch(List<OrderVo> voList);
 
     int update(TOrder tOrder);

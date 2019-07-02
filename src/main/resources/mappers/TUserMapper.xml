@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lcyzh.nmerp.dao.TUserMapper">
+
+    <resultMap id="tUserResultMap" type="com.lcyzh.nmerp.entity.TUser">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="us_code" property="usCode" jdbcType="VARCHAR"/>
+        <result column="us_name" property="usName" jdbcType="VARCHAR"/>
+        <result column="us_birth" property="usBirth" jdbcType="VARCHAR"/>
+        <result column="us_phone" property="usPhone" jdbcType="VARCHAR"/>
+        <result column="us_position" property="usPosition" jdbcType="VARCHAR"/>
+        <result column="us_email" property="usEmail" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+
+
+    </resultMap>
+
+
+    <select id="get" resultMap="tUserResultMap">
+        SELECT *
+        FROM T_USER
+        WHERE id = #{id}
+    </select>
+
+    <select id="findList" resultMap="tUserResultMap">
+        SELECT *
+        FROM T_USER
+        <where>
+        </where>
+    </select>
+
+    <select id="findAllList" resultMap="tUserResultMap">
+        SELECT *
+        FROM T_USER
+    </select>
+
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TUser">
+        INSERT INTO T_USER(
+            id,
+            us_code,
+            us_name,
+            us_birth,
+            us_phone,
+            us_position,
+            us_email,
+            create_time,
+            update_time
+        )
+        VALUES (
+            #{id,jdbcType=BIGINT},
+            #{usCode,jdbcType=VARCHAR},
+            #{usName,jdbcType=VARCHAR},
+            #{usBirth,jdbcType=VARCHAR},
+            #{usPhone,jdbcType=VARCHAR},
+            #{usPosition,jdbcType=VARCHAR},
+            #{usEmail,jdbcType=VARCHAR},
+            #{createTime,jdbcType=TIMESTAMP},
+            #{updateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TUser">
+        INSERT INTO T_USER(
+        id,
+        us_code,
+        us_name,
+        us_birth,
+        us_phone,
+        us_position,
+        us_email,
+        create_time,
+        update_time
+        )
+        VALUES
+        <foreach collection="list" item="tUser" separator=",">
+            (
+            #{tUser.id,jdbcType=BIGINT},
+            #{tUser.usCode,jdbcType=VARCHAR},
+            #{tUser.usName,jdbcType=VARCHAR},
+            #{tUser.usBirth,jdbcType=VARCHAR},
+            #{tUser.usPhone,jdbcType=VARCHAR},
+            #{tUser.usPosition,jdbcType=VARCHAR},
+            #{tUser.usEmail,jdbcType=VARCHAR},
+            #{tUser.createTime,jdbcType=TIMESTAMP},
+            #{tUser.updateTime,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+
+    <update id="update" parameterType="com.lcyzh.nmerp.entity.TUser">
+        UPDATE T_USER
+        SET
+        id = #{id},
+        us_code = #{usCode},
+        us_name = #{usName},
+        us_birth = #{usBirth},
+        us_phone = #{usPhone},
+        us_position = #{usPosition},
+        us_email = #{usEmail},
+        create_time = #{createTime},
+        update_time = #{updateTime}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="com.lcyzh.nmerp.entity.TUser">
+        DELETE FROM T_USER
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

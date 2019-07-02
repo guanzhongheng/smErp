@@ -3,14 +3,13 @@
 <mapper namespace="com.lcyzh.nmerp.dao.TMachineInfoMapper">
 
     <resultMap id="tMachineInfoResultMap" type="com.lcyzh.nmerp.entity.TMachineInfo">
-        <id column="id" property="id" jdbcType="BIGINT"/> 
-        <result column="mac_code" property="macCode" jdbcType="VARCHAR"/> 
-        <result column="prod_codes" property="prodCodes" jdbcType="VARCHAR"/> 
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
-        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/> 
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="mac_code" property="macCode" jdbcType="VARCHAR"/>
+        <result column="prod_codes" property="prodCodes" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
 
-        
-        
+
     </resultMap>
 
 
@@ -32,7 +31,7 @@
         FROM T_MACHINE_INFO
     </select>
 
-    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TMachineInfo">
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TMachineInfo">
         INSERT INTO T_MACHINE_INFO(
             id,
             mac_code,
@@ -51,25 +50,25 @@
 
     <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TMachineInfo">
         INSERT INTO T_MACHINE_INFO(
-            id,
-            mac_code,
-            prod_codes,
-            create_time,
-            update_time
+        id,
+        mac_code,
+        prod_codes,
+        create_time,
+        update_time
         )
         VALUES
-        <foreach collection ="list" item="tMachineInfo" separator =",">
-        (
+        <foreach collection="list" item="tMachineInfo" separator=",">
+            (
             #{tMachineInfo.id,jdbcType=BIGINT},
             #{tMachineInfo.macCode,jdbcType=VARCHAR},
             #{tMachineInfo.prodCodes,jdbcType=VARCHAR},
             #{tMachineInfo.createTime,jdbcType=TIMESTAMP},
             #{tMachineInfo.updateTime,jdbcType=TIMESTAMP}
-        )
+            )
         </foreach>
     </insert>
 
-    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TMachineInfo">
+    <update id="update" parameterType="com.lcyzh.nmerp.entity.TMachineInfo">
         UPDATE T_MACHINE_INFO
         SET
         id = #{id},
@@ -80,7 +79,7 @@
         WHERE id = #{id}
     </update>
 
-    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TMachineInfo">
+    <delete id="delete" parameterType="com.lcyzh.nmerp.entity.TMachineInfo">
         DELETE FROM T_MACHINE_INFO
         WHERE id = #{id}
     </delete>

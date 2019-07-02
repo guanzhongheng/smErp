@@ -8,7 +8,7 @@ import java.util.Date;
  * Author ljk
  * Date  2019-07-01
  */
-public class Customer extends DataEntity<Customer> {
+public class Customer {
     private static final long serialVersionUID = 1L;
     private String cusCode;
     private String cusName;

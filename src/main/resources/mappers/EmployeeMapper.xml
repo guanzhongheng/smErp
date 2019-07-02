@@ -3,19 +3,18 @@
 <mapper namespace="com.lcyzh.nmerp.dao.EmployeeMapper">
 
     <resultMap id="employeeResultMap" type="com.lcyzh.nmerp.entity.Employee">
-        <id column="emp_code" property="empCode" jdbcType="VARCHAR"/> 
-        <result column="emp_name" property="empName" jdbcType="VARCHAR"/> 
-        <result column="birth" property="birth" jdbcType="VARCHAR"/> 
-        <result column="emp_grade" property="empGrade" jdbcType="CHAR"/> 
-        <result column="department" property="department" jdbcType="VARCHAR"/> 
-        <result column="emp_phone" property="empPhone" jdbcType="VARCHAR"/> 
-        <result column="emp_email" property="empEmail" jdbcType="VARCHAR"/> 
-        <result column="emp_address" property="empAddress" jdbcType="VARCHAR"/> 
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
-        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/> 
+        <id column="emp_code" property="empCode" jdbcType="VARCHAR"/>
+        <result column="emp_name" property="empName" jdbcType="VARCHAR"/>
+        <result column="birth" property="birth" jdbcType="VARCHAR"/>
+        <result column="emp_grade" property="empGrade" jdbcType="CHAR"/>
+        <result column="department" property="department" jdbcType="VARCHAR"/>
+        <result column="emp_phone" property="empPhone" jdbcType="VARCHAR"/>
+        <result column="emp_email" property="empEmail" jdbcType="VARCHAR"/>
+        <result column="emp_address" property="empAddress" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
 
-        
-        
+
     </resultMap>
 
 
@@ -37,7 +36,7 @@
         FROM T_EMPLOYEE
     </select>
 
-    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.Employee">
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.Employee">
         INSERT INTO T_EMPLOYEE(
             emp_code,
             emp_name,
@@ -66,20 +65,20 @@
 
     <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.Employee">
         INSERT INTO T_EMPLOYEE(
-            emp_code,
-            emp_name,
-            birth,
-            emp_grade,
-            department,
-            emp_phone,
-            emp_email,
-            emp_address,
-            create_time,
-            update_time
+        emp_code,
+        emp_name,
+        birth,
+        emp_grade,
+        department,
+        emp_phone,
+        emp_email,
+        emp_address,
+        create_time,
+        update_time
         )
         VALUES
-        <foreach collection ="list" item="item" separator =",">
-        (
+        <foreach collection="list" item="item" separator=",">
+            (
             #{item.empCode,jdbcType=VARCHAR},
             #{item.empName,jdbcType=VARCHAR},
             #{item.birth,jdbcType=VARCHAR},
@@ -90,11 +89,11 @@
             #{item.empAddress,jdbcType=VARCHAR},
             #{item.createTime,jdbcType=TIMESTAMP},
             #{item.updateTime,jdbcType=TIMESTAMP}
-        )
+            )
         </foreach>
     </insert>
 
-    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.Employee">
+    <update id="update" parameterType="com.lcyzh.nmerp.entity.Employee">
         UPDATE T_EMPLOYEE
         SET
         emp_code = #{empCode},
@@ -110,7 +109,7 @@
         WHERE emp_code = #{empCode}
     </update>
 
-    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.Employee">
+    <delete id="delete" parameterType="com.lcyzh.nmerp.entity.Employee">
         DELETE FROM T_EMPLOYEE
         WHERE emp_code = #{empCode}
     </delete>

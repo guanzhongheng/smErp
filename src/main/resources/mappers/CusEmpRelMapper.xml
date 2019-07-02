@@ -3,20 +3,13 @@
 <mapper namespace="com.lcyzh.nmerp.dao.CusEmpRelMapper">
 
     <resultMap id="cusEmpRelResultMap" type="com.lcyzh.nmerp.entity.CusEmpRel">
-        <id column="id" property="id" jdbcType="BIGINT"/> 
-        <result column="cus_code" property="cusCode" jdbcType="VARCHAR"/> 
-        <result column="emp_code" property="empCode" jdbcType="VARCHAR"/> 
-        <result column="status" property="status" jdbcType="CHAR"/> 
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
-        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/> 
+        <id column="cus_code" property="cusCode" jdbcType="VARCHAR"/>
+        <result column="emp_code" property="empCode" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="CHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
-
-    <select id="get" resultMap="cusEmpRelResultMap">
-        SELECT *
-        FROM T_CUS_EMP_REL
-        WHERE id = #{id}
-    </select>
 
     <select id="findList" resultMap="cusEmpRelResultMap">
         SELECT *
@@ -30,9 +23,8 @@
         FROM T_CUS_EMP_REL
     </select>
 
-    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.CusEmpRel">
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.CusEmpRel">
         INSERT INTO T_CUS_EMP_REL(
-            id,
             cus_code,
             emp_code,
             status,
@@ -40,7 +32,6 @@
             update_time
         )
         VALUES (
-            #{id,jdbcType=BIGINT},
             #{cusCode,jdbcType=VARCHAR},
             #{empCode,jdbcType=VARCHAR},
             #{status,jdbcType=CHAR},
@@ -51,41 +42,64 @@
 
     <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.CusEmpRel">
         INSERT INTO T_CUS_EMP_REL(
-            id,
-            cus_code,
-            emp_code,
-            status,
-            create_time,
-            update_time
+        cus_code,
+        emp_code,
+        status,
+        create_time,
+        update_time
         )
         VALUES
-        <foreach collection ="list" item="item" separator =",">
-        (
-            #{item.id,jdbcType=BIGINT},
+        <foreach collection="list" item="item" separator=",">
+            (
             #{item.cusCode,jdbcType=VARCHAR},
             #{item.empCode,jdbcType=VARCHAR},
             #{item.status,jdbcType=CHAR},
             #{item.createTime,jdbcType=TIMESTAMP},
             #{item.updateTime,jdbcType=TIMESTAMP}
-        )
+            )
         </foreach>
     </insert>
 
-    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.CusEmpRel">
+    <update id="update" parameterType="com.lcyzh.nmerp.entity.CusEmpRel">
         UPDATE T_CUS_EMP_REL
         SET
-        id = #{id},
-        cus_code = #{cusCode},
         emp_code = #{empCode},
         status = #{status},
-        create_time = #{createTime},
         update_time = #{updateTime}
-        WHERE id = #{id}
+        WHERE cus_code = #{cusCode}
     </update>
 
-    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.CusEmpRel">
+    <delete id="delete" parameterType="java.util.List">
         DELETE FROM T_CUS_EMP_REL
-        WHERE id = #{id}
+        cus_code in (
+        <foreach collection="list" item="item" separator=",">
+            #{item}
+        </foreach>
+        )
     </delete>
+
+    <update id="updateBatch" parameterType="java.util.List">
+        update T_CUS_EMP_REL
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="emp_code =case" suffix="end,">
+                <foreach collection="list" item="emp">
+                    <if test="emp.empCode!=null">
+                        when cus_code=#{emp.cusCode} then #{emp.empCode}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="update_time =case" suffix="end,">
+                <foreach collection="list" item="emp">
+                    <if test="emp.updateTime!=null">
+                        when cus_code=#{emp.cusCode} then #{emp.updateTime}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where cus_code in
+        <foreach collection="list" index="index" item="emp" separator="," open="(" close=")">
+            #{emp.cusCode,jdbcType=VARCHAR}
+        </foreach>
+    </update>
 
 </mapper>

@@ -60,6 +60,130 @@ public class Constants {
     public static final long CUS_STATUS_CHECK=11002l;
     //拒绝
     public static final long CUS_STATUS_RJCT=11003l;
+    //没人跟进
+    public static final long CUS_STATUS_IDEL=11004l;
+
+    /**
+     * @Description: 客户资料类型-个人
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/1 4:10 PM
+     */
+    public static final long CUS_TYPE_PERSON=11101l;
+
+    /**
+     * @Description: 客户资料类型-企业
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/1 4:10 PM
+     */
+    public static final long CUS_TYPE_COM=11102l;
+    /**
+     * @Description: 客户星级-1
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/1 4:26 PM
+     */
+    public static final long CUS_GRADE_1=11201l;
+
+    /**
+     * @Description: 客户星级-2
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/1 4:26 PM
+     */
+    public static final long CUS_GRADE_2=11202l;
+
+    /**
+     * @Description: 客户星级-3
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/1 4:26 PM
+     */
+    public static final long CUS_GRADE_3=11203l;
+
+
+    /**
+     * @Description: 客户星级-4
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/1 4:26 PM
+     */
+    public static final long CUS_GRADE_4=11204l;
+
+
+    /**
+     * @Description: 客户星级-5
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/1 4:26 PM
+     */
+    public static final long CUS_GRADE_5=11205l;
+
+    /**
+     * @Description: 性别-女
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/1 3:48 PM
+     */
+    public static final long SEX_LADY=13001L;
+
+    /**
+     * @Description: 性别男
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/1 3:48 PM
+     */
+    public static final long SEX_MAN=13002L;
+
+
+    /**
+     * @Description: 订单类型
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/1 3:50 PM
+     */
+    public static final long ORD_TYPE_01=14000l;
+
+    /**
+     * @Description: 现金
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/1 3:51 PM
+     */
+    public static final long PAY_TYPE_CASH=15001l;
+
+    /**
+     * @Description: 电子转账
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/1 3:52 PM
+     */
+    public static final long PAY_TYPE_EFT=15002l;
 
     /**
      * @Description: 产品大类字典编号

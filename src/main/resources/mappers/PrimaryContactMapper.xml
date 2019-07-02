@@ -3,19 +3,19 @@
 <mapper namespace="com.lcyzh.nmerp.dao.PrimaryContactMapper">
 
     <resultMap id="primaryContactResultMap" type="com.lcyzh.nmerp.entity.PrimaryContact">
-        <id column="cus_code" property="cusCode" jdbcType="VARCHAR"/> 
-        <result column="contact_name" property="contactName" jdbcType="VARCHAR"/> 
+        <id column="cus_code" property="cusCode" jdbcType="VARCHAR"/>
+        <result column="contact_name" property="contactName" jdbcType="VARCHAR"/>
         <result column="contact_sex" property="contactSex" jdbcType="BIGINT"/>
-        <result column="contact_birth" property="contactBirth" jdbcType="VARCHAR"/> 
-        <result column="contact_role" property="contactRole" jdbcType="VARCHAR"/> 
-        <result column="department" property="department" jdbcType="VARCHAR"/> 
-        <result column="contact_phone" property="contactPhone" jdbcType="VARCHAR"/> 
-        <result column="fixed_phone" property="fixedPhone" jdbcType="VARCHAR"/> 
-        <result column="contact_address" property="contactAddress" jdbcType="VARCHAR"/> 
-        <result column="contact_email" property="contactEmail" jdbcType="VARCHAR"/> 
-        <result column="remark" property="remark" jdbcType="VARCHAR"/> 
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
-        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/> 
+        <result column="contact_birth" property="contactBirth" jdbcType="VARCHAR"/>
+        <result column="contact_role" property="contactRole" jdbcType="VARCHAR"/>
+        <result column="department" property="department" jdbcType="VARCHAR"/>
+        <result column="contact_phone" property="contactPhone" jdbcType="VARCHAR"/>
+        <result column="fixed_phone" property="fixedPhone" jdbcType="VARCHAR"/>
+        <result column="contact_address" property="contactAddress" jdbcType="VARCHAR"/>
+        <result column="contact_email" property="contactEmail" jdbcType="VARCHAR"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
 
@@ -37,7 +37,7 @@
         FROM T_PRIMARY_CONTACT
     </select>
 
-    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.PrimaryContact">
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.PrimaryContact">
         INSERT INTO T_PRIMARY_CONTACT(
             cus_code,
             contact_name,
@@ -72,23 +72,23 @@
 
     <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.PrimaryContact">
         INSERT INTO T_PRIMARY_CONTACT(
-            cus_code,
-            contact_name,
-            contact_sex,
-            contact_birth,
-            contact_role,
-            department,
-            contact_phone,
-            fixed_phone,
-            contact_address,
-            contact_email,
-            remark,
-            create_time,
-            update_time
+        cus_code,
+        contact_name,
+        contact_sex,
+        contact_birth,
+        contact_role,
+        department,
+        contact_phone,
+        fixed_phone,
+        contact_address,
+        contact_email,
+        remark,
+        create_time,
+        update_time
         )
         VALUES
-        <foreach collection ="list" item="item" separator =",">
-        (
+        <foreach collection="list" item="item" separator=",">
+            (
             #{item.cusCode,jdbcType=VARCHAR},
             #{item.contactName,jdbcType=VARCHAR},
             #{item.contactSex,jdbcType=BIGINT},
@@ -102,11 +102,11 @@
             #{item.remark,jdbcType=VARCHAR},
             #{item.createTime,jdbcType=TIMESTAMP},
             #{item.updateTime,jdbcType=TIMESTAMP}
-        )
+            )
         </foreach>
     </insert>
 
-    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.PrimaryContact">
+    <update id="update" parameterType="com.lcyzh.nmerp.entity.PrimaryContact">
         UPDATE T_PRIMARY_CONTACT
         SET
         cus_code = #{cusCode},
@@ -125,7 +125,7 @@
         WHERE cus_code = #{cusCode}
     </update>
 
-    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.PrimaryContact">
+    <delete id="delete" parameterType="com.lcyzh.nmerp.entity.PrimaryContact">
         DELETE FROM T_PRIMARY_CONTACT
         WHERE cus_code = #{cusCode}
     </delete>
