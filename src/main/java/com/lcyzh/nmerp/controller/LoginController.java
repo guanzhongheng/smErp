@@ -93,7 +93,6 @@ public class LoginController extends BaseController {
      * @param clean 计数清零
      * @return
      */
-    @SuppressWarnings("unchecked")
     public static boolean isValidateCodeLogin(String useruame, boolean isFail, boolean clean){
         Map<String, Integer> loginFailMap = (Map<String, Integer>) CacheUtils.get("loginFailMap");
         if (loginFailMap==null){

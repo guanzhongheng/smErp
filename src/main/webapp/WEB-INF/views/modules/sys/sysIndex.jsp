@@ -15,6 +15,7 @@
     </style>
     <script type="text/javascript">
         $(document).ready(function() {
+            debugger;
             // <c:if test="${tabmode eq '1'}"> 初始化页签
             $.fn.initJerichoTab({
                 renderTo: '#right', uniqueId: 'jerichotab',
@@ -23,6 +24,7 @@
             });//</c:if>
             // 绑定菜单单击事件
             $("#menu a.menu").click(function(){
+                debugger;
                 // 一级菜单焦点
                 $("#menu li.menu").removeClass("active");
                 $(this).parent().addClass("active");
@@ -42,7 +44,9 @@
                 }
                 // 显示二级菜单
                 var menuId = "#menu-" + $(this).attr("data-id");
+
                 if ($(menuId).length > 0){
+                    debugger;
                     $("#left .accordion").hide();
                     $(menuId).show();
                     // 初始化点击第一个二级菜单
@@ -57,6 +61,7 @@
                 }else{
                     // 获取二级菜单数据
                     $.get($(this).attr("data-href"), function(data){
+                        debugger;
                         if (data.indexOf("id=\"loginForm\"") != -1){
                             alert('未登录或登录超时。请重新登录，谢谢！');
                             top.location = "${ctx}";
@@ -85,6 +90,7 @@
                         // 展现三级
                         $(menuId + " .accordion-inner a").click(function(){
                             var href = $(this).attr("data-href");
+                            debugger;
                             if($(href).length > 0){
                                 $(href).toggle().parent().toggle();
                                 return false;
@@ -113,19 +119,6 @@
                     $(this).click();
                 }
             });
-            // 获取通知数目  <c:set var="oaNotifyRemindInterval" value="${fns:getConfig('oa.notify.remind.interval')}"/>
-            function getNotifyNum(){
-                $.get("${ctx}/oa/oaNotify/self/count?updateSession=0&t="+new Date().getTime(),function(data){
-                    var num = parseFloat(data);
-                    if (num > 0){
-                        $("#notifyNum,#notifyNum2").show().html("("+num+")");
-                    }else{
-                        $("#notifyNum,#notifyNum2").hide()
-                    }
-                });
-            }
-            getNotifyNum(); //<c:if test="${oaNotifyRemindInterval ne '' && oaNotifyRemindInterval ne '0'}">
-            setInterval(getNotifyNum, ${oaNotifyRemindInterval}); //</c:if>
         });
         // <c:if test="${tabmode eq '1'}"> 添加一个页签
         function addTab($this, refresh){

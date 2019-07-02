@@ -19,7 +19,7 @@
 <body>
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="${ctx}/sys/menu/">菜单列表</a></li>
-		<shiro:hasPermission name="sys:menu:edit"><li><a href="${ctx}/sys/menu/form">菜单添加</a></li></shiro:hasPermission>
+		<li><a href="${ctx}/sys/menu/form">菜单添加</a></li>
 	</ul>
 	<sys:message content="${message}"/>
 	<form id="listForm" method="post">

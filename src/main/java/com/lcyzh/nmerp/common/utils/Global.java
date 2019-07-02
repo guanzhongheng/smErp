@@ -3,6 +3,7 @@ package com.lcyzh.nmerp.common.utils;
 
 
 import com.google.common.collect.Maps;
+import com.lcyzh.nmerp.common.io.PropertiesUtils;
 import com.lcyzh.nmerp.common.lang.StringUtils;
 import com.lcyzh.nmerp.common.web.http.ServletUtils;
 import org.springframework.core.io.DefaultResourceLoader;
@@ -76,15 +77,12 @@ public class Global {
 	 */
 	public static String getConfig(String key) {
 
-
-
-
-//		String value = map.get(key);
-//		if (value == null) {
-//			value = PropertiesUtils.getInstance().getProperty(key);
-//			map.put(key, value != null ? value : StringUtils.EMPTY);
-//		}
-		return "asd";
+		String value = map.get(key);
+		if (value == null) {
+			value = PropertiesUtils.getInstance().getProperty(key);
+			map.put(key, value != null ? value : StringUtils.EMPTY);
+		}
+		return value;
 	}
 
 	/**
