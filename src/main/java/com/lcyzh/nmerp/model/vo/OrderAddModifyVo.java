@@ -13,7 +13,7 @@ import java.util.List;
  * ----------   ------------- -----------------------------------
  * lijinku          2019/06/19    create
  */
-public class OrderVo {
+public class OrderAddModifyVo {
     //订单收货地址
     private String ordAddress;
     //客户名称

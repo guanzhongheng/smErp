@@ -4,10 +4,10 @@ import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.dao.*;
 import com.lcyzh.nmerp.entity.*;
+import com.lcyzh.nmerp.model.vo.OrderAddModifyVo;
 import com.lcyzh.nmerp.model.vo.OrderItemAssignVo;
 import com.lcyzh.nmerp.model.vo.OrderItemVo;
 import com.lcyzh.nmerp.model.vo.OrderQueryVo;
-import com.lcyzh.nmerp.model.vo.OrderVo;
 import com.lcyzh.nmerp.service.TOrderService;
 import com.lcyzh.nmerp.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,7 +80,7 @@ public class TOrderServiceImpl implements TOrderService {
 
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
     @Override
-    public int insert(OrderVo vo) {
+    public int insert(OrderAddModifyVo vo) {
         //生成订单信息，及订单明细;如果合同号不存在，则生成新的合同，存在则关联合同号
         Date date = new Date();
         Customer cus = tCustomerMapper.findByCusName(vo.getCusName());
@@ -133,7 +133,7 @@ public class TOrderServiceImpl implements TOrderService {
     }
 
     @Override
-    public int insertBatch(List<OrderVo> voList) {
+    public int insertBatch(List<OrderAddModifyVo> voList) {
         List<TOrder> orders = new ArrayList<>(voList.size());
         return tOrderMapper.insertBatch(orders);
     }

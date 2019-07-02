@@ -3,11 +3,9 @@ package com.lcyzh.nmerp.service;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.entity.TOrder;
 import com.lcyzh.nmerp.entity.TOrderItem;
+import com.lcyzh.nmerp.model.vo.OrderAddModifyVo;
 import com.lcyzh.nmerp.model.vo.OrderItemAssignVo;
 import com.lcyzh.nmerp.model.vo.OrderQueryVo;
-import com.lcyzh.nmerp.model.vo.OrderVo;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -47,7 +45,7 @@ public interface TOrderService {
      */
     Page<OrderQueryVo> findPage(Page<OrderQueryVo> page, OrderQueryVo order);
 
-    int insert(OrderVo vo);
+    int insert(OrderAddModifyVo vo);
 
     /**
      * @Description: 批量录入订单
@@ -57,7 +55,7 @@ public interface TOrderService {
      * @Iteration : 1.0
      * @Date: 2019/7/2 10:53 AM
      */
-    int insertBatch(List<OrderVo> voList);
+    int insertBatch(List<OrderAddModifyVo> voList);
 
     int update(TOrder tOrder);
 
