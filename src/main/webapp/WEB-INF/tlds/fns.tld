@@ -53,7 +53,7 @@
     <description>获取当前用户对象</description>
     <name>getUser</name>
     <function-class>com.lcyzh.nmerp.controller.system.util.UserUtils</function-class>
-    <function-signature>com.lcyzh.nmerp.entity.TUser getUser()</function-signature>
+    <function-signature>com.lcyzh.nmerp.entity.sys.User getUser()</function-signature>
     <example>${fns:getUser()}</example>
   </function>
 

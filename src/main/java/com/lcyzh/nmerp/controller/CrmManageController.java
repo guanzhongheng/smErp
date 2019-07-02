@@ -6,6 +6,7 @@ import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.entity.Customer;
 import com.lcyzh.nmerp.entity.TOrder;
 import com.lcyzh.nmerp.model.vo.CustomerQueryVo;
+import com.lcyzh.nmerp.model.vo.OrderItemVo;
 import com.lcyzh.nmerp.model.vo.OrderQueryVo;
 import com.lcyzh.nmerp.service.TCustomerService;
 import com.lcyzh.nmerp.service.TOrderService;
@@ -48,11 +49,25 @@ public class CrmManageController extends BaseController {
 
     /**
      * 订单列表
+     * @param item
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = {"customer/prodDetailList", "order"})
+    public String prodDetailList(@ModelAttribute("orderItem") OrderItemVo item, Model model, HttpServletRequest request, HttpServletResponse response){
+        Page<OrderItemVo> page = null;
+        model.addAttribute("orderId",item.getItemCode());
+        model.addAttribute("page", page);
+        return "modules/crm/prodDetailList";
+    }
+
+    /**
+     * 订单产品详情
      * @param order
      * @param model
      * @return
      */
-    @RequestMapping(value = {"order/list", "order"})
+    @RequestMapping(value = {"orderD/list", "order"})
     public String orderList(@ModelAttribute("order") OrderQueryVo order, Model model, HttpServletRequest request, HttpServletResponse response){
         Page<OrderQueryVo> page = orderService.findPage(new Page<OrderQueryVo>(request, response), order);
         model.addAttribute("page", page);
