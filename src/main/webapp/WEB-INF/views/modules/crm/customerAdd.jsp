@@ -44,9 +44,9 @@
                                         <label class="col-sm-3 control-label"><i style="color: red">*</i> 客户类型：</label>
                                         <div class="col-sm-8">
                                             <div class="radio i-checks">
-                                                <input type="radio" checked="" value="1" id="optionsRadios1"
+                                                <input type="radio" checked="" value="110002" id="optionsRadios1"
                                                        name="cusType"><i></i>&nbsp;企业客户
-                                                <input type="radio" value="2" id="optionsRadios2"
+                                                <input type="radio" value="110001" id="optionsRadios2"
                                                        name="cusType"><i></i>&nbsp;个人客户
                                             </div>
                                         </div>
@@ -155,9 +155,10 @@
                                 <label class="col-sm-3 control-label">尊称：</label>
                                 <div class="col-sm-8">
                                     <div class="radio i-checks">
-                                        <input type="radio" name="primaryContactorSex" value="" checked=""> <i></i>未知
-                                        <input type="radio" name="primaryContactorSex" value=""> <i></i>先生
-                                        <input type="radio" name="primaryContactorSex" value=""> <i></i>女士
+
+                                        <input type="radio" name="primaryContactorSex" value="108003" checked=""> <i></i>未知
+                                        <input type="radio" name="primaryContactorSex" value="108001"> <i></i>先生
+                                        <input type="radio" name="primaryContactorSex" value="108002"> <i></i>女士
                                     </div>
                                 </div>
                             </div>

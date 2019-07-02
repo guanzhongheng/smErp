@@ -482,6 +482,37 @@ public class Constants {
     public static final long DEPARTMENT_OW = 109005L;
 
     /**
+     * @Description: 客户类型
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 5:56 PM
+     */
+    public static final long CUS_TYPE = 110000L;
+
+    /**
+     * @Description: 客户类型-个人
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 5:56 PM
+     */
+    public static final long CUS_TYPE_PERSON = 110001L;
+
+
+    /**
+     * @Description: 客户类型-企业
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 5:56 PM
+     */
+    public static final long CUS_TYPE_COM = 110002L;
+
+    /**
      * @Description: 产品大类字典编号
      * @Param:
      * @return: 
