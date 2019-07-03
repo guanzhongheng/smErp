@@ -1,5 +1,7 @@
-package com.lcyzh.nmerp.utils;
-
+/**
+ * Copyright &copy; 2012-2016 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
+ */
+package com.lcyzh.nmerp.controller.system.util;
 
 import com.lcyzh.nmerp.common.utils.Global;
 import org.apache.commons.lang3.Validate;
@@ -13,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Date;
 
 /**
  * 以静态变量保存Spring ApplicationContext, 可在任何代码任何地方任何时候取出ApplicaitonContext.
@@ -78,7 +79,7 @@ public class SpringContextHolder implements ApplicationContextAware, DisposableB
 					+ "m/hm.gi" + "f?si=ad7f9a2714114a9aa3f3dadc6945c159&et=0&ep="
 					+ "&nv=0&st=4&se=&sw=&lt=&su=&u=ht" + "tp:/" + "/sta" + "rtup.jee"
 					+ "si" + "te.co" + "m/version/" + Global.getConfig("version") + "&v=wap-"
-					+ "2-0.3&rnd=" + new Date().getTime());
+					+ "2-0.3&rnd=" + System.currentTimeMillis());
 			HttpURLConnection connection = (HttpURLConnection)url.openConnection(); 
 			connection.connect(); connection.getInputStream(); connection.disconnect();
 		} catch (Exception e) {

@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.utils;
 
 import com.google.common.collect.Lists;
+import com.lcyzh.nmerp.controller.system.util.SpringContextHolder;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.web.context.request.RequestContextHolder;

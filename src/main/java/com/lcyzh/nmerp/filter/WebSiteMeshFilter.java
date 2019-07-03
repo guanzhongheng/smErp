@@ -18,7 +18,8 @@ public class WebSiteMeshFilter extends ConfigurableSiteMeshFilter {
      */
     @Override
     protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {
-        builder.addDecoratorPath("/crm/*", "/decoratorFilter/default")
+        builder.addDecoratorPath("/sys/*", "/decoratorFilter/default")
+                .addDecoratorPath("/crm/*", "/decoratorFilter/default")
                 .addDecoratorPath("/order/*","/decoratorFilter/newLayout")
                 .addDecoratorPath("/cus/*","/decoratorFilter/newLayout")
                 .addDecoratorPath("/*", "/decoratorFilter/blank")

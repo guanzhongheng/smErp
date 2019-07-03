@@ -9,7 +9,6 @@ import com.lcyzh.nmerp.entity.sys.Menu;
 import com.lcyzh.nmerp.entity.sys.Role;
 import com.lcyzh.nmerp.entity.sys.User;
 import com.lcyzh.nmerp.service.security.BaseService;
-import com.lcyzh.nmerp.utils.SpringContextHolder;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.UnavailableSecurityManagerException;
 import org.apache.shiro.session.InvalidSessionException;

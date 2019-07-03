@@ -3,7 +3,6 @@
 <html>
 <head>
 	<title>用户管理</title>
-	<meta name="decorator" content="default"/>
 	<%@include file="/WEB-INF/views/include/treeview.jsp" %>
 	<style type="text/css">
 		.ztree {overflow:auto;margin:0;_margin-top:10px;padding:10px 0 0 10px;}

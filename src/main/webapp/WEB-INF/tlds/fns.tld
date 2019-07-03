@@ -120,6 +120,10 @@
     <function-class>com.lcyzh.nmerp.utils.DictUtils</function-class>
     <function-signature>java.util.List getEmpListByDept(java.lang.Long)</function-signature>
     <example>${fns:getEmpListByDept(deptKey)}</example>
+    <name>getDictLabel</name>
+    <function-class>com.lcyzh.nmerp.controller.system.util.DictUtils</function-class>
+    <function-signature>java.lang.String getDictLabel(java.lang.String, java.lang.String, java.lang.String)</function-signature>
+    <example>${fns:getDictLabel(value, type, defaultValue)}</example>
   </function>
 
   <!--<function>-->

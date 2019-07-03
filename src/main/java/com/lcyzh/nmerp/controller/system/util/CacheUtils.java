@@ -1,6 +1,5 @@
-package com.lcyzh.nmerp.common.utils;
+package com.lcyzh.nmerp.controller.system.util;
 
-import com.lcyzh.nmerp.controller.system.util.SpringContextHolder;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
 import org.slf4j.Logger;

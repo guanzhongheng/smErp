@@ -3,7 +3,6 @@
 <html>
 <head>
 	<title>个人信息</title>
-	<meta name="decorator" content="default"/>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#inputForm").validate({
@@ -40,18 +39,18 @@
 				<sys:ckfinder input="nameImage" type="images" uploadPath="/photo" selectMultiple="false" maxWidth="100" maxHeight="100"/>
 			</div>
 		</div>
-		<div class="control-group">
-			<label class="control-label">归属公司:</label>
-			<div class="controls">
-				<label class="lbl">${user.company.name}</label>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">归属部门:</label>
-			<div class="controls">
-				<label class="lbl">${user.office.name}</label>
-			</div>
-		</div>
+		<%--<div class="control-group">--%>
+			<%--<label class="control-label">归属公司:</label>--%>
+			<%--<div class="controls">--%>
+				<%--<label class="lbl">${user.company.name}</label>--%>
+			<%--</div>--%>
+		<%--</div>--%>
+		<%--<div class="control-group">--%>
+			<%--<label class="control-label">归属部门:</label>--%>
+			<%--<div class="controls">--%>
+				<%--<label class="lbl">${user.office.name}</label>--%>
+			<%--</div>--%>
+		<%--</div>--%>
 		<div class="control-group">
 			<label class="control-label">姓名:</label>
 			<div class="controls">
