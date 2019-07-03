@@ -47,6 +47,14 @@ public class CrmManageController extends BaseController {
         return "modules/crm/customerList";
     }
 
+    @RequestMapping(value = {"customer/customerPoolList"})
+    public String customerPoolList(@ModelAttribute("customer") CustomerQueryVo customer, Model model, HttpServletRequest request, HttpServletResponse response){
+        customer.setFollowType(0);
+        Page<CustomerQueryVo> page = customerService.findPage(new Page<CustomerQueryVo>(request, response), customer);
+        model.addAttribute("page", page);
+        return "modules/crm/customerPoolList";
+    }
+
     /**
      * 订单列表
      * @param order

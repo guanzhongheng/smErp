@@ -82,18 +82,4 @@ public class CusManageController  extends BaseController {
         return "redirect:/modules/crm/customerList";
     }
 
-    /**
-     * 订单产品详情
-     * @param item
-     * @param model
-     * @return
-     */
-    @RequestMapping(value = {"customer/prodDetailList"})
-    public String prodDetailList(@ModelAttribute("orderItem") OrderItemVo item, Model model, HttpServletRequest request, HttpServletResponse response){
-        Page<OrderItemVo> page = null;
-        model.addAttribute("orderId",item.getItemCode());
-        model.addAttribute("page", page);
-        return "modules/crm/prodDetailList";
-    }
-
 }

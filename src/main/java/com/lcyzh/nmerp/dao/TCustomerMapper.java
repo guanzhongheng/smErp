@@ -1,6 +1,5 @@
 package com.lcyzh.nmerp.dao;
 
-import com.lcyzh.nmerp.dao.common.CrudDao;
 import com.lcyzh.nmerp.entity.Customer;
 import com.lcyzh.nmerp.model.vo.CustomerAddModifyVo;
 import com.lcyzh.nmerp.model.vo.CustomerQueryVo;
