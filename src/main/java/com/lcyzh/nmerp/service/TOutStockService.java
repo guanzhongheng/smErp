@@ -2,6 +2,7 @@ package com.lcyzh.nmerp.service;
 
 import com.lcyzh.nmerp.entity.TOutStock;
 import com.lcyzh.nmerp.model.vo.ConcreteProdVo;
+import com.lcyzh.nmerp.model.vo.OutItemVo;
 import com.lcyzh.nmerp.model.vo.OutStockDetailVo;
 import com.lcyzh.nmerp.model.vo.OutStockVo;
 
@@ -14,7 +15,17 @@ import java.util.List;
 public interface TOutStockService {
 
     /**
-     * @Description: 根据出库单查看
+     * @Description: 根据出库单查询已出库的产品
+     * @Param: [outCode]
+     * @return: java.util.List<com.lcyzh.nmerp.model.vo.OutItemVo>
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/3 4:02 PM
+     */
+    List<OutItemVo> findOutItemsByOutCode(String outCode);
+
+    /**
+     * @Description: 根据出库单概况信息查看
      * @Param: [outCode]
      * @return: com.lcyzh.nmerp.entity.TOutStock
      * @Author: lijinku
@@ -24,14 +35,14 @@ public interface TOutStockService {
     TOutStock findByOutCode(String outCode);
 
     /**
-     * @Description: 根据订单号查看
+     * @Description: 根据订单号查看出库信息（有可能一个订单包含在多个出库单里）
      * @Param: [ordCode]
      * @return: com.lcyzh.nmerp.entity.TOutStock
      * @Author: lijinku
      * @Iteration : 1.0
      * @Date: 2019/7/2 10:48 AM
      */
-    TOutStock findByOrdCode(String ordCode);
+    List<TOutStock> findByOrdCode(String ordCode);
 
     /**
      * @Description: 多条件查询
@@ -61,7 +72,7 @@ public interface TOutStockService {
      * @Iteration : 1.0
      * @Date: 2019/7/2 10:47 AM
      */
-    String createAndReturnOutCode(Long applyUserId, String remark);
+    String createAndReturnOutCode(String applyUserId, String remark);
 
     /**
      * @Description: 更新出库信息

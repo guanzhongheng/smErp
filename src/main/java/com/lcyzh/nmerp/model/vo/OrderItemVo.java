@@ -33,10 +33,16 @@ public class OrderItemVo {
     private String itemColor;
     //产品数量
     private Double itemNum;
-    //产品单位
-    private String itemUnit;
+    //产品单位-字典
+    private Long itemUnit;
+    //产品单位值
+    private String itemUnitValue;
     //产品所属人
     private String itemOwner;
+    //压边类型
+    private Long blankPressType;
+    //压边类型值
+    private Long blankPressTypeValue;
     //备注
     private String remark;
 
@@ -128,12 +134,20 @@ public class OrderItemVo {
         this.itemNum = itemNum;
     }
 
-    public String getItemUnit() {
+    public Long getItemUnit() {
         return itemUnit;
     }
 
-    public void setItemUnit(String itemUnit) {
+    public void setItemUnit(Long itemUnit) {
         this.itemUnit = itemUnit;
+    }
+
+    public String getItemUnitValue() {
+        return itemUnitValue;
+    }
+
+    public void setItemUnitValue(String itemUnitValue) {
+        this.itemUnitValue = itemUnitValue;
     }
 
     public String getItemOwner() {
@@ -142,6 +156,22 @@ public class OrderItemVo {
 
     public void setItemOwner(String itemOwner) {
         this.itemOwner = itemOwner;
+    }
+
+    public Long getBlankPressType() {
+        return blankPressType;
+    }
+
+    public void setBlankPressType(Long blankPressType) {
+        this.blankPressType = blankPressType;
+    }
+
+    public Long getBlankPressTypeValue() {
+        return blankPressTypeValue;
+    }
+
+    public void setBlankPressTypeValue(Long blankPressTypeValue) {
+        this.blankPressTypeValue = blankPressTypeValue;
     }
 
     public String getRemark() {

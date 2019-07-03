@@ -18,7 +18,8 @@ public class TOrderItem implements Serializable {
     private Double itemThick;
     private String itemColor;
     private Double itemNum;
-    private String itemUnit;
+    private Long itemUnit;
+    private Long blankPressType;
     private String itemOwner;
     private String remark;
     private Date createTime;
@@ -91,12 +92,20 @@ public class TOrderItem implements Serializable {
         return itemColor;
     }
 
-    public String getItemUnit() {
+    public Long getItemUnit() {
         return itemUnit;
     }
 
-    public void setItemUnit(String itemUnit) {
+    public void setItemUnit(Long itemUnit) {
         this.itemUnit = itemUnit;
+    }
+
+    public Long getBlankPressType() {
+        return blankPressType;
+    }
+
+    public void setBlankPressType(Long blankPressType) {
+        this.blankPressType = blankPressType;
     }
 
     public void setItemOwner(String itemOwner) {

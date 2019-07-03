@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.dao;
 
 import com.lcyzh.nmerp.entity.TOutStockDetail;
+import com.lcyzh.nmerp.model.vo.OutItemVo;
 import com.lcyzh.nmerp.model.vo.OutStockVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -19,6 +20,9 @@ public interface TOutStockDetailMapper {
     TOutStockDetail findByPrimaryKey(Long id);
 
     List<TOutStockDetail> findAllList();
+
+
+    List<OutItemVo> findOutItemsByOutCode(String outCode);
 
     int insert(TOutStockDetail tOutStockDetail);
 

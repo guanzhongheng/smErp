@@ -7,8 +7,8 @@
         <result column="ord_code" property="ordCode" jdbcType="VARCHAR"/>
         <result column="out_status" property="outStatus" jdbcType="CHAR"/>
         <result column="out_count" property="outCount" jdbcType="INTEGER"/>
-        <result column="apply_user_id" property="applyUserId" jdbcType="BIGINT"/>
-        <result column="oper_user_id" property="operUserId" jdbcType="BIGINT"/>
+        <result column="apply_emp_code" property="applyEmpCode" jdbcType="VARCHAR"/>
+        <result column="oper_emp_code" property="operEmpCode" jdbcType="VARCHAR"/>
         <result column="remark" property="remark" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
@@ -33,34 +33,45 @@
         SELECT *
         FROM T_OUT_STOCK
         <where>
-            <if test="status!=null">
-                and status = #{status,jdbcType=CHAR}
+
+            <if test="outStatus!= null">
+                and out_status = #{outStatus,jdbcType=CHAR}
             </if>
-            <if test="createTime!=null">
-                and create_time = createTime like concat(concat('%', #{createTime}), '%')
+            <if test="applyEmpCode!= null">
+                and apply_emp_code like concat('%', #{applyEmpCode,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="operEmpCode!= null">
+                and oper_emp_code like concat('%', #{operEmpCode,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="remark!= null">
+                and remark like concat('%', #{remark,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="days!= null">
+                and create_time  >= now()-interval #{days,jdbcType=INTEGER} day
             </if>
         </where>
+        order by create_time desc
     </select>
 
     <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TOutStock">
-        INSERT INTO T_OUT_STOCK(
+      INSERT INTO T_OUT_STOCK(
             out_code,
-            out_status,
             ord_code,
+            out_status,
+            apply_emp_code,
+            oper_emp_code,
             out_count,
-            apply_user_id,
-            oper_user_id,
             remark,
             create_time,
             update_time
         )
         VALUES (
             #{outCode,jdbcType=VARCHAR},
-            #{outStatus,jdbcType=CHAR},
             #{ordCode,jdbcType=VARCHAR},
+            #{outStatus,jdbcType=CHAR},
+            #{applyEmpCode,jdbcType=VARCHAR},
+            #{operEmpCode,jdbcType=VARCHAR},
             #{outCount,jdbcType=INTEGER},
-            #{applyUserId,jdbcType=BIGINT},
-            #{operUserId,jdbcType=BIGINT},
             #{remark,jdbcType=VARCHAR},
             #{createTime,jdbcType=TIMESTAMP},
             #{updateTime,jdbcType=TIMESTAMP}
@@ -71,25 +82,25 @@
     <update id="update" parameterType="com.lcyzh.nmerp.entity.TOutStock">
         UPDATE T_OUT_STOCK
         <set>
-            <if test="outStatus!=null">
-                out_status = #{outStatus,jdbcType=CHAR},
-            </if>
-            <if test="ordCode!=null">
+            <if test="ordCode!= null">
                 ord_code = #{ordCode,jdbcType=VARCHAR},
             </if>
-            <if test="remark!=null">
+            <if test="outStatus!= null">
+                out_status = #{outStatus,jdbcType=CHAR},
+            </if>
+            <if test="applyEmpCode!= null">
+                apply_emp_code = #{applyEmpCode,jdbcType=VARCHAR},
+            </if>
+            <if test="operEmpCode!= null">
+                oper_emp_code = #{operEmpCode,jdbcType=VARCHAR},
+            </if>
+            <if test="outCount!= null">
+                out_count = #{outCount,jdbcType=INTEGER},
+            </if>
+            <if test="remark!= null">
                 remark = #{remark,jdbcType=VARCHAR},
             </if>
-            <if test="outCount!=null">
-                out_count = out_count + #{outCount,jdbcType=INTEGER},
-            </if>
-            <if test="applyUserId!=null">
-                apply_user_id = #{applyUserId,jdbcType=BIGINT},
-            </if>
-            <if test="operUserId!=null">
-                oper_user_id = #{operUserId,jdbcType=BIGINT},
-            </if>
-            <if test="remark!=null">
+            <if test="updateTime!= null">
                 update_time = #{updateTime,jdbcType=TIMESTAMP},
             </if>
         </set>
