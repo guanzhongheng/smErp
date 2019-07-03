@@ -2,11 +2,14 @@ package com.lcyzh.nmerp.service.impl;
 
 import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.dao.TBarCodeInfoMapper;
+import com.lcyzh.nmerp.dao.TOrderMapper;
 import com.lcyzh.nmerp.dao.TOutStockDetailMapper;
 import com.lcyzh.nmerp.dao.TOutStockMapper;
 import com.lcyzh.nmerp.entity.TBarCodeInfo;
 import com.lcyzh.nmerp.entity.TOutStock;
 import com.lcyzh.nmerp.entity.TOutStockDetail;
+import com.lcyzh.nmerp.model.vo.ConcreteProdVo;
+import com.lcyzh.nmerp.model.vo.OrderQueryVo;
 import com.lcyzh.nmerp.model.vo.OutStockDetailVo;
 import com.lcyzh.nmerp.model.vo.OutStockVo;
 import com.lcyzh.nmerp.service.TOutStockService;
@@ -33,7 +36,8 @@ public class TOutStockServiceImpl implements TOutStockService {
     private TOutStockDetailMapper tOutStockDetailMapper;
     @Autowired
     private TBarCodeInfoMapper tBarCodeInfoMapper;
-
+    @Autowired
+    private TOrderMapper tOrderMapper;
     @Override
     public TOutStock findByOutCode(String outCode) {
         return tOutStockMapper.findByPrimaryKey(outCode);
@@ -187,6 +191,22 @@ public class TOutStockServiceImpl implements TOutStockService {
         return res;
     }
 
+    @Override
+    public ConcreteProdVo findByBarCode(String barCode) {
+        ConcreteProdVo entity = tBarCodeInfoMapper.findDetailByPrimaryKey(barCode);
+        if(entity!=null && entity.getItemNum()!=null && entity.getCcProdNum()!=null){
+            entity.setRemainProdNum(entity.getItemNum().doubleValue()-entity.getCcProdNum());
+        }
+
+        if(entity.getOrdCode()!=null){
+            OrderQueryVo queryVo = tOrderMapper.findByPrimaryKey(entity.getOrdCode());
+            if(queryVo!=null){
+                entity.setProxyName(queryVo.getProxyName());
+                entity.setCusName(queryVo.getCusName());
+            }
+        }
+        return tBarCodeInfoMapper.findDetailByPrimaryKey(barCode);
+    }
 
 
 }
