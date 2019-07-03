@@ -82,4 +82,6 @@ public interface TOutStockService {
      */
     int delete(OutStockVo vo);
 
+//    findByBarCode(String barCode);
+
 }
