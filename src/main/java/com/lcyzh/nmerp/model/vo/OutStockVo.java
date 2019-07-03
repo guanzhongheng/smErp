@@ -15,7 +15,7 @@ public class OutStockVo {
     private String ordCode;
     private Long itemId;
     private String barCode;
-    private Long operUserId;
+    private String operEmpCode;
     private String remark;
 
     public String getOutCode() {
@@ -50,12 +50,12 @@ public class OutStockVo {
         this.barCode = barCode;
     }
 
-    public Long getOperUserId() {
-        return operUserId;
+    public String getOperEmpCode() {
+        return operEmpCode;
     }
 
-    public void setOperUserId(Long operUserId) {
-        this.operUserId = operUserId;
+    public void setOperEmpCode(String operEmpCode) {
+        this.operEmpCode = operEmpCode;
     }
 
     public String getRemark() {

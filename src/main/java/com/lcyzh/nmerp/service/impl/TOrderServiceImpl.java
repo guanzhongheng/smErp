@@ -38,7 +38,7 @@ public class TOrderServiceImpl implements TOrderService {
     private PrimaryContactMapper primaryContactMapper;
 
     @Override
-    public List<TOrderItem> findByOrdCode(String ordCode) {
+    public List<OrderItemVo> findByOrdCode(String ordCode) {
         return tOrderItemMapper.findByOrdCode(ordCode);
     }
 

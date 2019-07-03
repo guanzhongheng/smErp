@@ -87,13 +87,13 @@ public class TOutStockServiceImpl implements TOutStockService {
 
 
     @Override
-    public String createAndReturnOutCode(Long applyUserId, String remark) {
+    public String createAndReturnOutCode(String applyEmpCode, String remark) {
         TOutStock tOutStock = new TOutStock();
         String outCode = StringUtils.genFixPreFixStr(Constants.OUT_STORE_PRE_FIX);
         tOutStock.setOutCode(outCode);
         tOutStock.setOutCount(0);
         tOutStock.setRemark(remark);
-        tOutStock.setApplyUserId(applyUserId);
+        tOutStock.setApplyEmpCode(applyEmpCode);
         tOutStockMapper.insert(tOutStock);
         return outCode;
     }
@@ -113,7 +113,7 @@ public class TOutStockServiceImpl implements TOutStockService {
             }
         }
         tOutStock.setRemark(vo.getRemark());
-        tOutStock.setOperUserId(vo.getOperUserId());
+        tOutStock.setOperEmpCode(vo.getOperEmpCode());
         tOutStock.setUpdateTime(new Date());
         return tOutStockMapper.update(tOutStock);
     }

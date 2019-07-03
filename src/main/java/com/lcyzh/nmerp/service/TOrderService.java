@@ -5,6 +5,7 @@ import com.lcyzh.nmerp.entity.TOrder;
 import com.lcyzh.nmerp.entity.TOrderItem;
 import com.lcyzh.nmerp.model.vo.OrderAddModifyVo;
 import com.lcyzh.nmerp.model.vo.OrderItemAssignVo;
+import com.lcyzh.nmerp.model.vo.OrderItemVo;
 import com.lcyzh.nmerp.model.vo.OrderQueryVo;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public interface TOrderService {
      * @Iteration : 1.0
      * @Date: 2019/7/2 11:16 AM
      */
-    List<TOrderItem> findByOrdCode(String ordCode);
+    List<OrderItemVo> findByOrdCode(String ordCode);
 
     /**
      * @Description: 产品计划分配

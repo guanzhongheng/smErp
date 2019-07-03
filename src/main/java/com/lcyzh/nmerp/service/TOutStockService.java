@@ -72,7 +72,7 @@ public interface TOutStockService {
      * @Iteration : 1.0
      * @Date: 2019/7/2 10:47 AM
      */
-    String createAndReturnOutCode(Long applyUserId, String remark);
+    String createAndReturnOutCode(String applyUserId, String remark);
 
     /**
      * @Description: 更新出库信息
