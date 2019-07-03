@@ -4,6 +4,7 @@ import com.lcyzh.nmerp.dao.EmployeeMapper;
 import com.lcyzh.nmerp.dao.TDictMapper;
 import com.lcyzh.nmerp.entity.Employee;
 import com.lcyzh.nmerp.entity.TDict;
+import com.lcyzh.nmerp.utils.DictEntity;
 import com.lcyzh.nmerp.utils.DictUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -58,7 +59,12 @@ public class DictLoader implements CommandLineRunner {
         List<Employee> employees = employeeMapper.findAllList();
         if (employees != null && !employees.isEmpty()) {
             employees.forEach(emp -> {
-                DictUtils.getEmpMaps().put(emp.getEmpCode(), emp.getEmpName());
+                List<DictEntity> dictEntities = DictUtils.getEmpMapsByDept().get(emp.getDepartment());
+                if (dictEntities == null) {
+                    dictEntities = new ArrayList<>(10);
+                    DictUtils.getEmpMapsByDept().put(emp.getDepartment(),dictEntities);
+                }
+                dictEntities.add(new DictEntity(emp.getEmpCode(), emp.getEmpName()));
             });
         }
     }

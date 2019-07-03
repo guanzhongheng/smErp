@@ -5,11 +5,9 @@
     <resultMap id="cusEmpRelResultMap" type="com.lcyzh.nmerp.entity.CusEmpRel">
         <id column="cus_code" property="cusCode" jdbcType="VARCHAR"/>
         <result column="emp_code" property="empCode" jdbcType="VARCHAR"/>
-        <result column="status" property="status" jdbcType="CHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
-
 
     <select id="findList" resultMap="cusEmpRelResultMap">
         SELECT *
@@ -27,14 +25,12 @@
         INSERT INTO T_CUS_EMP_REL(
             cus_code,
             emp_code,
-            status,
             create_time,
             update_time
         )
         VALUES (
             #{cusCode,jdbcType=VARCHAR},
             #{empCode,jdbcType=VARCHAR},
-            #{status,jdbcType=CHAR},
             #{createTime,jdbcType=TIMESTAMP},
             #{updateTime,jdbcType=TIMESTAMP}
         )
@@ -44,7 +40,6 @@
         INSERT INTO T_CUS_EMP_REL(
         cus_code,
         emp_code,
-        status,
         create_time,
         update_time
         )
@@ -53,7 +48,6 @@
             (
             #{item.cusCode,jdbcType=VARCHAR},
             #{item.empCode,jdbcType=VARCHAR},
-            #{item.status,jdbcType=CHAR},
             #{item.createTime,jdbcType=TIMESTAMP},
             #{item.updateTime,jdbcType=TIMESTAMP}
             )
@@ -62,11 +56,15 @@
 
     <update id="update" parameterType="com.lcyzh.nmerp.entity.CusEmpRel">
         UPDATE T_CUS_EMP_REL
-        SET
-        emp_code = #{empCode},
-        status = #{status},
-        update_time = #{updateTime}
-        WHERE cus_code = #{cusCode}
+        <set>
+            <if test="empCode!= null">
+                emp_code = #{empCode,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime!= null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        WHERE cus_code = #{cusCode,jdbcType=VARCHAR}
     </update>
 
     <delete id="delete" parameterType="java.util.List">

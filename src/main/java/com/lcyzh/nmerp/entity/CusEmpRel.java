@@ -11,7 +11,6 @@ public class CusEmpRel implements Serializable {
     private static final long serialVersionUID = 1L;
     private String cusCode;
     private String empCode;
-    private Character status;
     private Date createTime;
     private Date updateTime;
 
@@ -30,14 +29,6 @@ public class CusEmpRel implements Serializable {
 
     public String getEmpCode() {
         return empCode;
-    }
-
-    public void setStatus(Character status) {
-        this.status = status;
-    }
-
-    public Character getStatus() {
-        return status;
     }
 
     public void setCreateTime(Date createTime) {

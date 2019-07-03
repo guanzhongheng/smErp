@@ -62,7 +62,10 @@
         JOIN t_sys_role r ON r.id = rm.role_id AND r.useable='1'
         JOIN t_sys_user_role ur ON ur.role_id = r.id
         JOIN t_sys_user u ON u.id = ur.user_id AND u.id = #{userId}
-        WHERE a.del_flag = #{DEL_FLAG_NORMAL} AND r.del_flag = #{DEL_FLAG_NORMAL} AND u.del_flag = #{DEL_FLAG_NORMAL}
+        WHERE a.is_show = 1
+		a.del_flag = #{DEL_FLAG_NORMAL}
+		AND r.del_flag = #{DEL_FLAG_NORMAL}
+		AND u.del_flag = #{DEL_FLAG_NORMAL}
         ORDER BY a.sort
     </select>
 

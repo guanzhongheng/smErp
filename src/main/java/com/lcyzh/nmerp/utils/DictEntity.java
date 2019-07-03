@@ -14,11 +14,19 @@ public class DictEntity {
     //值
     private String value;
     //标签
-    private Long lable;
+    private String label;
     //类型
-    private Long type;
+    private String type;
     //描述
     private String describe;
+
+    public DictEntity() {
+    }
+
+    public DictEntity(String value, String label) {
+        this.value = value;
+        this.label = label;
+    }
 
     public String getValue() {
         return value;
@@ -28,19 +36,19 @@ public class DictEntity {
         this.value = value;
     }
 
-    public Long getLable() {
-        return lable;
+    public String getLabel() {
+        return label;
     }
 
-    public void setLable(Long lable) {
-        this.lable = lable;
+    public void setLabel(String label) {
+        this.label = label;
     }
 
-    public Long getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Long type) {
+    public void setType(String type) {
         this.type = type;
     }
 

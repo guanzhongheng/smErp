@@ -6,6 +6,7 @@ import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.entity.Customer;
 import com.lcyzh.nmerp.entity.TOrder;
 import com.lcyzh.nmerp.model.vo.CustomerQueryVo;
+import com.lcyzh.nmerp.model.vo.OrderItemVo;
 import com.lcyzh.nmerp.model.vo.OrderQueryVo;
 import com.lcyzh.nmerp.service.TCustomerService;
 import com.lcyzh.nmerp.service.TOrderService;
@@ -39,7 +40,7 @@ public class CrmManageController extends BaseController {
         return "modules/crm/customerTest";
     }
 
-    @RequestMapping(value = {"customer/list", "customer"})
+    @RequestMapping(value = {"customer/list"})
     public String list(@ModelAttribute("customer") CustomerQueryVo customer, Model model, HttpServletRequest request, HttpServletResponse response){
         Page<CustomerQueryVo> page = customerService.findPage(new Page<CustomerQueryVo>(request, response), customer);
         model.addAttribute("page", page);
@@ -52,7 +53,7 @@ public class CrmManageController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping(value = {"order/list", "order"})
+    @RequestMapping(value = {"orderDlist"})
     public String orderList(@ModelAttribute("order") OrderQueryVo order, Model model, HttpServletRequest request, HttpServletResponse response){
         Page<OrderQueryVo> page = orderService.findPage(new Page<OrderQueryVo>(request, response), order);
         model.addAttribute("page", page);

@@ -63,6 +63,7 @@
                     $.get($(this).attr("data-href"), function(data){
                         debugger;
                         if (data.indexOf("id=\"loginForm\"") != -1){
+                            debugger;
                             alert('未登录或登录超时。请重新登录，谢谢！');
                             top.location = "${ctx}";
                             return false;

@@ -7,6 +7,7 @@ import com.lcyzh.nmerp.common.web.CookieUtils;
 import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.controller.system.util.UserUtils;
 import com.lcyzh.nmerp.service.security.SystemAuthorizingRealm.Principal;
+import com.lcyzh.nmerp.utils.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,37 +52,40 @@ public class LoginController extends BaseController {
      * 登录成功，进入管理首页
      */
    // @RequiresPermissions("user")
-    @RequestMapping(value = "index")
+    @RequestMapping(value = {"/","index"})
     public String index(HttpServletRequest request, HttpServletResponse response) {
         Principal principal = UserUtils.getPrincipal();
 
+        if(principal == null){
+            return "redirect:login";
+        }
         // 登录成功后，验证码计算器清零
-//        isValidateCodeLogin(principal.getLoginName(), false, true);
-//
-//        if (logger.isDebugEnabled()){
-//           // logger.debug("show index, active session size: {}", sessionDAO.getActiveSessions(false).size());
-//        }
-//
-//        // 如果已登录，再次访问主页，则退出原账号。
-//        if (Global.TRUE.equals(Global.getConfig("notAllowRefreshIndex"))){
-//            String logined = CookieUtils.getCookie(request, "LOGINED");
-//            if (StringUtils.isBlank(logined) || "false".equals(logined)){
-//                CookieUtils.setCookie(response, "LOGINED", "true");
-//            }else if (StringUtils.equals(logined, "true")){
-//                UserUtils.getSubject().logout();
-//                return "redirect:" + adminPath + "/login";
-//            }
-//        }
-//        // 如果是手机登录，则返回JSON字符串
-//        if (principal.isMobileLogin()){
-//            if (request.getParameter("login") != null){
-//                return renderString(response, principal);
-//            }
-//            if (request.getParameter("index") != null){
-//                return "modules/sys/sysIndex";
-//            }
-//            return "redirect:" + adminPath + "/login";
-//        }
+        isValidateCodeLogin(principal.getLoginName(), false, true);
+
+        if (logger.isDebugEnabled()){
+           // logger.debug("show index, active session size: {}", sessionDAO.getActiveSessions(false).size());
+        }
+
+        // 如果已登录，再次访问主页，则退出原账号。
+        if (Global.TRUE.equals(Global.getConfig("notAllowRefreshIndex"))){
+            String logined = CookieUtils.getCookie(request, "LOGINED");
+            if (StringUtils.isBlank(logined) || "false".equals(logined)){
+                CookieUtils.setCookie(response, "LOGINED", "true");
+            }else if (StringUtils.equals(logined, "true")){
+                UserUtils.getSubject().logout();
+                return "redirect:login";
+            }
+        }
+        // 如果是手机登录，则返回JSON字符串
+        if (principal.isMobileLogin()){
+            if (request.getParameter("login") != null){
+                return renderString(response, principal);
+            }
+            if (request.getParameter("index") != null){
+                return "modules/sys/sysIndex";
+            }
+            return "redirect:login";
+        }
 
         return "modules/sys/sysIndex";
     }

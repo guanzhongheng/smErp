@@ -53,7 +53,7 @@
     <description>获取当前用户对象</description>
     <name>getUser</name>
     <function-class>com.lcyzh.nmerp.controller.system.util.UserUtils</function-class>
-    <function-signature>com.lcyzh.nmerp.entity.TUser getUser()</function-signature>
+    <function-signature>com.lcyzh.nmerp.entity.sys.User getUser()</function-signature>
     <example>${fns:getUser()}</example>
   </function>
 
@@ -106,13 +106,25 @@
   </function>
 
   <!-- DictUtils -->
-  <!--<function>-->
-    <!--<description>获取字典标签</description>-->
-    <!--<name>getDictLabel</name>-->
-    <!--<function-class>com.thinkgem.jeesite.modules.sys.utils.DictUtils</function-class>-->
-    <!--<function-signature>java.lang.String getDictLabel(java.lang.String, java.lang.String, java.lang.String)</function-signature>-->
-    <!--<example>${fns:getDictLabel(value, type, defaultValue)}</example>-->
-  <!--</function>-->
+  <function>
+    <description>获取字典标签</description>
+    <name>getDictList</name>
+    <function-class>com.lcyzh.nmerp.utils.DictUtils</function-class>
+    <function-signature>java.util.List getDictList(java.lang.Long)</function-signature>
+    <example>${fns:getDictList(dictKey)}</example>
+  </function>
+
+  <function>
+    <description>获取字典标签-按部门获取员工信息</description>
+    <name>getEmpListByDept</name>
+    <function-class>com.lcyzh.nmerp.utils.DictUtils</function-class>
+    <function-signature>java.util.List getEmpListByDept(java.lang.Long)</function-signature>
+    <example>${fns:getEmpListByDept(deptKey)}</example>
+    <name>getDictLabel</name>
+    <function-class>com.lcyzh.nmerp.controller.system.util.DictUtils</function-class>
+    <function-signature>java.lang.String getDictLabel(java.lang.String, java.lang.String, java.lang.String)</function-signature>
+    <example>${fns:getDictLabel(value, type, defaultValue)}</example>
+  </function>
 
   <!--<function>-->
     <!--<description>获取字典标签(多个)</description>-->

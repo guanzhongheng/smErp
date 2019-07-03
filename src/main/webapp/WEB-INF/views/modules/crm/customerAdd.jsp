@@ -2,7 +2,16 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 
 <div class="wrapper wrapper-content animated fadeInRight">
-    <div class="row">
+    <div class="tabs-container">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true">客户新增</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane active">
+                <div class="panel-body">
+
+                    <div class="row">
         <div class="col-sm-12">
             <div class="ibox-title">
                 <h5>创建客户</h5>
@@ -33,9 +42,7 @@
                                         <div class="col-sm-8">
                                             <form:select path="industry" class="chosen-select"
                                                          cssStyle="min-width: 300px">
-                                                <form:option value="" label=""/>
-                                                <form:option value="1" label="12"/>
-                                                <%--<form:options items="${fns:getDictList('oa_notify_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
+                                                <form:options items="${fns:getDictList(120000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                                             </form:select>
                                         </div>
                                     </div>
@@ -57,9 +64,7 @@
                                         <div class="col-sm-8">
                                             <form:select path="cusStatus" class="chosen-select"
                                                          cssStyle="min-width: 300px">
-                                                <form:option value="" label=""/>
-                                                <form:option value="1" label="12"/>
-                                                <%--<form:options items="${fns:getDictList('oa_notify_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
+                                                <form:options items="${fns:getDictList(104000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                                             </form:select>
                                         </div>
                                     </div>
@@ -69,9 +74,7 @@
                                         <div class="col-sm-8">
                                             <form:select path="cusGrade" class="chosen-select"
                                                          cssStyle="min-width: 300px">
-                                                <form:option value="" label=""/>
-                                                <form:option value="1" label="1"/>
-                                                <%--<form:options items="${fns:getDictList('oa_notify_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
+                                                <form:options items="${fns:getDictList(105000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                                             </form:select>
                                         </div>
                                     </div>
@@ -82,9 +85,7 @@
                                         <div class="col-sm-8">
                                             <form:select path="cusSource" class="chosen-select"
                                                          cssStyle="min-width: 300px">
-                                                <form:option value="" label=""/>
-                                                <form:option value="1" label="1"/>
-                                                <%--<form:options items="${fns:getDictList('oa_notify_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
+                                                <form:options items="${fns:getDictList(106000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                                             </form:select>
                                         </div>
                                     </div>
@@ -95,9 +96,7 @@
                                         <div class="col-sm-8">
                                             <form:select path="empCode" class="chosen-select"
                                                          cssStyle="min-width: 300px">
-                                                <form:option value="" label=""/>
-                                                <form:option value="1" label="2"/>
-                                                <%--<form:options items="${fns:getDictList('oa_notify_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
+                                                <form:options items="${fns:getEmpListByDept(109001)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                                             </form:select>
                                         </div>
                                     </div>
@@ -109,7 +108,7 @@
                                         <label class="col-sm-3 control-label">详细地址：</label>
                                         <div class="col-sm-8">
                                             <form:input path="cusAddress" htmlEscape="false" maxlength="200"
-                                                        class="form-control" placeholder="客户名称"/>
+                                                        class="form-control" placeholder="详细地址"/>
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
@@ -168,8 +167,12 @@
                                 <label class="col-sm-3 control-label">角色：</label>
 
                                 <div class="col-sm-8">
-                                    <form:input path="primaryContactorRole" htmlEscape="false" maxlength="200"
-                                                class="form-control" placeholder="首要联系人角色"/>
+                                    <%--<form:input path="primaryContactorRole" htmlEscape="false" maxlength="200"--%>
+                                                <%--class="form-control" placeholder="首要联系人角色"/>--%>
+                                    <form:select path="primaryContactorRole" class="chosen-select"
+                                                 cssStyle="min-width: 300px">
+                                        <form:options items="${fns:getDictList(130000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+                                    </form:select>
                                 </div>
                             </div>
 
@@ -187,8 +190,12 @@
                                 <label class="col-sm-3 control-label">部门：</label>
 
                                 <div class="col-sm-8">
-                                    <form:input path="primaryContactorDepartment" htmlEscape="false" maxlength="200"
-                                                class="form-control" placeholder="首要联系人部门"/>
+                                    <%--<form:input path="primaryContactorDepartment" htmlEscape="false" maxlength="200"--%>
+                                                <%--class="form-control" placeholder="首要联系人部门"/>--%>
+                                    <form:select path="primaryContactorDepartment" class="chosen-select"
+                                                 cssStyle="min-width: 300px">
+                                        <form:options items="${fns:getDictList(109000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+                                    </form:select>
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
@@ -239,6 +246,10 @@
                         </div>
                     </div>
                 </form:form>
+            </div>
+        </div>
+    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.utils;
 
-import java.util.Collections;
+import com.lcyzh.nmerp.constant.Constants;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -112,9 +113,9 @@ public class DictUtils {
             if (subDictKeys != null) {
                 dictEntityList = subDictKeys.stream().map(subkey -> {
                     DictEntity dictEntity = new DictEntity();
-                    dictEntity.setLable(subkey);
-                    dictEntity.setValue(dictValueMaps.get(subkey));
-                    dictEntity.setType(dictKey);
+                    dictEntity.setLabel(dictValueMaps.get(subkey));
+                    dictEntity.setValue(String.valueOf(subkey));
+                    dictEntity.setType(String.valueOf(dictKey));
                     dictEntity.setDescribe(dictValueMaps.get(dictKey));
                     return dictEntity;
                 }).collect(Collectors.toList());
@@ -128,9 +129,18 @@ public class DictUtils {
 
 
     //key-员工编号；value-员工名称
-    private static final Map<String,String>  empMaps = new HashMap<>(100);
 
-    public static Map<String, String> getEmpMaps() {
-        return empMaps;
+    //按照部门分类：员工字典
+    private static final Map<Long, List<DictEntity>> empMapsByDept = new HashMap<>(60);
+
+    public static Map<Long, List<DictEntity>> getEmpMapsByDept() {
+        return empMapsByDept;
+    }
+
+    public static List<DictEntity> getEmpListByDept(Long deptKey) {
+        if (deptKey != null) {
+           return empMapsByDept.get(deptKey);
+        }
+        return null;
     }
 }
