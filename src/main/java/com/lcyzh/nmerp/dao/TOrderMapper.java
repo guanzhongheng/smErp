@@ -7,11 +7,13 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
-* Author ljk
-* Date  2019-06-06
-*/
+ * Author ljk
+ * Date  2019-06-06
+ */
 @Repository
 public interface TOrderMapper {
+
+    OrderQueryVo findByPrimaryKey(String ordCode);
 
     List<OrderQueryVo> findList(OrderQueryVo tOrder);
 

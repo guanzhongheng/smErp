@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.service;
 
 import com.lcyzh.nmerp.entity.TOutStock;
+import com.lcyzh.nmerp.model.vo.ConcreteProdVo;
 import com.lcyzh.nmerp.model.vo.OutStockDetailVo;
 import com.lcyzh.nmerp.model.vo.OutStockVo;
 
@@ -81,5 +82,15 @@ public interface TOutStockService {
      * @Date: 2019/7/2 10:50 AM
      */
     int delete(OutStockVo vo);
+
+    /**
+     * @Description: 根据条形码查看具体的信息
+     * @Param: [barCode]
+     * @return: com.lcyzh.nmerp.model.vo.ConcreteProdVo
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/3 2:43 PM
+     */
+    ConcreteProdVo findByBarCode(String barCode);
 
 }

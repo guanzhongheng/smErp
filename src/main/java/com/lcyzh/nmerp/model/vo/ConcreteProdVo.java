@@ -5,22 +5,25 @@ package com.lcyzh.nmerp.model.vo;
  * @Description : TODO
  * @Author : lijinku
  * @Iteration : 1.0
- * @Date : 2019/6/19  6:18 PM
+ * @Date : 2019/7/3  11:39 AM
  * @ModificationHistory Who          When          What
  * ----------   ------------- -----------------------------------
- * lijinku          2019/06/19    create
+ * lijinku          2019/07/03    create
  */
-public class OrderItemVo {
+public class ConcreteProdVo {
+
     //订单编号
     private String ordCode;
+    //一级客户
+    private String cusName;
     //代理商名称
     private String proxyName;
-    //产品编号
-    private String itemCode;
     //产品名称
     private String itemName;
     //产品规格
     private String itemSpec;
+    //产品分类
+    private String itemCgyCode;
     //产品类型
     private String itemType;
     //产品长度
@@ -31,14 +34,16 @@ public class OrderItemVo {
     private Double itemThick;
     //产品颜色
     private String itemColor;
-    //产品数量
+    //订单产品数量
     private Double itemNum;
+    //具体产品数量
+    private Double ccProdNum;
+    //剩余产品数量
+    private Double remainProdNum;
     //产品单位
     private String itemUnit;
     //产品所属人
     private String itemOwner;
-    //备注
-    private String remark;
 
     public String getOrdCode() {
         return ordCode;
@@ -46,6 +51,14 @@ public class OrderItemVo {
 
     public void setOrdCode(String ordCode) {
         this.ordCode = ordCode;
+    }
+
+    public String getCusName() {
+        return cusName;
+    }
+
+    public void setCusName(String cusName) {
+        this.cusName = cusName;
     }
 
     public String getProxyName() {
@@ -64,20 +77,20 @@ public class OrderItemVo {
         this.itemName = itemName;
     }
 
-    public String getItemCode() {
-        return itemCode;
-    }
-
-    public void setItemCode(String itemCode) {
-        this.itemCode = itemCode;
-    }
-
     public String getItemSpec() {
         return itemSpec;
     }
 
     public void setItemSpec(String itemSpec) {
         this.itemSpec = itemSpec;
+    }
+
+    public String getItemCgyCode() {
+        return itemCgyCode;
+    }
+
+    public void setItemCgyCode(String itemCgyCode) {
+        this.itemCgyCode = itemCgyCode;
     }
 
     public String getItemType() {
@@ -128,6 +141,22 @@ public class OrderItemVo {
         this.itemNum = itemNum;
     }
 
+    public Double getCcProdNum() {
+        return ccProdNum;
+    }
+
+    public void setCcProdNum(Double ccProdNum) {
+        this.ccProdNum = ccProdNum;
+    }
+
+    public Double getRemainProdNum() {
+        return remainProdNum;
+    }
+
+    public void setRemainProdNum(Double remainProdNum) {
+        this.remainProdNum = remainProdNum;
+    }
+
     public String getItemUnit() {
         return itemUnit;
     }
@@ -142,13 +171,5 @@ public class OrderItemVo {
 
     public void setItemOwner(String itemOwner) {
         this.itemOwner = itemOwner;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
     }
 }

@@ -19,6 +19,8 @@ public class OrderQueryVo extends DataEntity<OrderQueryVo> {
     private String cusCode;
     //客户名称
     private String cusName;
+    //上级名称
+    private String proxyName;
     //订单标题
     private String ordTitle;
     //订单总金额
@@ -70,6 +72,14 @@ public class OrderQueryVo extends DataEntity<OrderQueryVo> {
 
     public void setCusName(String cusName) {
         this.cusName = cusName;
+    }
+
+    public String getProxyName() {
+        return proxyName;
+    }
+
+    public void setProxyName(String proxyName) {
+        this.proxyName = proxyName;
     }
 
     public String getOrdTitle() {

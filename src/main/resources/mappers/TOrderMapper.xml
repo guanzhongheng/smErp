@@ -20,20 +20,21 @@
     </resultMap>
 
 
-    <select id="findList" parameterType="com.lcyzh.nmerp.model.vo.OrderQueryVo" resultType="com.lcyzh.nmerp.model.vo.OrderQueryVo">
+    <select id="findList" parameterType="com.lcyzh.nmerp.model.vo.OrderQueryVo"
+            resultType="com.lcyzh.nmerp.model.vo.OrderQueryVo">
         SELECT
-        od.ord_code,
-        od.ord_title,
-        cs.cus_name,
-        od.ord_status,
-        od.ord_total_amount,
-        od.ord_sign_date,
-        od.ord_delivery_date,
-        od.pay_type,
-        od.ord_type,
-        pt.repay_amount,
-        pt.invoiced_amount,
-        pt.overdue_num
+        od.ord_code ordCode,
+        od.ord_title ordTitle,
+        cs.cus_name cusName,
+        od.ord_status ordStatus,
+        od.ord_total_amount ordTotalAmount,
+        od.ord_sign_date ordSignDate,
+        od.ord_delivery_date ordDeliveryDate,
+        od.pay_type payType,
+        od.ord_type ordType,
+        pt.repay_amount repayAmount,
+        pt.invoiced_amount invoicedAmount,
+        pt.overdue_num overdueNum
         FROM
         T_ORDER od
         LEFT JOIN T_CUSTOMER cs ON od.cus_code = cs.cus_code
@@ -70,6 +71,24 @@
                 and cf.cus_code is null
             </if>
         </where>
+    </select>
+
+    <select id="findByPrimaryKey" resultType="com.lcyzh.nmerp.model.vo.OrderQueryVo" parameterType="java.lang.String">
+        SELECT
+            od.ord_code ordCode,
+            od.ord_title ordTitle,
+            cs.cus_name cusName,
+            od.ord_status ordStatus,
+            od.ord_total_amount ordTotalAmount,
+            od.ord_sign_date ordSignDate,
+            od.ord_delivery_date ordDeliveryDate,
+            od.pay_type payType,
+            od.ord_type ordType,
+            od.proxy_name proxyName
+        FROM
+            T_ORDER od
+            LEFT JOIN T_CUSTOMER cs ON od.cus_code = cs.cus_code
+        where od.ord_code =#{ordCode,jdbcType=VARCHAR}
     </select>
 
     <select id="findAllList" resultMap="tOrderResultMap">
