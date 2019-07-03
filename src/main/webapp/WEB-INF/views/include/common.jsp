@@ -9,6 +9,7 @@
 
 <link href="${ctxStatic}/hPlugs/css/bootstrap.min14ed.css?v=3.3.6" type="text/css" rel="stylesheet">
 <link href="${ctxStatic}/hPlugs/css/font-awesome.min93e3.css?v=4.4.0" type="text/css" rel="stylesheet">
+<link href="${ctxStatic}/hPlugs/css/plugins/bootstrap-table/bootstrap-table.css" rel="stylesheet">
 <link href="${ctxStatic}/hPlugs/css/plugins/chosen/chosen.css" rel="stylesheet">
 <link href="${ctxStatic}/hPlugs/css/plugins/colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
 <link href="${ctxStatic}/hPlugs/css/plugins/cropper/cropper.min.css" rel="stylesheet">

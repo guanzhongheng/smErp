@@ -1,158 +1,196 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ include file="/WEB-INF/views/include/taglib.jsp"%>
-<html>
-<head>
-    <title>全部客户</title>
-    <script type="text/javascript">
+<%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>产品列表</h5>
+                <div class="ibox-tools">
+                    <button type="button" class="btn-primary">明细保存</button>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="col-sm-12">
+                    <table id="productTables" data-height="400" data-mobile-responsive="true">
+                        <thead>
+                        <tr>
+                            <th data-field="prodCode">产品编码</th>
+                            <th data-field="prodName">产品名称</th>
+                            <th data-field="prodCgyCode">产品类别</th>
+                            <th data-field="prodSpec">产品规格</th>
+                            <th data-field="oper">操作</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    </script>
-</head>
-<body>
-<ul class="nav nav-tabs">
-    <li class="active"><a href="${ctx}/crm/list/">订单详情</a></li>
-    <li><a href="${ctx}/crm/poollist/">公海列表</a></li>
-</ul>
-<form:form id="searchForm" modelAttribute="customer" action="${ctx}/crm/customer/list" method="post" class="breadcrumb form-search">
-    <input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
-    <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
-    <ul class="ul-form">
-        <li>
-            <form:input path="cusName" htmlEscape="false" maxlength="200" class="input-medium" placeholder="客户名称"/>
-        </li>
-        <li>
-            &nbsp;&nbsp;
-            <form:select path="cusType" class="input-medium" placeholder="客户类型">
-                <form:option value="" label=""/>
-                <%--<form:options items="${fns:getDictList('oa_notify_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
-            </form:select>
-        </li>
-        <li>
-            &nbsp;&nbsp;
-            <form:select path="cusGrade" class="input-medium" placeholder="客户星级">
-                <form:option value="" label=""/>
-                <%--<form:options items="${fns:getDictList('oa_notify_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
-            </form:select>
-            <input id="beginDate" name="beginDate" placeholder="最后跟进" type="text" readonly="readonly" maxlength="20" class="input-small Wdate"
-                   value="" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
-        </li>
-        <li>
-            &nbsp;&nbsp;
-            <input type="checkbox" name="followType" id="type">归属模式
-        </li>
-        &nbsp;&nbsp;
-        <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
-    </ul>
-</form:form>
-<div class="control-group">&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="/cus/customer_add" type="button" class="btn btn-primary" style="width: 67px;height: 22px"><i class="icon-plus"></i>&nbsp;添加</a>
-    <%--&nbsp;&nbsp;--%>
-    <%--<a href="/crm/task_add" type="button" class="btn btn-default" style="width: 80px;height: 23px"><i class="icon-list-ul"></i>&nbsp;新建任务</a>--%>
-    &nbsp;&nbsp;
-    <a type="button" id="toCustomer" class="btn btn-default" style="width: 80px;height: 23px"><i class="icon-refresh"></i>&nbsp;转移客户</a>
-    &nbsp;&nbsp;
-    <a type="button" id="toPoolCustomer" class="btn btn-default" style="width: 80px;height: 23px"><i class="icon-group"></i>&nbsp;移入公海</a>
-</div>
-<div class="control-group">
-    <table id="contentTable" class="table table-striped table-bordered table-condensed">
-        <thead>
-        <tr>
-            <th></th>
-            <th>客户名称</th>
-            <th>客户状态</th>
-            <th>客户星级</th>
-            <th>首联系人</th>
-            <th>手机号码</th>
-            <%--<th>客户维护人</th>--%>
-            <th>最后跟进日期</th>
-            <th>未跟进天数</th>
-            <th>操作</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${page.list}" var="cus">
-            <tr>
-                <td><input type="checkbox" name="cuscode" >${cus.cusCode}</td>
-                <td>${cus.cusName}</td>
-                <td>${cus.cusStatus}</td>
-                <td>${cus.cusGrade}</td>
-                <td>${cus.primaryContactorName}</td>
-                <td>${cus.primaryContactorPhone}</td>
-                    <%--<td>${cus.cusAddress}</td>--%>
-                <td><fmt:formatDate value="${cus.lastFollowDate}" pattern="yyyy-MM-dd"/></td>
-                <td>${cus.unFollowDays}</td>
-                <td>
-                    <a href=""><i class="icon-comment">&nbsp;跟进</i></a>
-                    <a href="${ctx}/cus/customer_add"><i class="icon-pencil">&nbsp;编辑</i></a>
-                    <a href="${ctx}/cus/customer_delete?cusCode=${cus.cusCode}" onclick="return confirmx('确认要删除该客户吗？', this.href)"><i class="icon-trash">&nbsp;删除</i></a>
-                </td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-    <div class="pagination">${page}</div>
-
-    <script>
-        $("#toCustomer").click(function () {
-            <!-- 针对选中客户进行操作 -->
-            var checkValue = $(".td checkbox");
-            var str = '';
-
-            if(str.length > 0){
-                top.$.jBox.open("iframe:${ctx}/crm/formSubmit?ids=1,2,3,4,", "转移客户", 500, $(top.document).height() - 300, {
-                    buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
-                        debugger;
-                        var ids = h.find("iframe")[0].contentWindow.ids;
-                        var cusContent = h.find("iframe")[0].contentWindow.cusContent;
-                        var remarks = h.find("iframe")[0].contentWindow.remarks;
-                        if (v == "ok") {
-                            $.post('${ctx}/crmAjax/saveTransfer/', {
-                                cusIds: ids.value,
-                                userId: cusContent.value,
-                                remarks: remarks.value
-                            },function(data) {
-                                if(data = "success"){
-                                    top.$.jBox.tip('保存成功');
-                                }else{
-                                    top.$.jBox.tip('保存失败');
-                                }
-                            })
-                        }
-                    }, loaded: function (h) {
-                        debugger;
-                        $(".jbox-content", top.document).css("overflow-y", "hidden");
-                    }
-                });
-            }
-
-        });
-
-        $("#toPoolCustomer").click(function () {
-            <!-- 针对选中客户进行操作 -->
-            top.$.jBox.open("iframe:${ctx}/crm/poolRemark?ids=1,2,3,4,", "移入公海", 500, $(top.document).height() - 300, {
-                buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
-                    debugger;
-                    var ids = h.find("iframe")[0].contentWindow.ids;
-                    var remarks = h.find("iframe")[0].contentWindow.remarks;
-                    if (v == "ok") {
-                        $.post('${ctx}/crmAjax/savePoolCustomer/', {
-                            cusIds: ids.value,
-                            remarks: remarks.value
-                        },function(data) {
-                            if(data = "success"){
-                                top.$.jBox.tip('移入成功');
-                            }else{
-                                top.$.jBox.tip('移入失败');
-                            }
-                        })
-                    }
-                }, loaded: function (h) {
-                    debugger;
-                    $(".jbox-content", top.document).css("overflow-y", "hidden");
-                }
-            });
-        });
-    </script>
+    <div class="row">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>产品列表</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="col-sm-12">
+                    <table id="cusProdDetail" data-height="400" data-mobile-responsive="true">
+                        <thead>
+                        <tr>
+                            <th data-field="ckId">序号</th>
+                            <th data-field="itemCode">产品编码</th>
+                            <th data-field="itemName">产品名称</th>
+                            <th data-field="itemSpec">规格</th>
+                            <th data-field="itemLenth">长</th>
+                            <th data-field="itemWidth">宽</th>
+                            <th data-field="itemThick">高</th>
+                            <th data-field="itemNum">计量</th>
+                            <th data-field="itemColor">颜色</th>
+                            <th data-field="itemUnit">单位</th>
+                            <th data-field="itemOwner">收货人</th>
+                            <th data-field="itemYb">压边</th>
+                            <th data-field="operator">操作</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
-</html>
+<script src="${ctxStatic}/hPlugs/js/plugins/bootstrap-table/bootstrap-table.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script>
+    var prodList = [];
+    var cusProdList = [];
+    $(document).ready(function(){
+        $("#productTables").bootstrapTable({
+            url:'',
+            pagination: false,  //表格底部显示分页条
+            sidePagination: "server",
+            escape:false, //启动转义字符
+            queryParamsType:'',//设置请求参数格式
+            columns :[
+                {
+                    field: 'prodCode',
+                    title: '产品编号'
+                }, {
+                    field: 'prodName',
+                    title: '产品名称'
+                }, {
+                    field: 'prodCgyCode',
+                    title: '产品类型'
+                },{
+                    field: 'prodSpec',
+                    title: '产品规格'
+                },{
+                    field: 'oper',
+                    title: '操作',
+                    events: operateEvents,
+                    formatter: operFormatter
+                }
+            ]
+        });
+
+        $("#cusProdDetail").bootstrapTable({
+            url:'',
+            pagination: false,  //表格底部显示分页条
+            sidePagination: "server",
+            escape:false, //启动转义字符
+            queryParamsType:'',//设置请求参数格式
+            columns :[
+                {
+                    field: 'ckId',
+                    title: '序号'
+                },{
+                    field: 'itemCode',
+                    title: '产品编号'
+                },{
+                    field: 'itemName',
+                    title: '产品名称'
+                },{
+                    field: 'itemSpec',
+                    title: '产品规格'
+                },{
+                    field: 'itemLenth',
+                    title: '长',
+                    formatter:function (value,row,index) {
+                        return ['<input trpe="text" class="form-control" value="'+value+'"/>'].join('');
+                    }
+                },{
+                    field: 'itemWidth',
+                    title: '宽',
+                    formatter:function (value,row,index) {
+                        return ['<input trpe="text" class="form-control" value="'+value+'"/>'].join('');
+                    }
+                },{
+                    field: 'itemThick',
+                    title: '高',
+                    formatter:function (value,row,index) {
+                        return ['<input trpe="text" class="form-control" value="'+value+'"/>'].join('');
+                    }
+                },{
+                    field: 'itemNum',
+                    title: '计量',
+                    formatter:function (value,row,index) {
+                        return ['<input trpe="text" class="form-control" value="'+value+'"/>'].join('');
+                    }
+                },{
+                    field: 'itemColor',
+                    title: '产品颜色',
+                    formatter:function (value,row,index) {
+                        return ['<input trpe="text" class="form-control" value="'+value+'"/>'].join('');
+                    }
+                },{
+                    field: 'itemUnit',
+                    title: '单位',
+                    formatter:function (value,row,index) {
+                        return ['<input trpe="text" class="form-control" value="'+value+'"/>'].join('');
+                    }
+                },{
+                    field: 'itemOwner',
+                    title: '收货人',
+                    formatter:function (value,row,index) {
+                        return ['<input trpe="text" class="form-control" value="'+value+'"/>'].join('');
+                    }
+                },{
+                    field: 'itemYb',
+                    title: '压编',
+                    formatter:function (value,row,index) {
+                        return ['<input trpe="text" class="form-control" value="'+value+'"/>'].join('');
+                    }
+                },{
+                    field: 'oper',
+                    title: '操作',
+                    events: operateEvents,
+                    formatter: operFormatter
+                }
+            ]
+        })
+    });
+
+    function operFormatter(value, row, index) {
+        return [
+            ' <button id="tableRowAdd" type="button" class="btn btn-default" ">添加</button>'
+        ].join('');
+    };
+
+    function operProdFormatter(value, row, index) {
+        return [
+            ' <button id="tableRowdelete" type="button" class="btn btn-default" ">删除</button>'
+        ].join('');
+    };
+
+
+    window.operateEvents = {
+        "click #tableRowAdd" : function(e,value,row,index){
+            debugger;
+        },
+
+        "click #tableRowdelete" : function(e,value,row,index){
+            debugger;
+        }
+    }
+</script>

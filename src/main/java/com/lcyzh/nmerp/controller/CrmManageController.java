@@ -40,7 +40,7 @@ public class CrmManageController extends BaseController {
         return "modules/crm/customerTest";
     }
 
-    @RequestMapping(value = {"customer/list", "customer"})
+    @RequestMapping(value = {"customer/list"})
     public String list(@ModelAttribute("customer") CustomerQueryVo customer, Model model, HttpServletRequest request, HttpServletResponse response){
         Page<CustomerQueryVo> page = customerService.findPage(new Page<CustomerQueryVo>(request, response), customer);
         model.addAttribute("page", page);
@@ -49,25 +49,11 @@ public class CrmManageController extends BaseController {
 
     /**
      * 订单列表
-     * @param item
-     * @param model
-     * @return
-     */
-    @RequestMapping(value = {"customer/prodDetailList", "order"})
-    public String prodDetailList(@ModelAttribute("orderItem") OrderItemVo item, Model model, HttpServletRequest request, HttpServletResponse response){
-        Page<OrderItemVo> page = null;
-        model.addAttribute("orderId",item.getItemCode());
-        model.addAttribute("page", page);
-        return "modules/crm/prodDetailList";
-    }
-
-    /**
-     * 订单产品详情
      * @param order
      * @param model
      * @return
      */
-    @RequestMapping(value = {"orderD/list", "order"})
+    @RequestMapping(value = {"orderDlist"})
     public String orderList(@ModelAttribute("order") OrderQueryVo order, Model model, HttpServletRequest request, HttpServletResponse response){
         Page<OrderQueryVo> page = orderService.findPage(new Page<OrderQueryVo>(request, response), order);
         model.addAttribute("page", page);

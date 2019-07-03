@@ -2,7 +2,16 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 
 <div class="wrapper wrapper-content animated fadeInRight">
-    <div class="row">
+    <div class="tabs-container">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true">客户新增</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane active">
+                <div class="panel-body">
+
+                    <div class="row">
         <div class="col-sm-12">
             <div class="ibox-title">
                 <h5>创建客户</h5>
@@ -237,6 +246,10 @@
                         </div>
                     </div>
                 </form:form>
+            </div>
+        </div>
+    </div>
+                </div>
             </div>
         </div>
     </div>
