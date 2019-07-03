@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.dao;
 
 import com.lcyzh.nmerp.entity.TOrderItem;
+import com.lcyzh.nmerp.model.vo.OrderItemVo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,5 +25,5 @@ public interface TOrderItemMapper {
 
     int delete(TOrderItem tOrderItem);
 
-    List<TOrderItem> findByOrdCode(String ordCode);
+    List<OrderItemVo> findByOrdCode(String ordCode);
 }

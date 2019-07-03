@@ -12,6 +12,21 @@
     </resultMap>
 
 
+    <select id="findOutItemsByOutCode" parameterType="java.lang.String" resultType="com.lcyzh.nmerp.model.vo.OutItemVo">
+       SELECT
+            pt.prod_name itemName,
+            pt.prod_spec itemSpec,
+            oi.ord_code ordCode,
+            oi.item_owner itemOwner,
+            bi.bar_code barCode
+        FROM
+        T_OUT_STOCK_DETAIL ost
+        LEFT JOIN T_BARCODE_INFO bi ON ost.bar_code = bi.bar_code
+        LEFT JOIN T_ORDER_ITEM oi on oi.id = bi.item_id
+        LEFT JOIN T_PRODUCT pt on pt.prod_code = oi.item_code
+        WHERE out_code = #{outCode,jdbcType=VARCHAR}
+    </select>
+
     <select id="findListByCondition" resultType="com.lcyzh.nmerp.model.vo.OutStockVo" parameterType="java.lang.String">
         SELECT
         osd.bar_code barCode,

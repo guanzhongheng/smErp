@@ -8,10 +8,7 @@ import com.lcyzh.nmerp.dao.TOutStockMapper;
 import com.lcyzh.nmerp.entity.TBarCodeInfo;
 import com.lcyzh.nmerp.entity.TOutStock;
 import com.lcyzh.nmerp.entity.TOutStockDetail;
-import com.lcyzh.nmerp.model.vo.ConcreteProdVo;
-import com.lcyzh.nmerp.model.vo.OrderQueryVo;
-import com.lcyzh.nmerp.model.vo.OutStockDetailVo;
-import com.lcyzh.nmerp.model.vo.OutStockVo;
+import com.lcyzh.nmerp.model.vo.*;
 import com.lcyzh.nmerp.service.TOutStockService;
 import com.lcyzh.nmerp.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,13 +35,19 @@ public class TOutStockServiceImpl implements TOutStockService {
     private TBarCodeInfoMapper tBarCodeInfoMapper;
     @Autowired
     private TOrderMapper tOrderMapper;
+
+    @Override
+    public List<OutItemVo> findOutItemsByOutCode(String outCode) {
+        return tOutStockDetailMapper.findOutItemsByOutCode(outCode);
+    }
+
     @Override
     public TOutStock findByOutCode(String outCode) {
         return tOutStockMapper.findByPrimaryKey(outCode);
     }
 
     @Override
-    public TOutStock findByOrdCode(String ordCode) {
+    public List<TOutStock> findByOrdCode(String ordCode) {
         return tOutStockMapper.findByOrdCode(ordCode);
     }
 
@@ -104,8 +107,8 @@ public class TOutStockServiceImpl implements TOutStockService {
             if (dbOutStock != null) {
                 if (dbOutStock.getOrdCode() != null) {
                     tOutStock.setOrdCode(dbOutStock.getOrdCode() + vo.getOrdCode() + ",");
-                }else {
-                    tOutStock.setOrdCode(vo.getOrdCode()+",");
+                } else {
+                    tOutStock.setOrdCode(vo.getOrdCode() + ",");
                 }
             }
         }
@@ -194,13 +197,13 @@ public class TOutStockServiceImpl implements TOutStockService {
     @Override
     public ConcreteProdVo findByBarCode(String barCode) {
         ConcreteProdVo entity = tBarCodeInfoMapper.findDetailByPrimaryKey(barCode);
-        if(entity!=null && entity.getItemNum()!=null && entity.getCcProdNum()!=null){
-            entity.setRemainProdNum(entity.getItemNum().doubleValue()-entity.getCcProdNum());
+        if (entity != null && entity.getItemNum() != null && entity.getCcProdNum() != null) {
+            entity.setRemainProdNum(entity.getItemNum().doubleValue() - entity.getCcProdNum());
         }
 
-        if(entity.getOrdCode()!=null){
+        if (entity.getOrdCode() != null) {
             OrderQueryVo queryVo = tOrderMapper.findByPrimaryKey(entity.getOrdCode());
-            if(queryVo!=null){
+            if (queryVo != null) {
                 entity.setProxyName(queryVo.getProxyName());
                 entity.setCusName(queryVo.getCusName());
             }

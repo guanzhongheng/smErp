@@ -33,13 +33,24 @@
         SELECT *
         FROM T_OUT_STOCK
         <where>
-            <if test="status!=null">
-                and status = #{status,jdbcType=CHAR}
+
+            <if test="outStatus!= null">
+                and out_status = #{outStatus,jdbcType=CHAR}
             </if>
-            <if test="createTime!=null">
-                and create_time = createTime like concat(concat('%', #{createTime}), '%')
+            <if test="applyEmpCode!= null">
+                and apply_emp_code like concat('%', #{applyEmpCode,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="operEmpCode!= null">
+                and oper_emp_code like concat('%', #{operEmpCode,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="remark!= null">
+                and remark like concat('%', #{remark,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="createTime!= null">
+                and create_time  >= now()-interval 3 day
             </if>
         </where>
+        order by create_time desc
     </select>
 
     <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TOutStock">

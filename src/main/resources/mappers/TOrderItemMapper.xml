@@ -11,7 +11,8 @@
         <result column="item_width" property="itemWidth" jdbcType="DOUBLE"/>
         <result column="item_thick" property="itemThick" jdbcType="DOUBLE"/>
         <result column="item_color" property="itemColor" jdbcType="VARCHAR"/>
-        <result column="item_unit" property="itemUnit" jdbcType="VARCHAR"/>
+        <result column="item_unit" property="itemUnit" jdbcType="BIGINT"/>
+        <result column="blank_press_type" property="blankPressType" jdbcType="BIGINT"/>
         <result column="item_owner" property="itemOwner" jdbcType="VARCHAR"/>
         <result column="remark" property="remark" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
@@ -26,10 +27,12 @@
         tt.prod_type  itemType,
         toi.item_color itemColor,
         toi.item_lenth itemLenth,
-        toi.item_owner itemOwner,
         toi.item_thick itemThick,
         toi.item_width itemWidth,
+        toi.blan_press_type blankPressType,
+        toi.item_unit itemUnit,
         toi.item_num itemNum,
+        toi.item_owner itemOwner,
         toi.remark  remark
     FROM
         T_ORDER_ITEM toi
@@ -62,6 +65,7 @@
             item_color,
             item_unit,
             item_owner,
+            blank_press_type,
             remark,
             create_time
         )
@@ -74,8 +78,9 @@
             #{itemWidth,jdbcType=DOUBLE},
             #{itemThick,jdbcType=DOUBLE},
             #{itemColor,jdbcType=VARCHAR},
-            #{itemUnit,jdbcType=VARCHAR},
+            #{itemUnit,jdbcType=BIGINT},
             #{itemOwner,jdbcType=VARCHAR},
+             #{blankPressType,jdbcType=BIGINT},
             #{remark,jdbcType=VARCHAR},
             #{createTime,jdbcType=TIMESTAMP}
         )
@@ -83,19 +88,20 @@
 
     <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TOrderItem">
         INSERT INTO T_ORDER_ITEM(
-        id,
-        ord_code,
-        item_code,
-        item_num,
-        item_lenth,
-        item_width,
-        item_thick,
-        item_color,
-        item_unit,
-        item_owner,
-        remark,
-        create_time
-        )
+            id,
+            ord_code,
+            item_code,
+            item_num,
+            item_lenth,
+            item_width,
+            item_thick,
+            item_color,
+            item_unit,
+            blank_press_type,
+            item_owner,
+            remark,
+            create_time
+            )
         VALUES
         <foreach collection="list" item="tOrderItem" separator=",">
             (
@@ -107,7 +113,8 @@
             #{tOrderItem.itemWidth,jdbcType=DOUBLE},
             #{tOrderItem.itemThick,jdbcType=DOUBLE},
             #{tOrderItem.itemColor,jdbcType=VARCHAR},
-            #{tOrderItem.itemUnit,jdbcType=DOUBLE},
+            #{tOrderItem.itemUnit,jdbcType=BIGINT},
+            #{tOrderItem.blankPressType,jdbcType=BIGINT},
             #{tOrderItem.itemOwner,jdbcType=VARCHAR},
             #{tOrderItem.remark,jdbcType=VARCHAR},
             #{tOrderItem.createTime,jdbcType=TIMESTAMP}
