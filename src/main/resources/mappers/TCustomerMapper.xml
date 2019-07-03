@@ -17,6 +17,16 @@
 
     </resultMap>
 
+    <!-- 根据编号获得用户 -->
+    <select id="findByCusCode" resultMap="tCustomerResultMap">
+        SELECT
+        *
+        FROM T_CUSTOMER
+       where cus_code = #{cusCode,jdbcType=VARCHAR}
+    </select>
+
+
+
 
     <select id="findByCusName" parameterType="java.lang.String" resultMap="tCustomerResultMap">
         SELECT *

@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.service;
 
 import com.lcyzh.nmerp.common.persistence.Page;
+import com.lcyzh.nmerp.entity.Customer;
 import com.lcyzh.nmerp.model.vo.CustomerAddModifyVo;
 import com.lcyzh.nmerp.model.vo.CustomerQueryVo;
 import com.lcyzh.nmerp.model.vo.CustomerUpdateVo;
@@ -21,4 +22,5 @@ public interface TCustomerService {
 
     int delete(List<String> cusCodeList);
 
+    CustomerAddModifyVo findByCusCode(String cusCode);
 }

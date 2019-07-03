@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,6 +34,16 @@ public class CusManageController  extends BaseController {
 
     @Autowired
     private TCustomerService customerService;
+
+
+    @ModelAttribute
+    public CustomerAddModifyVo get(@RequestParam(required=false) String cusCode) {
+        if (StringUtils.isNotBlank(cusCode)){
+            return customerService.findByCusCode(cusCode);
+        }else{
+            return new CustomerAddModifyVo();
+        }
+    }
 
 
     @RequestMapping(value = {"customer_add"})

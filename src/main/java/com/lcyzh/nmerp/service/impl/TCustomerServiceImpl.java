@@ -207,4 +207,8 @@ public class TCustomerServiceImpl implements TCustomerService {
     }
 
 
+    @Override
+    public CustomerAddModifyVo findByCusCode(String cusCode) {
+        return null;
+    }
 }

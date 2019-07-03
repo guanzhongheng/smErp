@@ -36,21 +36,20 @@ public class UserController extends BaseController {
 	@Autowired
 	private SystemService systemService;
 
-	//@ModelAttribute
-	//public User get(@RequestParam(required=false) Long id) {
-	//	if (id != null){
-	//		return systemService.get(id);
-	//	}else{
-	//		return new TUser();
-	//	}
-	//}
+	@ModelAttribute
+	public User get(@RequestParam(required=false) String id) {
+		if (id != null){
+			return systemService.getUser(id);
+		}else{
+			return new User();
+		}
+	}
 //
     @RequestMapping(value = {"index"})
     public String index(User user, Model model) {
-        return "modules/sys/TUserIndex";
+        return "modules/sys/userIndex";
     }
 
-	@RequiresPermissions("sys:user:view")
 	@RequestMapping(value = {"list", ""})
 	public String list(User user, HttpServletRequest request, HttpServletResponse response, Model model) {
 		Page<User> page = systemService.findUser(new Page<User>(request, response), user);
@@ -59,7 +58,6 @@ public class UserController extends BaseController {
 	}
 
 	@ResponseBody
-	@RequiresPermissions("sys:user:view")
 	@RequestMapping(value = {"listData"})
 	public Page<User> listData(User user, HttpServletRequest request, HttpServletResponse response, Model model) {
 		Page<User> page = systemService.findUser(new Page<User>(request, response), user);

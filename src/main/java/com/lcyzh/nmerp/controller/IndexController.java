@@ -24,10 +24,6 @@ import java.util.concurrent.Executors;
 @Controller
 public class IndexController {
 
-    @RequestMapping("/")
-    public String index(){
-        return "index";
-    }
 
     @GetMapping("/webSocket")
     public ModelAndView goToWeight(){

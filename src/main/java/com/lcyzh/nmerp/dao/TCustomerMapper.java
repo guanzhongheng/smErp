@@ -1,5 +1,6 @@
 package com.lcyzh.nmerp.dao;
 
+import com.lcyzh.nmerp.dao.common.CrudDao;
 import com.lcyzh.nmerp.entity.Customer;
 import com.lcyzh.nmerp.model.vo.CustomerQueryVo;
 import org.springframework.stereotype.Repository;
@@ -12,6 +13,8 @@ import java.util.List;
 */
 @Repository
 public interface TCustomerMapper {
+
+    Customer findByCusCode(String cusCode);
 
     Customer findByCusName(String cusName);
 

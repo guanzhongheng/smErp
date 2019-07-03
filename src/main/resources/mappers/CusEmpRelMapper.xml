@@ -9,7 +9,6 @@
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
-
     <select id="findList" resultMap="cusEmpRelResultMap">
         SELECT *
         FROM T_CUS_EMP_REL

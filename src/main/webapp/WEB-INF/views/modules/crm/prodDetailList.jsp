@@ -91,7 +91,9 @@
                     events: operateEvents,
                     formatter: operFormatter
                 }
-            ]
+            ],onLoadSuccess:function (data) {
+                debugger;
+            }
         });
 
         $("#cusProdDetail").bootstrapTable({
