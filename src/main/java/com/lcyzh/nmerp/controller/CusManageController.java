@@ -39,7 +39,7 @@ public class CusManageController  extends BaseController {
     @ModelAttribute
     public CustomerAddModifyVo get(@RequestParam(required=false) String cusCode) {
         if (StringUtils.isNotBlank(cusCode)){
-            return customerService.findByCusCode(cusCode);
+            return customerService.findModifyInfoByCusCode(cusCode);
         }else{
             return new CustomerAddModifyVo();
         }
@@ -47,8 +47,8 @@ public class CusManageController  extends BaseController {
 
 
     @RequestMapping(value = {"customer_add"})
-    public String customerAdd(CustomerAddModifyVo customr,Model model){
-        model.addAttribute("customr",customr);
+    public String customerAdd(@ModelAttribute("customerAddModifyVo") CustomerAddModifyVo customerAddModifyVo,Model model){
+        model.addAttribute("customerAddModifyVo",customerAddModifyVo);
         return "modules/crm/customerAdd";
     }
 
