@@ -42,6 +42,7 @@
                                         <div class="col-sm-8">
                                             <form:select path="industry" class="chosen-select"
                                                          cssStyle="min-width: 300px">
+                                                <form:option value="" label=""/>
                                                 <form:options items="${fns:getDictList(120000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                                             </form:select>
                                         </div>
@@ -64,6 +65,7 @@
                                         <div class="col-sm-8">
                                             <form:select path="cusStatus" class="chosen-select"
                                                          cssStyle="min-width: 300px">
+                                                <form:option value="" label=""/>
                                                 <form:options items="${fns:getDictList(104000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                                             </form:select>
                                         </div>
@@ -74,6 +76,7 @@
                                         <div class="col-sm-8">
                                             <form:select path="cusGrade" class="chosen-select"
                                                          cssStyle="min-width: 300px">
+                                                <form:option value="" label=""/>
                                                 <form:options items="${fns:getDictList(105000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                                             </form:select>
                                         </div>
@@ -85,6 +88,7 @@
                                         <div class="col-sm-8">
                                             <form:select path="cusSource" class="chosen-select"
                                                          cssStyle="min-width: 300px">
+                                                <form:option value="" label=""/>
                                                 <form:options items="${fns:getDictList(106000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                                             </form:select>
                                         </div>
@@ -96,6 +100,7 @@
                                         <div class="col-sm-8">
                                             <form:select path="empCode" class="chosen-select"
                                                          cssStyle="min-width: 300px">
+                                                <form:option value="" label=""/>
                                                 <form:options items="${fns:getEmpListByDept(109001)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                                             </form:select>
                                         </div>

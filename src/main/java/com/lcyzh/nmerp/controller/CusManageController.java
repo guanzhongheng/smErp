@@ -39,7 +39,7 @@ public class CusManageController  extends BaseController {
     @ModelAttribute
     public CustomerAddModifyVo get(@RequestParam(required=false) String cusCode) {
         if (StringUtils.isNotBlank(cusCode)){
-            return customerService.findByCusCode(cusCode);
+            return customerService.findModifyInfoByCusCode(cusCode);
         }else{
             return new CustomerAddModifyVo();
         }
@@ -47,8 +47,8 @@ public class CusManageController  extends BaseController {
 
 
     @RequestMapping(value = {"customer_add"})
-    public String customerAdd(CustomerAddModifyVo customr,Model model){
-        model.addAttribute("customr",customr);
+    public String customerAdd(@ModelAttribute("customerAddModifyVo") CustomerAddModifyVo customerAddModifyVo,Model model){
+        model.addAttribute("customerAddModifyVo",customerAddModifyVo);
         return "modules/crm/customerAdd";
     }
 
@@ -80,20 +80,6 @@ public class CusManageController  extends BaseController {
         list.add(cusCode);
         customerService.delete(list);
         return "redirect:/modules/crm/customerList";
-    }
-
-    /**
-     * 订单产品详情
-     * @param item
-     * @param model
-     * @return
-     */
-    @RequestMapping(value = {"customer/prodDetailList"})
-    public String prodDetailList(@ModelAttribute("orderItem") OrderItemVo item, Model model, HttpServletRequest request, HttpServletResponse response){
-        Page<OrderItemVo> page = null;
-        model.addAttribute("orderId",item.getItemCode());
-        model.addAttribute("page", page);
-        return "modules/crm/prodDetailList";
     }
 
 }

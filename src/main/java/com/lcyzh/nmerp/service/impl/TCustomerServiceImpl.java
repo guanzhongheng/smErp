@@ -124,7 +124,6 @@ public class TCustomerServiceImpl implements TCustomerService {
     }
 
 
-
     /**
      * @Description: Vo转换实体po
      * @Param: [vo]
@@ -208,7 +207,7 @@ public class TCustomerServiceImpl implements TCustomerService {
 
 
     @Override
-    public CustomerAddModifyVo findByCusCode(String cusCode) {
-        return null;
+    public CustomerAddModifyVo findModifyInfoByCusCode(String cusCode) {
+        return tCustomerMapper.findModifyInfoByCusCode(cusCode);
     }
 }

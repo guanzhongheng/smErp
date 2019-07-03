@@ -6,13 +6,10 @@
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <h5>产品列表</h5>
-                <div class="ibox-tools">
-                    <button type="button" class="btn-primary">明细保存</button>
-                </div>
             </div>
             <div class="ibox-content">
-                <div class="col-sm-12">
-                    <table id="productTables" data-height="400" data-mobile-responsive="true">
+                <div class="col-sm-12" >
+                    <table id="productTables"data-height="300" data-mobile-responsive="true">
                         <thead>
                         <tr>
                             <th data-field="prodCode">产品编码</th>
@@ -27,15 +24,15 @@
             </div>
         </div>
     </div>
-
+</br>
     <div class="row">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>产品列表</h5>
+                <h5>订单产品列表</h5>
             </div>
             <div class="ibox-content">
-                <div class="col-sm-12">
-                    <table id="cusProdDetail" data-height="400" data-mobile-responsive="true">
+                <div class="col-sm-12" style="max-height: 350px">
+                    <table id="cusProdDetail" data-height="300" data-mobile-responsive="true">
                         <thead>
                         <tr>
                             <th data-field="ckId">序号</th>
@@ -58,6 +55,14 @@
             </div>
         </div>
     </div>
+    </br>
+    <div class="row">
+        <div class="form-group">
+                <button class="btn btn-primary" type="submit" onclick="saveProd()">保存详情</button>
+                &nbsp;&nbsp;
+                <button class="btn btn-white" type="button" onclick="history.go(-1)">返回</button>
+        </div>
+    </div>
 </div>
 </body>
 <script src="${ctxStatic}/hPlugs/js/plugins/bootstrap-table/bootstrap-table.js"></script>
@@ -65,9 +70,21 @@
 <script>
     var prodList = [];
     var cusProdList = [];
+    var indexCkId = 1;
+    var maxDataIndex = 1;
+    var data = [{"prodCode":"1","prodName":"1_n","prodCgyCode":"1_p","prodSpec":"1_c"},
+        {"prodCode":"2","prodName":"12_n","prodCgyCode":"12_p","prodSpec":"12_c"},
+        {"prodCode":"3","prodName":"13_n","prodCgyCode":"13_p","prodSpec":"13_c"},
+        {"prodCode":"4","prodName":"14_n","prodCgyCode":"14_p","prodSpec":"4_c"},
+        {"prodCode":"4","prodName":"14_n","prodCgyCode":"14_p","prodSpec":"4_c"},
+        {"prodCode":"4","prodName":"14_n","prodCgyCode":"14_p","prodSpec":"4_c"},
+        {"prodCode":"4","prodName":"14_n","prodCgyCode":"14_p","prodSpec":"4_c"},
+        {"prodCode":"4","prodName":"14_n","prodCgyCode":"14_p","prodSpec":"4_c"}]
     $(document).ready(function(){
+        debugger;
         $("#productTables").bootstrapTable({
             url:'',
+            classes: 'table table-hover',
             pagination: false,  //表格底部显示分页条
             sidePagination: "server",
             escape:false, //启动转义字符
@@ -91,11 +108,12 @@
                     events: operateEvents,
                     formatter: operFormatter
                 }
-            ],onLoadSuccess:function (data) {
+            ],onLoadSuccess:function () {
+
                 debugger;
             }
         });
-
+        $("#productTables").bootstrapTable("load",data);
         $("#cusProdDetail").bootstrapTable({
             url:'',
             pagination: false,  //表格底部显示分页条
@@ -105,7 +123,16 @@
             columns :[
                 {
                     field: 'ckId',
-                    title: '序号'
+                    title: '序号',
+                    formatter:function (value,row,index){
+                        debugger;
+                        if(index == 0){
+                            maxDataIndex = 1;
+                        }else{
+                            maxDataIndex = maxDataIndex + 1;
+                        }
+                        return maxDataIndex;
+                    }
                 },{
                     field: 'itemCode',
                     title: '产品编号'
@@ -119,58 +146,60 @@
                     field: 'itemLenth',
                     title: '长',
                     formatter:function (value,row,index) {
-                        return ['<input trpe="text" class="form-control" value="'+value+'"/>'].join('');
+                        debugger;
+                        return ['<input trpe="text" onchange="inserData(\'itemLenth\','+row.ckId+',this)" class="form-control" value="'+value+'"/>'].join('');
                     }
                 },{
                     field: 'itemWidth',
                     title: '宽',
                     formatter:function (value,row,index) {
-                        return ['<input trpe="text" class="form-control" value="'+value+'"/>'].join('');
+                        return ['<input trpe="text" onchange="inserData(\'itemWidth\','+row.ckId+',this)" class="form-control" value="'+value+'"/>'].join('');
                     }
                 },{
                     field: 'itemThick',
                     title: '高',
                     formatter:function (value,row,index) {
-                        return ['<input trpe="text" class="form-control" value="'+value+'"/>'].join('');
+                        return ['<input trpe="text" onchange="inserData(\'itemThick\','+row.ckId+',this)" class="form-control" value="'+value+'"/>'].join('');
                     }
                 },{
                     field: 'itemNum',
                     title: '计量',
                     formatter:function (value,row,index) {
-                        return ['<input trpe="text" class="form-control" value="'+value+'"/>'].join('');
+                        return ['<input trpe="text" onchange="inserData(\'itemNum\','+row.ckId+',this)" class="form-control" value="'+value+'"/>'].join('');
                     }
                 },{
                     field: 'itemColor',
                     title: '产品颜色',
                     formatter:function (value,row,index) {
-                        return ['<input trpe="text" class="form-control" value="'+value+'"/>'].join('');
+                        return ['<input trpe="text" onchange="inserData(\'itemColor\','+row.ckId+',this)" class="form-control" value="'+value+'"/>'].join('');
                     }
                 },{
                     field: 'itemUnit',
                     title: '单位',
                     formatter:function (value,row,index) {
-                        return ['<input trpe="text" class="form-control" value="'+value+'"/>'].join('');
+                        return ['<input trpe="text" onchange="inserData(\'itemUnit\','+row.ckId+',this)" class="form-control" value="'+value+'"/>'].join('');
                     }
                 },{
                     field: 'itemOwner',
                     title: '收货人',
                     formatter:function (value,row,index) {
-                        return ['<input trpe="text" class="form-control" value="'+value+'"/>'].join('');
+                        return ['<input trpe="text" onchange="inserData(\'itemOwner\','+row.ckId+',this)" class="form-control" value="'+value+'"/>'].join('');
                     }
                 },{
                     field: 'itemYb',
                     title: '压编',
                     formatter:function (value,row,index) {
-                        return ['<input trpe="text" class="form-control" value="'+value+'"/>'].join('');
+                        return ['<input trpe="text" onchange="inserData(\'itemYb\','+row.ckId+',this)" class="form-control" value="'+value+'"/>'].join('');
                     }
                 },{
                     field: 'oper',
                     title: '操作',
                     events: operateEvents,
-                    formatter: operFormatter
+                    formatter: operProdFormatter
                 }
             ]
         })
+        $(".fixed-table-border")[1].style.height = '230px';
     });
 
     function operFormatter(value, row, index) {
@@ -189,10 +218,58 @@
     window.operateEvents = {
         "click #tableRowAdd" : function(e,value,row,index){
             debugger;
+            cusProdList.push(tranObject(row));
+            $("#cusProdDetail").bootstrapTable("load",cusProdList);
         },
 
         "click #tableRowdelete" : function(e,value,row,index){
+            for(var i=0;i<cusProdList.length;i++){
+                if(cusProdList[i].ckId == row.ckId){
+                    cusProdList.splice(i,1);
+                    break;
+                }
+            }
+            $("#cusProdDetail").bootstrapTable("load",cusProdList);
             debugger;
         }
+    }
+    
+    function tranObject(data) {
+        indexCkId = indexCkId + 1;
+        debugger;
+        var obj = {
+            "ckId":indexCkId,
+            "itemCode":data.prodCode,
+            "itemName":data.prodCgyCode,
+            "itemSpec":data.prodSpec,
+            "itemLenth":"",
+            "itemWidth":"",
+            "itemThick":"",
+            "itemUnit":"",
+            "itemNum":"",
+            "itemColor":"",
+            "itemOwner":"",
+            "itemYb":""
+        }
+        return obj;
+    }
+
+    function inserData(name,index,obj) {
+        debugger
+        for(var i=0;i<cusProdList.length;i++){
+            if(cusProdList[i].ckId == index){
+                for(var key in cusProdList[i]){
+                    console.log(key,cusProdList[i][key]);
+                    if(key == name){
+                        cusProdList[i][key] = obj.value;
+                    }
+                }
+            }
+        }
+    }
+    
+    function saveProd() {
+
+        debugger;
     }
 </script>

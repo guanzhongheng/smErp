@@ -22,5 +22,5 @@ public interface TCustomerService {
 
     int delete(List<String> cusCodeList);
 
-    CustomerAddModifyVo findByCusCode(String cusCode);
+    CustomerAddModifyVo findModifyInfoByCusCode(String cusCode);
 }

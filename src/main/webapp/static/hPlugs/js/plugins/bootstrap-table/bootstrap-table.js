@@ -893,6 +893,12 @@
               this.$tableBorder = this.$tableBody.find('.fixed-table-border');
               this.$tableLoading.addClass('fixed-table-border');
             }
+
+            if (this.options.classes.split(' ').indexOf('b-bordered') !== -1) {
+                this.$tableBody.append('<div class="fixed-table-border" style="min-height: 230px"></div>');
+                this.$tableBorder = this.$tableBody.find('.fixed-table-border');
+                this.$tableLoading.addClass('fixed-table-border');
+            }
           }
         }
       }, {

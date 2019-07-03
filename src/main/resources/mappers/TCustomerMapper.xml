@@ -18,14 +18,41 @@
     </resultMap>
 
     <!-- 根据编号获得用户 -->
+    <select id="findModifyInfoByCusCode" parameterType="java.lang.String"
+            resultType="com.lcyzh.nmerp.model.vo.CustomerAddModifyVo">
+         SELECT
+            cu.cus_name cusName,
+            cu.cus_grade cusGrade,
+            cu.cus_address cusAddress,
+            cu.industry industry,
+            cu.cus_status cusStatus,
+            cu.cus_source cusSource,
+            cu.cus_type cusType,
+            cu.remark remarks,
+            pc.contact_name primaryContactorName,
+            pc.contact_phone primaryContactorPhone,
+            pc.contact_address primaryContactorAddress,
+            pc.contact_birth primaryContactorBirth,
+            pc.contact_email primaryContactorEmail,
+            pc.contact_role primaryContactorRole,
+            pc.contact_sex primaryContactorSex,
+            pc.department primaryContactorDepartment,
+            pc.fixed_phone primaryContactorFixedPhone,
+            pc.remark primaryContactorRemark
+        FROM
+          T_CUSTOMER cu
+        LEFT JOIN T_PRIMARY_CONTACT pc ON cu.cus_code = pc.cus_code
+       where cu.cus_code = #{cusCode,jdbcType=VARCHAR}
+    </select>
+
+
+    <!-- 根据编号获得用户 -->
     <select id="findByCusCode" resultMap="tCustomerResultMap">
         SELECT
         *
         FROM T_CUSTOMER
        where cus_code = #{cusCode,jdbcType=VARCHAR}
     </select>
-
-
 
 
     <select id="findByCusName" parameterType="java.lang.String" resultMap="tCustomerResultMap">

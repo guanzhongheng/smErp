@@ -10,8 +10,8 @@
 </head>
 <body>
 <ul class="nav nav-tabs">
-    <li class="active"><a href="${ctx}/crm/customer/list/">客户列表</a></li>
-    <li><a href="${ctx}/crm/poollist/">公海列表</a></li>
+    <li><a href="${ctx}/crm/list/">客户列表</a></li>
+    <li class="active"><a href="${ctx}/crm/poollist/">公海列表</a></li>
 </ul>
 <form:form id="searchForm" modelAttribute="customer" action="${ctx}/crm/customer/list" method="post"
            class="breadcrumb form-search">
