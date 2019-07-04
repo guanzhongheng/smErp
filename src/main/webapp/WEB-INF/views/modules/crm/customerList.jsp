@@ -4,14 +4,12 @@
 <head>
     <title>全部客户</title>
     <script type="text/javascript">
-
-
     </script>
 </head>
 <body>
 <ul class="nav nav-tabs">
-    <li class="active"><a href="${ctx}/crm/list/">客户列表</a></li>
-    <li><a href="${ctx}/crm/poollist/">公海列表</a></li>
+    <li class="active"><a href="${ctx}/crm/customer/list/">客户列表</a></li>
+    <li><a href="${ctx}/crm/customer/poollist/">公海列表</a></li>
 </ul>
 <form:form id="searchForm" modelAttribute="customer" action="${ctx}/crm/customer/list" method="post"
            class="breadcrumb form-search">
@@ -62,7 +60,7 @@
     <table id="contentTable" class="table table-striped table-bordered table-condensed">
         <thead>
         <tr>
-            <th></th>
+            <th>客户编号</th>
             <th>客户名称</th>
             <th>客户状态</th>
             <th>客户星级</th>
@@ -77,7 +75,7 @@
         <tbody>
         <c:forEach items="${page.list}" var="cus">
             <tr>
-                <td><input type="checkbox" name="cuscode">${cus.cusCode}</td>
+                <td><input type="checkbox" name="cuscode" value="${cus.cusCode}">${cus.cusCode}</td>
                 <td>${cus.cusName}</td>
                 <td>${cus.cusStatus}</td>
                 <td>${cus.cusGrade}</td>
@@ -100,12 +98,12 @@
 
     <script>
         $("#toCustomer").click(function () {
+            debugger;
             <!-- 针对选中客户进行操作 -->
-            var checkValue = $(".td checkbox");
-            var str = '';
-
+            // var checkValue = $(".td checkbox");
+            var str = getCheckValue();
             if (str.length > 0) {
-                top.$.jBox.open("iframe:${ctx}/crm/formSubmit?ids=1,2,3,4,", "转移客户", 500, $(top.document).height() - 300, {
+                top.$.jBox.open("iframe:${ctx}/crm/formSubmit?ids="+str, "转移客户", 500, $(top.document).height() - 300, {
                     buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
                         debugger;
                         var ids = h.find("iframe")[0].contentWindow.ids;
@@ -129,35 +127,54 @@
                         $(".jbox-content", top.document).css("overflow-y", "hidden");
                     }
                 });
+            }else{
+                top.$.jBox.tip('最少选中一条记录');
             }
 
         });
 
         $("#toPoolCustomer").click(function () {
             <!-- 针对选中客户进行操作 -->
-            top.$.jBox.open("iframe:${ctx}/crm/poolRemark?ids=1,2,3,4,", "移入公海", 500, $(top.document).height() - 300, {
-                buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
-                    debugger;
-                    var ids = h.find("iframe")[0].contentWindow.ids;
-                    var remarks = h.find("iframe")[0].contentWindow.remarks;
-                    if (v == "ok") {
-                        $.post('${ctx}/crmAjax/savePoolCustomer/', {
-                            cusIds: ids.value,
-                            remarks: remarks.value
-                        }, function (data) {
-                            if (data = "success") {
-                                top.$.jBox.tip('移入成功');
-                            } else {
-                                top.$.jBox.tip('移入失败');
-                            }
-                        })
+
+            var str = getCheckValue();
+            if (str.length > 0) {
+                top.$.jBox.open("iframe:${ctx}/crm/poolRemark?ids="+str, "移入公海", 500, $(top.document).height() - 300, {
+                    buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
+                        debugger;
+                        var ids = h.find("iframe")[0].contentWindow.ids;
+                        var remarks = h.find("iframe")[0].contentWindow.remarks;
+                        if (v == "ok") {
+                            $.post('${ctx}/crmAjax/savePoolCustomer/', {
+                                cusIds: ids.value,
+                                remarks: remarks.value
+                            }, function (data) {
+                                if (data = "success") {
+                                    top.$.jBox.tip('移入成功');
+                                } else {
+                                    top.$.jBox.tip('移入失败');
+                                }
+                            })
+                        }
+                    }, loaded: function (h) {
+                        debugger;
+                        $(".jbox-content", top.document).css("overflow-y", "hidden");
                     }
-                }, loaded: function (h) {
-                    debugger;
-                    $(".jbox-content", top.document).css("overflow-y", "hidden");
-                }
-            });
+                });
+            }else{
+                top.$.jBox.tip('最少选中一条记录');
+            }
         });
+
+        function getCheckValue(){
+            var obj = document.getElementsByName("cuscode");
+            var check_val = '';
+            for(k in obj){
+                if(obj[k].checked)
+                check_val = check_val + "," +obj[k].value
+            }
+            check_val = check_val.replace(",,",",");
+            return check_val;
+        }
     </script>
 </div>
 </body>

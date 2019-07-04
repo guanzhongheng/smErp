@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <html>
 <head>
-    <title>全部客户</title>
+    <title>全部订单</title>
     <script type="text/javascript">
 
 
@@ -10,130 +10,134 @@
 </head>
 <body>
 <ul class="nav nav-tabs">
-    <li class="active"><a href="${ctx}/crm/customer/list/">客户列表</a></li>
-    <li><a href="${ctx}/crm/poollist/">公海列表</a></li>
+    <li class="active"><a href="${ctx}/crm/order/taskList">任务分配</a></li>
 </ul>
-<form:form id="searchForm" modelAttribute="customer" action="${ctx}/crm/customer/list" method="post"
+<form:form id="searchForm" modelAttribute="order" action="${ctx}/crm/order/taskList" method="post"
            class="breadcrumb form-search">
     <input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
     <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
     <ul class="ul-form">
         <li>
-            <form:input path="cusName" htmlEscape="false" maxlength="200" class="input-medium" placeholder="客户名称"/>
+            <form:input path="ordCode" htmlEscape="false" maxlength="200"
+                        class="input-medium" placeholder="订单编号"/>
         </li>
         <li>
             &nbsp;&nbsp;
-            <form:select path="cusType" class="input-medium" placeholder="客户类型">
-                <form:option value="" label=""/>
-                <%--<form:options items="${fns:getDictList('oa_notify_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
-            </form:select>
+            <form:input path="ordTitle" htmlEscape="false" maxlength="200"
+                        class="input-medium" placeholder="订单标题"/>
         </li>
         <li>
             &nbsp;&nbsp;
-            <form:select path="cusGrade" class="input-medium" placeholder="客户星级">
-                <form:option value="" label=""/>
-                <%--<form:options items="${fns:getDictList('oa_notify_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
-            </form:select>
-            <input id="beginDate" name="beginDate" placeholder="最后跟进" type="text" readonly="readonly" maxlength="20"
+            <form:input path="cusName" htmlEscape="false" maxlength="200"
+                        class="input-medium" placeholder="关联客户"/>
+        </li>
+        <li>
+            &nbsp;&nbsp;
+            <input id="ordSignDate" name="ordSignDate" placeholder="签单日期" type="text" readonly="readonly" maxlength="20"
                    class="input-small Wdate"
                    value="" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
         </li>
-        <li>
-            &nbsp;&nbsp;
-            <input type="checkbox" name="followType" id="type">归属模式
-        </li>
-        &nbsp;&nbsp;
         <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
+        <li class="clearfix"></li>
     </ul>
 </form:form>
 <div class="control-group">&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="/cus/customer_add" type="button" class="btn btn-primary" style="width: 67px;height: 22px"><i
-            class="icon-plus"></i>&nbsp;添加</a>
-    <%--&nbsp;&nbsp;--%>
-    <%--<a href="/crm/task_add" type="button" class="btn btn-default" style="width: 80px;height: 23px"><i class="icon-list-ul"></i>&nbsp;新建任务</a>--%>
-    &nbsp;&nbsp;
-    <a type="button" id="toCustomer" class="btn btn-default" style="width: 80px;height: 23px"><i
-            class="icon-refresh"></i>&nbsp;转移客户</a>
-    &nbsp;&nbsp;
-    <a type="button" id="toPoolCustomer" class="btn btn-default" style="width: 80px;height: 23px"><i
-            class="icon-group"></i>&nbsp;移入公海</a>
+    <a type="button" id="taskDoWork" class="btn btn-default" style="width: 80px;height: 23px"><i
+            class="icon-refresh"></i>&nbsp;任务分配</a>
 </div>
 <div class="control-group">
     <table id="contentTable" class="table table-striped table-bordered table-condensed">
         <thead>
         <tr>
-            <th></th>
-            <th>客户名称</th>
-            <th>客户状态</th>
-            <th>客户星级</th>
-            <th>首联系人</th>
-            <th>手机号码</th>
-            <%--<th>客户维护人</th>--%>
-            <th>最后跟进日期</th>
-            <th>未跟进天数</th>
-            <th>操作</th>
+            <th><input type="checkbox" id="checkAll" onchange="checkedAll(this)"></th>
+            <th>订单编号</th>
+            <th>订单标题</th>
+            <th>关联客户</th>
+            <th>审批状态</th>
+            <th>订单总金额</th>
+            <th>已回款金额</th>
+            <th>已开票金额</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${page.list}" var="cus">
+        <c:forEach items="${page.list}" var="ord">
             <tr>
-                <td><input type="checkbox" name="cuscode">${cus.cusCode}</td>
-                <td>${cus.cusName}</td>
-                <td>${cus.cusStatus}</td>
-                <td>${cus.cusGrade}</td>
-                <td>${cus.primaryContactorName}</td>
-                <td>${cus.primaryContactorPhone}</td>
-                    <%--<td>${cus.cusAddress}</td>--%>
-                <td><fmt:formatDate value="${cus.lastFollowDate}" pattern="yyyy-MM-dd"/></td>
-                <td>${cus.unFollowDays}</td>
-                <td>
-                    <a href=""><i class="icon-comment">&nbsp;跟进</i></a>
-                    <a href="${ctx}/cus/customer_add?cusCode=${cus.cusCode}"><i class="icon-pencil">&nbsp;编辑</i></a>
-                    <a href="${ctx}/cus/customer_delete?cusCode=${cus.cusCode}"
-                       onclick="return confirmx('确认要删除该客户吗？', this.href)"><i class="icon-trash">&nbsp;删除</i></a>
-                </td>
+                <td><input type="checkbox" name="orderCode" value="${ord.ordCode}" /></td>
+                <td>${ord.ordCode}</td>
+                <td>${ord.ordTitle}</td>
+                <td>${ord.ordCusName}</td>
+                <td>${ord.ordStatusValue}</td>
+                <td>${ord.ordTotalAmount}</td>
+                <td>${ord.repayAmount}</td>
+                <td>${ord.invoicedAmount}</td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
     <div class="pagination">${page}</div>
-
-    <script>
-        $("#toCustomer").click(function () {
-            <!-- 针对选中客户进行操作 -->
-            var checkValue = $(".td checkbox");
-            var str = '';
-
-            if (str.length > 0) {
-                top.$.jBox.open("iframe:${ctx}/crm/formSubmit?ids=1,2,3,4,", "转移客户", 500, $(top.document).height() - 300, {
-                    buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
-                        debugger;
-                        var ids = h.find("iframe")[0].contentWindow.ids;
-                        var cusContent = h.find("iframe")[0].contentWindow.cusContent;
-                        var remarks = h.find("iframe")[0].contentWindow.remarks;
-                        if (v == "ok") {
-                            $.post('${ctx}/crmAjax/saveTransfer/', {
-                                cusIds: ids.value,
-                                userId: cusContent.value,
-                                remarks: remarks.value
-                            }, function (data) {
-                                if (data = "success") {
-                                    top.$.jBox.tip('保存成功');
-                                } else {
-                                    top.$.jBox.tip('保存失败');
-                                }
-                            })
-                        }
-                    }, loaded: function (h) {
-                        debugger;
-                        $(".jbox-content", top.document).css("overflow-y", "hidden");
-                    }
-                });
-            }
-
-        });
-
-    </script>
 </div>
+<sys:message content="${message}"/>
+<script>
+    $("#taskDoWork").click(function () {
+        debugger;
+        <!-- 针对选中客户进行操作 -->
+        // var checkValue = $(".td checkbox");
+        var str = getTaskCheckValue();
+        if (str.length > 0) {
+            top.$.jBox.open("iframe:${ctx}/crm/taskForm?ids="+str, "任务分配", 500, $(top.document).height() - 300, {
+                buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
+                    debugger;
+                    var taskIds = h.find("iframe")[0].contentWindow.taskIds;
+                    var devInfo = h.find("iframe")[0].contentWindow.devInfo;
+                    if (v == "ok") {
+                        $.post('${ctx}/crmAjax/saveTransfer/', {
+                            taskIds: taskIds.value,
+                            devInfo: devInfo.value
+                        }, function (data) {
+                            if (data = "success") {
+                                top.$.jBox.tip('分配成功');
+                                window.location.href = "/crm/order/taskList";
+                            } else {
+                                top.$.jBox.tip('分配成功');
+                            }
+                        })
+                    }
+                }, loaded: function (h) {
+                    debugger;
+                    $(".jbox-content", top.document).css("overflow-y", "hidden");
+                }
+            });
+        }else{
+            top.$.jBox.tip('最少选中一条记录');
+        }
+
+    });
+
+    function getTaskCheckValue() {
+        debugger;
+        var obj = document.getElementsByName("orderCode");
+        var check_val = '';
+        for(k in obj){
+            if(obj[k].checked)
+                check_val = check_val + "," +obj[k].value
+        }
+        check_val = check_val.replace(",,",",");
+        return check_val;
+    }
+
+    function checkedAll(obj){
+        var codes = document.getElementsByName("orderCode")
+        if(obj.checked){
+            for(var i=0;i<codes.length;i++){
+                codes[i].checked = true;
+            }
+        }else{
+            for(var i=0;i<codes.length;i++){
+                codes[i].checked = false;
+            }
+        }
+    }
+</script>
+
 </body>
 </html>
