@@ -3,7 +3,6 @@
 <html>
 <head>
 	<title>分配角色</title>
-	<meta name="decorator" content="default"/>
 </head>
 <body>
 	<ul class="nav nav-tabs">
@@ -13,13 +12,13 @@
 	<div class="container-fluid breadcrumb">
 		<div class="row-fluid span12">
 			<span class="span4">角色名称: <b>${role.name}</b></span>
-			<span class="span4">归属机构: ${role.office.name}</span>
-			<span class="span4">英文名称: ${role.enname}</span>
+			<%--<span class="span4">归属机构: ${role.office.name}</span>--%>
+			<%--<span class="span4">英文名称: ${role.enname}</span>--%>
 		</div>
 		<div class="row-fluid span8">
 			<span class="span4">角色类型: ${role.roleType}</span>
-			<c:set var="dictvalue" value="${role.dataScope}" scope="page" />
-			<span class="span4">数据范围: ${fns:getDictLabel(dictvalue, 'sys_data_scope', '')}</span>
+			<%--<c:set var="dictvalue" value="${role.dataScope}" scope="page" />--%>
+			<%--<span class="span4">数据范围: ${fns:getDictLabel(dictvalue, 'sys_data_scope', '')}</span>--%>
 		</div>
 	</div>
 	<sys:message content="${message}"/>
@@ -67,12 +66,12 @@
 		</script>
 	</div>
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
-		<thead><tr><th>归属公司</th><th>归属部门</th><th>登录名</th><th>姓名</th><th>电话</th><th>手机</th><shiro:hasPermission name="sys:user:edit"><th>操作</th></shiro:hasPermission></tr></thead>
+		<thead><tr><th>登录名</th><th>姓名</th><th>电话</th><th>手机</th><shiro:hasPermission name="sys:user:edit"><th>操作</th></shiro:hasPermission></tr></thead>
 		<tbody>
 		<c:forEach items="${userList}" var="user">
 			<tr>
-				<td>${user.company.name}</td>
-				<td>${user.office.name}</td>
+				<%--<td>${user.company.name}</td>--%>
+				<%--<td>${user.office.name}</td>--%>
 				<td><a href="${ctx}/sys/user/form?id=${user.id}">${user.loginName}</a></td>
 				<td>${user.name}</td>
 				<td>${user.phone}</td>

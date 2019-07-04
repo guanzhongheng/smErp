@@ -119,7 +119,7 @@
 			<label class="control-label">是否允许登录:</label>
 			<div class="controls">
 				<form:select path="loginFlag">
-					<%--<form:options items="${fns:getSysDictList('yes_no')}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
+					<form:options items="${fns:getDictList('yes_no')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 				</form:select>
 				<span class="help-inline"><font color="red">*</font> “是”代表此账号允许登录，“否”则表示此账号不允许登录</span>
 			</div>
@@ -129,7 +129,7 @@
 			<div class="controls">
 				<form:select path="userType" class="input-xlarge">
 					<form:option value="" label="请选择"/>
-					<%--<form:options items="${fns:getDictList('sys_user_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
+					<form:options items="${fns:getDictList('sys_user_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
 				</form:select>
 			</div>
 		</div>

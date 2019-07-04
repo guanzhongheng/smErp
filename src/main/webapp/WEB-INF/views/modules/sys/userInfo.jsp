@@ -83,9 +83,9 @@
 		</div>
 		<div class="control-group">
 			<label class="control-label">用户类型:</label>
-			<%--<div class="controls">--%>
-				<%--<label class="lbl">${fns:getDictLabel(user.userType, 'sys_user_type', '无')}</label>--%>
-			<%--</div>--%>
+			<div class="controls">
+				<label class="lbl">${fns:getDictLabel(user.userType, 'sys_user_type', '无')}</label>
+			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label">用户角色:</label>
