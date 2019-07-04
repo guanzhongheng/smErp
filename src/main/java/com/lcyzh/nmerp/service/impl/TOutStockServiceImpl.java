@@ -208,7 +208,7 @@ public class TOutStockServiceImpl implements TOutStockService {
                 entity.setCusName(queryVo.getCusName());
             }
         }
-        return tBarCodeInfoMapper.findDetailByPrimaryKey(barCode);
+        return entity;
     }
 
 

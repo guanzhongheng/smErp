@@ -42,6 +42,14 @@ public interface TOrderService {
      */
     Page<OrderQueryVo> findPage(Page<OrderQueryVo> page, OrderQueryVo order);
 
+    /**
+     * @Description: 订单批量导入
+     * @Param: [vo]
+     * @return: int
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/4 6:06 PM
+     */
     int insert(OrderAddBatchVo vo);
 
     /**
@@ -54,6 +62,14 @@ public interface TOrderService {
      */
     int insertBatch(List<OrderAddBatchVo> voList);
 
+    /**
+     * @Description: 订单更新
+     * @Param: [tOrder]
+     * @return: int
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/4 6:06 PM
+     */
     int update(TOrder tOrder);
 
     int delete(TOrder tOrder);
