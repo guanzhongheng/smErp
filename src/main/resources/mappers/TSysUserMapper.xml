@@ -4,24 +4,24 @@
 
     <sql id="userColumns">
         a.id,
-        a.login_name,
+        a.login_name AS loginName,
         a.password,
         a.no,
         a.name,
         a.email,
         a.phone,
         a.mobile,
-        a.user_type,
-        a.login_ip,
-        a.login_date,
+        a.user_type AS userType,
+        a.login_ip AS loginIp,
+        a.login_date AS loginDate,
         a.remarks,
-        a.login_flag,
+        a.login_flag AS loginFlag,
         a.photo,
         a.create_by AS "createBy.id",
-        a.create_date,
+        a.create_date AS createDate,
         a.update_by AS "updateBy.id",
-        a.update_date,
-        a.del_flag
+        a.update_date AS updateDate,
+        a.del_flag AS delFlag
     </sql>
 
     <!-- 根据编号获得用户 -->
@@ -58,16 +58,16 @@
             AND a.id != '1'
         </if>
         <if test="loginName != null and loginName != ''">
-            AND a.login_name like
-            <if test="dbName == 'oracle'">'%'||#{loginName}||'%'</if>
-            <if test="dbName == 'mssql'">'%'+#{loginName}+'%'</if>
-            <if test="dbName == 'mysql'">CONCAT('%', #{loginName}, '%')</if>
+            AND a.login_name like CONCAT('%', #{loginName}, '%')
+            <!--<if test="dbName == 'oracle'">'%'||#{loginName}||'%'</if>-->
+            <!--<if test="dbName == 'mssql'">'%'+#{loginName}+'%'</if>-->
+            <!--<if test="dbName == 'mysql'">CONCAT('%', #{loginName}, '%')</if>-->
         </if>
         <if test="name != null and name != ''">
-            AND a.name like
-            <if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
-            <if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
-            <if test="dbName == 'mysql'">CONCAT('%', #{name}, '%')</if>
+            AND a.name like CONCAT('%', #{name}, '%')
+            <!--<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>-->
+            <!--<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>-->
+            <!--<if test="dbName == 'mysql'">CONCAT('%', #{name}, '%')</if>-->
         </if>
         <!-- 数据范围过滤 -->
         ${sqlMap.dsf}
@@ -75,9 +75,9 @@
             <when test="page !=null and page.orderBy != null and page.orderBy != ''">
                 ORDER BY ${page.orderBy}
             </when>
-            <otherwise>
-                ORDER BY c.code, o.code, a.name
-            </otherwise>
+            <!--<otherwise>-->
+                <!--ORDER BY c.code, o.code, a.name-->
+            <!--</otherwise>-->
         </choose>
     </select>
 

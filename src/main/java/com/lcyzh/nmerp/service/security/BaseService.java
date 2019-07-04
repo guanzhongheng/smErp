@@ -31,7 +31,7 @@ public abstract class BaseService {
 	 * @param userAlias 用户表别名，多个用“,”逗号隔开，传递空，忽略此参数
 	 * @return 标准连接条件对象
 	 */
-	public static String dataScopeFilter(User user, String officeAlias, String userAlias) {
+	public static String 	dataScopeFilter(User user, String officeAlias, String userAlias) {
 
 		StringBuilder sqlString = new StringBuilder();
 		
