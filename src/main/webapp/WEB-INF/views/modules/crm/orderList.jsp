@@ -67,14 +67,15 @@
             <tr>
                 <td>${ord.ordCode}</td>
                 <td>${ord.ordTitle}</td>
-                <td>${ord.ordCusName}</td>
+                <td>${ord.cusName}</td>
                 <td>${ord.ordStatusValue}</td>
                 <td>${ord.ordTotalAmount}</td>
                 <td>${ord.repayAmount}</td>
                 <td>${ord.invoicedAmount}</td>
                 <td>
                     <a href=""><i class="icon-comment">跟进</i></a>
-                    <a href=""><i class="icon-pencil">编辑</i></a>
+                    <a href="/order/item/prodDetailList?ordCode=${ord.ordCode}"><i class="icon-comment">&nbsp;产品添加</i></a>
+                    <a href="${ctx}/order/order_add?ordCode=${ord.ordCode}"><i class="icon-pencil">编辑</i></a>
                     <a href=""><i class="icon-trash">删除</i></a>
                 </td>
             </tr>

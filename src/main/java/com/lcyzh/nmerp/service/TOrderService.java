@@ -2,11 +2,7 @@ package com.lcyzh.nmerp.service;
 
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.entity.TOrder;
-import com.lcyzh.nmerp.entity.TOrderItem;
-import com.lcyzh.nmerp.model.vo.OrderAddModifyVo;
-import com.lcyzh.nmerp.model.vo.OrderItemAssignVo;
-import com.lcyzh.nmerp.model.vo.OrderItemVo;
-import com.lcyzh.nmerp.model.vo.OrderQueryVo;
+import com.lcyzh.nmerp.model.vo.*;
 
 import java.util.List;
 
@@ -46,7 +42,7 @@ public interface TOrderService {
      */
     Page<OrderQueryVo> findPage(Page<OrderQueryVo> page, OrderQueryVo order);
 
-    int insert(OrderAddModifyVo vo);
+    int insert(OrderAddBatchVo vo);
 
     /**
      * @Description: 批量录入订单
@@ -56,10 +52,29 @@ public interface TOrderService {
      * @Iteration : 1.0
      * @Date: 2019/7/2 10:53 AM
      */
-    int insertBatch(List<OrderAddModifyVo> voList);
+    int insertBatch(List<OrderAddBatchVo> voList);
 
     int update(TOrder tOrder);
 
     int delete(TOrder tOrder);
 
+    /**
+     * @Description: 手录订单
+     * @Param: [ordAddModifyVo]
+     * @return: int
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/4 11:22 AM
+     */
+    int save(OrderAddModifyVo ordAddModifyVo);
+
+    /**
+     * @Description: 根据订单号查询可修改信息
+     * @Param: [ordCode]
+     * @return: com.lcyzh.nmerp.model.vo.OrderAddModifyVo
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/4 1:39 PM
+     */
+    OrderAddModifyVo findModifyInfoByOrdCode(String ordCode);
 }

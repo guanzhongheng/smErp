@@ -3,6 +3,7 @@
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
+        <input type="hidden" id="ordCode" value="${ordCode}"/>
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <h5>产品列表</h5>
@@ -46,7 +47,7 @@
                             <th data-field="itemColor">颜色</th>
                             <th data-field="itemUnit">单位</th>
                             <th data-field="itemOwner">收货人</th>
-                            <th data-field="itemYb">压边</th>
+                            <th data-field="blankPressTypeValue">压边</th>
                             <th data-field="operator">操作</th>
                         </tr>
                         </thead>
@@ -115,11 +116,17 @@
         });
         $("#productTables").bootstrapTable("load",data);
         $("#cusProdDetail").bootstrapTable({
-            url:'',
+            url:'/order/item/findItemsById',
             pagination: false,  //表格底部显示分页条
             sidePagination: "server",
             escape:false, //启动转义字符
             queryParamsType:'',//设置请求参数格式
+            queryParams: function queryParams(params) {
+                var params = {
+                    ordCode : $("#ordCode").val()
+                }
+                return params;
+            },
             columns :[
                 {
                     field: 'ckId',
@@ -186,10 +193,10 @@
                         return ['<input trpe="text" onchange="inserData(\'itemOwner\','+row.ckId+',this)" class="form-control" value="'+value+'"/>'].join('');
                     }
                 },{
-                    field: 'itemYb',
+                    field: 'blankPressTypeValue',
                     title: '压编',
                     formatter:function (value,row,index) {
-                        return ['<input trpe="text" onchange="inserData(\'itemYb\','+row.ckId+',this)" class="form-control" value="'+value+'"/>'].join('');
+                        return ['<input trpe="text" onchange="inserData(\'blankPressTypeValue\','+row.ckId+',this)" class="form-control" value="'+value+'"/>'].join('');
                     }
                 },{
                     field: 'oper',
@@ -235,6 +242,7 @@
     }
     
     function tranObject(data) {
+        debugger;
         indexCkId = indexCkId + 1;
         debugger;
         var obj = {
@@ -249,7 +257,7 @@
             "itemNum":"",
             "itemColor":"",
             "itemOwner":"",
-            "itemYb":""
+            "blankPressTypeValue":""
         }
         return obj;
     }

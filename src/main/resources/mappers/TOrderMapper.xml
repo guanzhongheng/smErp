@@ -6,6 +6,7 @@
         <id column="ord_code" property="ordCode" jdbcType="VARCHAR"/>
         <result column="cus_code" property="cusCode" jdbcType="VARCHAR"/>
         <result column="ord_title" property="ordTitle" jdbcType="VARCHAR"/>
+        <result column="proxy_name" property="proxyName" jdbcType="VARCHAR"/>
         <result column="ord_total_amount" property="ordTotalAmount" jdbcType="DOUBLE"/>
         <result column="ord_type" property="ordType" jdbcType="BIGINT"/>
         <result column="ord_sign_date" property="ordSignDate" jdbcType="VARCHAR"/>
@@ -19,6 +20,26 @@
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
+
+    <select id="findModifyInfoByOrdCode" parameterType="java.lang.String"
+            resultType="com.lcyzh.nmerp.model.vo.OrderAddModifyVo">
+        select
+        ord_code ordCode,
+        cus_code cusCode,
+        proxy_name proxyName,
+        ord_title ordTitle,
+        ord_total_amount ordTotalAmount,
+        ord_type ordType,
+        ord_sign_date ordSignDate,
+        ord_status ordStatus,
+        ord_delivery_date ordDeliveryDate,
+        pay_type payType,
+        cus_contractor cusContractor,
+        com_contractor comContractor,
+        remark remark
+        from T_ORDER
+        where ord_code = #{ordCode,jdbcType=VARCHAR}
+    </select>
 
     <select id="findList" parameterType="com.lcyzh.nmerp.model.vo.OrderQueryVo"
             resultType="com.lcyzh.nmerp.model.vo.OrderQueryVo">
@@ -111,6 +132,7 @@
             cus_contractor,
             com_contractor,
             cont_attach_url,
+            remark,
             create_time,
             update_time
         )
@@ -128,6 +150,7 @@
             #{cusContractor,jdbcType=VARCHAR},
             #{comContractor,jdbcType=VARCHAR},
             #{contAttachUrl,jdbcType=VARCHAR},
+            #{remark,jdbcType=VARCHAR},
             #{createTime,jdbcType=TIMESTAMP},
             #{updateTime,jdbcType=TIMESTAMP}
         )
@@ -201,6 +224,10 @@
 
             <if test="contAttachUrl!=null">
                 cont_attach_url = #{contAttachUrl,jdbcType=VARCHAR},
+            </if>
+
+            <if test="remark!=null">
+                remark = #{remark,jdbcType=VARCHAR},
             </if>
 
             <if test="updateTime!=null">

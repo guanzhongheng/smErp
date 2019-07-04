@@ -14,6 +14,8 @@ import java.util.List;
 @Repository
 public interface TCustomerMapper {
 
+    Customer findById(String cusCode);
+
     CustomerAddModifyVo findModifyInfoByCusCode(String cusCode);
 
     Customer findByCusName(String cusName);

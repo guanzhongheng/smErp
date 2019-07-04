@@ -4,11 +4,9 @@ import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.dao.*;
 import com.lcyzh.nmerp.entity.*;
-import com.lcyzh.nmerp.model.vo.OrderAddModifyVo;
-import com.lcyzh.nmerp.model.vo.OrderItemAssignVo;
-import com.lcyzh.nmerp.model.vo.OrderItemVo;
-import com.lcyzh.nmerp.model.vo.OrderQueryVo;
+import com.lcyzh.nmerp.model.vo.*;
 import com.lcyzh.nmerp.service.TOrderService;
+import com.lcyzh.nmerp.utils.DictUtils;
 import com.lcyzh.nmerp.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -74,13 +72,14 @@ public class TOrderServiceImpl implements TOrderService {
     public Page<OrderQueryVo> findPage(Page<OrderQueryVo> page, OrderQueryVo order) {
         order.setPage(page);
         List<OrderQueryVo> list = tOrderMapper.findList(order);
+        list.stream().forEach(vo-> vo.setOrdStatusValue(DictUtils.getDictValueMaps().get(vo.getOrdStatus())));
         page.setList(list);
         return page;
     }
 
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
     @Override
-    public int insert(OrderAddModifyVo vo) {
+    public int insert(OrderAddBatchVo vo) {
         //生成订单信息，及订单明细;如果合同号不存在，则生成新的合同，存在则关联合同号
         Date date = new Date();
         Customer cus = tCustomerMapper.findByCusName(vo.getCusName());
@@ -133,7 +132,7 @@ public class TOrderServiceImpl implements TOrderService {
     }
 
     @Override
-    public int insertBatch(List<OrderAddModifyVo> voList) {
+    public int insertBatch(List<OrderAddBatchVo> voList) {
         List<TOrder> orders = new ArrayList<>(voList.size());
         return tOrderMapper.insertBatch(orders);
     }
@@ -146,6 +145,65 @@ public class TOrderServiceImpl implements TOrderService {
     @Override
     public int delete(TOrder tOrder) {
         return tOrderMapper.delete(tOrder);
+    }
+
+    @Override
+    public int save(OrderAddModifyVo ordAddModifyVo) {
+        int res = -1;
+        if (ordAddModifyVo != null) {
+            Date current = new Date();
+            TOrder order = buildOrderPoFromVo(ordAddModifyVo, current);
+            if (StringUtils.isNotEmpty(ordAddModifyVo.getOrdCode())) {
+                res = tOrderMapper.update(order);
+            } else {
+                Customer cus = tCustomerMapper.findById(ordAddModifyVo.getCusCode());
+                if(cus!=null){
+                    order.setOrdCode(StringUtils.genFixPreFixStr(Constants.ORD_PRE_FIX));
+                    if(cus.getCusStatus().equals(Constants.CUS_STATUS_SPEC)){
+                        order.setOrdStatus(Constants.ORD_STATUS_TOASSIGN);
+                    }else if(cus.getCusStatus().equals(Constants.CUS_STATUS_BH)){
+                        return  res;
+                    }else {
+                        order.setOrdStatus(Constants.ORD_STATUS_NEW);
+                    }
+                    res = tOrderMapper.insert(order);
+                }
+            }
+
+        }
+
+        return res;
+    }
+
+    @Override
+    public OrderAddModifyVo findModifyInfoByOrdCode(String ordCode) {
+        return tOrderMapper.findModifyInfoByOrdCode(ordCode);
+    }
+
+    /**
+     * @Description: 构建po
+     * @Param: [ordAddModifyVo, current]
+     * @return: void
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/4 11:45 AM
+     */
+    private TOrder buildOrderPoFromVo(OrderAddModifyVo ordAddModifyVo, Date current) {
+        TOrder tOrder = new TOrder();
+        tOrder.setOrdCode(ordAddModifyVo.getOrdCode());
+        tOrder.setProxyName(ordAddModifyVo.getProxyName());
+        tOrder.setCusCode(ordAddModifyVo.getCusCode());
+        tOrder.setOrdDeliveryDate(ordAddModifyVo.getOrdDeliveryDate());
+        tOrder.setComContractor(ordAddModifyVo.getComContractor());
+        tOrder.setCusContractor(ordAddModifyVo.getCusContractor());
+        tOrder.setOrdSignDate(ordAddModifyVo.getOrdSignDate());
+        tOrder.setOrdStatus(ordAddModifyVo.getOrdStatus());
+        tOrder.setOrdTitle(ordAddModifyVo.getOrdTitle());
+        tOrder.setOrdType(ordAddModifyVo.getOrdType());
+        tOrder.setRemark(ordAddModifyVo.getRemark());
+        tOrder.setCreateTime(current);
+        tOrder.setUpdateTime(current);
+        return tOrder;
     }
 
 }

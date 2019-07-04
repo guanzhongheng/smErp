@@ -65,7 +65,7 @@ public class TCustomerServiceImpl implements TCustomerService {
         if (vo != null) {
             Date current = new Date();
             Customer customer = buidCustomerFromVo(vo, current);
-            if (vo.getCusCode() != null) {
+            if (StringUtils.isNotEmpty(vo.getCusCode())) {
                 res = tCustomerMapper.update(customer);
                 if (res > 0) {
                     PrimaryContact primaryContact = buidPrimaryContractor(vo, vo.getCusCode(), current);
