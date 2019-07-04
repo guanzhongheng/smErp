@@ -22,15 +22,6 @@ public interface TOrderService {
      */
     List<OrderItemVo> findByOrdCode(String ordCode);
 
-    /**
-     * @Description: 产品计划分配
-     * @Param: [voList, ordCode]
-     * @return: int
-     * @Author: lijinku
-     * @Iteration : 1.0
-     * @Date: 2019/7/2 10:53 AM
-     */
-    int ordProduceAssign(List<OrderItemAssignVo> voList,String ordCode);
 
     /**
      * @Description: 多条件分页查询

@@ -19,6 +19,7 @@ public class TProdplanExe implements Serializable {
     private Long ordItemId;
     private String macCode;
     private Double itemNum;
+    private Double itemFinishNum;
     private String itemUnit;
     private Character status;
     private Date finishTime;
@@ -55,6 +56,14 @@ public class TProdplanExe implements Serializable {
 
     public void setItemNum(Double itemNum) {
         this.itemNum = itemNum;
+    }
+
+    public Double getItemFinishNum() {
+        return itemFinishNum;
+    }
+
+    public void setItemFinishNum(Double itemFinishNum) {
+        this.itemFinishNum = itemFinishNum;
     }
 
     public String getItemUnit() {

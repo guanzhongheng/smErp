@@ -7,7 +7,7 @@
         <result column="ord_item_id" property="ordItemId" jdbcType="BIGINT"/>
         <result column="mac_code" property="macCode" jdbcType="VARCHAR"/>
         <result column="item_num" property="itemNum" jdbcType="DOUBLE"/>
-        <result column="item_unit" property="itemUnit" jdbcType="VARCHAR"/>
+        <result column="item_finish_num" property="itemFinishNum" jdbcType="DOUBLE"/>
         <result column="status" property="status" jdbcType="CHAR"/>
         <result column="finish_time" property="finishTime" jdbcType="TIMESTAMP"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
@@ -20,10 +20,21 @@
         WHERE id = #{id}
     </select>
 
-    <select id="findList" resultMap="resultMap">
+    <select id="findList" parameterType="com.lcyzh.nmerp.entity.TProdplanExe" resultMap="resultMap">
         SELECT *
         FROM T_PRODPLAN_EXE
         <where>
+            <if test="ordItemId!= null">
+                and ord_item_id = #{ordItemId,jdbcType=BIGINT}
+            </if>
+            <if test="macCode!= null">
+                and mac_code = #{macCode,jdbcType=VARCHAR}
+            </if>
+
+            <if test="status!= null">
+                and status = #{status,jdbcType=CHAR}
+            </if>
+
         </where>
     </select>
 
@@ -38,7 +49,7 @@
             ord_item_id,
             mac_code,
             item_num,
-            item_unit,
+            item_finish_num,
             status,
             finish_time,
             create_time,
@@ -49,7 +60,7 @@
             #{ordItemId,jdbcType=BIGINT},
             #{macCode,jdbcType=VARCHAR},
             #{itemNum,jdbcType=DOUBLE},
-            #{itemUnit,jdbcType=VARCHAR},
+            #{itemFinishNum,jdbcType=DOUBLE},
             #{status,jdbcType=CHAR},
             #{finishTime,jdbcType=TIMESTAMP},
             #{createTime,jdbcType=TIMESTAMP},
@@ -63,7 +74,7 @@
         ord_item_id,
         mac_code,
         item_num,
-        item_unit,
+        item_finish_num,
         status,
         finish_time,
         create_time,
@@ -76,7 +87,7 @@
             #{item.ordItemId,jdbcType=BIGINT},
             #{item.macCode,jdbcType=VARCHAR},
             #{item.itemNum,jdbcType=DOUBLE},
-            #{item.itemUnit,jdbcType=VARCHAR},
+            #{item.itemFinishNum,jdbcType=DOUBLE},
             #{item.status,jdbcType=CHAR},
             #{item.finishTime,jdbcType=TIMESTAMP},
             #{item.createTime,jdbcType=TIMESTAMP},
@@ -88,34 +99,31 @@
     <update id="updateBySelectKey" parameterType="com.lcyzh.nmerp.entity.TProdplanExe">
         UPDATE T_PRODPLAN_EXE
         <set>
-            <if test="macCode">
+            <if test="macCode!= null">
                 mac_code = #{macCode,jdbcType=VARCHAR},
             </if>
-
-            <if test="itemNum">
+            <if test="itemNum!= null">
                 item_num = #{itemNum,jdbcType=DOUBLE},
             </if>
-
-            <if test="itemUnit">
-                item_unit = #{itemUnit,jdbcType=VARCHAR},
+            <if test="itemFinishNum!= null">
+                item_finish_num = #{itemFinishNum,jdbcType=DOUBLE},
             </if>
-
-            <if test="status">
+            <if test="status!= null">
                 status = #{status,jdbcType=CHAR},
             </if>
-
-            <if test="updateTime">
-                update_time = #{updateTime,jdbcType=TIMESTAMP}
+            <if test="finishTime!= null">
+                finish_time = #{finishTime,jdbcType=TIMESTAMP},
             </if>
-
+            <if test="updateTime!= null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
         </set>
-
-        WHERE id = #{id}
+        WHERE id = #{id,jdbcType=BIGINT}
     </update>
 
     <delete id="delete" parameterType="com.lcyzh.nmerp.entity.TProdplanExe">
         DELETE FROM T_PRODPLAN_EXE
-        WHERE id = #{id}
+        WHERE id = #{id,jdbcType=BIGINT}
     </delete>
 
 </mapper>

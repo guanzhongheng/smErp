@@ -2,10 +2,20 @@ package com.lcyzh.nmerp.service.impl;
 
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
-import com.lcyzh.nmerp.dao.*;
-import com.lcyzh.nmerp.entity.*;
-import com.lcyzh.nmerp.model.vo.*;
+import com.lcyzh.nmerp.dao.PrimaryContactMapper;
+import com.lcyzh.nmerp.dao.TCustomerMapper;
+import com.lcyzh.nmerp.dao.TOrderItemMapper;
+import com.lcyzh.nmerp.dao.TOrderMapper;
+import com.lcyzh.nmerp.entity.Customer;
+import com.lcyzh.nmerp.entity.PrimaryContact;
+import com.lcyzh.nmerp.entity.TOrder;
+import com.lcyzh.nmerp.entity.TOrderItem;
+import com.lcyzh.nmerp.model.vo.OrderAddBatchVo;
+import com.lcyzh.nmerp.model.vo.OrderAddModifyVo;
+import com.lcyzh.nmerp.model.vo.OrderItemVo;
+import com.lcyzh.nmerp.model.vo.OrderQueryVo;
 import com.lcyzh.nmerp.service.TOrderService;
+import com.lcyzh.nmerp.service.TProdPlanService;
 import com.lcyzh.nmerp.utils.DictUtils;
 import com.lcyzh.nmerp.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +41,7 @@ public class TOrderServiceImpl implements TOrderService {
     @Autowired
     private TCustomerMapper tCustomerMapper;
     @Autowired
-    private TProdplanExeMapper tProdplanExeMapper;
+    private TProdPlanService prodPlanService;
     @Autowired
     private PrimaryContactMapper primaryContactMapper;
 
@@ -40,39 +50,13 @@ public class TOrderServiceImpl implements TOrderService {
         return tOrderItemMapper.findByOrdCode(ordCode);
     }
 
-    @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
-    @Override
-    public int ordProduceAssign(List<OrderItemAssignVo> voList, String ordCode) {
-        int res = -1;
-        if (voList != null && !voList.isEmpty()) {
-            Date current = new Date();
-            List<TProdplanExe> prodplanExes = voList.stream().map(vo -> {
-                TProdplanExe prodplanExe = new TProdplanExe();
-                prodplanExe.setOrdItemId(vo.getOrdItemId());
-                prodplanExe.setItemNum(vo.getItemNum());
-                prodplanExe.setItemUnit(vo.getItemUnit());
-                prodplanExe.setStatus('0');
-                prodplanExe.setMacCode(vo.getMacCode());
-                prodplanExe.setCreateTime(current);
-                return prodplanExe;
-            }).collect(Collectors.toList());
-            res = tProdplanExeMapper.insertBatch(prodplanExes);
-            if (res > 0) {
-                TOrder tOrder = new TOrder();
-                tOrder.setOrdCode(ordCode);
-                tOrder.setOrdStatus(Constants.ORD_STATUS_ASSIGNED);
-                tOrder.setUpdateTime(current);
-                res = tOrderMapper.update(tOrder);
-            }
-        }
-        return res;
-    }
+
 
     @Override
     public Page<OrderQueryVo> findPage(Page<OrderQueryVo> page, OrderQueryVo order) {
         order.setPage(page);
         List<OrderQueryVo> list = tOrderMapper.findList(order);
-        list.stream().forEach(vo-> vo.setOrdStatusValue(DictUtils.getDictValueMaps().get(vo.getOrdStatus())));
+        list.stream().forEach(vo -> vo.setOrdStatusValue(DictUtils.getDictValueMaps().get(vo.getOrdStatus())));
         page.setList(list);
         return page;
     }
@@ -89,6 +73,7 @@ public class TOrderServiceImpl implements TOrderService {
             cus.setCreateTime(date);
             cus.setCusAddress(vo.getOrdAddress());
             cus.setCusCode(StringUtils.genFixPreFixStr(Constants.CUS_PRE_FIX));
+            tCustomerMapper.insert(cus);
             PrimaryContact contact = new PrimaryContact();
             contact.setCusCode(cus.getCusCode());
             contact.setContactName(vo.getCusName());
@@ -96,14 +81,17 @@ public class TOrderServiceImpl implements TOrderService {
             contact.setUpdateTime(date);
             primaryContactMapper.insert(contact);
         }
+        String ordCode = StringUtils.genFixPreFixStr(Constants.ORD_PRE_FIX);
         TOrder tOrder = new TOrder();
         tOrder.setCusCode(cus.getCusCode());
         tOrder.setOrdDeliveryDate(vo.getDeliveryDate());
         tOrder.setProxyName(vo.getProxyName());
-        tOrder.setOrdCode(StringUtils.genFixPreFixStr(Constants.ORD_PRE_FIX));
+        tOrder.setOrdCode(ordCode);
         //根据客户资料类型设置订单状态
         if (cus.getCusStatus().equals(Constants.CUS_STATUS_SPEC)) {
             tOrder.setOrdStatus(Constants.ORD_STATUS_TOASSIGN);
+            //生成产品计划
+            prodPlanService.createProdPlan(ordCode,vo.getDeliveryDate(),vo.getItemVos());
         } else {
             tOrder.setOrdStatus(Constants.ORD_STATUS_NEW);
         }
@@ -111,24 +99,37 @@ public class TOrderServiceImpl implements TOrderService {
         List<OrderItemVo> itemVos = vo.getItemVos();
         if (itemVos != null && !itemVos.isEmpty()) {
             List<TOrderItem> orderItems = itemVos.stream().map(itv -> {
-                TOrderItem tOrderItem = new TOrderItem();
-                tOrderItem.setCreateTime(date);
-                tOrderItem.setItemCode(tOrder.getOrdCode());
-                tOrderItem.setItemCode(itv.getItemCode());
-                tOrderItem.setItemColor(itv.getItemColor());
-                tOrderItem.setItemLenth(itv.getItemLenth());
-                tOrderItem.setItemNum(itv.getItemNum());
-                tOrderItem.setItemOwner(itv.getItemOwner());
-                tOrderItem.setItemThick(itv.getItemThick());
-                tOrderItem.setItemUnit(itv.getItemUnit());
-                tOrderItem.setItemWidth(itv.getItemWidth());
-                tOrderItem.setRemark(itv.getRemark());
+                TOrderItem tOrderItem = buildOrderItemFromVo(itv, ordCode, date);
                 return tOrderItem;
 
             }).collect(Collectors.toList());
             tOrderItemMapper.insertBatch(orderItems);
         }
         return tOrderMapper.insert(tOrder);
+    }
+
+    /**
+     * @Description: 订单实体转换
+     * @Param: [itv, ordCode, date]
+     * @return: com.lcyzh.nmerp.entity.TOrderItem
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/4 10:36 PM
+     */
+    private TOrderItem buildOrderItemFromVo(OrderItemVo itv, String ordCode, Date date) {
+        TOrderItem tOrderItem = new TOrderItem();
+        tOrderItem.setCreateTime(date);
+        tOrderItem.setItemCode(ordCode);
+        tOrderItem.setItemCode(itv.getItemCode());
+        tOrderItem.setItemColor(itv.getItemColor());
+        tOrderItem.setItemLenth(itv.getItemLenth());
+        tOrderItem.setItemNum(itv.getItemNum());
+        tOrderItem.setItemOwner(itv.getItemOwner());
+        tOrderItem.setItemThick(itv.getItemThick());
+        tOrderItem.setItemUnit(itv.getItemUnit());
+        tOrderItem.setItemWidth(itv.getItemWidth());
+        tOrderItem.setRemark(itv.getRemark());
+        return tOrderItem;
     }
 
     @Override
@@ -157,13 +158,13 @@ public class TOrderServiceImpl implements TOrderService {
                 res = tOrderMapper.update(order);
             } else {
                 Customer cus = tCustomerMapper.findById(ordAddModifyVo.getCusCode());
-                if(cus!=null){
+                if (cus != null) {
                     order.setOrdCode(StringUtils.genFixPreFixStr(Constants.ORD_PRE_FIX));
-                    if(cus.getCusStatus().equals(Constants.CUS_STATUS_SPEC)){
+                    if (cus.getCusStatus().equals(Constants.CUS_STATUS_SPEC)) {
                         order.setOrdStatus(Constants.ORD_STATUS_TOASSIGN);
-                    }else if(cus.getCusStatus().equals(Constants.CUS_STATUS_BH)){
-                        return  res;
-                    }else {
+                    } else if (cus.getCusStatus().equals(Constants.CUS_STATUS_BH)) {
+                        return res;
+                    } else {
                         order.setOrdStatus(Constants.ORD_STATUS_NEW);
                     }
                     res = tOrderMapper.insert(order);

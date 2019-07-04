@@ -12,18 +12,14 @@ import java.util.List;
 @Repository
 public interface TProdPlanDetailMapper {
 
-    TProdPlanDetail get(String id);
+    TProdPlanDetail findById(String ordItemId);
 
     List<TProdPlanDetail> findList(TProdPlanDetail tProdPlanDetail);
-
-    List<TProdPlanDetail> findAllList();
 
     int insert(TProdPlanDetail tProdPlanDetail);
 
     int insertBatch(List<TProdPlanDetail> tProdPlanDetails);
 
     int update(TProdPlanDetail tProdPlanDetail);
-
-    int delete(TProdPlanDetail tProdPlanDetail);
 
 }
