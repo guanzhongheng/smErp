@@ -23,7 +23,7 @@
 
                 <form:form id="inputForm" modelAttribute="customerAddModifyVo" action="${ctx}/cus/customer_save"
                            method="post" class="form-horizontal">
-
+                    <form:hidden path="cusCode"/>
                     <div class="row">
                         <div class="col-sm-6 b-r">
                             <div class="ibox float-e-margins">
