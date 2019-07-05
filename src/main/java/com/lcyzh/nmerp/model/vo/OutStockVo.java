@@ -11,11 +11,18 @@ package com.lcyzh.nmerp.model.vo;
  * lijinku          2019/06/27    create
  */
 public class OutStockVo {
+    //出库编号
     private String outCode;
+    //订单编号
     private String ordCode;
+    //商品id
     private Long itemId;
+    //条形码
     private String barCode;
+    //操作员工编号
     private String operEmpCode;
+    //出库状态
+    private Character status;
     private String remark;
 
     public String getOutCode() {
@@ -56,6 +63,14 @@ public class OutStockVo {
 
     public void setOperEmpCode(String operEmpCode) {
         this.operEmpCode = operEmpCode;
+    }
+
+    public Character getStatus() {
+        return status;
+    }
+
+    public void setStatus(Character status) {
+        this.status = status;
     }
 
     public String getRemark() {

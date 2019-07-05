@@ -91,7 +91,7 @@
         UPDATE T_PROD_PLAN_DETAIL
         <set>
             <if test="itemFinishNum!= null">
-                item_finish_num = #{itemFinishNum,jdbcType=DOUBLE},
+                item_finish_num = item_finish_num + #{itemFinishNum,jdbcType=DOUBLE},
             </if>
             <if test="elstFinishDate!= null">
                 elst_finish_date = #{elstFinishDate,jdbcType=VARCHAR},
@@ -105,12 +105,13 @@
         </set>
         <where>
             <if test="ordItemId!=null">
-               and ord_item_id = #{ordItemId,jdbcType=BIGINT}
+                and ord_item_id = #{ordItemId,jdbcType=BIGINT}
             </if>
 
             <if test="prodPlanCode!= null">
                 and prod_plan_code = #{prodPlanCode,jdbcType=VARCHAR}
             </if>
+
         </where>
 
     </update>

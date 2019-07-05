@@ -17,19 +17,10 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
     @Autowired
     private TProdPlanDetailMapper tProdPlanDetailMapper;
 
-    @Override
-    public TProdPlanDetail get(String id){
-        return tProdPlanDetailMapper.get(id);
-    }
 
     @Override
     public List<TProdPlanDetail> findList(TProdPlanDetail tProdPlanDetail) {
         return tProdPlanDetailMapper.findList(tProdPlanDetail);
-    }
-
-    @Override
-    public List<TProdPlanDetail> findAllList() {
-        return tProdPlanDetailMapper.findAllList();
     }
 
     @Override
@@ -45,11 +36,6 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
     @Override
     public int update(TProdPlanDetail tProdPlanDetail) {
         return tProdPlanDetailMapper.update(tProdPlanDetail);
-    }
-
-    @Override
-    public int delete(TProdPlanDetail tProdPlanDetail) {
-        return tProdPlanDetailMapper.delete(tProdPlanDetail);
     }
 
 }
