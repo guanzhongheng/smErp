@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lcyzh.nmerp.dao.TProdPlanDetailMapper">
 
-    <resultMap id="tProdPlanDetailResultMap" type="com.lcyzh.nmerp.entity.TProdPlanDetail">
+    <resultMap id="prodPlanDetailResultMap" type="com.lcyzh.nmerp.entity.TProdPlanDetail">
         <id column="ord_item_id" property="ordItemId" jdbcType="BIGINT"/>
         <result column="prod_plan_code" property="prodPlanCode" jdbcType="VARCHAR"/>
         <result column="item_num" property="itemNum" jdbcType="DOUBLE"/>

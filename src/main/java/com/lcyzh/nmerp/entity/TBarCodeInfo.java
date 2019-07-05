@@ -20,7 +20,7 @@ public class TBarCodeInfo implements Serializable {
     //订单号
     private String ordCode;
     //商品明细ID
-    private String itemId;
+    private Long itemId;
     //入库状态
     private Character status;
     //入库参数
@@ -28,7 +28,7 @@ public class TBarCodeInfo implements Serializable {
     //计量
     private Double num;
     //单位
-    private String unit;
+    private Long unit;
     private Date createTime;
     private Date updateTime;
 
@@ -48,11 +48,11 @@ public class TBarCodeInfo implements Serializable {
         this.ordCode = ordCode;
     }
 
-    public String getItemId() {
+    public Long getItemId() {
         return itemId;
     }
 
-    public void setItemId(String itemId) {
+    public void setItemId(Long itemId) {
         this.itemId = itemId;
     }
 
@@ -80,11 +80,11 @@ public class TBarCodeInfo implements Serializable {
         this.num = num;
     }
 
-    public String getUnit() {
+    public Long getUnit() {
         return unit;
     }
 
-    public void setUnit(String unit) {
+    public void setUnit(Long unit) {
         this.unit = unit;
     }
 

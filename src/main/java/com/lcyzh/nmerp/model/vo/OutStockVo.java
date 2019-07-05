@@ -21,7 +21,7 @@ public class OutStockVo {
     private String barCode;
     //操作员工编号
     private String operEmpCode;
-    //出库状态
+    //出库状态:0-新建；1-出库审核；2-出库完成
     private Character status;
     private String remark;
 

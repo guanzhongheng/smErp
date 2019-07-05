@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lcyzh.nmerp.dao.TProdPlanMapper">
 
-    <resultMap id="tProdPlanResultMap" type="com.lcyzh.nmerp.entity.TProdPlan">
+    <resultMap id="prodPlanResultMap" type="com.lcyzh.nmerp.entity.TProdPlan">
         <id column="prod_plan_code" property="prodPlanCode" jdbcType="VARCHAR"/>
         <result column="ord_code" property="ordCode" jdbcType="VARCHAR"/>
         <result column="plan_status" property="planStatus" jdbcType="CHAR"/>
@@ -27,7 +27,7 @@
         WHERE ord_code = #{ordCode,jdbcType=VARCHAR}
     </select>
 
-    <select id="findList" resultMap="tProdPlanResultMap">
+    <select id="findList" parameterType="com.lcyzh.nmerp.entity.TProdPlan" resultMap="prodPlanResultMap">
         SELECT *
         FROM T_PROD_PLAN
         <where>

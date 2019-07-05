@@ -60,27 +60,32 @@ public class TOutStockServiceImpl implements TOutStockService {
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
     @Override
     public int insertStore(OutStockDetailVo vo) {
-        Date current = new Date();
-        TOutStock outStock = new TOutStock();
-        outStock.setOutCode(vo.getOutCode());
-        outStock.setOutCount(1);
-        outStock.setUpdateTime(current);
-        int res = tOutStockMapper.update(outStock);
-        if (res > 0) {
-            TOutStockDetail outStockDetail = new TOutStockDetail();
-            outStockDetail.setOutCode(vo.getOutCode());
-            outStockDetail.setBarCode(vo.getBarCode());
-            outStockDetail.setQualityStatus(vo.getQualityStatus());
-            outStockDetail.setQualityUsCode(vo.getQualityUsCode());
-            outStockDetail.setCreateTime(current);
-            res = tOutStockDetailMapper.insert(outStockDetail);
-            if (res > 0) {
-                TBarCodeInfo barCodeInfo = new TBarCodeInfo();
-                barCodeInfo.setBarCode(vo.getBarCode());
-                barCodeInfo.setStatus('1');
-                barCodeInfo.setUpdateTime(current);
-                res = tBarCodeInfoMapper.update(barCodeInfo);
+        int res = -1;
+        if(vo!=null){
+            Date current = new Date();
+            TBarCodeInfo barCodeInfo = new TBarCodeInfo();
+            barCodeInfo.setBarCode(vo.getBarCode());
+            barCodeInfo.setStatus('1');
+            barCodeInfo.setStatusParam('0');
+            barCodeInfo.setUpdateTime(current);
+            res = tBarCodeInfoMapper.update(barCodeInfo);
+            if(res>0){
+                TOutStock outStock = new TOutStock();
+                outStock.setOutCode(vo.getOutCode());
+                outStock.setOutCount(1);
+                outStock.setUpdateTime(current);
+                res = tOutStockMapper.update(outStock);
+                if (res > 0) {
+                    TOutStockDetail outStockDetail = new TOutStockDetail();
+                    outStockDetail.setOutCode(vo.getOutCode());
+                    outStockDetail.setBarCode(vo.getBarCode());
+                    outStockDetail.setQualityStatus(vo.getQualityStatus());
+                    outStockDetail.setQualityUsCode(vo.getQualityUsCode());
+                    outStockDetail.setCreateTime(current);
+                    res = tOutStockDetailMapper.insert(outStockDetail);
+                }
             }
+
         }
 
         return res;
@@ -104,21 +109,26 @@ public class TOutStockServiceImpl implements TOutStockService {
 
     @Override
     public int update(OutStockVo vo) {
-        TOutStock tOutStock = new TOutStock();
-        if (vo.getOrdCode() != null) {
-            TOutStock dbOutStock = tOutStockMapper.findByPrimaryKey(vo.getOutCode());
-            if (dbOutStock != null) {
-                if (dbOutStock.getOrdCode() != null) {
-                    tOutStock.setOrdCode(dbOutStock.getOrdCode() + vo.getOrdCode() + ",");
-                } else {
-                    tOutStock.setOrdCode(vo.getOrdCode() + ",");
+        int res = -1;
+        if(vo!=null){
+            TOutStock tOutStock = new TOutStock();
+            if (vo.getOrdCode() != null) {
+                TOutStock dbOutStock = tOutStockMapper.findByPrimaryKey(vo.getOutCode());
+                if (dbOutStock != null) {
+                    if (dbOutStock.getOrdCode() != null) {
+                        tOutStock.setOrdCode(dbOutStock.getOrdCode() + vo.getOrdCode() + ",");
+                    } else {
+                        tOutStock.setOrdCode(vo.getOrdCode() + ",");
+                    }
                 }
             }
+            tOutStock.setOutStatus(vo.getStatus());
+            tOutStock.setRemark(vo.getRemark());
+            tOutStock.setOperEmpCode(vo.getOperEmpCode());
+            tOutStock.setUpdateTime(new Date());
+            res = tOutStockMapper.update(tOutStock);
         }
-        tOutStock.setRemark(vo.getRemark());
-        tOutStock.setOperEmpCode(vo.getOperEmpCode());
-        tOutStock.setUpdateTime(new Date());
-        return tOutStockMapper.update(tOutStock);
+        return res;
     }
 
     /**

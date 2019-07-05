@@ -10,6 +10,8 @@ import java.util.List;
 @Repository
 public interface TBarCodeInfoMapper {
 
+    List<TBarCodeInfo> findList(TBarCodeInfo entry);
+
     int insert(TBarCodeInfo entry);
 
     int update(TBarCodeInfo entry);

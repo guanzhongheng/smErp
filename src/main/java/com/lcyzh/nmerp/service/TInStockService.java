@@ -1,8 +1,6 @@
 package com.lcyzh.nmerp.service;
 
-import com.lcyzh.nmerp.entity.TInStock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.lcyzh.nmerp.model.vo.InStockItemVo;
 
 import java.util.List;
 
@@ -11,18 +9,25 @@ import java.util.List;
 * Date  2019-06-06
 */
 public interface TInStockService {
-    TInStock get(String id);
 
-    List<TInStock> findList(TInStock tInStock);
+    /**
+     * @Description: 产品入库
+     * @Param: [vo]
+     * @return: int
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/5 10:58 AM
+     */
+    int goodWareHouse(InStockItemVo vo);
 
-    List<TInStock> findAllList();
-
-    int insert(TInStock tInStock);
-
-    int insertBatch(List<TInStock> tInStocks);
-
-    int update(TInStock tInStock);
-
-    int delete(TInStock tInStock);
+    /**
+     * @Description: 多条件查询入库记录
+     * @Param: [vo]
+     * @return: java.util.List<com.lcyzh.nmerp.model.vo.InStockItemVo>
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/5 10:58 AM
+     */
+    List<InStockItemVo> findByCondition(InStockItemVo vo);
 
 }

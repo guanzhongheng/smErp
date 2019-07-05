@@ -7,11 +7,29 @@
         <result column="ord_code" property="ordCode" jdbcType="VARCHAR"/>
         <result column="item_id" property="itemId" jdbcType="BIGINT"/>
         <result column="num" property="num" jdbcType="DOUBLE"/>
-        <result column="unit" property="unit" jdbcType="VARCHAR"/>
+        <result column="unit" property="unit" jdbcType="BIGINT"/>
         <result column="status" property="status" jdbcType="CHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
+
+
+    <select id="findList" parameterType="com.lcyzh.nmerp.entity.TBarCodeInfo" resultMap="resultMap">
+        SELECT *
+        FROM T_BARCODE_INFO
+        <where>
+            <if test="ordCode!= null">
+                and ord_code like concat('%', #{ordCode,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="itemId!= null">
+                and item_id = #{itemId,jdbcType=BIGINT}
+            </if>
+            <if test="status!= null">
+                and status = #{status,jdbcType=CHAR}
+            </if>
+
+        </where>
+    </select>
 
     <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TBarCodeInfo">
         insert into T_BARCODE_INFO(
@@ -27,7 +45,7 @@
             #{ordCode,jdbcType=VARCHAR},
             #{itemId,jdbcType=BIGINT},
             #{num,jdbcType=DOUBLE},
-            #{unit,jdbcType=VARCHAR},
+            #{unit,jdbcType=BIGINT},
             #{status,jdbcType=VARCHAR},
             #{createTime,jdbcType=TIMESTAMP}
         )
