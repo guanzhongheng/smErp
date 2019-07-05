@@ -152,11 +152,11 @@ public class TOutStockServiceImpl implements TOutStockService {
                 barCodeInf.setStatus('0');
                 barCodeInf.setUpdateTime(current);
                 res = tBarCodeInfoMapper.update(barCodeInf);
-                TOutStock tOutStock = new TOutStock();
-                tOutStock.setOutCode(vo.getOutCode());
-                tOutStock.setOutCount(-1);
-                tOutStock.setUpdateTime(current);
                 if (res > 0) {
+                    TOutStock tOutStock = new TOutStock();
+                    tOutStock.setOutCode(vo.getOutCode());
+                    tOutStock.setOutCount(-1);
+                    tOutStock.setUpdateTime(current);
                     tOutStockDetailMapper.deleteByBarCode(vo.getBarCode());
                     tOutStockMapper.update(tOutStock);
                 }
@@ -203,12 +203,13 @@ public class TOutStockServiceImpl implements TOutStockService {
                 }
 
                 if (vo.getOutCode() != null && vo.getItemId() == null && vo.getOrdCode() == null) {
-                    tOutStockMapper.delete(vo.getOutCode());
+                    res = tOutStockMapper.delete(vo.getOutCode());
                 }
 
                 if (bcList != null && !bcList.isEmpty()) {
                     res = tOutStockDetailMapper.deleteByBatch(bcList);
                 }
+
             }
         }
         return res;

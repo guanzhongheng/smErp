@@ -47,7 +47,7 @@
                 and remark like concat('%', #{remark,jdbcType=VARCHAR}, '%')
             </if>
             <if test="days!= null">
-                and create_time  >= now()-interval #{days,jdbcType=INTEGER} day
+                and create_time >= now()-interval #{days,jdbcType=INTEGER} day
             </if>
         </where>
         order by create_time desc
@@ -95,7 +95,7 @@
                 oper_emp_code = #{operEmpCode,jdbcType=VARCHAR},
             </if>
             <if test="outCount!= null">
-                out_count = #{outCount,jdbcType=INTEGER},
+                out_count = out_count + #{outCount,jdbcType=INTEGER},
             </if>
             <if test="remark!= null">
                 remark = #{remark,jdbcType=VARCHAR},
