@@ -21,6 +21,10 @@ public class InStockItemVo {
     private String itemName;
     //产品规格
     private String itemSpec;
+    //产品所属人
+    private String itemOwner;
+    //该订单产品总数
+    private Double itemNum;
     //商品计数
     private Double num;
     //单位字典
@@ -84,6 +88,23 @@ public class InStockItemVo {
 
     public void setItemSpec(String itemSpec) {
         this.itemSpec = itemSpec;
+    }
+
+
+    public String getItemOwner() {
+        return itemOwner;
+    }
+
+    public void setItemOwner(String itemOwner) {
+        this.itemOwner = itemOwner;
+    }
+
+    public Double getItemNum() {
+        return itemNum;
+    }
+
+    public void setItemNum(Double itemNum) {
+        this.itemNum = itemNum;
     }
 
     public Long getUnit() {

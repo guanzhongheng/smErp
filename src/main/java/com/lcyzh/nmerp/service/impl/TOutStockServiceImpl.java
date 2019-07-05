@@ -143,7 +143,7 @@ public class TOutStockServiceImpl implements TOutStockService {
     @Override
     public int delete(OutStockVo vo) {
         int res = -1;
-        if (vo.getBarCode() != null) {
+        if (vo.getOutCode() != null) {
             Date current = new Date();
             if (vo.getBarCode() != null) {
                 //删除一条记录
