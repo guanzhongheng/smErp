@@ -61,7 +61,7 @@ public class TOutStockServiceImpl implements TOutStockService {
     @Override
     public int insertStore(OutStockDetailVo vo) {
         int res = -1;
-        if(vo!=null){
+        if (vo != null) {
             Date current = new Date();
             TBarCodeInfo barCodeInfo = new TBarCodeInfo();
             barCodeInfo.setBarCode(vo.getBarCode());
@@ -69,7 +69,7 @@ public class TOutStockServiceImpl implements TOutStockService {
             barCodeInfo.setStatusParam('0');
             barCodeInfo.setUpdateTime(current);
             res = tBarCodeInfoMapper.update(barCodeInfo);
-            if(res>0){
+            if (res > 0) {
                 TOutStock outStock = new TOutStock();
                 outStock.setOutCode(vo.getOutCode());
                 outStock.setOutCount(1);
@@ -110,7 +110,7 @@ public class TOutStockServiceImpl implements TOutStockService {
     @Override
     public int update(OutStockVo vo) {
         int res = -1;
-        if(vo!=null){
+        if (vo != null) {
             TOutStock tOutStock = new TOutStock();
             if (vo.getOrdCode() != null) {
                 TOutStock dbOutStock = tOutStockMapper.findByPrimaryKey(vo.getOutCode());
@@ -162,7 +162,7 @@ public class TOutStockServiceImpl implements TOutStockService {
                 }
             } else {
                 List<OutStockVo> list = tOutStockDetailMapper.findListByCondition(vo.getOutCode(), vo.getOrdCode(), vo.getItemId());
-                final List<String> bcList =  new ArrayList<>(list.size());;
+                final List<String> bcList = new ArrayList<>(list.size());
                 if (list != null && !list.isEmpty()) {
                     List<TBarCodeInfo> barCodeList = list.stream().map(oc -> {
                                 TBarCodeInfo barCodeInfo = new TBarCodeInfo();
@@ -197,15 +197,16 @@ public class TOutStockServiceImpl implements TOutStockService {
                                     tOutStockMapper.update(tOutStock);
                                 }
                             }
-                        } else {
-                            if (res > 0) {
-                                tOutStockMapper.delete(vo.getOutCode());
-                            }
                         }
 
                     }
                 }
-                if(bcList!=null && !bcList.isEmpty()){
+
+                if (vo.getOutCode() != null && vo.getItemId() == null && vo.getOrdCode() == null) {
+                    tOutStockMapper.delete(vo.getOutCode());
+                }
+
+                if (bcList != null && !bcList.isEmpty()) {
                     res = tOutStockDetailMapper.deleteByBatch(bcList);
                 }
             }

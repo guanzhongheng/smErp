@@ -47,7 +47,6 @@
             <if test="itemId!=null">
                 and bi.item_id = #{itemId,jdbcType=VARCHAR}
             </if>
-            and bi.status = '1'
         </where>
 
 
