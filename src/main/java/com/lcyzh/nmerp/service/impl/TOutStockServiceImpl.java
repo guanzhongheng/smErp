@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -144,15 +145,18 @@ public class TOutStockServiceImpl implements TOutStockService {
                 tOutStock.setOutCount(-1);
                 tOutStock.setUpdateTime(current);
                 if (res > 0) {
+                    tOutStockDetailMapper.deleteByBarCode(vo.getBarCode());
                     tOutStockMapper.update(tOutStock);
                 }
             } else {
                 List<OutStockVo> list = tOutStockDetailMapper.findListByCondition(vo.getOutCode(), vo.getOrdCode(), vo.getItemId());
+                final List<String> bcList =  new ArrayList<>(list.size());;
                 if (list != null && !list.isEmpty()) {
                     List<TBarCodeInfo> barCodeList = list.stream().map(oc -> {
                                 TBarCodeInfo barCodeInfo = new TBarCodeInfo();
                                 barCodeInfo.setBarCode(oc.getBarCode());
                                 barCodeInfo.setStatus('0');
+                                bcList.add(oc.getBarCode());
                                 return barCodeInfo;
                             }
                     ).collect(Collectors.toList());
@@ -178,17 +182,18 @@ public class TOutStockServiceImpl implements TOutStockService {
                                     tOutStock.setOrdCode(sb.toString());
                                     tOutStock.setOutCount(-res);
                                     tOutStock.setUpdateTime(current);
-                                    res = tOutStockMapper.update(tOutStock);
+                                    tOutStockMapper.update(tOutStock);
                                 }
                             }
                         } else {
                             if (res > 0) {
-                                res = tOutStockMapper.delete(vo.getOutCode());
+                                tOutStockMapper.delete(vo.getOutCode());
                             }
                         }
-                    }
 
+                    }
                 }
+                res = tOutStockDetailMapper.deleteByBatch(bcList);
             }
         }
         return res;

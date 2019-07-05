@@ -27,7 +27,8 @@
         WHERE out_code = #{outCode,jdbcType=VARCHAR}
     </select>
 
-    <select id="findListByCondition" resultType="com.lcyzh.nmerp.model.vo.OutStockVo" parameterType="java.lang.String">
+    <select id="findListByCondition" resultType="com.lcyzh.nmerp.model.vo.OutStockVo"
+            parameterType="java.util.Map">
         SELECT
         osd.bar_code barCode,
         bi.ord_code ordCode,
@@ -37,14 +38,15 @@
         LEFT JOIN T_BARCODE_INFO bi ON osd.bar_code = bi.bar_code
         <where>
             <if test="outCode!=null">
-                osd.out_code = #{outCode,jdbcType=VARCHAR}
+                and osd.out_code = #{outCode,jdbcType=VARCHAR}
             </if>
             <if test="ordCode!=null">
-                bi.ord_code = #{ordCode,jdbcType=VARCHAR}
+                and bi.ord_code = #{ordCode,jdbcType=VARCHAR}
             </if>
             <if test="itemId!=null">
-                bi.item_id = #{itemId,jdbcType=VARCHAR}
+                and bi.item_id = #{itemId,jdbcType=VARCHAR}
             </if>
+            and bi.status = '1'
         </where>
 
 
@@ -108,5 +110,20 @@
         DELETE FROM T_OUT_STOCK_DETAIL
         WHERE bar_code = #{barCode,jdbcType=VARCHAR}
     </delete>
+
+
+    <delete id="deleteByOutCode" parameterType="java.lang.String">
+        DELETE FROM T_OUT_STOCK_DETAIL
+        WHERE out_code = #{outCode,jdbcType=VARCHAR}
+    </delete>
+
+    <delete id="deleteByBatch" parameterType="java.util.List">
+        delete from T_OUT_STOCK_DETAIL
+        bar_code in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+        #{item}
+
+    </delete>
+
 
 </mapper>

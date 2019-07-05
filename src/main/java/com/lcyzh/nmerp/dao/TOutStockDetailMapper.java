@@ -9,18 +9,17 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
-* Author ljk
-* Date  2019-06-06
-*/
+ * Author ljk
+ * Date  2019-06-06
+ */
 @Repository
 public interface TOutStockDetailMapper {
 
-    List<OutStockVo> findListByCondition(@Param("outCode") String outCode,@Param("ordCode") String ordCode,@Param("itemId") Long itemId);
+    List<OutStockVo> findListByCondition(@Param("outCode") String outCode, @Param("ordCode") String ordCode, @Param("itemId") Long itemId);
 
     TOutStockDetail findByPrimaryKey(Long id);
 
     List<TOutStockDetail> findAllList();
-
 
     List<OutItemVo> findOutItemsByOutCode(String outCode);
 
@@ -28,6 +27,10 @@ public interface TOutStockDetailMapper {
 
     int insertBatch(List<TOutStockDetail> tOutStockDetails);
 
-    int delete(TOutStockDetail tOutStockDetail);
+    int deleteByOutCode(String outCode);
+
+    int deleteByBarCode(String barCode);
+
+    int deleteByBatch(List<String> barCodeList);
 
 }
