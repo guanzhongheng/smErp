@@ -18,7 +18,8 @@
             pt.prod_spec itemSpec,
             oi.ord_code ordCode,
             oi.item_owner itemOwner,
-            bi.bar_code barCode
+            bi.bar_code barCode,
+            ost.out_code outCode
         FROM
         T_OUT_STOCK_DETAIL ost
         LEFT JOIN T_BARCODE_INFO bi ON ost.bar_code = bi.bar_code

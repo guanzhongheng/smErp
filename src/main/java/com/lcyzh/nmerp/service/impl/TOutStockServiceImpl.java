@@ -93,7 +93,9 @@ public class TOutStockServiceImpl implements TOutStockService {
         String outCode = StringUtils.genFixPreFixStr(Constants.OUT_STORE_PRE_FIX);
         tOutStock.setOutCode(outCode);
         tOutStock.setOutCount(0);
+        tOutStock.setOutStatus('0');
         tOutStock.setRemark(remark);
+        tOutStock.setCreateTime(new Date());
         tOutStock.setApplyEmpCode(applyEmpCode);
         tOutStockMapper.insert(tOutStock);
         return outCode;

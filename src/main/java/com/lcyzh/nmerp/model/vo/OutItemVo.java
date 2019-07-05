@@ -13,6 +13,8 @@ package com.lcyzh.nmerp.model.vo;
 public class OutItemVo {
     //条形码
     private String barCode;
+    //出库单
+    private String outCode;
     //订单编号
     private String ordCode;
     //产品所属人
@@ -22,7 +24,13 @@ public class OutItemVo {
     //产品规格
     private String itemSpec;
 
+    public String getOutCode() {
+        return outCode;
+    }
 
+    public void setOutCode(String outCode) {
+        this.outCode = outCode;
+    }
     public String getBarCode() {
         return barCode;
     }
