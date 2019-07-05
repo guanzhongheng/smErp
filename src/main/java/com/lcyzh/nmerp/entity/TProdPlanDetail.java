@@ -12,16 +12,20 @@ public class TProdPlanDetail implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long ordItemId;
     private String prodPlanCode;
-    private Double leastTime;
-    private Double mostTime;
+    private Double itemNum;
+    private Double itemFinishNum;
+    private String elstFinishDate;
+    private String latestFinishDate;
     private Date createTime;
+    private Date updateTime;
 
-    public Long getOrdItemId() {
-        return ordItemId;
-    }
 
     public void setOrdItemId(Long ordItemId) {
         this.ordItemId = ordItemId;
+    }
+
+    public Long getOrdItemId() {
+        return ordItemId;
     }
 
     public void setProdPlanCode(String prodPlanCode) {
@@ -32,20 +36,36 @@ public class TProdPlanDetail implements Serializable {
         return prodPlanCode;
     }
 
-    public void setLeastTime(Double leastTime) {
-        this.leastTime = leastTime;
+    public void setItemNum(Double itemNum) {
+        this.itemNum = itemNum;
     }
 
-    public Double getLeastTime() {
-        return leastTime;
+    public Double getItemNum() {
+        return itemNum;
     }
 
-    public void setMostTime(Double mostTime) {
-        this.mostTime = mostTime;
+    public void setItemFinishNum(Double itemFinishNum) {
+        this.itemFinishNum = itemFinishNum;
     }
 
-    public Double getMostTime() {
-        return mostTime;
+    public Double getItemFinishNum() {
+        return itemFinishNum;
+    }
+
+    public void setElstFinishDate(String elstFinishDate) {
+        this.elstFinishDate = elstFinishDate;
+    }
+
+    public String getElstFinishDate() {
+        return elstFinishDate;
+    }
+
+    public void setLatestFinishDate(String latestFinishDate) {
+        this.latestFinishDate = latestFinishDate;
+    }
+
+    public String getLatestFinishDate() {
+        return latestFinishDate;
     }
 
     public void setCreateTime(Date createTime) {
@@ -55,5 +75,14 @@ public class TProdPlanDetail implements Serializable {
     public Date getCreateTime() {
         return createTime;
     }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
 
 }

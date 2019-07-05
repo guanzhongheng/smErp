@@ -1,9 +1,5 @@
 package com.lcyzh.nmerp.entity;
 
-import com.lcyzh.nmerp.common.persistence.DataEntity;
-
-import java.io.Serializable;
-import java.util.List;
 import java.util.Date;
 
 /**
@@ -26,6 +22,7 @@ public class TOrder{
     private String cusContractor;
     private String comContractor;
     private String contAttachUrl;
+    private String remark;
     private Date createTime;
     private Date updateTime;
 
@@ -132,6 +129,14 @@ public class TOrder{
 
     public void setContAttachUrl(String contAttachUrl) {
         this.contAttachUrl = contAttachUrl;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public Date getCreateTime() {

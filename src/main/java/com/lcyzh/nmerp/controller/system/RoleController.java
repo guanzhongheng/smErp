@@ -14,7 +14,6 @@ import com.lcyzh.nmerp.entity.sys.Role;
 import com.lcyzh.nmerp.entity.sys.User;
 import com.lcyzh.nmerp.service.security.SystemService;
 import com.lcyzh.nmerp.utils.StringUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,7 +48,6 @@ public class RoleController extends BaseController {
 		}
 	}
 	
-	@RequiresPermissions("sys:role:view")
 	@RequestMapping(value = {"list", ""})
 	public String list(Role role, Model model) {
 		List<Role> list = systemService.findAllRole();
@@ -57,7 +55,6 @@ public class RoleController extends BaseController {
 		return "modules/sys/roleList";
 	}
 
-	@RequiresPermissions("sys:role:view")
 	@RequestMapping(value = "form")
 	public String form(Role role, Model model) {
 		//if (role.getOffice()==null){
@@ -69,7 +66,6 @@ public class RoleController extends BaseController {
 		return "modules/sys/roleForm";
 	}
 	
-	@RequiresPermissions("sys:role:edit")
 	@RequestMapping(value = "save")
 	public String save(Role role, Model model, RedirectAttributes redirectAttributes) {
 		if(!UserUtils.getUser().isAdmin()&&role.getSysData().equals(Global.YES)){
@@ -96,7 +92,6 @@ public class RoleController extends BaseController {
 		return "redirect:/sys/role/?repage";
 	}
 	
-	@RequiresPermissions("sys:role:edit")
 	@RequestMapping(value = "delete")
 	public String delete(Role role, RedirectAttributes redirectAttributes) {
 		if(!UserUtils.getUser().isAdmin() && role.getSysData().equals(Global.YES)){
@@ -124,7 +119,6 @@ public class RoleController extends BaseController {
 	 * @param model
 	 * @return
 	 */
-	@RequiresPermissions("sys:role:edit")
 	@RequestMapping(value = "assign")
 	public String assign(Role role, Model model) {
 		List<User> userList = systemService.findUser(new User(new Role(role.getId())));
@@ -138,7 +132,6 @@ public class RoleController extends BaseController {
 	 * @param model
 	 * @return
 	 */
-	@RequiresPermissions("sys:role:view")
 	@RequestMapping(value = "usertorole")
 	public String selectUserToRole(Role role, Model model) {
 		List<User> userList = systemService.findUser(new User(new Role(role.getId())));
@@ -155,7 +148,6 @@ public class RoleController extends BaseController {
 	 * @param response
 	 * @return
 	 */
-	@RequiresPermissions("sys:role:view")
 	@ResponseBody
 	@RequestMapping(value = "users")
 	public List<Map<String, Object>> users(String officeId, HttpServletResponse response) {
@@ -180,7 +172,6 @@ public class RoleController extends BaseController {
 	 * @param redirectAttributes
 	 * @return
 	 */
-	@RequiresPermissions("sys:role:edit")
 	@RequestMapping(value = "outrole")
 	public String outrole(String userId, String roleId, RedirectAttributes redirectAttributes) {
 		if(Global.isDemoMode()){
@@ -213,7 +204,6 @@ public class RoleController extends BaseController {
 	 * @param redirectAttributes
 	 * @return
 	 */
-	@RequiresPermissions("sys:role:edit")
 	@RequestMapping(value = "assignrole")
 	public String assignRole(Role role, String[] idsArr, RedirectAttributes redirectAttributes) {
 		if(Global.isDemoMode()){
@@ -239,7 +229,6 @@ public class RoleController extends BaseController {
 	 * @param name
 	 * @return
 	 */
-	@RequiresPermissions("user")
 	@ResponseBody
 	@RequestMapping(value = "checkName")
 	public String checkName(String oldName, String name) {

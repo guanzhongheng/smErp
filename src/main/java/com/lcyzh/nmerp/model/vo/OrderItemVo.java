@@ -11,6 +11,8 @@ package com.lcyzh.nmerp.model.vo;
  * lijinku          2019/06/19    create
  */
 public class OrderItemVo {
+    //商品明细ID
+    private Long itemId;
     //订单编号
     private String ordCode;
     //代理商名称
@@ -45,6 +47,14 @@ public class OrderItemVo {
     private Long blankPressTypeValue;
     //备注
     private String remark;
+
+    public Long getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(Long itemId) {
+        this.itemId = itemId;
+    }
 
     public String getOrdCode() {
         return ordCode;

@@ -4,9 +4,7 @@ import com.lcyzh.nmerp.common.lang.StringUtils;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.entity.Customer;
-import com.lcyzh.nmerp.entity.TOrder;
 import com.lcyzh.nmerp.model.vo.CustomerQueryVo;
-import com.lcyzh.nmerp.model.vo.OrderItemVo;
 import com.lcyzh.nmerp.model.vo.OrderQueryVo;
 import com.lcyzh.nmerp.service.TCustomerService;
 import com.lcyzh.nmerp.service.TOrderService;
@@ -47,12 +45,20 @@ public class CrmManageController extends BaseController {
         return "modules/crm/customerList";
     }
 
-    @RequestMapping(value = {"customer/customerPoolList"})
+    @RequestMapping(value = {"customer/poollist"})
     public String customerPoolList(@ModelAttribute("customer") CustomerQueryVo customer, Model model, HttpServletRequest request, HttpServletResponse response){
         customer.setFollowType(0);
         Page<CustomerQueryVo> page = customerService.findPage(new Page<CustomerQueryVo>(request, response), customer);
         model.addAttribute("page", page);
         return "modules/crm/customerPoolList";
+    }
+
+    @RequestMapping(value = {"order/taskList"})
+    public String taskList(@ModelAttribute("order") OrderQueryVo order, Model model, HttpServletRequest request, HttpServletResponse response){
+        // 获取通过审批后的产品清单列表
+        Page<OrderQueryVo> page = orderService.findPage(new Page<OrderQueryVo>(request, response), order);
+        model.addAttribute("page", page);
+        return "modules/crm/taskList";
     }
 
     /**
@@ -61,7 +67,6 @@ public class CrmManageController extends BaseController {
      * @param model
      * @return
      */
-
     @RequestMapping(value = {"order/list", "order"})
     public String orderList(@ModelAttribute("order") OrderQueryVo order, Model model, HttpServletRequest request, HttpServletResponse response){
         Page<OrderQueryVo> page = orderService.findPage(new Page<OrderQueryVo>(request, response), order);
@@ -79,6 +84,18 @@ public class CrmManageController extends BaseController {
     public String fromInfo(HttpServletRequest request, Model model){
         model.addAttribute("ids",request.getParameter("ids"));
         return "modules/crm/formSubmit";
+    }
+
+    /**
+     * 任务分配
+     * @param request
+     * @param model
+     * @return
+     */
+    @RequestMapping("taskForm")
+    public String taskForm(HttpServletRequest request, Model model){
+        model.addAttribute("taskIds",request.getParameter("ids"));
+        return "modules/crm/taskForm";
     }
 
     /**

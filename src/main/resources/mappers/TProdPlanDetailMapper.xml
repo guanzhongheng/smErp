@@ -5,45 +5,59 @@
     <resultMap id="tProdPlanDetailResultMap" type="com.lcyzh.nmerp.entity.TProdPlanDetail">
         <id column="ord_item_id" property="ordItemId" jdbcType="BIGINT"/>
         <result column="prod_plan_code" property="prodPlanCode" jdbcType="VARCHAR"/>
-        <result column="least_time" property="leastTime" jdbcType="DOUBLE"/>
-        <result column="most_time" property="mostTime" jdbcType="DOUBLE"/>
+        <result column="item_num" property="itemNum" jdbcType="DOUBLE"/>
+        <result column="item_finish_num" property="itemFinishNum" jdbcType="DOUBLE"/>
+        <result column="elst_finish_date" property="elstFinishDate" jdbcType="VARCHAR"/>
+        <result column="latest_finish_date" property="latestFinishDate" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
-
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
 
-    <select id="get" resultMap="tProdPlanDetailResultMap">
+    <select id="findById" parameterType="java.lang.Long" resultMap="prodPlanDetailResultMap">
         SELECT *
         FROM T_PROD_PLAN_DETAIL
-        WHERE ord_item_id = #{ordItemId}
+        WHERE ord_item_id = #{ordItemId,jdbcType=BIGINT}
     </select>
 
-    <select id="findList" resultMap="tProdPlanDetailResultMap">
+
+    <select id="findList" parameterType="com.lcyzh.nmerp.entity.TProdPlanDetail" resultMap="prodPlanDetailResultMap">
         SELECT *
         FROM T_PROD_PLAN_DETAIL
         <where>
+            <if test="prodPlanCode!= null">
+                and prod_plan_code = #{prodPlanCode,jdbcType=VARCHAR}
+            </if>
+            <if test="elstFinishDate!= null">
+                and elst_finish_date like concat('%', #{elstFinishDate,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="latestFinishDate!= null">
+                and latest_finish_date like concat('%', #{latestFinishDate,jdbcType=VARCHAR}, '%')
+            </if>
         </where>
     </select>
 
-    <select id="findAllList" resultMap="tProdPlanDetailResultMap">
-        SELECT *
-        FROM T_PROD_PLAN_DETAIL
-    </select>
 
     <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TProdPlanDetail">
-        INSERT INTO T_PROD_PLAN_DETAIL(
+            INSERT INTO T_PROD_PLAN_DETAIL(
             ord_item_id,
             prod_plan_code,
-            least_time,
-            most_time,
-            create_time
+            item_num,
+            item_finish_num,
+            elst_finish_date,
+            latest_finish_date,
+            create_time,
+            update_time
         )
         VALUES (
             #{ordItemId,jdbcType=BIGINT},
             #{prodPlanCode,jdbcType=VARCHAR},
-            #{leastTime,jdbcType=DOUBLE},
-            #{mostTime,jdbcType=DOUBLE},
-            #{createTime,jdbcType=TIMESTAMP}
+            #{itemNum,jdbcType=DOUBLE},
+            #{itemFinishNum,jdbcType=DOUBLE},
+            #{elstFinishDate,jdbcType=VARCHAR},
+            #{latestFinishDate,jdbcType=VARCHAR},
+            #{createTime,jdbcType=TIMESTAMP},
+            #{updateTime,jdbcType=TIMESTAMP}
         )
     </insert>
 
@@ -51,21 +65,54 @@
         INSERT INTO T_PROD_PLAN_DETAIL(
         ord_item_id,
         prod_plan_code,
-        least_time,
-        most_time,
-        create_time
+        item_num,
+        item_finish_num,
+        elst_finish_date,
+        latest_finish_date,
+        create_time,
+        update_time
         )
         VALUES
-        <foreach collection="list" item="tProdPlanDetail" separator=",">
+        <foreach collection="list" item="item" separator=",">
             (
-            #{tProdPlanDetail.ordItemId,jdbcType=BIGINT},
-            #{tProdPlanDetail.prodPlanCode,jdbcType=VARCHAR},
-            #{tProdPlanDetail.leastTime,jdbcType=DOUBLE},
-            #{tProdPlanDetail.mostTime,jdbcType=DOUBLE},
-            #{tProdPlanDetail.createTime,jdbcType=TIMESTAMP}
+            #{item.ordItemId,jdbcType=BIGINT},
+            #{item.prodPlanCode,jdbcType=VARCHAR},
+            #{item.itemNum,jdbcType=DOUBLE},
+            #{item.itemFinishNum,jdbcType=DOUBLE},
+            #{item.elstFinishDate,jdbcType=VARCHAR},
+            #{item.latestFinishDate,jdbcType=VARCHAR},
+            #{item.createTime,jdbcType=TIMESTAMP},
+            #{item.updateTime,jdbcType=TIMESTAMP}
             )
         </foreach>
     </insert>
 
+    <update id="update" parameterType="com.lcyzh.nmerp.entity.TProdPlanDetail">
+        UPDATE T_PROD_PLAN_DETAIL
+        <set>
+            <if test="itemFinishNum!= null">
+                item_finish_num = #{itemFinishNum,jdbcType=DOUBLE},
+            </if>
+            <if test="elstFinishDate!= null">
+                elst_finish_date = #{elstFinishDate,jdbcType=VARCHAR},
+            </if>
+            <if test="latestFinishDate!= null">
+                latest_finish_date = #{latestFinishDate,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime!= null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <where>
+            <if test="ordItemId!=null">
+               and ord_item_id = #{ordItemId,jdbcType=BIGINT}
+            </if>
+
+            <if test="prodPlanCode!= null">
+                and prod_plan_code = #{prodPlanCode,jdbcType=VARCHAR}
+            </if>
+        </where>
+
+    </update>
 
 </mapper>

@@ -5,10 +5,15 @@ import com.lcyzh.nmerp.service.security.SystemAuthorizingRealm;
 import net.sf.ehcache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
+import org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator;
+import org.apache.shiro.session.mgt.eis.SessionDAO;
+import org.apache.shiro.session.mgt.eis.SessionIdGenerator;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -108,15 +113,33 @@ public class ShiroConfiguration {
      * @return
      */
     @Bean(name = "sessionManager")
-    public DefaultWebSessionManager sessionManager(){
+    public DefaultWebSessionManager sessionManager(SessionDAO sessionDAO){
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
         sessionManager.setGlobalSessionTimeout(1800000);
         sessionManager.setSessionValidationInterval(120000);
         sessionManager.setSessionValidationSchedulerEnabled(true);
+        sessionManager.setSessionDAO(sessionDAO);
+        SimpleCookie sessionIdCookie = new SimpleCookie("sid");
+        sessionIdCookie.setHttpOnly(true);
+        sessionIdCookie.setMaxAge(-1);
+        sessionManager.setSessionIdCookie(sessionIdCookie);
+        sessionManager.setSessionIdCookieEnabled(true);
         return sessionManager;
     }
+    @Bean(name="sessionIdGenerator")
+    public SessionIdGenerator getSessionIdGenerator() { // 3
+        return new JavaUuidSessionIdGenerator();
+    }
 
-    @Bean
+    @Bean(name="sessionDAO")
+    public SessionDAO getSessionDAO(SessionIdGenerator sessionIdGenerator) { // 4
+        EnterpriseCacheSessionDAO sessionDAO = new EnterpriseCacheSessionDAO();
+        sessionDAO.setActiveSessionsCacheName("activeSessionsCache");
+        sessionDAO.setSessionIdGenerator(sessionIdGenerator);
+        return sessionDAO;
+    }
+
+    @Bean(name="ehCacheManager")
     public EhCacheManager ehCacheManager(CacheManager cacheManager) {
         EhCacheManager em = new EhCacheManager();
         em.setCacheManager(cacheManager);

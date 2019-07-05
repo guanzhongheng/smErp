@@ -13,11 +13,45 @@ package com.lcyzh.nmerp.constant;
 public class Constants {
     public static final String CONT_PRE_FIX="HT";
 
+    /**
+     * @Description: 订单编号前缀
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/4 10:41 PM
+     */
     public static final String ORD_PRE_FIX="ORD";
 
+    /**
+     * @Description: 客户资料编号前缀
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/4 10:41 PM
+     */
     public static final String CUS_PRE_FIX="CS";
 
+    /**
+     * @Description: 出库单号前缀
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/4 10:41 PM
+     */
     public static final String OUT_STORE_PRE_FIX="OST";
+
+    /**
+     * @Description: 产品计划编号前缀
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/4 10:41 PM
+     */
+    public static final String PROD_PLAN_PRE_FIX="PP";
     /***
      * @Description: 订单状态
      * @Param:

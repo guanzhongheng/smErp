@@ -17,6 +17,12 @@
 
     </resultMap>
 
+    <select id="findById" parameterType="com.lcyzh.nmerp.entity.Customer" resultMap="tCustomerResultMap">
+        SELECT *
+        FROM T_CUSTOMER
+        WHERE cus_code = #{cusCode,jdbcType=VARCHAR}
+    </select>
+
     <!-- 根据编号获得用户 -->
     <select id="findModifyInfoByCusCode" parameterType="java.lang.String"
             resultType="com.lcyzh.nmerp.model.vo.CustomerAddModifyVo">

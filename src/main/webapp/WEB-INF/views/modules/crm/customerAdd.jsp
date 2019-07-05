@@ -23,6 +23,7 @@
 
                 <form:form id="inputForm" modelAttribute="customerAddModifyVo" action="${ctx}/cus/customer_save"
                            method="post" class="form-horizontal">
+                    <form:hidden path="cusCode"/>
                     <div class="row">
                         <div class="col-sm-6 b-r">
                             <div class="ibox float-e-margins">
@@ -52,9 +53,15 @@
                                         <label class="col-sm-3 control-label"><i style="color: red">*</i> 客户类型：</label>
                                         <div class="col-sm-8">
                                             <div class="radio i-checks">
-                                                <input type="radio" checked="" value="110002" id="optionsRadios1"
+                                                <c:if test="${empty customerAddModifyVo.cusType}">
+                                                     <input type="radio" checked  value="110002" id="optionsRadios1"
                                                        name="cusType"><i></i>&nbsp;企业客户
-                                                <input type="radio" value="110001" id="optionsRadios2"
+                                                </c:if>
+                                                <c:if test="${not empty customerAddModifyVo.cusType}">
+                                                    <input type="radio" ${customerAddModifyVo.cusType eq '110002' ? 'checked' : ''}  value="110002" id="optionsRadios1"
+                                                           name="cusType"><i></i>&nbsp;企业客户
+                                                </c:if>
+                                                <input type="radio" ${customerAddModifyVo.cusType eq '110001' ? 'checked' : ''} value="110001" id="optionsRadios2"
                                                        name="cusType"><i></i>&nbsp;个人客户
                                             </div>
                                         </div>
@@ -159,10 +166,14 @@
                                 <label class="col-sm-3 control-label">尊称：</label>
                                 <div class="col-sm-8">
                                     <div class="radio i-checks">
-
-                                        <input type="radio" name="primaryContactorSex" value="108003" checked=""> <i></i>未知
-                                        <input type="radio" name="primaryContactorSex" value="108001"> <i></i>先生
-                                        <input type="radio" name="primaryContactorSex" value="108002"> <i></i>女士
+                                        <c:if test="${empty customerAddModifyVo.primaryContactorSex}">
+                                            <input type="radio" name="primaryContactorSex" value="108003" checked> <i></i>未知
+                                        </c:if>
+                                        <c:if test="${not empty customerAddModifyVo.primaryContactorSex}">
+                                            <input type="radio" name="primaryContactorSex" value="108003" ${customerAddModifyVo.primaryContactorSex eq '108003' ? 'checked' : ''}> <i></i>未知
+                                        </c:if>
+                                        <input type="radio" name="primaryContactorSex" value="108001" ${customerAddModifyVo.primaryContactorSex eq '108001' ? 'checked' : ''}> <i></i>先生
+                                        <input type="radio" name="primaryContactorSex" value="108002" ${customerAddModifyVo.primaryContactorSex eq '108002' ? 'checked' : ''}> <i></i>女士
                                     </div>
                                 </div>
                             </div>

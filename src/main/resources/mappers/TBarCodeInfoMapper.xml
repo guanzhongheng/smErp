@@ -96,6 +96,7 @@
         SELECT
             bi.ord_code ordCode,
             bi.num ccProdNum,
+            bi.status outStockStatus,
             pt.prod_name itemName,
             pt.prod_spec itemSpec,
             pt.prod_cgy_code itemCgyCode,

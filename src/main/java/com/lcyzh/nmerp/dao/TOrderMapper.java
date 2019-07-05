@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.dao;
 
 import com.lcyzh.nmerp.entity.TOrder;
+import com.lcyzh.nmerp.model.vo.OrderAddModifyVo;
 import com.lcyzh.nmerp.model.vo.OrderQueryVo;
 import org.springframework.stereotype.Repository;
 
@@ -27,4 +28,5 @@ public interface TOrderMapper {
 
     int delete(TOrder tOrder);
 
+    OrderAddModifyVo findModifyInfoByOrdCode(String ordCode);
 }

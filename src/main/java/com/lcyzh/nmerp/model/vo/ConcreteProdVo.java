@@ -44,6 +44,15 @@ public class ConcreteProdVo {
     private String itemUnit;
     //产品所属人
     private String itemOwner;
+    /**
+     * @Description: 出库状态0-未出库，1-已出库
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/4 9:21 PM
+     */
+    private Character outStockStatus;
 
     public String getOrdCode() {
         return ordCode;
@@ -171,5 +180,13 @@ public class ConcreteProdVo {
 
     public void setItemOwner(String itemOwner) {
         this.itemOwner = itemOwner;
+    }
+
+    public Character getOutStockStatus() {
+        return outStockStatus;
+    }
+
+    public void setOutStockStatus(Character outStockStatus) {
+        this.outStockStatus = outStockStatus;
     }
 }

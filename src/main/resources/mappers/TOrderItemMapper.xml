@@ -29,7 +29,7 @@
         toi.item_lenth itemLenth,
         toi.item_thick itemThick,
         toi.item_width itemWidth,
-        toi.blan_press_type blankPressType,
+        toi.blank_press_type blankPressType,
         toi.item_unit itemUnit,
         toi.item_num itemNum,
         toi.item_owner itemOwner,

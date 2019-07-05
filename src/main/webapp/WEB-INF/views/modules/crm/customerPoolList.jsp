@@ -10,10 +10,10 @@
 </head>
 <body>
 <ul class="nav nav-tabs">
-    <li><a href="${ctx}/crm/list/">客户列表</a></li>
-    <li class="active"><a href="${ctx}/crm/poollist/">公海列表</a></li>
+    <li><a href="${ctx}/crm/customer/list/">客户列表</a></li>
+    <li class="active"><a href="${ctx}/crm/customer/poollist/">公海列表</a></li>
 </ul>
-<form:form id="searchForm" modelAttribute="customer" action="${ctx}/crm/customer/list" method="post"
+<form:form id="searchForm" modelAttribute="customer" action="${ctx}/crm/customer/poollist" method="post"
            class="breadcrumb form-search">
     <input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
     <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
@@ -38,10 +38,6 @@
                    class="input-small Wdate"
                    value="" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
         </li>
-        <li>
-            &nbsp;&nbsp;
-            <input type="checkbox" name="followType" id="type">归属模式
-        </li>
         &nbsp;&nbsp;
         <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
     </ul>
@@ -54,9 +50,6 @@
     &nbsp;&nbsp;
     <a type="button" id="toCustomer" class="btn btn-default" style="width: 80px;height: 23px"><i
             class="icon-refresh"></i>&nbsp;转移客户</a>
-    &nbsp;&nbsp;
-    <a type="button" id="toPoolCustomer" class="btn btn-default" style="width: 80px;height: 23px"><i
-            class="icon-group"></i>&nbsp;移入公海</a>
 </div>
 <div class="control-group">
     <table id="contentTable" class="table table-striped table-bordered table-condensed">
@@ -68,7 +61,6 @@
             <th>客户星级</th>
             <th>首联系人</th>
             <th>手机号码</th>
-            <%--<th>客户维护人</th>--%>
             <th>最后跟进日期</th>
             <th>未跟进天数</th>
             <th>操作</th>
@@ -83,7 +75,6 @@
                 <td>${cus.cusGrade}</td>
                 <td>${cus.primaryContactorName}</td>
                 <td>${cus.primaryContactorPhone}</td>
-                    <%--<td>${cus.cusAddress}</td>--%>
                 <td><fmt:formatDate value="${cus.lastFollowDate}" pattern="yyyy-MM-dd"/></td>
                 <td>${cus.unFollowDays}</td>
                 <td>

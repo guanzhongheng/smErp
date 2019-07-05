@@ -15,100 +15,132 @@
 
                     <div class="row">
                         <div class="col-sm-12">
+                            <div class="ibox-title">
+                                <h5>基本信息</h5>
+                                <code class="pull-right"><span style="color: red">*</span>
+                                    <small>为必填项</small>
+                                </code>
+                            </div>
                             <div class="ibox-content">
+                                <form:form id="inputForm" modelAttribute="orderAddModifyVo"
+                                           action="${ctx}/order/order_save"
+                                           method="post" class="form-horizontal">
+                                <form:hidden path="ordCode"/>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <code class="pull-right"><i style="color: red">*</i>
-                                                    <small>为必填项</small>
-                                                </code>
+                                        <div class="ibox float-e-margins">
+                                            <form method="get" class="form-horizontal">
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label"><i style="color: red">*</i>
+                                                        订单标题：</label>
+                                                    <div class="col-sm-8">
+                                                        <form:input path="ordTitle" htmlEscape="false" maxlength="200"
+                                                                    class="form-control" placeholder="订单标题"/>
+                                                    </div>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label"><i style="color: red">*</i>
+                                                        关联客户：</label>
+                                                    <div class="col-sm-8">
+                                                        <form:input path="cusCode" htmlEscape="false" maxlength="200"
+                                                                    class="form-control" placeholder="关联客户"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label"><i style="color: red"></i>
+                                                        代理客户：</label>
+                                                    <div class="col-sm-8">
+                                                        <form:input path="proxyName" htmlEscape="false" maxlength="200"
+                                                                    class="form-control" placeholder="代理客户名称"/>
+                                                    </div>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label"><i style="color: red">*</i>
+                                                        订单类型：</label>
+                                                    <form:select path="ordType" class="chosen-select"
+                                                                 cssStyle="min-width: 300px">
+                                                        <form:option value="" label=""/>
+                                                        <form:options items="${fns:getDictList(120000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+                                                    </form:select>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label"><i style="color: red">*</i>
+                                                        订单签订日期：</label>
+                                                    <div class="col-sm-8">
+                                                        <form:input path="ordSignDate" htmlEscape="false"
+                                                                    maxlength="200"
+                                                                    class="form-control" placeholder="订单签订日期"/>
+                                                    </div>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label"><i style="color: red"></i>
+                                                        订单交付日期：</label>
+                                                    <div class="col-sm-8">
+                                                        <form:input path="ordDeliveryDate" htmlEscape="false"
+                                                                    maxlength="200"
+                                                                    class="form-control" placeholder="订单交付日期"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label"><i style="color: red">*</i>
+                                                        我方签约人：</label>
+                                                    <div class="col-sm-8">
+                                                        <form:input path="comContractor" htmlEscape="false"
+                                                                    maxlength="200"
+                                                                    class="form-control" placeholder="我方签约人"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label"><i style="color: red">*</i>
+                                                        客户签约人：</label>
+                                                    <div class="col-sm-8">
+                                                        <form:input path="cusContractor" htmlEscape="false"
+                                                                    maxlength="200"
+                                                                    class="form-control" placeholder="客户签约人"/>
+                                                    </div>
+                                                </div>
+
+                                                    <%--<div class="hr-line-dashed"></div>--%>
+                                                    <%--<div class="form-group">--%>
+                                                    <%--<label class="col-sm-3 control-label"><i style="color: red">*</i>--%>
+                                                    <%--归属人员：</label>--%>
+                                                    <%--<div class="col-sm-6">--%>
+                                                    <%--<input type="text" class="form-control" name="password">--%>
+                                                    <%--</div>--%>
+                                                    <%--</div>--%>
+
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label"><i style="color: red"></i>
+                                                        备注信息：</label>
+                                                    <div class="col-sm-8">
+                                                        <form:input path="remark" htmlEscape="false" maxlength="200"
+                                                                    class="form-control" placeholder="备注信息"/>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <div class="col-sm-4 col-sm-offset-2">
+                                                    <button class="btn btn-primary" type="submit">保存订单</button>
+                                                    &nbsp;&nbsp;
+                                                    <button class="btn btn-white" type="button"
+                                                            onclick="history.go(-1)">返回
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="hr-line-dashed"></div>
-                                        <form method="post" class="form-horizontal">
-                                            <div class="form-group">
-                                                <label class="col-sm-3 control-label"><i style="color: red">*</i>
-                                                    订单标题：</label>
-                                                <div class="col-sm-6">
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="hr-line-dashed"></div>
-                                            <div class="form-group">
-                                                <label class="col-sm-3 control-label"><i style="color: red">*</i>
-                                                    关联客户：</label>
-                                                <div class="col-sm-6">
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="hr-line-dashed"></div>
-                                            <div class="form-group">
-                                                <label class="col-sm-3 control-label"><i style="color: red">*</i>
-                                                    订单总金额：</label>
-                                                <div class="col-sm-6">
-                                                    <input type="text" class="form-control" name="password">
-                                                </div>
-                                            </div>
-                                            <div class="hr-line-dashed"></div>
-                                            <div class="form-group">
-                                                <label class="col-sm-3 control-label">订单类型：</label>
-                                                <div class="col-sm-6">
-
-                                                </div>
-                                            </div>
-                                            <div class="hr-line-dashed"></div>
-                                            <div class="form-group">
-                                                <label class="col-sm-3 control-label">交货日期：</label>
-                                                <div class="col-sm-6">
-                                                    <input type="text" class="form-control" name="password">
-                                                </div>
-                                            </div>
-                                            <div class="hr-line-dashed"></div>
-
-
-                                            <div class="form-group">
-                                                <label class="col-sm-3 control-label">客户签约人：</label>
-                                                <div class="col-sm-6">
-                                                    <input type="text" class="form-control" name="password">
-                                                </div>
-                                            </div>
-                                            <div class="hr-line-dashed"></div>
-
-                                            <div class="form-group">
-                                                <label class="col-sm-3 control-label">我方签约人：</label>
-                                                <div class="col-sm-6">
-                                                    <input type="text" class="form-control" name="password">
-                                                </div>
-                                            </div>
-                                            <div class="hr-line-dashed"></div>
-
-                                            <div class="form-group">
-                                                <label class="col-sm-3 control-label"><i style="color: red">*</i>
-                                                    归属人员：</label>
-                                                <div class="col-sm-6">
-                                                    <input type="text" class="form-control" name="password">
-                                                </div>
-                                            </div>
-                                            <div class="hr-line-dashed"></div>
-                                            <div class="form-group">
-                                                <label class="col-sm-3 control-label">备注信息：</label>
-                                                <div class="col-sm-6">
-                                                <textarea name="" id="" maxlength="300" style="min-width: 300px"
-                                                          rows="6"></textarea>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <div class="col-sm-8 col-sm-offset-4">
-                                                    <button class="btn btn-primary" type="submit">提交审批</button>
-                                                    &nbsp;&nbsp;
-                                                    <button class="btn btn-primary" type="submit">保存订单</button>
-                                                    &nbsp;&nbsp;
-                                                    <button class="btn btn-primary" type="submit">保存订单</button>
-                                                </div>
-                                            </div>
-                                        </form>
+                                        </form:form>
                                     </div>
                                 </div>
                             </div>
@@ -116,35 +148,28 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
-
-
 </div>
-
 <script>
     $(document).ready(function () {
         $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",})
     });
 </script>
-<script id="treeselectTpl" type="text/template">//<!--<div>
-<#form:treeselect id="{{d.id}}" title="{{d.title}}" name="{{d.name}}" value="{{d.value}}"
-	labelName="{{d.labelName}}" labelValue="{{d.labelValue}}" url="{{d.url}}"
-	class="{{d.cssClass}}" btnClass="btn-sm" allowClear="true"/>
-</div>//--></script>
-<script>
-
-    // $("#inputForm").validate({
-    //     submitHandler: function(form){
-    //         $("#userRoleString").val(roleGrid.dataGrid('getSelectRows').join(','));
-    //         js.ajaxSubmitForm($(form), function(data){
-    //             js.showMessage(data.message);
-    //             if(data.result == Global.TRUE){
-    //                 js.closeCurrentTabPage(function(contentWindow){
-    //                     contentWindow.page();
-    //                 });
-    //             }
-    //         }, "json");
-    //     }
-    // });
-</script>
+<script src="${ctxStatic}/hPlugs/js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+<script src="${ctxStatic}/hPlugs/js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+<script src="${ctxStatic}/hPlugs/js/content.min.js?v=1.0.0" type="text/javascript"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/chosen/chosen.jquery.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/jsKnob/jquery.knob.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/switchery/switchery.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/iCheck/icheck.min.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/clockpicker/clockpicker.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/cropper/cropper.min.js"></script>
+<script src="${ctxStatic}/hPlugs/js/demo/form-advanced-demo.min.js"></script>

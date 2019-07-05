@@ -22,7 +22,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 用户Controller
@@ -72,6 +71,7 @@ public class UserController extends BaseController {
 		//if (user.getOffice()==null || user.getOffice().getId()==null){
 		//	user.setOffice(UserUtils.getUser().getOffice());
 		//}
+
 		model.addAttribute("user", user);
 		model.addAttribute("allRoles", systemService.findAllRole());
 		return "modules/sys/userForm";
@@ -79,10 +79,10 @@ public class UserController extends BaseController {
 
 	@RequestMapping(value = "save")
 	public String save(User user, HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
-		if(Global.isDemoMode()){
-			addMessage(redirectAttributes, "演示模式，不允许操作！");
-			return "redirect:"  + "/sys/user/list?repage";
-		}
+		//if(Global.isDemoMode()){
+		//	addMessage(redirectAttributes, "演示模式，不允许操作！");
+		//	return "redirect:"  + "/sys/user/list?repage";
+		//}
 		//// 修正引用赋值问题，不知道为何，Company和Office引用的一个实例地址，修改了一个，另外一个跟着修改。
 		//user.setCompany(new Office(request.getParameter("company.id")));
 		//user.setOffice(new Office(request.getParameter("office.id")));
@@ -251,10 +251,10 @@ public class UserController extends BaseController {
 	public String info(User user, HttpServletResponse response, Model model) {
 		User currentUser = UserUtils.getUser();
 		if (StringUtils.isNotBlank(user.getName())){
-			if(Global.isDemoMode()){
-				model.addAttribute("message", "演示模式，不允许操作！");
-				return "modules/sys/userInfo";
-			}
+			//if(Global.isDemoMode()){
+			//	model.addAttribute("message", "演示模式，不允许操作！");
+			//	return "modules/sys/userInfo";
+			//}
 			currentUser.setEmail(user.getEmail());
 			currentUser.setPhone(user.getPhone());
 			currentUser.setMobile(user.getMobile());

@@ -3,19 +3,18 @@
 <html>
 <head>
 	<title>角色管理</title>
-	<meta name="decorator" content="default"/>
 	<%@include file="/WEB-INF/views/include/treeview.jsp" %>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$("#name").focus();
 			$("#inputForm").validate({
 				rules: {
-					name: {remote: "${ctx}/sys/role/checkName?oldName=" + encodeURIComponent("${role.name}")},
-					enname: {remote: "${ctx}/sys/role/checkEnname?oldEnname=" + encodeURIComponent("${role.enname}")}
+					name: {remote: "${ctx}/sys/role/checkName?oldName=" + encodeURIComponent("${role.name}")}
+					<%--enname: {remote: "${ctx}/sys/role/checkEnname?oldEnname=" + encodeURIComponent("${role.enname}")}--%>
 				},
 				messages: {
-					name: {remote: "角色名已存在"},
-					enname: {remote: "英文名已存在"}
+					name: {remote: "角色名已存在"}
+					// enname: {remote: "英文名已存在"}
 				},
 				submitHandler: function(form){
 					var ids = [], nodes = tree.getCheckedNodes(true);
@@ -23,11 +22,11 @@
 						ids.push(nodes[i].id);
 					}
 					$("#menuIds").val(ids);
-					var ids2 = [], nodes2 = tree2.getCheckedNodes(true);
-					for(var i=0; i<nodes2.length; i++) {
-						ids2.push(nodes2[i].id);
-					}
-					$("#officeIds").val(ids2);
+					// var ids2 = [], nodes2 = tree2.getCheckedNodes(true);
+					// for(var i=0; i<nodes2.length; i++) {
+					// 	ids2.push(nodes2[i].id);
+					// }
+					// $("#officeIds").val(ids2);
 					loading('正在提交，请稍等...');
 					form.submit();
 				},
@@ -66,34 +65,34 @@
 			tree.expandAll(true);
 			
 			// 用户-机构
-			var zNodes2=[
-					<c:forEach items="${officeList}" var="office">{id:"${office.id}", pId:"${not empty office.parent?office.parent.id:0}", name:"${office.name}"},
-		            </c:forEach>];
+			<%--var zNodes2=[--%>
+					<%--<c:forEach items="${officeList}" var="office">{id:"${office.id}", pId:"${not empty office.parent?office.parent.id:0}", name:"${office.name}"},--%>
+		            <%--</c:forEach>];--%>
 			// 初始化树结构
-			var tree2 = $.fn.zTree.init($("#officeTree"), setting, zNodes2);
+			// var tree2 = $.fn.zTree.init($("#officeTree"), setting, zNodes2);
 			// 不选择父节点
-			tree2.setting.check.chkboxType = { "Y" : "ps", "N" : "s" };
+			// tree2.setting.check.chkboxType = { "Y" : "ps", "N" : "s" };
 			// 默认选择节点
-			var ids2 = "${role.officeIds}".split(",");
-			for(var i=0; i<ids2.length; i++) {
-				var node = tree2.getNodeByParam("id", ids2[i]);
-				try{tree2.checkNode(node, true, false);}catch(e){}
-			}
+			<%--var ids2 = "${role.officeIds}".split(",");--%>
+			// for(var i=0; i<ids2.length; i++) {
+			// 	var node = tree2.getNodeByParam("id", ids2[i]);
+			// 	try{tree2.checkNode(node, true, false);}catch(e){}
+			// }
 			// 默认展开全部节点
-			tree2.expandAll(true);
+			// tree2.expandAll(true);
 			// 刷新（显示/隐藏）机构
-			refreshOfficeTree();
-			$("#dataScope").change(function(){
-				refreshOfficeTree();
-			});
+			// refreshOfficeTree();
+			// $("#dataScope").change(function(){
+			// 	refreshOfficeTree();
+			// });
 		});
-		function refreshOfficeTree(){
-			if($("#dataScope").val()==9){
-				$("#officeTree").show();
-			}else{
-				$("#officeTree").hide();
-			}
-		}
+		// function refreshOfficeTree(){
+		// 	if($("#dataScope").val()==9){
+		// 		$("#officeTree").show();
+		// 	}else{
+		// 		$("#officeTree").hide();
+		// 	}
+		// }
 	</script>
 </head>
 <body>
@@ -106,10 +105,10 @@
 		<sys:message content="${message}"/>
 		<div class="control-group">
 			<label class="control-label">归属机构:</label>
-			<div class="controls">
-                <sys:treeselect id="office" name="office.id" value="${role.office.id}" labelName="office.name" labelValue="${role.office.name}"
-					title="机构" url="/sys/office/treeData" cssClass="required"/>
-			</div>
+			<%--<div class="controls">--%>
+                <%--<sys:treeselect id="office" name="office.id" value="${role.office.id}" labelName="office.name" labelValue="${role.office.name}"--%>
+					<%--title="机构" url="/sys/office/treeData" cssClass="required"/>--%>
+			<%--</div>--%>
 		</div>
 		<div class="control-group">
 			<label class="control-label">角色名称:</label>
@@ -119,14 +118,14 @@
 				<span class="help-inline"><font color="red">*</font> </span>
 			</div>
 		</div>
-		<div class="control-group">
-			<label class="control-label">英文名称:</label>
-			<div class="controls">
-				<input id="oldEnname" name="oldEnname" type="hidden" value="${role.enname}">
-				<form:input path="enname" htmlEscape="false" maxlength="50" class="required"/>
-				<span class="help-inline"><font color="red">*</font> 工作流用户组标识</span>
-			</div>
-		</div>
+		<%--<div class="control-group">--%>
+			<%--<label class="control-label">英文名称:</label>--%>
+			<%--<div class="controls">--%>
+				<%--<input id="oldEnname" name="oldEnname" type="hidden" value="${role.enname}">--%>
+				<%--<form:input path="enname" htmlEscape="false" maxlength="50" class="required"/>--%>
+				<%--<span class="help-inline"><font color="red">*</font> 工作流用户组标识</span>--%>
+			<%--</div>--%>
+		<%--</div>--%>
 		<div class="control-group">
 			<label class="control-label">角色类型:</label>
 			<div class="controls"><%--
@@ -160,22 +159,22 @@
 				<span class="help-inline">“是”代表此数据可用，“否”则表示此数据不可用</span>
 			</div>
 		</div>
-		<div class="control-group">
-			<label class="control-label">数据范围:</label>
-			<div class="controls">
-				<form:select path="dataScope" class="input-medium">
-					<form:options items="${fns:getDictList('sys_data_scope')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
-				</form:select>
-				<span class="help-inline">特殊情况下，设置为“按明细设置”，可进行跨机构授权</span>
-			</div>
-		</div>
+		<%--<div class="control-group">--%>
+			<%--<label class="control-label">数据范围:</label>--%>
+			<%--<div class="controls">--%>
+				<%--<form:select path="dataScope" class="input-medium">--%>
+					<%--<form:options items="${fns:getDictList('sys_data_scope')}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
+				<%--</form:select>--%>
+				<%--<span class="help-inline">特殊情况下，设置为“按明细设置”，可进行跨机构授权</span>--%>
+			<%--</div>--%>
+		<%--</div>--%>
 		<div class="control-group">
 			<label class="control-label">角色授权:</label>
 			<div class="controls">
 				<div id="menuTree" class="ztree" style="margin-top:3px;float:left;"></div>
 				<form:hidden path="menuIds"/>
-				<div id="officeTree" class="ztree" style="margin-left:100px;margin-top:3px;float:left;"></div>
-				<form:hidden path="officeIds"/>
+				<%--<div id="officeTree" class="ztree" style="margin-left:100px;margin-top:3px;float:left;"></div>--%>
+				<%--<form:hidden path="officeIds"/>--%>
 			</div>
 		</div>
 		<div class="control-group">

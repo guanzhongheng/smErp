@@ -10,25 +10,15 @@ import java.util.Date;
  */
 public class TProdPlan implements Serializable {
     private static final long serialVersionUID = 1L;
-    private Long id;
     private String prodPlanCode;
     private String ordCode;
     private Character planStatus;
-    private Long operUserId;
+    private Integer itemCgyNum;
+    private Integer finishCgyNum;
+    private String operEmpCode;
     private Date createTime;
     private Date updateTime;
 
-
-    public TProdPlan() {
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
 
     public void setProdPlanCode(String prodPlanCode) {
         this.prodPlanCode = prodPlanCode;
@@ -54,12 +44,28 @@ public class TProdPlan implements Serializable {
         return planStatus;
     }
 
-    public void setOperUserId(Long operUserId) {
-        this.operUserId = operUserId;
+    public void setItemCgyNum(Integer itemCgyNum) {
+        this.itemCgyNum = itemCgyNum;
     }
 
-    public Long getOperUserId() {
-        return operUserId;
+    public Integer getItemCgyNum() {
+        return itemCgyNum;
+    }
+
+    public Integer getFinishCgyNum() {
+        return finishCgyNum;
+    }
+
+    public void setFinishCgyNum(Integer finishCgyNum) {
+        this.finishCgyNum = finishCgyNum;
+    }
+
+    public void setOperEmpCode(String operEmpCode) {
+        this.operEmpCode = operEmpCode;
+    }
+
+    public String getOperEmpCode() {
+        return operEmpCode;
     }
 
     public void setCreateTime(Date createTime) {

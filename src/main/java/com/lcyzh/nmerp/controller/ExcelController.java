@@ -49,7 +49,7 @@ public class ExcelController {
 //        }
 //        //获取文件体信息
 //        xmlConfigName = String.format("%s%s", xmlConfigPath, "point-body.xml");
-//        OrderAddModifyVo ord = new OrderAddModifyVo();
+//        OrderAddBatchVo ord = new OrderAddBatchVo();
 //        beans.clear();
 //        beans.put("ord", ord);
 //        //解析文件体
