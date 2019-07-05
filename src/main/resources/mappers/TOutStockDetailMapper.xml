@@ -119,7 +119,7 @@
     </delete>
 
     <delete id="deleteByBatch" parameterType="java.util.List">
-        delete from T_OUT_STOCK_DETAIL
+        delete from T_OUT_STOCK_DETAIL where 
         bar_code in
         <foreach collection="list" item="item" open="(" separator="," close=")">
         #{item}

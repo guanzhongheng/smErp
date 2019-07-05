@@ -26,13 +26,12 @@ import org.springframework.stereotype.Component;
  * lijinku          2019/06/17    create
  */
 
-@Component
+//@Component
 public class NettyServer implements CommandLineRunner {
     private final int port=12345;
     @Override
     public void run(String... args) throws Exception {
         EventLoopGroup bossGroup = new NioEventLoopGroup();
-
         EventLoopGroup group = new NioEventLoopGroup();
         try {
             ServerBootstrap sb = new ServerBootstrap();

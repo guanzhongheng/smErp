@@ -9,6 +9,7 @@
     <sitemesh:write property='head'/>
 </head>
 <body>
+
 <sitemesh:write property='body'/>
 <script type="text/javascript">//<!-- 无框架时，左上角显示菜单图标按钮。
 if(!(self.frameElement && self.frameElement.tagName=="IFRAME")){

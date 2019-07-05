@@ -205,7 +205,9 @@ public class TOutStockServiceImpl implements TOutStockService {
 
                     }
                 }
-                res = tOutStockDetailMapper.deleteByBatch(bcList);
+                if(bcList!=null && !bcList.isEmpty()){
+                    res = tOutStockDetailMapper.deleteByBatch(bcList);
+                }
             }
         }
         return res;
@@ -217,6 +219,7 @@ public class TOutStockServiceImpl implements TOutStockService {
         if (entity != null && entity.getItemNum() != null && entity.getCcProdNum() != null) {
             entity.setRemainProdNum(entity.getItemNum().doubleValue() - entity.getCcProdNum());
         }
+
 
         if (entity.getOrdCode() != null) {
             OrderQueryVo queryVo = tOrderMapper.findByPrimaryKey(entity.getOrdCode());
