@@ -47,7 +47,6 @@
     <example>${fns:getConst(key)}</example>
   </function>
 
-
   <!-- UserUtils -->
   <function>
     <description>获取当前用户对象</description>
@@ -57,22 +56,6 @@
     <example>${fns:getUser()}</example>
   </function>
 
-  <!--<function>-->
-    <!--<description>根据编码获取用户对象</description>-->
-    <!--<name>getUserById</name>-->
-    <!--<function-class>com.lcyzh.nmerp.controller.system.util.UserUtils</function-class>-->
-    <!--<function-signature>com.lcyzh.nmerp.entity.TUser get(java.lang.String)</function-signature>-->
-    <!--<example>${fns:getUserById(id)}</example>-->
-  <!--</function>-->
-
-  <!--<function>-->
-    <!--<description>获取授权用户信息</description>-->
-    <!--<name>getPrincipal</name>-->
-    <!--<function-class>com.lcyzh.nmerp.controller.system.util.UserUtils</function-class>-->
-    <!--<function-signature>com.thinkgem.jeesite.modules.sys.security.SystemAuthorizingRealm.Principal getPrincipal()</function-signature>-->
-    <!--<example>${fns:getPrincipal()}</example>-->
-  <!--</function>-->
-
   <function>
     <description>获取当前用户的菜单对象列表</description>
     <name>getMenuList</name>
@@ -80,22 +63,6 @@
     <function-signature>java.util.List getMenuList()</function-signature>
     <example>${fns:getMenuList()}</example>
   </function>
-
-  <!--<function>-->
-    <!--<description>获取当前用户的区域对象列表</description>-->
-    <!--<name>getAreaList</name>-->
-    <!--<function-class>com.lcyzh.nmerp.controller.system.util.UserUtils</function-class>-->
-    <!--<function-signature>java.util.List getAreaList()</function-signature>-->
-    <!--<example>${fns:getAreaList()}</example>-->
-  <!--</function>-->
-
-  <!--<function>-->
-    <!--<description>获取当前用户的部门对象列表</description>-->
-    <!--<name>getOfficeList</name>-->
-    <!--<function-class>com.lcyzh.nmerp.controller.system.util.UserUtils</function-class>-->
-    <!--<function-signature>java.util.List getOfficeList()</function-signature>-->
-    <!--<example>${fns:getOfficeList()}</example>-->
-  <!--</function>-->
 
   <function>
     <description>获取当前用户缓存</description>
@@ -105,14 +72,14 @@
     <example>${fns:getCache(cacheName, defaultValue)}</example>
   </function>
 
-  <!-- DictUtils -->
-  <!--<function>-->
-    <!--<description>获取字典标签</description>-->
-    <!--<name>getDictList</name>-->
-    <!--<function-class>com.lcyzh.nmerp.utils.DictUtils</function-class>-->
-    <!--<function-signature>java.util.List getDictList(java.lang.Long)</function-signature>-->
-    <!--<example>${fns:getDictList(dictKey)}</example>-->
-  <!--</function>-->
+   DictUtils
+  <function>
+    <description>获取字典标签</description>
+    <name>getCusDictList</name>
+    <function-class>com.lcyzh.nmerp.utils.DictUtils</function-class>
+    <function-signature>java.util.List getDictList(java.lang.Long)</function-signature>
+    <example>${fns:getCusDictList(dictKey)}</example>
+  </function>
 
   <function>
     <description>获取字典标签-按部门获取员工信息</description>
@@ -125,7 +92,7 @@
   <function>
     <description>获取字典标签</description>
     <name>getDictLabel</name>
-    <function-class>com.lcyzh.nmerp.controller.system.util.DictUtils</function-class>
+    <function-class>com.lcyzh.nmerp.controller.system.util.SysDictUtils</function-class>
     <function-signature>java.lang.String getDictLabel(java.lang.String, java.lang.String, java.lang.String)</function-signature>
     <example>${fns:getDictLabel(value, type, defaultValue)}</example>
   </function>
@@ -133,7 +100,7 @@
   <function>
     <description>获取字典标签(多个)</description>
     <name>getDictLabels</name>
-    <function-class>com.lcyzh.nmerp.controller.system.util.DictUtils</function-class>
+    <function-class>com.lcyzh.nmerp.controller.system.util.SysDictUtils</function-class>
     <function-signature>java.lang.String getDictLabels(java.lang.String, java.lang.String, java.lang.String)</function-signature>
     <example>${fns:getDictLabels(values, type, defaultValue)}</example>
   </function>
@@ -141,7 +108,7 @@
   <function>
     <description>获取字典值</description>
     <name>getDictValue</name>
-    <function-class>com.lcyzh.nmerp.controller.system.util.DictUtils</function-class>
+    <function-class>com.lcyzh.nmerp.controller.system.util.SysDictUtils</function-class>
     <function-signature>java.lang.String getDictValue(java.lang.String, java.lang.String, java.lang.String)</function-signature>
     <example>${fns:getDictValue(label, type, defaultValue)}</example>
   </function>
@@ -149,18 +116,10 @@
   <function>
     <description>获取字典对象列表</description>
     <name>getDictList</name>
-    <function-class>com.lcyzh.nmerp.controller.system.util.DictUtils</function-class>
+    <function-class>com.lcyzh.nmerp.controller.system.util.SysDictUtils</function-class>
     <function-signature>java.util.List getDictList(java.lang.String)</function-signature>
     <example>${fns:getDictList(type)}</example>
   </function>
-
-  <!--<function>-->
-    <!--<description>获取字典对象列表</description>-->
-    <!--<name>getDictListJson</name>-->
-    <!--<function-class>com.thinkgem.jeesite.modules.sys.utils.DictUtils</function-class>-->
-    <!--<function-signature>java.lang.String getDictListJson(java.lang.String)</function-signature>-->
-    <!--<example>${fns:getDictListJson(type)}</example>-->
-  <!--</function>-->
 
   <!-- Encodes -->
   <function>
@@ -260,5 +219,5 @@
     <function-signature>java.lang.String toJson(java.lang.Object)</function-signature>
     <example>${fns:toJson(object)}</example>
   </function>
-  
+
 </taglib>

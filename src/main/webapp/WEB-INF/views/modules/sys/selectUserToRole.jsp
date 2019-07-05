@@ -3,7 +3,6 @@
 <html>
 <head>
 	<title>分配角色</title>
-	<meta name="decorator" content="blank"/>
 	<%@include file="/WEB-INF/views/include/treeview.jsp" %>
 	<script type="text/javascript">
 	

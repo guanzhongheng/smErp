@@ -5,7 +5,6 @@
     <resultMap id="roleResult" type="com.lcyzh.nmerp.entity.sys.Role">
         <id property="id" column="id" />
         <result property="name" column="name" />
-        <result property="enname" column="enname" />
         <result property="roleType" column="roleType" />
         <result property="dataScope" column="dataScope" />
         <result property="remarks" column="remarks" />
@@ -51,7 +50,7 @@
         SELECT
         <include refid="roleColumns"/>
         FROM T_SYS_ROLE a
-        WHERE a.enname = #{enname} AND a.del_flag = #{DEL_FLAG_NORMAL}
+        WHERE  a.del_flag = #{DEL_FLAG_NORMAL}
     </select>
 
     <select id="findList" resultMap="roleResult">
@@ -113,7 +112,6 @@
     <update id="update">
 		UPDATE T_SYS_ROLE SET
 			name = #{name},
-			enname = #{enname},
 			role_type = #{roleType},
 			data_scope = #{dataScope},
 			update_by = #{updateBy.id},

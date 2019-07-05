@@ -110,38 +110,6 @@ public class CrmManageController extends BaseController {
         return "modules/crm/poolRemark";
     }
 
-    /**
-     * 客户查看
-     * @param customer
-     * @param model
-     * @return
-     */
-    @RequestMapping(value = "customer/info")
-    public String form(Customer customer, Model model) {
-        if (StringUtils.isNotBlank(customer.getCusCode())){
 
 
-        }
-        model.addAttribute("customer", customer);
-        return "modules/crm/customerInfo";
-    }
-
-    @RequestMapping(value = "save")
-    public String save(Customer customer, Model model, RedirectAttributes redirectAttributes) {
-        if (!beanValidator(model, customer)){
-            return form(customer, model);
-        }
-
-
-        addMessage(redirectAttributes, "保存客户成功");
-        return "redirect:" + adminPath + "/crm/customer/?repage";
-    }
-
-    @RequestMapping(value = "delete")
-    public String delete(Customer customer, RedirectAttributes redirectAttributes) {
-        // 删除方法调用
-
-        addMessage(redirectAttributes, "删除客户成功成功");
-        return "redirect:" + "/crm/customer/?repage";
-    }
 }

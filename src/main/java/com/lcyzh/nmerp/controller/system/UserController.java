@@ -12,11 +12,13 @@ import com.lcyzh.nmerp.entity.sys.Role;
 import com.lcyzh.nmerp.entity.sys.User;
 import com.lcyzh.nmerp.service.security.SystemService;
 import com.lcyzh.nmerp.utils.StringUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,13 +39,13 @@ public class UserController extends BaseController {
 
 	@ModelAttribute
 	public User get(@RequestParam(required=false) String id) {
-		if (id != null){
+		if (StringUtils.isNotBlank(id)){
 			return systemService.getUser(id);
 		}else{
 			return new User();
 		}
 	}
-//
+
     @RequestMapping(value = {"index"})
     public String index(User user, Model model) {
         return "modules/sys/userIndex";
@@ -65,13 +67,6 @@ public class UserController extends BaseController {
 
 	@RequestMapping(value = "form")
 	public String form(User user, Model model) {
-		//if (user.getCompany()==null || user.getCompany().getId()==null){
-		//	user.setCompany(UserUtils.getUser().getCompany());
-		//}
-		//if (user.getOffice()==null || user.getOffice().getId()==null){
-		//	user.setOffice(UserUtils.getUser().getOffice());
-		//}
-
 		model.addAttribute("user", user);
 		model.addAttribute("allRoles", systemService.findAllRole());
 		return "modules/sys/userForm";
@@ -79,13 +74,6 @@ public class UserController extends BaseController {
 
 	@RequestMapping(value = "save")
 	public String save(User user, HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
-		//if(Global.isDemoMode()){
-		//	addMessage(redirectAttributes, "演示模式，不允许操作！");
-		//	return "redirect:"  + "/sys/user/list?repage";
-		//}
-		//// 修正引用赋值问题，不知道为何，Company和Office引用的一个实例地址，修改了一个，另外一个跟着修改。
-		//user.setCompany(new Office(request.getParameter("company.id")));
-		//user.setOffice(new Office(request.getParameter("office.id")));
 		// 如果新密码为空，则不更换密码
 		if (StringUtils.isNotBlank(user.getNewPassword())) {
 			user.setPassword(SystemService.entryptPassword(user.getNewPassword()));

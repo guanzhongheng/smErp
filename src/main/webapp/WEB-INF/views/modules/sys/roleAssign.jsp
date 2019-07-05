@@ -7,7 +7,7 @@
 <body>
 	<ul class="nav nav-tabs">
 		<li><a href="${ctx}/sys/role/">角色列表</a></li>
-		<li class="active"><a href="${ctx}/sys/role/assign?id=${role.id}"><shiro:hasPermission name="sys:role:edit">角色分配</shiro:hasPermission><shiro:lacksPermission name="sys:role:edit">人员列表</shiro:lacksPermission></a></li>
+		<li class="active"><a href="${ctx}/sys/role/assign?id=${role.id}">角色操作</a></li>
 	</ul>
 	<div class="container-fluid breadcrumb">
 		<div class="row-fluid span12">
@@ -66,7 +66,7 @@
 		</script>
 	</div>
 	<table id="contentTable" class="table table-striped table-bordered table-condensed">
-		<thead><tr><th>登录名</th><th>姓名</th><th>电话</th><th>手机</th><shiro:hasPermission name="sys:user:edit"><th>操作</th></shiro:hasPermission></tr></thead>
+		<thead><tr><th>登录名</th><th>姓名</th><th>电话</th><th>手机</th><th>操作</th></tr></thead>
 		<tbody>
 		<c:forEach items="${userList}" var="user">
 			<tr>
@@ -76,10 +76,10 @@
 				<td>${user.name}</td>
 				<td>${user.phone}</td>
 				<td>${user.mobile}</td>
-				<shiro:hasPermission name="sys:role:edit"><td>
+				<td>
 					<a href="${ctx}/sys/role/outrole?userId=${user.id}&roleId=${role.id}" 
 						onclick="return confirmx('确认要将用户<b>[${user.name}]</b>从<b>[${role.name}]</b>角色中移除吗？', this.href)">移除</a>
-				</td></shiro:hasPermission>
+				</td>
 			</tr>
 		</c:forEach>
 		</tbody>

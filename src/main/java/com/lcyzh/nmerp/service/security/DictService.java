@@ -4,7 +4,7 @@
 package com.lcyzh.nmerp.service.security;
 
 import com.lcyzh.nmerp.common.utils.CacheUtils;
-import com.lcyzh.nmerp.controller.system.util.DictUtils;
+import com.lcyzh.nmerp.controller.system.util.SysDictUtils;
 import com.lcyzh.nmerp.dao.common.DictDao;
 import com.lcyzh.nmerp.entity.sys.Dict;
 import org.springframework.stereotype.Service;
@@ -32,13 +32,13 @@ public class DictService extends CrudService<DictDao, Dict> {
 	@Transactional(readOnly = false)
 	public void save(Dict dict) {
 		super.save(dict);
-		CacheUtils.remove(DictUtils.CACHE_DICT_MAP);
+		CacheUtils.remove(SysDictUtils.CACHE_DICT_MAP);
 	}
 
 	@Transactional(readOnly = false)
 	public void delete(Dict dict) {
 		super.delete(dict);
-		CacheUtils.remove(DictUtils.CACHE_DICT_MAP);
+		CacheUtils.remove(SysDictUtils.CACHE_DICT_MAP);
 	}
 
 }

@@ -19,7 +19,7 @@
 <body>
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="${ctx}/oa/oaNotify/${oaNotify.self?'self':''}">通知列表</a></li>
-		<c:if test="${!oaNotify.self}"><shiro:hasPermission name="oa:oaNotify:edit"><li><a href="${ctx}/oa/oaNotify/form">通知添加</a></li></shiro:hasPermission></c:if>
+		<c:if test="${!oaNotify.self}"><li><a href="${ctx}/oa/oaNotify/form">通知添加</a></li></c:if>
 	</ul>
 	<form:form id="searchForm" modelAttribute="oaNotify" action="${ctx}/oa/oaNotify/${oaNotify.self?'self':''}" method="post" class="breadcrumb form-search">
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
@@ -50,7 +50,7 @@
 				<th>状态</th>
 				<th>查阅状态</th>
 				<th>更新时间</th>
-				<c:if test="${!oaNotify.self}"><shiro:hasPermission name="oa:oaNotify:edit"><th>操作</th></shiro:hasPermission></c:if>
+				<c:if test="${!oaNotify.self}"><th>操作</th></c:if>
 			</tr>
 		</thead>
 		<tbody>
@@ -76,10 +76,12 @@
 				<td>
 					<fmt:formatDate value="${oaNotify.updateDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</td>
-				<c:if test="${!requestScope.oaNotify.self}"><shiro:hasPermission name="oa:oaNotify:edit"><td>
-    				<a href="${ctx}/oa/oaNotify/form?id=${oaNotify.id}">修改</a>
-					<a href="${ctx}/oa/oaNotify/delete?id=${oaNotify.id}" onclick="return confirmx('确认要删除该通知吗？', this.href)">删除</a>
-				</td></shiro:hasPermission></c:if>
+				<c:if test="${!requestScope.oaNotify.self}">
+					<td>
+						<a href="${ctx}/oa/oaNotify/form?id=${oaNotify.id}">修改</a>
+						<a href="${ctx}/oa/oaNotify/delete?id=${oaNotify.id}" onclick="return confirmx('确认要删除该通知吗？', this.href)">删除</a>
+					</td>
+				</c:if>
 			</tr>
 		</c:forEach>
 		</tbody>

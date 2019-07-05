@@ -11,34 +11,15 @@
 <body>
 	<sys:message content="${message}"/>
 	<div id="content" class="row-fluid">
-		<%--<div id="left" class="accordion-group">--%>
-			<%--<div class="accordion-heading">--%>
-		    	<%--<a class="accordion-toggle">组织机构<i class="icon-refresh pull-right" onclick="refreshTree();"></i></a>--%>
-		    <%--</div>--%>
-			<%--<div id="ztree" class="ztree"></div>--%>
-		<%--</div>--%>
+
 		<div id="openClose" class="close">&nbsp;</div>
 		<div id="right">
 			<iframe  src="${ctx}/sys/user/list" width="100%" height="91%" frameborder="0"></iframe>
 		</div>
 	</div>
 	<script type="text/javascript">
-		<%--var setting = {data:{simpleData:{enable:true,idKey:"id",pIdKey:"pId",rootPId:'0'}},--%>
-			<%--callback:{onClick:function(event, treeId, treeNode){--%>
-			    <%--debugger;--%>
-					<%--var id = treeNode.id == '0' ? '' :treeNode.id;--%>
-					<%--$('#officeContent').attr("src","${ctx}/sys/user/list");--%>
-				<%--}--%>
-			<%--}--%>
-		<%--};--%>
-		
-		<%--function refreshTree(){--%>
-			<%--$.getJSON("${ctx}/sys/office/treeData",function(data){--%>
-				<%--$.fn.zTree.init($("#ztree"), setting, data).expandAll(true);--%>
-			<%--});--%>
-		<%--}--%>
-		<%--refreshTree();--%>
-		 
+
+
 		// var leftWidth = 180; // 左侧窗口大小
 		// var htmlObj = $("html"), mainObj = $("#main");
 		// var frameObj = $("#left, #openClose, #right, #right iframe");

@@ -52,6 +52,7 @@ public class CusManageController  extends BaseController {
         return "modules/crm/customerAdd";
     }
 
+
     @RequestMapping(value = {"customer_save"})
     public String customerAdd(CustomerAddModifyVo customerAddModifyVo, Model model, RedirectAttributes redirectAttributes){
         if (!beanValidator(model, customerAddModifyVo)){
@@ -62,24 +63,26 @@ public class CusManageController  extends BaseController {
         return "redirect:/crm/customer/list?repage";
     }
 
+
     @RequestMapping(value = {"customer_info"})
-    public String customerInfo(Model model){
-        // Page<Customer> page = commentService.findPage(new Page<Comment>(request, response), comment);
-        Page<Customer> page = new Page<Customer>();
-        model.addAttribute("page", page);
+    public String customerInfo(@ModelAttribute("customerAddModifyVo") CustomerAddModifyVo customerAddModifyVo,Model model){
+        model.addAttribute("customerAddModifyVo",customerAddModifyVo);
         return "modules/crm/customerInfo";
     }
+
 
     @RequestMapping(value = {"customer_delete"})
     public String delete(String cusCode, RedirectAttributes redirectAttributes){
         if(StringUtils.isEmpty(cusCode)){
             addMessage(redirectAttributes, "删除失败");
-            return "redirect:/modules/crm/customerList";
+            return "redirect:/crm/customer/list?repage";
         }
         List<String> list = new ArrayList<>();
         list.add(cusCode);
         customerService.delete(list);
-        return "redirect:/modules/crm/customerList";
+        return "redirect:/crm/customer/list?repage";
     }
+
+
 
 }

@@ -4,6 +4,7 @@ import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.common.utils.Digests;
 import com.lcyzh.nmerp.common.utils.Global;
 import com.lcyzh.nmerp.controller.Servlets;
+import com.lcyzh.nmerp.controller.system.util.SpringContextHolder;
 import com.lcyzh.nmerp.controller.system.util.UserUtils;
 import com.lcyzh.nmerp.dao.TSysMenuMapper;
 import com.lcyzh.nmerp.dao.TSysRoleMapper;
@@ -46,8 +47,6 @@ public class SystemService extends BaseService {
     private TSysMenuMapper menuDao;
     @Autowired
     private SessionDAO sessionDao;
-//    @Autowired
-//    private SystemAuthorizingRealm systemRealm;
 
     public SessionDAO getSessionDao() {
         return sessionDao;
@@ -124,7 +123,7 @@ public class SystemService extends BaseService {
             // 清除用户缓存
             UserUtils.clearCache(user);
 //			// 清除权限缓存
-//			systemRealm.clearAllCachedAuthorizationInfo();
+			((SystemAuthorizingRealm)SpringContextHolder.getBean("myShiroRealm")).clearAllCachedAuthorizationInfo();
         }
     }
 
@@ -135,7 +134,7 @@ public class SystemService extends BaseService {
         // 清除用户缓存
         UserUtils.clearCache(user);
 //		// 清除权限缓存
-//		systemRealm.clearAllCachedAuthorizationInfo();
+		((SystemAuthorizingRealm)SpringContextHolder.getBean("myShiroRealm")).clearAllCachedAuthorizationInfo();
     }
 
     @Transactional(readOnly = false)
@@ -146,7 +145,7 @@ public class SystemService extends BaseService {
         // 清除用户缓存
         UserUtils.clearCache(user);
 //		// 清除权限缓存
-//		systemRealm.clearAllCachedAuthorizationInfo();
+		((SystemAuthorizingRealm)SpringContextHolder.getBean("myShiroRealm")).clearAllCachedAuthorizationInfo();
     }
 
     @Transactional(readOnly = false)
@@ -158,7 +157,7 @@ public class SystemService extends BaseService {
         user.setLoginName(loginName);
         UserUtils.clearCache(user);
 //		// 清除权限缓存
-//		systemRealm.clearAllCachedAuthorizationInfo();
+		((SystemAuthorizingRealm)SpringContextHolder.getBean("myShiroRealm")).clearAllCachedAuthorizationInfo();
     }
 
     @Transactional(readOnly = false)
@@ -172,10 +171,12 @@ public class SystemService extends BaseService {
         userDao.updateLoginInfo(user);
     }
 
+
     /**
      * 生成安全的密码，生成随机的16位salt并经过1024次 sha-1 hash
      */
     public static String entryptPassword(String plainPassword) {
+
         String plain = Encodes.unescapeHtml(plainPassword);
         byte[] salt = Digests.generateSalt(SALT_SIZE);
         byte[] hashPassword = Digests.sha1(plain.getBytes(), salt, HASH_INTERATIONS);
@@ -244,7 +245,7 @@ public class SystemService extends BaseService {
         // 清除用户角色缓存
         UserUtils.removeCache(UserUtils.CACHE_ROLE_LIST);
 //		// 清除权限缓存
-//		systemRealm.clearAllCachedAuthorizationInfo();
+		((SystemAuthorizingRealm)SpringContextHolder.getBean("myShiroRealm")).clearAllCachedAuthorizationInfo();
     }
 
     @Transactional(readOnly = false)
@@ -255,7 +256,7 @@ public class SystemService extends BaseService {
         // 清除用户角色缓存
         UserUtils.removeCache(UserUtils.CACHE_ROLE_LIST);
 //		// 清除权限缓存
-//		systemRealm.clearAllCachedAuthorizationInfo();
+		((SystemAuthorizingRealm)SpringContextHolder.getBean("myShiroRealm")).clearAllCachedAuthorizationInfo();
     }
 
     @Transactional(readOnly = false)
@@ -327,7 +328,7 @@ public class SystemService extends BaseService {
         // 清除用户菜单缓存
         UserUtils.removeCache(UserUtils.CACHE_MENU_LIST);
 //		// 清除权限缓存
-//		systemRealm.clearAllCachedAuthorizationInfo();
+		((SystemAuthorizingRealm)SpringContextHolder.getBean("myShiroRealm")).clearAllCachedAuthorizationInfo();
         // 清除日志相关缓存
       //  CacheUtils.remove(LogUtils.CACHE_MENU_NAME_PATH_MAP);
     }
@@ -337,8 +338,8 @@ public class SystemService extends BaseService {
         menuDao.updateSort(menu);
         // 清除用户菜单缓存
         UserUtils.removeCache(UserUtils.CACHE_MENU_LIST);
-//		// 清除权限缓存
-//		systemRealm.clearAllCachedAuthorizationInfo();
+		// 清除权限缓存
+		((SystemAuthorizingRealm)SpringContextHolder.getBean("myShiroRealm")).clearAllCachedAuthorizationInfo();
         // 清除日志相关缓存
      //   CacheUtils.remove(LogUtils.CACHE_MENU_NAME_PATH_MAP);
     }
@@ -349,7 +350,7 @@ public class SystemService extends BaseService {
         // 清除用户菜单缓存
         UserUtils.removeCache(UserUtils.CACHE_MENU_LIST);
 //		// 清除权限缓存
-//		systemRealm.clearAllCachedAuthorizationInfo();
+		((SystemAuthorizingRealm)SpringContextHolder.getBean("myShiroRealm")).clearAllCachedAuthorizationInfo();
         // 清除日志相关缓存
      //   CacheUtils.remove(LogUtils.CACHE_MENU_NAME_PATH_MAP);
     }

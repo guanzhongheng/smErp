@@ -18,7 +18,7 @@ import java.util.Map;
  * @author ThinkGem
  * @version 2013-5-29
  */
-public class DictUtils {
+public class SysDictUtils {
 	
 	private static DictDao dictDao = SpringContextHolder.getBean(DictDao.class);
 

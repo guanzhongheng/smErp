@@ -1,6 +1,7 @@
 
 package com.lcyzh.nmerp.service.security;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lcyzh.nmerp.common.servlet.ValidateCodeServlet;
 import com.lcyzh.nmerp.common.utils.Global;
 import com.lcyzh.nmerp.controller.system.LoginController;
@@ -19,9 +20,11 @@ import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.Permission;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
+import org.apache.shiro.cache.Cache;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +33,9 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 系统安全认证实现类
@@ -211,13 +216,13 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 		setCredentialsMatcher(matcher);
 	}
 
-//	/**
-//	 * 清空用户关联权限认证，待下次使用时重新加载
-//	 */
-//	public void clearCachedAuthorizationInfo(Principal principal) {
-//		SimplePrincipalCollection principals = new SimplePrincipalCollection(principal, getName());
-//		clearCachedAuthorizationInfo(principals);
-//	}
+	/**
+	 * 清空用户关联权限认证，待下次使用时重新加载
+	 */
+	public void clearCachedAuthorizationInfo(Principal principal) {
+		SimplePrincipalCollection principals = new SimplePrincipalCollection(principal, getName());
+		clearCachedAuthorizationInfo(principals);
+	}
 
 	/**
 	 * 清空所有关联认证
@@ -225,12 +230,12 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 	 */
 	@Deprecated
 	public void clearAllCachedAuthorizationInfo() {
-//		Cache<Object, AuthorizationInfo> cache = getAuthorizationCache();
-//		if (cache != null) {
-//			for (Object key : cache.keys()) {
-//				cache.remove(key);
-//			}
-//		}
+		Cache<Object, AuthorizationInfo> cache = getAuthorizationCache();
+		if (cache != null) {
+			for (Object key : cache.keys()) {
+				cache.remove(key);
+			}
+		}
 	}
 
 	/**
@@ -255,7 +260,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 		private String name; // 姓名
 		private boolean mobileLogin; // 是否手机登录
 
-//		private Map<String, Object> cacheMap;
+		private Map<String, Object> cacheMap;
 
 		public Principal(User user, boolean mobileLogin) {
 			this.id = user.getId();
@@ -280,13 +285,13 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 			return mobileLogin;
 		}
 
-//		@JsonIgnore
-//		public Map<String, Object> getCacheMap() {
-//			if (cacheMap==null){
-//				cacheMap = new HashMap<String, Object>();
-//			}
-//			return cacheMap;
-//		}
+		@JsonIgnore
+		public Map<String, Object> getCacheMap() {
+			if (cacheMap==null){
+				cacheMap = new HashMap<String, Object>();
+			}
+			return cacheMap;
+		}
 
 		/**
 		 * 获取SESSIONID

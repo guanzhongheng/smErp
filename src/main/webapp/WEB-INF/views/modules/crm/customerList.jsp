@@ -38,7 +38,7 @@
         </li>
         <li>
             &nbsp;&nbsp;
-            <input type="checkbox" name="followType" id="type">归属模式
+            <input type="checkbox" name="followType" id="type" value="1">归属模式
         </li>
         &nbsp;&nbsp;
         <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
@@ -60,6 +60,7 @@
     <table id="contentTable" class="table table-striped table-bordered table-condensed">
         <thead>
         <tr>
+            <th><input type="checkbox" id="checkAll" onchange="checkedAll(this)" /></th>
             <th>客户编号</th>
             <th>客户名称</th>
             <th>客户状态</th>
@@ -75,7 +76,8 @@
         <tbody>
         <c:forEach items="${page.list}" var="cus">
             <tr>
-                <td><input type="checkbox" name="cuscode" value="${cus.cusCode}">${cus.cusCode}</td>
+                <td><input type="checkbox" name="cuscode" value="${cus.cusCode}"></td>
+                <td><a href="/cus/customer_info?cusCode=${cus.cusCode}" >${cus.cusCode}</a></td>
                 <td>${cus.cusName}</td>
                 <td>${cus.cusStatus}</td>
                 <td>${cus.cusGrade}</td>
@@ -174,6 +176,19 @@
             }
             check_val = check_val.replace(",,",",");
             return check_val;
+        }
+
+        function checkedAll(obj){
+            var codes = document.getElementsByName("cuscode")
+            if(obj.checked){
+                for(var i=0;i<codes.length;i++){
+                    codes[i].checked = true;
+                }
+            }else{
+                for(var i=0;i<codes.length;i++){
+                    codes[i].checked = false;
+                }
+            }
         }
     </script>
 </div>

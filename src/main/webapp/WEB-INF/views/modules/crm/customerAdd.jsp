@@ -44,7 +44,7 @@
                                             <form:select path="industry" class="chosen-select"
                                                          cssStyle="min-width: 300px">
                                                 <form:option value="" label=""/>
-                                                <form:options items="${fns:getDictList(120000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+                                                <form:options items="${fns:getCusDictList(120000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                                             </form:select>
                                         </div>
                                     </div>
@@ -73,7 +73,7 @@
                                             <form:select path="cusStatus" class="chosen-select"
                                                          cssStyle="min-width: 300px">
                                                 <form:option value="" label=""/>
-                                                <form:options items="${fns:getDictList(104000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+                                                <form:options items="${fns:getCusDictList(104000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                                             </form:select>
                                         </div>
                                     </div>
@@ -84,7 +84,7 @@
                                             <form:select path="cusGrade" class="chosen-select"
                                                          cssStyle="min-width: 300px">
                                                 <form:option value="" label=""/>
-                                                <form:options items="${fns:getDictList(105000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+                                                <form:options items="${fns:getCusDictList(105000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                                             </form:select>
                                         </div>
                                     </div>
@@ -96,7 +96,7 @@
                                             <form:select path="cusSource" class="chosen-select"
                                                          cssStyle="min-width: 300px">
                                                 <form:option value="" label=""/>
-                                                <form:options items="${fns:getDictList(106000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+                                                <form:options items="${fns:getCusDictList(106000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                                             </form:select>
                                         </div>
                                     </div>
@@ -187,7 +187,7 @@
                                                 <%--class="form-control" placeholder="首要联系人角色"/>--%>
                                     <form:select path="primaryContactorRole" class="chosen-select"
                                                  cssStyle="min-width: 300px">
-                                        <form:options items="${fns:getDictList(130000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+                                        <form:options items="${fns:getCusDictList(130000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                                     </form:select>
                                 </div>
                             </div>
@@ -210,7 +210,7 @@
                                                 <%--class="form-control" placeholder="首要联系人部门"/>--%>
                                     <form:select path="primaryContactorDepartment" class="chosen-select"
                                                  cssStyle="min-width: 300px">
-                                        <form:options items="${fns:getDictList(109000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+                                        <form:options items="${fns:getCusDictList(109000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                                     </form:select>
                                 </div>
                             </div>

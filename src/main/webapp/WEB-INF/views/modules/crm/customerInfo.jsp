@@ -1,85 +1,298 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ include file="/WEB-INF/views/include/taglib.jsp"%>
-<html>
-<head>
-    <title>全部订单</title>
-    <script type="text/javascript">
+<%@ include file="/WEB-INF/views/include/taglib.jsp" %>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="tabs-container">
 
 
-    </script>
-</head>
-<body>
-<ul class="nav nav-tabs">
-    <li class="active"><a href="${ctx}/order/list/">订单列表</a></li>
-</ul>
-<form:form id="searchForm" modelAttribute="order" action="${ctx}/order/list" method="post" class="breadcrumb form-search">
-    <input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
-    <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
-    <ul class="ul-form">
-        <li>
-            <form:input path="ordCode" htmlEscape="false" maxlength="200"
-                        class="input-medium" placeholder="订单编号"/>
-        </li>
-        <li>
-            &nbsp;&nbsp;
-            <form:input path="contCode" htmlEscape="false" maxlength="200"
-                        class="input-medium" placeholder="订单标题"/>
-        </li>
-        <li>
-            &nbsp;&nbsp;
-            <form:input path="cusCode" htmlEscape="false" maxlength="200"
-                        class="input-medium" placeholder="关联客户"/>
-        </li>
-        <li>
-            &nbsp;&nbsp;
-            <input id="deliveryDate" name="deliveryDate" placeholder="签单日期" type="text" readonly="readonly" maxlength="20" class="input-small Wdate"
-                   value="" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
-        </li>
-        <li>
-            <label for="exception"><input id="exception" name="exception" type="checkbox" value="1"/>跟进状态</label>
-        </li>
-        <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
-        <li class="clearfix"></li>
-    </ul>
-</form:form>
-<div class="control-group">&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="/order/order_add" type="button" class="btn btn-primary" style="width: 67px;height: 22px"><i class="icon-plus"></i>&nbsp;添加</a>
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true">客户详情</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane active">
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="ibox-title">
+                                <h5>客户详情</h5>
+                                <code class="pull-right"><span style="color: red">*</span>
+                                    <small>为必填项</small>
+                                </code>
+                            </div>
+                            <div class="ibox-content">
+
+                                <form:form id="inputForm" modelAttribute="customerAddModifyVo" action="${ctx}/cus/customer_save"
+                                           method="post" class="form-horizontal">
+                                    <form:hidden path="cusCode"/>
+                                    <div class="row">
+                                        <div class="col-sm-6 b-r">
+                                            <div class="ibox float-e-margins">
+                                                <form method="get" class="form-horizontal">
+                                                    <h3>基本信息</h3>
+                                                    <div class="hr-line-dashed"></div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label"><i style="color: red">*</i> 客户名称：</label>
+                                                        <div class="col-sm-8">
+                                                            <form:input path="cusName" htmlEscape="false" maxlength="200"
+                                                                        class="form-control" placeholder="客户名称" readonly="true"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="hr-line-dashed"></div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label"><i style="color: red">*</i> 所属行业：</label>
+                                                        <div class="col-sm-8">
+                                                            <form:select path="industry" class="chosen-select"
+                                                                         cssStyle="min-width: 300px" readonly="true">
+                                                                <form:option value="" label=""/>
+                                                                <form:options items="${fns:getCusDictList(120000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+                                                            </form:select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="hr-line-dashed"></div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label"><i style="color: red">*</i> 客户类型：</label>
+                                                        <div class="col-sm-8">
+                                                            <div class="radio i-checks">
+                                                                <c:if test="${empty customerAddModifyVo.cusType}">
+                                                                    <input type="radio" checked  readonly="true" value="110002" id="optionsRadios1"
+                                                                           name="cusType"><i></i>&nbsp;企业客户
+                                                                </c:if>
+                                                                <c:if test="${not empty customerAddModifyVo.cusType}">
+                                                                    <input type="radio" ${customerAddModifyVo.cusType eq '110002' ? 'checked' : ''} readonly="true" value="110002" id="optionsRadios1"
+                                                                           name="cusType"><i></i>&nbsp;企业客户
+                                                                </c:if>
+                                                                <input type="radio" ${customerAddModifyVo.cusType eq '110001' ? 'checked' : ''} readonly="true" value="110001" id="optionsRadios2"
+                                                                       name="cusType"><i></i>&nbsp;个人客户
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="hr-line-dashed"></div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label"><i style="color: red">*</i> 客户状态：</label>
+                                                        <div class="col-sm-8">
+                                                            <form:select path="cusStatus" class="chosen-select"
+                                                                         cssStyle="min-width: 300px" readonly="true">
+                                                                <form:option value="" label=""/>
+                                                                <form:options items="${fns:getCusDictList(104000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+                                                            </form:select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="hr-line-dashed"></div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label"><i style="color: red">*</i> 客户星级：</label>
+                                                        <div class="col-sm-8">
+                                                            <form:select path="cusGrade" class="chosen-select"
+                                                                         cssStyle="min-width: 300px" readonly="true">
+                                                                <form:option value="" label=""/>
+                                                                <form:options items="${fns:getCusDictList(105000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+                                                            </form:select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="hr-line-dashed"></div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label">客户来源：</label>
+                                                        <div class="col-sm-8">
+                                                            <form:select path="cusSource" class="chosen-select"
+                                                                         cssStyle="min-width: 300px" readonly="true">
+                                                                <form:option value="" label=""/>
+                                                                <form:options items="${fns:getCusDictList(106000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+                                                            </form:select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="hr-line-dashed"></div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label"><i style="color: red">*</i> 归属人员：</label>
+                                                        <div class="col-sm-8">
+                                                            <form:select path="empCode" class="chosen-select"
+                                                                         cssStyle="min-width: 300px" readonly="true">
+                                                                <form:option value="" label=""/>
+                                                                <form:options items="${fns:getEmpListByDept(109001)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+                                                            </form:select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="hr-line-dashed"></div>
+
+                                                    <h3>附加信息</h3>
+                                                    <div class="hr-line-dashed"></div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label">详细地址：</label>
+                                                        <div class="col-sm-8">
+                                                            <form:input path="cusAddress" htmlEscape="false" maxlength="200"
+                                                                        class="form-control" placeholder="详细地址" readonly="true"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="hr-line-dashed"></div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label">备注信息：</label>
+                                                        <div class="col-sm-8">
+                                                            <form:textarea path="remarks" htmlEscape="false"
+                                                                           cssStyle="min-width: 300px;" rows="6" readonly="true"/>
+                                                        </div>
+                                                    </div>
+                                                    <c:if test="${not empty customerAddModifyVo.cusCode}">
+                                                    <div class="hr-line-dashed"></div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label">跟进内容：</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control" name="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="hr-line-dashed"></div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label"><i style="color: red">*</i> 跟进人员：</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control" name="password" readonly="true"
+                                                                   value="${customerAddModifyVo.cusName}">
+                                                        </div>
+                                                    </div>
+                                                    </c:if>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <h3>首要联系人</h3>
+                                            <div class="hr-line-dashed"></div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label"><i style="color: red">*</i> 联系人姓名：</label>
+                                                <div class="col-sm-8">
+                                                    <form:input path="primaryContactorName" htmlEscape="false" maxlength="200"
+                                                                class="form-control" placeholder="首要联系人姓名" readonly="true"/>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">尊称：</label>
+                                                <div class="col-sm-8">
+                                                    <div class="radio i-checks">
+                                                        <c:if test="${empty customerAddModifyVo.primaryContactorSex}">
+                                                            <input type="radio" name="primaryContactorSex" value="108003" readonly="true" checked> <i></i>未知
+                                                        </c:if>
+                                                        <c:if test="${not empty customerAddModifyVo.primaryContactorSex}">
+                                                            <input type="radio" name="primaryContactorSex" value="108003" readonly="true" ${customerAddModifyVo.primaryContactorSex eq '108003' ? 'checked' : ''}> <i></i>未知
+                                                        </c:if>
+                                                        <input type="radio" name="primaryContactorSex" value="108001" readonly="true" ${customerAddModifyVo.primaryContactorSex eq '108001' ? 'checked' : ''}> <i></i>先生
+                                                        <input type="radio" name="primaryContactorSex" value="108002" readonly="true" ${customerAddModifyVo.primaryContactorSex eq '108002' ? 'checked' : ''}> <i></i>女士
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="hr-line-dashed"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">角色：</label>
+
+                                                <div class="col-sm-8">
+                                                        <%--<form:input path="primaryContactorRole" htmlEscape="false" maxlength="200"--%>
+                                                        <%--class="form-control" placeholder="首要联系人角色"/>--%>
+                                                    <form:select path="primaryContactorRole" class="chosen-select"
+                                                                 cssStyle="min-width: 300px" readonly="true">
+                                                        <form:options items="${fns:getCusDictList(130000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+                                                    </form:select>
+                                                </div>
+                                            </div>
+
+                                            <div class="hr-line-dashed"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">生日：</label>
+
+                                                <div class="col-sm-8">
+                                                    <form:input path="primaryContactorBirth" htmlEscape="false" maxlength="200"
+                                                                class="form-control" placeholder="首要联系人生日" readonly="true"/>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">部门：</label>
+
+                                                <div class="col-sm-8">
+                                                        <%--<form:input path="primaryContactorDepartment" htmlEscape="false" maxlength="200"--%>
+                                                        <%--class="form-control" placeholder="首要联系人部门"/>--%>
+                                                    <form:select path="primaryContactorDepartment" class="chosen-select"
+                                                                 cssStyle="min-width: 300px" readonly="true">
+                                                        <form:options items="${fns:getCusDictList(109000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+                                                    </form:select>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label"><i style="color: red">*</i> 手机号码：</label>
+
+                                                <div class="col-sm-8">
+                                                    <form:input path="primaryContactorPhone" htmlEscape="false" maxlength="200"
+                                                                class="form-control" placeholder="首要联系人手机号码" readonly="true"/>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">电子邮箱：</label>
+
+                                                <div class="col-sm-8">
+                                                    <form:input path="primaryContactorEmail" htmlEscape="false" maxlength="200"
+                                                                class="form-control" placeholder="首要联系人电子邮箱" readonly="true"/>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">详细地址：</label>
+
+                                                <div class="col-sm-8">
+                                                    <form:input path="primaryContactorAddress" htmlEscape="false" maxlength="200"
+                                                                class="form-control" placeholder="首要联系人详细地址" readonly="true"/>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed"></div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">备注信息：</label>
+
+                                                <div class="col-sm-8">
+                                                    <form:textarea path="primaryContactorRemark" htmlEscape="false"
+                                                                   cssStyle="min-width: 300px;" rows="6" readonly="true"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-sm-4 col-sm-offset-2">
+                                                &nbsp;&nbsp;
+                                                <button class="btn btn-white" type="button" onclick="history.go(-1)">返回</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="control-group">
-    <table id="contentTable" class="table table-striped table-bordered table-condensed">
-        <thead>
-        <tr>
-            <th>序号</th>
-            <th>订单编号</th>
-            <th>订单标题</th>
-            <th>关联客户</th>
-            <th>审批状态</th>
-            <th>订单总金额</th>
-            <th>已回款金额</th>
-            <th>已开票金额</th>
-            <th>操作</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>1</td>
-            <td>
-                <a href=""><i class="icon-comment">跟进</i></a>
-                <a href=""><i class="icon-pencil">编辑</i></a>
-                <a href=""><i class="icon-trash">删除</i></a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <div class="pagination">${page}</div>
-</div>
-<%--<sys:message content="${message}"/>--%>
-</body>
-</html>
+
+<script>
+    $(document).ready(function () {
+        $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",})
+    });
+
+
+</script>
+<script src="${ctxStatic}/hPlugs/js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+<script src="${ctxStatic}/hPlugs/js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+<script src="${ctxStatic}/hPlugs/js/content.min.js?v=1.0.0" type="text/javascript"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/chosen/chosen.jquery.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/peity/jquery.peity.min.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/jsKnob/jquery.knob.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/switchery/switchery.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/iCheck/icheck.min.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/clockpicker/clockpicker.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/cropper/cropper.min.js"></script>
+<script src="${ctxStatic}/hPlugs/js/demo/form-advanced-demo.min.js"></script>
