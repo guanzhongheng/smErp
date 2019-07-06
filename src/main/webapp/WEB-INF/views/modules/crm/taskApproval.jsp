@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <html>
 <head>
-    <title>全部订单</title>
+    <title>任务审批</title>
     <script type="text/javascript">
 
 
@@ -10,7 +10,7 @@
 </head>
 <body>
 <ul class="nav nav-tabs">
-    <li class="active"><a href="${ctx}/crm/order/list/">订单列表</a></li>
+    <li class="active"><a href="${ctx}/crm/order/list/">任务审批</a></li>
 </ul>
 <form:form id="searchForm" modelAttribute="order" action="${ctx}/crm/order/list" method="post"
            class="breadcrumb form-search">

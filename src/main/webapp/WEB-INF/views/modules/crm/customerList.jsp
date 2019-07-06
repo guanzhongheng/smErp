@@ -23,14 +23,14 @@
             &nbsp;&nbsp;
             <form:select path="cusType" class="input-medium" placeholder="客户类型">
                 <form:option value="" label=""/>
-                <%--<form:options items="${fns:getDictList('oa_notify_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
+                <form:options items="${fns:getCusDictList(110000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
             </form:select>
         </li>
         <li>
             &nbsp;&nbsp;
             <form:select path="cusGrade" class="input-medium" placeholder="客户星级">
                 <form:option value="" label=""/>
-                <%--<form:options items="${fns:getDictList('oa_notify_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
+                <form:options items="${fns:getCusDictList(105000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
             </form:select>
             <input id="beginDate" name="beginDate" placeholder="最后跟进" type="text" readonly="readonly" maxlength="20"
                    class="input-small Wdate"
@@ -47,8 +47,6 @@
 <div class="control-group">&nbsp;&nbsp;&nbsp;&nbsp;
     <a href="/cus/customer_add" type="button" class="btn btn-primary" style="width: 67px;height: 22px"><i
             class="icon-plus"></i>&nbsp;添加</a>
-    <%--&nbsp;&nbsp;--%>
-    <%--<a href="/crm/task_add" type="button" class="btn btn-default" style="width: 80px;height: 23px"><i class="icon-list-ul"></i>&nbsp;新建任务</a>--%>
     &nbsp;&nbsp;
     <a type="button" id="toCustomer" class="btn btn-default" style="width: 80px;height: 23px"><i
             class="icon-refresh"></i>&nbsp;转移客户</a>
@@ -87,7 +85,7 @@
                 <td><fmt:formatDate value="${cus.lastFollowDate}" pattern="yyyy-MM-dd"/></td>
                 <td>${cus.unFollowDays}</td>
                 <td>
-                    <a href=""><i class="icon-comment">&nbsp;跟进</i></a>
+                    <a href="" onclick="gotoFollowInfo(${cusCode})"><i class="icon-comment">&nbsp;跟进</i></a>
                     <a href="${ctx}/cus/customer_add?cusCode=${cus.cusCode}"><i class="icon-pencil">&nbsp;编辑</i></a>
                     <a href="${ctx}/cus/customer_delete?cusCode=${cus.cusCode}"
                        onclick="return confirmx('确认要删除该客户吗？', this.href)"><i class="icon-trash">&nbsp;删除</i></a>
@@ -167,6 +165,33 @@
             }
         });
 
+        function gotoFollowInfo(cusCode) {
+            top.$.jBox.open("iframe:${ctx}/crm/followInfo?cusCode="+cusCode, "客户跟踪", 500, $(top.document).height() - 300, {
+                buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
+                    debugger;
+                    var cusCode = h.find("iframe")[0].contentWindow.cusCode;
+                    var followTitle = h.find("iframe")[0].contentWindow.followTitle;
+                    var remarks = h.find("iframe")[0].contentWindow.remarks;
+                    if (v == "ok") {
+                        $.post('${ctx}/crmAjax/saveFollow/', {
+                            cusCode: cusCode.value,
+                            followTitle: followTitle.value,
+                            followRemarks: remarks.value
+                        }, function (data) {
+                            if (data = "success") {
+                                top.$.jBox.tip('记录成功');
+                            } else {
+                                top.$.jBox.tip('记录失败');
+                            }
+                        })
+                    }
+                }, loaded: function (h) {
+                    debugger;
+                    $(".jbox-content", top.document).css("overflow-y", "hidden");
+                }
+            });
+        }
+        
         function getCheckValue(){
             var obj = document.getElementsByName("cuscode");
             var check_val = '';

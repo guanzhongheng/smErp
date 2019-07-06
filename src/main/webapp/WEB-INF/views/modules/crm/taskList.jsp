@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <html>
 <head>
-    <title>全部订单</title>
+    <title>任务分配</title>
     <script type="text/javascript">
 
 
@@ -49,7 +49,7 @@
     <table id="contentTable" class="table table-striped table-bordered table-condensed">
         <thead>
         <tr>
-            <th><input type="checkbox" id="checkAll" onchange="checkedAll(this)">全选/全不选</th>
+            <th><input type="checkbox" id="checkAll" onchange="checkedAll(this)"></th>
             <th>订单编号</th>
             <th>订单标题</th>
             <th>关联客户</th>

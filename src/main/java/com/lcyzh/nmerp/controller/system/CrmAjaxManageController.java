@@ -45,4 +45,44 @@ public class CrmAjaxManageController extends BaseController {
 
         return "success";
     }
+
+
+    /**
+     * 客户跟踪-保存
+     * @param cusIds
+     * @param remarks
+     * @return
+     */
+    @RequestMapping(value = "saveFollow")
+    @ResponseBody
+    public String savePoolCustomer(String cusCode,String followTitle,String followRemarks) {
+
+
+        return "success";
+    }
+
+
+    /**
+     * 任务分配
+     * @return
+     */
+    @RequestMapping(value = "saveTaskInfo")
+    @ResponseBody
+    public String saveTaskInfo(String taskIds,String devInfo,Integer followRemarks) {
+
+
+        return "success";
+    }
+
+    /**
+     * 流程审批处理
+     * @return
+     */
+    @RequestMapping(value = "inventoryInfo")
+    @ResponseBody
+    public String inventoryInfo(String taskIds,String devInfo,Integer followRemarks) {
+
+
+        return "success";
+    }
 }

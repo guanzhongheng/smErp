@@ -4,6 +4,7 @@ import com.lcyzh.nmerp.common.lang.StringUtils;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.entity.Customer;
+import com.lcyzh.nmerp.entity.TBarCodeInfo;
 import com.lcyzh.nmerp.model.vo.CustomerQueryVo;
 import com.lcyzh.nmerp.model.vo.OrderQueryVo;
 import com.lcyzh.nmerp.service.TCustomerService;
@@ -33,10 +34,6 @@ public class CrmManageController extends BaseController {
     @Autowired
     private TOrderService orderService;
 
-    @RequestMapping(value = {"test"})
-    public String test(){
-        return "modules/crm/customerTest";
-    }
 
     @RequestMapping(value = {"customer/list"})
     public String list(@ModelAttribute("customer") CustomerQueryVo customer, Model model, HttpServletRequest request, HttpServletResponse response){
@@ -60,6 +57,7 @@ public class CrmManageController extends BaseController {
         model.addAttribute("page", page);
         return "modules/crm/taskList";
     }
+
 
     /**
      * 订单列表
@@ -87,7 +85,7 @@ public class CrmManageController extends BaseController {
     }
 
     /**
-     * 任务分配
+     * 任务分配详情
      * @param request
      * @param model
      * @return
@@ -110,6 +108,33 @@ public class CrmManageController extends BaseController {
         return "modules/crm/poolRemark";
     }
 
+    /**
+     * 客户跟踪记录
+     * @param request
+     * @param model
+     * @return
+     */
+    @RequestMapping("followInfo")
+    public String followInfo(HttpServletRequest request, Model model){
+        model.addAttribute("cusCode",request.getParameter("cusCode"));
+        return "modules/crm/followInfo";
+    }
+
+    @RequestMapping(value = {"inventory/list"})
+    public String inventoryList(TBarCodeInfo barCodeInfo, Model model, HttpServletRequest request, HttpServletResponse response){
+       // Page<CustomerQueryVo> page = customerService.findPage(new Page<CustomerQueryVo>(request, response), barCodeInfo);
+        Page<CustomerQueryVo> page = null;
+        model.addAttribute("page", page);
+        return "modules/crm/inventoryList";
+    }
+
+    @RequestMapping(value = {"inventory/info"})
+    public String inventoryInfo( Model model, HttpServletRequest request, HttpServletResponse response){
+        // Page<CustomerQueryVo> page = customerService.findPage(new Page<CustomerQueryVo>(request, response), barCodeInfo);
+        Page<CustomerQueryVo> page = null;
+        model.addAttribute("page", page);
+        return "modules/crm/inventoryInfo";
+    }
 
 
 }
