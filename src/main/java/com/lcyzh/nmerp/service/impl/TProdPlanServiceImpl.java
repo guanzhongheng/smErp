@@ -9,6 +9,7 @@ import com.lcyzh.nmerp.entity.TProdPlanDetail;
 import com.lcyzh.nmerp.entity.TProdplanExe;
 import com.lcyzh.nmerp.model.vo.OrderItemAssignVo;
 import com.lcyzh.nmerp.model.vo.OrderItemVo;
+import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
 import com.lcyzh.nmerp.service.TProdPlanService;
 import com.lcyzh.nmerp.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,8 +47,10 @@ public class TProdPlanServiceImpl implements TProdPlanService {
     }
 
     @Override
-    public List<TProdPlan> findList(TProdPlan tProdPlan) {
-        return tProdPlanMapper.findList(tProdPlan);
+    public List<ProdPlanDetailVo> findList(TProdPlan tProdPlan) {
+        List<ProdPlanDetailVo> list = tProdPlanMapper.findList(tProdPlan);
+        //获取产品信息
+        return list;
     }
 
     @Override

@@ -6,6 +6,7 @@
         <id column="ord_item_id" property="ordItemId" jdbcType="BIGINT"/>
         <result column="prod_plan_code" property="prodPlanCode" jdbcType="VARCHAR"/>
         <result column="item_num" property="itemNum" jdbcType="DOUBLE"/>
+        <result column="item_assign_num" property="itemAssignNum" jdbcType="DOUBLE"/>
         <result column="item_finish_num" property="itemFinishNum" jdbcType="DOUBLE"/>
         <result column="elst_finish_date" property="elstFinishDate" jdbcType="VARCHAR"/>
         <result column="latest_finish_date" property="latestFinishDate" jdbcType="VARCHAR"/>
@@ -44,6 +45,7 @@
             prod_plan_code,
             item_num,
             item_finish_num,
+            item_assign_num,
             elst_finish_date,
             latest_finish_date,
             create_time,
@@ -54,6 +56,7 @@
             #{prodPlanCode,jdbcType=VARCHAR},
             #{itemNum,jdbcType=DOUBLE},
             #{itemFinishNum,jdbcType=DOUBLE},
+            #{itemAssignNum,jdbcType=DOUBLE},
             #{elstFinishDate,jdbcType=VARCHAR},
             #{latestFinishDate,jdbcType=VARCHAR},
             #{createTime,jdbcType=TIMESTAMP},
@@ -92,6 +95,9 @@
         <set>
             <if test="itemFinishNum!= null">
                 item_finish_num = item_finish_num + #{itemFinishNum,jdbcType=DOUBLE},
+            </if>
+            <if test="itemAssignNum!= null">
+                item_assign_num = item_assign_num + #{itemAssignNum,jdbcType=DOUBLE},
             </if>
             <if test="elstFinishDate!= null">
                 elst_finish_date = #{elstFinishDate,jdbcType=VARCHAR},

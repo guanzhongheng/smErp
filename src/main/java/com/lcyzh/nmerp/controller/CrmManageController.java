@@ -1,9 +1,8 @@
 package com.lcyzh.nmerp.controller;
 
-import com.lcyzh.nmerp.common.lang.StringUtils;
 import com.lcyzh.nmerp.common.persistence.Page;
+import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.controller.common.BaseController;
-import com.lcyzh.nmerp.entity.Customer;
 import com.lcyzh.nmerp.entity.TBarCodeInfo;
 import com.lcyzh.nmerp.model.vo.CustomerQueryVo;
 import com.lcyzh.nmerp.model.vo.OrderQueryVo;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -67,6 +65,7 @@ public class CrmManageController extends BaseController {
      */
     @RequestMapping(value = {"order/list", "order"})
     public String orderList(@ModelAttribute("order") OrderQueryVo order, Model model, HttpServletRequest request, HttpServletResponse response){
+        order.setOrdStatus(Constants.ORD_STATUS_TOASSIGN);
         Page<OrderQueryVo> page = orderService.findPage(new Page<OrderQueryVo>(request, response), order);
         model.addAttribute("page", page);
         return "modules/crm/orderList";
