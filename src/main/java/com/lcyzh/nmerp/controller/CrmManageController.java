@@ -120,6 +120,7 @@ public class CrmManageController extends BaseController {
         return "modules/crm/followInfo";
     }
 
+
     @RequestMapping(value = {"inventory/list"})
     public String inventoryList(TBarCodeInfo barCodeInfo, Model model, HttpServletRequest request, HttpServletResponse response){
        // Page<CustomerQueryVo> page = customerService.findPage(new Page<CustomerQueryVo>(request, response), barCodeInfo);
