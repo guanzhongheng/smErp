@@ -14,6 +14,7 @@ public class TProdPlanDetail implements Serializable {
     private String prodPlanCode;
     private Double itemNum;
     private Double itemFinishNum;
+    private Double itemAssignNum;
     private String elstFinishDate;
     private String latestFinishDate;
     private Date createTime;
@@ -62,6 +63,14 @@ public class TProdPlanDetail implements Serializable {
 
     public void setLatestFinishDate(String latestFinishDate) {
         this.latestFinishDate = latestFinishDate;
+    }
+
+    public Double getItemAssignNum() {
+        return itemAssignNum;
+    }
+
+    public void setItemAssignNum(Double itemAssignNum) {
+        this.itemAssignNum = itemAssignNum;
     }
 
     public String getLatestFinishDate() {

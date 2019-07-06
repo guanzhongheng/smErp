@@ -27,18 +27,28 @@
         WHERE ord_code = #{ordCode,jdbcType=VARCHAR}
     </select>
 
-    <select id="findList" parameterType="com.lcyzh.nmerp.entity.TProdPlan" resultMap="prodPlanResultMap">
-        SELECT *
-        FROM T_PROD_PLAN
+    <select id="findList" parameterType="com.lcyzh.nmerp.entity.TProdPlan" resultType="com.lcyzh.nmerp.model.vo.ProdPlanDetailVo">
+        SELECT
+        od.ord_code ordCode,
+        od.ord_title ordTitle,
+        oi.item_code itemCode,
+        oi.item_num itemNum,
+        ppd.item_assign_num itemAssignNum,
+        oi.item_unit itemUnit
+        FROM
+        T_PROD_PLAN pp
+        LEFT JOIN T_PROD_PLAN_DETAIL ppd ON pp.prod_plan_code = ppd.prod_plan_code
+        LEFT JOIN T_ORDER_ITEM oi ON ppd.ord_item_id = oi.id
+        LEFT JOIN T_ORDER od on od.ord_code = oi.ord_code
         <where>
             <if test="ordCode!= null">
-                and ord_code like concat('%', #{ordCode,jdbcType=VARCHAR}, '%')
+                and pp.ord_code like concat('%', #{ordCode,jdbcType=VARCHAR}, '%')
             </if>
             <if test="planStatus!= null">
-                and plan_status like concat('%', #{planStatus,jdbcType=CHAR}, '%')
+                and pp.plan_status = #{planStatus,jdbcType=CHAR}
             </if>
             <if test="operEmpCode!= null">
-                and oper_emp_code = #{operEmpCode,jdbcType=VARCHAR}
+                and pp.oper_emp_code = #{operEmpCode,jdbcType=VARCHAR}
             </if>
 
         </where>

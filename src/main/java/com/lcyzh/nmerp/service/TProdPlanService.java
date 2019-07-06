@@ -4,6 +4,7 @@ import com.lcyzh.nmerp.entity.TProdPlan;
 import com.lcyzh.nmerp.entity.TProdPlanDetail;
 import com.lcyzh.nmerp.model.vo.OrderItemAssignVo;
 import com.lcyzh.nmerp.model.vo.OrderItemVo;
+import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,7 +45,7 @@ public interface TProdPlanService {
      * @Iteration : 1.0
      * @Date: 2019/7/4 10:54 PM
      */
-    List<TProdPlan> findList(TProdPlan tProdPlan);
+    List<ProdPlanDetailVo> findList(TProdPlan tProdPlan);
 
     /**
      * @Description: 保存产品计划信息
