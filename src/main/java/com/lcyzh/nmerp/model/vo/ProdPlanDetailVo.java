@@ -1,7 +1,5 @@
 package com.lcyzh.nmerp.model.vo;
 
-import com.lcyzh.nmerp.common.persistence.DataEntity;
-
 /**
  * @Project : nm-erp
  * @Description : TODO
@@ -12,7 +10,7 @@ import com.lcyzh.nmerp.common.persistence.DataEntity;
  * ----------   ------------- -----------------------------------
  * lijinku          2019/07/06    create
  */
-public class ProdPlanDetailVo extends DataEntity<ProdPlanDetailVo> {
+public class ProdPlanDetailVo{
     //'订单编号'
     private String ordCode;
     //'订单标题'
@@ -27,6 +25,10 @@ public class ProdPlanDetailVo extends DataEntity<ProdPlanDetailVo> {
     private Double itemNum;
     //产品已分配数量
     private Double itemAssignNum;
+    //操作员工编号
+    private String operEmpCode;
+    //产品计划状态
+    private Character planStatus;
     //'产品单位'
     private Long itemUnit;
 
@@ -84,6 +86,22 @@ public class ProdPlanDetailVo extends DataEntity<ProdPlanDetailVo> {
 
     public void setItemAssignNum(Double itemAssignNum) {
         this.itemAssignNum = itemAssignNum;
+    }
+
+    public String getOperEmpCode() {
+        return operEmpCode;
+    }
+
+    public void setOperEmpCode(String operEmpCode) {
+        this.operEmpCode = operEmpCode;
+    }
+
+    public Character getPlanStatus() {
+        return planStatus;
+    }
+
+    public void setPlanStatus(Character planStatus) {
+        this.planStatus = planStatus;
     }
 
     public Long getItemUnit() {

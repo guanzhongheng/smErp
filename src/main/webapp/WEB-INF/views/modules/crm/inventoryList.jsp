@@ -48,12 +48,12 @@
     <table id="contentTable" class="table table-striped table-bordered table-condensed">
         <thead>
         <tr>
-            <th>产品名称</th>
-            <th>产品编号</th>
-            <th>产品规格</th>
             <th>订单编号</th>
             <th>订单标题</th>
-            <th>订单状态</th>
+            <th>产品编号</th>
+            <th>产品名称</th>
+            <th>产品规格</th>
+            <th>产品所属人</th>
             <th>当前库存</th>
         </tr>
         </thead>

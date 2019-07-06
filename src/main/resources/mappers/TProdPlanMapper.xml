@@ -27,7 +27,7 @@
         WHERE ord_code = #{ordCode,jdbcType=VARCHAR}
     </select>
 
-    <select id="findList" parameterType="com.lcyzh.nmerp.entity.TProdPlan" resultType="com.lcyzh.nmerp.model.vo.ProdPlanDetailVo">
+    <select id="findList" parameterType="com.lcyzh.nmerp.model.vo.ProdPlanDetailVo" resultType="com.lcyzh.nmerp.model.vo.ProdPlanDetailVo">
         SELECT
         od.ord_code ordCode,
         od.ord_title ordTitle,

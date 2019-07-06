@@ -14,6 +14,22 @@
     </resultMap>
 
 
+    <select id="findInvInfoList" resultType="com.lcyzh.nmerp.model.vo.ProdInvInfoVo" >
+        SELECT
+            oi.item_code itemCode,
+            od.ord_code ordCode,
+            od.ord_title ordTitle,
+            oi.item_owner itemOwner,
+            oi.id itemId,
+            oi.item_num itemNum,
+            sum(b.num) num
+        FROM
+            T_BARCODE_INFO b
+            LEFT JOIN T_ORDER_ITEM oi ON b.item_id = oi.id
+            LEFT JOIN T_ORDER od ON od.ord_code = oi.ord_code
+            GROUP BY b.item_id,b.status HAVING b.`status`='0'
+    </select>
+
     <select id="findList" parameterType="com.lcyzh.nmerp.entity.TBarCodeInfo" resultMap="resultMap">
         SELECT *
         FROM T_BARCODE_INFO

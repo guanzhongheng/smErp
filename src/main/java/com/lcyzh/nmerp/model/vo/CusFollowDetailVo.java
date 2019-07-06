@@ -1,34 +1,30 @@
-package com.lcyzh.nmerp.entity;
+package com.lcyzh.nmerp.model.vo;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Author ljk
- * Date  2019-07-01
+ * @Project : nm-erp
+ * @Description : TODO
+ * @Author : lijinku
+ * @Iteration : 1.0
+ * @Date : 2019/7/7  12:57 AM
+ * @ModificationHistory Who          When          What
+ * ----------   ------------- -----------------------------------
+ * lijinku          2019/07/07    create
  */
-public class CusFollowDetail implements Serializable {
-    private static final long serialVersionUID = 1L;
-    private Long id;
+public class CusFollowDetailVo {
+    //客户资料编号
     private String cusCode;
+    //员工编号
     private String empCode;
+    //跟进时间
     private Date followTime;
+    //跟进内容
     private String followDetail;
+    //跟进类型
     private Long followType;
+    //备注
     private String remark;
-    private Date createTime;
-
-
-    public CusFollowDetail() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getCusCode() {
         return cusCode;
@@ -76,13 +72,5 @@ public class CusFollowDetail implements Serializable {
 
     public void setRemark(String remark) {
         this.remark = remark;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
     }
 }

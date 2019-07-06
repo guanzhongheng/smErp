@@ -17,7 +17,7 @@ public interface TProdPlanMapper {
 
     TProdPlan findByOrdCode(String ordCode);
 
-    List<ProdPlanDetailVo> findList(TProdPlan tProdPlan);
+    List<ProdPlanDetailVo> findList(ProdPlanDetailVo vo);
 
     int insert(TProdPlan tProdPlan);
 

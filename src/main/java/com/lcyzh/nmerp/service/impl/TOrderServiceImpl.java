@@ -1,5 +1,6 @@
 package com.lcyzh.nmerp.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.dao.PrimaryContactMapper;
@@ -54,7 +55,7 @@ public class TOrderServiceImpl implements TOrderService {
 
     @Override
     public Page<OrderQueryVo> findPage(Page<OrderQueryVo> page, OrderQueryVo order) {
-        order.setPage(page);
+        PageHelper.startPage(page.getPageNo(),page.getPageSize());
         List<OrderQueryVo> list = tOrderMapper.findList(order);
         list.stream().forEach(vo -> vo.setOrdStatusValue(DictUtils.getDictValueMaps().get(vo.getOrdStatus())));
         page.setList(list);

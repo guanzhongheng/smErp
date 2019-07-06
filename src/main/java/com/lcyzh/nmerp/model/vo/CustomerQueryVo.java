@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.model.vo;
 
 import com.lcyzh.nmerp.common.persistence.DataEntity;
+import com.lcyzh.nmerp.common.persistence.Page;
 
 import java.util.Date;
 
@@ -14,7 +15,7 @@ import java.util.Date;
  * ----------   ------------- -----------------------------------
  * lijinku          2019/07/01    create
  */
-public class CustomerQueryVo extends DataEntity<CustomerQueryVo> {
+public class CustomerQueryVo extends Page<CustomerQueryVo> {
 
     //客户编号
     private String cusCode;

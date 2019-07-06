@@ -3,11 +3,12 @@ package com.lcyzh.nmerp.controller;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.controller.common.BaseController;
-import com.lcyzh.nmerp.entity.TBarCodeInfo;
+import com.lcyzh.nmerp.entity.CusFollowDetail;
 import com.lcyzh.nmerp.model.vo.CustomerQueryVo;
 import com.lcyzh.nmerp.model.vo.OrderQueryVo;
-import com.lcyzh.nmerp.service.TCustomerService;
-import com.lcyzh.nmerp.service.TOrderService;
+import com.lcyzh.nmerp.model.vo.ProdInvInfoVo;
+import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
+import com.lcyzh.nmerp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * 项目名称：nm-erp
@@ -31,10 +33,17 @@ public class CrmManageController extends BaseController {
     private TCustomerService customerService;
     @Autowired
     private TOrderService orderService;
+    @Autowired
+    private TProdPlanService prodPlanService;
+    @Autowired
+    private TInStockService inStockService;
+    @Autowired
+    private ICusFollowService cusFollowService;
 
 
     @RequestMapping(value = {"customer/list"})
     public String list(@ModelAttribute("customer") CustomerQueryVo customer, Model model, HttpServletRequest request, HttpServletResponse response){
+        customer.setPageSize(2);
         Page<CustomerQueryVo> page = customerService.findPage(new Page<CustomerQueryVo>(request, response), customer);
         model.addAttribute("page", page);
         return "modules/crm/customerList";
@@ -43,17 +52,18 @@ public class CrmManageController extends BaseController {
     @RequestMapping(value = {"customer/poollist"})
     public String customerPoolList(@ModelAttribute("customer") CustomerQueryVo customer, Model model, HttpServletRequest request, HttpServletResponse response){
         customer.setFollowType(0);
-        Page<CustomerQueryVo> page = customerService.findPage(new Page<CustomerQueryVo>(request, response), customer);
-        model.addAttribute("page", page);
+        Page<CustomerQueryVo> pageRes = customerService.findPage(new Page<CustomerQueryVo>(request,response), customer);
+        model.addAttribute("page", pageRes);
         return "modules/crm/customerPoolList";
     }
 
     @RequestMapping(value = {"order/taskList"})
     public String taskList(@ModelAttribute("order") OrderQueryVo order, Model model, HttpServletRequest request, HttpServletResponse response){
-        // 获取通过审批后的产品清单列表
+        // 获取需要审批的产品清单列表
+        order.setOrdStatus(Constants.ORD_STATUS_TOASSIGN);
         Page<OrderQueryVo> page = orderService.findPage(new Page<OrderQueryVo>(request, response), order);
         model.addAttribute("page", page);
-        return "modules/crm/taskList";
+        return "modules/crm/taskApproval";
     }
 
 
@@ -65,10 +75,22 @@ public class CrmManageController extends BaseController {
      */
     @RequestMapping(value = {"order/list", "order"})
     public String orderList(@ModelAttribute("order") OrderQueryVo order, Model model, HttpServletRequest request, HttpServletResponse response){
-        order.setOrdStatus(Constants.ORD_STATUS_TOASSIGN);
         Page<OrderQueryVo> page = orderService.findPage(new Page<OrderQueryVo>(request, response), order);
         model.addAttribute("page", page);
         return "modules/crm/orderList";
+    }
+
+    /**
+     * 生产待分配列表
+     * @param prodPlan
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = {"order/prodPlanlist"})
+    public String prodPlanList(ProdPlanDetailVo prodPlan, Model model, HttpServletRequest request, HttpServletResponse response){
+        Page<ProdPlanDetailVo> page = prodPlanService.findPage(new Page<ProdPlanDetailVo>(request, response), prodPlan);
+        model.addAttribute("page", page);
+        return "modules/crm/taskList";
     }
 
     /**
@@ -108,6 +130,19 @@ public class CrmManageController extends BaseController {
     }
 
     /**
+     * 客户跟踪记录列表
+     * @param request
+     * @param model
+     * @return
+     */
+    @RequestMapping("followInfo")
+    public String followInfoList(CusFollowDetail cusFollowDetail,HttpServletRequest request, Model model){
+        List<CusFollowDetail> list = cusFollowService.findList(cusFollowDetail);
+        model.addAttribute("list",list);
+        return "modules/crm/followInfo";
+    }
+
+    /**
      * 客户跟踪记录
      * @param request
      * @param model
@@ -121,9 +156,8 @@ public class CrmManageController extends BaseController {
 
 
     @RequestMapping(value = {"inventory/list"})
-    public String inventoryList(TBarCodeInfo barCodeInfo, Model model, HttpServletRequest request, HttpServletResponse response){
-       // Page<CustomerQueryVo> page = customerService.findPage(new Page<CustomerQueryVo>(request, response), barCodeInfo);
-        Page<CustomerQueryVo> page = null;
+    public String inventoryList(Model model, HttpServletRequest request, HttpServletResponse response){
+        Page<ProdInvInfoVo> page = inStockService.findProdInvInfoList(new Page<ProdInvInfoVo>(request, response));
         model.addAttribute("page", page);
         return "modules/crm/inventoryList";
     }

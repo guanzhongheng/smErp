@@ -1,10 +1,13 @@
 package com.lcyzh.nmerp.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.dao.TBarCodeInfoMapper;
 import com.lcyzh.nmerp.dao.TInStockMapper;
 import com.lcyzh.nmerp.entity.TBarCodeInfo;
 import com.lcyzh.nmerp.entity.TInStock;
 import com.lcyzh.nmerp.model.vo.InStockItemVo;
+import com.lcyzh.nmerp.model.vo.ProdInvInfoVo;
 import com.lcyzh.nmerp.service.TInStockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +25,15 @@ public class TInStockServiceImpl implements TInStockService {
     @Autowired
     private TBarCodeInfoMapper barCodeInfoMapper;
 
+
+    @Override
+    public Page<ProdInvInfoVo> findProdInvInfoList(Page<ProdInvInfoVo> page) {
+        PageHelper.startPage(page.getPageNo(),page.getPageSize());
+        List<ProdInvInfoVo> list = barCodeInfoMapper.findInvInfoList();
+        //转换产品字典
+        page.setList(list);
+        return page;
+    }
 
     @Override
     public int goodWareHouse(InStockItemVo vo) {

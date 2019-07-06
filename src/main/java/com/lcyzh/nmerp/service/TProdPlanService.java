@@ -1,5 +1,6 @@
 package com.lcyzh.nmerp.service;
 
+import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.entity.TProdPlan;
 import com.lcyzh.nmerp.entity.TProdPlanDetail;
 import com.lcyzh.nmerp.model.vo.OrderItemAssignVo;
@@ -45,7 +46,7 @@ public interface TProdPlanService {
      * @Iteration : 1.0
      * @Date: 2019/7/4 10:54 PM
      */
-    List<ProdPlanDetailVo> findList(TProdPlan tProdPlan);
+    Page<ProdPlanDetailVo> findPage(Page<ProdPlanDetailVo> page,ProdPlanDetailVo vo);
 
     /**
      * @Description: 保存产品计划信息

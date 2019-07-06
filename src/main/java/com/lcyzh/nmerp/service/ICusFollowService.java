@@ -1,6 +1,8 @@
 package com.lcyzh.nmerp.service;
 
 import com.lcyzh.nmerp.entity.CusFollow;
+import com.lcyzh.nmerp.entity.CusFollowDetail;
+import com.lcyzh.nmerp.model.vo.CusFollowDetailVo;
 
 import java.util.List;
 
@@ -9,15 +11,16 @@ import java.util.List;
 * Date  2019-07-01
 */
 public interface ICusFollowService {
-    CusFollow get(String id);
+
+    List<CusFollowDetail> findList(CusFollowDetail vo);
+
+    int save(CusFollowDetailVo vo);
 
     List<CusFollow> findList(CusFollow cusFollow);
 
     List<CusFollow> findAllList();
 
     int insert(CusFollow cusFollow);
-
-    int insertBatch(List<CusFollow> cusFollows);
 
     int update(CusFollow cusFollow);
 

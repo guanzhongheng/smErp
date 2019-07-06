@@ -1,6 +1,8 @@
 package com.lcyzh.nmerp.service;
 
+import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.model.vo.InStockItemVo;
+import com.lcyzh.nmerp.model.vo.ProdInvInfoVo;
 
 import java.util.List;
 
@@ -9,6 +11,16 @@ import java.util.List;
 * Date  2019-06-06
 */
 public interface TInStockService {
+
+    /**
+     * @Description: 分页查询产品信息
+     * @Param: []
+     * @return: com.lcyzh.nmerp.common.persistence.Page<com.lcyzh.nmerp.model.vo.ProdInvInfoVo>
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/6 10:31 PM
+     */
+    Page<ProdInvInfoVo> findProdInvInfoList(Page<ProdInvInfoVo> page);
 
     /**
      * @Description: 产品入库
