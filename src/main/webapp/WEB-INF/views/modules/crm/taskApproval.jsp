@@ -10,9 +10,9 @@
 </head>
 <body>
 <ul class="nav nav-tabs">
-    <li class="active"><a href="${ctx}/crm/order/list/">任务审批</a></li>
+    <li class="active"><a href="${ctx}/crm/approval/list/">任务审批</a></li>
 </ul>
-<form:form id="searchForm" modelAttribute="order" action="${ctx}/crm/order/list" method="post"
+<form:form id="searchForm" modelAttribute="order" action="${ctx}/crm/approval/list" method="post"
            class="breadcrumb form-search">
     <input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
     <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
@@ -57,8 +57,7 @@
             <th>关联客户</th>
             <th>审批状态</th>
             <th>订单总金额</th>
-            <th>已回款金额</th>
-            <th>已开票金额</th>
+            <th>订单交付期</th>
             <th>操作</th>
         </tr>
         </thead>
@@ -70,11 +69,10 @@
                 <td>${ord.ordCusName}</td>
                 <td>${ord.ordStatusValue}</td>
                 <td>${ord.ordTotalAmount}</td>
-                <td>${ord.repayAmount}</td>
-                <td>${ord.invoicedAmount}</td>
+                <td>${ord.ordDeliveryDate}</td>
                 <td>
-                    <a href="" type="button" class="btn btn-primary" >通过</a>&nbsp;&nbsp;
-                    <a href="" type="button" class="btn btn-primary" >不通过</a>
+                    <a href="/cus/orderStatus_update?ordCode=${ord.ordCode}&&ordStatus=0"  type="button" class="btn btn-primary" >通过</a>&nbsp;&nbsp;
+                    <a href="/cus/orderStatus_update?ordCode=${ord.ordCode}&&ordStatus=1" type="button" class="btn btn-primary" >不通过</a>
                 </td>
             </tr>
         </c:forEach>

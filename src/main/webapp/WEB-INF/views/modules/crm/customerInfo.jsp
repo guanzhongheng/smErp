@@ -25,6 +25,8 @@
                                 <form:form id="inputForm" modelAttribute="customerAddModifyVo" action="${ctx}/cus/customer_save"
                                            method="post" class="form-horizontal">
                                     <form:hidden path="cusCode"/>
+                                    <input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
+                                    <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
                                     <div class="row">
                                         <div class="col-sm-6 b-r">
                                             <div class="ibox float-e-margins">
@@ -271,105 +273,25 @@
                                     <h5>客户跟进信息</h5>
                                 </div>
                                 <div class="ibox-content timeline">
-
-
-                                    <c:forEach items="${userRemark}" var="ite">
+                                    <c:forEach items="${follow}" var="fo">
                                         <div class="timeline-item">
                                             <div class="row">
                                                 <div class="col-xs-3 date">
-                                                    <i class="fa fa-file-text"></i> ${ite.time}
+                                                    <i class="fa fa-file-text"></i>${fo.followTime}
                                                     <br>
                                                 </div>
                                                 <div class="col-xs-9 content">
-                                                    <p class="m-b-xs"><strong>修复了0.5个bug</strong>
+                                                    <p class="m-b-xs"><strong>${fo.followType}</strong>
                                                     </p>
-                                                    <p>重启服务</p>
+                                                    <p>${fo.followDetail}</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </c:forEach>
-
-                                    <div class="timeline-item">
-                                        <div class="row">
-                                            <div class="col-xs-3 date">
-                                                <i class="fa fa-file-text"></i> 7:00
-                                                <br>
-                                                <small class="text-navy">3小时前</small>
-                                            </div>
-                                            <div class="col-xs-9 content">
-                                                <p class="m-b-xs"><strong>修复了0.5个bug</strong>
-                                                </p>
-                                                <p>重启服务</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="timeline-item">
-                                        <div class="row">
-                                            <div class="col-xs-3 date">
-                                                <i class="fa fa-coffee"></i> 8:00
-                                                <br>
-                                            </div>
-                                            <div class="col-xs-9 content">
-                                                <p class="m-b-xs"><strong>喝水、上厕所、做测试</strong>
-                                                </p>
-                                                <p>
-                                                    喝了4杯水，上了3次厕所，控制台输出出2324个错误，神啊，带我走吧
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="timeline-item">
-                                        <div class="row">
-                                            <div class="col-xs-3 date">
-                                                <i class="fa fa-phone"></i> 11:00
-                                                <br>
-                                                <small class="text-navy">21小时前</small>
-                                            </div>
-                                            <div class="col-xs-9 content">
-                                                <p class="m-b-xs"><strong>项目经理打电话来了</strong>
-                                                </p>
-                                                <p>
-                                                    TMD，项目经理居然还没有起床！！！
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="timeline-item">
-                                        <div class="row">
-                                            <div class="col-xs-3 date">
-                                                <i class="fa fa-user-md"></i> 09:00
-                                                <br>
-                                                <small>21小时前</small>
-                                            </div>
-                                            <div class="col-xs-9 content">
-                                                <p class="m-b-xs"><strong>开会</strong>
-                                                </p>
-                                                <p>
-                                                    开你妹的会，老子还有897894个bug没有修复
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="timeline-item">
-                                        <div class="row">
-                                            <div class="col-xs-3 date">
-                                                <i class="fa fa-comments"></i> 12:50
-                                                <br>
-                                                <small class="text-navy">讨论</small>
-                                            </div>
-                                            <div class="col-xs-9 content">
-                                                <p class="m-b-xs"><strong>…………</strong>
-                                                </p>
-                                                <p>
-                                                    又是操蛋的一天
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -380,8 +302,6 @@
     $(document).ready(function () {
         $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",})
     });
-
-
 </script>
 <script src="${ctxStatic}/hPlugs/js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
 <script src="${ctxStatic}/hPlugs/js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>

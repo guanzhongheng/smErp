@@ -36,7 +36,7 @@
                                                         订单标题：</label>
                                                     <div class="col-sm-8">
                                                         <form:input path="ordTitle" htmlEscape="false" maxlength="200"
-                                                                    class="form-control" placeholder="订单标题"/>
+                                                                    class="form-control" placeholder="订单标题" readonly="true"/>
                                                     </div>
                                                 </div>
                                                 <div class="hr-line-dashed"></div>
@@ -45,7 +45,7 @@
                                                         关联客户：</label>
                                                     <div class="col-sm-8">
                                                         <form:input path="cusCode" htmlEscape="false" maxlength="200"
-                                                                    class="form-control" placeholder="关联客户"/>
+                                                                    class="form-control" placeholder="关联客户" readonly="true"/>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -53,7 +53,7 @@
                                                         代理客户：</label>
                                                     <div class="col-sm-8">
                                                         <form:input path="proxyName" htmlEscape="false" maxlength="200"
-                                                                    class="form-control" placeholder="代理客户名称"/>
+                                                                    class="form-control" placeholder="代理客户名称" readonly="true"/>
                                                     </div>
                                                 </div>
                                                 <div class="hr-line-dashed"></div>
@@ -61,7 +61,7 @@
                                                     <label class="col-sm-3 control-label"><i style="color: red">*</i>
                                                         订单类型：</label>
                                                     <form:select path="ordType" class="chosen-select"
-                                                                 cssStyle="min-width: 300px">
+                                                                 cssStyle="min-width: 300px" readonly="true">
                                                         <form:option value="" label=""/>
                                                         <form:options items="${fns:getDictList(120000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                                                     </form:select>
@@ -73,7 +73,7 @@
                                                     <div class="col-sm-8">
                                                         <form:input path="ordSignDate" htmlEscape="false"
                                                                     maxlength="200"
-                                                                    class="form-control" placeholder="订单签订日期"/>
+                                                                    class="form-control" placeholder="订单签订日期" readonly="true"/>
                                                     </div>
                                                 </div>
                                                 <div class="hr-line-dashed"></div>
@@ -83,7 +83,7 @@
                                                     <div class="col-sm-8">
                                                         <form:input path="ordDeliveryDate" htmlEscape="false"
                                                                     maxlength="200"
-                                                                    class="form-control" placeholder="订单交付日期"/>
+                                                                    class="form-control" placeholder="订单交付日期" readonly="true"/>
                                                     </div>
                                                 </div>
 
@@ -94,7 +94,7 @@
                                                     <div class="col-sm-8">
                                                         <form:input path="comContractor" htmlEscape="false"
                                                                     maxlength="200"
-                                                                    class="form-control" placeholder="我方签约人"/>
+                                                                    class="form-control" placeholder="我方签约人" readonly="true"/>
                                                     </div>
                                                 </div>
 
@@ -105,7 +105,7 @@
                                                     <div class="col-sm-8">
                                                         <form:input path="cusContractor" htmlEscape="false"
                                                                     maxlength="200"
-                                                                    class="form-control" placeholder="客户签约人"/>
+                                                                    class="form-control" placeholder="客户签约人" readonly="true"/>
                                                     </div>
                                                 </div>
 
@@ -124,7 +124,7 @@
                                                         备注信息：</label>
                                                     <div class="col-sm-8">
                                                         <form:input path="remark" htmlEscape="false" maxlength="200"
-                                                                    class="form-control" placeholder="备注信息"/>
+                                                                    class="form-control" placeholder="备注信息" readonly="true"/>
                                                     </div>
                                                 </div>
                                             </form>
@@ -132,15 +132,9 @@
                                         <div class="row">
                                             <div class="form-group">
                                                 <div class="col-sm-4 col-sm-offset-2">
-                                                    <button class="btn btn-primary" type="submit">保存订单</button>
-                                                    &nbsp;&nbsp;
-                                                    <a type="button" href="/crm/order/prodDetailList?ordCode=${orderAddModifyVo.ordCode}" class="btn btn-default" style="width: 80px;height: 23px"><i
-                                                            class="icon-group"></i>&nbsp;产品添加</a>
-                                                    &nbsp;&nbsp;
                                                     <button class="btn btn-white" type="button"
                                                             onclick="history.go(-1)">返回
                                                     </button>
-
                                                 </div>
                                             </div>
                                         </div>

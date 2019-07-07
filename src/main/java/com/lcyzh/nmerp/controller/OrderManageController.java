@@ -50,7 +50,9 @@ public class OrderManageController extends BaseController {
         }
         orderService.save(ordAddModifyVo);
         addMessage(redirectAttributes, "保存订单'" + ordAddModifyVo.getOrdTitle() + "'成功");
-        return "redirect:/crm/order/list?repage";
+
+        model.addAttribute("orderAddModifyVo",ordAddModifyVo);
+        return "modules/crm/orderAdd";
     }
 
 
