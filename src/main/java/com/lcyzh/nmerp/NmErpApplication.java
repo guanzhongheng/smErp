@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class NmErpApplication {
 
 	public static void main(String[] args) {
-		BasicConfigurator.configure();
 		SpringApplication.run(NmErpApplication.class, args);
 	}
 
