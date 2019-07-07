@@ -84,10 +84,10 @@
         </dependency>
 
         <!-- freemarker -->
-        <dependency>
-            <groupId>org.freemarker</groupId>
-            <artifactId>freemarker</artifactId>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.freemarker</groupId>-->
+        <!--<artifactId>freemarker</artifactId>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>io.netty</groupId>
@@ -236,17 +236,17 @@
             </exclusions>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-jasper</artifactId>
-            <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <artifactId>tomcat-embed-el</artifactId>
-                    <groupId>org.apache.tomcat.embed</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.apache.tomcat.embed</groupId>-->
+        <!--<artifactId>tomcat-embed-jasper</artifactId>-->
+        <!--<scope>provided</scope>-->
+        <!--<exclusions>-->
+        <!--<exclusion>-->
+        <!--<artifactId>tomcat-embed-el</artifactId>-->
+        <!--<groupId>org.apache.tomcat.embed</groupId>-->
+        <!--</exclusion>-->
+        <!--</exclusions>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>taglibs</groupId>
@@ -257,9 +257,16 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
-            <version>1.2</version>
-            <type>jar</type>
+            <!--<version>1.2</version>-->
+            <!--<type>jar</type>-->
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+            <version>8.5.20</version>
+        </dependency>
+
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
@@ -267,10 +274,10 @@
             <scope>provided</scope>
         </dependency>
         <!--<dependency>-->
-            <!--<groupId>javax.servlet.jsp</groupId>-->
-            <!--<artifactId>jsp-api</artifactId>-->
-            <!--<version>2.1</version>-->
-            <!--<scope>provided</scope>-->
+        <!--<groupId>javax.servlet.jsp</groupId>-->
+        <!--<artifactId>jsp-api</artifactId>-->
+        <!--<version>2.1</version>-->
+        <!--<scope>provided</scope>-->
         <!--</dependency>-->
 
         <!-- google java lib -->
@@ -387,9 +394,9 @@
 
         <!-- Email -->
         <!--<dependency>-->
-            <!--<groupId>org.apache.commons</groupId>-->
-            <!--<artifactId>commons-email</artifactId>-->
-            <!--<version>${commons-email.version}</version>-->
+        <!--<groupId>org.apache.commons</groupId>-->
+        <!--<artifactId>commons-email</artifactId>-->
+        <!--<version>${commons-email.version}</version>-->
         <!--</dependency>-->
         <dependency>
             <groupId>javax.activation</groupId>
@@ -503,16 +510,16 @@
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.2.12</version>
         </dependency>
-        <!-- Activiti -->
+        <!-- Activiti --<name />
         <!--<dependency>-->
-            <!--<groupId>org.activiti</groupId>-->
-            <!--<artifactId>activiti-engine</artifactId>-->
-            <!--<version>${activiti.version}</version>-->
+        <!--<groupId>org.activiti</groupId>-->
+        <!--<artifactId>activiti-engine</artifactId>-->
+        <!--<version>${activiti.version}</version>-->
         <!--</dependency>-->
         <!--<dependency>-->
-            <!--<groupId>org.activiti</groupId>-->
-            <!--<artifactId>activiti-spring</artifactId>-->
-            <!--<version>${activiti.version}</version>-->
+        <!--<groupId>org.activiti</groupId>-->
+        <!--<artifactId>activiti-spring</artifactId>-->
+        <!--<version>${activiti.version}</version>-->
         <!--</dependency>-->
     </dependencies>
 
