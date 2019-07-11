@@ -1,5 +1,5 @@
 /**
- * Copyright &copy; 2012-2016 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
+ * Copyright &copy; 2017-2019  All rights reserved.
  */
 package com.lcyzh.nmerp.common.servlet;
 

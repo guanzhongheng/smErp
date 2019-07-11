@@ -48,6 +48,7 @@
                                                                     class="form-control" placeholder="关联客户"/>
                                                     </div>
                                                 </div>
+                                                <div class="hr-line-dashed"></div>
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label"><i style="color: red"></i>
                                                         代理客户：</label>
@@ -60,11 +61,13 @@
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label"><i style="color: red">*</i>
                                                         订单类型：</label>
-                                                    <form:select path="ordType" class="chosen-select"
-                                                                 cssStyle="min-width: 300px">
-                                                        <form:option value="" label=""/>
-                                                        <form:options items="${fns:getDictList(120000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
-                                                    </form:select>
+                                                    <div class="col-sm-8">
+                                                        <form:select path="ordType" class="chosen-select"
+                                                                     cssStyle="min-width: 300px">
+                                                            <form:option value="" label=""/>
+                                                            <form:options items="${fns:getDictList(120000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+                                                        </form:select>
+                                                    </div>
                                                 </div>
                                                 <div class="hr-line-dashed"></div>
                                                 <div class="form-group">
@@ -109,15 +112,6 @@
                                                     </div>
                                                 </div>
 
-                                                    <%--<div class="hr-line-dashed"></div>--%>
-                                                    <%--<div class="form-group">--%>
-                                                    <%--<label class="col-sm-3 control-label"><i style="color: red">*</i>--%>
-                                                    <%--归属人员：</label>--%>
-                                                    <%--<div class="col-sm-6">--%>
-                                                    <%--<input type="text" class="form-control" name="password">--%>
-                                                    <%--</div>--%>
-                                                    <%--</div>--%>
-
                                                 <div class="hr-line-dashed"></div>
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label"><i style="color: red"></i>
@@ -134,8 +128,7 @@
                                                 <div class="col-sm-4 col-sm-offset-2">
                                                     <button class="btn btn-primary" type="submit">保存订单</button>
                                                     &nbsp;&nbsp;
-                                                    <a type="button" href="/crm/order/prodDetailList?ordCode=${orderAddModifyVo.ordCode}" class="btn btn-default" style="width: 80px;height: 23px"><i
-                                                            class="icon-group"></i>&nbsp;产品添加</a>
+                                                    <button type="button"  class="btn btn-default" onclick="prodlistAdd(${orderAddModifyVo.ordCode})">产品添加</button>
                                                     &nbsp;&nbsp;
                                                     <button class="btn btn-white" type="button"
                                                             onclick="history.go(-1)">返回
@@ -160,6 +153,9 @@
     $(document).ready(function () {
         $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",})
     });
+    function prodlistAdd(orderCode) {
+        window.location.href = "/order/prodDetailList?ordCode=" + orderCode;
+    }
 </script>
 <script src="${ctxStatic}/hPlugs/js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
 <script src="${ctxStatic}/hPlugs/js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>

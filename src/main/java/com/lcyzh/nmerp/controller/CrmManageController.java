@@ -110,16 +110,6 @@ public class CrmManageController extends BaseController {
         return "modules/crm/orderList";
     }
 
-    /**
-     * 订单详情-产品添加
-     * @return
-     */
-    @RequestMapping(value = {"order/prodDetailList"})
-    public String prodDetailList(String ordCode,Model model){
-        model.addAttribute("ordCode", ordCode);
-        return "modules/crm/prodDetailList";
-    }
-
 
     /**========================流程\任务相关流转==============================**/
     /**
@@ -211,6 +201,6 @@ public class CrmManageController extends BaseController {
         return "modules/crm/inventoryInfo";
     }
 
-    
+
 
 }

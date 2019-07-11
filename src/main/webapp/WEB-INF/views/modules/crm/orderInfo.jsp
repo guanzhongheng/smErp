@@ -48,6 +48,7 @@
                                                                     class="form-control" placeholder="关联客户" readonly="true"/>
                                                     </div>
                                                 </div>
+                                                <div class="hr-line-dashed"></div>
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label"><i style="color: red"></i>
                                                         代理客户：</label>

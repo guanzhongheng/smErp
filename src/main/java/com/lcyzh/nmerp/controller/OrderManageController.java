@@ -55,5 +55,14 @@ public class OrderManageController extends BaseController {
         return "modules/crm/orderAdd";
     }
 
+    /**
+     * 订单详情-产品添加
+     * @return
+     */
+    @RequestMapping(value = {"prodDetailList"})
+    public String prodDetailList(String ordCode,Model model){
+        model.addAttribute("ordCode", ordCode);
+        return "modules/crm/prodDetailList";
+    }
 
 }
