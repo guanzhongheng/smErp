@@ -11,18 +11,43 @@ import java.util.Date;
 public class TOrderItem implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long id;
+    //订单编号
     private Long ordCode;
+    //产品编号
     private String itemCode;
+    //长度
     private Double itemLenth;
+    //宽度
     private Double itemWidth;
+    //厚度
     private Double itemThick;
+    //颜色
     private String itemColor;
+    //计件数
     private Double itemNum;
+    //单位
     private Long itemUnit;
-    private Long blankPressType;
+    //单价
+    private Double itemPrice;
+    //计价方式 0-按面积 1-按重量
+    private Character itemPriceType;
+    //上级客户
+    private String superOwer;
+    //所属人
     private String itemOwner;
-    private String remark;
+    //备注
+    private String remarks;
     private Date createTime;
+    //单件重量
+    private Double itemWeight;
+    //总重量
+    private Double itemTotalWeight;
+    //总面积
+    private Double itemTotalSq;
+    //压边类型
+    private String itemYbType;
+    //延长类型
+    private String itemYcType;
 
 
     public TOrderItem() {
@@ -100,14 +125,6 @@ public class TOrderItem implements Serializable {
         this.itemUnit = itemUnit;
     }
 
-    public Long getBlankPressType() {
-        return blankPressType;
-    }
-
-    public void setBlankPressType(Long blankPressType) {
-        this.blankPressType = blankPressType;
-    }
-
     public void setItemOwner(String itemOwner) {
         this.itemOwner = itemOwner;
     }
@@ -116,12 +133,12 @@ public class TOrderItem implements Serializable {
         return itemOwner;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getRemarks() {
+        return remarks;
     }
 
     public void setCreateTime(Date createTime) {
@@ -132,4 +149,59 @@ public class TOrderItem implements Serializable {
         return createTime;
     }
 
+    public Double getItemPrice() {
+        return itemPrice;
+    }
+
+    public void setItemPrice(Double itemPrice) {
+        this.itemPrice = itemPrice;
+    }
+
+    public Character getItemPriceType() {
+        return itemPriceType;
+    }
+
+    public void setItemPriceType(Character itemPriceType) {
+        this.itemPriceType = itemPriceType;
+    }
+
+    public Double getItemWeight() {
+        return itemWeight;
+    }
+
+    public void setItemWeight(Double itemWeight) {
+        this.itemWeight = itemWeight;
+    }
+
+    public Double getItemTotalWeight() {
+        return itemTotalWeight;
+    }
+
+    public void setItemTotalWeight(Double itemTotalWeight) {
+        this.itemTotalWeight = itemTotalWeight;
+    }
+
+    public Double getItemTotalSq() {
+        return itemTotalSq;
+    }
+
+    public void setItemTotalSq(Double itemTotalSq) {
+        this.itemTotalSq = itemTotalSq;
+    }
+
+    public String getItemYbType() {
+        return itemYbType;
+    }
+
+    public void setItemYbType(String itemYbType) {
+        this.itemYbType = itemYbType;
+    }
+
+    public String getItemYcType() {
+        return itemYcType;
+    }
+
+    public void setItemYcType(String itemYcType) {
+        this.itemYcType = itemYcType;
+    }
 }

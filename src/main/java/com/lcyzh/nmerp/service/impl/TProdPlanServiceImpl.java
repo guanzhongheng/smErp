@@ -93,7 +93,7 @@ public class TProdPlanServiceImpl implements TProdPlanService {
                 if (res > 0) {
                     TOrder tOrder = new TOrder();
                     tOrder.setOrdCode(ordCode);
-                    tOrder.setOrdStatus(Constants.ORD_STATUS_ASSIGNED);
+                    //tOrder.setOrdStatus(Constants.ORD_STATUS_ASSIGNED);
                     tOrder.setUpdateTime(current);
                     res = tOrderMapper.update(tOrder);
                 }

@@ -30,8 +30,9 @@ public class OrderManageController extends BaseController {
     @ModelAttribute
     public OrderAddModifyVo get(@RequestParam(required=false) String ordCode) {
         if (StringUtils.isNotBlank(ordCode)){
-            OrderAddModifyVo modifyInfoByOrdCode = orderService.findModifyInfoByOrdCode(ordCode);
-            return modifyInfoByOrdCode;
+            //OrderAddModifyVo modifyInfoByOrdCode = orderService.findModifyInfoByOrdCode(ordCode);
+            //return modifyInfoByOrdCode;
+            return null;
         }else{
             return new OrderAddModifyVo();
         }
@@ -48,7 +49,7 @@ public class OrderManageController extends BaseController {
         if (!beanValidator(model, ordAddModifyVo)){
             return orderAdd(ordAddModifyVo, model);
         }
-        orderService.save(ordAddModifyVo);
+        //orderService.save(ordAddModifyVo);
         addMessage(redirectAttributes, "保存订单'" + ordAddModifyVo.getOrdTitle() + "'成功");
 
         model.addAttribute("orderAddModifyVo",ordAddModifyVo);

@@ -24,7 +24,7 @@ public class OrderAddBatchVo {
     private String deliveryDate;
     //客户联系电话
     private String phone;
-    private String remark;
+    private String remarks;
     private List<OrderItemVo> itemVos = new ArrayList<>();
 
     public String getOrdAddress() {
@@ -67,12 +67,12 @@ public class OrderAddBatchVo {
         this.phone = phone;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getRemarks() {
+        return remarks;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 
     public List<OrderItemVo> getItemVos() {

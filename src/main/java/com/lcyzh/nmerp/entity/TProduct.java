@@ -14,9 +14,10 @@ public class TProduct implements Serializable {
     private String prodCode;
     private String prodName;
     private String prodCgyCode;
-    private String prodSpec;
+    private String prodVariety;
+    private String prodThick;
+    private String prodGuidePrice;
     private Date createTime;
-    private Character prodType;
 
 
     public TProduct() {
@@ -54,14 +55,6 @@ public class TProduct implements Serializable {
         return prodCgyCode;
     }
 
-    public void setProdSpec(String prodSpec) {
-        this.prodSpec = prodSpec;
-    }
-
-    public String getProdSpec() {
-        return prodSpec;
-    }
-
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
@@ -70,12 +63,27 @@ public class TProduct implements Serializable {
         return createTime;
     }
 
-    public void setProdType(Character prodType) {
-        this.prodType = prodType;
+    public String getProdVariety() {
+        return prodVariety;
     }
 
-    public Character getProdType() {
-        return prodType;
+    public void setProdVariety(String prodVariety) {
+        this.prodVariety = prodVariety;
     }
 
+    public String getProdThick() {
+        return prodThick;
+    }
+
+    public void setProdThick(String prodThick) {
+        this.prodThick = prodThick;
+    }
+
+    public String getProdGuidePrice() {
+        return prodGuidePrice;
+    }
+
+    public void setProdGuidePrice(String prodGuidePrice) {
+        this.prodGuidePrice = prodGuidePrice;
+    }
 }

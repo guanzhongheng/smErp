@@ -7,11 +7,10 @@
         <result column="prod_code" property="prodCode" jdbcType="VARCHAR"/>
         <result column="prod_name" property="prodName" jdbcType="VARCHAR"/>
         <result column="prod_cgy_code" property="prodCgyCode" jdbcType="VARCHAR"/>
-        <result column="prod_spec" property="prodSpec" jdbcType="VARCHAR"/>
+        <result column="prod_thick" property="prodThick" jdbcType="VARCHAR"/>
+        <result column="prod_variety" property="prodVariety" jdbcType="VARCHAR"/>
+        <result column="prod_guide_price" property="prodGuidePrice" jdbcType="DOUBLE"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
-        <result column="prod_type" property="prodType" jdbcType="CHAR"/>
-
-
     </resultMap>
 
 
@@ -21,10 +20,25 @@
         WHERE id = #{id}
     </select>
 
-    <select id="findList" resultMap="tProductResultMap">
+    <select id="findList" parameterType="com.lcyzh.nmerp.entity.TProduct" resultMap="tProductResultMap">
         SELECT *
         FROM T_PRODUCT
         <where>
+            <if test="prodCode != null">
+                and prod_code = #{prodCode}
+            </if>
+            <if test="prodName != null">
+                and prod_name like concat(concat('%', #{prodName}),'%')
+            </if>
+            <if test="prodCgyCode != null">
+                and prod_cgy_code = #{prodCgyCode}
+            </if>
+            <if test="prodThick != null">
+                and prod_thick = #{prodThick}
+            </if>
+            <if test="prodVariety != null">
+                and prod_variety = #{prodVariety}
+            </if>
         </where>
     </select>
 
@@ -33,47 +47,47 @@
         FROM T_PRODUCT
     </select>
 
-    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TProduct">
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TProduct"  useGeneratedKeys="true" keyProperty="id">
         INSERT INTO T_PRODUCT(
-            id,
             prod_code,
             prod_name,
             prod_cgy_code,
-            prod_spec,
-            create_time,
-            prod_type
+            prod_thick,
+            prod_variety,
+            prod_guide_price,
+            create_time
         )
         VALUES (
-            #{id,jdbcType=BIGINT},
             #{prodCode,jdbcType=VARCHAR},
             #{prodName,jdbcType=VARCHAR},
             #{prodCgyCode,jdbcType=VARCHAR},
-            #{prodSpec,jdbcType=VARCHAR},
-            #{createTime,jdbcType=TIMESTAMP},
-            #{prodType,jdbcType=CHAR}
+            #{prodThick,jdbcType=VARCHAR},
+            #{prodVariety,jdbcType=VARCHAR},
+            #{prodGuidePrice,jdbcType=DOUBLE},
+            #{createTime,jdbcType=TIMESTAMP}
         )
     </insert>
 
-    <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TProduct">
+    <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TProduct" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO T_PRODUCT(
-        id,
-        prod_code,
-        prod_name,
-        prod_cgy_code,
-        prod_spec,
-        create_time,
-        prod_type
+            prod_code,
+            prod_name,
+            prod_cgy_code,
+            prod_thick,
+            prod_variety,
+            prod_guide_price,
+            create_time
         )
         VALUES
         <foreach collection="list" item="tProduct" separator=",">
             (
-            #{tProduct.id,jdbcType=BIGINT},
             #{tProduct.prodCode,jdbcType=VARCHAR},
             #{tProduct.prodName,jdbcType=VARCHAR},
             #{tProduct.prodCgyCode,jdbcType=VARCHAR},
-            #{tProduct.prodSpec,jdbcType=VARCHAR},
-            #{tProduct.createTime,jdbcType=TIMESTAMP},
-            #{tProduct.prodType,jdbcType=CHAR}
+            #{tProduct.prodThick,jdbcType=VARCHAR},
+            #{tProduct.prodVariety,jdbcType=VARCHAR},
+            #{tProduct.prodGuidePrice,jdbcType=DOUBLE},
+            #{tProduct.createTime,jdbcType=TIMESTAMP}
             )
         </foreach>
     </insert>
@@ -81,13 +95,12 @@
     <update id="update" parameterType="com.lcyzh.nmerp.entity.TProduct">
         UPDATE T_PRODUCT
         SET
-        id = #{id},
-        prod_code = #{prodCode},
-        prod_name = #{prodName},
-        prod_cgy_code = #{prodCgyCode},
-        prod_spec = #{prodSpec},
-        create_time = #{createTime},
-        prod_type = #{prodType}
+            prod_code = #{prodCode},
+            prod_name = #{prodName},
+            prod_cgy_code = #{prodCgyCode},
+            prod_thick = #{prodThick},
+            prod_variety = #{prodVariety},
+            prod_guide_price = #{prodGuidePrice},
         WHERE id = #{id}
     </update>
 

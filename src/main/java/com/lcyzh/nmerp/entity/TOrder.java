@@ -1,5 +1,6 @@
 package com.lcyzh.nmerp.entity;
 
+
 import java.util.Date;
 
 /**
@@ -7,22 +8,35 @@ import java.util.Date;
  * Date  2019-06-06
  */
 public class TOrder{
+    //订单编号
     private String ordCode;
     //客户资料编号
     private String cusCode;
     //代理商名称
     private String proxyName;
+    //订单标题
     private String ordTitle;
+    //订单总金额
     private Double ordTotalAmount;
+    //订单类型
     private Long ordType;
+    //订单签订日期
     private String ordSignDate;
-    private Long ordStatus;
+    //订单状态 0-新建 1-已审批 2-排产 3-完成 4-拒绝
+    private Character ordStatus;
     private String ordDeliveryDate;
-    private Long payType;
+    //付款方式 0-新建 1-待审批 2-排产 3-完成 4-拒绝
+    private Character payType;
+    //支付状态 0-现金支付 1-电子转账
+    private Character payStatus;
+    //客户签约人
     private String cusContractor;
+    //公司签约人
     private String comContractor;
+    //合同附件
     private String contAttachUrl;
-    private String remark;
+    //备注
+    private String remarks;
     private Date createTime;
     private Date updateTime;
 
@@ -75,11 +89,11 @@ public class TOrder{
         this.ordSignDate = ordSignDate;
     }
 
-    public Long getOrdStatus() {
+    public Character getOrdStatus() {
         return ordStatus;
     }
 
-    public void setOrdStatus(Long ordStatus) {
+    public void setOrdStatus(Character ordStatus) {
         this.ordStatus = ordStatus;
     }
 
@@ -97,14 +111,6 @@ public class TOrder{
 
     public void setOrdType(Long ordType) {
         this.ordType = ordType;
-    }
-
-    public Long getPayType() {
-        return payType;
-    }
-
-    public void setPayType(Long payType) {
-        this.payType = payType;
     }
 
     public String getCusContractor() {
@@ -131,12 +137,12 @@ public class TOrder{
         this.contAttachUrl = contAttachUrl;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getRemarks() {
+        return remarks;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 
     public Date getCreateTime() {
@@ -153,5 +159,17 @@ public class TOrder{
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public void setPayType(Character payType) {
+        this.payType = payType;
+    }
+
+    public Character getPayStatus() {
+        return payStatus;
+    }
+
+    public void setPayStatus(Character payStatus) {
+        this.payStatus = payStatus;
     }
 }

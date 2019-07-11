@@ -15,16 +15,8 @@ public class OrderItemVo {
     private Long itemId;
     //订单编号
     private String ordCode;
-    //代理商名称
-    private String proxyName;
     //产品编号
     private String itemCode;
-    //产品名称
-    private String itemName;
-    //产品规格
-    private String itemSpec;
-    //产品类型
-    private String itemType;
     //产品长度
     private Double itemLenth;
     //产品宽度
@@ -35,18 +27,22 @@ public class OrderItemVo {
     private String itemColor;
     //产品数量
     private Double itemNum;
-    //产品单位-字典
-    private Long itemUnit;
-    //产品单位值
-    private String itemUnitValue;
     //产品所属人
     private String itemOwner;
+    //产品单位
+    private String itemUnit;
+    //单件重量
+    private Double itemWeight;
+    //总重量
+    private Double itemTotalWeight;
+    //总面积
+    private Double itemTotalSq;
     //压边类型
-    private Long blankPressType;
-    //压边类型值
-    private Long blankPressTypeValue;
+    private String itemYbType;
+    //延长类型
+    private String itemYcType;
     //备注
-    private String remark;
+    private String remarks;
 
     public Long getItemId() {
         return itemId;
@@ -64,44 +60,12 @@ public class OrderItemVo {
         this.ordCode = ordCode;
     }
 
-    public String getProxyName() {
-        return proxyName;
-    }
-
-    public void setProxyName(String proxyName) {
-        this.proxyName = proxyName;
-    }
-
-    public String getItemName() {
-        return itemName;
-    }
-
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
-    }
-
     public String getItemCode() {
         return itemCode;
     }
 
     public void setItemCode(String itemCode) {
         this.itemCode = itemCode;
-    }
-
-    public String getItemSpec() {
-        return itemSpec;
-    }
-
-    public void setItemSpec(String itemSpec) {
-        this.itemSpec = itemSpec;
-    }
-
-    public String getItemType() {
-        return itemType;
-    }
-
-    public void setItemType(String itemType) {
-        this.itemType = itemType;
     }
 
     public Double getItemLenth() {
@@ -144,22 +108,6 @@ public class OrderItemVo {
         this.itemNum = itemNum;
     }
 
-    public Long getItemUnit() {
-        return itemUnit;
-    }
-
-    public void setItemUnit(Long itemUnit) {
-        this.itemUnit = itemUnit;
-    }
-
-    public String getItemUnitValue() {
-        return itemUnitValue;
-    }
-
-    public void setItemUnitValue(String itemUnitValue) {
-        this.itemUnitValue = itemUnitValue;
-    }
-
     public String getItemOwner() {
         return itemOwner;
     }
@@ -168,27 +116,59 @@ public class OrderItemVo {
         this.itemOwner = itemOwner;
     }
 
-    public Long getBlankPressType() {
-        return blankPressType;
+    public String getItemUnit() {
+        return itemUnit;
     }
 
-    public void setBlankPressType(Long blankPressType) {
-        this.blankPressType = blankPressType;
+    public void setItemUnit(String itemUnit) {
+        this.itemUnit = itemUnit;
     }
 
-    public Long getBlankPressTypeValue() {
-        return blankPressTypeValue;
+    public Double getItemWeight() {
+        return itemWeight;
     }
 
-    public void setBlankPressTypeValue(Long blankPressTypeValue) {
-        this.blankPressTypeValue = blankPressTypeValue;
+    public void setItemWeight(Double itemWeight) {
+        this.itemWeight = itemWeight;
     }
 
-    public String getRemark() {
-        return remark;
+    public Double getItemTotalWeight() {
+        return itemTotalWeight;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setItemTotalWeight(Double itemTotalWeight) {
+        this.itemTotalWeight = itemTotalWeight;
+    }
+
+    public Double getItemTotalSq() {
+        return itemTotalSq;
+    }
+
+    public void setItemTotalSq(Double itemTotalSq) {
+        this.itemTotalSq = itemTotalSq;
+    }
+
+    public String getItemYbType() {
+        return itemYbType;
+    }
+
+    public void setItemYbType(String itemYbType) {
+        this.itemYbType = itemYbType;
+    }
+
+    public String getItemYcType() {
+        return itemYcType;
+    }
+
+    public void setItemYcType(String itemYcType) {
+        this.itemYcType = itemYcType;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 }
