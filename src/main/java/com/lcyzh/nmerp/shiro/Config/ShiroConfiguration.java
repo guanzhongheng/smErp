@@ -81,7 +81,8 @@ public class ShiroConfiguration {
          */
         filterChainMap.put("/static/**","anon");
         filterChainMap.put("/logout", "logout");
-        filterChainMap.put("/crm/**", "anon");
+        filterChainMap.put("/crm/**", "user");
+        filterChainMap.put("/tProduct/**", "user");
         filterChainMap.put("/**", "anon");
 
         factoryBean.setFilterChainDefinitionMap(filterChainMap);

@@ -20,6 +20,7 @@ public class WebSiteMeshFilter extends ConfigurableSiteMeshFilter {
     protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {
         builder.addDecoratorPath("/sys/*", "/decoratorFilter/default")
                 .addDecoratorPath("/crm/*", "/decoratorFilter/default")
+                .addDecoratorPath("/tProduct/*", "/decoratorFilter/default")
                 .addDecoratorPath("/order/*","/decoratorFilter/newLayout")
                 .addDecoratorPath("/cus/*","/decoratorFilter/newLayout")
                 .addDecoratorPath("crm/order/prodDetailList","/decoratorFilter/newLayout")
