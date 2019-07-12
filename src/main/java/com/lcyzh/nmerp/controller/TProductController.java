@@ -1,6 +1,5 @@
 package com.lcyzh.nmerp.controller;
 
-import com.lcyzh.nmerp.common.lang.StringUtils;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.entity.TProduct;
@@ -11,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -30,9 +31,8 @@ public class TProductController extends BaseController {
      * @return
      */
     @RequestMapping(value = {"/list", ""}, method = RequestMethod.GET)
-    public String list(@ModelAttribute("tProduct") TProduct tProduct, Model model) {
-        List<TProduct> tProducts = tProductService.findAllList();
-        Page<TProduct> page = new Page<>();
+    public String list(@ModelAttribute("tProduct") TProduct tProduct, Model model, HttpServletRequest request, HttpServletResponse response) {
+        Page<TProduct> page = tProductService.findPage(new Page<TProduct>(request, response), tProduct);
         model.addAttribute("page", page);
         return "modules/crm/prodDictList";
     }

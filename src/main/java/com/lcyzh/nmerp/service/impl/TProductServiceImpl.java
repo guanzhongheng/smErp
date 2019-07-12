@@ -1,5 +1,7 @@
 package com.lcyzh.nmerp.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.dao.TProductMapper;
 import com.lcyzh.nmerp.entity.TProduct;
 import com.lcyzh.nmerp.service.TProductService;
@@ -50,6 +52,14 @@ public class TProductServiceImpl implements TProductService{
     @Override
     public int delete(TProduct tProduct) {
         return tProductMapper.delete(tProduct);
+    }
+
+    @Override
+    public Page<TProduct> findPage(Page<TProduct> page, TProduct tProduct) {
+        PageHelper.startPage(page.getPageNo(),page.getPageSize());
+        List<TProduct> list = tProductMapper.findList(tProduct);
+        page.setList(list);
+        return page;
     }
 
 }

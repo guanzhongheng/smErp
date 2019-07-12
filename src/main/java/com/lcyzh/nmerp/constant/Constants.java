@@ -73,16 +73,6 @@ public class Constants {
     public static final long ORD_STATUS_NEW = 100001L;
 
     /***
-     * @Description: 订单状态-待审批
-     * @Param:
-     * @return:
-     * @Author: lijinku
-     * @Iteration : 1.0
-     * @Date: 2019/7/2 3:18 PM
-     */
-    public static final long ORD_STATUS_TOASSIGN = 100002L;
-
-    /***
      * @Description: 订单状态-已审批
      * @Param:
      * @return:
@@ -90,7 +80,7 @@ public class Constants {
      * @Iteration : 1.0
      * @Date: 2019/7/2 3:18 PM
      */
-    public static final long ORD_STATUS_ASSIGNED = 100003L;
+    public static final long ORD_STATUS_ASSIGNED = 100002L;
 
     /***
      * @Description: 订单状态-审批驳回
@@ -100,7 +90,28 @@ public class Constants {
      * @Iteration : 1.0
      * @Date: 2019/7/2 3:18 PM
      */
-    public static final long ORD_STATUS_CHK_RJCT = 100004L;
+    public static final long ORD_STATUS_ABORT = 100003L;
+
+    /***
+     * @Description: 订单状态-排产
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 3:18 PM
+     */
+    public static final long ORD_STATUS_EXE = 100004L;
+
+
+    /***
+     * @Description: 订单状态-完成
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 3:18 PM
+     */
+    public static final long ORD_STATUS_OVER = 100005L;
 
     /**
      * @Description: 付款方式
@@ -130,57 +141,66 @@ public class Constants {
      * @Iteration : 1.0
      * @Date: 2019/7/2 3:28 PM
      */
-    public static final long PAY_TYPE_EFT = 101001L;
+    public static final long PAY_TYPE_EFT = 101002L;
 
-    /**
-     * @Description: 订单执行状态
-     * @Param:
-     * @return:
-     * @Author: lijinku
-     * @Iteration : 1.0
-     * @Date: 2019/7/2 3:35 PM
-     */
-    public static final long ORD_EXE_STATUS = 102000L;
-
-    /**
-     * @Description: 订单执行状态-待分配
-     * @Param:
-     * @return:
-     * @Author: lijinku
-     * @Iteration : 1.0
-     * @Date: 2019/7/2 3:35 PM
-     */
-    public static final long ORD_EXE_STATUS_TOASSIGN = 102001L;
-
-    /**
-     * @Description: 订单执行状态-已分配
-     * @Param:
-     * @return:
-     * @Author: lijinku
-     * @Iteration : 1.0
-     * @Date: 2019/7/2 3:35 PM
-     */
-    public static final long ORD_EXE_STATUS_ASSIGNED = 102002L;
-
-    /**
-     * @Description: 订单执行状态-执行中
-     * @Param:
-     * @return:
-     * @Author: lijinku
-     * @Iteration : 1.0
-     * @Date: 2019/7/2 3:35 PM
-     */
-    public static final long ORD_EXE_STATUS_EXING = 102003L;
-
-    /**
-     * @Description: 订单执行状态-未知
-     * @Param:
-     * @return:
-     * @Author: lijinku
-     * @Iteration : 1.0
-     * @Date: 2019/7/2 3:35 PM
-     */
-    public static final long ORD_EXE_STATUS_UNKNOWN = 102004L;
+    ///**
+    // * @Description: 订单执行状态
+    // * @Param:
+    // * @return:
+    // * @Author: lijinku
+    // * @Iteration : 1.0
+    // * @Date: 2019/7/2 3:35 PM
+    // */
+    //public static final long ORD_EXE_STATUS = 102000L;
+    //
+    ///**
+    // * @Description: 订单执行状态-新建
+    // * @Param:
+    // * @return:
+    // * @Author: lijinku
+    // * @Iteration : 1.0
+    // * @Date: 2019/7/2 3:35 PM
+    // */
+    //public static final long ORD_EXE_STATUS_NEW = 102001L;
+    //
+    ///**
+    // * @Description: 订单执行状态-已审批
+    // * @Param:
+    // * @return:
+    // * @Author: lijinku
+    // * @Iteration : 1.0
+    // * @Date: 2019/7/2 3:35 PM
+    // */
+    //public static final long ORD_EXE_STATUS_ASSIGNED = 102002L;
+    //
+    ///**
+    // * @Description: 订单执行状态-排产
+    // * @Param:
+    // * @return:
+    // * @Author: lijinku
+    // * @Iteration : 1.0
+    // * @Date: 2019/7/2 3:35 PM
+    // */
+    //public static final long ORD_EXE_STATUS_EXING = 102003L;
+    //
+    ///**
+    // * @Description: 订单执行状态-完成
+    // * @Param:
+    // * @return:
+    // * @Author: lijinku
+    // * @Iteration : 1.0
+    // * @Date: 2019/7/2 3:35 PM
+    // */
+    //public static final long ORD_EXE_STATUS_OVER = 102004L;
+    ///**
+    // * @Description: 订单执行状态-拒绝
+    // * @Param:
+    // * @return:
+    // * @Author: lijinku
+    // * @Iteration : 1.0
+    // * @Date: 2019/7/2 3:35 PM
+    // */
+    //public static final long ORD_EXE_STATUS_ABORT = 102004L;
 
     /**
      * @Description: 产品单位
@@ -190,7 +210,16 @@ public class Constants {
      * @Iteration : 1.0
      * @Date: 2019/7/2 3:42 PM
      */
-    public static final long PROD_UNIT = 103000L;
+    public static final long PROD_UNIT = 142000L;
+    /**
+     * @Description: 产品单位-平方米
+     * @Param:
+     * @return:
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 3:42 PM
+     */
+    public static final long PROD_UNIT_SQ = 142001L;
 
     /**
      * @Description: 产品单位-千克
@@ -200,7 +229,7 @@ public class Constants {
      * @Iteration : 1.0
      * @Date: 2019/7/2 3:42 PM
      */
-    public static final long PROD_UNIT_KG = 103001L;
+    public static final long PROD_UNIT_KG = 142002L;
 
     /**
      * @Description: 产品单位-顿
@@ -210,7 +239,7 @@ public class Constants {
      * @Iteration : 1.0
      * @Date: 2019/7/2 3:42 PM
      */
-    public static final long PROD_UNIT_TON = 103002L;
+    public static final long PROD_UNIT_TON = 142003L;
 
     /**
      * @Description: 客户状态
@@ -644,5 +673,26 @@ public class Constants {
      * @Date: 2019/6/28 12:07 PM
      */
     public static final String DICT_RAW_BIG_CGY = "SEM0001";
+
+    /**
+     * 订单支付状态
+     */
+    public static final long ORD_PAY_STATUS = 103000L;
+    /**
+     * 新建
+     */
+    public static final long ORD_PAY_STATUS_NEW = 103001L;
+    /**
+     * 未结清
+     */
+    public static final long ORD_PAY_STATUS_UNCLEAR = 103002L;
+    /**
+     * 已结清
+     */
+    public static final long ORD_PAY_STATUS_CLEAR = 103003L;
+    /**
+     * 欠款
+     */
+    public static final long ORD_PAY_STATUS_QK = 103004L;
 
 }

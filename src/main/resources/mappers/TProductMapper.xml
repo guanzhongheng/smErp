@@ -10,6 +10,8 @@
         <result column="prod_thick" property="prodThick" jdbcType="VARCHAR"/>
         <result column="prod_variety" property="prodVariety" jdbcType="VARCHAR"/>
         <result column="prod_guide_price" property="prodGuidePrice" jdbcType="DOUBLE"/>
+        <result column="prod_price_type" property="prodPriceType" jdbcType="BIGINT"/>
+        <result column="prod_unit" property="prodUnit" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
@@ -39,6 +41,12 @@
             <if test="prodVariety != null">
                 and prod_variety = #{prodVariety}
             </if>
+            <if test="prodPriceType != null">
+                and prod_price_type = #{prodPriceType}
+            </if>
+            <if test="prodUnit != null">
+                and prod_unit = #{prodUnit}
+            </if>
         </where>
     </select>
 
@@ -55,6 +63,8 @@
             prod_thick,
             prod_variety,
             prod_guide_price,
+            prod_price_type,
+            prod_unit,
             create_time
         )
         VALUES (
@@ -64,6 +74,8 @@
             #{prodThick,jdbcType=VARCHAR},
             #{prodVariety,jdbcType=VARCHAR},
             #{prodGuidePrice,jdbcType=DOUBLE},
+            #{prodPriceType,jdbcType=BIGINT},
+            #{prodUnit,jdbcType=VARCHAR},
             #{createTime,jdbcType=TIMESTAMP}
         )
     </insert>
@@ -76,6 +88,8 @@
             prod_thick,
             prod_variety,
             prod_guide_price,
+            prod_price_type,
+            prod_unit,
             create_time
         )
         VALUES
@@ -87,6 +101,8 @@
             #{tProduct.prodThick,jdbcType=VARCHAR},
             #{tProduct.prodVariety,jdbcType=VARCHAR},
             #{tProduct.prodGuidePrice,jdbcType=DOUBLE},
+            #{tProduct.prodPriceType,jdbcType=BIGINT},
+            #{tProduct.prodUnit,jdbcType=VARCHAR},
             #{tProduct.createTime,jdbcType=TIMESTAMP}
             )
         </foreach>
@@ -101,6 +117,8 @@
             prod_thick = #{prodThick},
             prod_variety = #{prodVariety},
             prod_guide_price = #{prodGuidePrice},
+            prod_price_type = #{prodPriceType},
+            prod_unit = #{prodUnit}
         WHERE id = #{id}
     </update>
 

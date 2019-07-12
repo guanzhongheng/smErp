@@ -1,5 +1,7 @@
 package com.lcyzh.nmerp.entity;
 
+import com.lcyzh.nmerp.common.persistence.Page;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Date;
@@ -8,17 +10,24 @@ import java.util.Date;
  * Author ljk
  * Date  2019-06-06
  */
-public class TProduct implements Serializable {
+public class TProduct extends Page<TProduct> implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long id;
     private String prodCode;
     private String prodName;
+    //类别
     private String prodCgyCode;
+    //品种、性质
     private String prodVariety;
+    //厚度
     private String prodThick;
+    //指导价
     private String prodGuidePrice;
     private Date createTime;
-
+    //计价方式
+    private Long prodPriceType;
+    //单位
+    private String prodUnit;
 
     public TProduct() {
     }
@@ -85,5 +94,21 @@ public class TProduct implements Serializable {
 
     public void setProdGuidePrice(String prodGuidePrice) {
         this.prodGuidePrice = prodGuidePrice;
+    }
+
+    public Long getProdPriceType() {
+        return prodPriceType;
+    }
+
+    public void setProdPriceType(Long prodPriceType) {
+        this.prodPriceType = prodPriceType;
+    }
+
+    public String getProdUnit() {
+        return prodUnit;
+    }
+
+    public void setProdUnit(String prodUnit) {
+        this.prodUnit = prodUnit;
     }
 }

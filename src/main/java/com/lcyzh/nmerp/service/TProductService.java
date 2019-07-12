@@ -1,5 +1,6 @@
 package com.lcyzh.nmerp.service;
 
+import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.entity.TProduct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,4 +26,5 @@ public interface TProductService {
 
     int delete(TProduct tProduct);
 
+    Page<TProduct> findPage(Page<TProduct> tProductPage, TProduct tProduct);
 }
