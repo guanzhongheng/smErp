@@ -10,15 +10,13 @@
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <label class="col-sm-3 control-label">产品选择:</label>
-                <div class="col-sm-8">
-                    <select data-placeholder="选择省份..." class="chosen-select" style="width:350px;" tabindex="2">
-                        <option value="">请选择省份</option>
-                        <option value="110000" hassubinfo="true">北京</option>
-                        <option value="120000" hassubinfo="true">天津</option>
-                        <option value="130000" hassubinfo="true">河北省</option>
-                        <option value="140000" hassubinfo="true">山西省</option>
-                    </select>
-                </div>
+                <select data-placeholder="产品选择" class="chosen-select" style="width:200px;">
+                    <c:forEach items="${prod}" var="p">
+                        <option data-prodCode='${p.prodCode}' data-prodCgyCode='${p.prodCgyCode}'
+                                data-prodVariety='${p.prodVariety}' data-prodThick='${p.prodThick}'
+                                data-prodPriceType='${p.prodPriceType}' value='${p.prodName}' > ${p.prodName}</option>
+                    </c:forEach>
+                </select>
             </div>
             <div class="ibox-content">
                 <form method="get" class="form-horizontal">
@@ -52,16 +50,11 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-4">
-                            <label class="col-md-2">颜色:</label>
-                            <div class="col-md-2">
-                                <select data-placeholder="选择颜色" class="chosen-select" tabindex="2">
-                                    <option value="">请选择省份</option>
-                                    <option value="110000" hassubinfo="true">北京</option>
-                                    <option value="120000" hassubinfo="true">天津</option>
-                                    <option value="130000" hassubinfo="true">河北省</option>
-                                    <option value="140000" hassubinfo="true">山西省</option>
-                                </select>
-                            </div>
+                            <select data-placeholder="选择颜色" class="chosen-select" tabindex="2">
+                                <c:forEach items="${color}" var="c">
+                                    <option value='${c.value}' > ${c.label}</option>
+                                </c:forEach>
+                            </select>
                         </div>
                         <div class="col-md-4">
                             <label class="col-md-2">备注:</label>

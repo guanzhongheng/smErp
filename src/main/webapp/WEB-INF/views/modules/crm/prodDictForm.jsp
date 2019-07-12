@@ -34,29 +34,47 @@
         <div class="controls">
             <form:select path="prodCgyCode" class="input-medium" placeholder="产品类型">
                 <form:option value="" label=""/>
-                <form:options items="${fns:getCusDictList(105000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+                <form:options items="${fns:getDictList('prod_cgy_code')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
             </form:select>
         </div>
     </div>
     <div class="control-group">
         <label class="control-label">产品品种:</label>
         <div class="controls">
-            <form:select path="prodVariety" class="input-medium" placeholder="产品类型">
+            <form:select path="prodVariety" class="input-medium" placeholder="产品品种">
                 <form:option value="" label=""/>
-                <form:options items="${fns:getCusDictList(105000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+                <form:options items="${fns:getDictList('prod_variety')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
             </form:select>
         </div>
     </div>
     <div class="control-group">
         <label class="control-label">产品厚度:</label>
         <div class="controls">
-            <form:input path="prodThick" htmlEscape="false" maxlength="100" class="email"/>
+            <form:input path="prodThick" htmlEscape="false" maxlength="100" class="required"/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">产品单位:</label>
+        <div class="controls">
+            <form:select path="prodUnit" class="input-medium" placeholder="产品单位">
+                <form:option value="" label=""/>
+                <form:options items="${fns:getCusDictList(142000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+            </form:select>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">计价方式:</label>
+        <div class="controls">
+            <form:select path="prodPriceType" class="input-medium" placeholder="计价方式">
+                <form:option value="" label=""/>
+                <form:options items="${fns:getCusDictList(141000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+            </form:select>
         </div>
     </div>
     <div class="control-group">
         <label class="control-label">参考单价:</label>
         <div class="controls">
-            <form:input path="prodGuidePrice" htmlEscape="false" maxlength="100" class="email"/>
+            <form:input path="prodGuidePrice" htmlEscape="false" maxlength="100" class="required"/>
         </div>
     </div>
     <div class="form-actions">

@@ -82,6 +82,14 @@
   </function>
 
   <function>
+    <description>获取字典标签-根据key获取值</description>
+    <name>getValueByDictKey</name>
+    <function-class>com.lcyzh.nmerp.utils.DictUtils</function-class>
+    <function-signature>java.lang.String getValueByDictKey(java.lang.Long)</function-signature>
+    <example>${fns:getValueByDictKey(dictKey)}</example>
+  </function>
+
+  <function>
     <description>获取字典标签-按部门获取员工信息</description>
     <name>getEmpListByDept</name>
     <function-class>com.lcyzh.nmerp.utils.DictUtils</function-class>

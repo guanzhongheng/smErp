@@ -47,6 +47,8 @@
             <th>产品类别</th>
             <th>产品品种</th>
             <th>产品厚度</th>
+            <th>产品单位</th>
+            <th>计价方式</th>
             <th>指导价格</th>
             <th>操作</th>
         </tr>
@@ -54,11 +56,14 @@
         <tbody>
         <c:forEach items="${page.list}" var="cus">
             <tr>
+                    <%--${fns:getDictLabel(user.userType, 'sys_user_type', '无')}--%>
                 <td>${cus.prodCode}</td>
                 <td>${cus.prodName}</td>
-                <td>${cus.prodCgyCode}</td>
-                <td>${cus.prodVariety}</td>
+                <td>${fns:getDictLabel(cus.prodCgyCode,'prod_cgy_code','无')}</td>
+                <td>${fns:getDictLabel(cus.prodVariety,'prod_variety','无')}</td>
                 <td>${cus.prodThick}</td>
+                <td>${fns:getValueByDictKey(cus.prodUnit)}</td>
+                <td>${fns:getValueByDictKey(cus.prodPriceType)}</td>
                 <td>${cus.prodGuidePrice}</td>
                 <td>
                     <a href="${ctx}/tProduct/get?id=${cus.id}"><i class="icon-pencil">&nbsp;编辑</i></a>

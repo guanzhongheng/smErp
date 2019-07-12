@@ -1,12 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 
-
 <div class="wrapper wrapper-content animated fadeInRight">
-
     <div class="tabs-container">
         <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true"> 创建订单</a>
+            <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true">创建订单</a>
             </li>
         </ul>
         <div class="tab-content">
