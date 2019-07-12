@@ -22,16 +22,24 @@ public class OrderAddModifyVo {
     private String ordTitle;
     //订单总金额
     private Double ordTotalAmount;
-    //订单类型
+    //订单类型-字典
     private Long ordType;
+    //订单类型值
+    private String ordTypeValue;
     //订单签订日期
     private String ordSignDate;
     //订单状态
     private Long ordStatus;
     //订单交货期
     private String ordDeliveryDate;
-    //支付类型
+    //支付类型-字典
     private Long payType;
+    //支付类型值
+    private String payTypeValue;
+    //支付状态-字典
+    private Long payStatus;
+    //支付状态值
+    private String payStatusValue;
     //客户签约人
     private String cusContractor;
     //我方签约人
@@ -39,7 +47,7 @@ public class OrderAddModifyVo {
     //合同附件
     private String contAttachUrl;
     //订单备注
-    private String remark;
+    private String remarks;
 
     public String getOrdCode() {
         return ordCode;
@@ -145,11 +153,43 @@ public class OrderAddModifyVo {
         this.contAttachUrl = contAttachUrl;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getRemarks() {
+        return remarks;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public String getOrdTypeValue() {
+        return ordTypeValue;
+    }
+
+    public void setOrdTypeValue(String ordTypeValue) {
+        this.ordTypeValue = ordTypeValue;
+    }
+
+    public String getPayTypeValue() {
+        return payTypeValue;
+    }
+
+    public void setPayTypeValue(String payTypeValue) {
+        this.payTypeValue = payTypeValue;
+    }
+
+    public Long getPayStatus() {
+        return payStatus;
+    }
+
+    public void setPayStatus(Long payStatus) {
+        this.payStatus = payStatus;
+    }
+
+    public String getPayStatusValue() {
+        return payStatusValue;
+    }
+
+    public void setPayStatusValue(String payStatusValue) {
+        this.payStatusValue = payStatusValue;
     }
 }

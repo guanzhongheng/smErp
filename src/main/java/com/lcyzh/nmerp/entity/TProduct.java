@@ -10,24 +10,24 @@ import java.util.Date;
  * Author ljk
  * Date  2019-06-06
  */
-public class TProduct extends Page<TProduct> implements Serializable {
+public class TProduct implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long id;
     private String prodCode;
     private String prodName;
     //类别
-    private String prodCgyCode;
+    private Long prodCgyCode;
     //品种、性质
-    private String prodVariety;
+    private Long prodVariety;
     //厚度
-    private String prodThick;
+    private Double prodThick;
     //指导价
-    private String prodGuidePrice;
+    private Double prodGuidePrice;
     private Date createTime;
     //计价方式
     private Long prodPriceType;
     //单位
-    private String prodUnit;
+    private Long prodUnit;
 
     public TProduct() {
     }
@@ -56,11 +56,11 @@ public class TProduct extends Page<TProduct> implements Serializable {
         return prodName;
     }
 
-    public void setProdCgyCode(String prodCgyCode) {
+    public void setProdCgyCode(Long prodCgyCode) {
         this.prodCgyCode = prodCgyCode;
     }
 
-    public String getProdCgyCode() {
+    public Long getProdCgyCode() {
         return prodCgyCode;
     }
 
@@ -72,27 +72,27 @@ public class TProduct extends Page<TProduct> implements Serializable {
         return createTime;
     }
 
-    public String getProdVariety() {
+    public Long getProdVariety() {
         return prodVariety;
     }
 
-    public void setProdVariety(String prodVariety) {
+    public void setProdVariety(Long prodVariety) {
         this.prodVariety = prodVariety;
     }
 
-    public String getProdThick() {
+    public Double getProdThick() {
         return prodThick;
     }
 
-    public void setProdThick(String prodThick) {
+    public void setProdThick(Double prodThick) {
         this.prodThick = prodThick;
     }
 
-    public String getProdGuidePrice() {
+    public Double getProdGuidePrice() {
         return prodGuidePrice;
     }
 
-    public void setProdGuidePrice(String prodGuidePrice) {
+    public void setProdGuidePrice(Double prodGuidePrice) {
         this.prodGuidePrice = prodGuidePrice;
     }
 
@@ -104,11 +104,11 @@ public class TProduct extends Page<TProduct> implements Serializable {
         this.prodPriceType = prodPriceType;
     }
 
-    public String getProdUnit() {
+    public Long getProdUnit() {
         return prodUnit;
     }
 
-    public void setProdUnit(String prodUnit) {
+    public void setProdUnit(Long prodUnit) {
         this.prodUnit = prodUnit;
     }
 }

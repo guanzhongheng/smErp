@@ -6,12 +6,12 @@
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="prod_code" property="prodCode" jdbcType="VARCHAR"/>
         <result column="prod_name" property="prodName" jdbcType="VARCHAR"/>
-        <result column="prod_cgy_code" property="prodCgyCode" jdbcType="VARCHAR"/>
-        <result column="prod_thick" property="prodThick" jdbcType="VARCHAR"/>
-        <result column="prod_variety" property="prodVariety" jdbcType="VARCHAR"/>
+        <result column="prod_cgy_code" property="prodCgyCode" jdbcType="BIGINT"/>
+        <result column="prod_thick" property="prodThick" jdbcType="DOUBLE"/>
+        <result column="prod_variety" property="prodVariety" jdbcType="BIGINT"/>
         <result column="prod_guide_price" property="prodGuidePrice" jdbcType="DOUBLE"/>
         <result column="prod_price_type" property="prodPriceType" jdbcType="BIGINT"/>
-        <result column="prod_unit" property="prodUnit" jdbcType="VARCHAR"/>
+        <result column="prod_unit" property="prodUnit" jdbcType="BIGINT"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
@@ -70,12 +70,12 @@
         VALUES (
             #{prodCode,jdbcType=VARCHAR},
             #{prodName,jdbcType=VARCHAR},
-            #{prodCgyCode,jdbcType=VARCHAR},
-            #{prodThick,jdbcType=VARCHAR},
-            #{prodVariety,jdbcType=VARCHAR},
+            #{prodCgyCode,jdbcType=BIGINT},
+            #{prodThick,jdbcType=DOUBLE},
+            #{prodVariety,jdbcType=BIGINT},
             #{prodGuidePrice,jdbcType=DOUBLE},
             #{prodPriceType,jdbcType=BIGINT},
-            #{prodUnit,jdbcType=VARCHAR},
+            #{prodUnit,jdbcType=BIGINT},
             #{createTime,jdbcType=TIMESTAMP}
         )
     </insert>
@@ -97,12 +97,12 @@
             (
             #{tProduct.prodCode,jdbcType=VARCHAR},
             #{tProduct.prodName,jdbcType=VARCHAR},
-            #{tProduct.prodCgyCode,jdbcType=VARCHAR},
-            #{tProduct.prodThick,jdbcType=VARCHAR},
-            #{tProduct.prodVariety,jdbcType=VARCHAR},
+            #{tProduct.prodCgyCode,jdbcType=BIGINT},
+            #{tProduct.prodThick,jdbcType=DOUBLE},
+            #{tProduct.prodVariety,jdbcType=BIGINT},
             #{tProduct.prodGuidePrice,jdbcType=DOUBLE},
             #{tProduct.prodPriceType,jdbcType=BIGINT},
-            #{tProduct.prodUnit,jdbcType=VARCHAR},
+            #{tProduct.prodUnit,jdbcType=BIGINT},
             #{tProduct.createTime,jdbcType=TIMESTAMP}
             )
         </foreach>

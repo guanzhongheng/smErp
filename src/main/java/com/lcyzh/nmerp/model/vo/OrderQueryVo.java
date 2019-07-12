@@ -39,6 +39,10 @@ public class OrderQueryVo{
     private Long payType;
     //付款方式值
     private String payTypeValue;
+    //支付状态-字典
+    private Long payStatus;
+    //支付状态值
+    private String payStatusValue;
     //已回款金额
     private Double repayAmount;
     //已开票金额
@@ -190,5 +194,21 @@ public class OrderQueryVo{
 
     public void setFollowType(Integer followType) {
         this.followType = followType;
+    }
+
+    public Long getPayStatus() {
+        return payStatus;
+    }
+
+    public void setPayStatus(Long payStatus) {
+        this.payStatus = payStatus;
+    }
+
+    public String getPayStatusValue() {
+        return payStatusValue;
+    }
+
+    public void setPayStatusValue(String payStatusValue) {
+        this.payStatusValue = payStatusValue;
     }
 }

@@ -121,17 +121,17 @@ public class CusManageController  extends BaseController {
     /**
      * 订单审批状态修改
      */
-    @RequestMapping(value = {"orderStatus_update"})
-    public String updateStatus(String ordCode,Character ordStatus,RedirectAttributes redirectAttributes){
-        if(StringUtils.isEmpty(ordCode) || ordStatus == null){
-            addMessage(redirectAttributes, "审批失败");
-            return "redirect:/crm/customer/list?repage";
-        }
-        TOrder order = new TOrder();
-        order.setOrdCode(ordCode);
-        order.setOrdStatus(ordStatus);
-        //orderService.update(order);
-        return "redirect:/crm/approval/list?repage";
-    }
+    //@RequestMapping(value = {"orderStatus_update"})
+    //public String updateStatus(String ordCode,Character ordStatus,RedirectAttributes redirectAttributes){
+    //    if(StringUtils.isEmpty(ordCode) || ordStatus == null){
+    //        addMessage(redirectAttributes, "审批失败");
+    //        return "redirect:/crm/customer/list?repage";
+    //    }
+    //    TOrder order = new TOrder();
+    //    order.setOrdCode(ordCode);
+    //    order.setOrdStatus(ordStatus);
+    //    //orderService.update(order);
+    //    return "redirect:/crm/approval/list?repage";
+    //}
 
 }

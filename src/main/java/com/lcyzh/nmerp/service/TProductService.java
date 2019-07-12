@@ -2,6 +2,7 @@ package com.lcyzh.nmerp.service;
 
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.entity.TProduct;
+import com.lcyzh.nmerp.model.vo.ProductVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ import java.util.List;
 * Date  2019-06-06
 */
 public interface TProductService {
-    TProduct get(String id);
+    ProductVo get(String id);
 
     List<TProduct> findList(TProduct tProduct);
 
@@ -26,5 +27,5 @@ public interface TProductService {
 
     int delete(TProduct tProduct);
 
-    Page<TProduct> findPage(Page<TProduct> tProductPage, TProduct tProduct);
+    Page<ProductVo> findPage(Page<ProductVo> tProductPage, TProduct tProduct);
 }

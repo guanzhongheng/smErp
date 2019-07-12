@@ -13,11 +13,13 @@
         <result column="ord_status" property="ordStatus" jdbcType="BIGINT"/>
         <result column="ord_delivery_date" property="ordDeliveryDate" jdbcType="VARCHAR"/>
         <result column="pay_type" property="payType" jdbcType="BIGINT"/>
+        <result column="pay_status" property="payStatus" jdbcType="BIGINT"/>
         <result column="cus_contractor" property="cusContractor" jdbcType="VARCHAR"/>
         <result column="com_contractor" property="comContractor" jdbcType="VARCHAR"/>
         <result column="cont_attach_url" property="contAttachUrl" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
     </resultMap>
 
 
@@ -34,9 +36,10 @@
         ord_status ordStatus,
         ord_delivery_date ordDeliveryDate,
         pay_type payType,
+        pay_status payStatus,
         cus_contractor cusContractor,
         com_contractor comContractor,
-        remark remark
+        remarks remarks
         from T_ORDER
         where ord_code = #{ordCode,jdbcType=VARCHAR}
     </select>
@@ -52,6 +55,7 @@
         od.ord_sign_date ordSignDate,
         od.ord_delivery_date ordDeliveryDate,
         od.pay_type payType,
+        od.pay_status payStatus,
         od.ord_type ordType,
         pt.repay_amount repayAmount,
         pt.invoiced_amount invoicedAmount,
@@ -129,6 +133,7 @@
             ord_status,
             ord_delivery_date,
             pay_type,
+            pay_status,
             cus_contractor,
             com_contractor,
             cont_attach_url,
@@ -147,6 +152,7 @@
             #{ordStatus,jdbcType=BIGINT},
             #{ordDeliveryDate,jdbcType=VARCHAR},
             #{payType,jdbcType=BIGINT},
+            #{payStatus,jdbcType=BIGINT},
             #{cusContractor,jdbcType=VARCHAR},
             #{comContractor,jdbcType=VARCHAR},
             #{contAttachUrl,jdbcType=VARCHAR},
@@ -168,6 +174,7 @@
         ord_status,
         ord_delivery_date,
         pay_type,
+        pay_status,
         cus_contractor,
         com_contractor,
         cont_attach_url,
@@ -187,6 +194,7 @@
             #{item.ordStatus,jdbcType=BIGINT},
             #{item.ordDeliveryDate,jdbcType=VARCHAR},
             #{item.payType,jdbcType=BIGINT},
+            #{item.payStatus,jdbcType=BIGINT},
             #{item.cusContractor,jdbcType=VARCHAR},
             #{item.comContractor,jdbcType=VARCHAR},
             #{item.contAttachUrl,jdbcType=VARCHAR},
@@ -209,7 +217,7 @@
                 ord_sign_date = #{ordSignDate,jdbcType=VARCHAR},
             </if>
             <if test="ordStatus!=null">
-                ord_status = #{ordStatus,jdbcType=CHAR},
+                ord_status = #{ordStatus,jdbcType=BIGINT},
             </if>
             <if test="ordDeliveryDate!=null">
                 ord_delivery_date = #{ordDeliveryDate,jdbcType=VARCHAR},
@@ -232,6 +240,9 @@
 
             <if test="updateTime!=null">
                 update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="payStatus!=null">
+                pay_status = #{payStatus,jdbcType=BIGINT}
             </if>
         </set>
 

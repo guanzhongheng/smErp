@@ -4,17 +4,22 @@
 
     <resultMap id="tOrderItemResultMap" type="com.lcyzh.nmerp.entity.TOrderItem">
         <id column="id" property="id" jdbcType="BIGINT"/>
-        <result column="ord_code" property="ordCode" jdbcType="BIGINT"/>
+        <result column="ord_code" property="ordCode" jdbcType="VARCHAR"/>
         <result column="item_code" property="itemCode" jdbcType="VARCHAR"/>
-        <result column="item_num" property="itemNum" jdbcType="DOUBLE"/>
         <result column="item_lenth" property="itemLenth" jdbcType="DOUBLE"/>
         <result column="item_width" property="itemWidth" jdbcType="DOUBLE"/>
         <result column="item_thick" property="itemThick" jdbcType="DOUBLE"/>
         <result column="item_color" property="itemColor" jdbcType="VARCHAR"/>
-        <result column="item_unit" property="itemUnit" jdbcType="BIGINT"/>
-        <result column="blank_press_type" property="blankPressType" jdbcType="BIGINT"/>
+        <result column="item_num" property="itemNum" jdbcType="DOUBLE"/>
         <result column="item_owner" property="itemOwner" jdbcType="VARCHAR"/>
-        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="item_price" property="itemPrice" jdbcType="DOUBLE"/>
+        <result column="item_price_type" property="itemPriceType" jdbcType="BIGINT"/>
+        <result column="item_weight" property="itemWeight" jdbcType="DOUBLE"/>
+        <result column="item_total_weight" property="itemTotalWeight" jdbcType="DOUBLE"/>
+        <result column="item_total_sq" property="itemTotalSq" jdbcType="DOUBLE"/>
+        <result column="item_yb_type" property="itemYbType" jdbcType="VARCHAR"/>
+        <result column="item_yc_type" property="itemYcType" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
@@ -23,17 +28,24 @@
        SELECT
         tt.prod_code itemCode,
         tt.prod_name itemName,
-        tt.prod_spec itemSpec,
-        tt.prod_type  itemType,
-        toi.item_color itemColor,
+        tt.prod_cgy_code itemCgyCode,
+        tt.prod_unit itemUnit,
+        tt.prod_variety  itemVariety,
         toi.item_lenth itemLenth,
         toi.item_thick itemThick,
         toi.item_width itemWidth,
-        toi.blank_press_type blankPressType,
-        toi.item_unit itemUnit,
+        toi.item_color itemColor,
         toi.item_num itemNum,
         toi.item_owner itemOwner,
-        toi.remark  remark
+        toi.remarks  remarks
+        toi.item_price itemPrice,
+        toi.item_price_type itemPriceType,
+        toi.item_weight itemWeight,
+        toi.item_total_weight itemTotalWeight,
+        toi.item_total_sq itemTotalSq,
+        toi.item_yb_type itemYbType,
+        toi.item_yc_type itemYcType,
+        toi.create_time createTime
     FROM
         T_ORDER_ITEM toi
         LEFT JOIN T_PRODUCT tt ON toi.item_code = tt.prod_code
@@ -53,70 +65,86 @@
         FROM T_ORDER_ITEM
     </select>
 
-    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TOrderItem">
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TOrderItem" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO T_ORDER_ITEM(
-            id,
             ord_code,
             item_code,
-            item_num,
             item_lenth,
             item_width,
             item_thick,
             item_color,
-            item_unit,
+            item_num,
             item_owner,
-            blank_press_type,
-            remark,
+            remarks,
+            item_price,
+            item_price_type,
+            item_weight,
+            item_total_weight,
+            item_total_sq,
+            item_yb_type,
+            item_yc_type,
             create_time
         )
         VALUES (
-            #{id,jdbcType=BIGINT},
-            #{ordCode,jdbcType=BIGINT},
+            #{ordCode,jdbcType=VARCHAR},
             #{itemCode,jdbcType=VARCHAR},
-            #{itemNum,jdbcType=DOUBLE},
             #{itemLenth,jdbcType=DOUBLE},
             #{itemWidth,jdbcType=DOUBLE},
             #{itemThick,jdbcType=DOUBLE},
             #{itemColor,jdbcType=VARCHAR},
-            #{itemUnit,jdbcType=BIGINT},
+            #{itemNum,jdbcType=DOUBLE},
             #{itemOwner,jdbcType=VARCHAR},
-             #{blankPressType,jdbcType=BIGINT},
-            #{remark,jdbcType=VARCHAR},
+            #{remarks,jdbcType=VARCHAR},
+            #{itemPrice,jdbcType=DOUBLE},
+            #{itemPriceType,jdbcType=BIGINT},
+            #{itemWeight,jdbcType=DOUBLE},
+            #{itemTotalWeight,jdbcType=DOUBLE},
+            #{itemTotalSq,jdbcType=DOUBLE},
+            #{itemYbType,jdbcType=VARCHAR},
+            #{itemYcType,jdbcType=VARCHAR},
             #{createTime,jdbcType=TIMESTAMP}
         )
     </insert>
 
-    <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TOrderItem">
+    <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TOrderItem" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO T_ORDER_ITEM(
-            id,
             ord_code,
             item_code,
-            item_num,
             item_lenth,
             item_width,
             item_thick,
             item_color,
-            item_unit,
-            blank_press_type,
+            item_num,
             item_owner,
-            remark,
+            remarks,
+            item_price,
+            item_price_type,
+            item_weight,
+            item_total_weight,
+            item_total_sq,
+            item_yb_type,
+            item_yc_type,
             create_time
             )
         VALUES
         <foreach collection="list" item="tOrderItem" separator=",">
             (
-            #{tOrderItem.id,jdbcType=BIGINT},
-            #{tOrderItem.ordCode,jdbcType=BIGINT},
+            #{tOrderItem.ordCode,jdbcType=VARCHAR},
             #{tOrderItem.itemCode,jdbcType=VARCHAR},
-            #{tOrderItem.itemNum,jdbcType=DOUBLE},
             #{tOrderItem.itemLenth,jdbcType=DOUBLE},
             #{tOrderItem.itemWidth,jdbcType=DOUBLE},
             #{tOrderItem.itemThick,jdbcType=DOUBLE},
             #{tOrderItem.itemColor,jdbcType=VARCHAR},
-            #{tOrderItem.itemUnit,jdbcType=BIGINT},
-            #{tOrderItem.blankPressType,jdbcType=BIGINT},
+            #{tOrderItem.itemNum,jdbcType=DOUBLE},
             #{tOrderItem.itemOwner,jdbcType=VARCHAR},
-            #{tOrderItem.remark,jdbcType=VARCHAR},
+            #{tOrderItem.remarks,jdbcType=VARCHAR},
+            #{tOrderItem.itemPrice,jdbcType=DOUBLE},
+            #{tOrderItem.itemPriceType,jdbcType=BIGINT},
+            #{tOrderItem.itemWeight,jdbcType=DOUBLE},
+            #{tOrderItem.itemTotalWeight,jdbcType=DOUBLE},
+            #{tOrderItem.itemTotalSq,jdbcType=DOUBLE},
+            #{tOrderItem.itemYbType,jdbcType=VARCHAR},
+            #{tOrderItem.itemYcType,jdbcType=VARCHAR},
             #{tOrderItem.createTime,jdbcType=TIMESTAMP}
             )
         </foreach>

@@ -22,13 +22,13 @@ public class TOrder{
     private Long ordType;
     //订单签订日期
     private String ordSignDate;
-    //订单状态 0-新建 1-已审批 2-排产 3-完成 4-拒绝
-    private Character ordStatus;
+    //订单状态
+    private Long ordStatus;
     private String ordDeliveryDate;
-    //付款方式 0-新建 1-待审批 2-排产 3-完成 4-拒绝
-    private Character payType;
-    //支付状态 0-现金支付 1-电子转账
-    private Character payStatus;
+    //付款方式
+    private Long payType;
+    //支付状态
+    private Long payStatus;
     //客户签约人
     private String cusContractor;
     //公司签约人
@@ -89,11 +89,11 @@ public class TOrder{
         this.ordSignDate = ordSignDate;
     }
 
-    public Character getOrdStatus() {
+    public Long getOrdStatus() {
         return ordStatus;
     }
 
-    public void setOrdStatus(Character ordStatus) {
+    public void setOrdStatus(Long ordStatus) {
         this.ordStatus = ordStatus;
     }
 
@@ -161,15 +161,15 @@ public class TOrder{
         this.updateTime = updateTime;
     }
 
-    public void setPayType(Character payType) {
+    public void setPayType(Long payType) {
         this.payType = payType;
     }
 
-    public Character getPayStatus() {
+    public Long getPayStatus() {
         return payStatus;
     }
 
-    public void setPayStatus(Character payStatus) {
+    public void setPayStatus(Long payStatus) {
         this.payStatus = payStatus;
     }
 }

@@ -33,24 +33,24 @@ public interface TOrderService {
      */
     Page<OrderQueryVo> findPage(Page<OrderQueryVo> page, OrderQueryVo order);
 
-    /**
-     * @Description: 订单批量导入
-     * @Param: [vo]
-     * @return: int
-     * @Author: lijinku
-     * @Iteration : 1.0
-     * @Date: 2019/7/4 6:06 PM
-     */
-    int insert(OrderAddBatchVo vo);
+    ///**
+    // * @Description: 订单批量导入
+    // * @Param: [vo]
+    // * @return: int
+    // * @Author: lijinku
+    // * @Iteration : 1.0
+    // * @Date: 2019/7/4 6:06 PM
+    // */
+    //int insert(OrderAddBatchVo vo);
 
-    /**
-     * @Description: 批量录入订单
-     * @Param: [voList]
-     * @return: int
-     * @Author: lijinku
-     * @Iteration : 1.0
-     * @Date: 2019/7/2 10:53 AM
-     */
+    ///**
+    // * @Description: 批量录入订单
+    // * @Param: [voList]
+    // * @return: int
+    // * @Author: lijinku
+    // * @Iteration : 1.0
+    // * @Date: 2019/7/2 10:53 AM
+    // */
     //int insertBatch(List<OrderAddBatchVo> voList);
     //
     ///**
@@ -65,23 +65,29 @@ public interface TOrderService {
     //
     //int delete(TOrder tOrder);
     //
-    ///**
-    // * @Description: 手录订单
-    // * @Param: [ordAddModifyVo]
-    // * @return: int
-    // * @Author: lijinku
-    // * @Iteration : 1.0
-    // * @Date: 2019/7/4 11:22 AM
-    // */
-    //int save(OrderAddModifyVo ordAddModifyVo);
-    //
-    ///**
-    // * @Description: 根据订单号查询可修改信息
-    // * @Param: [ordCode]
-    // * @return: com.lcyzh.nmerp.model.vo.OrderAddModifyVo
-    // * @Author: lijinku
-    // * @Iteration : 1.0
-    // * @Date: 2019/7/4 1:39 PM
-    // */
-    //OrderAddModifyVo findModifyInfoByOrdCode(String ordCode);
+    /**
+     * @Description: 手录订单
+     * @Param: [ordAddModifyVo]
+     * @return: int
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/4 11:22 AM
+     */
+    int save(OrderAddModifyVo ordAddModifyVo);
+
+    /**
+     * @Description: 根据订单号查询可修改信息
+     * @Param: [ordCode]
+     * @return: com.lcyzh.nmerp.model.vo.OrderAddModifyVo
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/4 1:39 PM
+     */
+    OrderAddModifyVo findModifyInfoByOrdCode(String ordCode);
+
+    /**
+     * 订单明细添加
+     */
+    int save(List<OrderItemVo> list);
+
 }

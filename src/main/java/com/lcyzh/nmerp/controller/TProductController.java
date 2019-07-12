@@ -3,6 +3,7 @@ package com.lcyzh.nmerp.controller;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.entity.TProduct;
+import com.lcyzh.nmerp.model.vo.ProductVo;
 import com.lcyzh.nmerp.service.TProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,7 +33,7 @@ public class TProductController extends BaseController {
      */
     @RequestMapping(value = {"/list", ""})
     public String list(@ModelAttribute("tProduct") TProduct tProduct, Model model, HttpServletRequest request, HttpServletResponse response) {
-        Page<TProduct> page = tProductService.findPage(new Page<TProduct>(request, response), tProduct);
+        Page<ProductVo> page = tProductService.findPage(new Page<ProductVo>(request, response), tProduct);
         model.addAttribute("page", page);
         return "modules/crm/prodDictList";
     }
@@ -44,7 +45,7 @@ public class TProductController extends BaseController {
      */
     @RequestMapping(value = {"get"}, method = RequestMethod.GET)
     public String get(@ModelAttribute("tProduct") TProduct tProduct,Model model) {
-        TProduct newTProduct = new TProduct();
+        ProductVo newTProduct = new ProductVo();
         if(tProduct.getId() != null){
             newTProduct = tProductService.get(tProduct.getId().toString());
         }

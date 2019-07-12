@@ -12,7 +12,7 @@ public class TOrderItem implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long id;
     //订单编号
-    private Long ordCode;
+    private String ordCode;
     //产品编号
     private String itemCode;
     //长度
@@ -29,14 +29,13 @@ public class TOrderItem implements Serializable {
     private Long itemUnit;
     //单价
     private Double itemPrice;
-    //计价方式 0-按面积 1-按重量
-    private Character itemPriceType;
-    //上级客户
-    private String superOwer;
+    //计价方式
+    private Long itemPriceType;
     //所属人
     private String itemOwner;
     //备注
     private String remarks;
+
     private Date createTime;
     //单件重量
     private Double itemWeight;
@@ -61,11 +60,11 @@ public class TOrderItem implements Serializable {
         return id;
     }
 
-    public void setOrdCode(Long ordCode) {
+    public void setOrdCode(String ordCode) {
         this.ordCode = ordCode;
     }
 
-    public Long getOrdCode() {
+    public String getOrdCode() {
         return ordCode;
     }
 
@@ -157,11 +156,11 @@ public class TOrderItem implements Serializable {
         this.itemPrice = itemPrice;
     }
 
-    public Character getItemPriceType() {
+    public Long getItemPriceType() {
         return itemPriceType;
     }
 
-    public void setItemPriceType(Character itemPriceType) {
+    public void setItemPriceType(Long itemPriceType) {
         this.itemPriceType = itemPriceType;
     }
 
