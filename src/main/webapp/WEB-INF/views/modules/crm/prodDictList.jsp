@@ -35,7 +35,7 @@
     </ul>
 </form:form>
 <div class="control-group">&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="/tProduct/get?id=" type="button" class="btn btn-primary" style="width: 71px;height: 22px"><i
+    <a href="/tProduct/get" type="button" class="btn btn-primary" style="width: 71px;height: 22px"><i
             class="icon-plus"></i>&nbsp;添加产品</a>
 </div>
 <div class="control-group">
@@ -62,7 +62,7 @@
                 <td>${cus.prodGuidePrice}</td>
                 <td>
                     <a href="${ctx}/tProduct/get?id=${cus.id}"><i class="icon-pencil">&nbsp;编辑</i></a>
-                    <a href="${ctx}/tProduct/delete?cusCode=${cus.cusCode}"
+                    <a href="${ctx}/tProduct/delete?id=${cus.id}"
                        onclick="return confirmx('确认要删除该产品吗？', this.href)"><i class="icon-trash">&nbsp;删除</i></a>
                 </td>
             </tr>

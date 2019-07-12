@@ -54,7 +54,7 @@
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label">参考价格:</label>
+        <label class="control-label">参考单价:</label>
         <div class="controls">
             <form:input path="prodGuidePrice" htmlEscape="false" maxlength="100" class="email"/>
         </div>

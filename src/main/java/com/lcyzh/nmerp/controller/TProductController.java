@@ -30,7 +30,7 @@ public class TProductController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping(value = {"/list", ""}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/list", ""})
     public String list(@ModelAttribute("tProduct") TProduct tProduct, Model model, HttpServletRequest request, HttpServletResponse response) {
         Page<TProduct> page = tProductService.findPage(new Page<TProduct>(request, response), tProduct);
         model.addAttribute("page", page);
@@ -39,10 +39,10 @@ public class TProductController extends BaseController {
 
     /**
      * 新增/修改页面流转
-     * @param id
+     * @param
      * @return
      */
-    @RequestMapping(value = {"/get"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"get"}, method = RequestMethod.GET)
     public String get(@ModelAttribute("tProduct") TProduct tProduct,Model model) {
         TProduct newTProduct = new TProduct();
         if(tProduct.getId() != null){
@@ -54,19 +54,31 @@ public class TProductController extends BaseController {
     }
 
 
-    @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    @ResponseBody
-    public String insert(@RequestBody TProduct tProduct) {
-        if (tProductService.insert(tProduct) > 0) {
-            return "success";
-        } else {
-            return "failed";
+    @RequestMapping("insert")
+    public String insert(TProduct tProduct,Model model,RedirectAttributes redirectAttributes) {
+        if (!beanValidator(model, tProduct)){
+            return get(tProduct, model);
         }
+        if(tProduct.getId() != null){
+            if (tProductService.update(tProduct) > 0) {
+                addMessage(redirectAttributes, "更新产品:'" + tProduct.getProdName() + "'成功");
+            } else {
+                addMessage(redirectAttributes, "更新产品:'" + tProduct.getProdName() + "'失败");
+            }
+        }else{
+            if (tProductService.insert(tProduct) > 0) {
+                addMessage(redirectAttributes, "保存产品:'" + tProduct.getProdName() + "'成功");
+            } else {
+                addMessage(redirectAttributes, "保存产品:'" + tProduct.getProdName() + "'失败");
+            }
+        }
+        return "redirect:/tProduct/list";
     }
 
-    @RequestMapping(value = "/insertBatch", method = RequestMethod.POST)
-    @ResponseBody
-    public String insertBatch(@RequestBody List<TProduct> tProducts) {
+
+
+    @RequestMapping(value = "/insertBatch")
+    public String insertBatch(List<TProduct> tProducts) {
         if (tProductService.insertBatch(tProducts) > 0) {
             return "success";
         } else {
@@ -74,9 +86,8 @@ public class TProductController extends BaseController {
         }
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    @ResponseBody
-    public String update(@RequestBody TProduct tProduct) {
+    @RequestMapping(value = "/update")
+    public String update(TProduct tProduct) {
         if (tProductService.update(tProduct) > 0) {
             return "success";
         } else {
@@ -84,8 +95,8 @@ public class TProductController extends BaseController {
         }
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public String delete(@RequestBody TProduct tProduct, RedirectAttributes redirectAttributes) {
+    @RequestMapping(value = "/delete")
+    public String delete(TProduct tProduct, RedirectAttributes redirectAttributes) {
         if (tProductService.delete(tProduct) > 0) {
             addMessage(redirectAttributes, "删除失败");
             return "redirect:/tProduct/list";

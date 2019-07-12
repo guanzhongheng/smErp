@@ -1,13 +1,18 @@
 package com.lcyzh.nmerp.service.impl;
 
+<<<<<<< HEAD
 import com.github.pagehelper.PageHelper;
 import com.lcyzh.nmerp.common.persistence.Page;
+=======
+import com.lcyzh.nmerp.common.lang.DateUtils;
+>>>>>>> 123
 import com.lcyzh.nmerp.dao.TProductMapper;
 import com.lcyzh.nmerp.entity.TProduct;
 import com.lcyzh.nmerp.service.TProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,6 +41,7 @@ public class TProductServiceImpl implements TProductService{
 
     @Override
     public int insert(TProduct tProduct) {
+        tProduct.setCreateTime(new Date());
         return tProductMapper.insert(tProduct);
     }
 
