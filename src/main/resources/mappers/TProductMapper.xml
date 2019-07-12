@@ -26,13 +26,13 @@
         SELECT *
         FROM T_PRODUCT
         <where>
-            <if test="prodCode != null">
+            <if test="prodCode != null and prodCode != ''">
                 and prod_code = #{prodCode}
             </if>
-            <if test="prodName != null">
+            <if test="prodName != null and prodName != ''">
                 and prod_name like concat(concat('%', #{prodName}),'%')
             </if>
-            <if test="prodCgyCode != null">
+            <if test="prodCgyCode != null and prodCgyCode != ''">
                 and prod_cgy_code = #{prodCgyCode}
             </if>
             <if test="prodThick != null">
