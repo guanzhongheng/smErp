@@ -1,6 +1,8 @@
 package com.lcyzh.nmerp.controller.system;
 
 import com.lcyzh.nmerp.controller.common.BaseController;
+import com.lcyzh.nmerp.controller.system.util.SysDictUtils;
+import com.lcyzh.nmerp.entity.sys.Dict;
 import com.lcyzh.nmerp.utils.DictEntity;
 import com.lcyzh.nmerp.utils.DictUtils;
 import org.springframework.stereotype.Controller;
@@ -100,8 +102,8 @@ public class CrmAjaxManageController extends BaseController {
     @ResponseBody
     public Map<String,Object> getDictInfo() {
         Map<String,Object> map = new HashMap<>();
-        List<DictEntity>  ycType =  DictUtils.getDictList(144000L);
-        List<DictEntity>  ybType =  DictUtils.getDictList(143000L);
+        List<Dict> ycType = SysDictUtils.getDictList("prod_ycType");
+        List<Dict>  ybType =  SysDictUtils.getDictList("prod_ybType");
         map.put("ycType",ycType);
         map.put("ybType",ybType);
         return map;

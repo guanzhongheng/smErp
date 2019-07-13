@@ -63,7 +63,7 @@
                             <label class="col-md-3" id="itemUnit"></label>
                         </div>
                         <div class="col-md-4" style="padding-left: 30px;">
-                            <select data-placeholder="选择颜色" class="chosen-select" style="width: 250px">
+                            <select data-placeholder="选择颜色" class="chosen-select" style="width: 250px" id="prodColor">
                                 <option value="-1">颜色选择</option>
                                 <c:forEach items="${color}" var="c">
                                     <option value='${c.value}' > ${c.label}</option>
@@ -103,17 +103,17 @@
                         <tr>
                             <th data-field="itemCode">编码</th>
                             <th data-field="itemName">名称</th>
-                            <th data-field="itemCgyCode">类别</th>
-                            <th data-field="itemVariety">品种</th>
+                            <th data-field="itemCgyCodeValue">类别</th>
+                            <th data-field="itemVaritemValue">品种</th>
                             <th data-field="itemLenth">长</th>
                             <th data-field="itemWidth">宽</th>
                             <th data-field="itemThick">厚度</th>
                             <th data-field="itemColor">颜色</th>
-                            <th data-field="itemUnit">单位</th>
+                            <th data-field="itemUnitValue">单位</th>
                             <th data-field="itemOwner">归属人</th>
                             <th data-field="itemPrice">单价</th>
                             <th data-field="itemNum">数量</th>
-                            <th data-field="itemPriceType">计价方式</th>
+                            <th data-field="itemPriceTypeValue">计价方式</th>
                             <th data-field="itemWeight">重量</th>
                             <th data-field="itemTotalWeight">总重量</th>
                             <th data-field="itemTotalSq">总面积</th>
@@ -155,6 +155,8 @@
 <script src="${ctxStatic}/hPlugs/js/plugins/cropper/cropper.min.js"></script>
 <script src="${ctxStatic}/hPlugs/js/demo/form-advanced-demo.min.js"></script>
 
+
+<script src="${ctxStatic}/hPlugs/js/plugins/layer/layer.min.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/bootstrap-table/bootstrap-table.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/bootstrap-table/bootstrap-table-fixed-columns.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
@@ -171,15 +173,19 @@
         "itemName":"",
         "itemLenth":"",
         "itemVariety":"",
+        "itemVaritemValue":"",
         "itemCgyCode":"",
+        "itemCgyCodeValue":"",
         "itemWidth":"",
         "itemThick":"",
         "itemColor":"",
         "itemUnit":"",
+        "itemUnitValue":"",
         "itemOwner":"",
         "itemPrice":"",
         "itemNum":"",
         "itemPriceType":"",
+        "itemPriceTypeValue":"",
         "itemWeight":"",
         "itemTotalWeight":"",
         "itemTotalSq":"",
@@ -220,6 +226,11 @@
 
     function doProcess() {
         debugger;
+        var color = $("#prodColor").val();
+        if(color == -1){
+            parent.layer.msg('请选择颜色');
+            return;
+        }
         if($("#prodInfo").find("option:selected").val() != -1){
             debugger;
             cusProdList.push(prodObj);
@@ -286,11 +297,11 @@
                     title: '名称',
                     width: '110px'
                 },{
-                    field: 'itemCgyCode',
+                    field: 'itemCgyCodeValue',
                     title: '类别',
                     width: '80px'
                 },{
-                    field: 'itemVariety',
+                    field: 'itemVaritemValue',
                     title: '品种',
                     width: '100px'
                 },{
@@ -313,13 +324,13 @@
                     title: '颜色',
                     width: '80px'
                 },{
-                    field: 'itemUnit',
+                    field: 'itemUnitValue',
                     title: '单位',
                     width: '50px'
                 },{
                     field: 'itemOwner',
                     title: '归属人',
-                    width: '120px',
+                    width: '150px',
                     formatter:function (value,row,index) {
                         return ['<input trpe="text" onchange="inserData(\'itemOwner\','+row.ckId+',this)" class="form-control" value="'+value+'"/>'].join('');
                     }
@@ -378,9 +389,7 @@
                     field: 'itemYcType',
                     title: '延长米方式',
                     width: '120px',
-                    formatter:function (value,row,index) {
-                        return ['<input trpe="text" onchange="inserData(\'itemYcType\','+row.ckId+',this)" class="form-control" value="'+value+'"/>'].join('');
-                    }
+                    formatter:operYcType
                 },{
                     field: 'itemYbType',
                     title: '压边类型',
@@ -402,9 +411,9 @@
     });
 
     function operYbType(value,row,index){
+        debugger;
         var option;
         var headOption = "<option value =''>请选择</option>";
-
         $.each(ybType,function(i,obj){
             if(value == obj.value){
                 headOption = headOption + "<option value='"+obj.value+"' selected>"+obj.label+"</option>";
@@ -412,12 +421,29 @@
                 headOption = headOption + "<option value='"+obj.value+"'>"+obj.label+"</option>";
             }
         });
-        option  = '<select class="form-control" id="itemYbType"'+row.ckId+' name="itemYbType" style="height:33px;">'+
+        option  = '<select class="form-control" id="itemYbType"'+row.ckId+' name="inserData(\'itemYbType\','+row.ckId+',this)" onchange="" style="height:33px;">'+
             headOption + '</select>';
 
         return [option].join('');
     }
 
+
+    function operYcType(value,row,index){
+        debugger;
+        var option;
+        var headOption = "<option value =''>请选择</option>";
+        $.each(ycType,function(i,obj){
+            if(value == obj.value){
+                headOption = headOption + "<option value='"+obj.value+"' selected>"+obj.label+"</option>";
+            }else{
+                headOption = headOption + "<option value='"+obj.value+"'>"+obj.label+"</option>";
+            }
+        });
+        option  = '<select class="form-control" id="itemYcType"'+row.ckId+' name="inserData(\'itemYcType\','+row.ckId+',this)" onchange="" style="height:33px;">'+
+            headOption + '</select>';
+
+        return [option].join('');
+    }
 
     function operFormatter(value, row, index) {
         return [
