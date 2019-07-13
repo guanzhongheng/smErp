@@ -24,7 +24,7 @@ public class TOrderItem implements Serializable {
     //颜色
     private String itemColor;
     //计件数
-    private Double itemNum;
+    private Long itemNum;
     //单位
     private Long itemUnit;
     //单价
@@ -76,11 +76,11 @@ public class TOrderItem implements Serializable {
         return itemCode;
     }
 
-    public void setItemNum(Double itemNum) {
+    public void setItemNum(Long itemNum) {
         this.itemNum = itemNum;
     }
 
-    public Double getItemNum() {
+    public Long getItemNum() {
         return itemNum;
     }
 

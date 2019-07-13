@@ -29,16 +29,6 @@ public interface TProdPlanService {
 
 
     /**
-     * @Description: 根据订单编号查找产品计划信息
-     * @Param: [prodPlanCode]
-     * @return: com.lcyzh.nmerp.entity.TProdPlan
-     * @Author: lijinku
-     * @Iteration : 1.0
-     * @Date: 2019/7/4 10:54 PM
-     */
-    TProdPlan findByOrdCode(String ordCode);
-
-    /**
      * @Description: 多条件查看产品计划列表
      * @Param: [tProdPlan]
      * @return: java.util.List<com.lcyzh.nmerp.entity.TProdPlan>
@@ -66,29 +56,7 @@ public interface TProdPlanService {
      * @Iteration : 1.0
      * @Date: 2019/7/4 11:32 PM
      */
-    int createProdPlan(String ordCode,String ordDeliveryDate, List<OrderItemVo> items);
-
-
-    /**
-     * @Description: 调整生产计划完成日期：当itemId为null时，更新该订单号下所有，否则更新一条
-     * @Param: [prodPlanCode, itemId, eaListDate, latestDate]
-     * @return: int
-     * @Author: lijinku
-     * @Iteration : 1.0
-     * @Date: 2019/7/5 12:17 AM
-     */
-    int adjustProdPlanDate(String prodPlanCode,Long itemId,String eaListDate,String latestDate);
-
-
-    /**
-     * @Description: 产品计划执行分配
-     * @Param: [voList]
-     * @return: int
-     * @Author: lijinku
-     * @Iteration : 1.0
-     * @Date: 2019/7/5 12:45 AM
-     */
-    int prodPlanExeAssign(List<OrderItemAssignVo> voList);
+    int createProdPlan(List<OrderItemVo> items);
 
     /**
      * @Description: 根据产品计划编号获取产品计划详情

@@ -6,36 +6,58 @@
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="mac_code" property="macCode" jdbcType="VARCHAR"/>
         <result column="prod_codes" property="prodCodes" jdbcType="VARCHAR"/>
+        <result column="min_width" property="minWidth" jdbcType="DOUBLE"/>
+        <result column="max_width" property="maxWidth" jdbcType="DOUBLE"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
-
-
     </resultMap>
 
 
-    <select id="get" resultMap="tMachineInfoResultMap">
+    <select id="findById" parameterType="java.lang.Long" resultMap="tMachineInfoResultMap">
         SELECT *
-        FROM T_MACHINE_INFO
-        WHERE id = #{id}
+        FROM t_machine_info
+        WHERE id = #{id,jdbcType=BIGINT}
     </select>
 
-    <select id="findList" resultMap="tMachineInfoResultMap">
+    <select id="findList" parameterType ="com.lcyzh.nmerp.entity.TMachineInfo"  resultMap="tMachineInfoResultMap">
         SELECT *
-        FROM T_MACHINE_INFO
+        FROM t_machine_info
         <where>
+
+            <if test="macCode!= null">
+                and mac_code like concat('%', #{macCode,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="prodCodes!= null">
+                and prod_codes like concat('%', #{prodCodes,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="minWidth!= null">
+                and min_width like concat('%', #{minWidth,jdbcType=DOUBLE}, '%')
+            </if>
+            <if test="maxWidth!= null">
+                and max_width like concat('%', #{maxWidth,jdbcType=DOUBLE}, '%')
+            </if>
+            <if test="createTime!= null">
+                and create_time like concat('%', #{createTime,jdbcType=TIMESTAMP}, '%')
+            </if>
+            <if test="updateTime!= null">
+                and update_time like concat('%', #{updateTime,jdbcType=TIMESTAMP}, '%')
+            </if>
         </where>
     </select>
 
     <select id="findAllList" resultMap="tMachineInfoResultMap">
         SELECT *
-        FROM T_MACHINE_INFO
+        FROM t_machine_info
+        ORDER BY max_width DESC
     </select>
 
-    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TMachineInfo">
-        INSERT INTO T_MACHINE_INFO(
+    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TMachineInfo">
+        INSERT INTO t_machine_info(
             id,
             mac_code,
             prod_codes,
+            min_width,
+            max_width,
             create_time,
             update_time
         )
@@ -43,45 +65,66 @@
             #{id,jdbcType=BIGINT},
             #{macCode,jdbcType=VARCHAR},
             #{prodCodes,jdbcType=VARCHAR},
+            #{minWidth,jdbcType=DOUBLE},
+            #{maxWidth,jdbcType=DOUBLE},
             #{createTime,jdbcType=TIMESTAMP},
             #{updateTime,jdbcType=TIMESTAMP}
         )
     </insert>
 
     <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TMachineInfo">
-        INSERT INTO T_MACHINE_INFO(
+        INSERT INTO t_machine_info(
         id,
         mac_code,
         prod_codes,
+        min_width,
+        max_width,
         create_time,
         update_time
         )
         VALUES
-        <foreach collection="list" item="tMachineInfo" separator=",">
+        <foreach collection ="list" item="item" separator =",">
             (
-            #{tMachineInfo.id,jdbcType=BIGINT},
-            #{tMachineInfo.macCode,jdbcType=VARCHAR},
-            #{tMachineInfo.prodCodes,jdbcType=VARCHAR},
-            #{tMachineInfo.createTime,jdbcType=TIMESTAMP},
-            #{tMachineInfo.updateTime,jdbcType=TIMESTAMP}
+            #{item.id,jdbcType=BIGINT},
+            #{item.macCode,jdbcType=VARCHAR},
+            #{item.prodCodes,jdbcType=VARCHAR},
+            #{item.minWidth,jdbcType=DOUBLE},
+            #{item.maxWidth,jdbcType=DOUBLE},
+            #{item.createTime,jdbcType=TIMESTAMP},
+            #{item.updateTime,jdbcType=TIMESTAMP}
             )
         </foreach>
     </insert>
 
-    <update id="update" parameterType="com.lcyzh.nmerp.entity.TMachineInfo">
-        UPDATE T_MACHINE_INFO
-        SET
-        id = #{id},
-        mac_code = #{macCode},
-        prod_codes = #{prodCodes},
-        create_time = #{createTime},
-        update_time = #{updateTime}
-        WHERE id = #{id}
+    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TMachineInfo">
+        UPDATE t_machine_info
+        <set>
+
+            <if test="macCode!= null">
+                mac_code = #{macCode,jdbcType=VARCHAR},
+            </if>
+            <if test="prodCodes!= null">
+                prod_codes = #{prodCodes,jdbcType=VARCHAR},
+            </if>
+            <if test="minWidth!= null">
+                min_width = #{minWidth,jdbcType=DOUBLE},
+            </if>
+            <if test="maxWidth!= null">
+                max_width = #{maxWidth,jdbcType=DOUBLE},
+            </if>
+            <if test="createTime!= null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime!= null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        WHERE id = #{id,jdbcType=BIGINT}
     </update>
 
-    <delete id="delete" parameterType="com.lcyzh.nmerp.entity.TMachineInfo">
-        DELETE FROM T_MACHINE_INFO
-        WHERE id = #{id}
+    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TMachineInfo">
+        DELETE FROM t_machine_info
+        WHERE id = #{id,jdbcType=BIGINT}
     </delete>
 
 </mapper>

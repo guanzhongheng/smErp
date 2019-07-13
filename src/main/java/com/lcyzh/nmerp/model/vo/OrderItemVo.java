@@ -40,7 +40,7 @@ public class OrderItemVo {
     //颜色
     private String itemColorValue;
     //计件数
-    private Double itemNum;
+    private Long itemNum;
     //单位-字典
     private Long itemUnit;
     //单位值
@@ -164,11 +164,9 @@ public class OrderItemVo {
         this.itemColor = itemColor;
     }
 
-    public Double getItemNum() {
-        return itemNum;
-    }
+    public Long getItemNum() { return itemNum; }
 
-    public void setItemNum(Double itemNum) {
+    public void setItemNum(Long itemNum) {
         this.itemNum = itemNum;
     }
 

@@ -2,124 +2,236 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lcyzh.nmerp.dao.TProdPlanDetailMapper">
 
-    <resultMap id="prodPlanDetailResultMap" type="com.lcyzh.nmerp.entity.TProdPlanDetail">
-        <id column="ord_item_id" property="ordItemId" jdbcType="BIGINT"/>
+    <resultMap id="tProdPlanDetailResultMap" type="com.lcyzh.nmerp.entity.TProdPlanDetail">
+        <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="prod_plan_code" property="prodPlanCode" jdbcType="VARCHAR"/>
-        <result column="item_num" property="itemNum" jdbcType="DOUBLE"/>
-        <result column="item_assign_num" property="itemAssignNum" jdbcType="DOUBLE"/>
-        <result column="item_finish_num" property="itemFinishNum" jdbcType="DOUBLE"/>
-        <result column="elst_finish_date" property="elstFinishDate" jdbcType="VARCHAR"/>
-        <result column="latest_finish_date" property="latestFinishDate" jdbcType="VARCHAR"/>
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
-        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="ord_code" property="ordCode" jdbcType="VARCHAR"/>
+        <result column="order_item_id" property="orderItemId" jdbcType="BIGINT"/>
+        <result column="item_code" property="itemCode" jdbcType="VARCHAR"/>
+        <result column="item_lenth" property="itemLenth" jdbcType="DOUBLE"/>
+        <result column="item_width" property="itemWidth" jdbcType="DOUBLE"/>
+        <result column="item_thick" property="itemThick" jdbcType="DOUBLE"/>
+        <result column="item_num" property="itemNum" jdbcType="BIGINT"/>
+        <result column="item_total_weight" property="itemTotalWeight" jdbcType="DOUBLE"/>
+        <result column="item_total_sq" property="itemTotalSq" jdbcType="DOUBLE"/>
+        <result column="item_yb_type" property="itemYbType" jdbcType="VARCHAR"/>
+        <result column="item_yc_type" property="itemYcType" jdbcType="VARCHAR"/>
+        <result column="item_status" property="itemStatus" jdbcType="CHAR"/>
+        <result column="item_cgy_code" property="itemCgyCode" jdbcType="BIGINT"/>
+        <result column="item_variety" property="itemVariety" jdbcType="BIGINT"/>
+        <result column="item_unit" property="itemUnit" jdbcType="BIGINT"/>
     </resultMap>
 
 
-    <select id="findById" parameterType="java.lang.Long" resultMap="prodPlanDetailResultMap">
+    <select id="findById" parameterType="java.lang.Long" resultMap="tProdPlanDetailResultMap">
         SELECT *
-        FROM T_PROD_PLAN_DETAIL
-        WHERE ord_item_id = #{ordItemId,jdbcType=BIGINT}
+        FROM t_prod_plan_detail
+        WHERE id = #{id,jdbcType=BIGINT}
     </select>
 
-
-    <select id="findList" parameterType="com.lcyzh.nmerp.entity.TProdPlanDetail" resultMap="prodPlanDetailResultMap">
+    <select id="findList" parameterType ="com.lcyzh.nmerp.entity.TProdPlanDetail"  resultMap="tProdPlanDetailResultMap">
         SELECT *
-        FROM T_PROD_PLAN_DETAIL
+        FROM t_prod_plan_detail
         <where>
+
             <if test="prodPlanCode!= null">
-                and prod_plan_code = #{prodPlanCode,jdbcType=VARCHAR}
+                and prod_plan_code like concat('%', #{prodPlanCode,jdbcType=VARCHAR}, '%')
             </if>
-            <if test="elstFinishDate!= null">
-                and elst_finish_date like concat('%', #{elstFinishDate,jdbcType=VARCHAR}, '%')
+            <if test="ordCode!= null">
+                and ord_code like concat('%', #{ordCode,jdbcType=VARCHAR}, '%')
             </if>
-            <if test="latestFinishDate!= null">
-                and latest_finish_date like concat('%', #{latestFinishDate,jdbcType=VARCHAR}, '%')
+            <if test="orderItemId!= null">
+                and order_item_id like concat('%', #{orderItemId,jdbcType=BIGINT}, '%')
+            </if>
+            <if test="itemCode!= null">
+                and item_code like concat('%', #{itemCode,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="itemLenth!= null">
+                and item_lenth like concat('%', #{itemLenth,jdbcType=DOUBLE}, '%')
+            </if>
+            <if test="itemWidth!= null">
+                and item_width like concat('%', #{itemWidth,jdbcType=DOUBLE}, '%')
+            </if>
+            <if test="itemThick!= null">
+                and item_thick like concat('%', #{itemThick,jdbcType=DOUBLE}, '%')
+            </if>
+            <if test="itemNum!= null">
+                and item_num like concat('%', #{itemNum,jdbcType=BIGINT}, '%')
+            </if>
+            <if test="itemTotalWeight!= null">
+                and item_total_weight like concat('%', #{itemTotalWeight,jdbcType=DOUBLE}, '%')
+            </if>
+            <if test="itemTotalSq!= null">
+                and item_total_sq like concat('%', #{itemTotalSq,jdbcType=DOUBLE}, '%')
+            </if>
+            <if test="itemYbType!= null">
+                and item_yb_type like concat('%', #{itemYbType,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="itemYcType!= null">
+                and item_yc_type like concat('%', #{itemYcType,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="itemStatus!= null">
+                and item_status like concat('%', #{itemStatus,jdbcType=CHAR}, '%')
+            </if>
+            <if test="itemCgyCode!= null">
+                and item_cgy_code like concat('%', #{itemCgyCode,jdbcType=BIGINT}, '%')
+            </if>
+            <if test="itemVariety!= null">
+                and item_variety like concat('%', #{itemVariety,jdbcType=BIGINT}, '%')
+            </if>
+            <if test="itemUnit!= null">
+                and item_unit like concat('%', #{itemUnit,jdbcType=BIGINT}, '%')
             </if>
         </where>
     </select>
 
+    <select id="findAllList" resultMap="tProdPlanDetailResultMap">
+        SELECT *
+        FROM t_prod_plan_detail
+    </select>
 
-    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TProdPlanDetail">
-            INSERT INTO T_PROD_PLAN_DETAIL(
-            ord_item_id,
+    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TProdPlanDetail">
+        INSERT INTO t_prod_plan_detail(
+            id,
             prod_plan_code,
+            ord_code,
+            order_item_id,
+            item_code,
+            item_lenth,
+            item_width,
+            item_thick,
             item_num,
-            item_finish_num,
-            item_assign_num,
-            elst_finish_date,
-            latest_finish_date,
-            create_time,
-            update_time
+            item_total_weight,
+            item_total_sq,
+            item_yb_type,
+            item_yc_type,
+            item_status,
+            item_cgy_code,
+            item_variety,
+            item_unit
         )
         VALUES (
-            #{ordItemId,jdbcType=BIGINT},
+            #{id,jdbcType=BIGINT},
             #{prodPlanCode,jdbcType=VARCHAR},
-            #{itemNum,jdbcType=DOUBLE},
-            #{itemFinishNum,jdbcType=DOUBLE},
-            #{itemAssignNum,jdbcType=DOUBLE},
-            #{elstFinishDate,jdbcType=VARCHAR},
-            #{latestFinishDate,jdbcType=VARCHAR},
-            #{createTime,jdbcType=TIMESTAMP},
-            #{updateTime,jdbcType=TIMESTAMP}
+            #{ordCode,jdbcType=VARCHAR},
+            #{orderItemId,jdbcType=BIGINT},
+            #{itemCode,jdbcType=VARCHAR},
+            #{itemLenth,jdbcType=DOUBLE},
+            #{itemWidth,jdbcType=DOUBLE},
+            #{itemThick,jdbcType=DOUBLE},
+            #{itemNum,jdbcType=BIGINT},
+            #{itemTotalWeight,jdbcType=DOUBLE},
+            #{itemTotalSq,jdbcType=DOUBLE},
+            #{itemYbType,jdbcType=VARCHAR},
+            #{itemYcType,jdbcType=VARCHAR},
+            #{itemStatus,jdbcType=CHAR},
+            #{itemCgyCode,jdbcType=BIGINT},
+            #{itemVariety,jdbcType=BIGINT},
+            #{itemUnit,jdbcType=BIGINT}
         )
     </insert>
 
-    <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TProdPlanDetail">
-        INSERT INTO T_PROD_PLAN_DETAIL(
-        ord_item_id,
+    <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TProdPlanDetail" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_prod_plan_detail(
         prod_plan_code,
+        ord_code,
+        order_item_id,
+        item_code,
+        item_lenth,
+        item_width,
+        item_thick,
         item_num,
-        item_finish_num,
-        elst_finish_date,
-        latest_finish_date,
-        create_time,
-        update_time
+        item_total_weight,
+        item_total_sq,
+        item_yb_type,
+        item_yc_type,
+        item_status,
+        item_cgy_code,
+        item_variety,
+        item_unit
         )
         VALUES
-        <foreach collection="list" item="item" separator=",">
+        <foreach collection ="list" item="item" separator =",">
             (
-            #{item.ordItemId,jdbcType=BIGINT},
             #{item.prodPlanCode,jdbcType=VARCHAR},
-            #{item.itemNum,jdbcType=DOUBLE},
-            #{item.itemFinishNum,jdbcType=DOUBLE},
-            #{item.elstFinishDate,jdbcType=VARCHAR},
-            #{item.latestFinishDate,jdbcType=VARCHAR},
-            #{item.createTime,jdbcType=TIMESTAMP},
-            #{item.updateTime,jdbcType=TIMESTAMP}
+            #{item.ordCode,jdbcType=VARCHAR},
+            #{item.orderItemId,jdbcType=BIGINT},
+            #{item.itemCode,jdbcType=VARCHAR},
+            #{item.itemLenth,jdbcType=DOUBLE},
+            #{item.itemWidth,jdbcType=DOUBLE},
+            #{item.itemThick,jdbcType=DOUBLE},
+            #{item.itemNum,jdbcType=BIGINT},
+            #{item.itemTotalWeight,jdbcType=DOUBLE},
+            #{item.itemTotalSq,jdbcType=DOUBLE},
+            #{item.itemYbType,jdbcType=VARCHAR},
+            #{item.itemYcType,jdbcType=VARCHAR},
+            #{item.itemStatus,jdbcType=CHAR},
+            #{item.itemCgyCode,jdbcType=BIGINT},
+            #{item.itemVariety,jdbcType=BIGINT},
+            #{item.itemUnit,jdbcType=BIGINT}
             )
         </foreach>
     </insert>
 
-    <update id="update" parameterType="com.lcyzh.nmerp.entity.TProdPlanDetail">
-        UPDATE T_PROD_PLAN_DETAIL
+    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TProdPlanDetail">
+        UPDATE t_prod_plan_detail
         <set>
-            <if test="itemFinishNum!= null">
-                item_finish_num = item_finish_num + #{itemFinishNum,jdbcType=DOUBLE},
-            </if>
-            <if test="itemAssignNum!= null">
-                item_assign_num = item_assign_num + #{itemAssignNum,jdbcType=DOUBLE},
-            </if>
-            <if test="elstFinishDate!= null">
-                elst_finish_date = #{elstFinishDate,jdbcType=VARCHAR},
-            </if>
-            <if test="latestFinishDate!= null">
-                latest_finish_date = #{latestFinishDate,jdbcType=VARCHAR},
-            </if>
-            <if test="updateTime!= null">
-                update_time = #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-        </set>
-        <where>
-            <if test="ordItemId!=null">
-                and ord_item_id = #{ordItemId,jdbcType=BIGINT}
-            </if>
 
             <if test="prodPlanCode!= null">
-                and prod_plan_code = #{prodPlanCode,jdbcType=VARCHAR}
+                prod_plan_code = #{prodPlanCode,jdbcType=VARCHAR},
             </if>
-
-        </where>
-
+            <if test="ordCode!= null">
+                ord_code = #{ordCode,jdbcType=VARCHAR},
+            </if>
+            <if test="orderItemId!= null">
+                order_item_id = #{orderItemId,jdbcType=BIGINT},
+            </if>
+            <if test="itemCode!= null">
+                item_code = #{itemCode,jdbcType=VARCHAR},
+            </if>
+            <if test="itemLenth!= null">
+                item_lenth = #{itemLenth,jdbcType=DOUBLE},
+            </if>
+            <if test="itemWidth!= null">
+                item_width = #{itemWidth,jdbcType=DOUBLE},
+            </if>
+            <if test="itemThick!= null">
+                item_thick = #{itemThick,jdbcType=DOUBLE},
+            </if>
+            <if test="itemNum!= null">
+                item_num = #{itemNum,jdbcType=BIGINT},
+            </if>
+            <if test="itemTotalWeight!= null">
+                item_total_weight = #{itemTotalWeight,jdbcType=DOUBLE},
+            </if>
+            <if test="itemTotalSq!= null">
+                item_total_sq = #{itemTotalSq,jdbcType=DOUBLE},
+            </if>
+            <if test="itemYbType!= null">
+                item_yb_type = #{itemYbType,jdbcType=VARCHAR},
+            </if>
+            <if test="itemYcType!= null">
+                item_yc_type = #{itemYcType,jdbcType=VARCHAR},
+            </if>
+            <if test="itemStatus!= null">
+                item_status = #{itemStatus,jdbcType=CHAR},
+            </if>
+            <if test="itemCgyCode!= null">
+                item_cgy_code = #{itemCgyCode,jdbcType=BIGINT},
+            </if>
+            <if test="itemVariety!= null">
+                item_variety = #{itemVariety,jdbcType=BIGINT},
+            </if>
+            <if test="itemUnit!= null">
+                item_unit = #{itemUnit,jdbcType=BIGINT},
+            </if>
+        </set>
+        WHERE id = #{id,jdbcType=BIGINT}
     </update>
+
+    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TProdPlanDetail">
+        DELETE FROM t_prod_plan_detail
+        WHERE id = #{id,jdbcType=BIGINT}
+    </delete>
 
 </mapper>

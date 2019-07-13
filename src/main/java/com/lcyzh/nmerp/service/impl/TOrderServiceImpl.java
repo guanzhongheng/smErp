@@ -44,11 +44,7 @@ public class TOrderServiceImpl implements TOrderService {
     @Autowired
     private TOrderItemMapper tOrderItemMapper;
     @Autowired
-    private TCustomerMapper tCustomerMapper;
-    @Autowired
     private TProdPlanService prodPlanService;
-    @Autowired
-    private PrimaryContactMapper primaryContactMapper;
 
     @Override
     public List<OrderItemVo> findByOrdCode(String ordCode) {
@@ -75,93 +71,6 @@ public class TOrderServiceImpl implements TOrderService {
         return page;
     }
 
-    //@Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
-    //@Override
-    //public int insert(OrderAddBatchVo vo) {
-    //    //生成订单信息，及订单明细;如果合同号不存在，则生成新的合同，存在则关联合同号
-    //    Date date = new Date();
-    //    Customer cus = tCustomerMapper.findByCusName(vo.getCusName());
-    //    if (cus == null) {
-    //        cus = new Customer();
-    //        cus.setCusName(vo.getCusName());
-    //        cus.setCreateTime(date);
-    //        cus.setCusAddress(vo.getOrdAddress());
-    //        cus.setCusCode(StringUtils.genFixPreFixStr(Constants.CUS_PRE_FIX));
-    //        tCustomerMapper.insert(cus);
-    //        PrimaryContact contact = new PrimaryContact();
-    //        contact.setCusCode(cus.getCusCode());
-    //        contact.setContactName(vo.getCusName());
-    //        contact.setContactPhone(vo.getPhone());
-    //        contact.setUpdateTime(date);
-    //        primaryContactMapper.insert(contact);
-    //    }
-    //    String ordCode = StringUtils.genFixPreFixStr(Constants.ORD_PRE_FIX);
-    //    TOrder tOrder = new TOrder();
-    //    tOrder.setCusCode(cus.getCusCode());
-    //    tOrder.setOrdDeliveryDate(vo.getDeliveryDate());
-    //    tOrder.setProxyName(vo.getProxyName());
-    //    tOrder.setOrdCode(ordCode);
-    //    //根据客户资料类型设置订单状态
-    //    if (cus.getCusStatus().equals(Constants.CUS_STATUS_SPEC)) {
-    //        tOrder.setOrdStatus(Constants.ORD_STATUS_TOASSIGN);
-    //        //生成产品计划
-    //        prodPlanService.createProdPlan(ordCode,vo.getDeliveryDate(),vo.getItemVos());
-    //    } else {
-    //        tOrder.setOrdStatus(Constants.ORD_STATUS_NEW);
-    //    }
-    //    tOrder.setCreateTime(date);
-    //    List<OrderItemVo> itemVos = vo.getItemVos();
-    //    if (itemVos != null && !itemVos.isEmpty()) {
-    //        List<TOrderItem> orderItems = itemVos.stream().map(itv -> {
-    //            TOrderItem tOrderItem = buildOrderItemFromVo(itv, ordCode, date);
-    //            return tOrderItem;
-    //
-    //        }).collect(Collectors.toList());
-    //        tOrderItemMapper.insertBatch(orderItems);
-    //    }
-    //    return tOrderMapper.insert(tOrder);
-    //}
-    //
-    ///**
-    // * @Description: 订单实体转换
-    // * @Param: [itv, ordCode, date]
-    // * @return: com.lcyzh.nmerp.entity.TOrderItem
-    // * @Author: lijinku
-    // * @Iteration : 1.0
-    // * @Date: 2019/7/4 10:36 PM
-    // */
-    //private TOrderItem buildOrderItemFromVo(OrderItemVo itv, String ordCode, Date date) {
-    //    TOrderItem tOrderItem = new TOrderItem();
-    //    tOrderItem.setCreateTime(date);
-    //    tOrderItem.setItemCode(ordCode);
-    //    tOrderItem.setItemCode(itv.getItemCode());
-    //    tOrderItem.setItemColor(itv.getItemColor());
-    //    tOrderItem.setItemLenth(itv.getItemLenth());
-    //    tOrderItem.setItemNum(itv.getItemNum());
-    //    tOrderItem.setItemOwner(itv.getItemOwner());
-    //    tOrderItem.setItemThick(itv.getItemThick());
-    //    tOrderItem.setItemUnit(itv.getItemUnit());
-    //    tOrderItem.setItemWidth(itv.getItemWidth());
-    //    tOrderItem.setRemark(itv.getRemark());
-    //    return tOrderItem;
-    //}
-    //
-    //@Override
-    //public int insertBatch(List<OrderAddBatchVo> voList) {
-    //    List<TOrder> orders = new ArrayList<>(voList.size());
-    //    return tOrderMapper.insertBatch(orders);
-    //}
-    //
-    //@Override
-    //public int update(TOrder tOrder) {
-    //    return tOrderMapper.update(tOrder);
-    //}
-    //
-    //@Override
-    //public int delete(TOrder tOrder) {
-    //    return tOrderMapper.delete(tOrder);
-    //}
-    //
     @Override
     public int save(OrderAddModifyVo ordAddModifyVo) {
         int res = -1;
@@ -173,17 +82,6 @@ public class TOrderServiceImpl implements TOrderService {
             if (StringUtils.isNotEmpty(ordAddModifyVo.getOrdCode())) {
                 res = tOrderMapper.update(order);
             } else {
-                //Customer cus = tCustomerMapper.findById(ordAddModifyVo.getCusCode());
-                //if (cus != null) {
-                //    order.setOrdCode(StringUtils.genFixPreFixStr(Constants.ORD_PRE_FIX));
-                //    if (cus.getCusStatus().equals(Constants.CUS_STATUS_SPEC)) {
-                //        order.setOrdStatus(Constants.ORD_STATUS_ASSIGNED);
-                //    } else if (cus.getCusStatus().equals(Constants.CUS_STATUS_BH)) {
-                //        return res;
-                //    } else {
-                //        order.setOrdStatus(Constants.ORD_STATUS_NEW);
-                //    }
-                //}
                 res = tOrderMapper.insert(order);
             }
 
@@ -228,6 +126,27 @@ public class TOrderServiceImpl implements TOrderService {
         tOrderItemMapper.deleteByOrdCode(ordCode);
         tOrderItemMapper.insertBatch(orderItems);
         return tOrderMapper.update(order);
+    }
+
+    @Override
+    public int orderAssign(String ordCode, int state) {
+        TOrder order = new TOrder();
+        order.setOrdCode(ordCode);
+        if(state == 0) {
+            order.setOrdStatus(Constants.ORD_STATUS_ASSIGNED);
+        }else if(state == 1) {
+            order.setOrdStatus(Constants.ORD_STATUS_ABORT);
+        }
+        if(tOrderMapper.update(order) > 0){
+            if(state == 0) {
+                //审批通过，加入生产计划
+                List<OrderItemVo> list = tOrderItemMapper.findByOrdCode(ordCode);
+                return prodPlanService.createProdPlan(list);
+            }
+            return 1;
+        }else{
+            return -1;
+        }
     }
 
     /**

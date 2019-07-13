@@ -5,10 +5,7 @@ import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.controller.system.util.UserUtils;
 import com.lcyzh.nmerp.dao.*;
-import com.lcyzh.nmerp.entity.TOrder;
-import com.lcyzh.nmerp.entity.TProdPlan;
-import com.lcyzh.nmerp.entity.TProdPlanDetail;
-import com.lcyzh.nmerp.entity.TProdplanExe;
+import com.lcyzh.nmerp.entity.*;
 import com.lcyzh.nmerp.model.vo.OrderItemAssignVo;
 import com.lcyzh.nmerp.model.vo.OrderItemVo;
 import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
@@ -19,8 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -34,18 +30,11 @@ public class TProdPlanServiceImpl implements TProdPlanService {
     @Autowired
     private TProdPlanDetailMapper prodPlanDetailMapper;
     @Autowired
-    private TProdplanExeMapper tProdplanExeMapper;
-    @Autowired
-    private TOrderMapper tOrderMapper;
+    private TMachineInfoMapper machineInfoMapper;
 
     @Override
     public TProdPlan findByProdPanCode(String prodPlanCode) {
-        return tProdPlanMapper.findById(prodPlanCode);
-    }
-
-    @Override
-    public TProdPlan findByOrdCode(String ordCode) {
-        return tProdPlanMapper.findByOrdCode(ordCode);
+        return tProdPlanMapper.findByProdPanCode(prodPlanCode);
     }
 
     @Override
@@ -63,10 +52,8 @@ public class TProdPlanServiceImpl implements TProdPlanService {
         if (prodPlan != null) {
             Date current = new Date();
             if (prodPlan != null) {
-                prodPlan.setUpdateTime(current);
                 res = tProdPlanMapper.update(prodPlan);
             } else {
-                prodPlan.setCreateTime(current);
                 res = tProdPlanMapper.insert(prodPlan);
             }
         }
@@ -75,72 +62,120 @@ public class TProdPlanServiceImpl implements TProdPlanService {
 
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
     @Override
-    public int createProdPlan(String ordCode, String ordDeliveryDate, List<OrderItemVo> items) {
+    public int createProdPlan(List<OrderItemVo> items) {
         int res = -1;
-        if (StringUtils.isNotEmpty(ordCode) && items != null && !items.isEmpty()) {
-            Date current = new Date();
-            //生成产品计划
-            String planCode = StringUtils.genFixPreFixStr(Constants.PROD_PLAN_PRE_FIX);
-            TProdPlan tProdPlan = buildProdPlan(ordCode, items, planCode, current);
-            res = tProdPlanMapper.insert(tProdPlan);
-            if (res > 0) {
-                List<TProdPlanDetail> prdPlanDetails = items.stream().map(item -> {
-                    TProdPlanDetail planDetail = buildProdPlanDetail(item, planCode, ordDeliveryDate, current);
-                    return planDetail;
-                }).collect(Collectors.toList());
-
-                res = prodPlanDetailMapper.insertBatch(prdPlanDetails);
-                if (res > 0) {
-                    TOrder tOrder = new TOrder();
-                    tOrder.setOrdCode(ordCode);
-                    //tOrder.setOrdStatus(Constants.ORD_STATUS_ASSIGNED);
-                    tOrder.setUpdateTime(current);
-                    res = tOrderMapper.update(tOrder);
+        List<TProdPlan> addList = new ArrayList<>();
+        List<TProdPlan> updateList = new ArrayList<>();
+        List<TProdPlanDetail> prodPlanDetails = new ArrayList<>();
+        if(items != null && !items.isEmpty()) {
+            List<TMachineInfo> machineInfos = machineInfoMapper.findAllList();
+            //机台支持宽度与code对应关系
+            Map<String, String> macMap = new HashMap<>(16);
+            for(TMachineInfo machineInfo : machineInfos) {
+                macMap.put(machineInfo.getMinWidth() + "-" + machineInfo.getMaxWidth(), machineInfo.getMacCode());
+            }
+            List<TProdPlan> prodPlans = tProdPlanMapper.findAllList();
+            Map<String, TProdPlan> ppMap = new HashMap<>(16);
+            if(!prodPlans.isEmpty()) {
+                for(TProdPlan prodPlan : prodPlans) {
+                    ppMap.put(prodPlan.getProdVariety()+"|"+prodPlan.getProdColor()+"|"+prodPlan.getMacCode(),
+                            prodPlan);
                 }
             }
-
+            String key;
+            String macCode;
+            for(OrderItemVo item : items) {
+                macCode = getMacCode(macMap,item.getItemWidth());
+                key = item.getItemVariety()+"|"+item.getItemColor()+"|"+macCode;
+                TProdPlan prodPlan;
+                if(ppMap.containsKey(key)) {
+                    //计划单包含该类品种和颜色的产品，更新数量
+                    prodPlan = ppMap.get(key);
+                    prodPlan.setTotalQuantity(prodPlan.getTotalQuantity() + item.getItemNum());
+                    if(prodPlan.getIsAuto() == 1) {
+                        //自动下发开启
+                        prodPlan.setQuantity(prodPlan.getQuantity() + item.getItemNum());
+                        prodPlanDetails.add(buildProdPlanDetail(prodPlan.getProdPlanCode(), item, '1'));
+                    }else{
+                        prodPlanDetails.add(buildProdPlanDetail(prodPlan.getProdPlanCode(), item, '0'));
+                    }
+                    updateList.add(prodPlan);
+                }else{
+                    //不包含在计划单内，新建
+                    prodPlan = new TProdPlan();
+                    prodPlan.setTotalQuantity(item.getItemNum());
+                    //自动下发默认关闭
+                    prodPlan.setIsAuto('0');
+                    prodPlan.setQuantity(0L);
+                    prodPlan.setProdColor(item.getItemColor());
+                    prodPlan.setProdPlanCode(StringUtils.genFixPreFixStr(Constants.PROD_PLAN_PRE_FIX));
+                    prodPlan.setMacCode(macCode);
+                    prodPlan.setProdVariety(item.getItemVariety());
+                    addList.add(prodPlan);
+                    ppMap.put(prodPlan.getProdVariety()+"|"+prodPlan.getProdColor()+"|"+prodPlan.getMacCode(),
+                            prodPlan);
+                    prodPlanDetails.add(buildProdPlanDetail(prodPlan.getProdPlanCode(), item, '0'));
+                }
+            }
+        }
+        if(!addList.isEmpty()) {
+            res = tProdPlanMapper.insertBatch(addList);
+        }
+        if(res > 0 && !updateList.isEmpty()) {
+            res = tProdPlanMapper.updateBatch(updateList);
+        }else{
+            //计划单插入失败
+            res = -1;
+        }
+        if(res > 0 && !prodPlanDetails.isEmpty()) {
+            res = prodPlanDetailMapper.insertBatch(prodPlanDetails);
+        }else{
+            //计划单更新失败
+            res = -2;
         }
         return res;
     }
 
-    @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
-    @Override
-    public int adjustProdPlanDate(String prodPlanCode, Long itemId, String eaListDate, String latestDate) {
-        int res = -1;
-        if (prodPlanCode != null) {
-            Date current = new Date();
-            TProdPlanDetail planDetail = new TProdPlanDetail();
-            planDetail.setProdPlanCode(prodPlanCode);
-            planDetail.setOrdItemId(itemId);
-            planDetail.setElstFinishDate(eaListDate);
-            planDetail.setLatestFinishDate(latestDate);
-            planDetail.setUpdateTime(current);
-            res = prodPlanDetailMapper.update(planDetail);
-        }
-        return res;
+    /**
+     * 构建产品计划明细
+     * @param prodPlanCode
+     * @param vo
+     * @param character 0-待确认；1-下发生产
+     * @return TProdPlanDetail
+     */
+    private TProdPlanDetail buildProdPlanDetail(String prodPlanCode, OrderItemVo vo, Character character) {
+        TProdPlanDetail detail = new TProdPlanDetail();
+        detail.setProdPlanCode(prodPlanCode);
+        detail.setItemNum(vo.getItemNum());
+        detail.setItemCgyCode(vo.getItemCgyCode());
+        detail.setItemCode(vo.getItemCode());
+        detail.setItemLenth(vo.getItemLenth());
+        detail.setItemThick(vo.getItemThick());
+        detail.setItemTotalSq(vo.getItemTotalSq());
+        detail.setItemTotalWeight(vo.getItemTotalWeight());
+        detail.setItemUnit(vo.getItemUnit());
+        detail.setItemVariety(vo.getItemVariety());
+        detail.setItemWidth(vo.getItemWidth());
+        detail.setItemYbType(vo.getItemYbType());
+        detail.setItemYcType(vo.getItemYcType());
+        detail.setOrdCode(vo.getOrdCode());
+        detail.setItemStatus(character);
+        detail.setOrderItemId(vo.getItemId());
+        return detail;
     }
 
-    @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
-    @Override
-    public int prodPlanExeAssign(List<OrderItemAssignVo> voList) {
-        int res = -1;
-        if (voList != null && !voList.isEmpty()) {
-            Date current = new Date();
-            List<TProdplanExe> prodplanExes = voList.stream().map(vo -> {
-                TProdplanExe prodplanExe = new TProdplanExe();
-                prodplanExe.setOrdItemId(vo.getOrdItemId());
-                prodplanExe.setItemNum(vo.getItemNum());
-                prodplanExe.setItemUnit(vo.getItemUnit());
-                prodplanExe.setStatus('0');
-                prodplanExe.setMacCode(vo.getMacCode());
-                prodplanExe.setItemFinishNum(0.0);
-                prodplanExe.setCreateTime(current);
-                return prodplanExe;
-            }).collect(Collectors.toList());
-            res = tProdplanExeMapper.insertBatch(prodplanExes);
+    private String getMacCode(Map<String, String> map, Double width) {
+        String macCode="";
+        for(Map.Entry<String, String> entry : map.entrySet()){
+            String[] keys = entry.getKey().split("-");
+            if(Double.valueOf(keys[0]) < width && Double.valueOf(keys[1]) > width) {
+                macCode = entry.getValue();
+                break;
+            }
         }
-        return res;
+        return macCode;
     }
+
 
     @Override
     public List<TProdPlanDetail> findByPlanCode(String planCode) {
@@ -148,46 +183,5 @@ public class TProdPlanServiceImpl implements TProdPlanService {
         planDetail.setProdPlanCode(planCode);
         return prodPlanDetailMapper.findList(planDetail);
     }
-
-    /**
-     * @Description: 构建产品计划明细
-     * @Param: [item, planCode, ordDeliveryDate, current]
-     * @return: com.lcyzh.nmerp.entity.TProdPlanDetail
-     * @Author: lijinku
-     * @Iteration : 1.0
-     * @Date: 2019/7/4 11:46 PM
-     */
-    private TProdPlanDetail buildProdPlanDetail(OrderItemVo item, String planCode, String ordDeliveryDate, Date current) {
-        TProdPlanDetail planDetail = new TProdPlanDetail();
-        planDetail.setOrdItemId(item.getItemId());
-        planDetail.setProdPlanCode(planCode);
-        planDetail.setItemNum(item.getItemNum());
-        planDetail.setItemFinishNum(0.0);
-        planDetail.setElstFinishDate(ordDeliveryDate);
-        planDetail.setLatestFinishDate(ordDeliveryDate);
-        planDetail.setCreateTime(current);
-        return planDetail;
-    }
-
-    /**
-     * @Description: 构建产品计划信息
-     * @Param: [ordCode, items, planCode, current]
-     * @return: com.lcyzh.nmerp.entity.TProdPlan
-     * @Author: lijinku
-     * @Iteration : 1.0
-     * @Date: 2019/7/4 11:38 PM
-     */
-    private TProdPlan buildProdPlan(String ordCode, List<OrderItemVo> items, String planCode, Date current) {
-        TProdPlan tProdPlan = new TProdPlan();
-        tProdPlan.setProdPlanCode(planCode);
-        tProdPlan.setOrdCode(ordCode);
-        tProdPlan.setItemCgyNum(items.size());
-        tProdPlan.setFinishCgyNum(0);
-        tProdPlan.setOperEmpCode(UserUtils.getUser().getId());
-        tProdPlan.setPlanStatus('0');
-        tProdPlan.setCreateTime(current);
-        return tProdPlan;
-    }
-
 
 }

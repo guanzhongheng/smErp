@@ -13,9 +13,7 @@ import java.util.List;
 @Repository
 public interface TProdPlanMapper {
 
-    TProdPlan findById(String prodPlanCode);
-
-    TProdPlan findByOrdCode(String ordCode);
+    TProdPlan findByProdPanCode(String prodPlanCode);
 
     List<ProdPlanDetailVo> findList(ProdPlanDetailVo vo);
 
@@ -25,4 +23,7 @@ public interface TProdPlanMapper {
 
     int update(TProdPlan tProdPlan);
 
+    List<TProdPlan> findAllList();
+
+    int updateBatch(List<TProdPlan> updateList);
 }

@@ -90,4 +90,11 @@ public interface TOrderService {
      */
     int save(List<OrderItemVo> list);
 
+    /**
+     * @Description: 订单审批
+     * @Param: ordCode：订单编号
+     * ordCode: state 0-审批通过 1-审批不通过
+     */
+    int orderAssign(String ordCode, int state);
+
 }

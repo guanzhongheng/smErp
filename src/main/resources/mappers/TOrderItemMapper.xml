@@ -10,7 +10,7 @@
         <result column="item_width" property="itemWidth" jdbcType="DOUBLE"/>
         <result column="item_thick" property="itemThick" jdbcType="DOUBLE"/>
         <result column="item_color" property="itemColor" jdbcType="VARCHAR"/>
-        <result column="item_num" property="itemNum" jdbcType="DOUBLE"/>
+        <result column="item_num" property="itemNum" jdbcType="BIGINT"/>
         <result column="item_owner" property="itemOwner" jdbcType="VARCHAR"/>
         <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
         <result column="item_price" property="itemPrice" jdbcType="DOUBLE"/>
@@ -31,6 +31,7 @@
         tt.prod_cgy_code itemCgyCode,
         tt.prod_unit itemUnit,
         tt.prod_variety  itemVariety,
+        toi.id itemId,
         toi.item_lenth itemLenth,
         toi.item_thick itemThick,
         toi.item_width itemWidth,
@@ -51,6 +52,7 @@
         LEFT JOIN T_PRODUCT tt ON toi.item_code = tt.prod_code
     WHERE
 	toi.ord_code = #{ordCode,jdbcType=VARCHAR}
+	order by itemVariety, itemColor, itemWidth desc
     </select>
 
     <select id="findList" resultMap="tOrderItemResultMap">
@@ -92,7 +94,7 @@
             #{itemWidth,jdbcType=DOUBLE},
             #{itemThick,jdbcType=DOUBLE},
             #{itemColor,jdbcType=VARCHAR},
-            #{itemNum,jdbcType=DOUBLE},
+            #{itemNum,jdbcType=BIGINT},
             #{itemOwner,jdbcType=VARCHAR},
             #{remarks,jdbcType=VARCHAR},
             #{itemPrice,jdbcType=DOUBLE},
@@ -135,7 +137,7 @@
             #{tOrderItem.itemWidth,jdbcType=DOUBLE},
             #{tOrderItem.itemThick,jdbcType=DOUBLE},
             #{tOrderItem.itemColor,jdbcType=VARCHAR},
-            #{tOrderItem.itemNum,jdbcType=DOUBLE},
+            #{tOrderItem.itemNum,jdbcType=BIGINT},
             #{tOrderItem.itemOwner,jdbcType=VARCHAR},
             #{tOrderItem.remarks,jdbcType=VARCHAR},
             #{tOrderItem.itemPrice,jdbcType=DOUBLE},

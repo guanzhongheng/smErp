@@ -10,88 +10,62 @@ import java.util.Date;
  */
 public class TProdPlanDetail implements Serializable {
     private static final long serialVersionUID = 1L;
-    private Long ordItemId;
+    private Long id;
     private String prodPlanCode;
-    private Double itemNum;
-    private Double itemFinishNum;
-    private Double itemAssignNum;
-    private String elstFinishDate;
-    private String latestFinishDate;
-    private Date createTime;
-    private Date updateTime;
+    private String ordCode;
+    private Long orderItemId;
+    private String itemCode;
+    private Double itemLenth;
+    private Double itemWidth;
+    private Double itemThick;
+    private Long itemNum;
+    private Double itemTotalWeight;
+    private Double itemTotalSq;
+    private String itemYbType;
+    private String itemYcType;
+    private Character itemStatus;
+    private Long itemCgyCode;
+    private Long itemVariety;
+    private Long itemUnit;
 
 
-    public void setOrdItemId(Long ordItemId) {
-        this.ordItemId = ordItemId;
+    public TProdPlanDetail(){
     }
 
-    public Long getOrdItemId() {
-        return ordItemId;
-    }
-
-    public void setProdPlanCode(String prodPlanCode) {
-        this.prodPlanCode = prodPlanCode;
-    }
-
-    public String getProdPlanCode() {
-        return prodPlanCode;
-    }
-
-    public void setItemNum(Double itemNum) {
-        this.itemNum = itemNum;
-    }
-
-    public Double getItemNum() {
-        return itemNum;
-    }
-
-    public void setItemFinishNum(Double itemFinishNum) {
-        this.itemFinishNum = itemFinishNum;
-    }
-
-    public Double getItemFinishNum() {
-        return itemFinishNum;
-    }
-
-    public void setElstFinishDate(String elstFinishDate) {
-        this.elstFinishDate = elstFinishDate;
-    }
-
-    public String getElstFinishDate() {
-        return elstFinishDate;
-    }
-
-    public void setLatestFinishDate(String latestFinishDate) {
-        this.latestFinishDate = latestFinishDate;
-    }
-
-    public Double getItemAssignNum() {
-        return itemAssignNum;
-    }
-
-    public void setItemAssignNum(Double itemAssignNum) {
-        this.itemAssignNum = itemAssignNum;
-    }
-
-    public String getLatestFinishDate() {
-        return latestFinishDate;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
+    public void setId (Long id) {this.id = id;}
+    public Long getId(){ return id;}
+    public void setProdPlanCode (String prodPlanCode) {this.prodPlanCode = prodPlanCode;}
+    public String getProdPlanCode(){ return prodPlanCode;}
+    public void setOrdCode (String ordCode) {this.ordCode = ordCode;}
+    public String getOrdCode(){ return ordCode;}
+    public void setOrderItemId (Long orderItemId) {this.orderItemId = orderItemId;}
+    public Long getOrderItemId(){ return orderItemId;}
+    public void setItemCode (String itemCode) {this.itemCode = itemCode;}
+    public String getItemCode(){ return itemCode;}
+    public void setItemLenth (Double itemLenth) {this.itemLenth = itemLenth;}
+    public Double getItemLenth(){ return itemLenth;}
+    public void setItemWidth (Double itemWidth) {this.itemWidth = itemWidth;}
+    public Double getItemWidth(){ return itemWidth;}
+    public void setItemThick (Double itemThick) {this.itemThick = itemThick;}
+    public Double getItemThick(){ return itemThick;}
+    public void setItemNum (Long itemNum) {this.itemNum = itemNum;}
+    public Long getItemNum(){ return itemNum;}
+    public void setItemTotalWeight (Double itemTotalWeight) {this.itemTotalWeight = itemTotalWeight;}
+    public Double getItemTotalWeight(){ return itemTotalWeight;}
+    public void setItemTotalSq (Double itemTotalSq) {this.itemTotalSq = itemTotalSq;}
+    public Double getItemTotalSq(){ return itemTotalSq;}
+    public void setItemYbType (String itemYbType) {this.itemYbType = itemYbType;}
+    public String getItemYbType(){ return itemYbType;}
+    public void setItemYcType (String itemYcType) {this.itemYcType = itemYcType;}
+    public String getItemYcType(){ return itemYcType;}
+    public void setItemStatus (Character itemStatus) {this.itemStatus = itemStatus;}
+    public Character getItemStatus(){ return itemStatus;}
+    public void setItemCgyCode (Long itemCgyCode) {this.itemCgyCode = itemCgyCode;}
+    public Long getItemCgyCode(){ return itemCgyCode;}
+    public void setItemVariety (Long itemVariety) {this.itemVariety = itemVariety;}
+    public Long getItemVariety(){ return itemVariety;}
+    public void setItemUnit (Long itemUnit) {this.itemUnit = itemUnit;}
+    public Long getItemUnit(){ return itemUnit;}
 
 
 }

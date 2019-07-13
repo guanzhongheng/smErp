@@ -11,77 +11,35 @@ import java.util.Date;
 public class TProdPlan implements Serializable {
     private static final long serialVersionUID = 1L;
     private String prodPlanCode;
-    private String ordCode;
-    private Character planStatus;
-    private Integer itemCgyNum;
-    private Integer finishCgyNum;
-    private String operEmpCode;
-    private Date createTime;
-    private Date updateTime;
+    private Long prodVariety;
+    private String prodColor;
+    private String macCode;
+    private Long totalQuantity;
+    private Long quantity;
+    private String formula;
+    private Character isAuto;
 
 
-    public void setProdPlanCode(String prodPlanCode) {
-        this.prodPlanCode = prodPlanCode;
+    public TProdPlan(){
     }
 
-    public String getProdPlanCode() {
-        return prodPlanCode;
-    }
+    public void setProdPlanCode (String prodPlanCode) {this.prodPlanCode = prodPlanCode;}
+    public String getProdPlanCode(){ return prodPlanCode;}
+    public void setProdVariety (Long prodVariety) {this.prodVariety = prodVariety;}
+    public Long getProdVariety(){ return prodVariety;}
+    public void setProdColor (String prodColor) {this.prodColor = prodColor;}
+    public String getProdColor(){ return prodColor;}
+    public void setMacCode (String macCode) {this.macCode = macCode;}
+    public String getMacCode(){ return macCode;}
+    public void setTotalQuantity (Long totalQuantity) {this.totalQuantity = totalQuantity;}
+    public Long getTotalQuantity(){ return totalQuantity;}
+    public void setQuantity (Long quantity) {this.quantity = quantity;}
+    public Long getQuantity(){ return quantity;}
+    public void setFormula (String formula) {this.formula = formula;}
+    public String getFormula(){ return formula;}
+    public void setIsAuto (Character isAuto) {this.isAuto = isAuto;}
+    public Character getIsAuto(){ return isAuto;}
 
-    public void setOrdCode(String ordCode) {
-        this.ordCode = ordCode;
-    }
 
-    public String getOrdCode() {
-        return ordCode;
-    }
-
-    public void setPlanStatus(Character planStatus) {
-        this.planStatus = planStatus;
-    }
-
-    public Character getPlanStatus() {
-        return planStatus;
-    }
-
-    public void setItemCgyNum(Integer itemCgyNum) {
-        this.itemCgyNum = itemCgyNum;
-    }
-
-    public Integer getItemCgyNum() {
-        return itemCgyNum;
-    }
-
-    public Integer getFinishCgyNum() {
-        return finishCgyNum;
-    }
-
-    public void setFinishCgyNum(Integer finishCgyNum) {
-        this.finishCgyNum = finishCgyNum;
-    }
-
-    public void setOperEmpCode(String operEmpCode) {
-        this.operEmpCode = operEmpCode;
-    }
-
-    public String getOperEmpCode() {
-        return operEmpCode;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
 
 }

@@ -2,128 +2,179 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lcyzh.nmerp.dao.TProdPlanMapper">
 
-    <resultMap id="prodPlanResultMap" type="com.lcyzh.nmerp.entity.TProdPlan">
+    <resultMap id="tProdPlanResultMap" type="com.lcyzh.nmerp.entity.TProdPlan">
         <id column="prod_plan_code" property="prodPlanCode" jdbcType="VARCHAR"/>
-        <result column="ord_code" property="ordCode" jdbcType="VARCHAR"/>
-        <result column="plan_status" property="planStatus" jdbcType="CHAR"/>
-        <result column="item_cgy_num" property="itemCgyNum" jdbcType="INTEGER"/>
-        <result column="finish_cgy_num" property="finishCgyNum" jdbcType="INTEGER"/>
-        <result column="oper_emp_code" property="operEmpCode" jdbcType="VARCHAR"/>
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
-        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="prod_variety" property="prodVariety" jdbcType="BIGINT"/>
+        <result column="prod_color" property="prodColor" jdbcType="VARCHAR"/>
+        <result column="mac_code" property="macCode" jdbcType="VARCHAR"/>
+        <result column="total_quantity" property="totalQuantity" jdbcType="BIGINT"/>
+        <result column="quantity" property="quantity" jdbcType="BIGINT"/>
+        <result column="formula" property="formula" jdbcType="VARCHAR"/>
+        <result column="isAuto" property="isAuto" jdbcType="CHAR"/>
     </resultMap>
 
+    <update id="updateBatch" parameterType="java.util.List">
+        update product
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="total_quantity =case" suffix="end,">
+                <foreach collection="list" item="i" index="index">
+                    <if test="i.totalQuantity!=null">
+                        when prod_plan_code=#{i.prodPlanCode} then #{i.totalQuantity}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="quantity =case" suffix="end,">
+                <foreach collection="list" item="i" index="index">
+                    <if test="i.quantity!=null">
+                        when prod_plan_code=#{i.prodPlanCode} then #{i.quantity}
+                    </if>
+                </foreach>
+            </trim>
 
-    <select id="findById" parameterType="java.lang.String" resultMap="prodPlanResultMap">
+            <trim prefix="isAuto =case" suffix="end,">
+                <foreach collection="list" item="i" index="index">
+                    <if test="i.isAuto!=null">
+                        when prod_plan_code=#{i.prodPlanCode} then #{i.isAuto}
+                    </if>
+                </foreach>
+            </trim>
+
+            <trim prefix="formula =case" suffix="end,">
+                <foreach collection="list" item="i" index="index">
+                    <if test="i.formula!=null">
+                        when prod_plan_code=#{i.prodPlanCode} then #{i.formula}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where
+        <foreach collection="list" separator="or" item="i" index="index">
+            prod_plan_code=#{i.prodPlanCode}
+        </foreach>
+
+    </update>
+
+    <select id="findByProdPanCode" parameterType="java.lang.String" resultMap="tProdPlanResultMap">
         SELECT *
-        FROM T_PROD_PLAN
+        FROM t_prod_plan
         WHERE prod_plan_code = #{prodPlanCode,jdbcType=VARCHAR}
     </select>
 
-
-    <select id="findByOrdCode" parameterType="java.lang.String" resultMap="prodPlanResultMap">
+    <select id="findList" parameterType ="com.lcyzh.nmerp.entity.TProdPlan"  resultMap="tProdPlanResultMap">
         SELECT *
-        FROM T_PROD_PLAN
-        WHERE ord_code = #{ordCode,jdbcType=VARCHAR}
-    </select>
-
-    <select id="findList" parameterType="com.lcyzh.nmerp.model.vo.ProdPlanDetailVo" resultType="com.lcyzh.nmerp.model.vo.ProdPlanDetailVo">
-        SELECT
-        od.ord_code ordCode,
-        od.ord_title ordTitle,
-        oi.item_code itemCode,
-        oi.item_num itemNum,
-        ppd.item_assign_num itemAssignNum,
-        oi.item_unit itemUnit
-        FROM
-        T_PROD_PLAN pp
-        LEFT JOIN T_PROD_PLAN_DETAIL ppd ON pp.prod_plan_code = ppd.prod_plan_code
-        LEFT JOIN T_ORDER_ITEM oi ON ppd.ord_item_id = oi.id
-        LEFT JOIN T_ORDER od on od.ord_code = oi.ord_code
+        FROM t_prod_plan
         <where>
-            <if test="ordCode!= null">
-                and pp.ord_code like concat('%', #{ordCode,jdbcType=VARCHAR}, '%')
-            </if>
-            <if test="planStatus!= null">
-                and pp.plan_status = #{planStatus,jdbcType=CHAR}
-            </if>
-            <if test="operEmpCode!= null">
-                and pp.oper_emp_code = #{operEmpCode,jdbcType=VARCHAR}
-            </if>
 
+            <if test="prodVariety!= null">
+                and prod_variety like concat('%', #{prodVariety,jdbcType=BIGINT}, '%')
+            </if>
+            <if test="prodColor!= null">
+                and prod_color like concat('%', #{prodColor,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="macCode!= null">
+                and mac_code like concat('%', #{macCode,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="totalQuantity!= null">
+                and total_quantity like concat('%', #{totalQuantity,jdbcType=BIGINT}, '%')
+            </if>
+            <if test="quantity!= null">
+                and quantity like concat('%', #{quantity,jdbcType=BIGINT}, '%')
+            </if>
+            <if test="formula!= null">
+                and formula like concat('%', #{formula,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="isAuto!= null">
+                and isAuto like concat('%', #{isAuto,jdbcType=CHAR}, '%')
+            </if>
         </where>
     </select>
 
+    <select id="findAllList" resultMap="tProdPlanResultMap">
+        SELECT *
+        FROM t_prod_plan
+    </select>
 
-    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TProdPlan">
-        INSERT INTO T_PROD_PLAN(
+    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TProdPlan">
+        INSERT INTO t_prod_plan(
             prod_plan_code,
-            ord_code,
-            plan_status,
-            item_cgy_num,
-            finish_cgy_num,
-            oper_emp_code,
-            create_time,
-            update_time
+            prod_variety,
+            prod_color,
+            mac_code,
+            total_quantity,
+            quantity,
+            formula,
+            isAuto
         )
         VALUES (
             #{prodPlanCode,jdbcType=VARCHAR},
-            #{ordCode,jdbcType=VARCHAR},
-            #{planStatus,jdbcType=CHAR},
-            #{itemCgyNum,jdbcType=INTEGER},
-            #{finishCgyNum,jdbcType=INTEGER},
-            #{operEmpCode,jdbcType=VARCHAR},
-            #{createTime,jdbcType=TIMESTAMP},
-            #{updateTime,jdbcType=TIMESTAMP}
+            #{prodVariety,jdbcType=BIGINT},
+            #{prodColor,jdbcType=VARCHAR},
+            #{macCode,jdbcType=VARCHAR},
+            #{totalQuantity,jdbcType=BIGINT},
+            #{quantity,jdbcType=BIGINT},
+            #{formula,jdbcType=VARCHAR},
+            #{isAuto,jdbcType=CHAR}
         )
     </insert>
 
     <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TProdPlan">
-        INSERT INTO T_PROD_PLAN(
+        INSERT INTO t_prod_plan(
         prod_plan_code,
-        ord_code,
-        plan_status,
-        item_cgy_num,
-        finish_cgy_num,
-        oper_emp_code,
-        create_time,
-        update_time
+        prod_variety,
+        prod_color,
+        mac_code,
+        total_quantity,
+        quantity,
+        formula,
+        isAuto
         )
         VALUES
-        <foreach collection="list" item="item" separator=",">
+        <foreach collection ="list" item="item" separator =",">
             (
             #{item.prodPlanCode,jdbcType=VARCHAR},
-            #{item.ordCode,jdbcType=VARCHAR},
-            #{item.planStatus,jdbcType=CHAR},
-            #{item.itemCgyNum,jdbcType=INTEGER},
-            #{item.finishCgyNum,jdbcType=INTEGER},
-            #{item.operEmpCode,jdbcType=VARCHAR},
-            #{item.createTime,jdbcType=TIMESTAMP},
-            #{item.updateTime,jdbcType=TIMESTAMP}
+            #{item.prodVariety,jdbcType=BIGINT},
+            #{item.prodColor,jdbcType=VARCHAR},
+            #{item.macCode,jdbcType=VARCHAR},
+            #{item.totalQuantity,jdbcType=BIGINT},
+            #{item.quantity,jdbcType=BIGINT},
+            #{item.formula,jdbcType=VARCHAR},
+            #{item.isAuto,jdbcType=CHAR}
             )
         </foreach>
     </insert>
 
-    <update id="update" parameterType="com.lcyzh.nmerp.entity.TProdPlan">
-        UPDATE T_PROD_PLAN
+    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TProdPlan">
+        UPDATE t_prod_plan
         <set>
-            <if test="ordCode!= null">
-                ord_code = #{ordCode,jdbcType=VARCHAR},
+
+            <if test="prodVariety!= null">
+                prod_variety = #{prodVariety,jdbcType=BIGINT},
             </if>
-            <if test="planStatus!= null">
-                plan_status = #{planStatus,jdbcType=CHAR},
+            <if test="prodColor!= null">
+                prod_color = #{prodColor,jdbcType=VARCHAR},
             </if>
-            <if test="finishCgyNum!= null">
-                finish_cgy_num = #{finishCgyNum,jdbcType=INTEGER},
+            <if test="macCode!= null">
+                mac_code = #{macCode,jdbcType=VARCHAR},
             </if>
-            <if test="operEmpCode!= null">
-                oper_emp_code = #{operEmpCode,jdbcType=VARCHAR},
+            <if test="totalQuantity!= null">
+                total_quantity = #{totalQuantity,jdbcType=BIGINT},
             </if>
-            <if test="updateTime!= null">
-                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            <if test="quantity!= null">
+                quantity = #{quantity,jdbcType=BIGINT},
+            </if>
+            <if test="formula!= null">
+                formula = #{formula,jdbcType=VARCHAR},
+            </if>
+            <if test="isAuto!= null">
+                isAuto = #{isAuto,jdbcType=CHAR},
             </if>
         </set>
         WHERE prod_plan_code = #{prodPlanCode,jdbcType=VARCHAR}
     </update>
+
+    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TProdPlan">
+        DELETE FROM t_prod_plan
+        WHERE prod_plan_code = #{prodPlanCode,jdbcType=VARCHAR}
+    </delete>
 
 </mapper>
