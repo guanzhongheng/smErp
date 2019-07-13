@@ -163,23 +163,25 @@ public class TOrderServiceImpl implements TOrderService {
     public int save(OrderAddModifyVo ordAddModifyVo) {
         int res = -1;
         if (ordAddModifyVo != null) {
+            String ordCode = StringUtils.genFixPreFixStr(Constants.ORD_PRE_FIX);
+            ordAddModifyVo.setOrdCode(ordCode);
             Date current = new Date();
             TOrder order = buildOrderPoFromVo(ordAddModifyVo, current);
             if (StringUtils.isNotEmpty(ordAddModifyVo.getOrdCode())) {
                 res = tOrderMapper.update(order);
             } else {
-                Customer cus = tCustomerMapper.findById(ordAddModifyVo.getCusCode());
-                if (cus != null) {
-                    order.setOrdCode(StringUtils.genFixPreFixStr(Constants.ORD_PRE_FIX));
-                    if (cus.getCusStatus().equals(Constants.CUS_STATUS_SPEC)) {
-                        order.setOrdStatus(Constants.ORD_STATUS_ASSIGNED);
-                    } else if (cus.getCusStatus().equals(Constants.CUS_STATUS_BH)) {
-                        return res;
-                    } else {
-                        order.setOrdStatus(Constants.ORD_STATUS_NEW);
-                    }
-                    res = tOrderMapper.insert(order);
-                }
+                //Customer cus = tCustomerMapper.findById(ordAddModifyVo.getCusCode());
+                //if (cus != null) {
+                //    order.setOrdCode(StringUtils.genFixPreFixStr(Constants.ORD_PRE_FIX));
+                //    if (cus.getCusStatus().equals(Constants.CUS_STATUS_SPEC)) {
+                //        order.setOrdStatus(Constants.ORD_STATUS_ASSIGNED);
+                //    } else if (cus.getCusStatus().equals(Constants.CUS_STATUS_BH)) {
+                //        return res;
+                //    } else {
+                //        order.setOrdStatus(Constants.ORD_STATUS_NEW);
+                //    }
+                //}
+                res = tOrderMapper.insert(order);
             }
 
         }
