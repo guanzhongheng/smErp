@@ -15,9 +15,9 @@ import java.util.List;
 public interface TProductService {
     ProductVo get(String id);
 
-    List<TProduct> findList(TProduct tProduct);
+    List<ProductVo> findList(TProduct tProduct);
 
-    List<TProduct> findAllList();
+    List<ProductVo> findAllList();
 
     int insert(TProduct tProduct);
 

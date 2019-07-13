@@ -39,13 +39,31 @@ public class TProductServiceImpl implements TProductService{
     }
 
     @Override
-    public List<TProduct> findList(TProduct tProduct) {
-        return tProductMapper.findList(tProduct);
+    public List<ProductVo> findList(TProduct tProduct) {
+        List<TProduct> list = tProductMapper.findList(tProduct);
+        return productConversion(list);
     }
 
     @Override
-    public List<TProduct> findAllList() {
-        return tProductMapper.findAllList();
+    public List<ProductVo> findAllList() {
+        List<TProduct> products = tProductMapper.findAllList();
+        return productConversion(products);
+    }
+
+    private List<ProductVo> productConversion(List<TProduct> products) {
+        List<ProductVo> list = new ArrayList<>(products.size());
+        if(!products.isEmpty()) {
+            list = products.stream().map(vo->{
+                ProductVo productVo = new ProductVo();
+                BeanUtils.copyProperties(vo, productVo);
+                productVo.setProdCgyCodeValue(DictUtils.getDictValueMaps().get(vo.getProdCgyCode()));
+                productVo.setProdVarietyValue(DictUtils.getDictValueMaps().get(vo.getProdVariety()));
+                productVo.setProdPriceTypeValue(DictUtils.getDictValueMaps().get(vo.getProdPriceType()));
+                productVo.setProdUnitValue(DictUtils.getDictValueMaps().get(vo.getProdUnit()));
+                return productVo;
+            }).collect(Collectors.toList());
+        }
+        return list;
     }
 
     @Override
@@ -73,18 +91,7 @@ public class TProductServiceImpl implements TProductService{
     public Page<ProductVo> findPage(Page<ProductVo> page, TProduct tProduct) {
         PageHelper.startPage(page.getPageNo(),page.getPageSize());
         List<TProduct> list = tProductMapper.findList(tProduct);
-        List<ProductVo> vos = new ArrayList<>(list.size());
-        if(!list.isEmpty()) {
-            vos = list.stream().map(vo ->{
-                ProductVo productVo = new ProductVo();
-                BeanUtils.copyProperties(vo, productVo);
-                productVo.setProdCgyCodeValue(DictUtils.getDictValueMaps().get(vo.getProdCgyCode()));
-                productVo.setProdVarietyValue(DictUtils.getDictValueMaps().get(vo.getProdVariety()));
-                productVo.setProdPriceTypeValue(DictUtils.getDictValueMaps().get(vo.getProdPriceType()));
-                productVo.setProdUnitValue(DictUtils.getDictValueMaps().get(vo.getProdUnit()));
-                return productVo;
-            }).collect(Collectors.toList());
-        }
+        List<ProductVo> vos = productConversion(list);
         page.setList(vos);
         return page;
     }
