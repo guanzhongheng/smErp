@@ -3,6 +3,7 @@ package com.lcyzh.nmerp.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
+import com.lcyzh.nmerp.controller.system.util.SysDictUtils;
 import com.lcyzh.nmerp.dao.PrimaryContactMapper;
 import com.lcyzh.nmerp.dao.TCustomerMapper;
 import com.lcyzh.nmerp.dao.TOrderItemMapper;
@@ -55,7 +56,9 @@ public class TOrderServiceImpl implements TOrderService {
         list.stream().forEach(vo->{
             vo.setItemUnitValue(DictUtils.getDictValueMaps().get(vo.getItemUnit()));
             vo.setItemCgyCodeValue(DictUtils.getDictValueMaps().get(vo.getItemCgyCode()));
+            vo.setItemVaritemValue(DictUtils.getDictValueMaps().get(vo.getItemVariety()));
             vo.setItemPriceTypeValue(DictUtils.getDictValueMaps().get(vo.getItemPriceType()));
+            vo.setItemColorValue(SysDictUtils.getDictLabel(vo.getItemColor(),"prod_color",""));
         });
         return list;
     }
@@ -192,9 +195,11 @@ public class TOrderServiceImpl implements TOrderService {
     @Override
     public OrderAddModifyVo findModifyInfoByOrdCode(String ordCode) {
         OrderAddModifyVo vo = tOrderMapper.findModifyInfoByOrdCode(ordCode);
-        vo.setOrdTypeValue(DictUtils.getDictValueMaps().get(vo.getOrdType()));
-        vo.setPayTypeValue(DictUtils.getDictValueMaps().get(vo.getPayType()));
-        vo.setPayStatusValue(DictUtils.getDictValueMaps().get(vo.getPayStatus()));
+        if(vo != null){
+            vo.setOrdTypeValue(DictUtils.getDictValueMaps().get(vo.getOrdType()));
+            vo.setPayTypeValue(DictUtils.getDictValueMaps().get(vo.getPayType()));
+            vo.setPayStatusValue(DictUtils.getDictValueMaps().get(vo.getPayStatus()));
+        }
         return vo;
     }
 

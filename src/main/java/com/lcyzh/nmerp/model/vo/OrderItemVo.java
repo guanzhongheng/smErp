@@ -37,6 +37,8 @@ public class OrderItemVo {
     private Double itemThick;
     //颜色
     private String itemColor;
+    //颜色
+    private String itemColorValue;
     //计件数
     private Double itemNum;
     //单位-字典
@@ -272,5 +274,13 @@ public class OrderItemVo {
 
     public void setItemYcType(String itemYcType) {
         this.itemYcType = itemYcType;
+    }
+
+    public String getItemColorValue() {
+        return itemColorValue;
+    }
+
+    public void setItemColorValue(String itemColorValue) {
+        this.itemColorValue = itemColorValue;
     }
 }

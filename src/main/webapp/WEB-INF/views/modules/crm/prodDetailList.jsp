@@ -6,18 +6,21 @@
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        <input type="hidden" id="ordCode" value="${ordCode}"/>
+      <%--  <input type="hidden" id="ordCode" value="${ordCode}"/>--%>
+        <input type="hidden" id="ordCode" value="1"/>
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <label class="col-sm-3 control-label">产品选择:
                     <select data-placeholder="产品选择" class="chosen-select" style="width:200px;" id="prodInfo" onchange="getResChange(this)">
                         <option value="-1">请选择</option>
                         <c:forEach items="${prod}" var="p">
-                            <option data-prodcode='${p.prodCode}' data-prodcgycode='${p.prodCgyCode}'
-                                    data-prodvariety='${p.prodVariety}' data-prodthick='${p.prodThick}'
-                                    data-prodpricetype='${p.prodPriceType}'
+                            <option data-prodcode='${p.prodCode}'
+                                    data-prodcgycode='${p.prodCgyCode}' data-prodCgyCodeValue='${p.prodCgyCodeValue}'
+                                    data-prodvariety='${p.prodVariety}' data-prodVarietyValue='${p.prodVarietyValue}'
+                                    data-prodthick='${p.prodThick}'
+                                    data-prodpricetype='${p.prodPriceType}'  data-prodPriceTypeValue='${p.prodPriceTypeValue}'
                                     data-prodguideprice='${p.prodGuidePrice}'
-                                    data-produnit='${p.prodUnit}'
+                                    data-produnit='${p.prodUnit}' data-prodUnitValue='${p.prodUnitValue}'
                                     value='${p.prodName}' > ${p.prodName}</option>
                         </c:forEach>
                     </select>
@@ -66,20 +69,19 @@
                             <select data-placeholder="选择颜色" class="chosen-select" style="width: 250px" id="prodColor">
                                 <option value="-1">颜色选择</option>
                                 <c:forEach items="${color}" var="c">
-                                    <option value='${c.value}' > ${c.label}</option>
+                                    <option value='${c.value}' data-label='${c.label}' >${c.label}</option>
                                 </c:forEach>
                             </select>
                         </div>
                     </div>
-                    <%--<div class="form-group">--%>
-                        <%--<div class="col-md-4">--%>
-                            <%--<label class="col-md-2">备注:</label>--%>
-                            <%--<label class="col-md-2">--%>
-                                <%--<textarea rows="5" cols="8" style="width: 300px" id="remark" name="remark">--%>
-                                <%--</textarea>--%>
-                            <%--</label>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label class="col-md-3">宽度(m):</label>
+                            <label class="col-md-3">
+                                <input type="text" class="form-control" style="width: 200px" id="itemWidth" name="itemWidth" />
+                            </label>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -98,7 +100,7 @@
             </div>
             <div class="ibox-content">
                 <div class="col-sm-12" style="max-height: 350px">
-                    <table id="cusProdDetail" data-height="300" style="min-width: 1300px">
+                    <table id="cusProdDetail" data-height="300" style="min-width: 1500px">
                         <thead>
                         <tr>
                             <th data-field="itemCode">编码</th>
@@ -108,7 +110,7 @@
                             <th data-field="itemLenth">长</th>
                             <th data-field="itemWidth">宽</th>
                             <th data-field="itemThick">厚度</th>
-                            <th data-field="itemColor">颜色</th>
+                            <th data-field="itemColorValue">颜色</th>
                             <th data-field="itemUnitValue">单位</th>
                             <th data-field="itemOwner">归属人</th>
                             <th data-field="itemPrice">单价</th>
@@ -155,7 +157,6 @@
 <script src="${ctxStatic}/hPlugs/js/plugins/cropper/cropper.min.js"></script>
 <script src="${ctxStatic}/hPlugs/js/demo/form-advanced-demo.min.js"></script>
 
-
 <script src="${ctxStatic}/hPlugs/js/plugins/layer/layer.min.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/bootstrap-table/bootstrap-table.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/bootstrap-table/bootstrap-table-fixed-columns.js"></script>
@@ -169,49 +170,59 @@
     var prodCgyCodes = new Array();
 
     var prodObj = {
+        "ckId":"",
         "itemCode":"",
         "itemName":"",
-        "itemLenth":"",
+        "itemLenth":0.00,
         "itemVariety":"",
         "itemVaritemValue":"",
         "itemCgyCode":"",
         "itemCgyCodeValue":"",
-        "itemWidth":"",
+        "itemWidth":0.00,
         "itemThick":"",
         "itemColor":"",
+        "itemColorValue":"",
         "itemUnit":"",
         "itemUnitValue":"",
         "itemOwner":"",
-        "itemPrice":"",
-        "itemNum":"",
+        "itemPrice":0.00,
+        "itemNum":0,
         "itemPriceType":"",
         "itemPriceTypeValue":"",
-        "itemWeight":"",
-        "itemTotalWeight":"",
-        "itemTotalSq":"",
+        "itemWeight":0.000,
+        "itemTotalWeight":0.000,
+        "itemTotalSq":0.000,
         "itemYcType":"",
         "itemYbType":""
     }
     function getResChange(obj) {
-
         if($(obj).find("option:selected").val() != -1){
+            debugger;
             prodObj.itemCode = $(obj).find("option:selected").attr("data-prodcode");
             prodObj.itemName = $(obj).find("option:selected").val();
-            prodObj.prodCgyCode = $(obj).find("option:selected").attr("data-prodcgyCode");
-            prodObj.prodVariety = $(obj).find("option:selected").attr("data-prodvariety");
-            prodObj.prodThick = $(obj).find("option:selected").attr("data-prodthick");
-            prodObj.prodPriceType = $(obj).find("option:selected").attr("data-prodpriceType");
+            prodObj.itemCgyCode = $(obj).find("option:selected").attr("data-prodcgyCode");
+            prodObj.itemCgyCodeValue = $(obj).find("option:selected").attr("data-prodCgyCodeValue");
+
+            prodObj.itemVariety = $(obj).find("option:selected").attr("data-prodvariety");
+            prodObj.itemVaritemValue = $(obj).find("option:selected").attr("data-prodVarietyValue");
+
+            prodObj.itemThick = $(obj).find("option:selected").attr("data-prodthick");
+            prodObj.itemPriceType = $(obj).find("option:selected").attr("data-prodpriceType");
+            prodObj.itemPriceTypeValue = $(obj).find("option:selected").attr("data-prodPriceTypeValue");
+
             prodObj.itemPrice = $(obj).find("option:selected").attr("data-prodguidePrice");
+
             prodObj.itemUnit = $(obj).find("option:selected").attr("data-produnit");
+            prodObj.itemUnitValue = $(obj).find("option:selected").attr("data-prodUnitValue");
 
             $("#itemCode").text($(obj).find("option:selected").attr("data-prodcode"));
             $("#itemName").text($(obj).find("option:selected").val());
-            $("#itemCgyCode").text($(obj).find("option:selected").attr("data-prodcgyCode"));
-            $("#itemVariety").text($(obj).find("option:selected").attr("data-prodvariety"));
+            $("#itemCgyCode").text($(obj).find("option:selected").attr("data-prodCgyCodeValue"));
+            $("#itemVariety").text($(obj).find("option:selected").attr("data-prodVarietyValue"));
             $("#itemThick").text($(obj).find("option:selected").attr("data-prodthick"));
-            $("#itemPriceType").text($(obj).find("option:selected").attr("data-prodpriceType"));
+            $("#itemPriceType").text($(obj).find("option:selected").attr("data-prodPriceTypeValue"));
             $("#itemPrice").text($(obj).find("option:selected").attr("data-prodguidePrice"));
-            $("#itemUnit").text($(obj).find("option:selected").attr("data-produnit"));
+            $("#itemUnit").text($(obj).find("option:selected").attr("data-prodUnitValue"));
         }else{
             $("#itemCode").text("");
             $("#itemName").text("");
@@ -227,14 +238,21 @@
     function doProcess() {
         debugger;
         var color = $("#prodColor").val();
+        var itemWidth =  $("#itemWidth").val();
         if(color == -1){
-            parent.layer.msg('请选择颜色');
+            layer.msg('请选择颜色');
             return;
         }
         if($("#prodInfo").find("option:selected").val() != -1){
             debugger;
-            cusProdList.push(prodObj);
+            prodObj.itemColor = color;
+            prodObj.itemColorValue = $("#prodColor").find("option:selected").attr("data-label");
+            prodObj.itemWidth = itemWidth;
+            cusProdList.push(tranObject(prodObj));
             $("#cusProdDetail").bootstrapTable("load",cusProdList);
+            $('#cusProdDetail .chosen-select').trigger("chosen:updated");
+            $('#cusProdDetail .chosen-select').chosen();
+
         }
     }
 
@@ -259,7 +277,6 @@
 
     $(document).ready(function(){
         getItemType();
-        prodCgyCodes = "${fns:getDictList('prod_cgy_code')}";
         $("#cusProdDetail").bootstrapTable({
             url:'/order/item/findItemsById',
             pagination: false,  //表格底部显示分页条
@@ -280,6 +297,7 @@
                 {
                     field: 'ckId',
                     title: '序号',
+                    width: '0px',
                     formatter:function (value,row,index){
                         debugger;
                         if(index == 0){
@@ -287,6 +305,7 @@
                         }else{
                             maxDataIndex = maxDataIndex + 1;
                         }
+                        row.ckId = maxDataIndex;
                         return maxDataIndex;
                     }
                 },{
@@ -295,7 +314,7 @@
                 },{
                     field: 'itemName',
                     title: '名称',
-                    width: '110px'
+                    width: '150px'
                 },{
                     field: 'itemCgyCodeValue',
                     title: '类别',
@@ -307,9 +326,9 @@
                 },{
                     field: 'itemLenth',
                     title: '长',
-                    width: '100px',
+                    width: '80px',
                     formatter:function (value,row,index) {
-                        return ['<input trpe="text" onchange="inserData(\'itemLenth\','+row.ckId+',this)" class="form-control" value="'+value+'"/>'].join('');
+                        return ['<input type="number" min="0" style="width: 80px" step="0.01" onchange="inserData(\'itemLenth\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
                     }
                 },{
                     field: 'itemWidth',
@@ -320,7 +339,7 @@
                     title: '厚',
                     width: '60px'
                 },{
-                    field: 'itemColor',
+                    field: 'itemColorValue',
                     title: '颜色',
                     width: '80px'
                 },{
@@ -332,51 +351,45 @@
                     title: '归属人',
                     width: '150px',
                     formatter:function (value,row,index) {
-                        return ['<input trpe="text" onchange="inserData(\'itemOwner\','+row.ckId+',this)" class="form-control" value="'+value+'"/>'].join('');
+                        return ['<input type="text"  style="width: 120px" onchange="inserData(\'itemOwner\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
                     }
                 },{
                     field: 'itemPrice',
                     title: '单价',
-                    width: '120px',
+                    width: '80px',
                     formatter:function (value,row,index) {
-                        return ['<input trpe="text" onchange="inserData(\'itemPrice\','+row.ckId+',this)" class="form-control" value="'+value+'"/>'].join('');
+                        return ['<input type="number" min="0" style="width: 80px" step="0.01" onchange="inserData(\'itemPrice\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
                     }
                 },{
                     field: 'itemNum',
                     title: '数量',
-                    width: '120px',
+                    width: '80px',
                     formatter:function (value,row,index) {
-                        return ['<input trpe="text" onchange="inserData(\'itemOwner\','+row.ckId+',this)" class="form-control" value="'+value+'"/>'].join('');
+                        return ['<input type="number" min="0" style="width: 80px" onchange="inserData(\'itemNum\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
                     }
                 },{
                     field: 'itemPriceType',
                     title: '计价方式',
-                    width: '120px',
-                    formatter:function (value,row,index) {
-                        debugger;
-                        var obj = '<select trpe="text" onchange="inserData(\'itemPriceType\','+row.ckId+',this)" class="form-control">';
-                        if(value == 141001){
-                            obj = obj +  '<option value="141001" checked>重量</option>';
-                        }else{
-                            obj = obj + '<option value="141001">重量</option>';
-                        }
-                        if(value == 141002){
-                            obj = obj + '<option value="141002" checked>体积</option>';
-                        }else{
-                            obj = obj + '<option value="141002">体积</option>';
-                        }
-                        obj =obj + '</select>'
-
-                        return [obj].join('');
-                    }
+                    width: '80px',
+                    formatter:operPriceType
                 },
                 {
                     field: 'itemWeight',
                     title: '重量',
-                    width: '120px',
+                    width: '55px',
                     formatter:function (value,row,index) {
-                        return ['<input trpe="text" onchange="inserData(\'itemWeight\','+row.ckId+',this)" class="form-control" value="'+value+'"/>'].join('');
+                        return ['<input type="number" min="0" step="0.001" style="width: 55px" onchange="inserData(\'itemWeight\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
                     }
+                },{
+                    field: 'itemYcType',
+                    title: '延长米方式',
+                    width: '150px',
+                    formatter:operYcType
+                },{
+                    field: 'itemYbType',
+                    title: '压边类型',
+                    width: '150px',
+                    formatter:operYbType
                 },{
                     field: 'itemTotalWeight',
                     title: '总重量',
@@ -385,16 +398,6 @@
                     field: 'itemTotalSq',
                     title: '总面积',
                     width: '100px'
-                },{
-                    field: 'itemYcType',
-                    title: '延长米方式',
-                    width: '120px',
-                    formatter:operYcType
-                },{
-                    field: 'itemYbType',
-                    title: '压边类型',
-                    width: '120px',
-                    formatter: operYbType
                 },
                 {
                     field: 'oper',
@@ -402,14 +405,38 @@
                     events: operateEvents,
                     formatter: operProdFormatter
                 }
-            ]
+            ],
+            onLoadSuccess:function (data) {
+                debugger;
+                cusProdList = $('#cusProdDetail').bootstrapTable("getData");
+                $('#cusProdDetail .chosen-select').trigger("chosen:updated");
+                $('#cusProdDetail .chosen-select').chosen();
+            }
         })
         // $(".fixed-table-border")[1].style.height = '230px';
          $(".fixed-table-border").hide();
-        $('#cusProdDetail').bootstrapTable('hideColumn', 'ckId');
         $('#cusProdDetail').bootstrapTable('hideColumn', 'itemCode');
     });
 
+    function operPriceType(value,row,index) {
+        var option;
+        var headOption = "<option value =''>请选择</option>";
+        if(value == 141001){
+            headOption = headOption + "<option value='141001' selected>重量</option>";
+        }else{
+            headOption = headOption + "<option value='141001'>重量</option>";
+        }
+        if(value == 141002){
+            headOption = headOption + "<option value='141002' selected>面积</option>";
+        }else{
+            headOption = headOption + "<option value='141002'>面积</option>";
+        }
+        option  = '<select class="chosen-select" id="itemPriceType"'+row.ckId+' onchange="inserData(\'itemPriceType\','+row.ckId+',this)" style="height:33px;">'+
+            headOption + '</select>';
+
+        return [option].join('');
+    }
+    
     function operYbType(value,row,index){
         debugger;
         var option;
@@ -421,7 +448,7 @@
                 headOption = headOption + "<option value='"+obj.value+"'>"+obj.label+"</option>";
             }
         });
-        option  = '<select class="form-control" id="itemYbType"'+row.ckId+' name="inserData(\'itemYbType\','+row.ckId+',this)" onchange="" style="height:33px;">'+
+        option  = '<select class="chosen-select" id="itemYbType"'+row.ckId+' onchange="inserData(\'itemYbType\','+row.ckId+',this)" style="height:33px;">'+
             headOption + '</select>';
 
         return [option].join('');
@@ -439,9 +466,8 @@
                 headOption = headOption + "<option value='"+obj.value+"'>"+obj.label+"</option>";
             }
         });
-        option  = '<select class="form-control" id="itemYcType"'+row.ckId+' name="inserData(\'itemYcType\','+row.ckId+',this)" onchange="" style="height:33px;">'+
+        option  = '<select class="chosen-select" id="itemYcType"'+row.ckId+' onchange="inserData(\'itemYcType\','+row.ckId+',this)" style="height:33px;">'+
             headOption + '</select>';
-
         return [option].join('');
     }
 
@@ -483,51 +509,104 @@
     }
     
     function tranObject(data) {
-        debugger;
         indexCkId = indexCkId + 1;
         debugger;
         var obj = {
             "ckId":indexCkId,
-            "itemCode":data.prodCode,
-            "itemName":data.prodCgyCode,
-            "itemCode":"",
-            "itemName":"",
-            "itemLenth":"",
-            "itemVariety":"",
-            "itemCgyCode":"",
-            "itemWidth":"",
-            "itemThick":"",
-            "itemColor":"",
-            "itemUnit":"",
+            "ordCode":$("#ordCode").val(),
+            "itemCode":data.itemCode,
+            "itemName":data.itemName,
+            "itemLenth":0.00,
+            "itemVariety":data.itemVariety,
+            "itemVaritemValue":data.itemVaritemValue,
+            "itemCgyCode":data.itemCgyCode,
+            "itemCgyCodeValue":data.itemCgyCodeValue,
+            "itemWidth":data.itemWidth,
+            "itemThick":data.itemThick,
+            "itemColor":data.itemColor,
+            "itemColorValue":data.itemColorValue,
+            "itemUnit":data.itemUnit,
+            "itemUnitValue":data.itemUnitValue,
             "itemOwner":"",
-            "itemPrice":"",
-            "itemNum":"",
-            "itemPriceType":"",
-            "itemWeight":"",
-            "itemTotalWeight":"",
-            "itemTotalSq":"",
+            "itemPrice":data.itemPrice,
+            "itemNum":0,
+            "itemPriceType":data.itemPriceType,
+            "itemPriceTypeValue":data.itemPriceTypeValue,
+            "itemWeight":0.000,
+            "itemTotalWeight":0,
+            "itemTotalSq":0,
             "itemYcType":"",
             "itemYbType":""
         }
         return obj;
     }
 
-    function inserData(name,index,obj) {
+    function inserData(name,index,obj,tIndex) {
+
         debugger
         for(var i=0;i<cusProdList.length;i++){
             if(cusProdList[i].ckId == index){
                 for(var key in cusProdList[i]){
                     console.log(key,cusProdList[i][key]);
                     if(key == name){
+                        if(name == "itemNum"){
+                            var totalWeigth = cusProdList[i]['itemWeight'] * obj.value;
+                            var totalMj = cusProdList[i]['itemLenth'] * cusProdList[i]['itemWidth'] * obj.value;
+                            cusProdList[i]["itemTotalWeight"] = totalWeigth;
+                            cusProdList[i]["itemTotalSq"] = totalMj;
+                        }
+                        if(name == "itemWeight"){
+                            var totalWeigth = obj.value * cusProdList[i]['itemNum'];
+                            cusProdList[i]["itemTotalWeight"] = totalWeigth;
+                        }
+                        if(name =='itemLenth'){
+                            var totalMj = obj.value * cusProdList[i]['itemWidth'] * cusProdList[i]['itemNum'];
+                            cusProdList[i]["itemTotalSq"] = totalMj;
+                        }
                         cusProdList[i][key] = obj.value;
+
                     }
                 }
             }
         }
+        debugger;
+        $("#cusProdDetail").bootstrapTable("load",cusProdList);
+        $('#cusProdDetail .chosen-select').trigger("chosen:updated");
+        $('#cusProdDetail .chosen-select').chosen();
+
     }
 
-    function saveProd() {
+    function mathWeightValue(row) {
 
-        debugger;
+    }
+
+    function mathMjValue(row) {
+
+    }
+    
+    function saveProd() {
+        if($("#ordCode").val() == ''){
+            return;
+        }
+        if(cusProdList.length > 0){
+            $.ajax({
+                url:'${ctx}/order/orderDetailBatchSave/',
+                data: JSON.stringify(cusProdList),
+                dataType:"json",
+                type:"post",
+                contentType:"application/json",
+                error: function(r) {
+
+                },
+                success: function(r) {
+                    debugger;
+                    if(r == "success"){
+                        window.location.href = "/crm/order/list"
+                    }else{
+
+                    }
+                }
+            })
+        }
     }
 </script>

@@ -103,7 +103,7 @@ public class CrmAjaxManageController extends BaseController {
     public Map<String,Object> getDictInfo() {
         Map<String,Object> map = new HashMap<>();
         List<Dict> ycType = SysDictUtils.getDictList("prod_ycType");
-        List<Dict>  ybType =  SysDictUtils.getDictList("prod_ybType");
+        List<Dict> ybType =  SysDictUtils.getDictList("prod_ybType");
         map.put("ycType",ycType);
         map.put("ybType",ybType);
         return map;

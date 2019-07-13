@@ -34,7 +34,7 @@
         <div class="controls">
             <form:select path="prodCgyCode" class="input-medium" placeholder="产品类型">
                 <form:option value="" label=""/>
-                <form:options items="${fns:getDictList('prod_cgy_code')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+                <form:options items="${fns:getCusDictList(149000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
             </form:select>
         </div>
     </div>
@@ -43,7 +43,7 @@
         <div class="controls">
             <form:select path="prodVariety" class="input-medium" placeholder="产品品种">
                 <form:option value="" label=""/>
-                <form:options items="${fns:getDictList('prod_variety')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+                <form:options items="${fns:getCusDictList(148000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
             </form:select>
         </div>
     </div>

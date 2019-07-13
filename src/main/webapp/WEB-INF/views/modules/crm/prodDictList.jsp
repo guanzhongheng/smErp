@@ -59,8 +59,8 @@
                     <%--${fns:getDictLabel(user.userType, 'sys_user_type', '无')}--%>
                 <td>${cus.prodCode}</td>
                 <td>${cus.prodName}</td>
-                <td>${fns:getDictLabel(cus.prodCgyCode,'prod_cgy_code','无')}</td>
-                <td>${fns:getDictLabel(cus.prodVariety,'prod_variety','无')}</td>
+                <td>${fns:getValueByDictKey(cus.prodCgyCode)}</td>
+                <td>${fns:getValueByDictKey(cus.prodVariety)}</td>
                 <td>${cus.prodThick}</td>
                 <td>${fns:getValueByDictKey(cus.prodUnit)}</td>
                 <td>${fns:getValueByDictKey(cus.prodPriceType)}</td>
