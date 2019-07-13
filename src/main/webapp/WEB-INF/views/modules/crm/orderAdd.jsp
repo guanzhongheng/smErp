@@ -123,7 +123,7 @@
                                                     <label class="col-sm-3 control-label"><i style="color: red"></i>
                                                         备注信息：</label>
                                                     <div class="col-sm-8">
-                                                        <form:textarea path="remark" htmlEscape="false"
+                                                        <form:textarea path="remarks" htmlEscape="false"
                                                                        cssStyle="min-width: 300px;" rows="6"/>
                                                     </div>
                                                 </div>

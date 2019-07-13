@@ -227,10 +227,28 @@
         }
     }
 
+    var ycType;
+    var ybType
+    function getItemType() {
+        $.ajax({
+            type: "POST",
+            url: '/crmAjax/ajaxDictInfo',
+            dataType:'json',
+            cache: false,
+            success: function(data){
+                debugger;
+                if(data != null){
+                    ycType = data.ycType;
+                    ybType = data.ybType;
+                }
+            }
+        });
+    }
+
+
     $(document).ready(function(){
-
+        getItemType();
         prodCgyCodes = "${fns:getDictList('prod_cgy_code')}";
-
         $("#cusProdDetail").bootstrapTable({
             url:'/order/item/findItemsById',
             pagination: false,  //表格底部显示分页条
@@ -240,7 +258,7 @@
             queryParams: function queryParams(params) {
                 debugger;
                 var ordCode = $("#ordCode").val()
-                if(ordCode != null && ordCode != '' && ordCode != undefined){
+                if(ordCode != null && ordCode != '' && ordCode != 'undefined'){
                     var params = {
                         ordCode : ordCode
                     }
@@ -367,9 +385,7 @@
                     field: 'itemYbType',
                     title: '压边类型',
                     width: '120px',
-                    formatter:function (value,row,index) {
-                        return ['<input trpe="text" onchange="inserData(\'itemYbType\','+row.ckId+',this)" class="form-control" value="'+value+'"/>'].join('');
-                    }
+                    formatter: operYbType
                 },
                 {
                     field: 'oper',
@@ -384,6 +400,24 @@
         $('#cusProdDetail').bootstrapTable('hideColumn', 'ckId');
         $('#cusProdDetail').bootstrapTable('hideColumn', 'itemCode');
     });
+
+    function operYbType(value,row,index){
+        var option;
+        var headOption = "<option value =''>请选择</option>";
+
+        $.each(ybType,function(i,obj){
+            if(value == obj.value){
+                headOption = headOption + "<option value='"+obj.value+"' selected>"+obj.label+"</option>";
+            }else{
+                headOption = headOption + "<option value='"+obj.value+"'>"+obj.label+"</option>";
+            }
+        });
+        option  = '<select class="form-control" id="itemYbType"'+row.ckId+' name="itemYbType" style="height:33px;">'+
+            headOption + '</select>';
+
+        return [option].join('');
+    }
+
 
     function operFormatter(value, row, index) {
         return [
@@ -465,7 +499,7 @@
             }
         }
     }
-    
+
     function saveProd() {
 
         debugger;

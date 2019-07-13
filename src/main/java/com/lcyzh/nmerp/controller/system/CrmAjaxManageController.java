@@ -1,9 +1,15 @@
 package com.lcyzh.nmerp.controller.system;
 
 import com.lcyzh.nmerp.controller.common.BaseController;
+import com.lcyzh.nmerp.utils.DictEntity;
+import com.lcyzh.nmerp.utils.DictUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 项目名称：nm-erp
@@ -84,5 +90,20 @@ public class CrmAjaxManageController extends BaseController {
 
 
         return "success";
+    }
+
+    /**
+     * 获取字典信息
+     * @return
+     */
+    @RequestMapping(value = "ajaxDictInfo")
+    @ResponseBody
+    public Map<String,Object> getDictInfo() {
+        Map<String,Object> map = new HashMap<>();
+        List<DictEntity>  ycType =  DictUtils.getDictList(144000L);
+        List<DictEntity>  ybType =  DictUtils.getDictList(143000L);
+        map.put("ycType",ycType);
+        map.put("ybType",ybType);
+        return map;
     }
 }

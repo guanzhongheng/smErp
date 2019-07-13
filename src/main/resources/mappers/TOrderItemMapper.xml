@@ -37,7 +37,7 @@
         toi.item_color itemColor,
         toi.item_num itemNum,
         toi.item_owner itemOwner,
-        toi.remarks  remarks
+        toi.remarks  remarks,
         toi.item_price itemPrice,
         toi.item_price_type itemPriceType,
         toi.item_weight itemWeight,

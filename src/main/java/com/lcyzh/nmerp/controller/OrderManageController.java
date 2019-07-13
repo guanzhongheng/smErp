@@ -5,6 +5,7 @@ import com.lcyzh.nmerp.controller.system.util.SysDictUtils;
 import com.lcyzh.nmerp.dao.TCustomerMapper;
 import com.lcyzh.nmerp.entity.TProduct;
 import com.lcyzh.nmerp.entity.sys.Dict;
+import com.lcyzh.nmerp.model.vo.CustomerAddModifyVo;
 import com.lcyzh.nmerp.model.vo.CustomerQueryVo;
 import com.lcyzh.nmerp.model.vo.OrderAddBatchVo;
 import com.lcyzh.nmerp.model.vo.OrderAddModifyVo;
@@ -44,9 +45,8 @@ public class OrderManageController extends BaseController {
     @ModelAttribute
     public OrderAddModifyVo get(@RequestParam(required=false) String ordCode) {
         if (StringUtils.isNotBlank(ordCode)){
-            //OrderAddModifyVo modifyInfoByOrdCode = orderService.findModifyInfoByOrdCode(ordCode);
-            //return modifyInfoByOrdCode;
-            return null;
+            OrderAddModifyVo modifyInfoByOrdCode = orderService.findModifyInfoByOrdCode(ordCode);
+            return modifyInfoByOrdCode;
         }else{
             return new OrderAddModifyVo();
         }
@@ -66,7 +66,7 @@ public class OrderManageController extends BaseController {
         if (!beanValidator(model, ordAddModifyVo)){
             return orderAdd(ordAddModifyVo, model);
         }
-       // orderService.save(ordAddModifyVo);
+        orderService.save(ordAddModifyVo);
         addMessage(redirectAttributes, "保存订单'" + ordAddModifyVo.getOrdTitle() + "'成功");
 
         model.addAttribute("orderAddModifyVo",ordAddModifyVo);
