@@ -26,4 +26,6 @@ public interface TOrderItemMapper {
     int delete(TOrderItem tOrderItem);
 
     List<OrderItemVo> findByOrdCode(String ordCode);
+
+    int deleteByOrdCode(String ordCode);
 }

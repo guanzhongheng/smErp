@@ -199,8 +199,10 @@ public class TOrderServiceImpl implements TOrderService {
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
     @Override
     public int save(List<OrderItemVo> list) {
+        String ordCode = list.get(0).getOrdCode();
         Date date = new Date();
         TOrder order = new TOrder();
+        order.setOrdCode(ordCode);
         Double amount = 0d;
         List<TOrderItem> orderItems = new ArrayList<>();
         for(OrderItemVo vo : list) {
@@ -208,7 +210,6 @@ public class TOrderServiceImpl implements TOrderService {
             BeanUtils.copyProperties(vo, orderItem);
             orderItem.setCreateTime(date);
             orderItems.add(orderItem);
-            order.setOrdCode(vo.getOrdCode());
             if(vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ)) {
                 amount += vo.getItemPrice() * vo.getItemTotalSq();
             }else if(vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)) {
@@ -217,6 +218,7 @@ public class TOrderServiceImpl implements TOrderService {
         }
         order.setOrdTotalAmount(amount);
         order.setUpdateTime(date);
+        tOrderItemMapper.deleteByOrdCode(ordCode);
         tOrderItemMapper.insertBatch(orderItems);
         return tOrderMapper.update(order);
     }

@@ -173,4 +173,9 @@
         WHERE id = #{id}
     </delete>
 
+    <delete id="deleteByOrdCode" parameterType="java.lang.String">
+        DELETE FROM T_ORDER_ITEM
+        WHERE ord_code = #{ordCode}
+    </delete>
+
 </mapper>
