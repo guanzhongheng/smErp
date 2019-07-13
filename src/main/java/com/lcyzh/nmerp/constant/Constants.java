@@ -695,4 +695,17 @@ public class Constants {
      */
     public static final long ORD_PAY_STATUS_QK = 103004L;
 
+    /**
+     * 计价方式
+     */
+    public static final long PROD_PRICE_TYPE = 141000L;
+    /**
+     * 按重量
+     */
+    public static final long PROD_PRICE_TYPE_WEIGHT = 141001L;
+    /**
+     * 按面积
+     */
+    public static final long PROD_PRICE_TYPE_SQ = 141002L;
+
 }

@@ -29,6 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.function.ObjDoubleConsumer;
 import java.util.stream.Collectors;
 
 /**
@@ -195,27 +196,39 @@ public class TOrderServiceImpl implements TOrderService {
         return vo;
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
     @Override
     public int save(List<OrderItemVo> list) {
         Date date = new Date();
-        List<TOrderItem> orderItems = list.stream().map(vo ->{
+        TOrder order = new TOrder();
+        Double amount = 0d;
+        List<TOrderItem> orderItems = new ArrayList<>();
+        for(OrderItemVo vo : list) {
             TOrderItem orderItem = new TOrderItem();
             BeanUtils.copyProperties(vo, orderItem);
             orderItem.setCreateTime(date);
-            return orderItem;
-        }).collect(Collectors.toList());
-        return tOrderItemMapper.insertBatch(orderItems);
+            orderItems.add(orderItem);
+            order.setOrdCode(vo.getOrdCode());
+            if(vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ)) {
+                amount += vo.getItemPrice() * vo.getItemTotalSq();
+            }else if(vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)) {
+                amount += vo.getItemPrice() * vo.getItemTotalWeight();
+            }
+        }
+        order.setOrdTotalAmount(amount);
+        order.setUpdateTime(date);
+        tOrderItemMapper.insertBatch(orderItems);
+        return tOrderMapper.update(order);
     }
 
-    //
-    ///**
-    // * @Description: 构建po
-    // * @Param: [ordAddModifyVo, current]
-    // * @return: void
-    // * @Author: lijinku
-    // * @Iteration : 1.0
-    // * @Date: 2019/7/4 11:45 AM
-    // */
+    /**
+     * @Description: 构建po
+     * @Param: [ordAddModifyVo, current]
+     * @return: void
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/4 11:45 AM
+     */
     private TOrder buildOrderPoFromVo(OrderAddModifyVo ordAddModifyVo, Date current) {
         TOrder tOrder = new TOrder();
         tOrder.setOrdCode(ordAddModifyVo.getOrdCode());

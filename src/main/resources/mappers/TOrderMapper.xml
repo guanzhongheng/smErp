@@ -137,7 +137,7 @@
             cus_contractor,
             com_contractor,
             cont_attach_url,
-            remark,
+            remarks,
             create_time,
             update_time
         )
@@ -156,7 +156,7 @@
             #{cusContractor,jdbcType=VARCHAR},
             #{comContractor,jdbcType=VARCHAR},
             #{contAttachUrl,jdbcType=VARCHAR},
-            #{remark,jdbcType=VARCHAR},
+            #{remarks,jdbcType=VARCHAR},
             #{createTime,jdbcType=TIMESTAMP},
             #{updateTime,jdbcType=TIMESTAMP}
         )
@@ -213,6 +213,9 @@
             <if test="proxyName!=null">
                 proxy_name = #{proxyName,jdbcType=VARCHAR},
             </if>
+            <if test="ordTotalAmount!=null">
+                ord_total_amount = #{ordTotalAmount, jdbcType=DOUBLE},
+            </if>
             <if test="ordSignDate!=null">
                 ord_sign_date = #{ordSignDate,jdbcType=VARCHAR},
             </if>
@@ -232,10 +235,6 @@
 
             <if test="contAttachUrl!=null">
                 cont_attach_url = #{contAttachUrl,jdbcType=VARCHAR},
-            </if>
-
-            <if test="remark!=null">
-                remark = #{remark,jdbcType=VARCHAR},
             </if>
 
             <if test="updateTime!=null">

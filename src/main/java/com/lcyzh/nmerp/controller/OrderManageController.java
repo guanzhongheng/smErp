@@ -8,6 +8,7 @@ import com.lcyzh.nmerp.entity.sys.Dict;
 import com.lcyzh.nmerp.model.vo.CustomerQueryVo;
 import com.lcyzh.nmerp.model.vo.OrderAddBatchVo;
 import com.lcyzh.nmerp.model.vo.OrderAddModifyVo;
+import com.lcyzh.nmerp.model.vo.ProductVo;
 import com.lcyzh.nmerp.service.TOrderService;
 import com.lcyzh.nmerp.service.TProductService;
 import org.apache.commons.lang3.StringUtils;
@@ -80,7 +81,7 @@ public class OrderManageController extends BaseController {
     public String prodDetailList(String ordCode,Model model){
         model.addAttribute("ordCode", ordCode);
         // 获取所有产品信息
-        List<TProduct> list = productService.findAllList();
+        List<ProductVo> list = productService.findAllList();
         // 获取颜色
         List<Dict> colorList = SysDictUtils.getDictList("prod_color");
         model.addAttribute("prod",list);
