@@ -3,7 +3,7 @@
 
 
 <div class="wrapper wrapper-content animated fadeInRight">
-
+    <sys:message content="${message}"/>
     <div class="tabs-container">
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true"> 创建订单</a>
@@ -43,9 +43,15 @@
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label"><i style="color: red">*</i>
                                                         关联客户：</label>
-                                                    <div class="col-sm-8">
-                                                        <form:input path="cusCode" htmlEscape="false" maxlength="200"
-                                                                    class="form-control" placeholder="关联客户"/>
+                                                    <div class="col-sm-6">
+                                                        <select id="cusCode" name="cusCode" class="chosen-select" style="width: 300px">
+                                                            <c:forEach items="${customers}" var="s">
+                                                                <option value='${s.cusCode}' > ${s.cusName}</option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <a href="/cus/customer_add" class="btn btn-primary" style="width: 75px">客户添加</a>
                                                     </div>
                                                 </div>
                                                 <div class="hr-line-dashed"></div>
@@ -65,7 +71,7 @@
                                                         <form:select path="ordType" class="chosen-select"
                                                                      cssStyle="min-width: 300px">
                                                             <form:option value="" label=""/>
-                                                            <form:options items="${fns:getDictList(120000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+                                                            <form:options items="${fns:getCusDictList(101000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                                                         </form:select>
                                                     </div>
                                                 </div>
@@ -74,9 +80,9 @@
                                                     <label class="col-sm-3 control-label"><i style="color: red">*</i>
                                                         订单签订日期：</label>
                                                     <div class="col-sm-8">
-                                                        <form:input path="ordSignDate" htmlEscape="false"
+                                                        <form:input path="ordSignDate" id="ordSignDate" htmlEscape="false"
                                                                     maxlength="200"
-                                                                    class="form-control" placeholder="订单签订日期"/>
+                                                                    class="input-sm form-control" placeholder="订单签订日期"/>
                                                     </div>
                                                 </div>
                                                 <div class="hr-line-dashed"></div>
@@ -84,9 +90,9 @@
                                                     <label class="col-sm-3 control-label"><i style="color: red"></i>
                                                         订单交付日期：</label>
                                                     <div class="col-sm-8">
-                                                        <form:input path="ordDeliveryDate" htmlEscape="false"
+                                                        <form:input path="ordDeliveryDate" id="ordDeliveryDate" htmlEscape="false"
                                                                     maxlength="200"
-                                                                    class="form-control" placeholder="订单交付日期"/>
+                                                                    class="input-sm form-control" placeholder="订单交付日期"/>
                                                     </div>
                                                 </div>
 
@@ -117,8 +123,8 @@
                                                     <label class="col-sm-3 control-label"><i style="color: red"></i>
                                                         备注信息：</label>
                                                     <div class="col-sm-8">
-                                                        <form:input path="remark" htmlEscape="false" maxlength="200"
-                                                                    class="form-control" placeholder="备注信息"/>
+                                                        <form:textarea path="remark" htmlEscape="false"
+                                                                       cssStyle="min-width: 300px;" rows="6"/>
                                                     </div>
                                                 </div>
                                             </form>
@@ -151,11 +157,31 @@
 </div>
 <script>
     $(document).ready(function () {
-        $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",})
+        $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",});
+        $("#ordSignDate").datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: !1,
+            forceParse: !1,
+            calendarWeeks: !0,
+            autoclose: !0
+        });
+        $("#ordDeliveryDate").datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: !1,
+            forceParse: !1,
+            calendarWeeks: !0,
+            autoclose: !0
+    })
     });
     function prodlistAdd(orderCode) {
+        if(orderCode == null || orderCode == '' || orderCode == undefined){
+            $("#messageBox").text("请先保存订单!");
+            // return;
+        }
         window.location.href = "/order/prodDetailList?ordCode=" + orderCode;
     }
+
+
 </script>
 <script src="${ctxStatic}/hPlugs/js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
 <script src="${ctxStatic}/hPlugs/js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>

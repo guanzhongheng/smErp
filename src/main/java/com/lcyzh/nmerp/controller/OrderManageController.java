@@ -2,8 +2,10 @@ package com.lcyzh.nmerp.controller;
 
 import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.controller.system.util.SysDictUtils;
+import com.lcyzh.nmerp.dao.TCustomerMapper;
 import com.lcyzh.nmerp.entity.TProduct;
 import com.lcyzh.nmerp.entity.sys.Dict;
+import com.lcyzh.nmerp.model.vo.CustomerQueryVo;
 import com.lcyzh.nmerp.model.vo.OrderAddBatchVo;
 import com.lcyzh.nmerp.model.vo.OrderAddModifyVo;
 import com.lcyzh.nmerp.service.TOrderService;
@@ -35,6 +37,8 @@ public class OrderManageController extends BaseController {
 
     @Autowired
     private TProductService productService;
+    @Autowired
+    private TCustomerMapper tCustomerMapper;
 
     @ModelAttribute
     public OrderAddModifyVo get(@RequestParam(required=false) String ordCode) {
@@ -49,6 +53,9 @@ public class OrderManageController extends BaseController {
 
     @RequestMapping(value = "order_add")
     public String orderAdd(@ModelAttribute("orderAddModifyVo") OrderAddModifyVo ordAddModifyVo, Model model){
+        // 获取用户列表
+        List<CustomerQueryVo> listPo = tCustomerMapper.findList(null);
+        model.addAttribute("customers",listPo);
         model.addAttribute("orderAddModifyVo",ordAddModifyVo);
         return "modules/crm/orderAdd";
     }
@@ -58,7 +65,7 @@ public class OrderManageController extends BaseController {
         if (!beanValidator(model, ordAddModifyVo)){
             return orderAdd(ordAddModifyVo, model);
         }
-        //orderService.save(ordAddModifyVo);
+       // orderService.save(ordAddModifyVo);
         addMessage(redirectAttributes, "保存订单'" + ordAddModifyVo.getOrdTitle() + "'成功");
 
         model.addAttribute("orderAddModifyVo",ordAddModifyVo);
@@ -75,7 +82,7 @@ public class OrderManageController extends BaseController {
         // 获取所有产品信息
         List<TProduct> list = productService.findAllList();
         // 获取颜色
-        List<Dict> colorList = SysDictUtils.getDictList("color_type");
+        List<Dict> colorList = SysDictUtils.getDictList("prod_color");
         model.addAttribute("prod",list);
         model.addAttribute("color",colorList);
 

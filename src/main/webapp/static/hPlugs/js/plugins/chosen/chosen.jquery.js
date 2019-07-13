@@ -512,7 +512,7 @@
 
         AbstractChosen.default_multiple_text = "Select Some Options";
 
-        AbstractChosen.default_single_text = "Select an Option";
+        AbstractChosen.default_single_text = "请选择一个值";
 
         AbstractChosen.default_no_result_text = "No results match";
 

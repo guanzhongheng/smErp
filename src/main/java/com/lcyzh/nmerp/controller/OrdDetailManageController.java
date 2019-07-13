@@ -44,6 +44,9 @@ public class OrdDetailManageController extends BaseController {
     @RequestMapping("findItemsById")
     @ResponseBody
     public List<OrderItemVo> findItemsByOrdCode(String ordCode) {
+        if(StringUtils.isEmpty(ordCode)){
+            return null;
+        }
         List<OrderItemVo> list = orderService.findByOrdCode(ordCode);
         return list;
     }

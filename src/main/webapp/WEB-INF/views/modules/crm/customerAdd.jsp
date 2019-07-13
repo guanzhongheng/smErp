@@ -257,7 +257,7 @@
                             <div class="col-sm-4 col-sm-offset-2">
                                 <button class="btn btn-primary" type="submit">创建客户</button>
                                 &nbsp;&nbsp;
-                                <button class="btn btn-white" type="button" onclick="history.go(-1)">返回</button>
+                                <button class="btn btn-white" type="button" onclick="javascript:window.location.replace(document.referrer); ">返回</button>
                             </div>
                         </div>
                     </div>

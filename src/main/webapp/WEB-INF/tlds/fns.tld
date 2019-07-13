@@ -72,7 +72,6 @@
     <example>${fns:getCache(cacheName, defaultValue)}</example>
   </function>
 
-   DictUtils
   <function>
     <description>获取字典标签</description>
     <name>getCusDictList</name>
