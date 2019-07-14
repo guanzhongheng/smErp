@@ -56,6 +56,7 @@
             <th>订单标题</th>
             <th>关联客户</th>
             <th>审批状态</th>
+            <th>签单日期</th>
             <th>订单总金额</th>
             <th>已回款金额</th>
             <th>已开票金额</th>
@@ -69,14 +70,15 @@
                 <td>${ord.ordTitle}</td>
                 <td>${ord.cusName}</td>
                 <td>${ord.ordStatusValue}</td>
+                <td>${ord.ordSignDate}</td>
                 <td>${ord.ordTotalAmount}</td>
                 <td>${ord.repayAmount}</td>
                 <td>${ord.invoicedAmount}</td>
                 <td>
                     <%--<a href=""><i class="icon-comment">跟进</i></a>--%>
                     <a href="/order/prodDetailList?ordCode=${ord.ordCode}"><i class="icon-comment">&nbsp;产品添加</i></a>
-                    <a href="${ctx}/order/order_add?ordCode=${ord.ordCode}"><i class="icon-pencil">编辑</i></a>
-                    <a href=""><i class="icon-trash">删除</i></a>
+                    <a href="/order/order_add?ordCode=${ord.ordCode}"><i class="icon-pencil">编辑</i></a>
+                    <a href="/order/order_delete?ordCode=${ord.ordCode}" onclick="return confirmx('确认要删除该订单吗？', this.href)"><i class="icon-trash">删除</i></a>
                 </td>
             </tr>
         </c:forEach>

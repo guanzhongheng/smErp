@@ -257,25 +257,28 @@
 
     var ycType;
     var ybType
-    function getItemType() {
-        $.ajax({
-            type: "POST",
-            url: '/crmAjax/ajaxDictInfo',
-            dataType:'json',
-            cache: false,
-            success: function(data){
-                debugger;
-                if(data != null){
-                    ycType = data.ycType;
-                    ybType = data.ybType;
-                }
+
+    $.ajax({
+        type: "POST",
+        url: '/crmAjax/ajaxDictInfo',
+        dataType:'json',
+        cache: false,
+        success: function(data){
+            debugger;
+            if(data != null){
+                ycType = data.ycType;
+                ybType = data.ybType;
             }
-        });
+        }
+    });
+
+    function getItemType() {
+
     }
 
 
     $(document).ready(function(){
-        getItemType();
+       // getItemType();
         $("#cusProdDetail").bootstrapTable({
             url:'/order/item/findItemsById',
             pagination: false,  //表格底部显示分页条
@@ -444,13 +447,15 @@
         debugger;
         var option;
         var headOption = "<option value =''>请选择</option>";
-        $.each(ybType,function(i,obj){
-            if(value == obj.value){
-                headOption = headOption + "<option value='"+obj.value+"' selected>"+obj.label+"</option>";
-            }else{
-                headOption = headOption + "<option value='"+obj.value+"'>"+obj.label+"</option>";
-            }
-        });
+        if(ybType != null || ybType != undefined){
+            $.each(ybType,function(i,obj){
+                if(value == obj.value){
+                    headOption = headOption + "<option value='"+obj.value+"' selected>"+obj.label+"</option>";
+                }else{
+                    headOption = headOption + "<option value='"+obj.value+"'>"+obj.label+"</option>";
+                }
+            });
+        }
         option  = '<select class="chosen-select" id="itemYbType"'+row.ckId+' onchange="inserData(\'itemYbType\','+row.ckId+',this)" style="height:33px;">'+
             headOption + '</select>';
 
@@ -462,13 +467,15 @@
         debugger;
         var option;
         var headOption = "<option value =''>请选择</option>";
-        $.each(ycType,function(i,obj){
-            if(value == obj.value){
-                headOption = headOption + "<option value='"+obj.value+"' selected>"+obj.label+"</option>";
-            }else{
-                headOption = headOption + "<option value='"+obj.value+"'>"+obj.label+"</option>";
-            }
-        });
+        if(ycType != null || ycType != undefined){
+            $.each(ycType,function(i,obj){
+                if(value == obj.value){
+                    headOption = headOption + "<option value='"+obj.value+"' selected>"+obj.label+"</option>";
+                }else{
+                    headOption = headOption + "<option value='"+obj.value+"'>"+obj.label+"</option>";
+                }
+            });
+        }
         option  = '<select class="chosen-select" id="itemYcType"'+row.ckId+' onchange="inserData(\'itemYcType\','+row.ckId+',this)" style="height:33px;">'+
             headOption + '</select>';
         return [option].join('');
@@ -588,6 +595,7 @@
     }
     
     function saveProd() {
+
         if($("#ordCode").val() == ''){
             return;
         }
@@ -599,14 +607,14 @@
                 type:"post",
                 contentType:"application/json",
                 error: function(r) {
-
+                    layer.msg("保存失败！")
                 },
                 success: function(r) {
                     debugger;
-                    if(r == "success"){
+                    if(r.res == "success"){
                         window.location.href = "/crm/order/list"
                     }else{
-
+                        layer.msg("保存失败！")
                     }
                 }
             })

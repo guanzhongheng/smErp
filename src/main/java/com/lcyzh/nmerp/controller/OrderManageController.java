@@ -16,7 +16,9 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 项目名称：nm-erp
@@ -68,7 +70,7 @@ public class OrderManageController extends BaseController {
     }
 
     /**
-     * 订单详情-产品添加
+     * 订单详情-产品添加crm
      * @return
      */
     @RequestMapping(value = {"prodDetailList"})
@@ -90,15 +92,28 @@ public class OrderManageController extends BaseController {
      */
     @RequestMapping(value = {"orderDetailBatchSave"})
     @ResponseBody
-    public String orderDetailBatchSave(@RequestBody List<OrderItemVo> list){
+    public Map<String,Object> orderDetailBatchSave(@RequestBody List<OrderItemVo> list){
+        Map<String,Object> map = new HashMap<>();
+        map.put("res","success");
         if(CollectionUtils.isEmpty(list)){
-           return "error";
+            map.put("res","error");
+        }else{
+            int res = orderService.save(list);
+            if(res < 1){
+                map.put("res","error");
+            }
         }
-        int res = orderService.save(list);
+        return map;
+    }
+
+    @RequestMapping(value = "order_delete")
+    public String delete(String ordCode, RedirectAttributes redirectAttributes) {
+        int res = orderService.detele(ordCode);
         if(res < 1){
-            return "error";
+            addMessage(redirectAttributes, "删除失败");
+            return "redirect:/crm/order/list";
         }
-        return "success";
+        return "redirect:/crm/order/list";
     }
 
 

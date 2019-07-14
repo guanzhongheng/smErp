@@ -20,6 +20,7 @@
 			});
 		});
 		function page(n,s){
+		    debugger;
 			if(n) $("#pageNo").val(n);
 			if(s) $("#pageSize").val(s);
 			$("#searchForm").attr("action","${ctx}/sys/user/list");

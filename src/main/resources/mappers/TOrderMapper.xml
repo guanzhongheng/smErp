@@ -71,19 +71,19 @@
             <if test="ordTitle!= null and ordTitle != ''">
                 and ord_title like concat('%', #{ordTitle,jdbcType=VARCHAR}, '%')
             </if>
-            <if test="ordType!= null">
+            <if test="ordType!= null and ordType!= ''">
                 and ord_type = #{ordType,jdbcType=BIGINT}
             </if>
-            <if test="ordSignDate!= null">
+            <if test="ordSignDate!= null and ordSignDate!= ''">
                 and ord_sign_date like concat('%', #{ordSignDate,jdbcType=VARCHAR}, '%')
             </if>
-            <if test="ordStatus!= null">
+            <if test="ordStatus!= null and ordStatus!= ''">
                 and ord_status = #{ordStatus,jdbcType=BIGINT}
             </if>
-            <if test="ordDeliveryDate!= null">
+            <if test="ordDeliveryDate!= null and ordDeliveryDate!= ''">
                 and ord_delivery_date like concat('%', #{ordDeliveryDate,jdbcType=VARCHAR}, '%')
             </if>
-            <if test="payType!= null">
+            <if test="payType!= null and payType!= ''">
                 and pay_type = #{payType,jdbcType=BIGINT}
             </if>
 

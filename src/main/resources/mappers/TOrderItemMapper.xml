@@ -32,7 +32,7 @@
         tt.prod_unit itemUnit,
         tt.prod_variety  itemVariety,
         toi.id itemId,
-        to1.ord_code ordCode,
+        toi.ord_code ordCode,
         toi.item_lenth itemLenth,
         toi.item_thick itemThick,
         toi.item_width itemWidth,

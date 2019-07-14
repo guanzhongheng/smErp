@@ -1,5 +1,7 @@
 package com.lcyzh.nmerp.model.vo;
 
+import com.lcyzh.nmerp.common.persistence.DataEntity;
+
 /**
  * @Project : nm-erp
  * @Description :
@@ -10,7 +12,7 @@ package com.lcyzh.nmerp.model.vo;
  * ----------   ------------- -----------------------------------
  * lijinku          2019/07/02    create
  */
-public class OrderQueryVo{
+public class OrderQueryVo extends DataEntity<OrderQueryVo> {
     //订单编号
     private String ordCode;
     //客户资料编号
@@ -51,6 +53,10 @@ public class OrderQueryVo{
     private Integer overdueNum;
     //0-未跟进；1-正在跟进
     private Integer followType;
+
+    public OrderQueryVo(){
+        super();
+    }
 
     public String getOrdCode() {
         return ordCode;
