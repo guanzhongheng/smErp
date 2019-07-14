@@ -65,7 +65,10 @@
         LEFT JOIN T_CUSTOMER cs ON od.cus_code = cs.cus_code
         LEFT JOIN T_PAYMENT pt ON od.ord_code = pt.ord_code
         <where>
-            <if test="ordTitle!= null">
+            <if test="ordCode!= null and ordCode != ''">
+                and od.ord_code like concat('%', #{ordCode,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="ordTitle!= null and ordTitle != ''">
                 and ord_title like concat('%', #{ordTitle,jdbcType=VARCHAR}, '%')
             </if>
             <if test="ordType!= null">
@@ -84,8 +87,8 @@
                 and pay_type = #{payType,jdbcType=BIGINT}
             </if>
 
-            <if test="cusName!= null">
-                and cus_name = like concat('%', #{cusName,jdbcType=VARCHAR}, '%')
+            <if test="cusName!= null and cusName != ''">
+                and cus_name  like concat('%', #{cusName,jdbcType=VARCHAR}, '%')
             </if>
 
             <if test="followType!= null and followType == 1">
@@ -244,7 +247,6 @@
                 pay_status = #{payStatus,jdbcType=BIGINT}
             </if>
         </set>
-
         WHERE ord_code = #{ordCode,jdbcType=VARCHAR}
     </update>
 

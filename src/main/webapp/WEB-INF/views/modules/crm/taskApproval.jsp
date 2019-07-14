@@ -44,10 +44,10 @@
         <li class="clearfix"></li>
     </ul>
 </form:form>
-<div class="control-group">&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="/order/order_add" type="button" class="btn btn-primary" style="width: 67px;height: 22px"><i
-            class="icon-plus"></i>&nbsp;添加</a>
-</div>
+<%--<div class="control-group">&nbsp;&nbsp;&nbsp;&nbsp;--%>
+    <%--<a href="/order/order_add" type="button" class="btn btn-primary" style="width: 67px;height: 22px"><i--%>
+            <%--class="icon-plus"></i>&nbsp;添加</a>--%>
+<%--</div>--%>
 <div class="control-group">
     <table id="contentTable" class="table table-striped table-bordered table-condensed">
         <thead>
@@ -66,13 +66,15 @@
             <tr>
                 <td>${ord.ordCode}</td>
                 <td>${ord.ordTitle}</td>
-                <td>${ord.ordCusName}</td>
+                <td>${ord.cusName}</td>
                 <td>${ord.ordStatusValue}</td>
                 <td>${ord.ordTotalAmount}</td>
                 <td>${ord.ordDeliveryDate}</td>
                 <td>
-                    <a href="/cus/orderStatus_update?ordCode=${ord.ordCode}&&ordStatus=0"  type="button" class="btn btn-primary" >通过</a>&nbsp;&nbsp;
-                    <a href="/cus/orderStatus_update?ordCode=${ord.ordCode}&&ordStatus=1" type="button" class="btn btn-primary" >不通过</a>
+                    <c:if test="${ord.ordStatus eq '100001'}">
+                        <a href="/cus/orderStatus_update?ordCode=${ord.ordCode}&&ordStatus=0"  type="button" class="btn btn-primary" >通过</a>&nbsp;&nbsp;
+                        <a href="/cus/orderStatus_update?ordCode=${ord.ordCode}&&ordStatus=1" type="button" class="btn btn-primary" >不通过</a>
+                    </c:if>
                 </td>
             </tr>
         </c:forEach>

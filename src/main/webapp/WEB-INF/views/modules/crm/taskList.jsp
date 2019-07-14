@@ -65,7 +65,7 @@
                 <td><input type="checkbox" name="orderCode" value="${ord.ordCode}" /></td>
                 <td>${ord.ordCode}</td>
                 <td>${ord.ordTitle}</td>
-                <td>${ord.ordCusName}</td>
+                <td>${ord.cusName}</td>
                 <td>${ord.ordStatusValue}</td>
                 <td>${ord.ordTotalAmount}</td>
                 <td>${ord.repayAmount}</td>

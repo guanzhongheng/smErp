@@ -122,7 +122,7 @@ public class CrmManageController extends BaseController {
     @RequestMapping(value = {"approval/list"})
     public String taskApproval(@ModelAttribute("order") OrderQueryVo order,Model model, HttpServletRequest request, HttpServletResponse response){
         // 获取需要审批的产品清单列表
-        //order.setOrdStatus(Constants.ORD_STATUS_TOASSIGN);
+        order.setOrdStatus(Constants.ORD_STATUS_NEW);
         Page<OrderQueryVo> page = orderService.findPage(new Page<OrderQueryVo>(request, response), order);
         model.addAttribute("page", page);
         return "modules/crm/taskApproval";
@@ -135,6 +135,7 @@ public class CrmManageController extends BaseController {
      */
     @RequestMapping(value = {"order/taskList"})
     public String taskList(@ModelAttribute("order") OrderQueryVo order, Model model, HttpServletRequest request, HttpServletResponse response){
+        order.setOrdStatus(Constants.ORD_STATUS_ASSIGNED);
         Page<OrderQueryVo> page = orderService.findPage(new Page<OrderQueryVo>(request, response), order);
         model.addAttribute("page", page);
         return "modules/crm/taskList";
