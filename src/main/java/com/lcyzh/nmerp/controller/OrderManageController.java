@@ -64,7 +64,7 @@ public class OrderManageController extends BaseController {
         orderService.save(ordAddModifyVo);
         addMessage(redirectAttributes, "保存订单'" + ordAddModifyVo.getOrdTitle() + "'成功");
         model.addAttribute("orderAddModifyVo",ordAddModifyVo);
-        return "modules/crm/orderAdd?";
+        return orderAdd(ordAddModifyVo, model);
     }
 
     /**

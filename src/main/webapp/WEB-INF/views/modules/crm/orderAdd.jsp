@@ -134,7 +134,7 @@
                                                 <div class="col-sm-4 col-sm-offset-2">
                                                     <button class="btn btn-primary" type="submit">保存订单</button>
                                                     &nbsp;&nbsp;
-                                                    <button type="button"  class="btn btn-default" onclick="prodlistAdd(${orderAddModifyVo.ordCode})">产品添加</button>
+                                                    <button type="button"  class="btn btn-default" onclick="prodlistAdd('${orderAddModifyVo.ordCode}')">产品添加</button>
                                                     &nbsp;&nbsp;
                                                     <button class="btn btn-white" type="button"
                                                             onclick="history.go(-1)">返回
@@ -196,7 +196,7 @@
             layer.msg('请先保存订单');
             return;
         }
-        window.location.href = "/order/prodDetailList?ordCode=" + orderCode;
+        window.location.href = "/order/prodDetailList?ordCode='" + orderCode + "'";
     }
 
 
