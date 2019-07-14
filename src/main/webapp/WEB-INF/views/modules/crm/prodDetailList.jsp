@@ -6,8 +6,7 @@
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-      <%--  <input type="hidden" id="ordCode" value="${ordCode}"/>--%>
-        <input type="hidden" id="ordCode" value="1"/>
+      <input type="hidden" id="ordCode" value="${ordCode}"/>
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <label class="col-sm-3 control-label">产品选择:
