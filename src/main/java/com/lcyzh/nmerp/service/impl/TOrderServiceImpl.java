@@ -76,15 +76,17 @@ public class TOrderServiceImpl implements TOrderService {
         int res = -1;
         if (ordAddModifyVo != null) {
             String ordCode = StringUtils.genFixPreFixStr(Constants.ORD_PRE_FIX);
-            ordAddModifyVo.setOrdCode(ordCode);
             Date current = new Date();
             TOrder order = buildOrderPoFromVo(ordAddModifyVo, current);
             if (StringUtils.isNotEmpty(ordAddModifyVo.getOrdCode())) {
                 res = tOrderMapper.update(order);
             } else {
+                order.setOrdCode(ordCode);
                 res = tOrderMapper.insert(order);
             }
-
+            if(res > 0) {
+                ordAddModifyVo.setOrdCode(ordCode);
+            }
         }
 
         return res;
