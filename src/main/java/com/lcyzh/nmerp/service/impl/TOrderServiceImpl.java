@@ -82,6 +82,7 @@ public class TOrderServiceImpl implements TOrderService {
                 res = tOrderMapper.update(order);
             } else {
                 order.setOrdCode(ordCode);
+                order.setOrdStatus(Constants.ORD_STATUS_NEW);
                 res = tOrderMapper.insert(order);
             }
             if(res > 0) {
@@ -149,6 +150,16 @@ public class TOrderServiceImpl implements TOrderService {
         }else{
             return -1;
         }
+    }
+
+    @Override
+    public int detele(String ordCode) {
+        int res = -1;
+        res = tOrderMapper.delete(ordCode);
+        if(res > 0) {
+            tOrderItemMapper.deleteByOrdCode(ordCode);
+        }
+        return res;
     }
 
     /**

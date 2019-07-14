@@ -97,4 +97,9 @@ public interface TOrderService {
      */
     int orderAssign(String ordCode, int state);
 
+    /**
+     * 订单删除
+     */
+    int detele(String ordCode);
+
 }

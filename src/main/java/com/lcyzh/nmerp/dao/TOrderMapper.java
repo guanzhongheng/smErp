@@ -26,7 +26,7 @@ public interface TOrderMapper {
 
     int update(TOrder tOrder);
 
-    int delete(TOrder tOrder);
+    int delete(String tOrder);
 
     OrderAddModifyVo findModifyInfoByOrdCode(String ordCode);
 }

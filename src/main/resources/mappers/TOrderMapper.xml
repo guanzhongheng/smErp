@@ -250,7 +250,7 @@
         WHERE ord_code = #{ordCode,jdbcType=VARCHAR}
     </update>
 
-    <delete id="delete" parameterType="com.lcyzh.nmerp.entity.TOrder">
+    <delete id="delete" parameterType="java.lang.String">
         DELETE FROM T_ORDER
         WHERE ord_code = #{ordCode,jdbcType=VARCHAR}
     </delete>
