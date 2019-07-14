@@ -311,6 +311,9 @@
                     field: 'itemCode',
                     title: '编号'
                 },{
+                    field: 'ordCode',
+                    title: '合同编码'
+                },{
                     field: 'itemName',
                     title: '名称',
                     width: '150px'
@@ -415,6 +418,7 @@
         // $(".fixed-table-border")[1].style.height = '230px';
          $(".fixed-table-border").hide();
         $('#cusProdDetail').bootstrapTable('hideColumn', 'itemCode');
+        $('#cusProdDetail').bootstrapTable('hideColumn', 'ordCode');
     });
 
     function operPriceType(value,row,index) {
