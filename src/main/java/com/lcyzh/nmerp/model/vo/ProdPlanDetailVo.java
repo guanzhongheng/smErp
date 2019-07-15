@@ -30,8 +30,16 @@ public class ProdPlanDetailVo extends Page<ProdPlanDetailVo> {
     private Long itemUnit;
     private String itemOwner;
     private String itemColor;
+    //机台编码
     private String macCode;
+    //配方
     private String formula;
+    //条形码
+    private String barCode;
+    //产品单件重量
+    private String itemWeight;
+    //产品单件面积
+    private String itemSq;
 
     public Long getProdPlanDetailId() {
         return prodPlanDetailId;
@@ -199,5 +207,29 @@ public class ProdPlanDetailVo extends Page<ProdPlanDetailVo> {
 
     public void setFormula(String formula) {
         this.formula = formula;
+    }
+
+    public String getBarCode() {
+        return barCode;
+    }
+
+    public void setBarCode(String barCode) {
+        this.barCode = barCode;
+    }
+
+    public String getItemWeight() {
+        return itemWeight;
+    }
+
+    public void setItemWeight(String itemWeight) {
+        this.itemWeight = itemWeight;
+    }
+
+    public String getItemSq() {
+        return itemSq;
+    }
+
+    public void setItemSq(String itemSq) {
+        this.itemSq = itemSq;
     }
 }

@@ -26,4 +26,5 @@ public interface TStockMapper {
 
     int delete(TStock tStock);
 
+    List<TStock> getByBarCode(String barCode);
 }

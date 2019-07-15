@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 import java.security.SecureRandom;
+import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -38,12 +39,25 @@ public class IdGen implements  SessionIdGenerator {
 	}
 
 	/**
+	 * 使用SecureRandom随机生成int
+	 */
+	public static int randomInt() {
+		return Math.abs(random.nextInt());
+	}
+
+	/**
 	 * 基于Base62编码的SecureRandom随机生成bytes.
 	 */
 	public static String randomBase62(int length) {
 		byte[] randomBytes = new byte[length];
 		random.nextBytes(randomBytes);
 		return Encodes.encodeBase62(randomBytes);
+	}
+	/**
+	 * 条形码生成
+	 */
+	public static String getNetBarCode() {
+		return randomBase62(3).toUpperCase() + randomInt();
 	}
 	
 	/**
@@ -59,11 +73,14 @@ public class IdGen implements  SessionIdGenerator {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(IdGen.uuid());
-		System.out.println(IdGen.uuid().length());
-		System.out.println(new IdGen().getNextId());
-		for (int i=0; i<1000; i++){
-			System.out.println(IdGen.randomLong() + "  " + IdGen.randomBase62(5));
+		//System.out.println(IdGen.uuid());
+		//System.out.println(IdGen.uuid().length());
+		//System.out.println(new IdGen().getNextId());
+		//for (int i=0; i<2; i++){
+		//	System.out.println(Math.abs(random.nextInt()) + "  " + IdGen.randomBase62(3));
+		//}
+		for(int i = 0; i < 100; i++) {
+			System.out.println(getNetBarCode());
 		}
 	}
 

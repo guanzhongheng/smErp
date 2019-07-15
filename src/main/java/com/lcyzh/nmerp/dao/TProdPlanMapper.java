@@ -26,4 +26,6 @@ public interface TProdPlanMapper {
     List<TProdPlan> findAllList();
 
     int updateBatch(List<TProdPlan> updateList);
+
+    int updateNum(TProdPlan prodPlan);
 }

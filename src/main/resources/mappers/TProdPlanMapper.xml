@@ -145,7 +145,7 @@
                 formula = #{formula,jdbcType=VARCHAR},
             </if>
             <if test="isAuto!= null">
-                isAuto = #{isAuto,jdbcType=CHAR},
+                isAuto = #{isAuto,jdbcType=CHAR}
             </if>
         </set>
         WHERE prod_plan_code = #{prodPlanCode,jdbcType=VARCHAR}
@@ -155,5 +155,11 @@
         DELETE FROM t_prod_plan
         WHERE prod_plan_code = #{prodPlanCode,jdbcType=VARCHAR}
     </delete>
+    
+    <update id="updateNum" parameterType="com.lcyzh.nmerp.entity.TProdPlan">
+        update t_prod_plan
+        set total_quantity = total_quantity - #{totalQuantity}, quantity = quantity - #{quantity}
+        where prod_plan_code = #{prodPlanCode}
+    </update>
 
 </mapper>

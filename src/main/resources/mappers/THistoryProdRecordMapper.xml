@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lcyzh.nmerp.dao.THistoryProdRecordMapper">
+
+    <resultMap id="tHistoryProdRecordResultMap" type="com.lcyzh.nmerp.entity.THistoryProdRecord">
+        <id column="id" property="id" jdbcType="BIGINT"/> 
+        <result column="ord_code" property="ordCode" jdbcType="VARCHAR"/> 
+        <result column="order_item_id" property="orderItemId" jdbcType="BIGINT"/> 
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
+    </resultMap>
+
+
+    <select id="findById" parameterType="java.lang.Long" resultMap="tHistoryProdRecordResultMap">
+        SELECT *
+        FROM t_history_prod_record
+        WHERE id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="findList" parameterType ="com.lcyzh.nmerp.entity.THistoryProdRecord"  resultMap="tHistoryProdRecordResultMap">
+        SELECT *
+        FROM t_history_prod_record
+        <where>
+            <if test="ordCode!= null">
+            and ord_code like concat('%', #{ordCode,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="orderItemId!= null">
+            and order_item_id like concat('%', #{orderItemId,jdbcType=BIGINT}, '%')
+            </if>
+            <if test="createTime!= null">
+            and create_time like concat('%', #{createTime,jdbcType=TIMESTAMP}, '%')
+            </if>
+        </where>
+    </select>
+
+    <select id="findAllList" resultMap="tHistoryProdRecordResultMap">
+        SELECT *
+        FROM t_history_prod_record
+    </select>
+
+    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.THistoryProdRecord" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_history_prod_record(
+            ord_code,
+            order_item_id,
+            create_time
+        )
+        VALUES (
+            #{id,jdbcType=BIGINT},
+            #{ordCode,jdbcType=VARCHAR},
+            #{orderItemId,jdbcType=BIGINT},
+            #{createTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.THistoryProdRecord">
+        INSERT INTO t_history_prod_record(
+            id,
+            ord_code,
+            order_item_id,
+            create_time
+        )
+        VALUES
+        <foreach collection ="list" item="item" separator =",">
+        (
+            #{item.id,jdbcType=BIGINT},
+            #{item.ordCode,jdbcType=VARCHAR},
+            #{item.orderItemId,jdbcType=BIGINT},
+            #{item.createTime,jdbcType=TIMESTAMP}
+        )
+        </foreach>
+    </insert>
+
+    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.THistoryProdRecord">
+        UPDATE t_history_prod_record
+        <set>
+            <if test="ordCode!= null">
+            ord_code = #{ordCode,jdbcType=VARCHAR},
+            </if>
+            <if test="orderItemId!= null">
+            order_item_id = #{orderItemId,jdbcType=BIGINT},
+            </if>
+            <if test="createTime!= null">
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        WHERE id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.THistoryProdRecord">
+        DELETE FROM t_history_prod_record
+        WHERE id = #{id,jdbcType=BIGINT}
+    </delete>
+
+</mapper>

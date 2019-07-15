@@ -3,97 +3,258 @@
 <mapper namespace="com.lcyzh.nmerp.dao.TStockMapper">
 
     <resultMap id="tStockResultMap" type="com.lcyzh.nmerp.entity.TStock">
-        <id column="id" property="id" jdbcType="BIGINT"/>
-        <result column="prod_code" property="prodCode" jdbcType="VARCHAR"/>
-        <result column="stock_num" property="stockNum" jdbcType="DOUBLE"/>
-        <result column="aval_stock_num" property="avalStockNum" jdbcType="DOUBLE"/>
-        <result column="stock_unit" property="stockUnit" jdbcType="VARCHAR"/>
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
-        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
-
-
+        <id column="id" property="id" jdbcType="BIGINT"/> 
+        <result column="bar_code" property="barCode" jdbcType="BIGINT"/> 
+        <result column="ord_code" property="ordCode" jdbcType="VARCHAR"/> 
+        <result column="item_code" property="itemCode" jdbcType="VARCHAR"/> 
+        <result column="item_lenth" property="itemLenth" jdbcType="DOUBLE"/> 
+        <result column="item_width" property="itemWidth" jdbcType="DOUBLE"/> 
+        <result column="item_thick" property="itemThick" jdbcType="DOUBLE"/> 
+        <result column="item_weight" property="itemWeight" jdbcType="DOUBLE"/> 
+        <result column="item_sq" property="itemSq" jdbcType="DOUBLE"/> 
+        <result column="status" property="status" jdbcType="CHAR"/> 
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/> 
+        <result column="item_owner" property="itemOwner" jdbcType="VARCHAR"/> 
+        <result column="item_yc_type" property="itemYcType" jdbcType="VARCHAR"/> 
+        <result column="item_yb_type" property="itemYbType" jdbcType="VARCHAR"/> 
+        <result column="item_cgy_code" property="itemCgyCode" jdbcType="BIGINT"/> 
+        <result column="item_variety" property="itemVariety" jdbcType="BIGINT"/> 
+        <result column="item_unit" property="itemUnit" jdbcType="BIGINT"/> 
+        <result column="item_color" property="itemColor" jdbcType="VARCHAR"/> 
     </resultMap>
 
-
-    <select id="get" resultMap="tStockResultMap">
-        SELECT *
-        FROM T_STOCK
-        WHERE id = #{id}
+    <select id="getByBarCode" parameterType="java.lang.String" resultMap="tStockResultMap">
+        select * from t_stock where bar_code = #{barCode}
     </select>
 
-    <select id="findList" resultMap="tStockResultMap">
+    <select id="findById" parameterType="java.lang.Long" resultMap="tStockResultMap">
         SELECT *
-        FROM T_STOCK
+        FROM t_stock
+        WHERE id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="findList" parameterType ="com.lcyzh.nmerp.entity.TStock"  resultMap="tStockResultMap">
+        SELECT *
+        FROM t_stock
         <where>
+            <if test="barCode!= null">
+            and bar_code like concat('%', #{barCode,jdbcType=BIGINT}, '%')
+            </if>
+            <if test="ordCode!= null">
+            and ord_code like concat('%', #{ordCode,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="itemCode!= null">
+            and item_code like concat('%', #{itemCode,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="itemLenth!= null">
+            and item_lenth like concat('%', #{itemLenth,jdbcType=DOUBLE}, '%')
+            </if>
+            <if test="itemWidth!= null">
+            and item_width like concat('%', #{itemWidth,jdbcType=DOUBLE}, '%')
+            </if>
+            <if test="itemThick!= null">
+            and item_thick like concat('%', #{itemThick,jdbcType=DOUBLE}, '%')
+            </if>
+            <if test="itemWeight!= null">
+            and item_weight like concat('%', #{itemWeight,jdbcType=DOUBLE}, '%')
+            </if>
+            <if test="itemSq!= null">
+            and item_sq like concat('%', #{itemSq,jdbcType=DOUBLE}, '%')
+            </if>
+            <if test="status!= null">
+            and status like concat('%', #{status,jdbcType=CHAR}, '%')
+            </if>
+            <if test="createTime!= null">
+            and create_time like concat('%', #{createTime,jdbcType=TIMESTAMP}, '%')
+            </if>
+            <if test="updateTime!= null">
+            and update_time like concat('%', #{updateTime,jdbcType=TIMESTAMP}, '%')
+            </if>
+            <if test="itemOwner!= null">
+            and item_owner like concat('%', #{itemOwner,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="itemYcType!= null">
+            and item_yc_type like concat('%', #{itemYcType,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="itemYbType!= null">
+            and item_yb_type like concat('%', #{itemYbType,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="itemCgyCode!= null">
+            and item_cgy_code like concat('%', #{itemCgyCode,jdbcType=BIGINT}, '%')
+            </if>
+            <if test="itemVariety!= null">
+            and item_variety like concat('%', #{itemVariety,jdbcType=BIGINT}, '%')
+            </if>
+            <if test="itemUnit!= null">
+            and item_unit like concat('%', #{itemUnit,jdbcType=BIGINT}, '%')
+            </if>
+            <if test="itemColor!= null">
+            and item_color like concat('%', #{itemColor,jdbcType=VARCHAR}, '%')
+            </if>
         </where>
     </select>
 
     <select id="findAllList" resultMap="tStockResultMap">
         SELECT *
-        FROM T_STOCK
+        FROM t_stock
     </select>
 
-    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TStock">
-        INSERT INTO T_STOCK(
-            id,
-            prod_code,
-            stock_num,
-            aval_stock_num,
-            stock_unit,
+    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TStock" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_stock(
+            bar_code,
+            ord_code,
+            item_code,
+            item_lenth,
+            item_width,
+            item_thick,
+            item_weight,
+            item_sq,
+            status,
             create_time,
-            update_time
+            update_time,
+            item_owner,
+            item_yc_type,
+            item_yb_type,
+            item_cgy_code,
+            item_variety,
+            item_unit,
+            item_color
         )
         VALUES (
-            #{id,jdbcType=BIGINT},
-            #{prodCode,jdbcType=VARCHAR},
-            #{stockNum,jdbcType=DOUBLE},
-            #{avalStockNum,jdbcType=DOUBLE},
-            #{stockUnit,jdbcType=VARCHAR},
+            #{barCode,jdbcType=BIGINT},
+            #{ordCode,jdbcType=VARCHAR},
+            #{itemCode,jdbcType=VARCHAR},
+            #{itemLenth,jdbcType=DOUBLE},
+            #{itemWidth,jdbcType=DOUBLE},
+            #{itemThick,jdbcType=DOUBLE},
+            #{itemWeight,jdbcType=DOUBLE},
+            #{itemSq,jdbcType=DOUBLE},
+            #{status,jdbcType=CHAR},
             #{createTime,jdbcType=TIMESTAMP},
-            #{updateTime,jdbcType=TIMESTAMP}
+            #{updateTime,jdbcType=TIMESTAMP},
+            #{itemOwner,jdbcType=VARCHAR},
+            #{itemYcType,jdbcType=VARCHAR},
+            #{itemYbType,jdbcType=VARCHAR},
+            #{itemCgyCode,jdbcType=BIGINT},
+            #{itemVariety,jdbcType=BIGINT},
+            #{itemUnit,jdbcType=BIGINT},
+            #{itemColor,jdbcType=VARCHAR}
         )
     </insert>
 
     <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TStock">
-        INSERT INTO T_STOCK(
-        id,
-        prod_code,
-        stock_num,
-        aval_stock_num,
-        stock_unit,
-        create_time,
-        update_time
+        INSERT INTO t_stock(
+            id,
+            bar_code,
+            ord_code,
+            item_code,
+            item_lenth,
+            item_width,
+            item_thick,
+            item_weight,
+            item_sq,
+            status,
+            create_time,
+            update_time,
+            item_owner,
+            item_yc_type,
+            item_yb_type,
+            item_cgy_code,
+            item_variety,
+            item_unit,
+            item_color
         )
         VALUES
-        <foreach collection="list" item="tStock" separator=",">
-            (
-            #{tStock.id,jdbcType=BIGINT},
-            #{tStock.prodCode,jdbcType=VARCHAR},
-            #{tStock.stockNum,jdbcType=DOUBLE},
-            #{tStock.avalStockNum,jdbcType=DOUBLE},
-            #{tStock.stockUnit,jdbcType=VARCHAR},
-            #{tStock.createTime,jdbcType=TIMESTAMP},
-            #{tStock.updateTime,jdbcType=TIMESTAMP}
-            )
+        <foreach collection ="list" item="item" separator =",">
+        (
+            #{item.id,jdbcType=BIGINT},
+            #{item.barCode,jdbcType=BIGINT},
+            #{item.ordCode,jdbcType=VARCHAR},
+            #{item.itemCode,jdbcType=VARCHAR},
+            #{item.itemLenth,jdbcType=DOUBLE},
+            #{item.itemWidth,jdbcType=DOUBLE},
+            #{item.itemThick,jdbcType=DOUBLE},
+            #{item.itemWeight,jdbcType=DOUBLE},
+            #{item.itemSq,jdbcType=DOUBLE},
+            #{item.status,jdbcType=CHAR},
+            #{item.createTime,jdbcType=TIMESTAMP},
+            #{item.updateTime,jdbcType=TIMESTAMP},
+            #{item.itemOwner,jdbcType=VARCHAR},
+            #{item.itemYcType,jdbcType=VARCHAR},
+            #{item.itemYbType,jdbcType=VARCHAR},
+            #{item.itemCgyCode,jdbcType=BIGINT},
+            #{item.itemVariety,jdbcType=BIGINT},
+            #{item.itemUnit,jdbcType=BIGINT},
+            #{item.itemColor,jdbcType=VARCHAR}
+        )
         </foreach>
     </insert>
 
-    <update id="update" parameterType="com.lcyzh.nmerp.entity.TStock">
-        UPDATE T_STOCK
-        SET
-        id = #{id},
-        prod_code = #{prodCode},
-        stock_num = #{stockNum},
-        aval_stock_num = #{avalStockNum},
-        stock_unit = #{stockUnit},
-        create_time = #{createTime},
-        update_time = #{updateTime}
-        WHERE id = #{id}
+    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TStock">
+        UPDATE t_stock
+        <set>
+            <if test="barCode!= null">
+            bar_code = #{barCode,jdbcType=BIGINT},
+            </if>
+            <if test="ordCode!= null">
+            ord_code = #{ordCode,jdbcType=VARCHAR},
+            </if>
+            <if test="itemCode!= null">
+            item_code = #{itemCode,jdbcType=VARCHAR},
+            </if>
+            <if test="itemLenth!= null">
+            item_lenth = #{itemLenth,jdbcType=DOUBLE},
+            </if>
+            <if test="itemWidth!= null">
+            item_width = #{itemWidth,jdbcType=DOUBLE},
+            </if>
+            <if test="itemThick!= null">
+            item_thick = #{itemThick,jdbcType=DOUBLE},
+            </if>
+            <if test="itemWeight!= null">
+            item_weight = #{itemWeight,jdbcType=DOUBLE},
+            </if>
+            <if test="itemSq!= null">
+            item_sq = #{itemSq,jdbcType=DOUBLE},
+            </if>
+            <if test="status!= null">
+            status = #{status,jdbcType=CHAR},
+            </if>
+            <if test="createTime!= null">
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime!= null">
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="itemOwner!= null">
+            item_owner = #{itemOwner,jdbcType=VARCHAR},
+            </if>
+            <if test="itemYcType!= null">
+            item_yc_type = #{itemYcType,jdbcType=VARCHAR},
+            </if>
+            <if test="itemYbType!= null">
+            item_yb_type = #{itemYbType,jdbcType=VARCHAR},
+            </if>
+            <if test="itemCgyCode!= null">
+            item_cgy_code = #{itemCgyCode,jdbcType=BIGINT},
+            </if>
+            <if test="itemVariety!= null">
+            item_variety = #{itemVariety,jdbcType=BIGINT},
+            </if>
+            <if test="itemUnit!= null">
+            item_unit = #{itemUnit,jdbcType=BIGINT},
+            </if>
+            <if test="itemColor!= null">
+            item_color = #{itemColor,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE id = #{id,jdbcType=BIGINT}
     </update>
 
-    <delete id="delete" parameterType="com.lcyzh.nmerp.entity.TStock">
-        DELETE FROM T_STOCK
-        WHERE id = #{id}
+    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TStock">
+        DELETE FROM t_stock
+        WHERE id = #{id,jdbcType=BIGINT}
     </delete>
 
 </mapper>

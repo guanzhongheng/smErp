@@ -40,5 +40,9 @@ public interface TProdPlanDetailService {
     //
     //int update(TProdPlanDetail tProdPlanDetail);
 
+    /**
+     * @Description: 货品生产后打标签入库
+     */
 
+    ProdPlanDetailVo labelAndInStock(ProdPlanDetailVo vo);
 }

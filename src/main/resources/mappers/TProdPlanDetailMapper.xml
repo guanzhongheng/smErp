@@ -194,57 +194,11 @@
     <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TProdPlanDetail">
         UPDATE t_prod_plan_detail
         <set>
-
-            <if test="prodPlanCode!= null">
-                prod_plan_code = #{prodPlanCode,jdbcType=VARCHAR},
-            </if>
-            <if test="ordCode!= null">
-                ord_code = #{ordCode,jdbcType=VARCHAR},
-            </if>
-            <if test="orderItemId!= null">
-                order_item_id = #{orderItemId,jdbcType=BIGINT},
-            </if>
-            <if test="itemCode!= null">
-                item_code = #{itemCode,jdbcType=VARCHAR},
-            </if>
-            <if test="itemLenth!= null">
-                item_lenth = #{itemLenth,jdbcType=DOUBLE},
-            </if>
-            <if test="itemWidth!= null">
-                item_width = #{itemWidth,jdbcType=DOUBLE},
-            </if>
-            <if test="itemThick!= null">
-                item_thick = #{itemThick,jdbcType=DOUBLE},
-            </if>
             <if test="itemNum!= null">
-                item_num = #{itemNum,jdbcType=BIGINT},
-            </if>
-            <if test="itemTotalWeight!= null">
-                item_total_weight = #{itemTotalWeight,jdbcType=DOUBLE},
-            </if>
-            <if test="itemTotalSq!= null">
-                item_total_sq = #{itemTotalSq,jdbcType=DOUBLE},
-            </if>
-            <if test="itemYbType!= null">
-                item_yb_type = #{itemYbType,jdbcType=VARCHAR},
-            </if>
-            <if test="itemYcType!= null">
-                item_yc_type = #{itemYcType,jdbcType=VARCHAR},
-            </if>
-            <if test="itemStatus!= null">
-                item_status = #{itemStatus,jdbcType=CHAR},
-            </if>
-            <if test="itemCgyCode!= null">
-                item_cgy_code = #{itemCgyCode,jdbcType=BIGINT},
-            </if>
-            <if test="itemVariety!= null">
-                item_variety = #{itemVariety,jdbcType=BIGINT},
-            </if>
-            <if test="itemUnit!= null">
-                item_unit = #{itemUnit,jdbcType=BIGINT},
+                item_num = #{itemNum,jdbcType=BIGINT}
             </if>
         </set>
-        WHERE id = #{id,jdbcType=BIGINT}
+        WHERE prod_plan_code = #{prodPlanCode,jdbcType=VARCHAR}
     </update>
 
     <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TProdPlanDetail">

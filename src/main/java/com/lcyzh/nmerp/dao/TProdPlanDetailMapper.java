@@ -26,4 +26,6 @@ public interface TProdPlanDetailMapper {
     List<TProdPlanDetail> findListByProdPlanCode(String prodPlanCode);
 
     int updateByIds(List<String> ids);
+
+    int deleteByCode(String prodPlanCode);
 }
