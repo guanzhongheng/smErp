@@ -20,7 +20,22 @@
         <result column="item_cgy_code" property="itemCgyCode" jdbcType="BIGINT"/>
         <result column="item_variety" property="itemVariety" jdbcType="BIGINT"/>
         <result column="item_unit" property="itemUnit" jdbcType="BIGINT"/>
+        <result column="item_owner" property="itemOwner" jdbcType="VARCHAR"/>
+        <result column="item_color" property="itemColor" jdbcType="VARCHAR"/>
+        <result column="mac_code" property="macCode" jdbcType="VARCHAR"/>
     </resultMap>
+
+    <select id="findListByProdPlanCode" parameterType="java.lang.String">
+        select * from t_prod_plan_detail where prod_plan_code = #{prodPlanCode,jdbcType=VARCHAR}
+        order by item_status, item_width desc
+    </select>
+
+    <update id="updateByIds" parameterType="java.util.List">
+        update t_prod_plan_detail set item_status = '1' where id in
+        <foreach item = "id" index = "index" collection = "ids" open = "(" separator = "," close = ")">
+          #{id}
+        </foreach>
+    </update>
 
 
     <select id="findById" parameterType="java.lang.Long" resultMap="tProdPlanDetailResultMap">
@@ -90,9 +105,8 @@
         FROM t_prod_plan_detail
     </select>
 
-    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TProdPlanDetail">
+    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TProdPlanDetail" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_prod_plan_detail(
-            id,
             prod_plan_code,
             ord_code,
             order_item_id,
@@ -108,10 +122,12 @@
             item_status,
             item_cgy_code,
             item_variety,
-            item_unit
+            item_unit,
+            item_owner,
+            item_color,
+            mac_code
         )
         VALUES (
-            #{id,jdbcType=BIGINT},
             #{prodPlanCode,jdbcType=VARCHAR},
             #{ordCode,jdbcType=VARCHAR},
             #{orderItemId,jdbcType=BIGINT},
@@ -127,7 +143,10 @@
             #{itemStatus,jdbcType=CHAR},
             #{itemCgyCode,jdbcType=BIGINT},
             #{itemVariety,jdbcType=BIGINT},
-            #{itemUnit,jdbcType=BIGINT}
+            #{itemUnit,jdbcType=BIGINT},
+            #{itemOwner,jdbcType=VARCHAR},
+            #{itemColor,jdbcType=VARCHAR},
+            #{macCode,jdbcType=VARCHAR}
         )
     </insert>
 
@@ -148,7 +167,10 @@
         item_status,
         item_cgy_code,
         item_variety,
-        item_unit
+        item_unit,
+        item_owner,
+        item_color,
+        mac_code
         )
         VALUES
         <foreach collection ="list" item="item" separator =",">
@@ -168,7 +190,10 @@
             #{item.itemStatus,jdbcType=CHAR},
             #{item.itemCgyCode,jdbcType=BIGINT},
             #{item.itemVariety,jdbcType=BIGINT},
-            #{item.itemUnit,jdbcType=BIGINT}
+            #{item.itemUnit,jdbcType=BIGINT},
+            #{item.itemOwner,jdbcType=VARCHAR},
+            #{item.itemColor,jdbcType=VARCHAR},
+            #{item.macCode,jdbcType=VARCHAR}
             )
         </foreach>
     </insert>

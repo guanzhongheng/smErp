@@ -1,14 +1,11 @@
 package com.lcyzh.nmerp.controller;
 
-import com.lcyzh.nmerp.common.lang.StringUtils;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.controller.common.BaseController;
-import com.lcyzh.nmerp.entity.CusFollowDetail;
 import com.lcyzh.nmerp.model.vo.CustomerQueryVo;
 import com.lcyzh.nmerp.model.vo.OrderQueryVo;
 import com.lcyzh.nmerp.model.vo.ProdInvInfoVo;
-import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
 import com.lcyzh.nmerp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  * 项目名称：nm-erp

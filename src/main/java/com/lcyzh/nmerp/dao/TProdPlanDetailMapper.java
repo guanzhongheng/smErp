@@ -22,4 +22,7 @@ public interface TProdPlanDetailMapper {
 
     int update(TProdPlanDetail tProdPlanDetail);
 
+    List<TProdPlanDetail> findListByProdPlanCode(String prodPlanCode);
+
+    int updateByIds(List<String> ids);
 }

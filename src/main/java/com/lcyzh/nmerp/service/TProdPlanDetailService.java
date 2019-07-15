@@ -12,13 +12,25 @@ import java.util.List;
 */
 public interface TProdPlanDetailService {
 
-    List<TProdPlanDetail> findList(TProdPlanDetail tProdPlanDetail);
+    /**
+     * 根据计划单号查询明细数据
+     */
+    List<TProdPlanDetail> findListByProdPlanCode(String prodPlanCode);
 
-    int insert(TProdPlanDetail tProdPlanDetail);
+    /**
+     * 批量下发生产，状态由待确认改为下发生产
+     */
+    int updateByIds(String id);
 
-    int insertBatch(List<TProdPlanDetail> tProdPlanDetails);
 
-    int update(TProdPlanDetail tProdPlanDetail);
+
+    //List<TProdPlanDetail> findList(TProdPlanDetail tProdPlanDetail);
+    //
+    //int insert(TProdPlanDetail tProdPlanDetail);
+    //
+    //int insertBatch(List<TProdPlanDetail> tProdPlanDetails);
+    //
+    //int update(TProdPlanDetail tProdPlanDetail);
 
 
 }

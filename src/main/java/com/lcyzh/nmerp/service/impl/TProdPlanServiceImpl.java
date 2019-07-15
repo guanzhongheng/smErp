@@ -3,12 +3,10 @@ package com.lcyzh.nmerp.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
-import com.lcyzh.nmerp.controller.system.util.UserUtils;
 import com.lcyzh.nmerp.dao.*;
 import com.lcyzh.nmerp.entity.*;
-import com.lcyzh.nmerp.model.vo.OrderItemAssignVo;
 import com.lcyzh.nmerp.model.vo.OrderItemVo;
-import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
+import com.lcyzh.nmerp.model.vo.ProdPlanVo;
 import com.lcyzh.nmerp.service.TProdPlanService;
 import com.lcyzh.nmerp.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,6 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Author ljk
@@ -32,32 +29,47 @@ public class TProdPlanServiceImpl implements TProdPlanService {
     @Autowired
     private TMachineInfoMapper machineInfoMapper;
 
-    @Override
-    public TProdPlan findByProdPanCode(String prodPlanCode) {
-        return tProdPlanMapper.findByProdPanCode(prodPlanCode);
-    }
+
+
+    //@Override
+    //public TProdPlan findByProdPanCode(String prodPlanCode) {
+    //    return tProdPlanMapper.findByProdPanCode(prodPlanCode);
+    //}
+    //
+    //@Override
+    //public Page<ProdPlanDetailVo> findPage(Page<ProdPlanDetailVo> page,ProdPlanDetailVo vo) {
+    //    PageHelper.startPage(page.getPageNo(),page.getPageSize());
+    //    List<ProdPlanDetailVo> list = tProdPlanMapper.findList(vo);
+    //    //获取产品信息
+    //    page.setList(list);
+    //    return page;
+    //}
+    //
+    //@Override
+    //public int save(TProdPlan prodPlan) {
+    //    int res = -1;
+    //    if (prodPlan != null) {
+    //        Date current = new Date();
+    //        if (prodPlan != null) {
+    //            res = tProdPlanMapper.update(prodPlan);
+    //        } else {
+    //            res = tProdPlanMapper.insert(prodPlan);
+    //        }
+    //    }
+    //    return res;
+    //}
 
     @Override
-    public Page<ProdPlanDetailVo> findPage(Page<ProdPlanDetailVo> page,ProdPlanDetailVo vo) {
+    public Page<ProdPlanVo> findPage(Page<ProdPlanVo> page, ProdPlanVo vo) {
         PageHelper.startPage(page.getPageNo(),page.getPageSize());
-        List<ProdPlanDetailVo> list = tProdPlanMapper.findList(vo);
-        //获取产品信息
+        List<ProdPlanVo> list = tProdPlanMapper.findList(vo);
         page.setList(list);
         return page;
     }
 
     @Override
-    public int save(TProdPlan prodPlan) {
-        int res = -1;
-        if (prodPlan != null) {
-            Date current = new Date();
-            if (prodPlan != null) {
-                res = tProdPlanMapper.update(prodPlan);
-            } else {
-                res = tProdPlanMapper.insert(prodPlan);
-            }
-        }
-        return res;
+    public int update(TProdPlan prodPlan) {
+        return tProdPlanMapper.update(prodPlan);
     }
 
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
@@ -95,9 +107,9 @@ public class TProdPlanServiceImpl implements TProdPlanService {
                     if(prodPlan.getIsAuto() == 1) {
                         //自动下发开启
                         prodPlan.setQuantity(prodPlan.getQuantity() + item.getItemNum());
-                        prodPlanDetails.add(buildProdPlanDetail(prodPlan.getProdPlanCode(), item, '1'));
+                        prodPlanDetails.add(buildProdPlanDetail(macCode, prodPlan.getProdPlanCode(), item, '1'));
                     }else{
-                        prodPlanDetails.add(buildProdPlanDetail(prodPlan.getProdPlanCode(), item, '0'));
+                        prodPlanDetails.add(buildProdPlanDetail(macCode, prodPlan.getProdPlanCode(), item, '0'));
                     }
                     updateList.add(prodPlan);
                 }else{
@@ -114,7 +126,7 @@ public class TProdPlanServiceImpl implements TProdPlanService {
                     addList.add(prodPlan);
                     ppMap.put(prodPlan.getProdVariety()+"|"+prodPlan.getProdColor()+"|"+prodPlan.getMacCode(),
                             prodPlan);
-                    prodPlanDetails.add(buildProdPlanDetail(prodPlan.getProdPlanCode(), item, '0'));
+                    prodPlanDetails.add(buildProdPlanDetail(macCode,prodPlan.getProdPlanCode(), item, '0'));
                 }
             }
         }
@@ -143,7 +155,7 @@ public class TProdPlanServiceImpl implements TProdPlanService {
      * @param character 0-待确认；1-下发生产
      * @return TProdPlanDetail
      */
-    private TProdPlanDetail buildProdPlanDetail(String prodPlanCode, OrderItemVo vo, Character character) {
+    private TProdPlanDetail buildProdPlanDetail(String macCode, String prodPlanCode, OrderItemVo vo, Character character) {
         TProdPlanDetail detail = new TProdPlanDetail();
         detail.setProdPlanCode(prodPlanCode);
         detail.setItemNum(vo.getItemNum());
@@ -161,6 +173,9 @@ public class TProdPlanServiceImpl implements TProdPlanService {
         detail.setOrdCode(vo.getOrdCode());
         detail.setItemStatus(character);
         detail.setOrderItemId(vo.getItemId());
+        detail.setItemOwner(vo.getItemOwner());
+        detail.setItemColor(vo.getItemColor());
+        detail.setMacCode(macCode);
         return detail;
     }
 
@@ -177,11 +192,11 @@ public class TProdPlanServiceImpl implements TProdPlanService {
     }
 
 
-    @Override
-    public List<TProdPlanDetail> findByPlanCode(String planCode) {
-        TProdPlanDetail planDetail = new TProdPlanDetail();
-        planDetail.setProdPlanCode(planCode);
-        return prodPlanDetailMapper.findList(planDetail);
-    }
+    //@Override
+    //public List<TProdPlanDetail> findByPlanCode(String planCode) {
+    //    TProdPlanDetail planDetail = new TProdPlanDetail();
+    //    planDetail.setProdPlanCode(planCode);
+    //    return prodPlanDetailMapper.findList(planDetail);
+    //}
 
 }

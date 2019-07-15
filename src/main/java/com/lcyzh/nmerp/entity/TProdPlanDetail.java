@@ -27,7 +27,9 @@ public class TProdPlanDetail implements Serializable {
     private Long itemCgyCode;
     private Long itemVariety;
     private Long itemUnit;
-
+    private String itemOwner;
+    private String itemColor;
+    private String macCode;
 
     public TProdPlanDetail(){
     }
@@ -66,6 +68,14 @@ public class TProdPlanDetail implements Serializable {
     public Long getItemVariety(){ return itemVariety;}
     public void setItemUnit (Long itemUnit) {this.itemUnit = itemUnit;}
     public Long getItemUnit(){ return itemUnit;}
-
-
+    public String getItemOwner() {
+        return itemOwner;
+    }
+    public void setItemOwner(String itemOwner) {
+        this.itemOwner = itemOwner;
+    }
+    public String getItemColor() { return itemColor; }
+    public void setItemColor(String itemColor) { this.itemColor = itemColor; }
+    public String getMacCode() { return macCode; }
+    public void setMacCode(String macCode) { this.macCode = macCode; }
 }

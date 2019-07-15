@@ -60,33 +60,22 @@
         WHERE prod_plan_code = #{prodPlanCode,jdbcType=VARCHAR}
     </select>
 
-    <select id="findList" parameterType ="com.lcyzh.nmerp.entity.TProdPlan"  resultMap="tProdPlanResultMap">
+    <select id="findList" parameterType ="com.lcyzh.nmerp.model.vo.ProdPlanVo"
+    resultType="com.lcyzh.nmerp.model.vo.ProdPlanVo">
         SELECT *
         FROM t_prod_plan
         <where>
-
             <if test="prodVariety!= null">
-                and prod_variety like concat('%', #{prodVariety,jdbcType=BIGINT}, '%')
+                and prod_variety = #{prodVariety,jdbcType=BIGINT}
             </if>
-            <if test="prodColor!= null">
-                and prod_color like concat('%', #{prodColor,jdbcType=VARCHAR}, '%')
+            <if test="prodColor!= null and prodColor!=''">
+                and prod_color = #{prodColor,jdbcType=VARCHAR}
             </if>
-            <if test="macCode!= null">
-                and mac_code like concat('%', #{macCode,jdbcType=VARCHAR}, '%')
-            </if>
-            <if test="totalQuantity!= null">
-                and total_quantity like concat('%', #{totalQuantity,jdbcType=BIGINT}, '%')
-            </if>
-            <if test="quantity!= null">
-                and quantity like concat('%', #{quantity,jdbcType=BIGINT}, '%')
-            </if>
-            <if test="formula!= null">
-                and formula like concat('%', #{formula,jdbcType=VARCHAR}, '%')
-            </if>
-            <if test="isAuto!= null">
-                and isAuto like concat('%', #{isAuto,jdbcType=CHAR}, '%')
+            <if test="macCode!= null and macCode!=''">
+                and mac_code = #{macCode,jdbcType=VARCHAR}
             </if>
         </where>
+        order by total_quantity desc, prod_variety, prod_color, mac_code
     </select>
 
     <select id="findAllList" resultMap="tProdPlanResultMap">
@@ -146,16 +135,6 @@
     <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TProdPlan">
         UPDATE t_prod_plan
         <set>
-
-            <if test="prodVariety!= null">
-                prod_variety = #{prodVariety,jdbcType=BIGINT},
-            </if>
-            <if test="prodColor!= null">
-                prod_color = #{prodColor,jdbcType=VARCHAR},
-            </if>
-            <if test="macCode!= null">
-                mac_code = #{macCode,jdbcType=VARCHAR},
-            </if>
             <if test="totalQuantity!= null">
                 total_quantity = #{totalQuantity,jdbcType=BIGINT},
             </if>
