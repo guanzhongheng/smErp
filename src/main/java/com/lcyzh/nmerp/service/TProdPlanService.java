@@ -4,6 +4,7 @@ import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.entity.TProdPlan;
 import com.lcyzh.nmerp.entity.TProdPlanDetail;
 import com.lcyzh.nmerp.model.vo.OrderItemVo;
+import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
 import com.lcyzh.nmerp.model.vo.ProdPlanVo;
 
 import java.util.List;
@@ -24,15 +25,15 @@ public interface TProdPlanService {
      */
     int update(TProdPlan prodPlan);
 
-    ///**
-    // * @Description: 根据产品计划编号查找产品计划信息
-    // * @Param: [prodPlanCode]
-    // * @return: com.lcyzh.nmerp.entity.TProdPlan
-    // * @Author: lijinku
-    // * @Iteration : 1.0
-    // * @Date: 2019/7/4 10:54 PM
-    // */
-    //TProdPlan findByProdPanCode(String prodPlanCode);
+    /**
+     * @Description: 根据产品计划编号查找产品计划信息
+     * @Param: [prodPlanCode]
+     * @return: com.lcyzh.nmerp.entity.TProdPlan
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/4 10:54 PM
+     */
+    TProdPlan findByProdPanCode(String prodPlanCode);
     //
     //
     ///**
@@ -74,6 +75,5 @@ public interface TProdPlanService {
     // * @Date: 2019/7/5 12:46 AM
     // */
     //List<TProdPlanDetail> findByPlanCode(String planCode);
-
 
 }

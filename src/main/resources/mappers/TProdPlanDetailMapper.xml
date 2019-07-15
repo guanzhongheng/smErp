@@ -44,60 +44,53 @@
         WHERE id = #{id,jdbcType=BIGINT}
     </select>
 
-    <select id="findList" parameterType ="com.lcyzh.nmerp.entity.TProdPlanDetail"  resultMap="tProdPlanDetailResultMap">
-        SELECT *
-        FROM t_prod_plan_detail
+    <select id="findList" parameterType ="com.lcyzh.nmerp.model.vo.ProdPlanDetailVo"
+        resultType="com.lcyzh.nmerp.model.vo.ProdPlanDetailVo">
+        SELECT
+        ppd.id prodPlanDetailId,
+        ppd.prod_plan_code prodPlanCode,
+        ppd.ord_code ordCode,
+        ppd.order_item_id orderItemId,
+        ppd.item_code itemCode,
+        ppd.item_lenth itemLenth,
+        ppd.item_width itemWidth,
+        ppd.item_thick itemThick,
+        ppd.item_num itemNum,
+        ppd.item_total_weight itemTotalWeight,
+        ppd.item_total_sq itemTotalSq,
+        ppd.item_yb_type itemYbType,
+        ppd.item_yc_type itemYcType,
+        ppd.item_status itemStatus,
+        ppd.item_cgy_code itemCgyCode,
+        ppd.item_variety itemVariety,
+        ppd.item_unit itemUnit,
+        ppd.item_owner itemOwner,
+        ppd.item_color itemColor,
+        ppd.mac_code macCode,
+        pp.formula formula
+        FROM t_prod_plan_detail ppd
+        left join t_prod_plan pp on ppd.prod_plan_code = pp.prod_plan_code
         <where>
-
-            <if test="prodPlanCode!= null">
-                and prod_plan_code like concat('%', #{prodPlanCode,jdbcType=VARCHAR}, '%')
-            </if>
-            <if test="ordCode!= null">
-                and ord_code like concat('%', #{ordCode,jdbcType=VARCHAR}, '%')
-            </if>
-            <if test="orderItemId!= null">
-                and order_item_id like concat('%', #{orderItemId,jdbcType=BIGINT}, '%')
-            </if>
-            <if test="itemCode!= null">
-                and item_code like concat('%', #{itemCode,jdbcType=VARCHAR}, '%')
-            </if>
-            <if test="itemLenth!= null">
-                and item_lenth like concat('%', #{itemLenth,jdbcType=DOUBLE}, '%')
-            </if>
-            <if test="itemWidth!= null">
-                and item_width like concat('%', #{itemWidth,jdbcType=DOUBLE}, '%')
-            </if>
-            <if test="itemThick!= null">
-                and item_thick like concat('%', #{itemThick,jdbcType=DOUBLE}, '%')
-            </if>
-            <if test="itemNum!= null">
-                and item_num like concat('%', #{itemNum,jdbcType=BIGINT}, '%')
-            </if>
-            <if test="itemTotalWeight!= null">
-                and item_total_weight like concat('%', #{itemTotalWeight,jdbcType=DOUBLE}, '%')
-            </if>
-            <if test="itemTotalSq!= null">
-                and item_total_sq like concat('%', #{itemTotalSq,jdbcType=DOUBLE}, '%')
-            </if>
-            <if test="itemYbType!= null">
-                and item_yb_type like concat('%', #{itemYbType,jdbcType=VARCHAR}, '%')
-            </if>
-            <if test="itemYcType!= null">
-                and item_yc_type like concat('%', #{itemYcType,jdbcType=VARCHAR}, '%')
+            <if test="prodPlanDetailId!= null">
+                and ppd.id = #{prodPlanDetailId,jdbcType=BIGINT}
             </if>
             <if test="itemStatus!= null">
-                and item_status like concat('%', #{itemStatus,jdbcType=CHAR}, '%')
+                and ppd.item_status = #{itemStatus,jdbcType=CHAR}
             </if>
             <if test="itemCgyCode!= null">
-                and item_cgy_code like concat('%', #{itemCgyCode,jdbcType=BIGINT}, '%')
+                and ppd.item_cgy_code = #{itemCgyCode,jdbcType=BIGINT}
             </if>
             <if test="itemVariety!= null">
-                and item_variety like concat('%', #{itemVariety,jdbcType=BIGINT}, '%')
+                and ppd.item_variety = #{itemVariety,jdbcType=BIGINT}
             </if>
-            <if test="itemUnit!= null">
-                and item_unit like concat('%', #{itemUnit,jdbcType=BIGINT}, '%')
+            <if test="macCode!= null and macCode!=''">
+                and ppd.mac_code = #{macCode,jdbcType=VARCHAR}
+            </if>
+            <if test="itemColor!= null and itemColor!=''">
+                and ppd.item_color = #{itemColor,jdbcType=VARCHAR}
             </if>
         </where>
+        order by mac_code,item_variety,item_color,item_width desc
     </select>
 
     <select id="findAllList" resultMap="tProdPlanDetailResultMap">

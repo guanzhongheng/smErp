@@ -6,6 +6,7 @@ import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.dao.*;
 import com.lcyzh.nmerp.entity.*;
 import com.lcyzh.nmerp.model.vo.OrderItemVo;
+import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
 import com.lcyzh.nmerp.model.vo.ProdPlanVo;
 import com.lcyzh.nmerp.service.TProdPlanService;
 import com.lcyzh.nmerp.utils.StringUtils;
@@ -31,11 +32,11 @@ public class TProdPlanServiceImpl implements TProdPlanService {
 
 
 
-    //@Override
-    //public TProdPlan findByProdPanCode(String prodPlanCode) {
-    //    return tProdPlanMapper.findByProdPanCode(prodPlanCode);
-    //}
-    //
+    @Override
+    public TProdPlan findByProdPanCode(String prodPlanCode) {
+        return tProdPlanMapper.findByProdPanCode(prodPlanCode);
+    }
+
     //@Override
     //public Page<ProdPlanDetailVo> findPage(Page<ProdPlanDetailVo> page,ProdPlanDetailVo vo) {
     //    PageHelper.startPage(page.getPageNo(),page.getPageSize());
@@ -43,20 +44,6 @@ public class TProdPlanServiceImpl implements TProdPlanService {
     //    //获取产品信息
     //    page.setList(list);
     //    return page;
-    //}
-    //
-    //@Override
-    //public int save(TProdPlan prodPlan) {
-    //    int res = -1;
-    //    if (prodPlan != null) {
-    //        Date current = new Date();
-    //        if (prodPlan != null) {
-    //            res = tProdPlanMapper.update(prodPlan);
-    //        } else {
-    //            res = tProdPlanMapper.insert(prodPlan);
-    //        }
-    //    }
-    //    return res;
     //}
 
     @Override
@@ -135,9 +122,6 @@ public class TProdPlanServiceImpl implements TProdPlanService {
         }
         if(res > 0 && !updateList.isEmpty()) {
             res = tProdPlanMapper.updateBatch(updateList);
-        }else{
-            //计划单插入失败
-            res = -1;
         }
         if(res > 0 && !prodPlanDetails.isEmpty()) {
             res = prodPlanDetailMapper.insertBatch(prodPlanDetails);

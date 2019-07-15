@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.dao;
 
 import com.lcyzh.nmerp.entity.TProdPlanDetail;
+import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface TProdPlanDetailMapper {
 
     TProdPlanDetail findById(String ordItemId);
 
-    List<TProdPlanDetail> findList(TProdPlanDetail tProdPlanDetail);
+    List<ProdPlanDetailVo> findList(ProdPlanDetailVo vo);
 
     int insert(TProdPlanDetail tProdPlanDetail);
 

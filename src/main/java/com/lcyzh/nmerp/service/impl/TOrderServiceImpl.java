@@ -130,7 +130,7 @@ public class TOrderServiceImpl implements TOrderService {
         tOrderItemMapper.insertBatch(orderItems);
         return tOrderMapper.update(order);
     }
-
+    @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
     @Override
     public int orderAssign(String ordCode, int state) {
         TOrder order = new TOrder();

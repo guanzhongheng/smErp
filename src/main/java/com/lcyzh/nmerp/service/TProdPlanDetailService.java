@@ -1,8 +1,8 @@
 package com.lcyzh.nmerp.service;
 
+import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.entity.TProdPlanDetail;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
 
 import java.util.List;
 
@@ -22,7 +22,11 @@ public interface TProdPlanDetailService {
      */
     int updateByIds(String id);
 
-
+    /**
+     * @Description: 机台查看生产任务
+     *
+     */
+    Page<ProdPlanDetailVo> findProdTaskPage(Page<ProdPlanDetailVo> page, ProdPlanDetailVo vo);
 
     //List<TProdPlanDetail> findList(TProdPlanDetail tProdPlanDetail);
     //
