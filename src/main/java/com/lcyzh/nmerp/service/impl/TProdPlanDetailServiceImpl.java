@@ -41,6 +41,14 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
         return page;
     }
 
+    @Override
+    public ProdPlanDetailVo findProdTask(ProdPlanDetailVo vo) {
+        if(vo.getProdPlanDetailId() != null) {
+            return tProdPlanDetailMapper.findList(vo).get(0);
+        }
+        return null;
+    }
+
 
     //@Override
     //public List<TProdPlanDetail> findList(TProdPlanDetail tProdPlanDetail) {

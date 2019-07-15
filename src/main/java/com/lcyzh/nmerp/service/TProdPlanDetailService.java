@@ -23,11 +23,15 @@ public interface TProdPlanDetailService {
     int updateByIds(String id);
 
     /**
-     * @Description: 机台查看生产任务
+     * @Description: 机台查看生产任务列表
      *
      */
     Page<ProdPlanDetailVo> findProdTaskPage(Page<ProdPlanDetailVo> page, ProdPlanDetailVo vo);
 
+    /**
+     * @Description: 查看生产任务明细
+     */
+    ProdPlanDetailVo findProdTask(ProdPlanDetailVo vo);
     //List<TProdPlanDetail> findList(TProdPlanDetail tProdPlanDetail);
     //
     //int insert(TProdPlanDetail tProdPlanDetail);
