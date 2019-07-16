@@ -7,6 +7,7 @@ import com.lcyzh.nmerp.model.vo.CustomerQueryVo;
 import com.lcyzh.nmerp.model.vo.OrderQueryVo;
 import com.lcyzh.nmerp.model.vo.ProdHistroyVo;
 import com.lcyzh.nmerp.model.vo.ProdInvInfoVo;
+import com.lcyzh.nmerp.model.vo.ProdPlanVo;
 import com.lcyzh.nmerp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,7 +37,7 @@ public class CrmManageController extends BaseController {
     @Autowired
     private TInStockService inStockService;
     @Autowired
-    private ICusFollowService cusFollowService;
+    private TMachineInfoService machineInfoService;
 
     /**========================客户相关流转==============================**/
 
@@ -212,5 +213,35 @@ public class CrmManageController extends BaseController {
         return "modules/crm/outStockList";
     }
 
+    /**========================生产计划相关流转==============================**/
+    /**
+     * @Description: 生产计划列表
+     * @Param: [vo, model, request, response]
+     * @return: java.lang.String
+     * @Author: wsm
+     * @Iteration : 1.0
+     * @Date: 2019/7/11 11:11 AM
+     */
+    @RequestMapping(value = {"producePlan/list","vo"})
+    public String prodPlanList(@ModelAttribute("vo") ProdPlanVo vo, Model model, HttpServletRequest request, HttpServletResponse response){
+        Page<ProdPlanVo> page = prodPlanService.findPage(new Page<ProdPlanVo>(request,response),vo);
+        model.addAttribute("page", page);
+        model.addAttribute("macList",machineInfoService.findAllList());
+        return "modules/crm/producePlanList";
+    }
+
+    /**
+     * @Description: 生产列表
+     * @Param: [vo, model, request, response]
+     * @return: java.lang.String
+     * @Author: wsm
+     * @Iteration : 1.0
+     * @Date: 2019/7/11 11:11 AM
+     */
+    @RequestMapping(value = {"produce/list","vo"})
+    public String produceList(@ModelAttribute("vo") ProdPlanVo vo, Model model, HttpServletRequest request, HttpServletResponse response){
+
+        return "modules/crm/produceList";
+    }
 
 }

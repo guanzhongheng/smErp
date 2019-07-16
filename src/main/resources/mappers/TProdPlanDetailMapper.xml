@@ -25,7 +25,7 @@
         <result column="mac_code" property="macCode" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <select id="findListByProdPlanCode" parameterType="java.lang.String">
+    <select id="findListByProdPlanCode" parameterType="java.lang.String" resultMap="tProdPlanDetailResultMap">
         select * from t_prod_plan_detail where prod_plan_code = #{prodPlanCode,jdbcType=VARCHAR}
         order by item_status, item_width desc
     </select>

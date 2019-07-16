@@ -49,8 +49,8 @@ public class SysDictUtils {
 	public static String getDictValue(String label, String type, String defaultLabel){
 		if (StringUtils.isNotBlank(type) && StringUtils.isNotBlank(label)){
 			for (Dict dict : getDictList(type)){
-				if (type.equals(dict.getType()) && label.equals(dict.getLabel())){
-					return dict.getValue();
+				if (type.equals(dict.getType()) && label.equals(dict.getValue())){
+					return dict.getLabel();
 				}
 			}
 		}

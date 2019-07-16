@@ -2,6 +2,7 @@ package com.lcyzh.nmerp.dao;
 
 import com.lcyzh.nmerp.entity.TProdPlanDetail;
 import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public interface TProdPlanDetailMapper {
 
     List<TProdPlanDetail> findListByProdPlanCode(String prodPlanCode);
 
-    int updateByIds(List<String> ids);
 
     int deleteByCode(String prodPlanCode);
+    int updateByIds(@Param("ids") List<String> ids);
 }
