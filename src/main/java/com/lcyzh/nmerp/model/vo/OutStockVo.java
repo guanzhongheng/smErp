@@ -23,6 +23,7 @@ public class OutStockVo {
     private String operEmpCode;
     //出库状态:0-新建；1-出库审核；2-出库完成
     private Character status;
+
     private String remark;
 
     public String getOutCode() {

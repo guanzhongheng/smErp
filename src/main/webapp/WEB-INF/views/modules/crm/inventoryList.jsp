@@ -9,7 +9,7 @@
 <body>
 <ul class="nav nav-tabs">
     <li class="active"><a href="${ctx}/crm/inventory/list/">库存列表</a></li>
-    <li><a href="${ctx}/crm/inventory/info/">出库清单</a></li>
+    <%--<li><a href="${ctx}/crm/inventory/info/">出库清单</a></li>--%>
 </ul>
 <form:form id="searchForm" modelAttribute="prodInvInfoVo" action="${ctx}/crm/inventory/list" method="post"
            class="breadcrumb form-search">

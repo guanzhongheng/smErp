@@ -5,6 +5,7 @@ import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.model.vo.CustomerQueryVo;
 import com.lcyzh.nmerp.model.vo.OrderQueryVo;
+import com.lcyzh.nmerp.model.vo.ProdHistroyVo;
 import com.lcyzh.nmerp.model.vo.ProdInvInfoVo;
 import com.lcyzh.nmerp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -198,6 +199,18 @@ public class CrmManageController extends BaseController {
         return "modules/crm/inventoryInfo";
     }
 
+    /**
+     * 出库清单列表页面流转
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = {"inventory/outStockList"})
+    public String outStockList(@ModelAttribute("prodHistroyVo") ProdHistroyVo prodHistroyVo, Model model, HttpServletRequest request, HttpServletResponse response) {
+        // Page<ProductVo> page = tProductService.findPage(new Page<ProductVo>(request, response), tProduct);
+        Page<ProdHistroyVo> page = new Page<ProdHistroyVo>();
+        model.addAttribute("page", page);
+        return "modules/crm/outStockList";
+    }
 
 
 }
