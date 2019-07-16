@@ -1,6 +1,8 @@
 package com.lcyzh.nmerp.service;
 
+import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.entity.THistoryProdRecord;
+import com.lcyzh.nmerp.model.vo.HistoryPordRecordVo;
 
 import java.util.List;
 
@@ -9,6 +11,9 @@ import java.util.List;
 * Date  2019-07-15
 */
 public interface ITHistoryProdRecordService {
+
+    Page<HistoryPordRecordVo> findPage(Page<HistoryPordRecordVo> page, HistoryPordRecordVo vo);
+
     THistoryProdRecord findById(String id);
 
     List<THistoryProdRecord> findList(THistoryProdRecord tHistoryProdRecord);

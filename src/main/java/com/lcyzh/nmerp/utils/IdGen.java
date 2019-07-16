@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 import java.security.SecureRandom;
+import java.time.LocalDate;
 import java.util.Random;
 import java.util.UUID;
 
@@ -79,9 +80,8 @@ public class IdGen implements  SessionIdGenerator {
 		//for (int i=0; i<2; i++){
 		//	System.out.println(Math.abs(random.nextInt()) + "  " + IdGen.randomBase62(3));
 		//}
-		for(int i = 0; i < 100; i++) {
-			System.out.println(getNetBarCode());
-		}
+		//LocalDate ld = LocalDate.now().minusMonths(1);
+		//System.out.println(ld.toString());
 	}
 
 }

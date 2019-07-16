@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.dao;
 
 import com.lcyzh.nmerp.entity.THistoryProdRecord;
+import com.lcyzh.nmerp.model.vo.HistoryPordRecordVo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -26,4 +27,5 @@ public interface THistoryProdRecordMapper {
 
     int delete(THistoryProdRecord tHistoryProdRecord);
 
+    List<HistoryPordRecordVo> findListVo(HistoryPordRecordVo vo);
 }

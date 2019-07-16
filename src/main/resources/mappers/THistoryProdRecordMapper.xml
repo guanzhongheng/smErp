@@ -7,6 +7,23 @@
         <result column="ord_code" property="ordCode" jdbcType="VARCHAR"/> 
         <result column="order_item_id" property="orderItemId" jdbcType="BIGINT"/> 
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
+        <result column="mac_code" property="macCode" jdbcType="VARCHAR"/> 
+        <result column="item_color" property="itemColor" jdbcType="VARCHAR"/> 
+        <result column="item_owner" property="itemOwner" jdbcType="VARCHAR"/> 
+        <result column="item_variety" property="itemVariety" jdbcType="BIGINT"/> 
+        <result column="item_cgy_code" property="itemCgyCode" jdbcType="BIGINT"/> 
+        <result column="item_yc_type" property="itemYcType" jdbcType="VARCHAR"/> 
+        <result column="item_yb_type" property="itemYbType" jdbcType="VARCHAR"/> 
+        <result column="item_total_sq" property="itemTotalSq" jdbcType="DOUBLE"/> 
+        <result column="item_total_weight" property="itemTotalWeight" jdbcType="DOUBLE"/> 
+        <result column="item_num" property="itemNum" jdbcType="BIGINT"/> 
+        <result column="item_thick" property="itemThick" jdbcType="DOUBLE"/> 
+        <result column="item_width" property="itemWidth" jdbcType="DOUBLE"/> 
+        <result column="item_lenth" property="itemLenth" jdbcType="DOUBLE"/> 
+        <result column="item_code" property="itemCode" jdbcType="VARCHAR"/> 
+
+        
+        
     </resultMap>
 
 
@@ -14,6 +31,58 @@
         SELECT *
         FROM t_history_prod_record
         WHERE id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <select id="findListVo" parameterType="com.lcyzh.nmerp.model.vo.HistoryPordRecordVo" resultType="com.lcyzh.nmerp.model.vo.HistoryPordRecordVo">
+        SELECT
+        id id,
+        ord_code ordCode,
+        order_item_id orderItemId,
+        mac_code macCode,
+        item_color itemColor,
+        item_owner itemOwner,
+        item_variety itemVariety,
+        item_cgy_code itemCgyCode,
+        item_yc_type itemYcType,
+        item_yb_type itemYbType,
+        item_total_sq itemTotalSq,
+        item_total_weight itemTotalWeight,
+        item_num itemNum,
+        item_thick itemThick,
+        item_width itemWidth,
+        item_lenth itemLenth,
+        item_code itemCode,
+        create_time createTime
+        FROM t_history_prod_record
+        <where>
+            <if test="ordCode!= null and ordCode!=''">
+                and ord_code = #{ordCode,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime!= null">
+                and create_time like concat('%', #{createTime,jdbcType=TIMESTAMP}, '%')
+            </if>
+            <if test="macCode!= null and macCode!=''">
+                and mac_code = #{macCode,jdbcType=VARCHAR}
+            </if>
+            <if test="itemColor!= null and itemColor!= ''">
+                and item_color = #{itemColor,jdbcType=VARCHAR}
+            </if>
+            <if test="itemVariety!= null">
+                and item_variety = #{itemVariety,jdbcType=BIGINT}
+            </if>
+            <if test="itemCgyCode!= null">
+                and item_cgy_code = #{itemCgyCode,jdbcType=BIGINT}
+            </if>
+            <if test="itemYcType!= null and itemYcType!= ''">
+                and item_yc_type = #{itemYcType,jdbcType=VARCHAR}
+            </if>
+            <if test="itemYbType!= null and itemYbType!= ''">
+                and item_yb_type = #{itemYbType,jdbcType=VARCHAR}
+            </if>
+            <if test="itemCode!= null and itemCode!= ''">
+                and item_code = #{itemCode,jdbcType=VARCHAR}
+            </if>
+        </where>
     </select>
 
     <select id="findList" parameterType ="com.lcyzh.nmerp.entity.THistoryProdRecord"  resultMap="tHistoryProdRecordResultMap">
@@ -29,6 +98,48 @@
             <if test="createTime!= null">
             and create_time like concat('%', #{createTime,jdbcType=TIMESTAMP}, '%')
             </if>
+            <if test="macCode!= null">
+            and mac_code like concat('%', #{macCode,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="itemColor!= null">
+            and item_color like concat('%', #{itemColor,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="itemOwner!= null">
+            and item_owner like concat('%', #{itemOwner,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="itemVariety!= null">
+            and item_variety like concat('%', #{itemVariety,jdbcType=BIGINT}, '%')
+            </if>
+            <if test="itemCgyCode!= null">
+            and item_cgy_code like concat('%', #{itemCgyCode,jdbcType=BIGINT}, '%')
+            </if>
+            <if test="itemYcType!= null">
+            and item_yc_type like concat('%', #{itemYcType,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="itemYbType!= null">
+            and item_yb_type like concat('%', #{itemYbType,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="itemTotalSq!= null">
+            and item_total_sq like concat('%', #{itemTotalSq,jdbcType=DOUBLE}, '%')
+            </if>
+            <if test="itemTotalWeight!= null">
+            and item_total_weight like concat('%', #{itemTotalWeight,jdbcType=DOUBLE}, '%')
+            </if>
+            <if test="itemNum!= null">
+            and item_num like concat('%', #{itemNum,jdbcType=BIGINT}, '%')
+            </if>
+            <if test="itemThick!= null">
+            and item_thick like concat('%', #{itemThick,jdbcType=DOUBLE}, '%')
+            </if>
+            <if test="itemWidth!= null">
+            and item_width like concat('%', #{itemWidth,jdbcType=DOUBLE}, '%')
+            </if>
+            <if test="itemLenth!= null">
+            and item_lenth like concat('%', #{itemLenth,jdbcType=DOUBLE}, '%')
+            </if>
+            <if test="itemCode!= null">
+            and item_code like concat('%', #{itemCode,jdbcType=VARCHAR}, '%')
+            </if>
         </where>
     </select>
 
@@ -37,17 +148,45 @@
         FROM t_history_prod_record
     </select>
 
-    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.THistoryProdRecord" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.THistoryProdRecord" >
         INSERT INTO t_history_prod_record(
             ord_code,
             order_item_id,
-            create_time
+            create_time,
+            mac_code,
+            item_color,
+            item_owner,
+            item_variety,
+            item_cgy_code,
+            item_yc_type,
+            item_yb_type,
+            item_total_sq,
+            item_total_weight,
+            item_num,
+            item_thick,
+            item_width,
+            item_lenth,
+            item_code
         )
         VALUES (
             #{id,jdbcType=BIGINT},
             #{ordCode,jdbcType=VARCHAR},
             #{orderItemId,jdbcType=BIGINT},
-            #{createTime,jdbcType=TIMESTAMP}
+            #{createTime,jdbcType=TIMESTAMP},
+            #{macCode,jdbcType=VARCHAR},
+            #{itemColor,jdbcType=VARCHAR},
+            #{itemOwner,jdbcType=VARCHAR},
+            #{itemVariety,jdbcType=BIGINT},
+            #{itemCgyCode,jdbcType=BIGINT},
+            #{itemYcType,jdbcType=VARCHAR},
+            #{itemYbType,jdbcType=VARCHAR},
+            #{itemTotalSq,jdbcType=DOUBLE},
+            #{itemTotalWeight,jdbcType=DOUBLE},
+            #{itemNum,jdbcType=BIGINT},
+            #{itemThick,jdbcType=DOUBLE},
+            #{itemWidth,jdbcType=DOUBLE},
+            #{itemLenth,jdbcType=DOUBLE},
+            #{itemCode,jdbcType=VARCHAR}
         )
     </insert>
 
@@ -56,7 +195,21 @@
             id,
             ord_code,
             order_item_id,
-            create_time
+            create_time,
+            mac_code,
+            item_color,
+            item_owner,
+            item_variety,
+            item_cgy_code,
+            item_yc_type,
+            item_yb_type,
+            item_total_sq,
+            item_total_weight,
+            item_num,
+            item_thick,
+            item_width,
+            item_lenth,
+            item_code
         )
         VALUES
         <foreach collection ="list" item="item" separator =",">
@@ -64,7 +217,21 @@
             #{item.id,jdbcType=BIGINT},
             #{item.ordCode,jdbcType=VARCHAR},
             #{item.orderItemId,jdbcType=BIGINT},
-            #{item.createTime,jdbcType=TIMESTAMP}
+            #{item.createTime,jdbcType=TIMESTAMP},
+            #{item.macCode,jdbcType=VARCHAR},
+            #{item.itemColor,jdbcType=VARCHAR},
+            #{item.itemOwner,jdbcType=VARCHAR},
+            #{item.itemVariety,jdbcType=BIGINT},
+            #{item.itemCgyCode,jdbcType=BIGINT},
+            #{item.itemYcType,jdbcType=VARCHAR},
+            #{item.itemYbType,jdbcType=VARCHAR},
+            #{item.itemTotalSq,jdbcType=DOUBLE},
+            #{item.itemTotalWeight,jdbcType=DOUBLE},
+            #{item.itemNum,jdbcType=BIGINT},
+            #{item.itemThick,jdbcType=DOUBLE},
+            #{item.itemWidth,jdbcType=DOUBLE},
+            #{item.itemLenth,jdbcType=DOUBLE},
+            #{item.itemCode,jdbcType=VARCHAR}
         )
         </foreach>
     </insert>
@@ -72,15 +239,58 @@
     <update id="update"  parameterType ="com.lcyzh.nmerp.entity.THistoryProdRecord">
         UPDATE t_history_prod_record
         <set>
-            <if test="ordCode!= null">
-            ord_code = #{ordCode,jdbcType=VARCHAR},
-            </if>
-            <if test="orderItemId!= null">
-            order_item_id = #{orderItemId,jdbcType=BIGINT},
-            </if>
-            <if test="createTime!= null">
-            create_time = #{createTime,jdbcType=TIMESTAMP},
-            </if>
+                
+<if test="ordCode!= null">
+ord_code = #{ordCode,jdbcType=VARCHAR},
+</if>        
+<if test="orderItemId!= null">
+order_item_id = #{orderItemId,jdbcType=BIGINT},
+</if>        
+<if test="createTime!= null">
+create_time = #{createTime,jdbcType=TIMESTAMP},
+</if>        
+<if test="macCode!= null">
+mac_code = #{macCode,jdbcType=VARCHAR},
+</if>        
+<if test="itemColor!= null">
+item_color = #{itemColor,jdbcType=VARCHAR},
+</if>        
+<if test="itemOwner!= null">
+item_owner = #{itemOwner,jdbcType=VARCHAR},
+</if>        
+<if test="itemVariety!= null">
+item_variety = #{itemVariety,jdbcType=BIGINT},
+</if>        
+<if test="itemCgyCode!= null">
+item_cgy_code = #{itemCgyCode,jdbcType=BIGINT},
+</if>        
+<if test="itemYcType!= null">
+item_yc_type = #{itemYcType,jdbcType=VARCHAR},
+</if>        
+<if test="itemYbType!= null">
+item_yb_type = #{itemYbType,jdbcType=VARCHAR},
+</if>        
+<if test="itemTotalSq!= null">
+item_total_sq = #{itemTotalSq,jdbcType=DOUBLE},
+</if>        
+<if test="itemTotalWeight!= null">
+item_total_weight = #{itemTotalWeight,jdbcType=DOUBLE},
+</if>        
+<if test="itemNum!= null">
+item_num = #{itemNum,jdbcType=BIGINT},
+</if>        
+<if test="itemThick!= null">
+item_thick = #{itemThick,jdbcType=DOUBLE},
+</if>        
+<if test="itemWidth!= null">
+item_width = #{itemWidth,jdbcType=DOUBLE},
+</if>        
+<if test="itemLenth!= null">
+item_lenth = #{itemLenth,jdbcType=DOUBLE},
+</if>        
+<if test="itemCode!= null">
+item_code = #{itemCode,jdbcType=VARCHAR},
+</if>
         </set>
         WHERE id = #{id,jdbcType=BIGINT}
     </update>

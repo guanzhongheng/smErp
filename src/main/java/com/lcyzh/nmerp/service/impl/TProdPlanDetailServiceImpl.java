@@ -81,8 +81,7 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
         }else if(vo.getItemNum() -1 == 0){
             //该商品生产完，更新计划单，将明细单该记录移到生产记录表
             THistoryProdRecord historyProdRecord = new THistoryProdRecord();
-            historyProdRecord.setOrdCode(vo.getOrdCode());
-            historyProdRecord.setOrderItemId(vo.getOrderItemId());
+            BeanUtils.copyProperties(vo, historyProdRecord);
             historyProdRecord.setCreateTime(date);
             TProdPlan prodPlan = new TProdPlan();
             prodPlan.setProdPlanCode(vo.getProdPlanCode());

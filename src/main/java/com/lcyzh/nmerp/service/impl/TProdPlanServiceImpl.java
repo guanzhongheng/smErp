@@ -120,7 +120,7 @@ public class TProdPlanServiceImpl implements TProdPlanService {
         if(!addList.isEmpty()) {
             res = tProdPlanMapper.insertBatch(addList);
         }
-        if(res > 0 && !updateList.isEmpty()) {
+        if(!updateList.isEmpty()) {
             res = tProdPlanMapper.updateBatch(updateList);
         }
         if(res > 0 && !prodPlanDetails.isEmpty()) {
