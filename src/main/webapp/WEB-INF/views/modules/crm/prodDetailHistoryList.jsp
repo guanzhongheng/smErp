@@ -8,9 +8,9 @@
 </head>
 <body>
 <ul class="nav nav-tabs">
-    <li class="active"><a href="${ctx}/tProduct/histroyList">产品历史</a></li>
+    <li class="active"><a href="/tProduct/stockHistoryList">产品生产历史</a></li>
 </ul>
-<form:form id="searchForm" modelAttribute="prodHistroyVo" action="${ctx}/tProduct/histroyList" method="post"
+<form:form id="searchForm" modelAttribute="prodHistroyVo" action="${ctx}/tProduct/stockHistoryList" method="post"
            class="breadcrumb form-search">
     <input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
     <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
@@ -65,7 +65,7 @@
         <tbody>
         <c:forEach items="${page.list}" var="cus">
             <tr>
-                <td>${cus.contCode}</td>
+                <td>${cus.ordCode}</td>
                 <td>${fns:getValueByDictKey(cus.prodVariety)}</td>
                 <td>${fns:getValueByDictKey(cus.prodCgyCode)}</td>
                 <td>${fns:getDictLabel('prod_color',cus.itemColor,'无')}</td>

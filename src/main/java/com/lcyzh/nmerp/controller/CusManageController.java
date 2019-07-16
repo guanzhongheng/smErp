@@ -113,10 +113,8 @@ public class CusManageController  extends BaseController {
     @RequestMapping(value = {"order/info"})
     public String orderInfo(@ModelAttribute("order") OrderQueryVo order, Model model){
 
-
         return "modules/crm/orderInfo";
     }
-
 
     /**
      * 订单审批状态修改

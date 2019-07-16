@@ -11,6 +11,7 @@ import java.util.List;
 * Date  2019-06-06
 */
 public interface TStockService {
+
     TStock get(String id);
 
     //List<TStock> findList(TStock tStock);

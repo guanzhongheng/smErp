@@ -1,25 +1,19 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ include file="/WEB-INF/views/include/taglib.jsp" %>
+
 <!DOCTYPE html>
 <html>
-
-
-<!-- Mirrored from www.zi-han.net/theme/hplus/invoice.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:47 GMT -->
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-    <title></title>
+    <title>青州市嘉润塑业有限公司收据</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
-
     <link rel="shortcut icon" href="favicon.ico">
-
     <link href="${ctxStatic}/hPlugs/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
     <link href="${ctxStatic}/hPlugs/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
     <link href="${ctxStatic}/hPlugs/css/animate.min.css" rel="stylesheet">
     <link href="${ctxStatic}/hPlugs/css/style.min862f.css?v=4.1.0" rel="stylesheet">
-
 </head>
 
 <body class="gray-bg">
@@ -45,13 +39,12 @@
 
                     <div class="col-sm-6 text-right">
                         <h4>单据编号：</h4>
-                        <h4 class="text-navy">H-000567F7-00</h4>
+                        <h4 class="text-navy">${order.ordCode}</h4>
                         <address>
-                            <strong>客户:SNS(现金结算)</strong>
-
+                            <strong>客户:${customer.cusName}(现金结算)</strong>
                         </address>
                         <p>
-                            <span><strong>收货日期：</strong> 2019-07-15</span>
+                            <span><strong>收货日期：</strong> ${order.ordDeliveryDate}</span>
                         </p>
                     </div>
                 </div>
@@ -75,49 +68,22 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>SNS</td>
-                            <td>黑白膜</td>
-                            <td>大膜</td>
-                            <td>干膜</td>
-                            <td>红色</td>
-                            <td>2000.00 * 9.0 * 0.1</td>
-                            <td>0.00</td>
-                            <td>1</td>
-                            <td>1400.00</td>
-                            <td>0</td>
-                            <td>&yen;1.240</td>
-                            <td>&yen;22,320.00</td>
-                        </tr>
-                        <tr>
-                            <td>SNS</td>
-                            <td>黑白膜</td>
-                            <td>大膜</td>
-                            <td>干膜</td>
-                            <td>红色</td>
-                            <td>1000.00 * 12.0 * 0.1</td>
-                            <td>0.00</td>
-                            <td>1</td>
-                            <td>1400.00</td>
-                            <td>0</td>
-                            <td>&yen;1.240</td>
-                            <td>&yen;14,880.00</td>
-                        </tr>
-                        <tr>
-                            <td>SNS</td>
-                            <td>黑白膜</td>
-                            <td>大膜</td>
-                            <td>干膜</td>
-                            <td>红色</td>
-                            <td>1000.00 * 14.0 * 0.1</td>
-                            <td>0.00</td>
-                            <td>1</td>
-                            <td>0.00</td>
-                            <td>0</td>
-                            <td>&yen;1.240</td>
-                            <td>&yen;17,360.00</td>
-                        </tr>
-
+                        <c:forEach items="${orderItem}" var="ord">
+                            <tr>
+                                <td>${ord.itemOwner}</td>
+                                <td>${ord.itemName}</td>
+                                <td>${fns:getValueByDictKey(ord.itemVariety)}</td>
+                                <td>${fns:getValueByDictKey(ord.itemCgyCode)}</td>
+                                <td>${fns:getDictLabel('prod_color',ord.itemColor,'无')}</td>
+                                <td>${ord.itemLenth}*${ord.itemWidth}*${ord.itemThick}</td>
+                                <td>${ord.itemWeight}</td>
+                                <td>${ord.itemNum}</td>
+                                <td>${ord.itemTotalSq}</td>
+                                <td>${ord.itemTotalWeight}</td>
+                                <td>&yen;${ord.itemPrice}</td>
+                                <td>&yen;${ord.itemPrice * ord.itemNum}</td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
@@ -128,17 +94,17 @@
                     <tr>
                         <td><strong>总面积：</strong>
                         </td>
-                        <td>1026.00 M&sup2</td>
+                        <td>${totalMj} M&sup2</td>
                     </tr>
                     <tr>
                         <td><strong>总重量：</strong>
                         </td>
-                        <td>0 kg</td>
+                        <td>${totalZl} kg</td>
                     </tr>
                     <tr>
                         <td><strong>订单总价：</strong>
                         </td>
-                        <td>&yen;54560.00</td>
+                        <td>&yen;${totalPrice}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -146,16 +112,20 @@
                 <div class="well m-t">
 
                     <div class="row">
-                        <div class="col-sm-2"> 应收金额：&yen;54560.00</div>
-                        <div class="col-sm-2"> 实收金额：&yen;54560.00</div>
-                        <div class="col-sm-2"> 制单人：王某</div>
-                        <div class="col-sm-2"> 制单时间：2019-07-11</div>
+                        <div class="col-sm-2"> 应收金额：&yen;${totalPrice}</div>
+                        <div class="col-sm-2"> 实收金额：&yen;${totalPrice}</div>
+                        <div class="col-sm-2"> 制单人：${userName}</div>
+                        <div class="col-sm-2"> 制单时间：${nowTime}</div>
                     </div>
                 </div>
                 <!--endprint-->
-                <div class="text-right">
-                    <button class="btn btn-primary" onclick="print2()">打印</button>
-                </div>
+                <!--expoint-->
+                    <div class="text-right">
+                        <button class="btn btn-primary" onclick="print2()">打印</button>
+                        &nbsp;&nbsp;
+                        <button class="btn btn-primary" onclick="javascript:history.go(-1);">返回</button>
+                    </div>
+                <!--expoint-->
             </div>
         </div>
     </div>
@@ -169,10 +139,17 @@
     }
     function print2(){
         bdhtml=window.document.body.innerHTML;
-        sprnstr="<!--startprint-->";
-        eprnstr="<!--endprint-->";
-        prnhtml=bdhtml.substring(bdhtml.indexOf(sprnstr)+17);
-        prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));
+
+        exs = "<!--expoint-->";
+
+        bdhtml.split(exs);
+        prnhtml =  bdhtml.split(exs)[0] + bdhtml.split(exs)[2];
+
+        // sprnstr="<!--startprint-->";
+        // eprnstr="<!--endprint-->";
+
+        // prnhtml=bdhtml.substring(bdhtml.indexOf(sprnstr)+17);
+        // prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));
         window.document.body.innerHTML=prnhtml;
         window.print();
     }

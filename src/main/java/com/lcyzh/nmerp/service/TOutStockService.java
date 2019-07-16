@@ -3,6 +3,7 @@ package com.lcyzh.nmerp.service;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.entity.TOutStock;
 import com.lcyzh.nmerp.entity.TOutStockDetail;
+import com.lcyzh.nmerp.model.vo.OutStockDetailVo;
 import com.lcyzh.nmerp.model.vo.OutStockVo;
 import com.lcyzh.nmerp.model.vo.StockVo;
 
@@ -29,6 +30,7 @@ public interface TOutStockService {
      */
     List<StockVo> findOutItemsByOutCode(String outCode);
 
+
     /**
      * @Description: 多条件查询
      * @Param: [tOutStock]
@@ -37,8 +39,18 @@ public interface TOutStockService {
      * @Iteration : 1.0
      * @Date: 2019/7/2 10:48 AM
      */
-    //List<TOutStock> findList(TOutStock tOutStock);
     Page<OutStockVo> findList(Page<OutStockVo> page, OutStockVo vo);
+
+
+    /**
+     * @Description: 出库记录
+     * @Param: [vo]
+     * @return: int
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/2 10:49 AM
+     */
+   // int insertStore(OutStockDetailVo vo);
 
     /**
      * @Description: 创建出库单并返回
@@ -66,6 +78,7 @@ public interface TOutStockService {
      * @return
      */
     Integer doOutStock(TOutStock tOutStock);
+
 
     /**
      * 添加出库单明细

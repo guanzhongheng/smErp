@@ -24,11 +24,12 @@ public class WebSiteMeshFilter extends ConfigurableSiteMeshFilter {
                 .addDecoratorPath("/order/*","/decoratorFilter/newLayout")
                 .addDecoratorPath("/cus/*","/decoratorFilter/newLayout")
                 .addDecoratorPath("/produce/*","/decoratorFilter/newLayout")
-                .addDecoratorPath("crm/order/prodDetailList","/decoratorFilter/newLayout")
+                .addDecoratorPath("/crm/order/prodDetailList","/decoratorFilter/newLayout")
+                .addDecoratorPath("/crm/inventory/outStockDetail","/decoratorFilter/newLayout")
                // .addDecoratorPath("/", "/decoratorFilter/blank")
                 .addDecoratorPath("/*", "/decoratorFilter/blank")
                 .addDecoratorPath("/common/*", "/decoratorFilter/blank")
-                .addExcludedPath("/logout").addExcludedPath("/crm/test")
+                .addExcludedPath("/logout").addExcludedPath("/crm/test").addExcludedPath("/print/**")
                 .addExcludedPath("/crmAjax/*").addExcludedPath("/sys/menu/tree");
     }
 }

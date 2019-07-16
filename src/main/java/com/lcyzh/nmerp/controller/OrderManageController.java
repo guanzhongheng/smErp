@@ -6,6 +6,7 @@ import com.lcyzh.nmerp.dao.TCustomerMapper;
 import com.lcyzh.nmerp.entity.TProduct;
 import com.lcyzh.nmerp.entity.sys.Dict;
 import com.lcyzh.nmerp.model.vo.*;
+import com.lcyzh.nmerp.service.TCustomerService;
 import com.lcyzh.nmerp.service.TOrderService;
 import com.lcyzh.nmerp.service.TProductService;
 import org.apache.commons.lang3.StringUtils;
@@ -36,8 +37,11 @@ public class OrderManageController extends BaseController {
 
     @Autowired
     private TProductService productService;
+
     @Autowired
     private TCustomerMapper tCustomerMapper;
+
+
 
     @ModelAttribute
     public OrderAddModifyVo get(@RequestParam(required=false) String ordCode) {
@@ -115,6 +119,8 @@ public class OrderManageController extends BaseController {
         }
         return "redirect:/crm/order/list";
     }
+
+
 
 
 }

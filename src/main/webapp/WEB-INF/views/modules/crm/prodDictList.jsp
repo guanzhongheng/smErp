@@ -27,7 +27,7 @@
             &nbsp;&nbsp;
             <form:select path="prodCgyCode" class="input-medium" placeholder="产品类型">
                 <form:option value="" label=""/>
-                <form:options items="${fns:getCusDictList(105000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+                <form:options items="${fns:getCusDictList(149000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
             </form:select>
         </li>
         &nbsp;&nbsp;

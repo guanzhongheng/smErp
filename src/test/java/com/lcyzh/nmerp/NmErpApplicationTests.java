@@ -16,9 +16,9 @@ public class NmErpApplicationTests {
 	private TOutStockService outStockService;
 	@Test
 	public void contextLoads() {
-        OutStockVo outStockVo = new OutStockVo();
-        outStockVo.setBarCode("10001");
-        outStockVo.setOutCode("1000");
+//        OutStockVo outStockVo = new OutStockVo();
+//        outStockVo.setBarCode("10001");
+//        outStockVo.setOutCode("1000");
 
 
 	}

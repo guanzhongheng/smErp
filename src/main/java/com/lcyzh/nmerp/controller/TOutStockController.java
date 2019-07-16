@@ -6,6 +6,7 @@ import com.lcyzh.nmerp.service.TOutStockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -83,8 +84,11 @@ public class TOutStockController {
      * @Date: 2019/7/5 11:31 AM
      */
     @RequestMapping(value = {"/doOutStock"}, method = RequestMethod.POST)
+    @ResponseBody
     public String doOutStock(TOutStock tOutStock){
         Integer result = tOutStockService.doOutStock(tOutStock);
         return String.valueOf(result);
     }
+
+
 }

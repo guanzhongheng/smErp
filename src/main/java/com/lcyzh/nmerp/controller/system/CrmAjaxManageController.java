@@ -57,8 +57,6 @@ public class CrmAjaxManageController extends BaseController {
 
     /**
      * 客户跟踪-保存
-     * @param cusIds
-     * @param remarks
      * @return
      */
     @RequestMapping(value = "saveFollow")

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * 项目名称：nm-erp
@@ -36,6 +37,11 @@ public class CrmManageController extends BaseController {
     private TInStockService inStockService;
     @Autowired
     private TMachineInfoService machineInfoService;
+    @Autowired
+    private TOutStockService outStockService;
+    @Autowired
+    private TStockService stockService;
+
 
     /**========================客户相关流转==============================**/
 
@@ -137,21 +143,6 @@ public class CrmManageController extends BaseController {
         return "modules/crm/taskList";
     }
 
-
-
-//    /**
-//     * 生产计划表
-//     * @param prodPlan
-//     * @param model
-//     * @return
-//     */
-//    @RequestMapping(value = {"order/prodPlanList"})
-//    public String prodPlanList(ProdPlanDetailVo prodPlan, Model model, HttpServletRequest request, HttpServletResponse response){
-//        Page<ProdPlanDetailVo> page = prodPlanService.findPage(new Page<ProdPlanDetailVo>(request, response), prodPlan);
-//        model.addAttribute("page", page);
-//        return "modules/crm/prodPlanList";
-//    }
-
     /**
      * 任务分配详情
      * @param request
@@ -176,9 +167,8 @@ public class CrmManageController extends BaseController {
      * @return
      */
     @RequestMapping(value = {"inventory/list"})
-    public String inventoryList(ProdInvInfoVo prodInvInfoVo,Model model, HttpServletRequest request, HttpServletResponse response){
-
-        Page<ProdInvInfoVo> page = inStockService.findProdInvInfoList(new Page<ProdInvInfoVo>(request, response));
+    public String inventoryList(StockQueryVo stockQueryVo,Model model, HttpServletRequest request, HttpServletResponse response){
+        Page<StockQueryVo> page = stockService.findList(new Page<StockQueryVo>(request, response),stockQueryVo);
         model.addAttribute("page", page);
         return "modules/crm/inventoryList";
     }
@@ -204,9 +194,8 @@ public class CrmManageController extends BaseController {
      * @return
      */
     @RequestMapping(value = {"inventory/outStockList"})
-    public String outStockList(@ModelAttribute("prodHistroyVo") ProdHistroyVo prodHistroyVo, Model model, HttpServletRequest request, HttpServletResponse response) {
-        // Page<ProductVo> page = tProductService.findPage(new Page<ProductVo>(request, response), tProduct);
-        Page<ProdHistroyVo> page = new Page<ProdHistroyVo>();
+    public String outStockList(@ModelAttribute("outStockVo") OutStockVo outStockVo, Model model, HttpServletRequest request, HttpServletResponse response) {
+        Page<OutStockVo> page = outStockService.findList(new Page<OutStockVo>(request, response), outStockVo);
         model.addAttribute("page", page);
         return "modules/crm/outStockList";
     }
@@ -237,11 +226,25 @@ public class CrmManageController extends BaseController {
      * @Date: 2019/7/11 11:11 AM
      */
     @RequestMapping(value = {"produce/list","vo"})
-    public String produceList(@ModelAttribute("vo") ProdPlanDetailVo vo, Model model, HttpServletRequest request, HttpServletResponse response){
-        Page<ProdPlanDetailVo> page = prodPlanDetailService.findProdTaskPage(new Page<ProdPlanDetailVo>(request,response),vo);
+    public String produceList(@ModelAttribute("vo") ProdPlanDetailVo vo, Model model, HttpServletRequest request, HttpServletResponse response) {
+        Page<ProdPlanDetailVo> page = prodPlanDetailService.findProdTaskPage(new Page<ProdPlanDetailVo>(request, response), vo);
         model.addAttribute("page", page);
-        model.addAttribute("macList",machineInfoService.findAllList());
+        model.addAttribute("macList", machineInfoService.findAllList());
         return "modules/crm/produceList";
+    }
+
+    /**
+     * 出库清单列表页面流转
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = {"inventory/outStockDetail"})
+    public String outStockDetail(String outCode, Model model) {
+       // OutStockVo outStockVo = outStockService.
+        List<StockVo> stockVos = outStockService.findOutItemsByOutCode(outCode);
+        model.addAttribute("outCode",outCode);
+        model.addAttribute("stocks", stockVos);
+        return "modules/crm/outStockListDetail";
     }
 
 }

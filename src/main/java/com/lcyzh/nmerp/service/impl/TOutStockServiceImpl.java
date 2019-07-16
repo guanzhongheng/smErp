@@ -3,6 +3,7 @@ package com.lcyzh.nmerp.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
+import com.lcyzh.nmerp.controller.system.util.UserUtils;
 import com.lcyzh.nmerp.dao.*;
 import com.lcyzh.nmerp.entity.TOutStock;
 import com.lcyzh.nmerp.entity.TOutStockDetail;
@@ -94,7 +95,7 @@ public class TOutStockServiceImpl implements TOutStockService {
     @Override
     public Integer doOutStock(TOutStock tOutStock) {
         Date date = new Date();
-        User currUser = (User) SecurityUtils.getSubject().getPrincipal();
+        User currUser = UserUtils.getUser();
         //已审批，出库
         tOutStock.setOutStatus('1');
         tOutStock.setUpdateTime(date);
