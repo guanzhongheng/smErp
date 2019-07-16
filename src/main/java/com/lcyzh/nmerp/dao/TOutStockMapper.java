@@ -2,6 +2,7 @@ package com.lcyzh.nmerp.dao;
 
 import com.lcyzh.nmerp.entity.TOutStock;
 import com.lcyzh.nmerp.model.vo.OutItemVo;
+import com.lcyzh.nmerp.model.vo.OutStockVo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public interface TOutStockMapper {
 
     List<TOutStock> findByOrdCode(String ordCode);
 
-    List<TOutStock> findList(TOutStock tOutStock);
+    List<TOutStock> findList(OutStockVo vo);
 
     int insert(TOutStock tOutStock);
 

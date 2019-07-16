@@ -1,14 +1,18 @@
 package com.lcyzh.nmerp.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.dao.TStockMapper;
 import com.lcyzh.nmerp.entity.TStock;
 import com.lcyzh.nmerp.model.vo.StockQueryVo;
 import com.lcyzh.nmerp.service.TStockService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
 * Author ljk
@@ -40,12 +44,22 @@ public class TStockServiceImpl implements TStockService{
     }
 
     @Override
-    public List<TStock> findList(StockQueryVo vo) {
+    public Page<StockQueryVo> findList(Page<StockQueryVo> page, StockQueryVo vo) {
+        PageHelper.startPage(page.getPageNo(),page.getPageSize());
         if(vo.getStartDate() == null || vo.getStartDate().length() == 0) {
             LocalDate.now().minusDays(7).toString();
+        }
+        if(vo.getEndDate() == null || vo.getEndDate().length() == 0) {
             vo.setEndDate(LocalDate.now().toString());
         }
-        return tStockMapper.findList(vo);
+        List<TStock> list = tStockMapper.findList(vo);
+        List<StockQueryVo> vos = list.stream().map(tStock -> {
+            StockQueryVo stockQueryVo = new StockQueryVo();
+            BeanUtils.copyProperties(tStock, stockQueryVo);
+            return stockQueryVo;
+        }).collect(Collectors.toList());
+        page.setList(vos);
+        return page;
     }
 
 }

@@ -42,7 +42,7 @@ public class HistoryPordRecordVo extends Page<HistoryPordRecordVo> {
         this.startDate = startDate;
     }
 
-    public String getEndDate(String s) {
+    public String getEndDate() {
         return endDate;
     }
 

@@ -1,5 +1,8 @@
 package com.lcyzh.nmerp.entity;
 
+
+import com.lcyzh.nmerp.common.persistence.Page;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -7,7 +10,7 @@ import java.util.Date;
 * Author ljk
 * Date  2019-07-16
 */
-public class TOutStock implements Serializable {
+public class TOutStock  extends Page<TOutStock> implements Serializable {
     private static final long serialVersionUID = 1L;
     private String outCode;
     private String cusName;

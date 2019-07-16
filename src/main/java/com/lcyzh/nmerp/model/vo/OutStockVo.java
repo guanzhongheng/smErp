@@ -1,5 +1,7 @@
 package com.lcyzh.nmerp.model.vo;
 
+import java.util.Date;
+
 /**
  * @Project : nm-erp
  * @Description : TODO
@@ -11,20 +13,35 @@ package com.lcyzh.nmerp.model.vo;
  * lijinku          2019/06/27    create
  */
 public class OutStockVo {
-    //出库编号
+    private String startDate;
+    private String endDate;
     private String outCode;
-    //订单编号
-    private String ordCode;
-    //商品id
-    private Long itemId;
-    //条形码
-    private String barCode;
-    //操作员工编号
-    private String operEmpCode;
-    //出库状态:0-新建；1-出库审核；2-出库完成
-    private Character status;
+    private String cusName;
+    private String receiver;
+    private String phone;
+    private String address;
+    private Character outStatus;
+    private String createBy;
+    private Date createTime;
+    private Date updateTime;
+    private String updateBy;
+    private String remarks;
 
-    private String remark;
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
 
     public String getOutCode() {
         return outCode;
@@ -34,51 +51,83 @@ public class OutStockVo {
         this.outCode = outCode;
     }
 
-    public String getOrdCode() {
-        return ordCode;
+    public String getCusName() {
+        return cusName;
     }
 
-    public void setOrdCode(String ordCode) {
-        this.ordCode = ordCode;
+    public void setCusName(String cusName) {
+        this.cusName = cusName;
     }
 
-    public String getBarCode() {
-        return barCode;
+    public String getReceiver() {
+        return receiver;
     }
 
-    public Long getItemId() {
-        return itemId;
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
     }
 
-    public void setItemId(Long itemId) {
-        this.itemId = itemId;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setBarCode(String barCode) {
-        this.barCode = barCode;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getOperEmpCode() {
-        return operEmpCode;
+    public String getAddress() {
+        return address;
     }
 
-    public void setOperEmpCode(String operEmpCode) {
-        this.operEmpCode = operEmpCode;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public Character getStatus() {
-        return status;
+    public Character getOutStatus() {
+        return outStatus;
     }
 
-    public void setStatus(Character status) {
-        this.status = status;
+    public void setOutStatus(Character outStatus) {
+        this.outStatus = outStatus;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getCreateBy() {
+        return createBy;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 }

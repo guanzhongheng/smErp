@@ -26,6 +26,8 @@ public class THistoryProdRecordServiceImpl implements ITHistoryProdRecordService
         PageHelper.startPage(page.getPageNo(),page.getPageSize());
         if(vo.getStartDate() == null || vo.getStartDate().length() == 0) {
             vo.setStartDate(LocalDate.now().minusMonths(1).toString());
+        }
+        if(vo.getEndDate() == null || vo.getEndDate().length() == 0) {
             vo.setEndDate(LocalDate.now().toString());
         }
         List<HistoryPordRecordVo> list = tHistoryProdRecordMapper.findListVo(vo);

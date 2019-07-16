@@ -1,7 +1,9 @@
 package com.lcyzh.nmerp.service;
 
+import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.entity.TOutStock;
 import com.lcyzh.nmerp.entity.TOutStockDetail;
+import com.lcyzh.nmerp.model.vo.OutStockVo;
 import com.lcyzh.nmerp.model.vo.StockVo;
 
 import java.util.List;
@@ -30,7 +32,8 @@ public interface TOutStockService {
      * @Iteration : 1.0
      * @Date: 2019/7/2 10:48 AM
      */
-    List<TOutStock> findList(TOutStock tOutStock);
+    //List<TOutStock> findList(TOutStock tOutStock);
+    Page<OutStockVo> findList(Page<OutStockVo> page, OutStockVo vo);
 
     /**
      * @Description: 创建出库单并返回

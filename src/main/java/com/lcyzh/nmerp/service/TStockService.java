@@ -1,5 +1,6 @@
 package com.lcyzh.nmerp.service;
 
+import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.entity.TStock;
 import com.lcyzh.nmerp.model.vo.StockQueryVo;
 
@@ -19,6 +20,6 @@ public interface TStockService {
     int insertBatch(List<TStock> tStocks);
 
     //补标签查询
-    List<TStock> findList(StockQueryVo vo);
+    Page<StockQueryVo> findList(Page<StockQueryVo> page, StockQueryVo vo);
 
 }

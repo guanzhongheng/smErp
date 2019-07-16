@@ -22,21 +22,24 @@
         WHERE out_code = #{outCode,jdbcType=VARCHAR}
     </select>
 
-    <select id="findList" parameterType ="com.lcyzh.nmerp.entity.TOutStock"  resultMap="tOutStockResultMap">
+    <select id="findList" parameterType ="com.lcyzh.nmerp.model.vo.OutStockVo"  resultMap="tOutStockResultMap">
         SELECT *
         FROM t_out_stock
         <where>
             <if test="cusName!= null and cusName!= ''">
-            and cus_name like concat('%', #{cusName,jdbcType=VARCHAR}, '%')
+                and cus_name like concat('%', #{cusName,jdbcType=VARCHAR}, '%')
             </if>
             <if test="receiver!= null and receiver!= ''">
-            and receiver like concat('%', #{receiver,jdbcType=VARCHAR}, '%')
+                and receiver like concat('%', #{receiver,jdbcType=VARCHAR}, '%')
             </if>
             <if test="outStatus!= null">
-            and out_status = #{outStatus,jdbcType=CHAR}
+                and out_status = #{outStatus,jdbcType=CHAR}
             </if>
             <if test="updateBy!= null and updateBy!= ''">
-            and update_by like concat('%', #{updateBy,jdbcType=VARCHAR}, '%')
+                and update_by like concat('%', #{updateBy,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="startDate != null">
+                and create_time between #{startDate} and #{endDate}
             </if>
         </where>
     </select>

@@ -1,5 +1,7 @@
 package com.lcyzh.nmerp.model.vo;
 
+import com.lcyzh.nmerp.common.persistence.Page;
+
 /**
  * @Project :
  * @Description :补签查询vo
@@ -8,7 +10,7 @@ package com.lcyzh.nmerp.model.vo;
  * @Date :
  * @ModificationHistory Who          When          What
  */
-public class StockQueryVo {
+public class StockQueryVo extends Page<StockQueryVo> {
     //订单编号（模糊匹配）
     private String ordCode;
     //产品类别
@@ -19,6 +21,20 @@ public class StockQueryVo {
     private String startDate;
     //结束时间
     private String endDate;
+
+    private String barCode;
+    private String itemCode;
+    private Double itemLenth;
+    private Double itemWidth;
+    private Double itemThick;
+    private Double itemWeight;
+    private Double itemSq;
+    private String itemOwner;
+    private String itemYcType;
+    private String itemYbType;
+    private Long itemUnit;
+    private String itemUnitValue;
+    private String itemColor;
 
     public String getOrdCode() {
         return ordCode;
@@ -58,5 +74,109 @@ public class StockQueryVo {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+    public String getBarCode() {
+        return barCode;
+    }
+
+    public void setBarCode(String barCode) {
+        this.barCode = barCode;
+    }
+
+    public String getItemCode() {
+        return itemCode;
+    }
+
+    public void setItemCode(String itemCode) {
+        this.itemCode = itemCode;
+    }
+
+    public Double getItemLenth() {
+        return itemLenth;
+    }
+
+    public void setItemLenth(Double itemLenth) {
+        this.itemLenth = itemLenth;
+    }
+
+    public Double getItemWidth() {
+        return itemWidth;
+    }
+
+    public void setItemWidth(Double itemWidth) {
+        this.itemWidth = itemWidth;
+    }
+
+    public Double getItemThick() {
+        return itemThick;
+    }
+
+    public void setItemThick(Double itemThick) {
+        this.itemThick = itemThick;
+    }
+
+    public Double getItemWeight() {
+        return itemWeight;
+    }
+
+    public void setItemWeight(Double itemWeight) {
+        this.itemWeight = itemWeight;
+    }
+
+    public Double getItemSq() {
+        return itemSq;
+    }
+
+    public void setItemSq(Double itemSq) {
+        this.itemSq = itemSq;
+    }
+
+    public String getItemOwner() {
+        return itemOwner;
+    }
+
+    public void setItemOwner(String itemOwner) {
+        this.itemOwner = itemOwner;
+    }
+
+    public String getItemYcType() {
+        return itemYcType;
+    }
+
+    public void setItemYcType(String itemYcType) {
+        this.itemYcType = itemYcType;
+    }
+
+    public String getItemYbType() {
+        return itemYbType;
+    }
+
+    public void setItemYbType(String itemYbType) {
+        this.itemYbType = itemYbType;
+    }
+
+    public Long getItemUnit() {
+        return itemUnit;
+    }
+
+    public void setItemUnit(Long itemUnit) {
+        this.itemUnit = itemUnit;
+    }
+
+    public String getItemUnitValue() {
+        return itemUnitValue;
+    }
+
+    public void setItemUnitValue(String itemUnitValue) {
+        this.itemUnitValue = itemUnitValue;
+    }
+
+    public String getItemColor() {
+        return itemColor;
+    }
+
+    public void setItemColor(String itemColor) {
+        this.itemColor = itemColor;
     }
 }

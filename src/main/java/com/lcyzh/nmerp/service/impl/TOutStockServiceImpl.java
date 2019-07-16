@@ -1,5 +1,7 @@
 package com.lcyzh.nmerp.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.dao.*;
 import com.lcyzh.nmerp.entity.TOutStock;
@@ -10,12 +12,15 @@ import com.lcyzh.nmerp.service.TOutStockService;
 import com.lcyzh.nmerp.utils.DictUtils;
 import com.lcyzh.nmerp.utils.StringUtils;
 import org.apache.shiro.SecurityUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Author ljk
@@ -36,9 +41,28 @@ public class TOutStockServiceImpl implements TOutStockService {
     }
 
     @Override
-    public List<TOutStock> findList(TOutStock tOutStock) {
-        return tOutStockMapper.findList(tOutStock);
+    public Page<OutStockVo> findList(Page<OutStockVo> page, OutStockVo vo) {
+        PageHelper.startPage(page.getPageNo(),page.getPageSize());
+        if(vo.getStartDate() == null || vo.getStartDate().length() == 0) {
+            vo.setStartDate(LocalDate.now().minusDays(7).toString());
+        }
+        if(vo.getEndDate() == null || vo.getEndDate().length() == 0) {
+            vo.setEndDate(LocalDate.now().toString());
+        }
+        List<TOutStock> list = tOutStockMapper.findList(vo);
+        List<OutStockVo> vos = list.stream().map(tOutStock -> {
+            OutStockVo outStockVo = new OutStockVo();
+            BeanUtils.copyProperties(tOutStock, outStockVo);
+            return outStockVo;
+        }).collect(Collectors.toList());
+        page.setList(vos);
+        return page;
     }
+
+    //@Override
+    //public List<TOutStock> findList(TOutStock tOutStock) {
+    //    return tOutStockMapper.findList(tOutStock);
+    //}
 
     @Override
     public String createAndReturnOutCode(String createBy, String remark) {
