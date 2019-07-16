@@ -36,6 +36,11 @@ public class TOutStockServiceImpl implements TOutStockService {
     private TOutStockDetailMapper tOutStockDetailMapper;
 
     @Override
+    public TOutStock findByCode(String outCode) {
+        return tOutStockMapper.findByOutCode(outCode);
+    }
+
+    @Override
     public List<StockVo> findOutItemsByOutCode(String outCode) {
         return tStockMapper.findOutItemsByOutCode(outCode);
     }

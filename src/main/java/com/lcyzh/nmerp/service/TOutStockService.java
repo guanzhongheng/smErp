@@ -15,6 +15,11 @@ import java.util.List;
 public interface TOutStockService {
 
     /**
+     * 根据outCode查询出库单
+     */
+    TOutStock findByCode(String outCode);
+
+    /**
      * @Description: 根据出库单查询已出库的产品
      * @Param: [outCode]
      * @return: java.util.List<com.lcyzh.nmerp.model.vo.OutItemVo>

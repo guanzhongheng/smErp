@@ -16,7 +16,7 @@
         <result column="remarks" property="remarks" jdbcType="VARCHAR"/> 
     </resultMap>
 
-    <select id="findById" parameterType="java.lang.String" resultMap="tOutStockResultMap">
+    <select id="findByOutCode" parameterType="java.lang.String" resultMap="tOutStockResultMap">
         SELECT *
         FROM t_out_stock
         WHERE out_code = #{outCode,jdbcType=VARCHAR}

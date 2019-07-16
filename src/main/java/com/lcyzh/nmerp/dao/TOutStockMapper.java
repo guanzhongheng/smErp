@@ -1,7 +1,6 @@
 package com.lcyzh.nmerp.dao;
 
 import com.lcyzh.nmerp.entity.TOutStock;
-import com.lcyzh.nmerp.model.vo.OutItemVo;
 import com.lcyzh.nmerp.model.vo.OutStockVo;
 import org.springframework.stereotype.Repository;
 
@@ -26,4 +25,5 @@ public interface TOutStockMapper {
 
     int delete(String barCode);
 
+    TOutStock findByOutCode(String outCode);
 }
