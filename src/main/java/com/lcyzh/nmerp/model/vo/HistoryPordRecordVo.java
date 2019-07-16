@@ -1,6 +1,6 @@
 package com.lcyzh.nmerp.model.vo;
 
-import com.lcyzh.nmerp.common.persistence.Page;
+import com.lcyzh.nmerp.common.persistence.DataEntity;
 
 import java.util.Date;
 
@@ -12,7 +12,7 @@ import java.util.Date;
  * @Date :
  * @ModificationHistory Who          When          What
  */
-public class HistoryPordRecordVo extends Page<HistoryPordRecordVo> {
+public class HistoryPordRecordVo extends DataEntity<HistoryPordRecordVo> {
     private String startDate;
     private String endDate;
     private Long historyProdRecordId;

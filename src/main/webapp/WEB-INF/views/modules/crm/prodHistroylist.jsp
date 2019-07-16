@@ -21,7 +21,17 @@
         </li>
         <li>
             &nbsp;&nbsp;
-            <form:input path="prodName" htmlEscape="false" maxlength="200" class="input-medium" placeholder="产品名称"/>
+            <form:select path="prodCgyCode" class="input-medium" placeholder="产品类型">
+                <form:option value="" label=""/>
+                <form:options items="${fns:getCusDictList(105000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+            </form:select>
+        </li>
+        <li>
+            &nbsp;&nbsp;
+            <form:select path="prodVariety" class="input-medium" placeholder="产品品种">
+                <form:option value="" label=""/>
+                <form:options items="${fns:getCusDictList(148000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+            </form:select>
         </li>
         <li>
             &nbsp;&nbsp;
@@ -42,11 +52,13 @@
         <thead>
         <tr>
             <th>订单编号</th>
-            <th>产品名称</th>
-            <th>产品类别</th>
             <th>产品品种</th>
+            <th>产品类别</th>
             <th>产品颜色</th>
+            <th>产品重量</th>
+            <th>产品数量</th>
             <th>生产机台</th>
+            <th>产品归属人</th>
             <th>入库时间</th>
             <th>操作</th>
         </tr>
@@ -55,13 +67,16 @@
         <c:forEach items="${page.list}" var="cus">
             <tr>
                 <td>${cus.contCode}</td>
-                <td>${cus.prodName}</td>
-                <td>${fns:getValueByDictKey(cus.prodCgyCode)}</td>
                 <td>${fns:getValueByDictKey(cus.prodVariety)}</td>
-                <td>${cus.itemColor}</td>
+                <td>${fns:getValueByDictKey(cus.prodCgyCode)}</td>
+                <td>${fns:getDictLabel('prod_color',cus.itemColor,'无')}</td>
+                <td>${cus.itemTotalWeight}</td>
+                <td>${cus.itemNum}</td>
+                <td>${cus.macCode}</td>
+                <td>${cus.itemOwner}</td>
                 <td>${cus.createTime}</td>
                 <td>
-                    <a href="#"><i class="icon-pencil">&nbsp;详情</i></a>
+                    <a href="#"><i class="icon-pencil">&nbsp;条形码查看</i></a>
                 </td>
             </tr>
         </c:forEach>

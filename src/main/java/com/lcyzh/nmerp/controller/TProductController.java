@@ -3,9 +3,11 @@ package com.lcyzh.nmerp.controller;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.entity.TProduct;
+import com.lcyzh.nmerp.model.vo.HistoryPordRecordVo;
 import com.lcyzh.nmerp.model.vo.OutStockVo;
 import com.lcyzh.nmerp.model.vo.ProdHistroyVo;
 import com.lcyzh.nmerp.model.vo.ProductVo;
+import com.lcyzh.nmerp.service.ITHistoryProdRecordService;
 import com.lcyzh.nmerp.service.TProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +29,8 @@ public class TProductController extends BaseController {
     @Autowired
     private TProductService tProductService;
 
+    @Autowired
+    private ITHistoryProdRecordService historyProdRecordService;
     /**
      * 列表页面流转
      * @param tProduct
@@ -114,9 +118,8 @@ public class TProductController extends BaseController {
      * @return
      */
     @RequestMapping(value = {"/histroyList"})
-    public String histroyList(@ModelAttribute("prodHistroyVo") ProdHistroyVo prodHistroyVo, Model model, HttpServletRequest request, HttpServletResponse response) {
-       // Page<ProductVo> page = tProductService.findPage(new Page<ProductVo>(request, response), tProduct);
-        Page<ProductVo> page = new Page<ProductVo>();
+    public String histroyList(@ModelAttribute("prodHistroyVo") HistoryPordRecordVo prodHistroyVo, Model model, HttpServletRequest request, HttpServletResponse response) {
+        Page<HistoryPordRecordVo> page = historyProdRecordService.findPage(new Page<HistoryPordRecordVo>(request, response), prodHistroyVo);
         model.addAttribute("page", page);
         return "modules/crm/prodHistroylist";
     }
