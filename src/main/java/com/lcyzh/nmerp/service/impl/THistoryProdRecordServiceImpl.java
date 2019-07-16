@@ -28,7 +28,7 @@ public class THistoryProdRecordServiceImpl implements ITHistoryProdRecordService
             vo.setStartDate(LocalDate.now().minusMonths(1).toString());
         }
         if(vo.getEndDate() == null || vo.getEndDate().length() == 0) {
-            vo.setEndDate(LocalDate.now().toString());
+            vo.setEndDate(LocalDate.now().plusDays(1).toString());
         }
         List<HistoryPordRecordVo> list = tHistoryProdRecordMapper.findListVo(vo);
         page.setList(list);

@@ -52,7 +52,7 @@ public class TOutStockServiceImpl implements TOutStockService {
             vo.setStartDate(LocalDate.now().minusDays(7).toString());
         }
         if(vo.getEndDate() == null || vo.getEndDate().length() == 0) {
-            vo.setEndDate(LocalDate.now().toString());
+            vo.setEndDate(LocalDate.now().plusDays(1).toString());
         }
         List<TOutStock> list = tOutStockMapper.findList(vo);
         List<OutStockVo> vos = list.stream().map(tOutStock -> {

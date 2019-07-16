@@ -50,7 +50,7 @@ public class TStockServiceImpl implements TStockService{
             LocalDate.now().minusDays(7).toString();
         }
         if(vo.getEndDate() == null || vo.getEndDate().length() == 0) {
-            vo.setEndDate(LocalDate.now().toString());
+            vo.setEndDate(LocalDate.now().plusDays(1).toString());
         }
         List<TStock> list = tStockMapper.findList(vo);
         List<StockQueryVo> vos = list.stream().map(tStock -> {
