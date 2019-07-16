@@ -19,6 +19,7 @@
             <form:input path="ordCode" htmlEscape="false" maxlength="200"
                         class="input-medium" placeholder="订单编号"/>
         </li>
+
         <li>
             &nbsp;&nbsp;
             <form:select path="itemCgyCode" class="input-medium" placeholder="产品类型">
