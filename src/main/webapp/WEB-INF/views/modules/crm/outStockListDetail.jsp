@@ -30,9 +30,11 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-md-1">收货地址:</label>
-                                            <div class="col-sm-8">
-                                                <input type="text" class="form-control" name="" id="address"/>
+                                            <div class="col-md-12">
+                                                <label class="col-md-3">收货地址:</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="" id="address"/>
+                                                </div>
                                             </div>
                                         </div>
                                     </form>
@@ -127,7 +129,6 @@
 <script src="${ctxStatic}/hPlugs/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 <script>
     function saveAddress() {
-        debugger;
         var receiver = $("#receiver").val();
         var phone = $("#phone").val();
         var address = $("#address").val();
