@@ -7,6 +7,7 @@ import com.lcyzh.nmerp.service.TStockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -40,6 +41,10 @@ public class TStockServiceImpl implements TStockService{
 
     @Override
     public List<TStock> findList(StockQueryVo vo) {
+        if(vo.getStartDate() == null || vo.getStartDate().length() == 0) {
+            LocalDate.now().minusDays(7).toString();
+            vo.setEndDate(LocalDate.now().toString());
+        }
         return tStockMapper.findList(vo);
     }
 
