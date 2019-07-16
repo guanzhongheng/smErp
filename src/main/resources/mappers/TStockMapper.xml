@@ -96,8 +96,8 @@
             <if test="startDate!= null">
                 and create_time between #{startDate} and #{endDate}
             </if>
-
         </where>
+        order by create_time desc
     </select>
 
     <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TStock" useGeneratedKeys="true" keyProperty="id">
