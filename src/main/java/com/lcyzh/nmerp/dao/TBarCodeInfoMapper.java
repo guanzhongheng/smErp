@@ -1,7 +1,6 @@
 package com.lcyzh.nmerp.dao;
 
 import com.lcyzh.nmerp.entity.TBarCodeInfo;
-import com.lcyzh.nmerp.model.vo.ConcreteProdVo;
 import com.lcyzh.nmerp.model.vo.ProdInvInfoVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -25,5 +24,4 @@ public interface TBarCodeInfoMapper {
 
     TBarCodeInfo findByPrimaryKey(String barCode);
 
-    ConcreteProdVo findDetailByPrimaryKey(String barCode);
 }

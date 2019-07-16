@@ -1,10 +1,7 @@
 package com.lcyzh.nmerp.controller;
 
 import com.lcyzh.nmerp.entity.TOutStock;
-import com.lcyzh.nmerp.model.vo.ConcreteProdVo;
-import com.lcyzh.nmerp.model.vo.OutItemVo;
-import com.lcyzh.nmerp.model.vo.OutStockDetailVo;
-import com.lcyzh.nmerp.model.vo.OutStockVo;
+import com.lcyzh.nmerp.model.vo.StockVo;
 import com.lcyzh.nmerp.service.TOutStockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +21,7 @@ public class TOutStockController {
     private TOutStockService tOutStockService;
 
     /**
-     * @Description: 查询昨天到今天的未完成的出库单
+     * @Description: 查询未完成的出库单
      * @Param: []
      * @return: java.util.List<com.lcyzh.nmerp.entity.TOutStock>
      * @Author: wsm
@@ -35,7 +32,6 @@ public class TOutStockController {
     public List<TOutStock> findList(){
         TOutStock tOutStock = new TOutStock();
         tOutStock.setOutStatus('0');
-        tOutStock.setDays(1);
         return tOutStockService.findList(tOutStock);
     }
 
@@ -49,7 +45,7 @@ public class TOutStockController {
      */
     @RequestMapping(value = {"/create"}, method = RequestMethod.POST)
     public String addOutStock(){
-        return tOutStockService.createAndReturnOutCode("1","无");
+        return tOutStockService.createAndReturnOutCode("admin","无");
     }
 
     /**
@@ -61,7 +57,7 @@ public class TOutStockController {
      * @Date: 2019/7/3 11:49 PM
      */
     @RequestMapping(value = {"/getProd"}, method = RequestMethod.GET)
-    public ConcreteProdVo getDetail(String barCode){
+    public StockVo getDetail(String barCode){
         return tOutStockService.findByBarCode(barCode);
     }
 
@@ -74,7 +70,7 @@ public class TOutStockController {
      * @Date: 2019/7/3 11:52 PM
      */
     @RequestMapping(value = {"/getDetailList"}, method = RequestMethod.GET)
-    public List<OutItemVo> detailList(String outCode){
+    public List<StockVo> detailList(String outCode){
         return tOutStockService.findOutItemsByOutCode(outCode);
     }
 
@@ -87,45 +83,8 @@ public class TOutStockController {
      * @Date: 2019/7/5 11:31 AM
      */
     @RequestMapping(value = {"/doOutStock"}, method = RequestMethod.POST)
-    public String doOutStock(String barCode,String outCode){
-        OutStockDetailVo vo = new OutStockDetailVo();
-        vo.setBarCode(barCode);
-        vo.setOutCode(outCode);
-        Integer result = tOutStockService.insertStore(vo);
-        return String.valueOf(result);
-    }
-
-    /**
-     * @Description: 根据传入的code删除对应的资源
-     * @Param: [barCode, outCode]
-     * @return: java.lang.String
-     * @Author: wsm
-     * @Iteration : 1.0
-     * @Date: 2019/7/5 11:31 AM
-     */
-    @RequestMapping(value = {"/deleteByCode"}, method = RequestMethod.POST)
-    public String deleteByCode(String barCode,String outCode){
-        OutStockVo vo = new OutStockVo();
-        vo.setBarCode(barCode);
-        vo.setOutCode(outCode);
-        Integer result = tOutStockService.delete(vo);
-        return String.valueOf(result);
-    }
-
-    /**
-     * @Description: 出库单完结
-     * @Param: [outCode]
-     * @return: java.lang.String
-     * @Author: wsm
-     * @Iteration : 1.0
-     * @Date: 2019/7/5 3:24 PM
-     */
-    @RequestMapping(value = {"/finishOutStock"}, method = RequestMethod.POST)
-    public String finishOutStock(String outCode){
-        OutStockVo outStock = new OutStockVo();
-        outStock.setOutCode(outCode);
-        outStock.setStatus('1');
-        Integer result = tOutStockService.update(outStock);
+    public String doOutStock(TOutStock tOutStock){
+        Integer result = tOutStockService.doOutStock(tOutStock);
         return String.valueOf(result);
     }
 }

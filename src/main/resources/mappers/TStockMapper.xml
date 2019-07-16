@@ -4,7 +4,7 @@
 
     <resultMap id="tStockResultMap" type="com.lcyzh.nmerp.entity.TStock">
         <id column="id" property="id" jdbcType="BIGINT"/> 
-        <result column="bar_code" property="barCode" jdbcType="BIGINT"/> 
+        <result column="bar_code" property="barCode" jdbcType="VARCHAR"/>
         <result column="ord_code" property="ordCode" jdbcType="VARCHAR"/> 
         <result column="item_code" property="itemCode" jdbcType="VARCHAR"/> 
         <result column="item_lenth" property="itemLenth" jdbcType="DOUBLE"/> 
@@ -24,6 +24,52 @@
         <result column="item_color" property="itemColor" jdbcType="VARCHAR"/> 
     </resultMap>
 
+    <select id="findByBarCode" parameterType="java.lang.String" resultType="com.lcyzh.nmerp.model.vo.StockVo">
+        select
+        id stockId,
+        bar_code barCode,
+        item_code itemCode,
+        item_lenth itemLenth,
+        item_width itemWidth,
+        item_thick itemThick,
+        item_weight itemWeight,
+        item_sq itemSq,
+        item_owner itemOwner,
+        item_yc_type itemYcType,
+        item_yb_type itemYbType,
+        item_cgy_code itemCgyCode,
+        item_variety itemVariety,
+        item_unit itemUnit,
+        item_color itemColor
+        from t_stock
+        where bar_code = #{barCode}
+    </select>
+
+    <select id="findOutItemsByOutCode" parameterType="java.lang.String" resultType="com.lcyzh.nmerp.model.vo.StockVo">
+        select
+        id stockId,
+        bar_code barCode,
+        item_code itemCode,
+        item_lenth itemLenth,
+        item_width itemWidth,
+        item_thick itemThick,
+        item_weight itemWeight,
+        item_sq itemSq,
+        item_owner itemOwner,
+        item_yc_type itemYcType,
+        item_yb_type itemYbType,
+        item_cgy_code itemCgyCode,
+        item_variety itemVariety,
+        item_unit itemUnit,
+        item_color itemColor
+        from t_stock
+        where bar_code in (select bar_code from t_out_stock_detail where out_code = #{outCode})
+    </select>
+
+    <update id="updateByOutCode" parameterType="java.util.Map">
+        update t_stock set status = #{status,jdbcType=CHAR},update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where bar_code in (select bar_code from t_out_stock_detail where out_code = #{outCode})
+    </update>
     <select id="getByBarCode" parameterType="java.lang.String" resultMap="tStockResultMap">
         select * from t_stock where bar_code = #{barCode}
     </select>
@@ -39,7 +85,7 @@
         FROM t_stock
         <where>
             <if test="barCode!= null">
-            and bar_code like concat('%', #{barCode,jdbcType=BIGINT}, '%')
+            and bar_code like concat('%', #{barCode,jdbcType=VARCHAR}, '%')
             </if>
             <if test="ordCode!= null">
             and ord_code like concat('%', #{ordCode,jdbcType=VARCHAR}, '%')
@@ -122,7 +168,7 @@
             item_color
         )
         VALUES (
-            #{barCode,jdbcType=BIGINT},
+            #{barCode,jdbcType=VARCHAR},
             #{ordCode,jdbcType=VARCHAR},
             #{itemCode,jdbcType=VARCHAR},
             #{itemLenth,jdbcType=DOUBLE},
@@ -169,7 +215,7 @@
         <foreach collection ="list" item="item" separator =",">
         (
             #{item.id,jdbcType=BIGINT},
-            #{item.barCode,jdbcType=BIGINT},
+            #{item.barCode,jdbcType=VARCHAR},
             #{item.ordCode,jdbcType=VARCHAR},
             #{item.itemCode,jdbcType=VARCHAR},
             #{item.itemLenth,jdbcType=DOUBLE},
@@ -195,7 +241,7 @@
         UPDATE t_stock
         <set>
             <if test="barCode!= null">
-            bar_code = #{barCode,jdbcType=BIGINT},
+            bar_code = #{barCode,jdbcType=VARCHAR},
             </if>
             <if test="ordCode!= null">
             ord_code = #{ordCode,jdbcType=VARCHAR},

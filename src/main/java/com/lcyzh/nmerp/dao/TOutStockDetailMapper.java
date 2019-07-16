@@ -15,22 +15,11 @@ import java.util.List;
 @Repository
 public interface TOutStockDetailMapper {
 
-    List<OutStockVo> findListByCondition(@Param("outCode") String outCode, @Param("ordCode") String ordCode, @Param("itemId") Long itemId);
-
-    TOutStockDetail findByPrimaryKey(Long id);
-
     List<TOutStockDetail> findAllList();
-
-    List<OutItemVo> findOutItemsByOutCode(String outCode);
 
     int insert(TOutStockDetail tOutStockDetail);
 
     int insertBatch(List<TOutStockDetail> tOutStockDetails);
 
-    int deleteByOutCode(String outCode);
-
-    int deleteByBarCode(String barCode);
-
-    int deleteByBatch(List<String> barCodeList);
-
+    List<TOutStockDetail> findList(TOutStockDetail tOutStockDetail);
 }

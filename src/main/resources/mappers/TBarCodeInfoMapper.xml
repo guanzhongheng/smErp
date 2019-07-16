@@ -125,26 +125,4 @@
        select * from T_BARCODE_INFO where bar_code = #{barCode,jdbcType=VARCHAR}
     </select>
 
-    <select id="findDetailByPrimaryKey" resultType="com.lcyzh.nmerp.model.vo.ConcreteProdVo"
-            parameterType="java.lang.String">
-        SELECT
-            bi.ord_code ordCode,
-            bi.num ccProdNum,
-            bi.status outStockStatus,
-            pt.prod_name itemName,
-            pt.prod_spec itemSpec,
-            pt.prod_cgy_code itemCgyCode,
-            oi.item_color itemColor,
-            oi.item_lenth itemLenth,
-            oi.item_num itemNum,
-            oi.item_thick itemThick,
-            oi.item_width itemWidth,
-            oi.item_owner itemOwner
-        FROM
-            T_BARCODE_INFO bi
-        LEFT JOIN T_ORDER_ITEM oi ON bi.item_id = oi.id
-        LEFT JOIN T_PRODUCT pt ON oi.item_code = pt.prod_code
-        WHERE
-         bi.bar_code = #{barCode,jdbcType=VARCHAR}
-    </select>
 </mapper>

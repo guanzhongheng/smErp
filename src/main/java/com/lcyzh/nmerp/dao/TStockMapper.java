@@ -1,9 +1,11 @@
 package com.lcyzh.nmerp.dao;
 
 import com.lcyzh.nmerp.entity.TStock;
+import com.lcyzh.nmerp.model.vo.StockVo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
 * Author ljk
@@ -27,4 +29,10 @@ public interface TStockMapper {
     int delete(TStock tStock);
 
     List<TStock> getByBarCode(String barCode);
+
+    StockVo findByBarCode(String barCode);
+
+    List<StockVo> findOutItemsByOutCode(String outCode);
+
+    int updateByOutCode(Map<String, Object> map);
 }

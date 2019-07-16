@@ -19,10 +19,8 @@ public class NmErpApplicationTests {
         OutStockVo outStockVo = new OutStockVo();
         outStockVo.setBarCode("10001");
         outStockVo.setOutCode("1000");
-        int delete = outStockService.delete(outStockVo);
 
 
-        System.out.println("删除成功："+delete);
 	}
 
 }

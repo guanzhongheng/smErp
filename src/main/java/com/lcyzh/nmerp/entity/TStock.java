@@ -11,7 +11,7 @@ import java.util.Date;
 public class TStock implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long id;
-    private Long barCode;
+    private String barCode;
     private String ordCode;
     private String itemCode;
     private Double itemLenth;
@@ -35,8 +35,8 @@ public class TStock implements Serializable {
 
     public void setId (Long id) {this.id = id;}
     public Long getId(){ return id;} 
-    public void setBarCode (Long barCode) {this.barCode = barCode;} 
-    public Long getBarCode(){ return barCode;} 
+    public void setBarCode (String barCode) {this.barCode = barCode;}
+    public String getBarCode(){ return barCode;}
     public void setOrdCode (String ordCode) {this.ordCode = ordCode;} 
     public String getOrdCode(){ return ordCode;} 
     public void setItemCode (String itemCode) {this.itemCode = itemCode;} 

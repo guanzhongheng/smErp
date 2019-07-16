@@ -3,112 +3,150 @@
 <mapper namespace="com.lcyzh.nmerp.dao.TOutStockMapper">
 
     <resultMap id="tOutStockResultMap" type="com.lcyzh.nmerp.entity.TOutStock">
-        <id column="out_code" property="outCode" jdbcType="VARCHAR"/>
-        <result column="ord_code" property="ordCode" jdbcType="VARCHAR"/>
-        <result column="out_status" property="outStatus" jdbcType="CHAR"/>
-        <result column="out_count" property="outCount" jdbcType="INTEGER"/>
-        <result column="apply_emp_code" property="applyEmpCode" jdbcType="VARCHAR"/>
-        <result column="oper_emp_code" property="operEmpCode" jdbcType="VARCHAR"/>
-        <result column="remark" property="remark" jdbcType="VARCHAR"/>
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
-        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <id column="out_code" property="outCode" jdbcType="VARCHAR"/> 
+        <result column="cus_name" property="cusName" jdbcType="VARCHAR"/> 
+        <result column="receiver" property="receiver" jdbcType="VARCHAR"/> 
+        <result column="phone" property="phone" jdbcType="VARCHAR"/> 
+        <result column="address" property="address" jdbcType="VARCHAR"/> 
+        <result column="out_status" property="outStatus" jdbcType="CHAR"/> 
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/> 
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/> 
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/> 
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR"/> 
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/> 
     </resultMap>
 
-
-    <select id="findByPrimaryKey" parameterType="java.lang.String" resultMap="tOutStockResultMap">
+    <select id="findById" parameterType="java.lang.String" resultMap="tOutStockResultMap">
         SELECT *
-        FROM T_OUT_STOCK
+        FROM t_out_stock
         WHERE out_code = #{outCode,jdbcType=VARCHAR}
     </select>
 
-
-    <select id="findByOrdCode" parameterType="java.lang.String" resultMap="tOutStockResultMap">
+    <select id="findList" parameterType ="com.lcyzh.nmerp.entity.TOutStock"  resultMap="tOutStockResultMap">
         SELECT *
-        FROM T_OUT_STOCK
-        WHERE find_in_set(#{ordCode,jdbcType=VARCHAR},ord_code)
-    </select>
-
-
-    <select id="findList" parameterType="com.lcyzh.nmerp.entity.TOutStock" resultMap="tOutStockResultMap">
-        SELECT *
-        FROM T_OUT_STOCK
+        FROM t_out_stock
         <where>
-
+            <if test="cusName!= null and cusName!= ''">
+            and cus_name like concat('%', #{cusName,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="receiver!= null and receiver!= ''">
+            and receiver like concat('%', #{receiver,jdbcType=VARCHAR}, '%')
+            </if>
             <if test="outStatus!= null">
-                and out_status = #{outStatus,jdbcType=CHAR}
+            and out_status = #{outStatus,jdbcType=CHAR}
             </if>
-            <if test="applyEmpCode!= null">
-                and apply_emp_code like concat('%', #{applyEmpCode,jdbcType=VARCHAR}, '%')
-            </if>
-            <if test="operEmpCode!= null">
-                and oper_emp_code like concat('%', #{operEmpCode,jdbcType=VARCHAR}, '%')
-            </if>
-            <if test="remark!= null">
-                and remark like concat('%', #{remark,jdbcType=VARCHAR}, '%')
-            </if>
-            <if test="days!= null">
-                and create_time >= now()-interval #{days,jdbcType=INTEGER} day
+            <if test="updateBy!= null and updateBy!= ''">
+            and update_by like concat('%', #{updateBy,jdbcType=VARCHAR}, '%')
             </if>
         </where>
-        order by create_time desc
     </select>
 
-    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TOutStock">
-      INSERT INTO T_OUT_STOCK(
+    <select id="findAllList" resultMap="tOutStockResultMap">
+        SELECT *
+        FROM t_out_stock
+    </select>
+
+    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TOutStock">
+        INSERT INTO t_out_stock(
             out_code,
-            ord_code,
+            cus_name,
+            receiver,
+            phone,
+            address,
             out_status,
-            apply_emp_code,
-            oper_emp_code,
-            out_count,
-            remark,
+            create_by,
             create_time,
-            update_time
+            update_time,
+            update_by,
+            remarks
         )
         VALUES (
             #{outCode,jdbcType=VARCHAR},
-            #{ordCode,jdbcType=VARCHAR},
+            #{cusName,jdbcType=VARCHAR},
+            #{receiver,jdbcType=VARCHAR},
+            #{phone,jdbcType=VARCHAR},
+            #{address,jdbcType=VARCHAR},
             #{outStatus,jdbcType=CHAR},
-            #{applyEmpCode,jdbcType=VARCHAR},
-            #{operEmpCode,jdbcType=VARCHAR},
-            #{outCount,jdbcType=INTEGER},
-            #{remark,jdbcType=VARCHAR},
+            #{createBy,jdbcType=VARCHAR},
             #{createTime,jdbcType=TIMESTAMP},
-            #{updateTime,jdbcType=TIMESTAMP}
+            #{updateTime,jdbcType=TIMESTAMP},
+            #{updateBy,jdbcType=VARCHAR},
+            #{remarks,jdbcType=VARCHAR}
         )
     </insert>
 
+    <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TOutStock">
+        INSERT INTO t_out_stock(
+            out_code,
+            cus_name,
+            receiver,
+            phone,
+            address,
+            out_status,
+            create_by,
+            create_time,
+            update_time,
+            update_by,
+            remarks
+        )
+        VALUES
+        <foreach collection ="list" item="item" separator =",">
+        (
+            #{item.outCode,jdbcType=VARCHAR},
+            #{item.cusName,jdbcType=VARCHAR},
+            #{item.receiver,jdbcType=VARCHAR},
+            #{item.phone,jdbcType=VARCHAR},
+            #{item.address,jdbcType=VARCHAR},
+            #{item.outStatus,jdbcType=CHAR},
+            #{item.createBy,jdbcType=VARCHAR},
+            #{item.createTime,jdbcType=TIMESTAMP},
+            #{item.updateTime,jdbcType=TIMESTAMP},
+            #{item.updateBy,jdbcType=VARCHAR},
+            #{item.remarks,jdbcType=VARCHAR}
+        )
+        </foreach>
+    </insert>
 
-    <update id="update" parameterType="com.lcyzh.nmerp.entity.TOutStock">
-        UPDATE T_OUT_STOCK
+    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TOutStock">
+        UPDATE t_out_stock
         <set>
-            <if test="ordCode!= null">
-                ord_code = #{ordCode,jdbcType=VARCHAR},
-            </if>
-            <if test="outStatus!= null">
-                out_status = #{outStatus,jdbcType=CHAR},
-            </if>
-            <if test="applyEmpCode!= null">
-                apply_emp_code = #{applyEmpCode,jdbcType=VARCHAR},
-            </if>
-            <if test="operEmpCode!= null">
-                oper_emp_code = #{operEmpCode,jdbcType=VARCHAR},
-            </if>
-            <if test="outCount!= null">
-                out_count = out_count + #{outCount,jdbcType=INTEGER},
-            </if>
-            <if test="remark!= null">
-                remark = #{remark,jdbcType=VARCHAR},
-            </if>
-            <if test="updateTime!= null">
-                update_time = #{updateTime,jdbcType=TIMESTAMP},
-            </if>
+                
+<if test="cusName!= null">
+cus_name = #{cusName,jdbcType=VARCHAR},
+</if>        
+<if test="receiver!= null">
+receiver = #{receiver,jdbcType=VARCHAR},
+</if>        
+<if test="phone!= null">
+phone = #{phone,jdbcType=VARCHAR},
+</if>        
+<if test="address!= null">
+address = #{address,jdbcType=VARCHAR},
+</if>        
+<if test="outStatus!= null">
+out_status = #{outStatus,jdbcType=CHAR},
+</if>        
+<if test="createBy!= null">
+create_by = #{createBy,jdbcType=VARCHAR},
+</if>        
+<if test="createTime!= null">
+create_time = #{createTime,jdbcType=TIMESTAMP},
+</if>        
+<if test="updateTime!= null">
+update_time = #{updateTime,jdbcType=TIMESTAMP},
+</if>        
+<if test="updateBy!= null">
+update_by = #{updateBy,jdbcType=VARCHAR},
+</if>        
+<if test="remarks!= null">
+remarks = #{remarks,jdbcType=VARCHAR},
+</if>
         </set>
         WHERE out_code = #{outCode,jdbcType=VARCHAR}
     </update>
 
-    <delete id="delete" parameterType="java.lang.String">
-        DELETE FROM T_OUT_STOCK
+    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TOutStock">
+        DELETE FROM t_out_stock
         WHERE out_code = #{outCode,jdbcType=VARCHAR}
     </delete>
 

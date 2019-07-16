@@ -56,7 +56,7 @@
         FROM t_history_prod_record
         <where>
             <if test="ordCode!= null and ordCode!=''">
-                and ord_code = #{ordCode,jdbcType=VARCHAR}
+                and ord_code like concat('%', concat(#{ordCode,jdbcType=VARCHAR}, '%'))
             </if>
             <if test="startDate!= null">
                 and create_time between #{startDate} and #{endDate}
@@ -239,58 +239,57 @@
     <update id="update"  parameterType ="com.lcyzh.nmerp.entity.THistoryProdRecord">
         UPDATE t_history_prod_record
         <set>
-                
-<if test="ordCode!= null">
-ord_code = #{ordCode,jdbcType=VARCHAR},
-</if>        
-<if test="orderItemId!= null">
-order_item_id = #{orderItemId,jdbcType=BIGINT},
-</if>        
-<if test="createTime!= null">
-create_time = #{createTime,jdbcType=TIMESTAMP},
-</if>        
-<if test="macCode!= null">
-mac_code = #{macCode,jdbcType=VARCHAR},
-</if>        
-<if test="itemColor!= null">
-item_color = #{itemColor,jdbcType=VARCHAR},
-</if>        
-<if test="itemOwner!= null">
-item_owner = #{itemOwner,jdbcType=VARCHAR},
-</if>        
-<if test="itemVariety!= null">
-item_variety = #{itemVariety,jdbcType=BIGINT},
-</if>        
-<if test="itemCgyCode!= null">
-item_cgy_code = #{itemCgyCode,jdbcType=BIGINT},
-</if>        
-<if test="itemYcType!= null">
-item_yc_type = #{itemYcType,jdbcType=VARCHAR},
-</if>        
-<if test="itemYbType!= null">
-item_yb_type = #{itemYbType,jdbcType=VARCHAR},
-</if>        
-<if test="itemTotalSq!= null">
-item_total_sq = #{itemTotalSq,jdbcType=DOUBLE},
-</if>        
-<if test="itemTotalWeight!= null">
-item_total_weight = #{itemTotalWeight,jdbcType=DOUBLE},
-</if>        
-<if test="itemNum!= null">
-item_num = #{itemNum,jdbcType=BIGINT},
-</if>        
-<if test="itemThick!= null">
-item_thick = #{itemThick,jdbcType=DOUBLE},
-</if>        
-<if test="itemWidth!= null">
-item_width = #{itemWidth,jdbcType=DOUBLE},
-</if>        
-<if test="itemLenth!= null">
-item_lenth = #{itemLenth,jdbcType=DOUBLE},
-</if>        
-<if test="itemCode!= null">
-item_code = #{itemCode,jdbcType=VARCHAR},
-</if>
+            <if test="ordCode!= null">
+            ord_code = #{ordCode,jdbcType=VARCHAR},
+            </if>
+            <if test="orderItemId!= null">
+            order_item_id = #{orderItemId,jdbcType=BIGINT},
+            </if>
+            <if test="createTime!= null">
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="macCode!= null">
+            mac_code = #{macCode,jdbcType=VARCHAR},
+            </if>
+            <if test="itemColor!= null">
+            item_color = #{itemColor,jdbcType=VARCHAR},
+            </if>
+            <if test="itemOwner!= null">
+            item_owner = #{itemOwner,jdbcType=VARCHAR},
+            </if>
+            <if test="itemVariety!= null">
+            item_variety = #{itemVariety,jdbcType=BIGINT},
+            </if>
+            <if test="itemCgyCode!= null">
+            item_cgy_code = #{itemCgyCode,jdbcType=BIGINT},
+            </if>
+            <if test="itemYcType!= null">
+            item_yc_type = #{itemYcType,jdbcType=VARCHAR},
+            </if>
+            <if test="itemYbType!= null">
+            item_yb_type = #{itemYbType,jdbcType=VARCHAR},
+            </if>
+            <if test="itemTotalSq!= null">
+            item_total_sq = #{itemTotalSq,jdbcType=DOUBLE},
+            </if>
+            <if test="itemTotalWeight!= null">
+            item_total_weight = #{itemTotalWeight,jdbcType=DOUBLE},
+            </if>
+            <if test="itemNum!= null">
+            item_num = #{itemNum,jdbcType=BIGINT},
+            </if>
+            <if test="itemThick!= null">
+            item_thick = #{itemThick,jdbcType=DOUBLE},
+            </if>
+            <if test="itemWidth!= null">
+            item_width = #{itemWidth,jdbcType=DOUBLE},
+            </if>
+            <if test="itemLenth!= null">
+            item_lenth = #{itemLenth,jdbcType=DOUBLE},
+            </if>
+            <if test="itemCode!= null">
+            item_code = #{itemCode,jdbcType=VARCHAR},
+            </if>
         </set>
         WHERE id = #{id,jdbcType=BIGINT}
     </update>
