@@ -90,7 +90,7 @@
                 and ppd.item_color = #{itemColor,jdbcType=VARCHAR}
             </if>
         </where>
-        order by mac_code,item_variety,item_color,item_width desc
+        order by ppd.mac_code,ppd.item_variety,ppd.item_color,ppd.item_width desc
     </select>
 
     <select id="findAllList" resultMap="tProdPlanDetailResultMap">

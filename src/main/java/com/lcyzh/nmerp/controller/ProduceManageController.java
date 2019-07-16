@@ -2,6 +2,7 @@ package com.lcyzh.nmerp.controller;
 
 import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.entity.TProdPlan;
+import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
 import com.lcyzh.nmerp.model.vo.ProdPlanVo;
 import com.lcyzh.nmerp.service.TMachineInfoService;
 import com.lcyzh.nmerp.service.TProdPlanDetailService;
@@ -91,8 +92,10 @@ public class ProduceManageController extends BaseController {
      * @Date: 2019/7/16 9:15 AM
      */
     @RequestMapping(value = {"produce/info"})
-    public String prodDetail(Model model, HttpServletRequest request, HttpServletResponse response){
-
+    public String prodDetail(Long id, Model model, HttpServletRequest request, HttpServletResponse response){
+        ProdPlanDetailVo vo = new ProdPlanDetailVo();
+        vo.setProdPlanDetailId(id);
+        model.addAttribute("detail",prodPlanDetailService.findProdTask(vo));
         return "modules/crm/produceDetail";
     }
 }

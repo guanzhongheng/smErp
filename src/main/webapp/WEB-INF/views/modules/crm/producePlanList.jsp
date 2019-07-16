@@ -8,8 +8,7 @@
 </head>
 <body>
 <ul class="nav nav-tabs">
-    <li class="active"><a href="${ctx}/crm/producePlan/list/">当前生产计划</a></li>
-    <li><a href="${ctx}/crm/producePlanHis/list/">历史生产记录</a></li>
+    <li class="active">当前生产计划</li>
 </ul>
 <form:form id="searchForm" modelAttribute="vo" action="${ctx}/crm/producePlan/list" method="post"
            class="breadcrumb form-search">

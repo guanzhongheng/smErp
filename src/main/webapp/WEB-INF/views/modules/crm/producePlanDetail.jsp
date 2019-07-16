@@ -106,6 +106,7 @@
                                             <th style="width: 150px">产品编号</th>
                                             <th style="width: 60px">所属人</th>
                                             <th style="width: 80px">机台编号</th>
+                                            <th style="width: 80px">品种</th>
                                             <th style="width: 60px">颜色</th>
                                             <th style="width: 60px">长度</th>
                                             <th style="width: 60px">宽度</th>
@@ -131,6 +132,7 @@
                                             <td>${vo.itemCode}</td>
                                             <td>${vo.itemOwner}</td>
                                             <td>${vo.macCode}</td>
+                                            <td>${fns:getValueByDictKey(vo.itemVariety)}</td>
                                             <td>${vo.itemColor}</td>
                                             <td>${vo.itemLenth}</td>
                                             <td>${vo.itemWidth}</td>

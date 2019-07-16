@@ -3,11 +3,7 @@ package com.lcyzh.nmerp.controller;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.controller.common.BaseController;
-import com.lcyzh.nmerp.model.vo.CustomerQueryVo;
-import com.lcyzh.nmerp.model.vo.OrderQueryVo;
-import com.lcyzh.nmerp.model.vo.ProdHistroyVo;
-import com.lcyzh.nmerp.model.vo.ProdInvInfoVo;
-import com.lcyzh.nmerp.model.vo.ProdPlanVo;
+import com.lcyzh.nmerp.model.vo.*;
 import com.lcyzh.nmerp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,6 +30,8 @@ public class CrmManageController extends BaseController {
     private TOrderService orderService;
     @Autowired
     private TProdPlanService prodPlanService;
+    @Autowired
+    private TProdPlanDetailService prodPlanDetailService;
     @Autowired
     private TInStockService inStockService;
     @Autowired
@@ -239,8 +237,10 @@ public class CrmManageController extends BaseController {
      * @Date: 2019/7/11 11:11 AM
      */
     @RequestMapping(value = {"produce/list","vo"})
-    public String produceList(@ModelAttribute("vo") ProdPlanVo vo, Model model, HttpServletRequest request, HttpServletResponse response){
-
+    public String produceList(@ModelAttribute("vo") ProdPlanDetailVo vo, Model model, HttpServletRequest request, HttpServletResponse response){
+        Page<ProdPlanDetailVo> page = prodPlanDetailService.findProdTaskPage(new Page<ProdPlanDetailVo>(request,response),vo);
+        model.addAttribute("page", page);
+        model.addAttribute("macList",machineInfoService.findAllList());
         return "modules/crm/produceList";
     }
 
