@@ -128,15 +128,4 @@ public class TProductController extends BaseController {
         return "modules/crm/prodHistroylist";
     }
 
-    /**
-     * 查询存库历史信息 用于条形码定位
-     *
-     */
-//    @RequestMapping(value = {"/outSocList"})
-//    public String outSocList(@ModelAttribute("prodHistroyVo") HistoryPordRecordVo prodHistroyVo, Model model, HttpServletRequest request, HttpServletResponse response) {
-//        Page<HistoryPordRecordVo> page = outStockService.findPage(new Page<HistoryPordRecordVo>(request, response), prodHistroyVo);
-//        model.addAttribute("page", page);
-//        return "modules/crm/outSocList";
-//    }
-
 }
