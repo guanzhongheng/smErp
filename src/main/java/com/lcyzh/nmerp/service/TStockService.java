@@ -1,8 +1,7 @@
 package com.lcyzh.nmerp.service;
 
 import com.lcyzh.nmerp.entity.TStock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.lcyzh.nmerp.model.vo.StockQueryVo;
 
 import java.util.List;
 
@@ -13,16 +12,13 @@ import java.util.List;
 public interface TStockService {
     TStock get(String id);
 
-    List<TStock> findList(TStock tStock);
-
-    List<TStock> findAllList();
+    //List<TStock> findList(TStock tStock);
 
     int insert(TStock tStock);
 
     int insertBatch(List<TStock> tStocks);
 
-    int update(TStock tStock);
-
-    int delete(TStock tStock);
+    //补标签查询
+    List<TStock> findList(StockQueryVo vo);
 
 }

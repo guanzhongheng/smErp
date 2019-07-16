@@ -13,7 +13,7 @@ package com.lcyzh.nmerp.model.vo;
  */
 public class StockVo {
     private Long stockId;
-    private Long barCode;
+    private String barCode;
     private String ordCode;
     private String itemCode;
     private Double itemLenth;
@@ -40,11 +40,11 @@ public class StockVo {
         this.stockId = stockId;
     }
 
-    public Long getBarCode() {
+    public String getBarCode() {
         return barCode;
     }
 
-    public void setBarCode(Long barCode) {
+    public void setBarCode(String barCode) {
         this.barCode = barCode;
     }
 

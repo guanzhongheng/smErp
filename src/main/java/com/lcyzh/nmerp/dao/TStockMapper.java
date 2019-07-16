@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.dao;
 
 import com.lcyzh.nmerp.entity.TStock;
+import com.lcyzh.nmerp.model.vo.StockQueryVo;
 import com.lcyzh.nmerp.model.vo.StockVo;
 import org.springframework.stereotype.Repository;
 
@@ -16,17 +17,12 @@ public interface TStockMapper {
 
     TStock get(String id);
 
-    List<TStock> findList(TStock tStock);
-
-    List<TStock> findAllList();
+    //List<TStock> findList(TStock tStock);
+    List<TStock> findList(StockQueryVo vo);
 
     int insert(TStock tStock);
 
     int insertBatch(List<TStock> tStocks);
-
-    int update(TStock tStock);
-
-    int delete(TStock tStock);
 
     List<TStock> getByBarCode(String barCode);
 

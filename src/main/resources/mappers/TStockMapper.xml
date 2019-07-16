@@ -80,70 +80,24 @@
         WHERE id = #{id,jdbcType=BIGINT}
     </select>
 
-    <select id="findList" parameterType ="com.lcyzh.nmerp.entity.TStock"  resultMap="tStockResultMap">
+    <select id="findList" parameterType ="com.lcyzh.nmerp.model.vo.StockQueryVo"  resultMap="tStockResultMap">
         SELECT *
         FROM t_stock
         <where>
-            <if test="barCode!= null">
-            and bar_code like concat('%', #{barCode,jdbcType=VARCHAR}, '%')
-            </if>
-            <if test="ordCode!= null">
-            and ord_code like concat('%', #{ordCode,jdbcType=VARCHAR}, '%')
-            </if>
-            <if test="itemCode!= null">
-            and item_code like concat('%', #{itemCode,jdbcType=VARCHAR}, '%')
-            </if>
-            <if test="itemLenth!= null">
-            and item_lenth like concat('%', #{itemLenth,jdbcType=DOUBLE}, '%')
-            </if>
-            <if test="itemWidth!= null">
-            and item_width like concat('%', #{itemWidth,jdbcType=DOUBLE}, '%')
-            </if>
-            <if test="itemThick!= null">
-            and item_thick like concat('%', #{itemThick,jdbcType=DOUBLE}, '%')
-            </if>
-            <if test="itemWeight!= null">
-            and item_weight like concat('%', #{itemWeight,jdbcType=DOUBLE}, '%')
-            </if>
-            <if test="itemSq!= null">
-            and item_sq like concat('%', #{itemSq,jdbcType=DOUBLE}, '%')
-            </if>
-            <if test="status!= null">
-            and status like concat('%', #{status,jdbcType=CHAR}, '%')
-            </if>
-            <if test="createTime!= null">
-            and create_time like concat('%', #{createTime,jdbcType=TIMESTAMP}, '%')
-            </if>
-            <if test="updateTime!= null">
-            and update_time like concat('%', #{updateTime,jdbcType=TIMESTAMP}, '%')
-            </if>
-            <if test="itemOwner!= null">
-            and item_owner like concat('%', #{itemOwner,jdbcType=VARCHAR}, '%')
-            </if>
-            <if test="itemYcType!= null">
-            and item_yc_type like concat('%', #{itemYcType,jdbcType=VARCHAR}, '%')
-            </if>
-            <if test="itemYbType!= null">
-            and item_yb_type like concat('%', #{itemYbType,jdbcType=VARCHAR}, '%')
-            </if>
             <if test="itemCgyCode!= null">
-            and item_cgy_code like concat('%', #{itemCgyCode,jdbcType=BIGINT}, '%')
+                and item_cgy_code = #{itemCgyCode,jdbcType=BIGINT}
             </if>
             <if test="itemVariety!= null">
-            and item_variety like concat('%', #{itemVariety,jdbcType=BIGINT}, '%')
+                and item_variety = #{itemVariety,jdbcType=BIGINT}
             </if>
-            <if test="itemUnit!= null">
-            and item_unit like concat('%', #{itemUnit,jdbcType=BIGINT}, '%')
+            <if test="ordCode!= null">
+                and ord_code like concat('%', #{ordCode,jdbcType=VARCHAR}, '%')
             </if>
-            <if test="itemColor!= null">
-            and item_color like concat('%', #{itemColor,jdbcType=VARCHAR}, '%')
+            <if test="startDate!= null">
+                and create_time between #{startDate} and #{endDate}
             </if>
-        </where>
-    </select>
 
-    <select id="findAllList" resultMap="tStockResultMap">
-        SELECT *
-        FROM t_stock
+        </where>
     </select>
 
     <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TStock" useGeneratedKeys="true" keyProperty="id">
@@ -236,71 +190,5 @@
         )
         </foreach>
     </insert>
-
-    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TStock">
-        UPDATE t_stock
-        <set>
-            <if test="barCode!= null">
-            bar_code = #{barCode,jdbcType=VARCHAR},
-            </if>
-            <if test="ordCode!= null">
-            ord_code = #{ordCode,jdbcType=VARCHAR},
-            </if>
-            <if test="itemCode!= null">
-            item_code = #{itemCode,jdbcType=VARCHAR},
-            </if>
-            <if test="itemLenth!= null">
-            item_lenth = #{itemLenth,jdbcType=DOUBLE},
-            </if>
-            <if test="itemWidth!= null">
-            item_width = #{itemWidth,jdbcType=DOUBLE},
-            </if>
-            <if test="itemThick!= null">
-            item_thick = #{itemThick,jdbcType=DOUBLE},
-            </if>
-            <if test="itemWeight!= null">
-            item_weight = #{itemWeight,jdbcType=DOUBLE},
-            </if>
-            <if test="itemSq!= null">
-            item_sq = #{itemSq,jdbcType=DOUBLE},
-            </if>
-            <if test="status!= null">
-            status = #{status,jdbcType=CHAR},
-            </if>
-            <if test="createTime!= null">
-            create_time = #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateTime!= null">
-            update_time = #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="itemOwner!= null">
-            item_owner = #{itemOwner,jdbcType=VARCHAR},
-            </if>
-            <if test="itemYcType!= null">
-            item_yc_type = #{itemYcType,jdbcType=VARCHAR},
-            </if>
-            <if test="itemYbType!= null">
-            item_yb_type = #{itemYbType,jdbcType=VARCHAR},
-            </if>
-            <if test="itemCgyCode!= null">
-            item_cgy_code = #{itemCgyCode,jdbcType=BIGINT},
-            </if>
-            <if test="itemVariety!= null">
-            item_variety = #{itemVariety,jdbcType=BIGINT},
-            </if>
-            <if test="itemUnit!= null">
-            item_unit = #{itemUnit,jdbcType=BIGINT},
-            </if>
-            <if test="itemColor!= null">
-            item_color = #{itemColor,jdbcType=VARCHAR},
-            </if>
-        </set>
-        WHERE id = #{id,jdbcType=BIGINT}
-    </update>
-
-    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TStock">
-        DELETE FROM t_stock
-        WHERE id = #{id,jdbcType=BIGINT}
-    </delete>
 
 </mapper>

@@ -2,6 +2,7 @@ package com.lcyzh.nmerp.service.impl;
 
 import com.lcyzh.nmerp.dao.TStockMapper;
 import com.lcyzh.nmerp.entity.TStock;
+import com.lcyzh.nmerp.model.vo.StockQueryVo;
 import com.lcyzh.nmerp.service.TStockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,15 +23,10 @@ public class TStockServiceImpl implements TStockService{
         return tStockMapper.get(id);
     }
 
-    @Override
-    public List<TStock> findList(TStock tStock) {
-        return tStockMapper.findList(tStock);
-    }
-
-    @Override
-    public List<TStock> findAllList() {
-        return tStockMapper.findAllList();
-    }
+    //@Override
+    //public List<TStock> findList(TStock tStock) {
+    //    return tStockMapper.findList(tStock);
+    //}
 
     @Override
     public int insert(TStock tStock) {
@@ -43,13 +39,8 @@ public class TStockServiceImpl implements TStockService{
     }
 
     @Override
-    public int update(TStock tStock) {
-        return tStockMapper.update(tStock);
-    }
-
-    @Override
-    public int delete(TStock tStock) {
-        return tStockMapper.delete(tStock);
+    public List<TStock> findList(StockQueryVo vo) {
+        return tStockMapper.findList(vo);
     }
 
 }

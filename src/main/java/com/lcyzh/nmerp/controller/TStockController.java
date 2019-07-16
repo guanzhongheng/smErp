@@ -21,12 +21,6 @@ public class TStockController {
     @Autowired
     private TStockService tStockService;
 
-    @RequestMapping(value = {"/list", ""}, method = RequestMethod.GET)
-    public Object list() {
-        List<TStock> tStocks = tStockService.findAllList();
-        return tStocks;
-    }
-
     @RequestMapping(value = {"/get"}, method = RequestMethod.GET)
     public Object get(@RequestParam String id) {
         TStock tStock = tStockService.get(id);
@@ -45,24 +39,6 @@ public class TStockController {
     @RequestMapping(value = "/insertBatch", method = RequestMethod.POST)
     public String insertBatch(@RequestBody List<TStock> tStocks) {
         if (tStockService.insertBatch(tStocks) > 0) {
-            return "success";
-        } else {
-            return "failed";
-        }
-    }
-
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@RequestBody TStock tStock) {
-        if (tStockService.update(tStock) > 0) {
-            return "success";
-        } else {
-            return "failed";
-        }
-    }
-
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public String delete(@RequestBody TStock tStock) {
-        if (tStockService.delete(tStock) > 0) {
             return "success";
         } else {
             return "failed";
