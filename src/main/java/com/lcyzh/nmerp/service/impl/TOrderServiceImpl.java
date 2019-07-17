@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.controller.system.util.SysDictUtils;
@@ -65,6 +66,8 @@ public class TOrderServiceImpl implements TOrderService {
             vo.setPayTypeValue(DictUtils.getDictValueMaps().get(vo.getPayType()));
             vo.setPayStatusValue(DictUtils.getDictValueMaps().get(vo.getPayStatus()));
         });
+        PageInfo<OrderQueryVo> p = new PageInfo<>(list);
+        page.setCount(p.getTotal());
         page.setList(list);
         return page;
     }

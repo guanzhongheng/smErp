@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.dao.TProductMapper;
 import com.lcyzh.nmerp.entity.TProduct;
@@ -92,6 +93,8 @@ public class TProductServiceImpl implements TProductService{
         PageHelper.startPage(page.getPageNo(),page.getPageSize());
         List<TProduct> list = tProductMapper.findList(tProduct);
         List<ProductVo> vos = productConversion(list);
+        PageInfo<TProduct> p = new PageInfo<>(list);
+        page.setCount(p.getTotal());
         page.setList(vos);
         return page;
     }

@@ -1,3 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ include file="/WEB-INF/views/include/taglib.jsp" %>
+
 <!DOCTYPE html>
 <html>
 
@@ -13,11 +16,11 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
 
-    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-    <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
-
-    <link href="css/animate.min.css" rel="stylesheet">
-    <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="${ctxStatic}/hPlugs/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="${ctxStatic}/hPlugs/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="${ctxStatic}/hPlugs/css/animate.min.css" rel="stylesheet">
+    <link href="${ctxStatic}/hPlugs/css/style.min862f.css?v=4.1.0" rel="stylesheet">
 
 </head>
 
@@ -32,18 +35,18 @@
         </div>
         <div style="height: 5px"></div>
         <div class="row" style="text-align: left;">
-            <label class="col-sm-4" style="width: 180px">品种：双边膜</label>
-            <label class="col-sm-4" style="width: 170px">类别：大膜</label>
-            <label class="col-sm-4" style="width: 170px">颜色：蓝色</label>
+            <label class="col-sm-4" style="width: 180px">品种：${fns:getValueByDictKey(prod.itemCgyCode)}</label>
+            <label class="col-sm-4" style="width: 170px">类别：${fns:getValueByDictKey(prod.itemVariety)}</label>
+            <label class="col-sm-4" style="width: 170px">颜色：${fns:getDictLabel(prod.itemColor,'prod_color','无')}</label>
         </div>
         <div style="height: 5px"></div>
         <div class="row" style="text-align: left;">
-            <label class="col-sm-4" style="width: 180px">领单时间：SNS</label>
-            <label class="col-sm-4" style="width: 170px">适配范围：1-8.0米</label>
+            <label class="col-sm-4" style="width: 180px">创单时间：SNS</label>
+            <label class="col-sm-4" style="width: 170px">适配机台：1-8.0米</label>
         </div>
         <div style="height: 5px"></div>
         <div class="row" style="text-align: left;">
-            <label class="col-sm-12" >备注: 操作信息备注说明</label>
+            <label class="col-sm-12" >备注: </label>
         </div>
 
         <!-- /table-responsive -->
@@ -139,20 +142,22 @@
 
 
 
-<script src="js/jquery.min.js?v=2.1.4"></script>
-<script src="js/bootstrap.min.js?v=3.3.6"></script>
+<script src="${ctxStatic}/hPlugs/js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+<script src="${ctxStatic}/hPlugs/js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+<script src="${ctxStatic}/hPlugs/js/content.min.js?v=1.0.0" type="text/javascript"></script>
 <script type="text/javascript">
-    function doPrint(){
+    function doPrint() {
         window.print();
     }
-    function print2(){
-        bdhtml=window.document.body.innerHTML;
-        sprnstr="<!--startprint-->";
-        eprnstr="<!--endprint-->";
-        prnhtml=bdhtml.substring(bdhtml.indexOf(sprnstr)+17);
-        prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));
-        window.document.body.innerHTML=prnhtml;
+    function print2() {
+        bdhtml = window.document.body.innerHTML;
+        sprnstr = "<!--startprint-->";
+        eprnstr = "<!--endprint-->";
+        prnhtml = bdhtml.substring(bdhtml.indexOf(sprnstr) + 17);
+        prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr));
+        window.document.body.innerHTML = prnhtml;
         window.print();
+        window.history.go(-1);
     }
 </script>
 </body>

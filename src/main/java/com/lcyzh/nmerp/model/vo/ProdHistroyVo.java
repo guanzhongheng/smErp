@@ -1,6 +1,6 @@
 package com.lcyzh.nmerp.model.vo;
 
-import com.lcyzh.nmerp.common.persistence.Page;
+import com.lcyzh.nmerp.common.persistence.DataEntity;
 
 /**
  * 项目名称：nm-erp
@@ -9,7 +9,7 @@ import com.lcyzh.nmerp.common.persistence.Page;
  * 创建时间：2019/7/15 7:26 PM
  * 创 建 人：guan
  */
-public class ProdHistroyVo extends Page<ProdHistroyVo> {
+public class ProdHistroyVo extends DataEntity<ProdHistroyVo> {
 
     private String ordCode;
 

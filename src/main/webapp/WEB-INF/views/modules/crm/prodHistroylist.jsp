@@ -4,6 +4,14 @@
 <head>
     <title>全部客户</title>
     <script type="text/javascript">
+        function page(n,s){
+            debugger;
+            if(n) $("#pageNo").val(n);
+            if(s) $("#pageSize").val(s);
+            $("#searchForm").attr("action","${ctx}/tProduct/histroyList");
+            $("#searchForm").submit();
+            return false;
+        }
     </script>
 </head>
 <body>
@@ -65,15 +73,15 @@
         <tbody>
         <c:forEach items="${page.list}" var="cus">
             <tr>
-                <td>${cus.contCode}</td>
-                <td>${fns:getValueByDictKey(cus.prodVariety)}</td>
-                <td>${fns:getValueByDictKey(cus.prodCgyCode)}</td>
-                <td>${fns:getDictLabel('prod_color',cus.itemColor,'无')}</td>
+                <td>${cus.ordCode}</td>
+                <td>${fns:getValueByDictKey(cus.itemVariety)}</td>
+                <td>${fns:getValueByDictKey(cus.itemCgyCode)}</td>
+                <td>${fns:getDictLabel(cus.itemColor,'prod_color','无')}</td>
                 <td>${cus.itemTotalWeight}</td>
                 <td>${cus.itemNum}</td>
                 <td>${cus.macCode}</td>
                 <td>${cus.itemOwner}</td>
-                <td>${cus.createTime}</td>
+                <td><fmt:formatDate value="${cus.createTime}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
             </tr>
         </c:forEach>
         </tbody>

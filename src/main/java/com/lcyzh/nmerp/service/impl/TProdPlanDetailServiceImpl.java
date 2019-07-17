@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.dao.THistoryProdRecordMapper;
 import com.lcyzh.nmerp.dao.TProdPlanDetailMapper;
@@ -53,6 +54,13 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
         //查询已经下发生产的
         vo.setItemStatus('1');
         List<ProdPlanDetailVo> list = tProdPlanDetailMapper.findList(vo);
+
+
+
+        PageInfo<ProdPlanDetailVo> p = new PageInfo<>(list);
+        page.setCount(p.getTotal());
+
+
         page.setList(list);
         return page;
     }

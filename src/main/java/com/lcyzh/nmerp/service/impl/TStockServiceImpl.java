@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.dao.TStockMapper;
 import com.lcyzh.nmerp.entity.TStock;
@@ -58,6 +59,9 @@ public class TStockServiceImpl implements TStockService{
             BeanUtils.copyProperties(tStock, stockQueryVo);
             return stockQueryVo;
         }).collect(Collectors.toList());
+
+        PageInfo<TStock> p = new PageInfo<>(list);
+        page.setCount(p.getTotal());
         page.setList(vos);
         return page;
     }

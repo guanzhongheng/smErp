@@ -3,8 +3,8 @@ package com.lcyzh.nmerp.service;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.entity.TOutStock;
 import com.lcyzh.nmerp.entity.TOutStockDetail;
-import com.lcyzh.nmerp.model.vo.OutStockDetailVo;
 import com.lcyzh.nmerp.model.vo.OutStockVo;
+import com.lcyzh.nmerp.model.vo.StockRecordVo;
 import com.lcyzh.nmerp.model.vo.StockVo;
 
 import java.util.List;
@@ -40,6 +40,7 @@ public interface TOutStockService {
      * @Date: 2019/7/2 10:48 AM
      */
     Page<OutStockVo> findList(Page<OutStockVo> page, OutStockVo vo);
+
 
 
     /**
@@ -94,4 +95,12 @@ public interface TOutStockService {
      * 出库单明细删除
      */
     int deleteDetail(String barCode);
+
+
+    /**
+     * 获取
+     * @param outCode
+     * @return
+     */
+    List<StockRecordVo> getOutStockList(String outCode);
 }

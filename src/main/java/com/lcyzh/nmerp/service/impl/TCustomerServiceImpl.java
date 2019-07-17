@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.dao.CusEmpRelMapper;
@@ -45,7 +46,7 @@ public class TCustomerServiceImpl implements TCustomerService {
 
     @Override
     public Page<CustomerQueryVo> findPage(Page<CustomerQueryVo> page, CustomerQueryVo vo) {
-        PageHelper.startPage(vo.getPageNo(),vo.getPageSize());
+        PageHelper.startPage(page.getPageNo(),page.getPageSize());
         List<CustomerQueryVo> listPo = tCustomerMapper.findList(vo);
         if (listPo != null && !listPo.isEmpty()) {
             listPo.forEach(po -> {
@@ -54,6 +55,8 @@ public class TCustomerServiceImpl implements TCustomerService {
                 po.setCusStatusValue(DictUtils.getValueByDictKey(po.getCusStatus()));
             });
         }
+        PageInfo<CustomerQueryVo> p = new PageInfo<>(listPo);
+        page.setCount(p.getTotal());
         page.setList(listPo);
         return page;
     }

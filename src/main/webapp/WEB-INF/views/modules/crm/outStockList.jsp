@@ -4,6 +4,14 @@
 <head>
     <title>全部客户</title>
     <script type="text/javascript">
+        function page(n,s){
+            debugger;
+            if(n) $("#pageNo").val(n);
+            if(s) $("#pageSize").val(s);
+            $("#searchForm").attr("action","${ctx}/crm/inventory/outStockList");
+            $("#searchForm").submit();
+            return false;
+        }
     </script>
 </head>
 <body>
@@ -22,6 +30,7 @@
             <li>
                 &nbsp;&nbsp;
                 <select id="outStatus" name="outStatus" class="input-medium">
+                    <option value="">请选择</option>
                     <option value="0">未出库</option>
                     <option value="1">已出库</option>
                 </select>
@@ -57,11 +66,11 @@
                 <td>${cus.outCode}</td>
                 <td>${cus.cusName}</td>
                 <td>${cus.phone}</td>
-                <td>${cus.outStatus == '0'?"为出库":"已出库"}</td>
+                <td>${cus.outStatus == '0'?"未出库":"已出库"}</td>
                 <td><fmt:formatDate value="${cus.createTime}" pattern="yyyy-MM-dd"/></td>
                 <td>
                     <a href="/crm/inventory/outStockDetail?outCode=${cus.outCode}"><i class="icon-pencil">&nbsp;详情</i></a>
-                    <a href="#"><i class="icon-pencil">&nbsp;打印</i></a>
+                    <a href="/print/outStock_print?outCode=${cus.outCode}"><i class="icon-pencil">&nbsp;打印</i></a>
                 </td>
             </tr>
         </c:forEach>

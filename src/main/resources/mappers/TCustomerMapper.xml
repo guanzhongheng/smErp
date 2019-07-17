@@ -85,7 +85,9 @@
         LEFT JOIN T_CUS_FOLLOW cf ON cu.cus_code = cf.cus_code
 
         <where>
-            and cu.cus_status!=11004
+            <if test="1 == 1">
+                and cu.cus_status!=11004
+            </if>
             <if test="cusName!= null">
                 and cus_name like concat('%', #{cusName,jdbcType=VARCHAR}, '%')
             </if>

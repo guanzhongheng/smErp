@@ -2,6 +2,7 @@ package com.lcyzh.nmerp.dao;
 
 import com.lcyzh.nmerp.entity.TOutStock;
 import com.lcyzh.nmerp.model.vo.OutStockVo;
+import com.lcyzh.nmerp.model.vo.StockRecordVo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,4 +29,6 @@ public interface TOutStockMapper {
     TOutStock findByOutCode(String outCode);
 
     //int delete(String outCode);
+
+    List<StockRecordVo> getOutStockList(OutStockVo vo);
 }

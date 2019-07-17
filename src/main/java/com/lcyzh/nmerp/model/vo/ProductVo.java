@@ -1,6 +1,6 @@
 package com.lcyzh.nmerp.model.vo;
 
-import com.lcyzh.nmerp.common.persistence.Page;
+import com.lcyzh.nmerp.common.persistence.DataEntity;
 import com.lcyzh.nmerp.entity.TProduct;
 
 import java.util.Date;
@@ -13,8 +13,8 @@ import java.util.Date;
  * @Date :
  * @ModificationHistory Who          When          What
  */
-public class ProductVo extends Page<TProduct> {
-    private Long id;
+public class ProductVo extends DataEntity<TProduct> {
+ //   private Long id;
     private String prodCode;
     private String prodName;
     //类别-字典
@@ -39,13 +39,13 @@ public class ProductVo extends Page<TProduct> {
     //单位-字典值
     private String prodUnitValue;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
     public String getProdCode() {
         return prodCode;

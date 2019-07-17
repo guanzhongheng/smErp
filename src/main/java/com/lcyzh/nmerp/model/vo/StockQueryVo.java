@@ -1,6 +1,6 @@
 package com.lcyzh.nmerp.model.vo;
 
-import com.lcyzh.nmerp.common.persistence.Page;
+import com.lcyzh.nmerp.common.persistence.DataEntity;
 
 /**
  * @Project :
@@ -10,7 +10,7 @@ import com.lcyzh.nmerp.common.persistence.Page;
  * @Date :
  * @ModificationHistory Who          When          What
  */
-public class StockQueryVo extends Page<StockQueryVo> {
+public class StockQueryVo extends DataEntity<StockQueryVo> {
     //订单编号（模糊匹配）
     private String ordCode;
     //产品类别

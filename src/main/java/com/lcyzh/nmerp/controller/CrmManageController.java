@@ -47,7 +47,6 @@ public class CrmManageController extends BaseController {
 
     @RequestMapping(value = {"customer/list"})
     public String list(@ModelAttribute("customer") CustomerQueryVo customer, Model model, HttpServletRequest request, HttpServletResponse response){
-        customer.setPageSize(2);
         Page<CustomerQueryVo> page = customerService.findPage(new Page<CustomerQueryVo>(request, response), customer);
         model.addAttribute("page", page);
         return "modules/crm/customerList";

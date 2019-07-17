@@ -4,6 +4,14 @@
 <head>
     <title>库存列表</title>
     <script type="text/javascript">
+        function page(n,s){
+            debugger;
+            if(n) $("#pageNo").val(n);
+            if(s) $("#pageSize").val(s);
+            $("#searchForm").attr("action","${ctx}/crm/inventory/list");
+            $("#searchForm").submit();
+            return false;
+        }
     </script>
 </head>
 <body>
@@ -52,7 +60,7 @@
             <th>厚</th>
             <th>重量</th>
             <th>压边类型</th>
-            <th>计价方式</th>
+            <th>延长米方式</th>
             <th>单价</th>
             <th>操作</th>
         </tr>
@@ -63,15 +71,15 @@
                 <td>${cus.ordCode}</td>
                 <td>${cus.barCode}</td>
                 <td>${cus.itemOwner}</td>
-                <td>${fns:getValueByDictKey(cus.prodCgyCode)}</td>
-                <td>${fns:getValueByDictKey(cus.prodVariety)}</td>
-                <td>${fns:getDictLabel('prod_color',cus.itemColor,'无')}</td>
+                <td>${fns:getValueByDictKey(cus.itemCgyCode)}</td>
+                <td>${fns:getValueByDictKey(cus.itemVariety)}</td>
+                <td>${fns:getDictLabel(cus.itemColor,'prod_color','无')}</td>
                 <td>${cus.itemLenth}</td>
                 <td>${cus.itemWidth}</td>
                 <td>${cus.itemThick}</td>
                 <td>${cus.itemWeight}</td>
-                <td>${fns:getDictLabel('prod_ybType',cus.itemYbType,'无')}</td>
-                <td>${fns:getDictLabel('prod_ycType',cus.itemYcType,'无')}</td>
+                <td>${fns:getDictLabel(cus.itemYbType,'prod_ybType','无')}</td>
+                <td>${fns:getDictLabel(cus.itemYcType,'prod_ycType','无')}</td>
                 <td>${cus.itemUnit}</td>
                 <td><a href="#">补签</a></td>
             </tr>

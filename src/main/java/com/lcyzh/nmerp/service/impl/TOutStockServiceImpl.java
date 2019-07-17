@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.controller.system.util.UserUtils;
@@ -47,11 +48,11 @@ public class TOutStockServiceImpl implements TOutStockService {
 
     @Override
     public Page<OutStockVo> findList(Page<OutStockVo> page, OutStockVo vo) {
-        PageHelper.startPage(page.getPageNo(),page.getPageSize());
-        if(vo.getStartDate() == null || vo.getStartDate().length() == 0) {
+        PageHelper.startPage(page.getPageNo(), page.getPageSize());
+        if (vo.getStartDate() == null || vo.getStartDate().length() == 0) {
             vo.setStartDate(LocalDate.now().minusDays(7).toString());
         }
-        if(vo.getEndDate() == null || vo.getEndDate().length() == 0) {
+        if (vo.getEndDate() == null || vo.getEndDate().length() == 0) {
             vo.setEndDate(LocalDate.now().plusDays(1).toString());
         }
         List<TOutStock> list = tOutStockMapper.findList(vo);
@@ -60,6 +61,10 @@ public class TOutStockServiceImpl implements TOutStockService {
             BeanUtils.copyProperties(tOutStock, outStockVo);
             return outStockVo;
         }).collect(Collectors.toList());
+
+        PageInfo<TOutStock> p = new PageInfo<>(list);
+        page.setCount(p.getTotal());
+
         page.setList(vos);
         return page;
     }
@@ -110,7 +115,7 @@ public class TOutStockServiceImpl implements TOutStockService {
     @Override
     public int addOutStockDetail(TOutStockDetail tOutStockDetail) {
         List<TOutStockDetail> list = tOutStockDetailMapper.findList(tOutStockDetail);
-        if(!list.isEmpty()) {
+        if (!list.isEmpty()) {
             //该产品已经添加出库单
             return 2;
         }
@@ -126,5 +131,13 @@ public class TOutStockServiceImpl implements TOutStockService {
     @Override
     public int deleteDetail(String barCode) {
         return tOutStockDetailMapper.deleteByBarCode(barCode);
+
+
+    }
+    @Override
+    public List<StockRecordVo> getOutStockList(String outCode) {
+        OutStockVo vo = new OutStockVo();
+        vo.setOutCode(outCode);
+        return tOutStockMapper.getOutStockList(vo);
     }
 }

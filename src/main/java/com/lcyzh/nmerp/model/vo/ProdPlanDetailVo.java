@@ -1,5 +1,6 @@
 package com.lcyzh.nmerp.model.vo;
 
+import com.lcyzh.nmerp.common.persistence.DataEntity;
 import com.lcyzh.nmerp.common.persistence.Page;
 
 /**
@@ -10,7 +11,7 @@ import com.lcyzh.nmerp.common.persistence.Page;
  * @Date :
  * @ModificationHistory Who          When          What
  */
-public class ProdPlanDetailVo extends Page<ProdPlanDetailVo> {
+public class ProdPlanDetailVo extends DataEntity<ProdPlanDetailVo> {
     private Long prodPlanDetailId;
     private String prodPlanCode;
     private String ordCode;

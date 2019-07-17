@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.dao.THistoryProdRecordMapper;
 import com.lcyzh.nmerp.entity.THistoryProdRecord;
@@ -31,6 +32,9 @@ public class THistoryProdRecordServiceImpl implements ITHistoryProdRecordService
             vo.setEndDate(LocalDate.now().plusDays(1).toString());
         }
         List<HistoryPordRecordVo> list = tHistoryProdRecordMapper.findListVo(vo);
+
+        PageInfo<HistoryPordRecordVo> p = new PageInfo<>(list);
+        page.setCount(p.getTotal());
         page.setList(list);
         return page;
     }

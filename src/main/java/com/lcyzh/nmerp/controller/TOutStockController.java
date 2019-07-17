@@ -29,12 +29,12 @@ public class TOutStockController {
      * @Iteration : 1.0
      * @Date: 2019/7/3 11:41 PM
      */
-    //@RequestMapping(value = {"/getList"}, method = RequestMethod.GET)
-    //public List<TOutStock> findList(){
-    //    TOutStock tOutStock = new TOutStock();
-    //    tOutStock.setOutStatus('0');
-    //    return tOutStockService.findList(tOutStock);
-    //}
+//    @RequestMapping(value = {"/getList"}, method = RequestMethod.GET)
+//    public List<TOutStock> findList(){
+//        TOutStock tOutStock = new TOutStock();
+//        tOutStock.setOutStatus('0');
+//        return tOutStockService.findList(tOutStock);
+//    }
 
     /**
      * @Description: 新增出库单

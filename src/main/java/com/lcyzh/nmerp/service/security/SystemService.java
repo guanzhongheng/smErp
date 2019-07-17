@@ -1,5 +1,7 @@
 package com.lcyzh.nmerp.service.security;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.common.utils.Digests;
 import com.lcyzh.nmerp.common.utils.Global;
@@ -13,6 +15,7 @@ import com.lcyzh.nmerp.entity.sys.Menu;
 import com.lcyzh.nmerp.entity.sys.Role;
 import com.lcyzh.nmerp.entity.sys.User;
 import com.lcyzh.nmerp.dao.common.SessionDAO;
+import com.lcyzh.nmerp.model.vo.OrderQueryVo;
 import com.lcyzh.nmerp.utils.Encodes;
 import com.lcyzh.nmerp.utils.StringUtils;
 import org.apache.shiro.session.Session;
@@ -78,10 +81,16 @@ public class SystemService extends BaseService {
         // 生成数据权限过滤条件（dsf为dataScopeFilter的简写，在xml中使用 ${sqlMap.dsf}调用权限SQL）
         user.getSqlMap().put("dsf", dataScopeFilter(user.getCurrentUser(), "o", "a"));
 
+        PageHelper.startPage(page.getPageNo(),page.getPageSize());
+        List<User> userList = userDao.findList(user);
+        PageInfo<User> p = new PageInfo<>(userList);
+        page.setCount(p.getTotal());
+
         // 设置分页参数
-        user.setPage(page);
+        // user.setPage(page);
+
         // 执行分页查询
-        page.setList(userDao.findList(user));
+        page.setList(userList);
 
         return page;
     }

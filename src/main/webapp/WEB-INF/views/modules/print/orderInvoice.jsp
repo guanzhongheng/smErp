@@ -74,7 +74,7 @@
                                 <td>${ord.itemName}</td>
                                 <td>${fns:getValueByDictKey(ord.itemVariety)}</td>
                                 <td>${fns:getValueByDictKey(ord.itemCgyCode)}</td>
-                                <td>${fns:getDictLabel('prod_color',ord.itemColor,'无')}</td>
+                                <td>${fns:getDictLabel(ord.itemColor,'prod_color','无')}</td>
                                 <td>${ord.itemLenth}*${ord.itemWidth}*${ord.itemThick}</td>
                                 <td>${ord.itemWeight}</td>
                                 <td>${ord.itemNum}</td>

@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.dao.*;
@@ -49,6 +50,10 @@ public class TProdPlanServiceImpl implements TProdPlanService {
     public Page<ProdPlanVo> findPage(Page<ProdPlanVo> page, ProdPlanVo vo) {
         PageHelper.startPage(page.getPageNo(),page.getPageSize());
         List<ProdPlanVo> list = tProdPlanMapper.findList(vo);
+
+        PageInfo<ProdPlanVo> p = new PageInfo<>(list);
+        page.setCount(p.getTotal());
+
         page.setList(list);
         return page;
     }

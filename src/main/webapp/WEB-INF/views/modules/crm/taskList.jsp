@@ -4,7 +4,14 @@
 <head>
     <title>任务分配</title>
     <script type="text/javascript">
-
+        function page(n,s){
+            debugger;
+            if(n) $("#pageNo").val(n);
+            if(s) $("#pageSize").val(s);
+            $("#searchForm").attr("action","${ctx}/crm/order/taskList");
+            $("#searchForm").submit();
+            return false;
+        }
     </script>
 </head>
 <body>
