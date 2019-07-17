@@ -15,6 +15,9 @@
         <result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
         <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
     </resultMap>
+    <select id="finListNoOut" resultMap="tOutStockResultMap">
+        select * from t_out_stock where out_status = '0' order by create_time
+    </select>
 
     <select id="findByOutCode" parameterType="java.lang.String" resultMap="tOutStockResultMap">
         SELECT *

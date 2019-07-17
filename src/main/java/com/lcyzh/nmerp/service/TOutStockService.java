@@ -16,6 +16,10 @@ import java.util.List;
 public interface TOutStockService {
 
     /**
+     * 查询未出库的列表
+     */
+    List<TOutStock> findList();
+    /**
      * 根据outCode查询出库单
      */
     TOutStock findByCode(String outCode);

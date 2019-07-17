@@ -31,4 +31,6 @@ public interface TOutStockMapper {
     //int delete(String outCode);
 
     List<StockRecordVo> getOutStockList(OutStockVo vo);
+
+    List<TOutStock> finListNoOut();
 }
