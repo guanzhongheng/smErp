@@ -17,6 +17,10 @@ public class ProdPlanVo extends Page<ProdPlanVo> {
     private Long prodVariety;
     //产品品种-字典值
     private String prodVarietyValue;
+    //产品类别-字典
+    private Long prodCgyCode;
+    //产品类别-字典值
+    private String prodCgyCodeValue;
     //产品颜色
     private String prodColor;
     //机台编码

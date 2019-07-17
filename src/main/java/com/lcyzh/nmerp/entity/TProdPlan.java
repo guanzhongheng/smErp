@@ -12,6 +12,7 @@ public class TProdPlan implements Serializable {
     private static final long serialVersionUID = 1L;
     private String prodPlanCode;
     private Long prodVariety;
+    private Long prodCgyCode;
     private String prodColor;
     private String macCode;
     private Long totalQuantity;
@@ -27,6 +28,8 @@ public class TProdPlan implements Serializable {
     public String getProdPlanCode(){ return prodPlanCode;}
     public void setProdVariety (Long prodVariety) {this.prodVariety = prodVariety;}
     public Long getProdVariety(){ return prodVariety;}
+    public Long getProdCgyCode() { return prodCgyCode; }
+    public void setProdCgyCode(Long prodCgyCode) { this.prodCgyCode = prodCgyCode; }
     public void setProdColor (String prodColor) {this.prodColor = prodColor;}
     public String getProdColor(){ return prodColor;}
     public void setMacCode (String macCode) {this.macCode = macCode;}

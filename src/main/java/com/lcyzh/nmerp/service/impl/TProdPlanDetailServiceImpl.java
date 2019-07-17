@@ -74,7 +74,6 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
         vo.setBarCode(barCode);
         if(vo.getItemNum() - 1 > 0) {
             //该商品还没有生产完，更新计划单明细件数
-            vo.setItemNum(vo.getItemNum() - 1);
             TProdPlanDetail prodPlanDetail = new TProdPlanDetail();
             BeanUtils.copyProperties(vo, prodPlanDetail);
             tProdPlanDetailMapper.update(prodPlanDetail);
@@ -100,6 +99,7 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
             tStock.setItemSq(vo.getItemLenth() * vo.getItemWidth());
         }
         tStockMapper.insert(tStock);
+        vo.setItemNum(vo.getItemNum() - 1);
         return vo;
     }
 

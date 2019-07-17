@@ -5,6 +5,7 @@
     <resultMap id="tProdPlanResultMap" type="com.lcyzh.nmerp.entity.TProdPlan">
         <id column="prod_plan_code" property="prodPlanCode" jdbcType="VARCHAR"/>
         <result column="prod_variety" property="prodVariety" jdbcType="BIGINT"/>
+        <result column="prod_cgy_code" property="prodCgyCode" jdbcType="BIGINT"/>
         <result column="prod_color" property="prodColor" jdbcType="VARCHAR"/>
         <result column="mac_code" property="macCode" jdbcType="VARCHAR"/>
         <result column="total_quantity" property="totalQuantity" jdbcType="BIGINT"/>
@@ -68,6 +69,9 @@
             <if test="prodVariety!= null">
                 and prod_variety = #{prodVariety,jdbcType=BIGINT}
             </if>
+            <if test="prodCgyCode!= null">
+                and prod_cgy_code = #{prodCgyCode,jdbcType=BIGINT}
+            </if>
             <if test="prodColor!= null and prodColor!=''">
                 and prod_color = #{prodColor,jdbcType=VARCHAR}
             </if>
@@ -87,6 +91,7 @@
         INSERT INTO t_prod_plan(
             prod_plan_code,
             prod_variety,
+            prod_cgy_code,
             prod_color,
             mac_code,
             total_quantity,
@@ -97,6 +102,7 @@
         VALUES (
             #{prodPlanCode,jdbcType=VARCHAR},
             #{prodVariety,jdbcType=BIGINT},
+            #{prodCgyCode,jdbcType=BIGINT},
             #{prodColor,jdbcType=VARCHAR},
             #{macCode,jdbcType=VARCHAR},
             #{totalQuantity,jdbcType=BIGINT},
@@ -110,6 +116,7 @@
         INSERT INTO t_prod_plan(
         prod_plan_code,
         prod_variety,
+        prod_cgy_code,
         prod_color,
         mac_code,
         total_quantity,
@@ -122,6 +129,7 @@
             (
             #{item.prodPlanCode,jdbcType=VARCHAR},
             #{item.prodVariety,jdbcType=BIGINT},
+            #{item.prodCgyCode,jdbcType=BIGINT},
             #{item.prodColor,jdbcType=VARCHAR},
             #{item.macCode,jdbcType=VARCHAR},
             #{item.totalQuantity,jdbcType=BIGINT},

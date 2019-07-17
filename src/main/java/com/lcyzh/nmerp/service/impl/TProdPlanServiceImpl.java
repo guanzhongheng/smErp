@@ -6,7 +6,6 @@ import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.dao.*;
 import com.lcyzh.nmerp.entity.*;
 import com.lcyzh.nmerp.model.vo.OrderItemVo;
-import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
 import com.lcyzh.nmerp.model.vo.ProdPlanVo;
 import com.lcyzh.nmerp.service.TProdPlanService;
 import com.lcyzh.nmerp.utils.StringUtils;
@@ -77,15 +76,17 @@ public class TProdPlanServiceImpl implements TProdPlanService {
             Map<String, TProdPlan> ppMap = new HashMap<>(16);
             if(!prodPlans.isEmpty()) {
                 for(TProdPlan prodPlan : prodPlans) {
-                    ppMap.put(prodPlan.getProdVariety()+"|"+prodPlan.getProdColor()+"|"+prodPlan.getMacCode(),
+                    ppMap.put(prodPlan.getProdCgyCode()+"|"+prodPlan.getProdVariety()+"|"+prodPlan.getProdColor()+"|"+prodPlan.getMacCode(),
                             prodPlan);
                 }
             }
+            Map<String, TProdPlan> ppMapNew = new HashMap<>(16);
+            Map<String, TProdPlan> ppMapUpdate = new HashMap<>(16);
             String key;
             String macCode;
             for(OrderItemVo item : items) {
                 macCode = getMacCode(macMap,item.getItemWidth());
-                key = item.getItemVariety()+"|"+item.getItemColor()+"|"+macCode;
+                key = item.getItemCgyCode()+"|"+item.getItemVariety()+"|"+item.getItemColor()+"|"+macCode;
                 TProdPlan prodPlan;
                 if(ppMap.containsKey(key)) {
                     //计划单包含该类品种和颜色的产品，更新数量
@@ -98,36 +99,52 @@ public class TProdPlanServiceImpl implements TProdPlanService {
                     }else{
                         prodPlanDetails.add(buildProdPlanDetail(macCode, prodPlan.getProdPlanCode(), item, '0'));
                     }
-                    updateList.add(prodPlan);
+                    ppMapUpdate.put(key, prodPlan);
                 }else{
                     //不包含在计划单内，新建
-                    prodPlan = new TProdPlan();
-                    prodPlan.setTotalQuantity(item.getItemNum());
-                    //自动下发默认关闭
-                    prodPlan.setIsAuto('0');
-                    prodPlan.setQuantity(0L);
-                    prodPlan.setProdColor(item.getItemColor());
-                    prodPlan.setProdPlanCode(StringUtils.genFixPreFixStr(Constants.PROD_PLAN_PRE_FIX));
-                    prodPlan.setMacCode(macCode);
-                    prodPlan.setProdVariety(item.getItemVariety());
-                    addList.add(prodPlan);
-                    ppMap.put(prodPlan.getProdVariety()+"|"+prodPlan.getProdColor()+"|"+prodPlan.getMacCode(),
-                            prodPlan);
-                    prodPlanDetails.add(buildProdPlanDetail(macCode,prodPlan.getProdPlanCode(), item, '0'));
+                    if(ppMapNew.containsKey(key)) {
+                        prodPlan = ppMapNew.get(key);
+                        prodPlan.setTotalQuantity(prodPlan.getTotalQuantity() + item.getItemNum());
+                        if(prodPlan.getIsAuto() == 1) {
+                            //自动下发开启
+                            prodPlan.setQuantity(prodPlan.getQuantity() + item.getItemNum());
+                            prodPlanDetails.add(buildProdPlanDetail(macCode, prodPlan.getProdPlanCode(), item, '1'));
+                        }else{
+                            prodPlanDetails.add(buildProdPlanDetail(macCode, prodPlan.getProdPlanCode(), item, '0'));
+                        }
+                        ppMapNew.put(key, prodPlan);
+                    }else{
+                        prodPlan = new TProdPlan();
+                        prodPlan.setTotalQuantity(item.getItemNum());
+                        //自动下发默认关闭
+                        prodPlan.setIsAuto('0');
+                        prodPlan.setQuantity(0L);
+                        prodPlan.setProdColor(item.getItemColor());
+                        prodPlan.setProdPlanCode(StringUtils.genFixPreFixStr(Constants.PROD_PLAN_PRE_FIX));
+                        prodPlan.setMacCode(macCode);
+                        prodPlan.setProdVariety(item.getItemVariety());
+                        prodPlan.setProdCgyCode(item.getItemCgyCode());
+                        ppMapNew.put(prodPlan.getProdCgyCode()+"|"+prodPlan.getProdVariety()+"|"+prodPlan.getProdColor()+"|"+prodPlan.getMacCode(),
+                                prodPlan);
+                        prodPlanDetails.add(buildProdPlanDetail(macCode,prodPlan.getProdPlanCode(), item, '0'));
+                    }
                 }
             }
-        }
-        if(!addList.isEmpty()) {
-            res = tProdPlanMapper.insertBatch(addList);
-        }
-        if(!updateList.isEmpty()) {
-            res = tProdPlanMapper.updateBatch(updateList);
-        }
-        if(res > 0 && !prodPlanDetails.isEmpty()) {
-            res = prodPlanDetailMapper.insertBatch(prodPlanDetails);
-        }else{
-            //计划单更新失败
-            res = -2;
+            if(ppMapNew.size() > 0) {
+                for(TProdPlan value : ppMapNew.values()) {
+                    addList.add(value);
+                }
+                res = tProdPlanMapper.insertBatch(addList);
+            }
+            if(ppMapUpdate.size() > 0) {
+                for(TProdPlan value : ppMapUpdate.values()) {
+                    updateList.add(value);
+                }
+                res = tProdPlanMapper.updateBatch(updateList);
+            }
+            if(res > 0 && !prodPlanDetails.isEmpty()) {
+                res = prodPlanDetailMapper.insertBatch(prodPlanDetails);
+            }
         }
         return res;
     }

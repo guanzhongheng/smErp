@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,7 +38,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     public static String genFixPreFixStr(String prefix) {
         LocalDateTime now = LocalDateTime.now();
         String dateStr = now.format(formatter);
-        return prefix + dateStr;
+        return prefix + dateStr + new Random().nextInt(10000);
     }
 
     /**
