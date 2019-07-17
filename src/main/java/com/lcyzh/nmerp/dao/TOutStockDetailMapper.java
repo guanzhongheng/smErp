@@ -22,4 +22,8 @@ public interface TOutStockDetailMapper {
     int insertBatch(List<TOutStockDetail> tOutStockDetails);
 
     List<TOutStockDetail> findList(TOutStockDetail tOutStockDetail);
+
+    void deleteByOutCode(String outCode);
+
+    int deleteByBarCode(String barCode);
 }

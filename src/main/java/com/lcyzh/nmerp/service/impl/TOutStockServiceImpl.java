@@ -12,7 +12,6 @@ import com.lcyzh.nmerp.model.vo.*;
 import com.lcyzh.nmerp.service.TOutStockService;
 import com.lcyzh.nmerp.utils.DictUtils;
 import com.lcyzh.nmerp.utils.StringUtils;
-import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -116,5 +115,16 @@ public class TOutStockServiceImpl implements TOutStockService {
             return 2;
         }
         return tOutStockDetailMapper.insert(tOutStockDetail);
+    }
+
+    @Override
+    public int delete(String outCode) {
+        tOutStockDetailMapper.deleteByOutCode(outCode);
+        return tOutStockMapper.delete(outCode);
+    }
+
+    @Override
+    public int deleteDetail(String barCode) {
+        return tOutStockDetailMapper.deleteByBarCode(barCode);
     }
 }

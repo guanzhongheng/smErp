@@ -9,6 +9,14 @@
 
     </resultMap>
 
+    <delete id="deleteByOutCode" parameterType="java.lang.String">
+        delete from t_out_stock_detail where out_code = #{outCode}
+    </delete>
+
+    <delete id="deleteByBarCode" parameterType="java.lang.String">
+        delete from t_out_stock_detail where bar_code = #{barCode}
+    </delete>
+
 
     <select id="findById" parameterType="java.lang.Long" resultMap="tOutStockDetailResultMap">
         SELECT *
@@ -73,10 +81,5 @@
         </set>
         WHERE id = #{id,jdbcType=BIGINT}
     </update>
-
-    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TOutStockDetail">
-        DELETE FROM t_out_stock_detail
-        WHERE id = #{id,jdbcType=BIGINT}
-    </delete>
 
 </mapper>

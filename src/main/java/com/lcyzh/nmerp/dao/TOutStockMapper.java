@@ -23,7 +23,9 @@ public interface TOutStockMapper {
 
     int update(TOutStock tOutStock);
 
-    int delete(String barCode);
+    int delete(String outCode);
 
     TOutStock findByOutCode(String outCode);
+
+    //int delete(String outCode);
 }

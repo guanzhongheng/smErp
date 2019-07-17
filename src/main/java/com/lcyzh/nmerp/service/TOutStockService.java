@@ -84,4 +84,14 @@ public interface TOutStockService {
      * 添加出库单明细
      */
     int addOutStockDetail(TOutStockDetail tOutStockDetail);
+
+    /**
+     * 出库单删除
+     */
+    int delete(String outCode);
+
+    /**
+     * 出库单明细删除
+     */
+    int deleteDetail(String barCode);
 }
