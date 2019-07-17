@@ -23,6 +23,11 @@ public class TMachineInfoServiceImpl implements TMachineInfoService{
     }
 
     @Override
+    public TMachineInfo getByCode(String macCode) {
+        return tMachineInfoMapper.getByCode(macCode);
+    }
+
+    @Override
     public List<TMachineInfo> findList(TMachineInfo tMachineInfo) {
         return tMachineInfoMapper.findList(tMachineInfo);
     }

@@ -19,11 +19,14 @@
         WHERE id = #{id,jdbcType=BIGINT}
     </select>
 
+    <select id="getByCode" parameterType="java.lang.String" resultMap="tMachineInfoResultMap">
+        select * from t_machine_info where mac_code = #{macCode,jdbcType=VARCHAR}
+    </select>
+
     <select id="findList" parameterType ="com.lcyzh.nmerp.entity.TMachineInfo"  resultMap="tMachineInfoResultMap">
         SELECT *
         FROM t_machine_info
         <where>
-
             <if test="macCode!= null">
                 and mac_code like concat('%', #{macCode,jdbcType=VARCHAR}, '%')
             </if>
@@ -36,12 +39,6 @@
             <if test="maxWidth!= null">
                 and max_width like concat('%', #{maxWidth,jdbcType=DOUBLE}, '%')
             </if>
-            <if test="createTime!= null">
-                and create_time like concat('%', #{createTime,jdbcType=TIMESTAMP}, '%')
-            </if>
-            <if test="updateTime!= null">
-                and update_time like concat('%', #{updateTime,jdbcType=TIMESTAMP}, '%')
-            </if>
         </where>
     </select>
 
@@ -51,9 +48,8 @@
         ORDER BY max_width DESC
     </select>
 
-    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TMachineInfo">
+    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TMachineInfo"  useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_machine_info(
-            id,
             mac_code,
             prod_codes,
             min_width,
@@ -62,7 +58,6 @@
             update_time
         )
         VALUES (
-            #{id,jdbcType=BIGINT},
             #{macCode,jdbcType=VARCHAR},
             #{prodCodes,jdbcType=VARCHAR},
             #{minWidth,jdbcType=DOUBLE},
@@ -72,9 +67,8 @@
         )
     </insert>
 
-    <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TMachineInfo">
+    <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TMachineInfo"  useGeneratedKeys="true" keyProperty="id">
         INSERT INTO t_machine_info(
-        id,
         mac_code,
         prod_codes,
         min_width,
@@ -85,7 +79,6 @@
         VALUES
         <foreach collection ="list" item="item" separator =",">
             (
-            #{item.id,jdbcType=BIGINT},
             #{item.macCode,jdbcType=VARCHAR},
             #{item.prodCodes,jdbcType=VARCHAR},
             #{item.minWidth,jdbcType=DOUBLE},
@@ -111,9 +104,6 @@
             </if>
             <if test="maxWidth!= null">
                 max_width = #{maxWidth,jdbcType=DOUBLE},
-            </if>
-            <if test="createTime!= null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
             </if>
             <if test="updateTime!= null">
                 update_time = #{updateTime,jdbcType=TIMESTAMP},

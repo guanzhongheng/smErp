@@ -13,6 +13,8 @@ import java.util.List;
 public interface TMachineInfoService {
     TMachineInfo get(String id);
 
+    TMachineInfo getByCode(String macCode);
+
     List<TMachineInfo> findList(TMachineInfo tMachineInfo);
 
     List<TMachineInfo> findAllList();
