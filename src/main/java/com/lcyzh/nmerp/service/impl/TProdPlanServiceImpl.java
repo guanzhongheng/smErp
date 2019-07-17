@@ -184,7 +184,7 @@ public class TProdPlanServiceImpl implements TProdPlanService {
         String macCode="";
         for(Map.Entry<String, String> entry : map.entrySet()){
             String[] keys = entry.getKey().split("-");
-            if(Double.valueOf(keys[0]) < width && Double.valueOf(keys[1]) > width) {
+            if(Double.valueOf(keys[0]) <= width && Double.valueOf(keys[1]) >= width) {
                 macCode = entry.getValue();
                 break;
             }

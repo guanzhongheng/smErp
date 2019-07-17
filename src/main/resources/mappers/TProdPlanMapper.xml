@@ -15,7 +15,7 @@
     </resultMap>
 
     <update id="updateBatch" parameterType="java.util.List">
-        update product
+        update t_prod_plan
         <trim prefix="set" suffixOverrides=",">
             <trim prefix="total_quantity =case" suffix="end,">
                 <foreach collection="list" item="i" index="index">
@@ -63,7 +63,16 @@
 
     <select id="findList" parameterType ="com.lcyzh.nmerp.model.vo.ProdPlanVo"
     resultType="com.lcyzh.nmerp.model.vo.ProdPlanVo">
-        SELECT *
+        SELECT
+        prod_plan_code prodPlanCode,
+        prod_variety prodVariety,
+        prod_cgy_code prodCgyCode,
+        prod_color prodColor,
+        mac_code macCode,
+        total_quantity totalQuantity,
+        quantity quantity,
+        formula formula,
+        isAuto isAuto
         FROM t_prod_plan
         <where>
             <if test="prodVariety!= null">
