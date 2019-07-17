@@ -37,7 +37,7 @@ public class TOutStockServiceImpl implements TOutStockService {
     private TOutStockDetailMapper tOutStockDetailMapper;
 
     @Override
-    public List<TOutStock> findList() {
+    public List<TOutStock> findListNoOut() {
         return tOutStockMapper.finListNoOut();
     }
 

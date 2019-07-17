@@ -18,7 +18,7 @@ public interface TOutStockService {
     /**
      * 查询未出库的列表
      */
-    List<TOutStock> findList();
+    List<TOutStock> findListNoOut();
     /**
      * 根据outCode查询出库单
      */
