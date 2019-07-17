@@ -15,7 +15,12 @@
         <result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
         <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
     </resultMap>
-    <select id="finListNoOut" resultMap="tOutStockResultMap">
+
+    <update id="updateStatus" parameterType="java.util.Map">
+        update t_out_stock set out_status = #{outStatus} where out_code = #{outCode}
+    </update>
+
+    <select id="findListNew" resultMap="tOutStockResultMap">
         select * from t_out_stock where out_status = '0' order by create_time
     </select>
 

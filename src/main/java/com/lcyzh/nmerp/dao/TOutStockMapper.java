@@ -6,6 +6,7 @@ import com.lcyzh.nmerp.model.vo.StockRecordVo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
 * Author ljk
@@ -32,5 +33,7 @@ public interface TOutStockMapper {
 
     List<StockRecordVo> getOutStockList(OutStockVo vo);
 
-    List<TOutStock> finListNoOut();
+    List<TOutStock> findListNew();
+
+    int updateStatus(Map<String, Object> map);
 }

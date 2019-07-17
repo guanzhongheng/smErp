@@ -16,9 +16,13 @@ import java.util.List;
 public interface TOutStockService {
 
     /**
-     * 查询未出库的列表
+     * 查询新建出库单列表
      */
-    List<TOutStock> findListNoOut();
+    List<TOutStock> findListNew();
+    /**
+     * 出库单更改状态 0-新建；1-待审批；2-已审批
+     */
+    int updateStatus(String outCode, Character status);
     /**
      * 根据outCode查询出库单
      */

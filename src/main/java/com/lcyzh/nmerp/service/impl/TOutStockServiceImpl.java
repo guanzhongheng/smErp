@@ -37,8 +37,16 @@ public class TOutStockServiceImpl implements TOutStockService {
     private TOutStockDetailMapper tOutStockDetailMapper;
 
     @Override
-    public List<TOutStock> findListNoOut() {
-        return tOutStockMapper.finListNoOut();
+    public List<TOutStock> findListNew() {
+        return tOutStockMapper.findListNew();
+    }
+
+    @Override
+    public int updateStatus(String outCode, Character status) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("outCode", outCode);
+        map.put("outStatus", status);
+        return tOutStockMapper.updateStatus(map);
     }
 
     @Override
