@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -97,5 +98,18 @@ public class ProduceManageController extends BaseController {
         vo.setProdPlanDetailId(id);
         model.addAttribute("detail",prodPlanDetailService.findProdTask(vo));
         return "modules/crm/produceDetail";
+    }
+
+    @RequestMapping(value = {"produce/inStock"})
+    @ResponseBody
+    public ProdPlanDetailVo doInStock(Long id,String weight){
+        ProdPlanDetailVo vo = new ProdPlanDetailVo();
+        vo.setProdPlanDetailId(id);
+
+        ProdPlanDetailVo voInDB = prodPlanDetailService.findProdTask(vo);
+        voInDB.setItemWeight(weight);
+
+        ProdPlanDetailVo result = prodPlanDetailService.labelAndInStock(voInDB);
+        return result;
     }
 }

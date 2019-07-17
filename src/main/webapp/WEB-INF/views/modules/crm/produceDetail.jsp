@@ -25,7 +25,7 @@
                                 <!-- /.box-header -->
                                 <div class="box-body" >
                                     <div style="float:left;    margin-bottom: 10px;">
-                                        <a class="btn btn-app">
+                                        <a class="btn btn-app" id="wsStart">
                                             <i class="fa fa-play"></i> 启动
                                         </a>
                                         <a class="btn btn-app">
@@ -46,7 +46,7 @@
                                     </div>
 
                                     <div style="min-width: 270px;background-color: black;color:green; font-size: 30px;float:left;text-align: center;margin-left:15px;">
-                                        净：<span>0.00</span> KG
+                                        毛重：<span id="totalWeight">50.201</span> KG
                                     </div>
                                     <div style="min-width: 270px;background-color: black;color:green; font-size: 30px;float:left;text-align: center;margin-left:15px;">
                                         皮：0.00 KG
@@ -57,8 +57,6 @@
 
 
                             <div class="ibox-content">
-                                <form:form id="inputForm" modelAttribute="vo" action="${ctx}/cus/customer_save"
-                                           method="post" class="form-horizontal">
                                     <div class="row">
                                         <div class="col-sm-6 b-r">
                                             <div class="ibox float-e-margins">
@@ -115,7 +113,7 @@
                                                     <div class="form-group">
                                                         <label class="col-sm-5 control-label"> 配方：</label>
                                                         <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                                                ${detail.formula}
+                                                            <textarea style="width: 150px;height: 150px;" readonly>${detail.formula}</textarea>
                                                         </div>
                                                     </div>
                                                     <div class="hr-line-dashed"></div>
@@ -123,73 +121,75 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label class="col-sm-5 control-label"> 产品编号：</label>
-                                                <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                                        ${detail.itemCode}
+                                            <form method="get" class="form-horizontal">
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label"> 产品编号：</label>
+                                                    <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
+                                                            ${detail.itemCode}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="hr-line-dashed"></div>
-                                            <div class="form-group">
-                                                <label class="col-sm-5 control-label"> 品种：</label>
-                                                <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                                        ${fns:getValueByDictKey(detail.itemVariety)}
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label"> 品种：</label>
+                                                    <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
+                                                            ${fns:getValueByDictKey(detail.itemVariety)}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="hr-line-dashed"></div>
-                                            <div class="form-group">
-                                                <label class="col-sm-5 control-label"> 颜色：</label>
-                                                <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                                        ${fns:getDictValue(detail.itemColor, 'prod_color', defaultValue)}
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label"> 颜色：</label>
+                                                    <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
+                                                            ${fns:getDictValue(detail.itemColor, 'prod_color', defaultValue)}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="hr-line-dashed"></div>
-                                            <div class="form-group">
-                                                <label class="col-sm-5 control-label"> 宽度：</label>
-                                                <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                                        ${detail.itemWidth}
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label"> 宽度：</label>
+                                                    <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
+                                                            ${detail.itemWidth}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="hr-line-dashed"></div>
-                                            <div class="form-group">
-                                                <label class="col-sm-5 control-label"> 数量：</label>
-                                                <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                                        ${detail.itemNum}
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label"> 数量：</label>
+                                                    <div class="col-sm-5" style="text-align:center;padding-top: 7px;" id="itemNum">
+                                                            ${detail.itemNum}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="hr-line-dashed"></div>
-                                            <div class="form-group">
-                                                <label class="col-sm-5 control-label"> 面积：</label>
-                                                <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                                        ${detail.itemTotalSq}
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label"> 面积：</label>
+                                                    <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
+                                                            ${detail.itemTotalSq}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="hr-line-dashed"></div>
-                                            <div class="form-group">
-                                                <label class="col-sm-5 control-label"> 延长米计算方式：</label>
-                                                <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                                        ${fns:getValueByDictKey(detail.itemYcType)}
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label"> 延长米计算方式：</label>
+                                                    <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
+                                                            ${fns:getValueByDictKey(detail.itemYcType)}
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="hr-line-dashed"></div>
-                                            <div class="form-group">
-                                                <label class="col-sm-5 control-label"> 操作：</label>
-                                                <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                                    <button class="btn btn-primary" type="button" onclick="history.go(-1)">入库</button>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-5 control-label"> 操作：</label>
+                                                    <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
+                                                        <button class="btn btn-primary" type="button" id="inStock">入库</button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="hr-line-dashed"></div>
+                                                <div class="hr-line-dashed"></div>
+                                                <input id="prodPlanDetailId" value="${detail.prodPlanDetailId}" type="hidden">
+                                            </form>
                                         </div>
 
                                     </div>
                                     <div class="row">
                                         <div class="form-group">
-
+                                            <img id="imgcode" />
                                             <button class="btn btn-primary" type="button" onclick="history.go(-1)">重新打签</button>
                                             <button class="btn btn-primary" type="button" onclick="history.go(-1)">返回</button>
                                         </div>
                                     </div>
-                                </form:form>
                             </div>
                         </div>
                     </div>
@@ -202,6 +202,72 @@
 <script>
     $(document).ready(function () {
         $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",})
+        $("#inStock").click(function () {
+            $("#inStock").attr('disabled',"true");
+
+            var totalWeight = $("#totalWeight").text();
+            if(totalWeight == null || parseFloat(totalWeight)<=0){
+                top.$.jBox.tip('入库失败！原因：重量为0，请开启电子秤并称重后再行入库');
+                $("#inStock").removeAttr('disabled');
+                return;
+            }
+
+            $.ajax({
+                url: "/produce/produce/inStock",
+                type: 'POST',
+                data: {id:$("#prodPlanDetailId").val(),weight:totalWeight},
+                dataType: 'json',
+                success: function (result) {
+                    if (result.itemNum>0) {
+                        top.$.jBox.tip('入库成功');
+                        $("#itemNum").text(result.itemNum);
+                    } else if (result.itemNum == 0) {
+                        top.$.jBox.tip('入库成功');
+                        // 关闭ws
+                        // 吊起打印
+                    }
+                    $("#imgcode").JsBarcode(result.barCode);
+                }
+            });
+            $("#inStock").removeAttr('disabled');
+        });
+        $("#wsStart").click(function () {
+            send("start");
+        });
+
+        var socket;
+        if(!window.WebSocket){
+            window.WebSocket = window.MozWebSocket;
+        }
+        if(window.WebSocket){
+            socket = new WebSocket("ws://127.0.0.1:12345/ws");
+            socket.onmessage = function(event){
+                // document.getElementById('ttt').value =  event.data;
+                $("#itemNum").text(event.data);
+            };
+            socket.onopen = function(event){
+                // var ta = document.getElementById('responseText');
+                // document.getElementById('ttt').value = ta;
+                // ta.value = "Netty-WebSocket服务器。。。。。。连接  \r\n";
+            };
+            socket.onclose = function(event){
+                // var ta = document.getElementById('responseText');
+                //document.getElementById('ttt').value = ta;
+                // ta.value = "Netty-WebSocket服务器。。。。。。关闭 \r\n";
+            };
+        }else{
+            alert("您的浏览器不支持WebSocket协议！");
+        }
+        function send(message){
+            if(!window.WebSocket){return;}
+            if(socket.readyState == WebSocket.OPEN){
+                socket.send(message);
+            }else{
+                alert("WebSocket 连接没有建立成功！");
+            }
+
+        }
+
     });
 </script>
 <script src="${ctxStatic}/hPlugs/js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
@@ -221,3 +287,4 @@
 <script src="${ctxStatic}/hPlugs/js/plugins/clockpicker/clockpicker.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/cropper/cropper.min.js"></script>
 <script src="${ctxStatic}/hPlugs/js/demo/form-advanced-demo.min.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/JsBarcode/JsBarcode.all.min.js"></script>
