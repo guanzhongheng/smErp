@@ -3,14 +3,8 @@ package com.lcyzh.nmerp.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lcyzh.nmerp.common.persistence.Page;
-import com.lcyzh.nmerp.dao.THistoryProdRecordMapper;
-import com.lcyzh.nmerp.dao.TProdPlanDetailMapper;
-import com.lcyzh.nmerp.dao.TProdPlanMapper;
-import com.lcyzh.nmerp.dao.TStockMapper;
-import com.lcyzh.nmerp.entity.THistoryProdRecord;
-import com.lcyzh.nmerp.entity.TProdPlan;
-import com.lcyzh.nmerp.entity.TProdPlanDetail;
-import com.lcyzh.nmerp.entity.TStock;
+import com.lcyzh.nmerp.dao.*;
+import com.lcyzh.nmerp.entity.*;
 import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
 import com.lcyzh.nmerp.service.TProdPlanDetailService;
 import com.lcyzh.nmerp.utils.IdGen;
@@ -38,6 +32,8 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
     private THistoryProdRecordMapper tHistoryProdRecordMapper;
     @Autowired
     private TProdPlanMapper tProdPlanMapper;
+    @Autowired
+    private TOrderItemMapper tOrderItemMapper;
 
     @Override
     public List<TProdPlanDetail> findListByProdPlanCode(String prodPlanCode) {
@@ -80,15 +76,18 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
         //生成条形码字符串
         String barCode = getBarCode(IdGen.getNetBarCode());
         vo.setBarCode(barCode);
-        if(vo.getItemNum() - 1 > 0) {
+        vo.setItemNum(vo.getItemNum() - 1);
+        if(vo.getItemNum() > 0) {
             //该商品还没有生产完，更新计划单明细件数
             TProdPlanDetail prodPlanDetail = new TProdPlanDetail();
             BeanUtils.copyProperties(vo, prodPlanDetail);
             tProdPlanDetailMapper.update(prodPlanDetail);
-        }else if(vo.getItemNum() -1 == 0){
+        }else if(vo.getItemNum() == 0){
             //该商品生产完，更新计划单，将明细单该记录移到生产记录表
             THistoryProdRecord historyProdRecord = new THistoryProdRecord();
             BeanUtils.copyProperties(vo, historyProdRecord);
+            TOrderItem tOrderItem = tOrderItemMapper.get(historyProdRecord.getOrderItemId());
+            historyProdRecord.setItemNum(tOrderItem.getItemNum());
             historyProdRecord.setCreateTime(date);
             TProdPlan prodPlan = new TProdPlan();
             prodPlan.setProdPlanCode(vo.getProdPlanCode());
@@ -107,7 +106,6 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
             tStock.setItemSq(vo.getItemLenth() * vo.getItemWidth());
         }
         tStockMapper.insert(tStock);
-        vo.setItemNum(vo.getItemNum() - 1);
         return vo;
     }
 

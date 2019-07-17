@@ -23,6 +23,10 @@
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
 
+    <select id="get" parameterType="java.lang.Long" resultMap="tOrderItemResultMap">
+        select * from T_ORDER_ITEM where id = #{id}
+    </select>
+
 
     <select id="findByOrdCode" parameterType="java.lang.String" resultType="com.lcyzh.nmerp.model.vo.OrderItemVo">
        SELECT

@@ -28,4 +28,6 @@ public interface TOrderItemMapper {
     List<OrderItemVo> findByOrdCode(String ordCode);
 
     int deleteByOrdCode(String ordCode);
+
+    TOrderItem get(Long id);
 }
