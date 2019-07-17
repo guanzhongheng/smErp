@@ -25,28 +25,31 @@
                                 <!-- /.box-header -->
                                 <div class="box-body" >
                                     <div style="float:left;    margin-bottom: 10px;">
-                                        <a class="btn btn-app" id="wsStart">
+                                        <a class="btn btn-app" id="wsStart" >
                                             <i class="fa fa-play"></i> 启动
                                         </a>
-                                        <a class="btn btn-app">
+                                        <a class="btn btn-app" id="wsStop" style="display: none;">
+                                            <i class="fa fa-stop"></i> 停止
+                                        </a>
+                                        <a class="btn btn-app" disabled="true">
                                             <i class="fa fa-repeat"></i> 归零
                                         </a>
-                                        <a class="btn btn-app">
+                                        <a class="btn btn-app" disabled="true">
                                             <i class="fa fa-circle-o"></i> 去皮
                                         </a>
-                                        <a class="btn btn-app">
+                                        <a class="btn btn-app" disabled="true">
                                             <i class="fa fa-balance-scale"></i> 标重
                                         </a>
-                                        <a class="btn btn-app">
+                                        <a class="btn btn-app" disabled="true">
                                             <i class="fa fa-tachometer"></i> 刻度
                                         </a>
-                                        <a class="btn btn-app">
+                                        <a class="btn btn-app" disabled="true">
                                             <i class="fa fa-save"></i> 存盘
                                         </a>
                                     </div>
 
                                     <div style="min-width: 270px;background-color: black;color:green; font-size: 30px;float:left;text-align: center;margin-left:15px;">
-                                        毛重：<span id="totalWeight">50.201</span> KG
+                                        毛重：<span id="totalWeight">0.00</span> KG
                                     </div>
                                     <div style="min-width: 270px;background-color: black;color:green; font-size: 30px;float:left;text-align: center;margin-left:15px;">
                                         皮：0.00 KG
@@ -233,6 +236,13 @@
         });
         $("#wsStart").click(function () {
             send("start");
+            $("#wsStart").hide();
+            $("#wsStop").show();
+        });
+        $("#wsStop").click(function () {
+            send("stop");
+            $("#wsStart").show();
+            $("#wsStop").hide();
         });
 
         var socket;
@@ -243,7 +253,9 @@
             socket = new WebSocket("ws://127.0.0.1:12345/ws");
             socket.onmessage = function(event){
                 // document.getElementById('ttt').value =  event.data;
-                $("#itemNum").text(event.data);
+                var data = event.data.replace(" ","").replace("+","").replace("kg","");
+                console.log(event.data);
+                $("#totalWeight").text(data);
             };
             socket.onopen = function(event){
                 // var ta = document.getElementById('responseText');

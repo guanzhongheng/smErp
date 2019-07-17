@@ -38,7 +38,7 @@ public class ProdPlanDetailVo extends DataEntity<ProdPlanDetailVo> {
     //条形码
     private String barCode;
     //产品单件重量
-    private String itemWeight;
+    private Double itemWeight;
     //产品单件面积
     private String itemSq;
 
@@ -218,11 +218,11 @@ public class ProdPlanDetailVo extends DataEntity<ProdPlanDetailVo> {
         this.barCode = barCode;
     }
 
-    public String getItemWeight() {
+    public Double getItemWeight() {
         return itemWeight;
     }
 
-    public void setItemWeight(String itemWeight) {
+    public void setItemWeight(Double itemWeight) {
         this.itemWeight = itemWeight;
     }
 

@@ -102,7 +102,7 @@ public class ProduceManageController extends BaseController {
 
     @RequestMapping(value = {"produce/inStock"})
     @ResponseBody
-    public ProdPlanDetailVo doInStock(Long id,String weight){
+    public ProdPlanDetailVo doInStock(Long id,Double weight){
         ProdPlanDetailVo vo = new ProdPlanDetailVo();
         vo.setProdPlanDetailId(id);
 
