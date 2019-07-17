@@ -113,38 +113,6 @@
     <update id="update" parameterType="com.lcyzh.nmerp.entity.TOutStock">
         UPDATE t_out_stock
         <set>
-<<<<<<< HEAD
-            <if test="cusName!= null">
-            cus_name = #{cusName,jdbcType=VARCHAR},
-            </if>
-            <if test="receiver!= null">
-            receiver = #{receiver,jdbcType=VARCHAR},
-            </if>
-            <if test="phone!= null">
-            phone = #{phone,jdbcType=VARCHAR},
-            </if>
-            <if test="address!= null">
-            address = #{address,jdbcType=VARCHAR},
-            </if>
-            <if test="outStatus!= null">
-            out_status = #{outStatus,jdbcType=CHAR},
-            </if>
-            <if test="createBy!= null">
-            create_by = #{createBy,jdbcType=VARCHAR},
-            </if>
-            <if test="createTime!= null">
-            create_time = #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateTime!= null">
-            update_time = #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateBy!= null">
-            update_by = #{updateBy,jdbcType=VARCHAR},
-            </if>
-            <if test="remarks!= null">
-            remarks = #{remarks,jdbcType=VARCHAR},
-=======
-
             <if test="cusName!= null">
                 cus_name = #{cusName,jdbcType=VARCHAR},
             </if>
@@ -174,17 +142,12 @@
             </if>
             <if test="remarks!= null">
                 remarks = #{remarks,jdbcType=VARCHAR},
->>>>>>> 提交分页
             </if>
         </set>
         WHERE out_code = #{outCode,jdbcType=VARCHAR}
     </update>
 
-<<<<<<< HEAD
     <delete id="delete"  parameterType ="java.lang.String">
-=======
-    <delete id="delete" parameterType="com.lcyzh.nmerp.entity.TOutStock">
->>>>>>> 提交分页
         DELETE FROM t_out_stock
         WHERE out_code = #{outCode,jdbcType=VARCHAR}
     </delete>
