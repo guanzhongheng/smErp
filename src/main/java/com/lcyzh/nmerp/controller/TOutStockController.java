@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.controller;
 
 import com.lcyzh.nmerp.entity.TOutStock;
+import com.lcyzh.nmerp.model.vo.OutStockVo;
 import com.lcyzh.nmerp.model.vo.StockVo;
 import com.lcyzh.nmerp.service.TOutStockService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,5 +91,37 @@ public class TOutStockController {
         return String.valueOf(result);
     }
 
+    /**
+     * @Description: 根据传入的code删除对应的资源
+     * @Param: [barCode, outCode]
+     * @return: java.lang.String
+     * @Author: wsm
+     * @Iteration : 1.0
+     * @Date: 2019/7/5 11:31 AM
+     */
+    @RequestMapping(value = {"/deleteByCode"}, method = RequestMethod.POST)
+    public String deleteByCode(String barCode,String outCode){
+        Integer result = 0;
+        if(barCode != null && !barCode.equals("")){
+            result = tOutStockService.deleteDetail(barCode);
+        }
+        if(outCode != null && !outCode.equals("")){
+            result = tOutStockService.delete(outCode);
+        }
+        return String.valueOf(result);
+    }
 
+    /**
+     * @Description: 出库单完结
+     * @Param: [outCode]
+     * @return: java.lang.String
+     * @Author: wsm
+     * @Iteration : 1.0
+     * @Date: 2019/7/5 3:24 PM
+     */
+    @RequestMapping(value = {"/finishOutStock"}, method = RequestMethod.POST)
+    public String finishOutStock(String outCode){
+        Integer result = tOutStockService.updateStatus(outCode,'1');
+        return String.valueOf(result);
+    }
 }
