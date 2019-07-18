@@ -127,7 +127,7 @@ public class TOutStockServiceImpl implements TOutStockService {
         Date date = new Date();
         User currUser = UserUtils.getUser();
         //已审批，出库
-        tOutStock.setOutStatus('1');
+        tOutStock.setOutStatus('2');
         tOutStock.setUpdateTime(date);
         tOutStock.setUpdateBy(currUser.getLoginName());
         tOutStockMapper.update(tOutStock);

@@ -6,7 +6,6 @@ import com.lcyzh.nmerp.entity.TOutStockDetail;
 import com.lcyzh.nmerp.model.vo.OutStockDetailVo;
 import com.lcyzh.nmerp.model.vo.OutStockVo;
 import com.lcyzh.nmerp.model.vo.StockRecordVo;
-import com.lcyzh.nmerp.model.vo.StockVo;
 
 import java.util.List;
 
@@ -21,7 +20,7 @@ public interface TOutStockService {
      */
     List<TOutStock> findListNew();
     /**
-     * 出库单更改状态 0-新建；1-待审批；2-已审批
+     * 出库单更改状态 0-新建；1-待审批
      */
     int updateStatus(String outCode, Character status);
     /**
