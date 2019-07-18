@@ -5,8 +5,8 @@
     <resultMap id="tStockResultMap" type="com.lcyzh.nmerp.entity.TStock">
         <id column="id" property="id" jdbcType="BIGINT"/> 
         <result column="bar_code" property="barCode" jdbcType="VARCHAR"/>
-        <result column="ord_code" property="ordCode" jdbcType="VARCHAR"/> 
-        <result column="item_code" property="itemCode" jdbcType="VARCHAR"/> 
+        <result column="ord_code" property="ordCode" jdbcType="VARCHAR"/>
+        <result column="item_code" property="itemCode" jdbcType="VARCHAR"/>
         <result column="item_lenth" property="itemLenth" jdbcType="DOUBLE"/> 
         <result column="item_width" property="itemWidth" jdbcType="DOUBLE"/> 
         <result column="item_thick" property="itemThick" jdbcType="DOUBLE"/> 
@@ -28,6 +28,7 @@
         select
         id stockId,
         bar_code barCode,
+        ord_code ordCode,
         item_code itemCode,
         item_lenth itemLenth,
         item_width itemWidth,
