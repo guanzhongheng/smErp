@@ -41,8 +41,8 @@
         </div>
         <div style="height: 5px"></div>
         <div class="row" style="text-align: left;">
-            <label class="col-sm-4" style="width: 180px">创单时间：SNS</label>
-            <label class="col-sm-4" style="width: 170px">适配机台：1-8.0米</label>
+            <label class="col-sm-4" style="width: 180px">创单时间：<fmt:formatDate value="${time}" pattern="yyyy-MM-dd HH:mm:ss"/></label>
+            <label class="col-sm-4" style="width: 170px">适配机台：${prod.macCode}</label>
         </div>
         <div style="height: 5px"></div>
         <div class="row" style="text-align: left;">
@@ -67,61 +67,26 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>SNS</td>
-                <td>1000.00</td>
-                <td>4.5</td>
-                <td>0.08</td>
-                <td>125.01 M&sup2</td>
-                <td>63.0</td>
-                <td>2040.00</td>
-                <td>40</td>
-                <td>双边</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>SNS</td>
-                <td>1000.00</td>
-                <td>4.5</td>
-                <td>0.08</td>
-                <td>125.01 M&sup2</td>
-                <td>63.0</td>
-                <td>2040.00</td>
-                <td>40</td>
-                <td>双边</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>SNS</td>
-                <td>1000.00</td>
-                <td>4.5</td>
-                <td>0.08</td>
-                <td>125.01 M&sup2</td>
-                <td>63.0</td>
-                <td>2040.00</td>
-                <td>40</td>
-                <td>双边</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>SNS</td>
-                <td>1000.00</td>
-                <td>4.5</td>
-                <td>0.08</td>
-                <td>125.01 M&sup2</td>
-                <td>63.0</td>
-                <td>2040.00</td>
-                <td>40</td>
-                <td>双边</td>
-                <td></td>
-            </tr>
+            <c:forEach items="${details}" var="de">
+                <tr>
+                    <td>${de.itemOwner}</td>
+                    <td>${de.itemLenth}</td>
+                    <td>${de.itemWidth}</td>
+                    <td>${de.itemThick}</td>
+                    <td>${de.itemTotalSq}</td>
+                    <td>${fns:getDictLabel(de.itemYcType,'prod_ycType','无')}</td>
+                    <td>${de.itemTotalWeight}</td>
+                    <td>${de.itemNum}</td>
+                    <td>${fns:getDictLabel(de.itemYbType,'prod_ybType','无')}</td>
+                    <td></td>
+                </tr>
+            </c:forEach>
             <tr>
                 <td>合计:</td>
-                <td colspan="3">5234.12</td>
-                <td colspan="2">12542.02 M&sup2</td>
-                <td >5234.12</td>
-                <td>120</td>
-                <td></td>
+                <td colspan="3">${totalLength}</td>
+                <td colspan="2">${totalMj} M&sup2</td>
+                <td >${totalZl} kg</td>
+                <td>${totalNum}</td>
                 <td colspan="2"></td>
             </tr>
             </tbody>
@@ -129,14 +94,16 @@
 
         <div class="well m-t">
             <div class="row">
-                <label class="col-sm-3"> 制单人：王某</label>
-                <label class="col-sm-4"> 制单时间：2019-07-11</label>
+                <label class="col-sm-3"> 制单人：${name}</label>
+                <label class="col-sm-4"> 制单时间：<fmt:formatDate value="${time}" pattern="yyyy-MM-dd HH:mm:ss"/></label>
             </div>
         </div>
     </div>
     <!--endprint-->
     <div class="text-right">
         <button class="btn btn-primary" onclick="print2()">打印</button>
+        &nbsp;&nbsp;
+        <button class="btn btn-primary" onclick="javascript:history.go(-1);">返回</button>
     </div>
 </div>
 

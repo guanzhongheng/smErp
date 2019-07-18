@@ -44,7 +44,7 @@
                             <strong>客户:${customer.cusName}(现金结算)</strong>
                         </address>
                         <p>
-                            <span><strong>收货日期：</strong> ${order.ordDeliveryDate}</span>
+                            <span><strong>收货日期：</strong> <fmt:formatDate value="${order.ordDeliveryDate}" pattern="yyyy-MM-dd HH:mm:ss"/></span>
                         </p>
                     </div>
                 </div>
@@ -152,6 +152,7 @@
         // prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));
         window.document.body.innerHTML=prnhtml;
         window.print();
+        window.history.go(-1);
     }
 </script>
 </body>

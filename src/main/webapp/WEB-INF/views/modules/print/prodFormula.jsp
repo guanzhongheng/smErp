@@ -9,16 +9,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    <title>H+ 后台主题UI框架 - 单据打印</title>
-    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
-    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+    <title>配方信息</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
 
     <link rel="shortcut icon" href="favicon.ico">
-    <link href="css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
-    <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
 
-    <link href="css/animate.min.css" rel="stylesheet">
-    <link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="${ctxStatic}/hPlugs/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="${ctxStatic}/hPlugs/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="${ctxStatic}/hPlugs/css/animate.min.css" rel="stylesheet">
+    <link href="${ctxStatic}/hPlugs/css/style.min862f.css?v=4.1.0" rel="stylesheet">
 
 </head>
 
@@ -32,68 +32,24 @@
             </div>
             <div style="height: 5px"></div>
             <div class="row" style="text-align: left;">
-                <label class="col-sm-4" style="width: 250px">产品名称：普通PO膜（小膜）</label>
+                <label class="col-sm-4" style="width: 250px">产品名称：${fns:getValueByDictKey(prod.itemCgyCode)}（${fns:getValueByDictKey(prod.itemVariety)}）</label>
                 <label class="col-sm-4" style="width: 60px"></label>
-                <label class="col-sm-4 " style="width: 150px">产品品种：干膜</label>
+                <label class="col-sm-4 " style="width: 150px">产品品种：${fns:getValueByDictKey(prod.itemCgyCode)}</label>
             </div>
             <div style="height: 5px"></div>
             <div class="row" style="text-align: left;">
-                <label class="col-sm-4" style="width: 250px">产品类别：大膜</label>
+                <label class="col-sm-4" style="width: 250px">产品类别：${fns:getValueByDictKey(prod.itemVariety)}</label>
                 <label class="col-sm-4" style="width: 60px"></label>
-                <label class="col-sm-4 " style="width: 150px">产品颜色：红色</label>
+                <label class="col-sm-4 " style="width: 150px">产品颜色：${fns:getDictLabel(prod.itemColor,'prod_color','无')}</label>
             </div>
         </div>
         <br>
-        <!-- /table-responsive -->
-
-        <!-- <div class="row">
-            <div class="table-bordered" style="height: 300px">
-                内容宽度
-            </div>
-        </div> -->
-
         <div class="row">
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th colspan="2" style="text-align: center;">外层配比（190℃）/中层配比（195℃）/内层配比（210℃）</th>
-                </tr>
-                <tr>
-                    <th>材料名称</th>
-                    <th>长</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>原料</td>
-                    <td>1袋</td>
-                </tr>
-                <tr>
-                    <td>高压M21</td>
-                    <td>1袋</td>
-                </tr>
-                <tr>
-                    <td>茂金属1018MA</td>
-                    <td>1袋</td>
-                </tr>
-                <tr>
-                    <td>线性1018N</td>
-                    <td>8袋</td>
-                </tr>
-                <tr>
-                    <td>南方1年长寿母料（5%）</td>
-                    <td>0.5袋（12.5公斤）</td>
-                </tr>
-                <tr>
-                    <td>蓝色母</td>
-                    <td>50克</td>
-                </tr>
-                <tr>
-                    <td>PPA</td>
-                    <td>0.5公斤</td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="row">
+                <div class="table-bordered" style="height: 300px">
+                    ${prod.formula}
+                </div>
+            </div>
             <p>注意：</p>
             <p>（随幅宽增减而增减高压和线性的比例！其他比例不变！）</p>
             <p>1.以上温度仅供参考，随时注意塑化情况，开口情况，</p>
@@ -106,6 +62,8 @@
         <!--endprint-->
         <div class="text-right">
             <button class="btn btn-primary" onclick="print2()">打印</button>
+            &nbsp;&nbsp;
+            <button class="btn btn-primary" onclick="javascript:history.go(-1);">返回</button>
         </div>
     </div>
 
@@ -125,6 +83,7 @@
         prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr));
         window.document.body.innerHTML = prnhtml;
         window.print();
+        window.history.go(-1);
     }
 </script>
 </body>

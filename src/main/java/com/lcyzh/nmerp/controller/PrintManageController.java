@@ -5,11 +5,17 @@ import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.controller.system.util.UserUtils;
 import com.lcyzh.nmerp.dao.TCustomerMapper;
 import com.lcyzh.nmerp.entity.TOutStock;
+import com.lcyzh.nmerp.entity.TProdPlan;
+import com.lcyzh.nmerp.entity.TProdPlanDetail;
 import com.lcyzh.nmerp.entity.sys.User;
-import com.lcyzh.nmerp.model.vo.*;
+import com.lcyzh.nmerp.model.vo.CustomerAddModifyVo;
+import com.lcyzh.nmerp.model.vo.OrderAddModifyVo;
+import com.lcyzh.nmerp.model.vo.OrderItemVo;
+import com.lcyzh.nmerp.model.vo.StockRecordVo;
 import com.lcyzh.nmerp.service.TOrderService;
 import com.lcyzh.nmerp.service.TOutStockService;
-import com.lcyzh.nmerp.service.TProductService;
+import com.lcyzh.nmerp.service.TProdPlanDetailService;
+import com.lcyzh.nmerp.service.TProdPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +43,12 @@ public class PrintManageController extends BaseController {
 
     @Autowired
     private TCustomerMapper tCustomerMapper;
+
+    @Autowired
+    private TProdPlanService planService;
+
+    @Autowired
+    private TProdPlanDetailService prodPlanDetailService;
 
     /**
      * 收据打印
@@ -120,7 +132,8 @@ public class PrintManageController extends BaseController {
      */
     @RequestMapping("remark_print")
     public String prodRemarkInfo(String prodPlanCode,Model model){
-
+        TProdPlan prodPlan = planService.findByProdPanCode(prodPlanCode);
+        model.addAttribute("prod",prodPlan);
         return "modules/print/prodFormula";
     }
 
@@ -132,7 +145,21 @@ public class PrintManageController extends BaseController {
      */
     @RequestMapping("prodProduce_print")
     public String prodProduceList(String prodPlanCode,Model model){
+        TProdPlan prodPlan = planService.findByProdPanCode(prodPlanCode);
+        List<TProdPlanDetail> details = prodPlanDetailService.findListByProdPlanCode(prodPlanCode);
 
+        Double totalMj = details.stream().mapToDouble(i -> i.getItemTotalSq()==null?0: i.getItemTotalSq()).sum();
+        Double totalZl = details.stream().mapToDouble(i -> i.getItemTotalWeight()==null?0: i.getItemTotalWeight()).sum();
+        Double totalNum = details.stream().mapToDouble(i -> i.getItemNum()==null?0: i.getItemNum()).sum();
+        Double totalLength = details.stream().mapToDouble(i -> i.getItemLenth()==null?0: i.getItemLenth()).sum();
+        model.addAttribute("prod",prodPlan);
+        model.addAttribute("details",details);
+        model.addAttribute("totalMj",totalMj);
+        model.addAttribute("totalZl",totalZl);
+        model.addAttribute("totalNum",totalNum);
+        model.addAttribute("totalLength",totalLength);
+        model.addAttribute("time",DateUtils.getDate());
+        model.addAttribute("name",UserUtils.getUser().getName());
         return "modules/print/produceList";
     }
 
