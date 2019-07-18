@@ -38,7 +38,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     public static String genFixPreFixStr(String prefix) {
         LocalDateTime now = LocalDateTime.now();
         String dateStr = now.format(formatter);
-        return prefix + dateStr + new Random().nextInt(10000);
+        return prefix + dateStr + new Random().nextInt(1000);
     }
 
     /**

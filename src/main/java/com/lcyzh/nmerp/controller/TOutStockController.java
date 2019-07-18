@@ -30,12 +30,10 @@ public class TOutStockController {
      * @Iteration : 1.0
      * @Date: 2019/7/3 11:41 PM
      */
-//    @RequestMapping(value = {"/getList"}, method = RequestMethod.GET)
-//    public List<TOutStock> findList(){
-//        TOutStock tOutStock = new TOutStock();
-//        tOutStock.setOutStatus('0');
-//        return tOutStockService.findList(tOutStock);
-//    }
+    @RequestMapping(value = {"/getList"}, method = RequestMethod.GET)
+    public List<TOutStock> findList(){
+        return tOutStockService.findListNew();
+    }
 
     /**
      * @Description: 新增出库单
@@ -59,7 +57,7 @@ public class TOutStockController {
      * @Date: 2019/7/3 11:49 PM
      */
     @RequestMapping(value = {"/getProd"}, method = RequestMethod.GET)
-    public StockVo getDetail(String barCode){
+    public OutStockDetailVo getDetail(String barCode){
         return tOutStockService.findByBarCode(barCode);
     }
 
