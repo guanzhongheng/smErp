@@ -15,6 +15,7 @@ import com.lcyzh.nmerp.utils.DictUtils;
 import com.lcyzh.nmerp.utils.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -100,12 +101,20 @@ public class TOutStockServiceImpl implements TOutStockService {
     }
 
     @Override
-    public StockVo findByBarCode(String barCode) {
+    public OutStockDetailVo findByBarCode(String barCode) {
+        OutStockDetailVo outStockDetailVo = new OutStockDetailVo();
         StockVo vo = tStockMapper.findByBarCode(barCode);
         vo.setItemCgyCodeValue(DictUtils.getValueByDictKey(vo.getItemCgyCode()));
         vo.setItemUnitValue(DictUtils.getValueByDictKey(vo.getItemUnit()));
         vo.setItemVarietyValue(DictUtils.getValueByDictKey(vo.getItemVariety()));
-        return vo;
+        BeanUtils.copyProperties(vo, outStockDetailVo);
+        List<TOutStockDetail> list = tOutStockDetailMapper.findByBarCode(barCode);
+        if(!list.isEmpty()) {
+            outStockDetailVo.setIsOut('1');
+        }else{
+            outStockDetailVo.setIsOut('0');
+        }
+        return outStockDetailVo;
     }
 
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)

@@ -32,6 +32,8 @@ public class OutStockDetailVo {
     private Long itemUnit;
     private String itemUnitValue;
     private String itemColor;
+    //0-未扫描 1-已扫描确认过
+    private Character isOut;
 
     public Long getOutStockDetailId() {
         return outStockDetailId;
@@ -199,5 +201,13 @@ public class OutStockDetailVo {
 
     public void setItemColor(String itemColor) {
         this.itemColor = itemColor;
+    }
+
+    public Character getIsOut() {
+        return isOut;
+    }
+
+    public void setIsOut(Character isOut) {
+        this.isOut = isOut;
     }
 }

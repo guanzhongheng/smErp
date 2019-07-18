@@ -80,7 +80,7 @@ public interface TOutStockService {
      * @Iteration : 1.0
      * @Date: 2019/7/3 2:43 PM
      */
-    StockVo findByBarCode(String barCode);
+    OutStockDetailVo findByBarCode(String barCode);
 
     /**
      * 出库

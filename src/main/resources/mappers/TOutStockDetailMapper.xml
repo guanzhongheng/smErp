@@ -8,6 +8,9 @@
         <result column="bar_code" property="barCode" jdbcType="VARCHAR"/> 
 
     </resultMap>
+    <select id="findByBarCode" parameterType="java.lang.String" resultMap="tOutStockDetailResultMap">
+        select * from t_out_stock_detail where bar_code = #{barCode}
+    </select>
     <select id="findOutItemsByOutCode" parameterType="java.lang.String" resultType="com.lcyzh.nmerp.model.vo.OutStockDetailVo">
         select
         osd.id outStockDetailId,
