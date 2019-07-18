@@ -708,4 +708,18 @@ public class Constants {
      */
     public static final long PROD_PRICE_TYPE_SQ = 141002L;
 
+    /**
+     * 产品颜色
+     */
+    public static final String PROD_COLOR = "prod_color";
+
+    /**
+     * 压边类型
+     */
+    public static final String PROD_YB_TYPE = "prod_ybType";
+    /**
+     * 延长类型
+     */
+    public static final String PROD_YC_TYPE = "prod_ycType";
+
 }

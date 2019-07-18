@@ -24,7 +24,9 @@ public class OutStockDetailVo {
     private Double itemSq;
     private String itemOwner;
     private String itemYcType;
+    private String itemYcTypeValue;
     private String itemYbType;
+    private String itemYbTypeValue;
     private Long itemCgyCode;
     private String itemCgyCodeValue;
     private Long itemVariety;
@@ -32,6 +34,7 @@ public class OutStockDetailVo {
     private Long itemUnit;
     private String itemUnitValue;
     private String itemColor;
+    private String itemColorValue;
     //0-未扫描 1-已扫描确认过
     private Character isOut;
 
@@ -203,11 +206,35 @@ public class OutStockDetailVo {
         this.itemColor = itemColor;
     }
 
+    public String getItemColorValue() {
+        return itemColorValue;
+    }
+
+    public void setItemColorValue(String itemColorValue) {
+        this.itemColorValue = itemColorValue;
+    }
+
     public Character getIsOut() {
         return isOut;
     }
 
     public void setIsOut(Character isOut) {
         this.isOut = isOut;
+    }
+
+    public String getItemYcTypeValue() {
+        return itemYcTypeValue;
+    }
+
+    public void setItemYcTypeValue(String itemYcTypeValue) {
+        this.itemYcTypeValue = itemYcTypeValue;
+    }
+
+    public String getItemYbTypeValue() {
+        return itemYbTypeValue;
+    }
+
+    public void setItemYbTypeValue(String itemYbTypeValue) {
+        this.itemYbTypeValue = itemYbTypeValue;
     }
 }

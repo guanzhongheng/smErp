@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
+import com.lcyzh.nmerp.controller.system.util.SysDictUtils;
 import com.lcyzh.nmerp.controller.system.util.UserUtils;
 import com.lcyzh.nmerp.dao.*;
 import com.lcyzh.nmerp.entity.TOutStock;
@@ -114,6 +115,9 @@ public class TOutStockServiceImpl implements TOutStockService {
         }else{
             outStockDetailVo.setIsOut('0');
         }
+        outStockDetailVo.setItemColorValue(SysDictUtils.getDictLabel(outStockDetailVo.getItemColor(), Constants.PROD_COLOR, ""));
+        outStockDetailVo.setItemYbTypeValue(SysDictUtils.getDictLabel(outStockDetailVo.getItemYbType(), Constants.PROD_YB_TYPE, ""));
+        outStockDetailVo.setItemYcTypeValue(SysDictUtils.getDictLabel(outStockDetailVo.getItemYcType(), Constants.PROD_YC_TYPE, ""));
         return outStockDetailVo;
     }
 
