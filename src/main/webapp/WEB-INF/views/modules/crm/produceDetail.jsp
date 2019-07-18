@@ -255,6 +255,7 @@
                 // document.getElementById('ttt').value =  event.data;
                 var data = event.data.replace(" ","").replace("+","").replace("kg","");
                 console.log(event.data);
+
                 $("#totalWeight").text(data);
             };
             socket.onopen = function(event){

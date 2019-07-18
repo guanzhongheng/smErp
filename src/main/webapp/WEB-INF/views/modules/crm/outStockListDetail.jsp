@@ -31,7 +31,7 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="col-md-12">
-                                                <label class="col-md-3">收货地址:</label>
+                                                <label class="col-md-1">收货地址:</label>
                                                 <div class="col-sm-8">
                                                     <input type="text" class="form-control" name="" id="address"/>
                                                 </div>
@@ -47,6 +47,8 @@
                             <div class="form-group">
                                 &nbsp;&nbsp;
                                 <button class="btn btn-primary" type="button" onclick="saveAddress()">确认出库</button>
+                                &nbsp;&nbsp;
+                                <button class="btn btn-primary" type="button" onclick="">申请驳回</button>
                                 &nbsp;&nbsp;
                                 <button class="btn btn-white" type="button"
                                         onclick="javascript:window.location.replace(document.referrer);">返 回
@@ -153,6 +155,25 @@
                     window.location.href = "/crm/inventory/outStockList";
                 } else {
                     layer.msg("出库失败！");
+                }
+            }
+        })
+    }
+    
+    function getBack() {
+        $.ajax({
+            type: "POST",
+          //  url: '/tOutStock/backOutStock',
+            data: {
+                outCode: $("#outCode").val()
+            },
+            dataType: 'json',
+            cache: false,
+            success: function (data) {
+                if (data != null && data > 0) {
+                    window.location.href = "/crm/inventory/outStockList";
+                } else {
+                    layer.msg("驳回失败！");
                 }
             }
         })

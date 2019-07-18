@@ -221,7 +221,7 @@ public class CrmManageController extends BaseController {
      * @Param: [vo, model, request, response]
      * @return: java.lang.String
      * @Author: wsm
-     * @Iteration : 1.0
+     * @Iteration : 1.0TOutStockVo
      * @Date: 2019/7/11 11:11 AM
      */
     @RequestMapping(value = {"produce/list","vo"})

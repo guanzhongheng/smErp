@@ -49,7 +49,7 @@ public class DictController extends BaseController {
 	public String list(Dict dict, HttpServletRequest request, HttpServletResponse response, Model model) {
 		List<String> typeList = dictService.findTypeList();
 		model.addAttribute("typeList", typeList);
-        Page<Dict> page = dictService.findPage(new Page<Dict>(request, response), dict);
+        Page<Dict> page = dictService.findPageForHelp(new Page<Dict>(request, response), dict);
         model.addAttribute("page", page);
 		return "modules/sys/dictList";
 	}

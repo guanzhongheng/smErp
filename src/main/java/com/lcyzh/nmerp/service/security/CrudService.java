@@ -3,9 +3,12 @@
  */
 package com.lcyzh.nmerp.service.security;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.lcyzh.nmerp.common.persistence.DataEntity;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.dao.common.CrudDao;
+import com.lcyzh.nmerp.model.vo.ProdPlanVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -61,6 +64,22 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity<T>>
 	public Page<T> findPage(Page<T> page, T entity) {
 		entity.setPage(page);
 		page.setList(dao.findList(entity));
+		return page;
+	}
+
+	/**
+	 * 通过PageHelp 分页
+	 * @param page 分页对象
+	 * @param entity
+	 * @return
+	 */
+	public Page<T> findPageForHelp(Page<T> page, T entity) {
+		PageHelper.startPage(page.getPageNo(),page.getPageSize());
+		entity.setPage(page);
+		List<T> list = dao.findList(entity);
+		PageInfo<T> p = new PageInfo<>(list);
+		page.setCount(p.getTotal());
+		page.setList(list);
 		return page;
 	}
 
