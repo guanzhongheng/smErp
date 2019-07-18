@@ -2,6 +2,7 @@ package com.lcyzh.nmerp.dao;
 
 import com.lcyzh.nmerp.entity.TOutStockDetail;
 import com.lcyzh.nmerp.model.vo.OutItemVo;
+import com.lcyzh.nmerp.model.vo.OutStockDetailVo;
 import com.lcyzh.nmerp.model.vo.OutStockVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -26,4 +27,6 @@ public interface TOutStockDetailMapper {
     void deleteByOutCode(String outCode);
 
     int deleteByBarCode(String barCode);
+
+    List<OutStockDetailVo> findOutItemsByOutCode(String outCode);
 }

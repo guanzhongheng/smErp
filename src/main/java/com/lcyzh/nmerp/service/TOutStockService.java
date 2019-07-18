@@ -3,6 +3,7 @@ package com.lcyzh.nmerp.service;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.entity.TOutStock;
 import com.lcyzh.nmerp.entity.TOutStockDetail;
+import com.lcyzh.nmerp.model.vo.OutStockDetailVo;
 import com.lcyzh.nmerp.model.vo.OutStockVo;
 import com.lcyzh.nmerp.model.vo.StockRecordVo;
 import com.lcyzh.nmerp.model.vo.StockVo;
@@ -36,7 +37,7 @@ public interface TOutStockService {
      * @Iteration : 1.0
      * @Date: 2019/7/3 4:02 PM
      */
-    List<StockVo> findOutItemsByOutCode(String outCode);
+    List<OutStockDetailVo> findOutItemsByOutCode(String outCode);
 
 
     /**

@@ -8,6 +8,29 @@
         <result column="bar_code" property="barCode" jdbcType="VARCHAR"/> 
 
     </resultMap>
+    <select id="findOutItemsByOutCode" parameterType="java.lang.String" resultType="com.lcyzh.nmerp.model.vo.OutStockDetailVo">
+        select
+        osd.id outStockDetailId,
+        osd.out_code outCode,
+        s.id stockId,
+        s.bar_code barCode,
+        s.item_code itemCode,
+        s.item_lenth itemLenth,
+        s.item_width itemWidth,
+        s.item_thick itemThick,
+        s.item_weight itemWeight,
+        s.item_sq itemSq,
+        s.item_owner itemOwner,
+        s.item_yc_type itemYcType,
+        s.item_yb_type itemYbType,
+        s.item_cgy_code itemCgyCode,
+        s.item_variety itemVariety,
+        s.item_unit itemUnit,
+        s.item_color itemColor
+        from t_out_stock_detail osd
+        left join t_stock s on osd.bar_code = s.bar_code
+        where osd.out_code = #{outCode}
+    </select>
 
     <delete id="deleteByOutCode" parameterType="java.lang.String">
         delete from t_out_stock_detail where out_code = #{outCode}

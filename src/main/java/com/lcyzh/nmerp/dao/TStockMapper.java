@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.dao;
 
 import com.lcyzh.nmerp.entity.TStock;
+import com.lcyzh.nmerp.model.vo.OutStockDetailVo;
 import com.lcyzh.nmerp.model.vo.StockQueryVo;
 import com.lcyzh.nmerp.model.vo.StockVo;
 import org.springframework.stereotype.Repository;
@@ -27,8 +28,6 @@ public interface TStockMapper {
     List<TStock> getByBarCode(String barCode);
 
     StockVo findByBarCode(String barCode);
-
-    List<StockVo> findOutItemsByOutCode(String outCode);
 
     int updateByOutCode(Map<String, Object> map);
 }

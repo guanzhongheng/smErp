@@ -1,7 +1,7 @@
 package com.lcyzh.nmerp.controller;
 
 import com.lcyzh.nmerp.entity.TOutStock;
-import com.lcyzh.nmerp.model.vo.OutStockVo;
+import com.lcyzh.nmerp.model.vo.OutStockDetailVo;
 import com.lcyzh.nmerp.model.vo.StockVo;
 import com.lcyzh.nmerp.service.TOutStockService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,7 +72,7 @@ public class TOutStockController {
      * @Date: 2019/7/3 11:52 PM
      */
     @RequestMapping(value = {"/getDetailList"}, method = RequestMethod.GET)
-    public List<StockVo> detailList(String outCode){
+    public List<OutStockDetailVo> detailList(String outCode){
         return tOutStockService.findOutItemsByOutCode(outCode);
     }
 

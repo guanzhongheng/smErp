@@ -45,27 +45,6 @@
         where bar_code = #{barCode}
     </select>
 
-    <select id="findOutItemsByOutCode" parameterType="java.lang.String" resultType="com.lcyzh.nmerp.model.vo.StockVo">
-        select
-        id stockId,
-        bar_code barCode,
-        item_code itemCode,
-        item_lenth itemLenth,
-        item_width itemWidth,
-        item_thick itemThick,
-        item_weight itemWeight,
-        item_sq itemSq,
-        item_owner itemOwner,
-        item_yc_type itemYcType,
-        item_yb_type itemYbType,
-        item_cgy_code itemCgyCode,
-        item_variety itemVariety,
-        item_unit itemUnit,
-        item_color itemColor
-        from t_stock
-        where bar_code in (select bar_code from t_out_stock_detail where out_code = #{outCode})
-    </select>
-
     <update id="updateByOutCode" parameterType="java.util.Map">
         update t_stock set status = #{status,jdbcType=CHAR},update_time = #{updateTime,jdbcType=TIMESTAMP}
         where bar_code in (select bar_code from t_out_stock_detail where out_code = #{outCode})
