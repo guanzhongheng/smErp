@@ -18,6 +18,8 @@ public interface TStockMapper {
 
     TStock get(String id);
 
+    TStock findById(Long id);
+
     //List<TStock> findList(TStock tStock);
     List<TStock> findList(StockQueryVo vo);
 

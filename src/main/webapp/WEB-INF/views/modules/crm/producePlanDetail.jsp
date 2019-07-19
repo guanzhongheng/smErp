@@ -73,7 +73,10 @@
                                                 <label class="col-sm-5 control-label">配方：</label>
                                                 <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
                                                     <textarea name="formula" style="width: 250px;height: 200px;" >
-                                                             <c:out value="${prodPlan.formula}" escapeXml="false"></c:out>
+                                                        <c:if test="${prodPlan.formula ne '' && prodPlan.formula != null}">
+                                                            ${prodPlan.formula}
+                                                        </c:if>
+
                                                     </textarea>
                                                 </div>
                                             </div>
@@ -146,7 +149,7 @@
                                             <td>${fns:getValueByDictKey(vo.itemYcType)}</td>
                                             <td style="color: #08c;">
                                                 <c:if test="${vo.itemStatus eq '48'}">待确认</c:if>
-                                                <c:if test="${vo.itemStatus eq '49'}">下发生产</c:if>
+                                                <c:if test="${vo.itemStatus eq '49'}">已下发</c:if>
                                                 <c:if test="${vo.itemStatus eq '50'}">已完成</c:if>
                                             </td>
                                             <%--<td>按钮：移出机台</td>--%>

@@ -8,6 +8,7 @@ import com.lcyzh.nmerp.entity.*;
 import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
 import com.lcyzh.nmerp.service.TProdPlanDetailService;
 import com.lcyzh.nmerp.utils.IdGen;
+import com.sun.xml.internal.bind.v2.TODO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -107,7 +108,7 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
             prodPlan.setQuantity(1L);
             tHistoryProdRecordMapper.insert(historyProdRecord);
             tProdPlanMapper.updateNum(prodPlan);
-            tProdPlanDetailMapper.deleteByCode(vo.getProdPlanCode());
+            tProdPlanDetailMapper.delete(vo.getProdPlanDetailId());
         }
         //入库
         TStock tStock = new TStock();
@@ -118,6 +119,8 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
             tStock.setItemSq(vo.getItemLenth() * vo.getItemWidth());
         }
         tStockMapper.insert(tStock);
+
+        vo.setCreateTime(date);
         return vo;
     }
 

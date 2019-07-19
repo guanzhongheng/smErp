@@ -33,6 +33,7 @@ public class ProdPlanDetailVo extends DataEntity<ProdPlanDetailVo> {
     private Long itemUnit;
     private String itemOwner;
     private String itemColor;
+    private String itemColorValue;
     //机台编码
     private String macCode;
     //配方
@@ -45,6 +46,14 @@ public class ProdPlanDetailVo extends DataEntity<ProdPlanDetailVo> {
     private String itemSq;
 
     private Date createTime;
+
+    public String getItemColorValue() {
+        return itemColorValue;
+    }
+
+    public void setItemColorValue(String itemColorValue) {
+        this.itemColorValue = itemColorValue;
+    }
 
     public Date getCreateTime() {
         return createTime;

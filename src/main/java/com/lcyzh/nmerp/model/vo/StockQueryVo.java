@@ -2,6 +2,8 @@ package com.lcyzh.nmerp.model.vo;
 
 import com.lcyzh.nmerp.common.persistence.DataEntity;
 
+import java.util.Date;
+
 /**
  * @Project :
  * @Description :补签查询vo
@@ -22,6 +24,7 @@ public class StockQueryVo extends DataEntity<StockQueryVo> {
     //结束时间
     private String endDate;
 
+    private Long stockId;
     private String barCode;
     private String itemCode;
     private Double itemLenth;
@@ -35,6 +38,15 @@ public class StockQueryVo extends DataEntity<StockQueryVo> {
     private Long itemUnit;
     private String itemUnitValue;
     private String itemColor;
+
+    public Long getStockId() {
+        return stockId;
+    }
+
+    public void setStockId(Long stockId) {
+        this.stockId = stockId;
+    }
+
 
     public String getOrdCode() {
         return ordCode;

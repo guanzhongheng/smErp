@@ -49,7 +49,7 @@
                                     </div>
 
                                     <div style="min-width: 270px;background-color: black;color:green; font-size: 30px;float:left;text-align: center;margin-left:15px;">
-                                        毛重：<span id="totalWeight">0.00</span> KG
+                                        毛重：<span id="totalWeight">1.00</span> KG
                                     </div>
                                     <div style="min-width: 270px;background-color: black;color:green; font-size: 30px;float:left;text-align: center;margin-left:15px;">
                                         皮：0.00 KG
@@ -188,8 +188,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="form-group">
-                                            <button class="btn btn-primary" type="button" onclick="doPrint()">重新打签</button>
-                                            <button class="btn btn-primary" type="button" onclick="history.go(-1)">返回</button>
+                                            <button class="btn btn-primary" type="button" id="rePrint">重新打签</button>
+                                            <a class="btn btn-primary"  href="${ctx}/crm/produce/list">返回</a>
                                         </div>
                                     </div>
                             </div>
@@ -201,43 +201,10 @@
     </div>
 </div>
 
-<!--startprint-->
-<div <%--style="display: none"--%>>
-    <div style="width:100%;">
-        <table  border="1" cellspacing="0" style="width:80%;height:180px;">
-            <tr>
-                <td colspan="2" style="height:1px;"></td>
-            </tr>
-            <tr>
-                <td colspan="2" ><img id="imgcode" /></td>
-            </tr>
-            <tr>
-                <td colspan="2"><font size=2 id="print_itemOwner">长寿莫-经销商-农户</font></td>
-            </tr>
-            <tr>
-                <td style="width:50%"><font size=1 id="print_itemWidth">幅宽：13M</font></td>
-                <td><font size=1 id="print_itemThick">厚度：0.08mm</font></td>
-            </tr>
-            <tr>
-                <td><font size=1 id="print_itemLength">长度：188m</font></td>
-                <td><font size=1 id="print_itemColor">颜色：白色</font></td>
-            </tr>
-            <tr>
-                <td colspan="2"><font size=1 id="print_itemWeight">重量：188.8 kg</font></td>
-            </tr>
-            <tr>
-                <td colspan="2"><font size=1 id="print_createTime">生产时间：2019-08-09 10:25:22</font></td>
-            </tr>
-            <tr>
-                <td colspan="2"><font size=1 >联系人：纪经理 131 2547 8852</font></td>
-            </tr>
-        </table>
-    </div>
-</div>
-<!--endprint-->
 
 <script>
     $(document).ready(function () {
+
         $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",})
         $("#inStock").click(function () {
             $("#inStock").attr('disabled',"true");
@@ -258,39 +225,31 @@
                     if (result.itemNum>0) {
                         top.$.jBox.tip('入库成功');
                         $("#itemNum").text(result.itemNum);
+                        doPrint();
                     } else if (result.itemNum == 0) {
                         top.$.jBox.tip('入库成功');
-                        // 关闭ws
-                        // 吊起打印
+                        doPrint();
+                        // var path = 'window.location.href = "/produce/producePlan/info?prodPlanCode='+prodPlanCode+'"';
+
                     }
-                    $("#imgcode").JsBarcode(result.barCode);
                 }
             });
             $("#inStock").removeAttr('disabled');
         });
 
-        function printPrepare(detail){
-
-        }
+        $("#rePrint").click(function () {
+            doPrint();
+        });
         function doPrint(){
-            JsBarcode("#imgcode", "051190330001111",{
-                format: "CODE128",//选择要使用的条形码类型
-                height:50,//高度
-                displayValue:true,//是否在条形码下方显示文字
-                fontSize:3,//设置文本的大小
-                textPosition:"top",//设置文本的垂直位置
-                background:"#eee",//设置条形码的背景
+            layer.open({
+                type: 2,
+                title: '打印标签确认',
+                skin: 'layui-layer-rim', //加上边框
+                area: ['300px', '300px'],
+                content: ['/produce/produce/doPrint', 'yes'] //iframe的url，no代表不显示滚动条
             });
-
-            bdhtml = window.document.body.innerHTML;
-            sprnstr = "<!--startprint-->";
-            eprnstr = "<!--endprint-->";
-            prnhtml = bdhtml.substring(bdhtml.indexOf(sprnstr) + 17);
-            prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr));
-            window.document.body.innerHTML = prnhtml;
-            window.print();
-            window.history.go(-1);
         }
+
 
         $("#wsStart").click(function () {
             send("start");
@@ -359,3 +318,4 @@
 <script src="${ctxStatic}/hPlugs/js/plugins/cropper/cropper.min.js"></script>
 <script src="${ctxStatic}/hPlugs/js/demo/form-advanced-demo.min.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/JsBarcode/JsBarcode.all.min.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/layer/layer.min.js"></script>

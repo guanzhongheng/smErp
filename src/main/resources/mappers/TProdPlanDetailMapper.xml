@@ -201,7 +201,7 @@
         WHERE prod_plan_code = #{prodPlanCode,jdbcType=VARCHAR}
     </update>
 
-    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TProdPlanDetail">
+    <delete id="delete"  parameterType="java.lang.Long">
         DELETE FROM t_prod_plan_detail
         WHERE id = #{id,jdbcType=BIGINT}
     </delete>

@@ -169,7 +169,6 @@
             item_code
         )
         VALUES (
-            #{id,jdbcType=BIGINT},
             #{ordCode,jdbcType=VARCHAR},
             #{orderItemId,jdbcType=BIGINT},
             #{createTime,jdbcType=TIMESTAMP},

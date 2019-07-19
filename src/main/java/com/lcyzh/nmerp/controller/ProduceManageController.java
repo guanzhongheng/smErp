@@ -1,12 +1,20 @@
 package com.lcyzh.nmerp.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.controller.common.BaseController;
+import com.lcyzh.nmerp.controller.system.util.SysDictUtils;
 import com.lcyzh.nmerp.entity.TProdPlan;
+import com.lcyzh.nmerp.entity.TStock;
+import com.lcyzh.nmerp.model.vo.LabelPrint;
 import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
 import com.lcyzh.nmerp.model.vo.ProdPlanVo;
 import com.lcyzh.nmerp.service.TMachineInfoService;
 import com.lcyzh.nmerp.service.TProdPlanDetailService;
 import com.lcyzh.nmerp.service.TProdPlanService;
+import com.lcyzh.nmerp.service.TStockService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * @Project : nm-erp
@@ -36,7 +45,8 @@ public class ProduceManageController extends BaseController {
     private TProdPlanDetailService prodPlanDetailService;
     @Autowired
     private TMachineInfoService machineInfoService;
-
+    @Autowired
+    private TStockService stockService;
     /**
      * @Description: 跳转到生产计划详情页面
      * @Param: [vo, prodPlanCode, model, request, response]
@@ -103,7 +113,7 @@ public class ProduceManageController extends BaseController {
 
     @RequestMapping(value = {"produce/inStock"})
     @ResponseBody
-    public ProdPlanDetailVo doInStock(Long id,Double weight){
+    public ProdPlanDetailVo doInStock(Long id,Double weight, HttpServletRequest request){
         ProdPlanDetailVo vo = new ProdPlanDetailVo();
         vo.setProdPlanDetailId(id);
 
@@ -111,6 +121,36 @@ public class ProduceManageController extends BaseController {
         voInDB.setItemWeight(weight);
 
         ProdPlanDetailVo result = prodPlanDetailService.labelAndInStock(voInDB);
+        result.setItemColorValue(SysDictUtils.getDictLabel(result.getItemColor(), Constants.PROD_COLOR, ""));
+
+        HttpSession session = request.getSession();
+        session.setAttribute("vo",result);
+
         return result;
+    }
+
+    @RequestMapping(value = {"produce/doPrint"})
+    public String doPrint( Model model, HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession();
+        ProdPlanDetailVo print = (ProdPlanDetailVo)session.getAttribute("vo");
+        model.addAttribute("vo",print);
+        if(print.getItemNum()>0){
+            model.addAttribute("jump",1);
+        }else{
+            model.addAttribute("jump",0);
+        }
+        return "modules/crm/stockPrint";
+    }
+
+    @RequestMapping(value = {"produce/rePrint"})
+    public String rePrint(Long stockId, Model model, HttpServletRequest request, HttpServletResponse response){
+        TStock stock = stockService.findById(stockId);
+        ProdPlanDetailVo print = new ProdPlanDetailVo();
+        BeanUtils.copyProperties(stock, print);
+        print.setItemColorValue(SysDictUtils.getDictLabel(print.getItemColor(), Constants.PROD_COLOR, ""));
+
+        model.addAttribute("vo",print);
+        model.addAttribute("jump",1);
+        return "modules/crm/stockPrint";
     }
 }

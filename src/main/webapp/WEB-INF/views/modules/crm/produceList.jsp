@@ -101,7 +101,11 @@
                         <c:if test="${vo.itemStatus eq '49'}">下发生产</c:if>
                         <c:if test="${vo.itemStatus eq '50'}">已完成</c:if>
                     </td>
-                    <td><a href="${ctx}/produce/produce/info?id=${vo.prodPlanDetailId}"><i class="icon-pencil">&nbsp;生产</i></a></td>
+                    <td>
+                        <c:if test="${vo.itemNum ne 0}">
+                            <a href="${ctx}/produce/produce/info?id=${vo.prodPlanDetailId}"><i class="icon-pencil">&nbsp;生产</i></a>
+                        </c:if>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>

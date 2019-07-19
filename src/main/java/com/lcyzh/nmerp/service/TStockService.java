@@ -14,6 +14,8 @@ public interface TStockService {
 
     TStock get(String id);
 
+    TStock findById(Long id);
+
     //List<TStock> findList(TStock tStock);
 
     int insert(TStock tStock);

@@ -2,6 +2,7 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <html>
 <head>
+    <script src="${ctxStatic}/hPlugs/js/plugins/layer/layer.min.js"></script>
     <title>库存列表</title>
     <script type="text/javascript">
         function page(n,s){
@@ -11,6 +12,16 @@
             $("#searchForm").attr("action","${ctx}/crm/inventory/list");
             $("#searchForm").submit();
             return false;
+        }
+
+        function rePrint(stockId){
+            layer.open({
+                type: 2,
+                title: '打印标签确认',
+                skin: 'layui-layer-rim', //加上边框
+                area: ['300px', '300px'],
+                content: ['/produce/produce/rePrint?stockId='+stockId+'"', 'yes'] //iframe的url，no代表不显示滚动条
+            });
         }
     </script>
 </head>
@@ -81,7 +92,7 @@
                 <td>${fns:getDictLabel(cus.itemYbType,'prod_ybType','无')}</td>
                 <td>${fns:getDictLabel(cus.itemYcType,'prod_ycType','无')}</td>
                 <td>${cus.itemUnit}</td>
-                <td><a href="#">补签</a></td>
+                <td><button class="btn btn-primary" type="button" onclick="rePrint(${cus.stockId})"  >补签</button></td>
             </tr>
         </c:forEach>
         </tbody>
@@ -91,4 +102,10 @@
 
 </div>
 </body>
+
+<script type="text/javascript">
+
+
+</script>
+
 </html>

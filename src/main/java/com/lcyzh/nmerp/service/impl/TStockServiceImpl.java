@@ -21,8 +21,14 @@ import java.util.stream.Collectors;
 */
 @Service
 public class TStockServiceImpl implements TStockService{
+
     @Autowired
     private TStockMapper tStockMapper;
+
+    @Override
+    public TStock findById(Long id) {
+        return tStockMapper.findById(id);
+    }
 
     @Override
     public TStock get(String id){
@@ -57,6 +63,7 @@ public class TStockServiceImpl implements TStockService{
         List<StockQueryVo> vos = list.stream().map(tStock -> {
             StockQueryVo stockQueryVo = new StockQueryVo();
             BeanUtils.copyProperties(tStock, stockQueryVo);
+            stockQueryVo.setStockId(tStock.getId());
             return stockQueryVo;
         }).collect(Collectors.toList());
 
