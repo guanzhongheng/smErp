@@ -59,15 +59,9 @@
         </if>
         <if test="loginName != null and loginName != ''">
             AND a.login_name like CONCAT('%', #{loginName}, '%')
-            <!--<if test="dbName == 'oracle'">'%'||#{loginName}||'%'</if>-->
-            <!--<if test="dbName == 'mssql'">'%'+#{loginName}+'%'</if>-->
-            <!--<if test="dbName == 'mysql'">CONCAT('%', #{loginName}, '%')</if>-->
         </if>
         <if test="name != null and name != ''">
             AND a.name like CONCAT('%', #{name}, '%')
-            <!--<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>-->
-            <!--<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>-->
-            <!--<if test="dbName == 'mysql'">CONCAT('%', #{name}, '%')</if>-->
         </if>
         <!-- 数据范围过滤 -->
         ${sqlMap.dsf}

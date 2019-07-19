@@ -9,8 +9,9 @@
         <label class="col-sm-1 control-label">接收对象:</label>
         <div class="col-sm-8 controls">
             <select id="cusContent" name="cusContent" class="input-medium">
-                <option value="123">123</option>
-                <option value="345">ddfg</option>
+                <c:forEach items="${userList}" var="us">
+                	<option value="${us.loginName}">${us.loginName}</option>
+                </c:forEach>
             </select>
         </div>
     </div>

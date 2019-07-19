@@ -3,8 +3,11 @@ package com.lcyzh.nmerp.controller.system;
 import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.controller.system.util.SysDictUtils;
 import com.lcyzh.nmerp.entity.sys.Dict;
+import com.lcyzh.nmerp.model.vo.CustomerUpdateVo;
+import com.lcyzh.nmerp.service.TCustomerService;
 import com.lcyzh.nmerp.utils.DictEntity;
 import com.lcyzh.nmerp.utils.DictUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,19 +27,21 @@ import java.util.Map;
 @RequestMapping("crmAjax")
 public class CrmAjaxManageController extends BaseController {
 
+    @Autowired
+    private TCustomerService customerService;
+
 
     /**
      * 转移客户-保存
-     * @param cusIds
-     * @param userId
-     * @param remarks
      * @return
      */
     @RequestMapping(value = "saveTransfer")
     @ResponseBody
-    public String saveTransfer(String cusIds,String userId,String remarks) {
-
-
+    public String saveTransfer(CustomerUpdateVo vo) {
+        int res = customerService.updateBatch(vo);
+        if(res < 1){
+            return "error";
+        }
         return "success";
     }
 
@@ -48,9 +53,11 @@ public class CrmAjaxManageController extends BaseController {
      */
     @RequestMapping(value = "savePoolCustomer")
     @ResponseBody
-    public String savePoolCustomer(String cusIds,String remarks) {
-
-
+    public String savePoolCustomer(CustomerUpdateVo vo) {
+        int res = customerService.updateBatch(vo);
+        if(res < 1){
+            return "error";
+        }
         return "success";
     }
 

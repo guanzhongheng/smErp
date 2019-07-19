@@ -3,8 +3,11 @@ package com.lcyzh.nmerp.controller;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.controller.common.BaseController;
+import com.lcyzh.nmerp.controller.system.util.UserUtils;
+import com.lcyzh.nmerp.entity.sys.User;
 import com.lcyzh.nmerp.model.vo.*;
 import com.lcyzh.nmerp.service.*;
+import com.lcyzh.nmerp.service.security.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,6 +45,8 @@ public class CrmManageController extends BaseController {
     @Autowired
     private TStockService stockService;
 
+    @Autowired
+    private SystemService systemService;
 
     /**========================客户相关流转==============================**/
 
@@ -68,6 +73,8 @@ public class CrmManageController extends BaseController {
      */
     @RequestMapping("formSubmit")
     public String fromInfo(HttpServletRequest request, Model model){
+        List<User> userList = systemService.findUser(new User());
+        model.addAttribute("userList",userList);
         model.addAttribute("ids",request.getParameter("ids"));
         return "modules/crm/formSubmit";
     }

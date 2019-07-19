@@ -120,9 +120,9 @@
                         var remarks = h.find("iframe")[0].contentWindow.remarks;
                         if (v == "ok") {
                             $.post('${ctx}/crmAjax/saveTransfer/', {
-                                cusIds: ids.value,
-                                userId: cusContent.value,
-                                remarks: remarks.value
+                                cusCodes: ids.value,
+                                empCode: cusContent.value,
+                                remark: remarks.value
                             }, function (data) {
                                 if (data = "success") {
                                     top.$.jBox.tip('保存成功');
@@ -154,8 +154,8 @@
                         var remarks = h.find("iframe")[0].contentWindow.remarks;
                         if (v == "ok") {
                             $.post('${ctx}/crmAjax/savePoolCustomer/', {
-                                cusIds: ids.value,
-                                remarks: remarks.value
+                                cusCodes: ids.value,
+                                remark: remarks.value
                             }, function (data) {
                                 if (data = "success") {
                                     top.$.jBox.tip('移入成功');
@@ -202,11 +202,12 @@
         }
         
         function getCheckValue(){
+            debugger;
             var obj = document.getElementsByName("cuscode");
             var check_val = '';
             for(k in obj){
                 if(obj[k].checked)
-                check_val = check_val + "," +obj[k].value
+                check_val = check_val + obj[k].value + ",";
             }
             check_val = check_val.replace(",,",",");
             return check_val;

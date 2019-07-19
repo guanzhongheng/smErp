@@ -69,6 +69,7 @@
 
     <delete id="delete" parameterType="java.util.List">
         DELETE FROM T_CUS_EMP_REL
+        where
         cus_code in (
         <foreach collection="list" item="item" separator=",">
             #{item}
