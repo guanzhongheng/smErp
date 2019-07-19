@@ -32,6 +32,13 @@
         </li>
         <li>
             &nbsp;&nbsp;
+            <form:select path="prodCgyCode" class="input-medium" placeholder="类别">
+                <form:option value="" label=""/>
+                <form:options items="${fns:getCusDictList(149000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+            </form:select>
+        </li>
+        <li>
+            &nbsp;&nbsp;
             <form:select path="prodColor" class="input-medium" placeholder="颜色">
                 <form:option value="" label=""/>
                 <form:options items="${fns:getDictList('prod_color')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
@@ -54,6 +61,7 @@
         <thead>
         <tr>
             <th>品种</th>
+            <th>类别</th>
             <th>机台</th>
             <th>颜色</th>
             <th>总数量</th>
@@ -65,6 +73,7 @@
         <c:forEach items="${page.list}" var="pp">
             <tr>
                 <td>${fns:getValueByDictKey(pp.prodVariety)}</td>
+                <td>${fns:getValueByDictKey(pp.prodCgyCode)}</td>
                 <td>${pp.macCode}</td>
                 <td>${fns:getDictValue(pp.prodColor, 'prod_color', defaultValue)}</td>
                 <td>${pp.totalQuantity}</td>

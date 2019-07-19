@@ -32,6 +32,13 @@
         </li>
         <li>
             &nbsp;&nbsp;
+            <form:select path="itemCgyCode" class="input-medium" placeholder="类别">
+                <form:option value="" label=""/>
+                <form:options items="${fns:getCusDictList(149000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+            </form:select>
+        </li>
+        <li>
+            &nbsp;&nbsp;
             <form:select path="itemColor" class="input-medium" placeholder="颜色">
                 <form:option value="" label=""/>
                 <form:options items="${fns:getDictList('prod_color')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
@@ -57,13 +64,14 @@
                 <th style="width: 60px">所属人</th>
                 <th style="width: 80px">机台编号</th>
                 <th style="width: 80px">品种</th>
+                <th style="width: 80px">类别</th>
                 <th style="width: 60px">颜色</th>
-                <th style="width: 60px">长度</th>
-                <th style="width: 60px">宽度</th>
-                <th style="width: 60px">厚度</th>
+                <th style="width: 60px">长度(m)</th>
+                <th style="width: 60px">宽度(m)</th>
+                <th style="width: 60px">厚度(m)</th>
                 <th style="width: 60px">数量</th>
                 <th style="width: 60px">重量</th>
-                <th style="width: 60px">面积</th>
+                <th style="width: 60px">面积(㎡)</th>
                 <th style="width: 80px">压边类型</th>
                 <th style="width: 100px">延长米计算方式</th>
                 <th style="width: 50px">状态</th>
@@ -78,6 +86,7 @@
                     <td>${vo.itemOwner}</td>
                     <td>${vo.macCode}</td>
                     <td>${fns:getValueByDictKey(vo.itemVariety)}</td>
+                    <td>${fns:getValueByDictKey(vo.itemCgyCode)}</td>
                     <td>${fns:getDictValue(vo.itemColor, 'prod_color', defaultValue)}</td>
                     <td>${vo.itemLenth}</td>
                     <td>${vo.itemWidth}</td>
@@ -92,7 +101,7 @@
                         <c:if test="${vo.itemStatus eq '49'}">下发生产</c:if>
                         <c:if test="${vo.itemStatus eq '50'}">已完成</c:if>
                     </td>
-                    <td><a href="${ctx}/produce/produce/info?id=${vo.prodPlanDetailId}"><i class="icon-pencil">&nbsp;去生产</i></a></td>
+                    <td><a href="${ctx}/produce/produce/info?id=${vo.prodPlanDetailId}"><i class="icon-pencil">&nbsp;生产</i></a></td>
                 </tr>
             </c:forEach>
             </tbody>

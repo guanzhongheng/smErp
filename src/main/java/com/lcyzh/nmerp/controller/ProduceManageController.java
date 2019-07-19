@@ -79,6 +79,7 @@ public class ProduceManageController extends BaseController {
      * @Date: 2019/7/16 9:19 AM
      */
     @RequestMapping(value = {"producePlanDetail/updateBatch"})
+    @ResponseBody
     public String producePlanDetailUpdate(String ids){
         int result = prodPlanDetailService.updateByIds(ids);
         return String.valueOf(result);

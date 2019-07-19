@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.controller;
 
 import com.lcyzh.nmerp.entity.TOutStock;
+import com.lcyzh.nmerp.entity.TOutStockDetail;
 import com.lcyzh.nmerp.model.vo.OutStockDetailVo;
 import com.lcyzh.nmerp.model.vo.StockVo;
 import com.lcyzh.nmerp.service.TOutStockService;
@@ -84,8 +85,11 @@ public class TOutStockController {
      */
     @RequestMapping(value = {"/doOutStock"}, method = RequestMethod.POST)
     @ResponseBody
-    public String doOutStock(TOutStock tOutStock){
-        Integer result = tOutStockService.doOutStock(tOutStock);
+    public String doOutStock(String barCode,String outCode){
+        TOutStockDetail tOutStockDetail = new TOutStockDetail();
+        tOutStockDetail.setBarCode(barCode);
+        tOutStockDetail.setOutCode(outCode);
+        int result = tOutStockService.addOutStockDetail(tOutStockDetail);
         return String.valueOf(result);
     }
 

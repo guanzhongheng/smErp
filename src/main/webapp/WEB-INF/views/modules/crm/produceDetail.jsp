@@ -88,14 +88,14 @@
                                                     <div class="form-group">
                                                         <label class="col-sm-5 control-label"> 长度：</label>
                                                         <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                                                ${detail.itemLenth}
+                                                                ${detail.itemLenth}m
                                                         </div>
                                                     </div>
                                                     <div class="hr-line-dashed"></div>
                                                     <div class="form-group">
                                                         <label class="col-sm-5 control-label"> 厚度：</label>
                                                         <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                                                ${detail.itemThick}
+                                                                ${detail.itemThick}m
                                                         </div>
                                                     </div>
                                                     <div class="hr-line-dashed"></div>
@@ -116,7 +116,7 @@
                                                     <div class="form-group">
                                                         <label class="col-sm-5 control-label"> 配方：</label>
                                                         <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                                            <textarea style="width: 150px;height: 150px;" readonly>${detail.formula}</textarea>
+                                                            <textarea style="width: 250px;height: 200px;" readonly>${detail.formula}</textarea>
                                                         </div>
                                                     </div>
                                                     <div class="hr-line-dashed"></div>
@@ -149,7 +149,7 @@
                                                 <div class="form-group">
                                                     <label class="col-sm-5 control-label"> 宽度：</label>
                                                     <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                                            ${detail.itemWidth}
+                                                            ${detail.itemWidth}m
                                                     </div>
                                                 </div>
                                                 <div class="hr-line-dashed"></div>
@@ -163,7 +163,7 @@
                                                 <div class="form-group">
                                                     <label class="col-sm-5 control-label"> 面积：</label>
                                                     <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                                            ${detail.itemTotalSq}
+                                                            ${detail.itemTotalSq}㎡
                                                     </div>
                                                 </div>
                                                 <div class="hr-line-dashed"></div>
@@ -188,8 +188,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="form-group">
-                                            <img id="imgcode" />
-                                            <button class="btn btn-primary" type="button" onclick="history.go(-1)">重新打签</button>
+                                            <button class="btn btn-primary" type="button" onclick="doPrint()">重新打签</button>
                                             <button class="btn btn-primary" type="button" onclick="history.go(-1)">返回</button>
                                         </div>
                                     </div>
@@ -201,6 +200,41 @@
         </div>
     </div>
 </div>
+
+<!--startprint-->
+<div <%--style="display: none"--%>>
+    <div style="width:100%;">
+        <table  border="1" cellspacing="0" style="width:80%;height:180px;">
+            <tr>
+                <td colspan="2" style="height:1px;"></td>
+            </tr>
+            <tr>
+                <td colspan="2" ><img id="imgcode" /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><font size=2 id="print_itemOwner">长寿莫-经销商-农户</font></td>
+            </tr>
+            <tr>
+                <td style="width:50%"><font size=1 id="print_itemWidth">幅宽：13M</font></td>
+                <td><font size=1 id="print_itemThick">厚度：0.08mm</font></td>
+            </tr>
+            <tr>
+                <td><font size=1 id="print_itemLength">长度：188m</font></td>
+                <td><font size=1 id="print_itemColor">颜色：白色</font></td>
+            </tr>
+            <tr>
+                <td colspan="2"><font size=1 id="print_itemWeight">重量：188.8 kg</font></td>
+            </tr>
+            <tr>
+                <td colspan="2"><font size=1 id="print_createTime">生产时间：2019-08-09 10:25:22</font></td>
+            </tr>
+            <tr>
+                <td colspan="2"><font size=1 >联系人：纪经理 131 2547 8852</font></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<!--endprint-->
 
 <script>
     $(document).ready(function () {
@@ -234,6 +268,30 @@
             });
             $("#inStock").removeAttr('disabled');
         });
+
+        function printPrepare(detail){
+
+        }
+        function doPrint(){
+            JsBarcode("#imgcode", "051190330001111",{
+                format: "CODE128",//选择要使用的条形码类型
+                height:50,//高度
+                displayValue:true,//是否在条形码下方显示文字
+                fontSize:3,//设置文本的大小
+                textPosition:"top",//设置文本的垂直位置
+                background:"#eee",//设置条形码的背景
+            });
+
+            bdhtml = window.document.body.innerHTML;
+            sprnstr = "<!--startprint-->";
+            eprnstr = "<!--endprint-->";
+            prnhtml = bdhtml.substring(bdhtml.indexOf(sprnstr) + 17);
+            prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr));
+            window.document.body.innerHTML = prnhtml;
+            window.print();
+            window.history.go(-1);
+        }
+
         $("#wsStart").click(function () {
             send("start");
             $("#wsStart").hide();

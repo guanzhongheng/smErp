@@ -31,16 +31,16 @@
                                                     </div>
                                                     <div class="hr-line-dashed"></div>
                                                     <div class="form-group">
-                                                        <label class="col-sm-5 control-label"> 颜色：</label>
+                                                        <label class="col-sm-5 control-label"> 种类：</label>
                                                         <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                                                ${fns:getDictValue(prodPlan.prodColor, 'prod_color', defaultValue)}
+                                                                ${fns:getValueByDictKey(prodPlan.prodCgyCode)}
                                                         </div>
                                                     </div>
                                                     <div class="hr-line-dashed"></div>
                                                     <div class="form-group">
-                                                        <label class="col-sm-5 control-label"> 机台：</label>
+                                                        <label class="col-sm-5 control-label"> 颜色：</label>
                                                         <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                                                ${prodPlan.totalQuantity}
+                                                                ${fns:getDictValue(prodPlan.prodColor, 'prod_color', defaultValue)}
                                                         </div>
                                                     </div>
                                                     <div class="hr-line-dashed"></div>
@@ -72,7 +72,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-5 control-label">配方：</label>
                                                 <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                                    <textarea name="formula" style="width: 150px;height: 150px;" >
+                                                    <textarea name="formula" style="width: 250px;height: 200px;" >
                                                              <c:out value="${prodPlan.formula}" escapeXml="false"></c:out>
                                                     </textarea>
                                                 </div>
@@ -106,18 +106,19 @@
                                             <th style="width: 150px">产品编号</th>
                                             <th style="width: 60px">所属人</th>
                                             <th style="width: 80px">机台编号</th>
-                                            <th style="width: 80px">品种</th>
+                                            <th style="width: 100px">品种</th>
+                                            <th style="width: 80px">类别</th>
                                             <th style="width: 60px">颜色</th>
-                                            <th style="width: 60px">长度</th>
-                                            <th style="width: 60px">宽度</th>
-                                            <th style="width: 60px">厚度</th>
+                                            <th style="width: 70px">长度(m)</th>
+                                            <th style="width: 70px">宽度(m)</th>
+                                            <th style="width: 70px">厚度(m)</th>
                                             <th style="width: 60px">数量</th>
                                             <th style="width: 60px">重量</th>
-                                            <th style="width: 60px">面积</th>
+                                            <th style="width: 70px">面积(㎡)</th>
                                             <th style="width: 80px">压边类型</th>
-                                            <th style="width: 100px">延长米计算方式</th>
-                                            <th style="width: 50px">状态</th>
-                                            <th style="width: 50px">操作</th>
+                                            <th style="width: 120px">延长米计算方式</th>
+                                            <th style="width: 100px">状态</th>
+                                            <%--<th style="width: 50px">操作</th>--%>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -133,7 +134,8 @@
                                             <td>${vo.itemOwner}</td>
                                             <td>${vo.macCode}</td>
                                             <td>${fns:getValueByDictKey(vo.itemVariety)}</td>
-                                            <td>${vo.itemColor}</td>
+                                            <td>${fns:getValueByDictKey(vo.itemCgyCode)}</td>
+                                            <td>${fns:getDictValue(vo.itemColor, 'prod_color', defaultValue)}</td>
                                             <td>${vo.itemLenth}</td>
                                             <td>${vo.itemWidth}</td>
                                             <td>${vo.itemThick}</td>
@@ -142,12 +144,12 @@
                                             <td>${vo.itemTotalSq}</td>
                                             <td>${fns:getValueByDictKey(vo.itemYbType)}</td>
                                             <td>${fns:getValueByDictKey(vo.itemYcType)}</td>
-                                            <td>
+                                            <td style="color: #08c;">
                                                 <c:if test="${vo.itemStatus eq '48'}">待确认</c:if>
                                                 <c:if test="${vo.itemStatus eq '49'}">下发生产</c:if>
                                                 <c:if test="${vo.itemStatus eq '50'}">已完成</c:if>
                                             </td>
-                                            <td>按钮：移出机台</td>
+                                            <%--<td>按钮：移出机台</td>--%>
                                         </tr>
                                         </c:forEach>
                                         </tbody>
@@ -176,25 +178,25 @@
     $("#distribution").click(function () {
         <!-- 针对选中客户进行操作 -->
         var str = getCheckValue();
+        var prodPlanCode = $("#prodPlanCode").val();
+        var path = 'window.location.href = "/produce/producePlan/info?prodPlanCode='+prodPlanCode+'"';
         if (str.length > 0) {
-            top.$.jBox.open("iframe:${ctx}/produce/producePlanDetail/updateBatch?ids="+str, "下发生产", 500, $(top.document).height() - 300, {
-                buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
-                    var ids = h.find("iframe")[0].contentWindow.ids;
-                    if (v == "ok") {
-                        $.post('${ctx}/crmAjax/saveTransfer/', {
-                            cusIds: ids.value
-                        }, function (data) {
-                            if (data = "success") {
-                                top.$.jBox.tip('保存成功');
-                            } else {
-                                top.$.jBox.tip('保存失败');
-                            }
-                        })
+            $.ajax({
+                url: "/produce/producePlanDetail/updateBatch",
+                type: 'POST',
+                data: {ids:str },
+                dataType: 'json',
+                success: function (result) {
+                    if(result >0){
+                        top.$.jBox.tip('下发成功');
+                        self.setTimeout(path, 2000);
+                    }else {
+                        top.$.jBox.tip('下发失败，请联系管理员');
                     }
-                }, loaded: function (h) {
-                    $(".jbox-content", top.document).css("overflow-y", "hidden");
+
                 }
             });
+
         }else{
             top.$.jBox.tip('最少选中一条记录');
         }
@@ -225,31 +227,5 @@
         }
     }
 
-    function htmlEscape(text){
-        return text.replace(/[<>"&]/g, function(match, pos, originalText){
-            switch(match){
-                case "<": return "&lt;";
-                case ">":return "&gt;";
-                case "&":return "&amp;";
-                case "\"":return "&quot;";
-            }
-        });
-    }
+
 </script>
-<script src="${ctxStatic}/hPlugs/js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
-<script src="${ctxStatic}/hPlugs/js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
-<script src="${ctxStatic}/hPlugs/js/content.min.js?v=1.0.0" type="text/javascript"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/chosen/chosen.jquery.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/peity/jquery.peity.min.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/jsKnob/jquery.knob.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/jasny/jasny-bootstrap.min.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/datapicker/bootstrap-datepicker.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/switchery/switchery.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/iCheck/icheck.min.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/clockpicker/clockpicker.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/cropper/cropper.min.js"></script>
-<script src="${ctxStatic}/hPlugs/js/demo/form-advanced-demo.min.js"></script>

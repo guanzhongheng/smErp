@@ -34,6 +34,22 @@ public class ProdPlanVo extends DataEntity<ProdPlanVo> {
     //自动下发开关；0-关闭；1-开启
     private Character isAuto;
 
+    public Long getProdCgyCode() {
+        return prodCgyCode;
+    }
+
+    public void setProdCgyCode(Long prodCgyCode) {
+        this.prodCgyCode = prodCgyCode;
+    }
+
+    public String getProdCgyCodeValue() {
+        return prodCgyCodeValue;
+    }
+
+    public void setProdCgyCodeValue(String prodCgyCodeValue) {
+        this.prodCgyCodeValue = prodCgyCodeValue;
+    }
+
     public String getProdPlanCode() {
         return prodPlanCode;
     }

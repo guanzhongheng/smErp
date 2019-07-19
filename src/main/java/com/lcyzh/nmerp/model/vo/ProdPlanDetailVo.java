@@ -3,6 +3,8 @@ package com.lcyzh.nmerp.model.vo;
 import com.lcyzh.nmerp.common.persistence.DataEntity;
 import com.lcyzh.nmerp.common.persistence.Page;
 
+import java.util.Date;
+
 /**
  * @Project :
  * @Description :
@@ -41,6 +43,16 @@ public class ProdPlanDetailVo extends DataEntity<ProdPlanDetailVo> {
     private Double itemWeight;
     //产品单件面积
     private String itemSq;
+
+    private Date createTime;
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
     public Long getProdPlanDetailId() {
         return prodPlanDetailId;
