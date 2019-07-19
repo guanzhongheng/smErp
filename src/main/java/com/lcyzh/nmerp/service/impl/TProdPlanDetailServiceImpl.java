@@ -44,7 +44,7 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
     @Override
     public int updateByIds(String id) {
         if(id!=null && id.length() != 0) {
-            List<String> ids = Arrays.asList(id.trim().substring(id.trim().length()-1).split(","));
+            List<String> ids = Arrays.asList(id.trim().split(","));
             TProdPlanDetail tProdPlanDetail = tProdPlanDetailMapper.findById(Long.valueOf(ids.get(0)));
             TProdPlan tProdPlan = tProdPlanMapper.findByProdPanCode(tProdPlanDetail.getProdPlanCode());
             tProdPlan.setQuantity(Long.valueOf(ids.size()));
