@@ -204,25 +204,26 @@
     });
 
     function getCheckValue(){
+        debugger;
         var obj = document.getElementsByName("detailId");
         var check_val = '';
         for(k in obj){
             if(obj[k].checked)
-                check_val = check_val + "," +obj[k].value
+                check_val = check_val + obj[k].value + ",";
         }
         check_val = check_val.replace(",,",",");
         return check_val;
     }
 
     function checkedAll(obj){
-        var ids = document.getElementsByName("detailId")
+        var codes = document.getElementsByName("detailId")
         if(obj.checked){
-            for(var i=0;i<ids.length;i++){
-                ids[i].checked = true;
+            for(var i=0;i<codes.length;i++){
+                codes[i].checked = true;
             }
         }else{
-            for(var i=0;i<ids.length;i++){
-                ids[i].checked = false;
+            for(var i=0;i<codes.length;i++){
+                codes[i].checked = false;
             }
         }
     }
