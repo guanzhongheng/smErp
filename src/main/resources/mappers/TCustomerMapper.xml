@@ -86,7 +86,7 @@
 
         <where>
             <if test="1 == 1">
-                and cu.cus_status!=11004
+                and cu.cus_status!=104005
             </if>
             <if test="cusName!= null">
                 and cus_name like concat('%', #{cusName,jdbcType=VARCHAR}, '%')
