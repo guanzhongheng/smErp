@@ -179,4 +179,10 @@
         where prod_plan_code = #{prodPlanCode}
     </update>
 
+    <update id="updateAddNum" parameterType="com.lcyzh.nmerp.entity.TProdPlan">
+        update t_prod_plan
+        set total_quantity = total_quantity + #{totalQuantity}, quantity = quantity + #{quantity}
+        where prod_plan_code = #{prodPlanCode}
+    </update>
+
 </mapper>

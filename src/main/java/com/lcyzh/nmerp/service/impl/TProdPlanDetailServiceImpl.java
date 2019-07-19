@@ -39,9 +39,21 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
     public List<TProdPlanDetail> findListByProdPlanCode(String prodPlanCode) {
         return tProdPlanDetailMapper.findListByProdPlanCode(prodPlanCode);
     }
+
+    @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
     @Override
     public int updateByIds(String id) {
-        return tProdPlanDetailMapper.updateByIds(Arrays.asList(id.split(",")));
+        if(id!=null && id.length() != 0) {
+            List<String> ids = Arrays.asList(id.trim().substring(id.trim().length()-1).split(","));
+            TProdPlanDetail tProdPlanDetail = tProdPlanDetailMapper.findById(Long.valueOf(ids.get(0)));
+            TProdPlan tProdPlan = tProdPlanMapper.findByProdPanCode(tProdPlanDetail.getProdPlanCode());
+            tProdPlan.setQuantity(Long.valueOf(ids.size()));
+            tProdPlan.setTotalQuantity(0L);
+            tProdPlanMapper.updateAddNum(tProdPlan);
+            return tProdPlanDetailMapper.updateByIds(ids);
+        }else{
+            return -1;
+        }
     }
 
     @Override

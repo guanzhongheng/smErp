@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public interface TProdPlanDetailMapper {
 
-    TProdPlanDetail findById(String ordItemId);
+    TProdPlanDetail findById(Long id);
 
     List<ProdPlanDetailVo> findList(ProdPlanDetailVo vo);
 

@@ -28,4 +28,6 @@ public interface TProdPlanMapper {
     int updateBatch(List<TProdPlan> updateList);
 
     int updateNum(TProdPlan prodPlan);
+
+    int updateAddNum(TProdPlan tProdPlan);
 }

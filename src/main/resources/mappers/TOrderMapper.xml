@@ -42,6 +42,7 @@
         remarks remarks
         from T_ORDER
         where ord_code = #{ordCode,jdbcType=VARCHAR}
+        order by create_time desc
     </select>
 
     <select id="findList" parameterType="com.lcyzh.nmerp.model.vo.OrderQueryVo"
@@ -99,6 +100,7 @@
                 and cf.cus_code is null
             </if>
         </where>
+        order by create_time desc
     </select>
 
     <select id="findByPrimaryKey" resultType="com.lcyzh.nmerp.model.vo.OrderQueryVo" parameterType="java.lang.String">
@@ -117,11 +119,13 @@
             T_ORDER od
             LEFT JOIN T_CUSTOMER cs ON od.cus_code = cs.cus_code
         where od.ord_code =#{ordCode,jdbcType=VARCHAR}
+        order by create_time desc
     </select>
 
     <select id="findAllList" resultMap="tOrderResultMap">
         SELECT *
         FROM T_ORDER
+        order by create_time desc
     </select>
 
     <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TOrder">
