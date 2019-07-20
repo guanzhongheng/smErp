@@ -51,11 +51,11 @@
         var jump = '${jump}';
         JsBarcode("#imgcode", barCode,{
             format: "CODE128",//选择要使用的条形码类型
-            height:50,//高度
+            height:28,//高度
+            width:1.5,
             displayValue:true,//是否在条形码下方显示文字
             fontSize:3,//设置文本的大小
             textPosition:"top",//设置文本的垂直位置
-            background:"#eee",//设置条形码的背景
         });
 
         $("#bth").click(function () {
