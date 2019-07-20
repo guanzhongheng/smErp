@@ -48,7 +48,7 @@
                                 &nbsp;&nbsp;
                                 <button class="btn btn-primary" type="button" onclick="saveAddress()">确认出库</button>
                                 &nbsp;&nbsp;
-                                <button class="btn btn-primary" type="button" onclick="">申请驳回</button>
+                                <button class="btn btn-primary" type="button" onclick="getBack()">申请驳回</button>
                                 &nbsp;&nbsp;
                                 <button class="btn btn-white" type="button"
                                         onclick="javascript:window.location.replace(document.referrer);">返 回
