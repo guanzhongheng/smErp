@@ -52,7 +52,9 @@
 </form:form>
 <div class="control-group">&nbsp;&nbsp;&nbsp;&nbsp;
     <a href="/order/order_add" type="button" class="btn btn-primary" style="width: 67px;height: 22px"><i
-            class="icon-plus"></i>&nbsp;添加</a>
+            class="icon-plus"></i>&nbsp;添加</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a type="button" class="btn btn-primary" style="width: 67px;height: 22px" onclick="uploadFile()"><i
+            class="icon-plus"></i>&nbsp;上传</a>
 </div>
 <div class="control-group">
     <table id="contentTable" class="table table-striped table-bordered table-condensed">
@@ -94,6 +96,54 @@
     </table>
     <div class="pagination">${page}</div>
 </div>
+<script>
+    function uploadFile() {
+        top.$.jBox.open("iframe:${ctx}/crm/order/upload", "文件上传", 500, $(top.document).height() - 300, {
+            buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
+                debugger;
+
+                var file = h.find("iframe")[0].contentWindow.orderFile;
+                var formData = new FormData();
+                formData.append("file", file.files[0]);
+                if (v == "ok") {
+
+                    $.ajax({
+                        type: "post",
+                        url : '/order/import',
+                        cache : false,
+                        data : formData,
+                        processData : false,
+                        mimeType:"multipart/form-data"
+                    }).done(function(data) {
+                        if (data = "success") {
+                            top.$.jBox.tip('上传成功');
+                        } else {
+                            top.$.jBox.tip('上传失败');
+                        }
+                    }, 'json').fail(function() {
+                    });
+
+
+
+
+
+                    $.post('${ctx}//order/import', formData, function (data) {
+                        if (data = "success") {
+                            top.$.jBox.tip('上传成功');
+                        } else {
+                            top.$.jBox.tip('上传失败');
+                        }
+                    })
+                }
+            }, loaded: function (h) {
+                debugger;
+                $(".jbox-content", top.document).css("overflow-y", "hidden");
+            }
+        });
+    };
+</script>
 <%--<sys:message content="${message}"/>--%>
 </body>
+
+
 </html>

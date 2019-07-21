@@ -39,7 +39,7 @@ public class ExcelController {
         return "upload";
     }
 
-    @RequestMapping(value = "/import", method = RequestMethod.POST)
+    @RequestMapping(value = "/order/import", method = RequestMethod.POST)
     @Transactional
     public String importExcel(@RequestParam(required = true) MultipartFile file, HttpServletRequest request) {
         String fileName = file.getOriginalFilename().toLowerCase();
@@ -65,7 +65,11 @@ public class ExcelController {
         beans.put("ord", ord);
         //解析文件体
         parseExcelService.parseExcel(xmlConfigName, file, beans);
+<<<<<<< HEAD
         this.tOrderService.insert(ord);
+=======
+       // this.tOrderService.insert(ord);
+>>>>>>> 提交
         return "index";
     }
 }

@@ -3,7 +3,7 @@
     <worksheet idx="0">
         <!-- 表头开始至结束行 -->
         <section startRow="0" endRow="5">
-           <!-- 客户名称-->
+            <!-- 客户名称-->
             <mapping cell="A2">ord.cusName</mapping>
             <!--客户地址-->
             <mapping cell="B2">ord.ordAddress</mapping>

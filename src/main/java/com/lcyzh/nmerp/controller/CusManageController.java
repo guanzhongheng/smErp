@@ -1,14 +1,9 @@
 package com.lcyzh.nmerp.controller;
 
 import com.lcyzh.nmerp.common.lang.StringUtils;
-import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.entity.CusFollowDetail;
-import com.lcyzh.nmerp.entity.Customer;
-import com.lcyzh.nmerp.entity.TOrder;
-import com.lcyzh.nmerp.model.vo.CusFollowDetailVo;
 import com.lcyzh.nmerp.model.vo.CustomerAddModifyVo;
-import com.lcyzh.nmerp.model.vo.OrderItemVo;
 import com.lcyzh.nmerp.model.vo.OrderQueryVo;
 import com.lcyzh.nmerp.service.ICusFollowService;
 import com.lcyzh.nmerp.service.TCustomerService;
@@ -21,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 

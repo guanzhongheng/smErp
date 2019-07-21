@@ -117,7 +117,14 @@ public class CrmManageController extends BaseController {
         model.addAttribute("page", page);
         return "modules/crm/orderList";
     }
-
+    /**
+     * 订单上传
+     * @return
+     */
+    @RequestMapping(value = {"order/upload"})
+    public String orderList(){
+        return "modules/crm/orderFileUpload";
+    }
 
     /**========================流程\任务相关流转==============================**/
     /**
