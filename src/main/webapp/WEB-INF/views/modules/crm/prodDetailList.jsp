@@ -321,11 +321,11 @@
                     width: '150px'
                 },{
                     field: 'itemCgyCodeValue',
-                    title: '类别',
+                    title: '品种',
                     width: '80px'
                 },{
                     field: 'itemVaritemValue',
-                    title: '品种',
+                    title: '类别',
                     width: '100px'
                 },{
                     field: 'itemLenth',
