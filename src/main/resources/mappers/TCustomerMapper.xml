@@ -92,17 +92,17 @@
                 and cus_name like concat('%', #{cusName,jdbcType=VARCHAR}, '%')
             </if>
             <if test="cusStatus!= null">
-                and cu.cus_status = #{cusStatus,jdbcType=BIGINT)
+                and cu.cus_status = #{cusStatus,jdbcType=BIGINT}
             </if>
             <if test="cusGrade!= null">
-                and cu.cus_grade = #{cusGrade,jdbcType=BIGINT)
+                and cu.cus_grade = #{cusGrade,jdbcType=BIGINT}
             </if>
             <if test="cusType!= null">
-                and cu.cus_type = #{cusType,jdbcType=BIGINT)
+                and cu.cus_type = #{cusType,jdbcType=BIGINT}
             </if>
 
             <if test="cusSource!= null">
-                and cu.cus_source = #{cusSource,jdbcType=BIGINT)
+                and cu.cus_source = #{cusSource,jdbcType=BIGINT}
             </if>
 
             <if test="lastFollowDate!= null">

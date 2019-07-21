@@ -1,6 +1,6 @@
 package com.lcyzh.nmerp.common.utils.word;
 
-import org.apache.poi.POIXMLDocument;
+import org.apache.poi.ooxml.POIXMLDocument;
 import org.apache.poi.xwpf.usermodel.*;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTHeight;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTrPr;

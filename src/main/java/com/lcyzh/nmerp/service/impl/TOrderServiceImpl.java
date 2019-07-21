@@ -73,6 +73,11 @@ public class TOrderServiceImpl implements TOrderService {
     }
 
     @Override
+    public int insert(OrderAddBatchVo vo) {
+        return 0;
+    }
+
+    @Override
     public int save(OrderAddModifyVo ordAddModifyVo) {
         int res = -1;
         if (ordAddModifyVo != null) {

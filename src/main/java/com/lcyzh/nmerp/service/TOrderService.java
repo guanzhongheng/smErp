@@ -33,15 +33,15 @@ public interface TOrderService {
      */
     Page<OrderQueryVo> findPage(Page<OrderQueryVo> page, OrderQueryVo order);
 
-    ///**
-    // * @Description: 订单批量导入
-    // * @Param: [vo]
-    // * @return: int
-    // * @Author: lijinku
-    // * @Iteration : 1.0
-    // * @Date: 2019/7/4 6:06 PM
-    // */
-    //int insert(OrderAddBatchVo vo);
+    /**
+     * @Description: 订单批量导入
+     * @Param: [vo]
+     * @return: int
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/7/4 6:06 PM
+     */
+    int insert(OrderAddBatchVo vo);
 
     ///**
     // * @Description: 批量录入订单
