@@ -24,6 +24,7 @@ public class OrderAddBatchVo {
     private String deliveryDate;
     //客户联系电话
     private String phone;
+
     private String remarks;
     private List<OrderItemVo> itemVos = new ArrayList<>();
 

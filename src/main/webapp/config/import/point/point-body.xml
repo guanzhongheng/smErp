@@ -12,7 +12,7 @@
             <!--交付日期-->
             <mapping cell="D2">ord.deliveryDate</mapping>
             <!--备注-->
-            <mapping cell="E2">ord.remark</mapping>
+            <mapping cell="E2">ord.remarks</mapping>
             <!--<mapping row="3" col="4">department.chief.bonus</mapping>-->
         </section>
         <!-- 开始循环读取文件数据，配置开始行，items映射的list var映射的bean varType 类路径
@@ -66,7 +66,7 @@
                 </mapping>
                 <!-- 备注 -->
                 <mapping row="6" col="10" nullAllowed="true">
-                    item.remark
+                    item.remarks
                 </mapping>
             </section>
             <!-- 结束条件配置 -->

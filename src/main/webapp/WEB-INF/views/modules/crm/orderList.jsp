@@ -113,7 +113,7 @@
                         cache : false,
                         data : formData,
                         processData : false,
-                        mimeType:"multipart/form-data"
+                        contentType : false
                     }).done(function(data) {
                         if (data = "success") {
                             top.$.jBox.tip('上传成功');
@@ -122,18 +122,6 @@
                         }
                     }, 'json').fail(function() {
                     });
-
-
-
-
-
-                    $.post('${ctx}//order/import', formData, function (data) {
-                        if (data = "success") {
-                            top.$.jBox.tip('上传成功');
-                        } else {
-                            top.$.jBox.tip('上传失败');
-                        }
-                    })
                 }
             }, loaded: function (h) {
                 debugger;
