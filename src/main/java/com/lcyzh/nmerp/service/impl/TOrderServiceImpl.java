@@ -126,7 +126,7 @@ public class TOrderServiceImpl implements TOrderService {
                     tOrderItem.setItemPrice(product.getProdGuidePrice());
                     tOrderItem.setItemPriceType(product.getProdPriceType());
                 }
-//                tOrderItem.setItemColor(StringUtils.parseDictKey(itv.getItemColor()).toString());
+                tOrderItem.setItemColor(StringUtils.parseColorDictKey(itv.getItemColor()));
                 tOrderItem.setItemLenth(itv.getItemLenth());
                 if (tOrderItem.getItemPriceType() != null) {
                     if (tOrderItem.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)) {

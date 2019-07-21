@@ -44,6 +44,15 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         return null;
     }
 
+    public static String parseColorDictKey(String str){
+        if(isNotEmpty(str)){
+            String[] strs = str.trim().split(SEPARATOR_2);
+            if(strs!=null && strs.length==2){
+                return strs[0];
+            }
+        }
+        return null;
+    }
 
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
 
