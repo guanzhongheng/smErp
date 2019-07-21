@@ -2,8 +2,10 @@ package com.lcyzh.nmerp.component;
 
 import com.lcyzh.nmerp.dao.EmployeeMapper;
 import com.lcyzh.nmerp.dao.TDictMapper;
+import com.lcyzh.nmerp.dao.TProductMapper;
 import com.lcyzh.nmerp.entity.Employee;
 import com.lcyzh.nmerp.entity.TDict;
+import com.lcyzh.nmerp.entity.TProduct;
 import com.lcyzh.nmerp.utils.DictEntity;
 import com.lcyzh.nmerp.utils.DictUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,8 @@ public class DictLoader implements CommandLineRunner {
     private TDictMapper dictMapper;
     @Autowired
     private EmployeeMapper employeeMapper;
+    @Autowired
+    private TProductMapper productMapper;
 
 
     @Override
@@ -65,6 +69,14 @@ public class DictLoader implements CommandLineRunner {
                     DictUtils.getEmpMapsByDept().put(emp.getDepartment(),dictEntities);
                 }
                 dictEntities.add(new DictEntity(emp.getEmpCode(), emp.getEmpName()));
+            });
+        }
+
+        List<TProduct> prods = productMapper.findAllList();
+        if(prods!=null && !prods.isEmpty()){
+            Map<String, TProduct> prodMaps = DictUtils.getProdMaps();
+            prods.forEach(prod->{
+              prodMaps.put(String.valueOf(prod.getProdCgyCode())+prod.getProdVariety(),prod);
             });
         }
     }

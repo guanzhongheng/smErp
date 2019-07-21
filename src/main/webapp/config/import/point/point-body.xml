@@ -24,24 +24,28 @@
               varType="com.lcyzh.nmerp.model.vo.OrderItemVo">
             <!-- 循环开始行 -->
             <section startRow="6" endRow="6">
-                <!-- 产品名称 -->
+                <!-- 产品类别 -->
                 <mapping row="6" col="0" nullAllowed="true">
-                    item.itemName
+                    item.itemCgyCodeValue
+                </mapping>
+                <!-- 产品品种 -->
+                <mapping row="6" col="1" nullAllowed="true">
+                    item.itemVaritemValue
                 </mapping>
                 <!-- 长度 -->
-                <mapping row="6" col="1" nullAllowed="true">
+                <mapping row="6" col="2" nullAllowed="true">
                     item.itemLenth
                 </mapping>
                 <!-- 宽度 -->
-                <mapping row="6" col="2" nullAllowed="true">
+                <mapping row="6" col="3" nullAllowed="true">
                     item.itemWidth
                 </mapping>
                 <!-- 厚度 -->
-                <mapping row="6" col="3" nullAllowed="true">
+                <mapping row="6" col="4" nullAllowed="true">
                     item.itemThick
                 </mapping>
                 <!-- 颜色 -->
-                <mapping row="6" col="4" nullAllowed="true">
+                <mapping row="6" col="5" nullAllowed="true">
                     item.itemColor
                 </mapping>
                 <!-- 单件计数 -->
@@ -49,23 +53,23 @@
                     item.itemWeight
                 </mapping>
                 <!-- 计件数量 -->
-                <mapping row="6" col="6" nullAllowed="true">
+                <mapping row="6" col="7" nullAllowed="true">
                     item.itemNum
                 </mapping>
                 <!-- 单位 -->
-                <mapping row="6" col="7" nullAllowed="true">
-                    item.itemUnit
+                <mapping row="6" col="8" nullAllowed="true">
+                    item.itemUnitValue
                 </mapping>
                 <!-- 压边类型 -->
-                <mapping row="6" col="8" nullAllowed="true">
+                <mapping row="6" col="9" nullAllowed="true">
                     item.itemYbType
                 </mapping>
                 <!-- 产品所属人 -->
-                <mapping row="6" col="9" nullAllowed="true">
+                <mapping row="6" col="10" nullAllowed="true">
                     item.itemOwner
                 </mapping>
                 <!-- 备注 -->
-                <mapping row="6" col="10" nullAllowed="true">
+                <mapping row="6" col="11" nullAllowed="true">
                     item.remarks
                 </mapping>
             </section>

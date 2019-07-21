@@ -30,7 +30,19 @@ import java.util.regex.Pattern;
  */
 public class StringUtils extends org.apache.commons.lang3.StringUtils {
     private static final char SEPARATOR = '_';
+    private static final String SEPARATOR_2 = "/";
     private static final String CHARSET_NAME = "UTF-8";
+
+
+    public static Long parseDictKey(String str){
+        if(isNotEmpty(str)){
+            String[] strs = str.trim().split(SEPARATOR_2);
+            if(strs!=null && strs.length==2){
+                return Long.valueOf(strs[0]);
+            }
+        }
+        return null;
+    }
 
 
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");

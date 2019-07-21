@@ -6,7 +6,6 @@ import com.lcyzh.nmerp.model.vo.OrderAddBatchVo;
 import com.lcyzh.nmerp.service.TOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,7 +39,6 @@ public class ExcelController {
     }
 
     @RequestMapping(value = "/order/import", method = RequestMethod.POST)
-    @Transactional
     public String importExcel(@RequestParam(required = true) MultipartFile file, HttpServletRequest request) {
         String fileName = file.getOriginalFilename().toLowerCase();
         if (!fileName.endsWith(".xls") && !fileName.endsWith(".xlsx")) {

@@ -1,5 +1,7 @@
 package com.lcyzh.nmerp.utils;
 
+import com.lcyzh.nmerp.entity.TProduct;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -138,6 +140,19 @@ public class DictUtils {
     public static List<DictEntity> getEmpListByDept(Long deptKey) {
         if (deptKey != null) {
            return empMapsByDept.get(deptKey);
+        }
+        return null;
+    }
+
+    private static final Map<String,TProduct> prodMaps = new HashMap<>(100);
+
+    public static Map<String, TProduct> getProdMaps() {
+        return prodMaps;
+    }
+
+    public static TProduct getProdCodeByProdCgyAndVari(String dictKey){
+        if (dictKey != null) {
+            return prodMaps.get(dictKey);
         }
         return null;
     }
