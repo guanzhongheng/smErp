@@ -65,11 +65,7 @@ public class ExcelController {
         beans.put("ord", ord);
         //解析文件体
         parseExcelService.parseExcel(xmlConfigName, file, beans);
-<<<<<<< HEAD
         this.tOrderService.insert(ord);
-=======
-       // this.tOrderService.insert(ord);
->>>>>>> 提交
         return "index";
     }
 }
