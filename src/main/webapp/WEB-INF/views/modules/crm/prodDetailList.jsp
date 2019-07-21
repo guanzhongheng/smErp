@@ -34,31 +34,31 @@
                         </div>
                         <div class="col-md-4">
                             <label class="col-md-3">产品名称:</label>
-                            <label class="col-md-3" id="itemName">AAA</label>
+                            <label class="col-md-3" id="itemName"></label>
                         </div>
                         <div class="col-md-4">
                             <label class="col-md-3">产品品种:</label>
-                            <label class="col-md-3" id="itemVariety">AAA</label>
+                            <label class="col-md-3" id="itemCgyCode"></label>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-4">
                             <label class="col-md-3">产品类别:</label>
-                            <label class="col-md-3" id="itemCgyCode">AAA</label>
+                            <label class="col-md-3" id="itemVariety"></label>
                         </div>
                         <div class="col-md-4">
                             <label class="col-md-3">产品厚度:</label>
-                            <label class="col-md-3" id="itemThick">AAA</label>
+                            <label class="col-md-3" id="itemThick"></label>
                         </div>
                         <div class="col-md-4">
                             <label class="col-md-3">计价方式:</label>
-                            <label class="col-md-3" id="itemPriceType">AAA</label>
+                            <label class="col-md-3" id="itemPriceType"></label>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-4">
                             <label class="col-md-3">指导价格:</label>
-                            <label class="col-md-3" id="itemPrice">AAA</label>
+                            <label class="col-md-3" id="itemPrice"></label>
                         </div>
                         <div class="col-md-4">
                             <label class="col-md-3">单位:</label>
@@ -104,8 +104,8 @@
                         <tr>
                             <th data-field="itemCode">编码</th>
                             <th data-field="itemName">名称</th>
-                            <th data-field="itemCgyCodeValue">类别</th>
-                            <th data-field="itemVaritemValue">品种</th>
+                            <th data-field="itemCgyCodeValue">品种</th>
+                            <th data-field="itemVaritemValue">类别</th>
                             <th data-field="itemLenth">长</th>
                             <th data-field="itemWidth">宽</th>
                             <th data-field="itemThick">厚度</th>
