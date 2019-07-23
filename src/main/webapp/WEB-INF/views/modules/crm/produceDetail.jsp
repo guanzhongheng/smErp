@@ -49,7 +49,7 @@
                                     </div>
 
                                     <div style="min-width: 270px;background-color: black;color:green; font-size: 30px;float:left;text-align: center;margin-left:15px;">
-                                        毛重：<span id="totalWeight">1.00</span> KG
+                                        毛重：<span id="totalWeight">0.00</span> KG
                                     </div>
                                     <div style="min-width: 270px;background-color: black;color:green; font-size: 30px;float:left;text-align: center;margin-left:15px;">
                                         皮：0.00 KG
@@ -210,11 +210,11 @@
             $("#inStock").attr('disabled',"true");
 
             var totalWeight = $("#totalWeight").text();
-            if(totalWeight == null || parseFloat(totalWeight)<=0){
-                top.$.jBox.tip('入库失败！原因：重量为0，请开启电子秤并称重后再行入库');
-                $("#inStock").removeAttr('disabled');
-                return;
-            }
+            // if(totalWeight == null || parseFloat(totalWeight)<=0){
+            //     top.$.jBox.tip('入库失败！原因：重量为0，请开启电子秤并称重后再行入库');
+            //     $("#inStock").removeAttr('disabled');
+            //     return;
+            // }
 
             $.ajax({
                 url: "/produce/produce/inStock",

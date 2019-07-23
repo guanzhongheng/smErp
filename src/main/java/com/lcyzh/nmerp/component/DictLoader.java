@@ -10,6 +10,7 @@ import com.lcyzh.nmerp.utils.DictEntity;
 import com.lcyzh.nmerp.utils.DictUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ import java.util.stream.Collectors;
  * lijinku          2019/06/28    create
  */
 
+@Order(value = 0)
 @Component
 public class DictLoader implements CommandLineRunner {
 

@@ -77,15 +77,6 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>SNS</td>
-                                                <td>1000.00</td>
-                                                <td>4.5</td>
-                                                <td>0.08</td>
-                                                <td>125.01 M&sup2</td>
-                                                <td>63.0</td>
-                                                <td>2040.00</td>
-                                            </tr>
                                         <c:forEach items="${stocks}" var="cus">
                                             <tr>
                                                 <td>${cus.barCode}</td>
@@ -135,7 +126,7 @@
         var phone = $("#phone").val();
         var address = $("#address").val();
 
-        if (address == null || receiver == null || phone == null) {
+        if (address == null || receiver == null || phone == null || address == "" || receiver == "" || phone == "") {
             layer.msg('请完善好信息在提交！');
             return;
         }
@@ -163,7 +154,7 @@
     function getBack() {
         $.ajax({
             type: "POST",
-          //  url: '/tOutStock/backOutStock',
+            url: '/tOutStock/backOutStock',
             data: {
                 outCode: $("#outCode").val()
             },
