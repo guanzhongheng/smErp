@@ -23,6 +23,6 @@ public interface TStockService {
     int insertBatch(List<TStock> tStocks);
 
     //补标签查询
-    Page<StockQueryVo> findList(Page<StockQueryVo> page, StockQueryVo vo);
+    List<StockQueryVo> findList(Page<StockQueryVo> page, StockQueryVo vo);
 
 }

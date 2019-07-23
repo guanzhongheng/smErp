@@ -13,7 +13,7 @@ import java.util.Date;
  * @Date :
  * @ModificationHistory Who          When          What
  */
-public class ProdPlanDetailVo extends DataEntity<ProdPlanDetailVo> {
+public class ProdPlanDetailVo{
     private Long prodPlanDetailId;
     private String prodPlanCode;
     private String ordCode;

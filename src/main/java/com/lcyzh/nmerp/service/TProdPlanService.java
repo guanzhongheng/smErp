@@ -18,7 +18,7 @@ public interface TProdPlanService {
     /**
      * 多条件查询生产计划单
      */
-    Page<ProdPlanVo> findPage(Page<ProdPlanVo> page, ProdPlanVo vo);
+    List<ProdPlanVo> findPage(Page<ProdPlanVo> page, ProdPlanVo vo);
 
     /**
      * 生产计划单编辑（修改配方、自动下发开关设置）

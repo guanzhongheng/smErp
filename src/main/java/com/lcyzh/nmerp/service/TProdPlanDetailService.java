@@ -26,7 +26,7 @@ public interface TProdPlanDetailService {
      * @Description: 机台查看生产任务列表
      *
      */
-    Page<ProdPlanDetailVo> findProdTaskPage(Page<ProdPlanDetailVo> page, ProdPlanDetailVo vo);
+    List<ProdPlanDetailVo> findProdTaskPage(Page<ProdPlanDetailVo> page, ProdPlanDetailVo vo);
 
     /**
      * @Description: 查看生产任务明细

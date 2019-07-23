@@ -12,7 +12,7 @@ import java.util.Date;
  * @Date :
  * @ModificationHistory Who          When          What
  */
-public class StockQueryVo extends DataEntity<StockQueryVo> {
+public class StockQueryVo {
     //订单编号（模糊匹配）
     private String ordCode;
     //产品类别

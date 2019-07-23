@@ -196,7 +196,10 @@ public class CrmManageController extends BaseController {
      */
     @RequestMapping(value = {"inventory/list"})
     public String inventoryList(StockQueryVo stockQueryVo,Model model, HttpServletRequest request, HttpServletResponse response){
-        Page<StockQueryVo> page = stockService.findList(new Page<StockQueryVo>(request, response),stockQueryVo);
+        Page<StockQueryVo> page = new Page<>(request, response);
+        List<StockQueryVo> list = stockService.findList(page,stockQueryVo);
+        page.setCount(list.size());
+        page.setList(list);
         model.addAttribute("page", page);
         return "modules/crm/inventoryList";
     }
@@ -223,7 +226,10 @@ public class CrmManageController extends BaseController {
      */
     @RequestMapping(value = {"inventory/outStockList"})
     public String outStockList(@ModelAttribute("outStockVo") OutStockVo outStockVo, Model model, HttpServletRequest request, HttpServletResponse response) {
-        Page<OutStockVo> page = outStockService.findList(new Page<OutStockVo>(request, response), outStockVo);
+        Page<OutStockVo> page = new Page<>(request, response);
+        List<OutStockVo> list = outStockService.findList(page, outStockVo);
+        page.setCount(list.size());
+        page.setList(list);
         model.addAttribute("page", page);
         return "modules/crm/outStockList";
     }
@@ -239,7 +245,10 @@ public class CrmManageController extends BaseController {
      */
     @RequestMapping(value = {"producePlan/list","vo"})
     public String prodPlanList(@ModelAttribute("vo") ProdPlanVo vo, Model model, HttpServletRequest request, HttpServletResponse response){
-        Page<ProdPlanVo> page = prodPlanService.findPage(new Page<ProdPlanVo>(request,response),vo);
+        Page<ProdPlanVo> page = new Page<>(request, response);
+        List<ProdPlanVo> list = prodPlanService.findPage(page,vo);
+        page.setCount(list.size());
+        page.setList(list);
         model.addAttribute("page", page);
         model.addAttribute("macList",machineInfoService.findAllList());
         return "modules/crm/producePlanList";
@@ -255,7 +264,10 @@ public class CrmManageController extends BaseController {
      */
     @RequestMapping(value = {"produce/list","vo"})
     public String produceList(@ModelAttribute("vo") ProdPlanDetailVo vo, Model model, HttpServletRequest request, HttpServletResponse response) {
-        Page<ProdPlanDetailVo> page = prodPlanDetailService.findProdTaskPage(new Page<ProdPlanDetailVo>(request, response), vo);
+        Page<ProdPlanDetailVo> page = new Page<>(request, response);
+        List<ProdPlanDetailVo> list = prodPlanDetailService.findProdTaskPage(page, vo);
+        page.setCount(list.size());
+        page.setList(list);
         model.addAttribute("page", page);
         model.addAttribute("macList", machineInfoService.findAllList());
         return "modules/crm/produceList";

@@ -57,20 +57,12 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
     }
 
     @Override
-    public Page<ProdPlanDetailVo> findProdTaskPage(Page<ProdPlanDetailVo> page, ProdPlanDetailVo vo) {
+    public List<ProdPlanDetailVo> findProdTaskPage(Page<ProdPlanDetailVo> page, ProdPlanDetailVo vo) {
         PageHelper.startPage(page.getPageNo(),page.getPageSize());
         //查询已经下发生产的
         vo.setItemStatus('1');
         List<ProdPlanDetailVo> list = tProdPlanDetailMapper.findList(vo);
-
-
-
-        PageInfo<ProdPlanDetailVo> p = new PageInfo<>(list);
-        page.setCount(p.getTotal());
-
-
-        page.setList(list);
-        return page;
+        return list;
     }
 
     @Override

@@ -62,26 +62,21 @@ public class TOutStockServiceImpl implements TOutStockService {
     }
 
     @Override
-    public Page<OutStockVo> findList(Page<OutStockVo> page, OutStockVo vo) {
-        PageHelper.startPage(page.getPageNo(), page.getPageSize());
+    public List<OutStockVo> findList(Page<OutStockVo> page, OutStockVo vo) {
         if (vo.getStartDate() == null || vo.getStartDate().length() == 0) {
             vo.setStartDate(LocalDate.now().minusDays(7).toString());
         }
         if (vo.getEndDate() == null || vo.getEndDate().length() == 0) {
             vo.setEndDate(LocalDate.now().plusDays(1).toString());
         }
+        PageHelper.startPage(page.getPageNo(), page.getPageSize());
         List<TOutStock> list = tOutStockMapper.findList(vo);
         List<OutStockVo> vos = list.stream().map(tOutStock -> {
             OutStockVo outStockVo = new OutStockVo();
             BeanUtils.copyProperties(tOutStock, outStockVo);
             return outStockVo;
         }).collect(Collectors.toList());
-
-        PageInfo<TOutStock> p = new PageInfo<>(list);
-        page.setCount(p.getTotal());
-
-        page.setList(vos);
-        return page;
+        return vos;
     }
 
     //@Override

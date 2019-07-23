@@ -47,7 +47,7 @@ public interface TOutStockService {
      * @Iteration : 1.0
      * @Date: 2019/7/2 10:48 AM
      */
-    Page<OutStockVo> findList(Page<OutStockVo> page, OutStockVo vo);
+    List<OutStockVo> findList(Page<OutStockVo> page, OutStockVo vo);
 
 
 
