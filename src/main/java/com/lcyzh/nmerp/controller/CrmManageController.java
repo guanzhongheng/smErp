@@ -52,7 +52,10 @@ public class CrmManageController extends BaseController {
 
     @RequestMapping(value = {"customer/list"})
     public String list(@ModelAttribute("customer") CustomerQueryVo customer, Model model, HttpServletRequest request, HttpServletResponse response){
-        Page<CustomerQueryVo> page = customerService.findPage(new Page<CustomerQueryVo>(request, response), customer);
+        Page<CustomerQueryVo> page = new Page<>(request, response);
+        List<CustomerQueryVo> list = customerService.findPage(page, customer);
+        page.setCount(list.size());
+        page.setList(list);
         model.addAttribute("page", page);
         return "modules/crm/customerList";
     }
@@ -60,8 +63,11 @@ public class CrmManageController extends BaseController {
     @RequestMapping(value = {"customer/poollist"})
     public String customerPoolList(@ModelAttribute("customer") CustomerQueryVo customer, Model model, HttpServletRequest request, HttpServletResponse response){
         customer.setFollowType(0);
-        Page<CustomerQueryVo> pageRes = customerService.findPage(new Page<CustomerQueryVo>(request,response), customer);
-        model.addAttribute("page", pageRes);
+        Page<CustomerQueryVo> page = new Page<>(request, response);
+        List<CustomerQueryVo> list = customerService.findPage(page, customer);
+        page.setCount(list.size());
+        page.setList(list);
+        model.addAttribute("page", page);
         return "modules/crm/customerPoolList";
     }
 
@@ -113,7 +119,10 @@ public class CrmManageController extends BaseController {
      */
     @RequestMapping(value = {"order/list", "order"})
     public String orderList(@ModelAttribute("order") OrderQueryVo order, Model model, HttpServletRequest request, HttpServletResponse response){
-        Page<OrderQueryVo> page = orderService.findPage(new Page<OrderQueryVo>(request, response), order);
+        Page<OrderQueryVo> page = new Page<>(request, response);
+        List<OrderQueryVo> list = orderService.findPage(page, order);
+        page.setCount(list.size());
+        page.setList(list);
         model.addAttribute("page", page);
         return "modules/crm/orderList";
     }
@@ -138,7 +147,10 @@ public class CrmManageController extends BaseController {
     public String taskApproval(@ModelAttribute("order") OrderQueryVo order,Model model, HttpServletRequest request, HttpServletResponse response){
         // 获取需要审批的产品清单列表
         order.setOrdStatus(Constants.ORD_STATUS_NEW);
-        Page<OrderQueryVo> page = orderService.findPage(new Page<OrderQueryVo>(request, response), order);
+        Page<OrderQueryVo> page = new Page<>(request, response);
+        List<OrderQueryVo> list = orderService.findPage(page, order);
+        page.setCount(list.size());
+        page.setList(list);
         model.addAttribute("page", page);
         return "modules/crm/taskApproval";
     }
@@ -151,7 +163,10 @@ public class CrmManageController extends BaseController {
     @RequestMapping(value = {"order/taskList"})
     public String taskList(@ModelAttribute("order") OrderQueryVo order, Model model, HttpServletRequest request, HttpServletResponse response){
         order.setOrdStatus(Constants.ORD_STATUS_ASSIGNED);
-        Page<OrderQueryVo> page = orderService.findPage(new Page<OrderQueryVo>(request, response), order);
+        Page<OrderQueryVo> page = new Page<>(request, response);
+        List<OrderQueryVo> list = orderService.findPage(page, order);
+        page.setCount(list.size());
+        page.setList(list);
         model.addAttribute("page", page);
         return "modules/crm/taskList";
     }

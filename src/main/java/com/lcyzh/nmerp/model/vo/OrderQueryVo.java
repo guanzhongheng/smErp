@@ -12,7 +12,7 @@ import com.lcyzh.nmerp.common.persistence.DataEntity;
  * ----------   ------------- -----------------------------------
  * lijinku          2019/07/02    create
  */
-public class OrderQueryVo extends DataEntity<OrderQueryVo> {
+public class OrderQueryVo {
     //订单编号
     private String ordCode;
     //客户资料编号

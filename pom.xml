@@ -83,12 +83,6 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
-        <!-- freemarker -->
-        <!--<dependency>-->
-        <!--<groupId>org.freemarker</groupId>-->
-        <!--<artifactId>freemarker</artifactId>-->
-        <!--</dependency>-->
-
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
@@ -100,11 +94,11 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.44</version>
         </dependency>
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-            <version>4.3.2</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>cn.hutool</groupId>-->
+            <!--<artifactId>hutool-all</artifactId>-->
+            <!--<version>4.3.2</version>-->
+        <!--</dependency>-->
 
 
         <dependency>
@@ -197,17 +191,6 @@
             <artifactId>jxls-reader</artifactId>
             <version>[2.0.5,)</version>
         </dependency>
-        <!--<dependency>-->
-        <!--<groupId>org.apache.tomcat.embed</groupId>-->
-        <!--<artifactId>tomcat-embed-jasper</artifactId>-->
-        <!--<scope>provided</scope>-->
-        <!--<exclusions>-->
-        <!--<exclusion>-->
-        <!--<artifactId>tomcat-embed-el</artifactId>-->
-        <!--<groupId>org.apache.tomcat.embed</groupId>-->
-        <!--</exclusion>-->
-        <!--</exclusions>-->
-        <!--</dependency>-->
 
         <dependency>
             <groupId>taglibs</groupId>
@@ -228,18 +211,6 @@
             <version>8.5.20</version>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>javax.servlet</groupId>-->
-            <!--<artifactId>servlet-api</artifactId>-->
-            <!--<version>2.5</version>-->
-            <!--<scope>provided</scope>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>javax.servlet.jsp</groupId>-->
-        <!--<artifactId>jsp-api</artifactId>-->
-        <!--<version>2.1</version>-->
-        <!--<scope>provided</scope>-->
-        <!--</dependency>-->
 
         <!-- google java lib -->
         <dependency>
@@ -292,7 +263,6 @@
         </dependency>
 
         <!-- SECURITY end -->
-
 
         <!-- GENERAL UTILS begin -->
         <dependency>
@@ -353,12 +323,6 @@
             <version>${blade-patchca.version}</version>
         </dependency>
 
-        <!-- Email -->
-        <!--<dependency>-->
-        <!--<groupId>org.apache.commons</groupId>-->
-        <!--<artifactId>commons-email</artifactId>-->
-        <!--<version>${commons-email.version}</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>javax.activation</groupId>
             <artifactId>activation</artifactId>
@@ -425,33 +389,6 @@
             <version>${pinyin4j.version}</version>
         </dependency>
 
-        <!--<dependency>-->
-        <!--<groupId>org.apache.poi</groupId>-->
-        <!--<artifactId>poi</artifactId>-->
-        <!--<version>${poi.version}</version>-->
-        <!--<exclusions>-->
-        <!--<exclusion>-->
-        <!--<artifactId>commons-codec</artifactId>-->
-        <!--<groupId>commons-codec</groupId>-->
-        <!--</exclusion>-->
-        <!--</exclusions>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.apache.poi</groupId>-->
-        <!--<artifactId>poi-ooxml</artifactId>-->
-        <!--<version>${poi.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.apache.poi</groupId>-->
-        <!--<artifactId>poi-ooxml-schemas</artifactId>-->
-        <!--<version>${poi.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.apache.poi</groupId>-->
-        <!--<artifactId>poi-scratchpad</artifactId>-->
-        <!--<version>${poi.version}</version>-->
-        <!--</dependency>-->
-
 
         <!-- 条形码、二维码生成  -->
         <dependency>
@@ -465,24 +402,6 @@
             <version>${zxing.version}</version>
         </dependency>
 
-        <!--pagehelper-->
-        <!--<dependency>-->
-        <!--<groupId>com.github.pagehelper</groupId>-->
-        <!--<artifactId>pagehelper</artifactId>-->
-        <!--<version>5.1.10</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>com.github.pagehelper</groupId>-->
-        <!--<artifactId>pagehelper-spring-boot-autoconfigure</artifactId>-->
-        <!--<version>1.2.12</version>-->
-        <!--</dependency>-->
-
-        <!--<dependency>-->
-        <!--<groupId>com.github.pagehelper</groupId>-->
-        <!--<artifactId>pagehelper-spring-boot-starter</artifactId>-->
-        <!--<version>1.2.12</version>-->
-        <!--</dependency>-->
-
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
@@ -493,16 +412,10 @@
     </dependencies>
 
     <build>
-        <finalName>hhadmin</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>1.4.2.RELEASE</version><!-- springboot项目打jar包运行 插件版本只能是1.4.2.RELEASE -->
-                <configuration>
-                    <mainClass>com.lcyzh.nmerp.NmErpApplication</mainClass><!--入口类-->
-                    <fork>true</fork>
-                </configuration>
             </plugin>
         </plugins>
         <resources>

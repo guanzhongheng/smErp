@@ -45,7 +45,7 @@ public class TCustomerServiceImpl implements TCustomerService {
 
 
     @Override
-    public Page<CustomerQueryVo> findPage(Page<CustomerQueryVo> page, CustomerQueryVo vo) {
+    public List<CustomerQueryVo> findPage(Page<CustomerQueryVo> page, CustomerQueryVo vo) {
         PageHelper.startPage(page.getPageNo(),page.getPageSize());
         List<CustomerQueryVo> listPo = tCustomerMapper.findList(vo);
         if (listPo != null && !listPo.isEmpty()) {
@@ -55,10 +55,8 @@ public class TCustomerServiceImpl implements TCustomerService {
                 po.setCusStatusValue(DictUtils.getValueByDictKey(po.getCusStatus()));
             });
         }
-        PageInfo<CustomerQueryVo> p = new PageInfo<>(listPo);
-        page.setCount(p.getTotal());
-        page.setList(listPo);
-        return page;
+
+        return listPo;
     }
 
 

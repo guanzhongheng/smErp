@@ -60,7 +60,7 @@ public class TOrderServiceImpl implements TOrderService {
     }
 
     @Override
-    public Page<OrderQueryVo> findPage(Page<OrderQueryVo> page, OrderQueryVo order) {
+    public List<OrderQueryVo> findPage(Page<OrderQueryVo> page, OrderQueryVo order) {
         PageHelper.startPage(page.getPageNo(), page.getPageSize());
         List<OrderQueryVo> list = tOrderMapper.findList(order);
         list.stream().forEach(vo -> {
@@ -68,10 +68,9 @@ public class TOrderServiceImpl implements TOrderService {
             vo.setPayTypeValue(DictUtils.getDictValueMaps().get(vo.getPayType()));
             vo.setPayStatusValue(DictUtils.getDictValueMaps().get(vo.getPayStatus()));
         });
-        PageInfo<OrderQueryVo> p = new PageInfo<>(list);
-        page.setCount(p.getTotal());
-        page.setList(list);
-        return page;
+//        page.setCount(list.size());
+//        page.setList(list);
+        return list;
     }
 
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)

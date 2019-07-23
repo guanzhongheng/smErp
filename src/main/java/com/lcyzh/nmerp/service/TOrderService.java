@@ -31,7 +31,7 @@ public interface TOrderService {
      * @Iteration : 1.0
      * @Date: 2019/7/2 10:53 AM
      */
-    Page<OrderQueryVo> findPage(Page<OrderQueryVo> page, OrderQueryVo order);
+    List<OrderQueryVo> findPage(Page<OrderQueryVo> page, OrderQueryVo order);
 
     /**
      * @Description: 订单批量导入

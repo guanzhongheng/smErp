@@ -1,14 +1,8 @@
 package com.lcyzh.nmerp.controller;
 
-import cn.hutool.core.util.RandomUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 
 /**
@@ -28,7 +22,7 @@ public class IndexController {
     @GetMapping("/webSocket")
     public ModelAndView goToWeight(){
         ModelAndView mav=new ModelAndView("socket");
-        mav.addObject("uid", RandomUtil.randomNumbers(6));
+//        mav.addObject("uid", RandomUtil.randomNumbers(6));
         return mav;
     }
 

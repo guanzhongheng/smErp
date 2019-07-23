@@ -27,8 +27,8 @@ import org.springframework.stereotype.Component;
  * lijinku          2019/06/17    create
  */
 
-@Order(value = 1)
-@Component
+//@Order(value = 1)
+//@Component
 public class NettyServer implements CommandLineRunner {
     private final int port=12345;
     @Override

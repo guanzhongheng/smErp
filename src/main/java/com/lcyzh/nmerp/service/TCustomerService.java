@@ -14,7 +14,7 @@ import java.util.List;
 */
 public interface TCustomerService {
 
-    Page<CustomerQueryVo> findPage(Page<CustomerQueryVo> page, CustomerQueryVo customer);
+    List<CustomerQueryVo> findPage(Page<CustomerQueryVo> page, CustomerQueryVo customer);
 
     int save(CustomerAddModifyVo tCustomer);
 

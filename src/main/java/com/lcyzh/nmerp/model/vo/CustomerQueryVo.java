@@ -15,7 +15,7 @@ import java.util.Date;
  * ----------   ------------- -----------------------------------
  * lijinku          2019/07/01    create
  */
-public class CustomerQueryVo extends DataEntity<CustomerQueryVo> {
+public class CustomerQueryVo {
 
     //客户编号
     private String cusCode;
