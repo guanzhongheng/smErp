@@ -166,8 +166,10 @@ public class Page<T> {
             last = pageNo;
         }
 
-        if (this.count % this.pageSize == 0 || this.last == 0) {
-            this.last++;
+        if(this.count!=0){
+            if (this.count % this.pageSize == 0 || this.last == 0) {
+                this.last++;
+            }
         }
 
         if (this.last < this.first) {
