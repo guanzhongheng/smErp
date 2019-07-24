@@ -56,6 +56,8 @@ public class TCustomerServiceImpl implements TCustomerService {
             });
         }
 
+        PageInfo<CustomerQueryVo> pageInfo = new PageInfo<>(listPo);
+        page.setTotal(pageInfo.getTotal());
         return listPo;
     }
 

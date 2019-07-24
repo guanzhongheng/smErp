@@ -50,6 +50,8 @@ public class TProdPlanServiceImpl implements TProdPlanService {
     public List<ProdPlanVo> findPage(Page<ProdPlanVo> page, ProdPlanVo vo) {
         PageHelper.startPage(page.getPageNo(),page.getPageSize());
         List<ProdPlanVo> list = tProdPlanMapper.findList(vo);
+        PageInfo<ProdPlanVo> pageInfo = new PageInfo<>(list);
+        page.setTotal(pageInfo.getTotal());
         return list;
     }
 

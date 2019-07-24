@@ -68,8 +68,8 @@ public class TOrderServiceImpl implements TOrderService {
             vo.setPayTypeValue(DictUtils.getDictValueMaps().get(vo.getPayType()));
             vo.setPayStatusValue(DictUtils.getDictValueMaps().get(vo.getPayStatus()));
         });
-//        page.setCount(list.size());
-//        page.setList(list);
+        PageInfo<OrderQueryVo> pageInfo = new PageInfo<>(list);
+        page.setTotal(pageInfo.getTotal());
         return list;
     }
 

@@ -62,6 +62,8 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
         //查询已经下发生产的
         vo.setItemStatus('1');
         List<ProdPlanDetailVo> list = tProdPlanDetailMapper.findList(vo);
+        PageInfo<ProdPlanDetailVo> pageInfo = new PageInfo<>(list);
+        page.setTotal(pageInfo.getTotal());
         return list;
     }
 

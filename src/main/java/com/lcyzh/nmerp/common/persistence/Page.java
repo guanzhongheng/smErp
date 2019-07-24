@@ -27,6 +27,8 @@ public class Page<T> {
 
     private long count;// 总记录数，设置为“-1”表示不查询总数
 
+    private long total;
+
     private int first;// 首页索引
     private int last;// 尾页索引
     private int prev;// 上一页索引
@@ -159,18 +161,21 @@ public class Page<T> {
 
         //1
         this.first = 1;
-        if (count >= this.pageSize) {
-            this.last = (int) (count / this.pageSize + first - 1);
 
-        } else {
-            last = pageNo;
-        }
+        this.last = total%this.pageSize==0?(int) total/this.pageSize:(int) total/this.pageSize+1;
+//        this.last = (int) (total%this.pageSize)+first-1;
+//        if (count >= this.pageSize) {
+//            this.last = (int) (count / this.pageSize + first - 1) + pageNo-1;
+//
+//        } else {
+//            last = pageNo;
+//        }
 
-        if(this.count!=0){
-            if (this.count % this.pageSize == 0 || this.last == 0) {
-                this.last++;
-            }
-        }
+//        if (this.count != 0) {
+//            if (this.count % this.pageSize == 0 || this.last == 0) {
+//                this.last++;
+//            }
+//        }
 
         if (this.last < this.first) {
             this.last = this.first;
@@ -577,7 +582,16 @@ public class Page<T> {
         return getPageSize();
     }
 
-//	/**
+    public long getTotal() {
+        return total;
+    }
+
+    public void setTotal(long total) {
+        this.total = total;
+    }
+
+
+    //	/**
 //	 * 获取 Spring data JPA 分页对象
 //	 */
 //	public Pageable getSpringPage(){

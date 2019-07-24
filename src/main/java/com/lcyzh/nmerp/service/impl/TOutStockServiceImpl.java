@@ -76,6 +76,8 @@ public class TOutStockServiceImpl implements TOutStockService {
             BeanUtils.copyProperties(tOutStock, outStockVo);
             return outStockVo;
         }).collect(Collectors.toList());
+        PageInfo<TOutStock> pageInfo = new PageInfo<>(list);
+        page.setTotal(pageInfo.getTotal());
         return vos;
     }
 

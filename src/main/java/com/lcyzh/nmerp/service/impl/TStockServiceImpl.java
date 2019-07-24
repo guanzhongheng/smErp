@@ -52,13 +52,13 @@ public class TStockServiceImpl implements TStockService{
 
     @Override
     public List<StockQueryVo> findList(Page<StockQueryVo> page, StockQueryVo vo) {
-        PageHelper.startPage(page.getPageNo(),page.getPageSize());
         if(vo.getStartDate() == null || vo.getStartDate().length() == 0) {
             LocalDate.now().minusDays(7).toString();
         }
         if(vo.getEndDate() == null || vo.getEndDate().length() == 0) {
             vo.setEndDate(LocalDate.now().plusDays(1).toString());
         }
+        PageHelper.startPage(page.getPageNo(),page.getPageSize());
         List<TStock> list = tStockMapper.findList(vo);
         List<StockQueryVo> vos = list.stream().map(tStock -> {
             StockQueryVo stockQueryVo = new StockQueryVo();
@@ -66,6 +66,9 @@ public class TStockServiceImpl implements TStockService{
             stockQueryVo.setStockId(tStock.getId());
             return stockQueryVo;
         }).collect(Collectors.toList());
+
+        PageInfo<TStock> pageInfo = new PageInfo<>(list);
+        page.setTotal(pageInfo.getTotal());
         return vos;
     }
 
