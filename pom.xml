@@ -416,6 +416,11 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>1.4.2.RELEASE</version><!-- springboot项目打jar包运行 插件版本只能是1.4.2.RELEASE -->
+                <configuration>
+                    <mainClass>com.lcyzh.nmerp.NmErpApplication</mainClass><!--入口类-->
+                    <fork>true</fork>
+                </configuration>
             </plugin>
         </plugins>
         <resources>
