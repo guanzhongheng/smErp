@@ -6,7 +6,6 @@
     <title>农膜ERP登录</title>
     <style type="text/css">
         html, body, table {
-            background-color: #f5f5f5;
             width: 100%;
             text-align: center;
         }
@@ -23,7 +22,7 @@
             text-align: left;
             width: 300px;
             padding: 25px 29px 29px;
-            margin: 0 auto 20px;
+            margin: 210px auto 20px;
             background-color: #fff;
             border: 1px solid #e5e5e5;
             -webkit-border-radius: 5px;
@@ -118,6 +117,12 @@
     </script>
 </head>
 <body>
+<div id="bg" style="position:absolute; left:0px; top:0px; width:100%; height:100%; z-index: -1">
+    <img src="../../../../static/images/bg.jpg" width="100%" height="100%"/>
+</div>
+<%--<div style="background:url('../../../../static/images/bg.jpg');--%>
+ <%--left:0px; top:0px;  position:absolute;width: 100%; height: 100%">--%>
+
 <!--[if lte IE 6]><br/>
 <div class='alert alert-block' style="text-align:left;padding-bottom:10px;"><a class="close" data-dismiss="alert">x</a>
     <h4>温馨提示：</h4>
@@ -130,7 +135,7 @@
         <label id="loginError" class="error">${message}</label>
     </div>
 </div>
-<h1 class="form-signin-heading">农膜ERP操作系统</h1>
+<%--<h1 class="form-signin-heading">农膜ERP操作系统</h1>--%>
 <form id="loginForm" class="form-signin" action="${ctx}/login" method="post">
     <label class="input-label" for="username">登录名</label>
     <input type="text" id="username" name="username" class="input-block-level required" value="${username}">
@@ -143,10 +148,14 @@
         </div>
     </c:if><%--
 		<label for="mobile" title="手机登录"><input type="checkbox" id="mobileLogin" name="mobileLogin" ${mobileLogin ? 'checked' : ''}/></label> --%>
-    <input class="btn btn-large btn-primary" type="submit" value="登 录"/>&nbsp;&nbsp;
-    <label for="rememberMe" title="下次不需要再登录"><input type="checkbox" id="rememberMe"
+    <div style="text-align: center; width: 100%; height: 100%" >
+    <input class="btn btn-large btn-primary" style="text-align: center; width:100%" type="submit" value="登 录"/>&nbsp;&nbsp;
+    <br/>
+    <label for="rememberMe" title="下次不需要再登录">
+        <input type="checkbox" style="text-align: center" id="rememberMe"
                                                     name="rememberMe" ${rememberMe ? 'checked' : ''}/>
         记住我（公共场所慎用）</label>
+    </div>
     <div id="themeSwitch" class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown"
            href="#"><b class="caret"></b></a>
@@ -154,10 +163,11 @@
         <script type="text/javascript">$('#themeSwitch').hide();</script><![endif]-->
     </div>
 </form>
-<div class="footer">
-    Copyright &copy; 2012-2020 <a
-        href="#">农膜ERP操作系统</a> - Powered By
-    <a href="http://jeesite.com" target="_blank">nmErp</a> v1.0.0
+<div class="footer" style="z-index: auto">
+    Copyright &copy; 2019-2020 <a
+        href="#" style="color: #0d0d0d">ERP管理系统</a> - Powered By
+    <a href="http://jeesite.com" target="_blank" style="color: #0d0d0d">nmErp</a> v1.0.0
+</div>
 </div>
 <script src="${ctxStatic}/flash/zoom.min.js" type="text/javascript"></script>
 </body>
