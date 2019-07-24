@@ -134,10 +134,10 @@
                                                 <div class="col-sm-4 col-sm-offset-2">
                                                     <button class="btn btn-primary" type="submit">保存订单</button>
                                                     &nbsp;&nbsp;
-                                                    <button type="button"  class="btn btn-default" onclick="prodlistAdd()">产品添加</button>
+                                                    <button type="button"  class="btn btn-primary" onclick="prodlistAdd()">产品添加</button>
                                                     &nbsp;&nbsp;
-                                                    <button class="btn btn-white" type="button"
-                                                            onclick="history.go(-1)">返回
+                                                    <button class="btn btn-primary" type="button"
+                                                            onclick="history.go(-1)">返  回
                                                     </button>
 
                                                 </div>

@@ -55,14 +55,15 @@
                                             <div class="radio i-checks">
                                                 <c:if test="${empty customerAddModifyVo.cusType}">
                                                      <input type="radio" checked  value="110002" id="optionsRadios1"
-                                                       name="cusType"><i></i>&nbsp;企业客户
+                                                       name="cusType"><i></i>&nbsp;经销商
                                                 </c:if>
                                                 <c:if test="${not empty customerAddModifyVo.cusType}">
                                                     <input type="radio" ${customerAddModifyVo.cusType eq '110002' ? 'checked' : ''}  value="110002" id="optionsRadios1"
-                                                           name="cusType"><i></i>&nbsp;企业客户
+                                                           name="cusType"><i></i>&nbsp;经销商
                                                 </c:if>
                                                 <input type="radio" ${customerAddModifyVo.cusType eq '110001' ? 'checked' : ''} value="110001" id="optionsRadios2"
-                                                       name="cusType"><i></i>&nbsp;个人客户
+                                                       name="cusType"><i></i>&nbsp;散户
+
                                             </div>
                                         </div>
                                     </div>

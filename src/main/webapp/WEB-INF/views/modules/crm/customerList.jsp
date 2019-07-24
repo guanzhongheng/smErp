@@ -86,8 +86,8 @@
                 <td><input type="checkbox" name="cuscode" value="${cus.cusCode}"></td>
                 <td><a href="/cus/customer_info?cusCode=${cus.cusCode}" >${cus.cusCode}</a></td>
                 <td>${cus.cusName}</td>
-                <td>${cus.cusStatus}</td>
-                <td>${cus.cusGrade}</td>
+                <td>${fns:getValueByDictKey(cus.cusStatus)}</td>
+                <td>${fns:getValueByDictKey(cus.cusGrade)}</td>
                 <td>${cus.primaryContactorName}</td>
                 <td>${cus.primaryContactorPhone}</td>
                     <%--<td>${cus.cusAddress}</td>--%>

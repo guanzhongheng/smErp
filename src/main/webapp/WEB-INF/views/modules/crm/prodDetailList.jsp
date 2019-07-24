@@ -9,8 +9,8 @@
       <input type="hidden" id="ordCode" value="${ordCode}"/>
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <label class="col-sm-3 control-label">产品选择:
-                    <select data-placeholder="产品选择" class="chosen-select" style="width:200px;" id="prodInfo" onchange="getResChange(this)">
+                <label class="col-sm-3 control-label">&nbsp;产品选择:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <select data-placeholder="产品选择" class="chosen-select" style="width:120px;" id="prodInfo" onchange="getResChange(this)">
                         <option value="-1">请选择</option>
                         <c:forEach items="${prod}" var="p">
                             <option data-prodcode='${p.prodCode}'
@@ -65,7 +65,7 @@
                             <label class="col-md-3" id="itemUnit"></label>
                         </div>
                         <div class="col-md-4" style="padding-left: 30px;">
-                            <select data-placeholder="选择颜色" class="chosen-select" style="width: 250px" id="prodColor">
+                            <select data-placeholder="选择颜色" class="chosen-select" style="width: 120px" id="prodColor">
                                 <option value="-1">颜色选择</option>
                                 <c:forEach items="${color}" var="c">
                                     <option value='${c.value}' data-label='${c.label}' >${c.label}</option>
@@ -75,9 +75,9 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-4">
-                            <label class="col-md-3">宽度(m):</label>
+                            <label class="col-md-3">宽度&nbsp;(m):</label>
                             <label class="col-md-3">
-                                <input type="text" class="form-control" style="width: 200px" id="itemWidth" name="itemWidth" />
+                                <input type="text" class="form-control" style="width: 120px" id="itemWidth" name="itemWidth" />
                             </label>
                         </div>
                     </div>
@@ -98,7 +98,7 @@
                 <h5>订单产品列表</h5>
             </div>
             <div class="ibox-content">
-                <div class="col-sm-12" style="max-height: 350px">
+                <div class="" style="max-height: 350px">
                     <table id="cusProdDetail" data-height="300" style="min-width: 1500px">
                         <thead>
                         <tr>
@@ -341,7 +341,10 @@
                 },{
                     field: 'itemThick',
                     title: '厚',
-                    width: '60px'
+                    width: '60px',
+                    formatter:function (value,row,index){
+                        return ['<input type="text"  style="width: 80px" onchange="inserData(\'itemThick\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
+                    }
                 },{
                     field: 'itemColorValue',
                     title: '颜色',
@@ -353,9 +356,9 @@
                 },{
                     field: 'itemOwner',
                     title: '归属人',
-                    width: '150px',
+                    width: '80px',
                     formatter:function (value,row,index) {
-                        return ['<input type="text"  style="width: 120px" onchange="inserData(\'itemOwner\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
+                        return ['<input type="text"  style="width: 80px" onchange="inserData(\'itemOwner\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
                     }
                 },{
                     field: 'itemPrice',
@@ -374,7 +377,7 @@
                 },{
                     field: 'itemPriceType',
                     title: '计价方式',
-                    width: '80px',
+                    width: '100px',
                     formatter:operPriceType
                 },
                 {
@@ -436,7 +439,7 @@
         }else{
             headOption = headOption + "<option value='141002'>面积</option>";
         }
-        option  = '<select class="chosen-select" id="itemPriceType"'+row.ckId+' onchange="inserData(\'itemPriceType\','+row.ckId+',this)" style="height:33px;">'+
+        option  = '<select class="chosen-select" id="itemPriceType"'+row.ckId+' onchange="inserData(\'itemPriceType\','+row.ckId+',this)" style="width: 80px;height:33px;">'+
             headOption + '</select>';
 
         return [option].join('');
@@ -489,7 +492,7 @@
     function operProdFormatter(value, row, index) {
         return [
             // ' <button id="tableRowCope" type="button" class="btn btn-default" ">复制</button>'+
-            ' <button id="tableRowdelete" type="button" class="btn btn-default" ">删除</button>'
+            ' <button id="tableRowdelete" type="button" class="btn btn-primary" ">删除</button>'
         ].join('');
     };
 
