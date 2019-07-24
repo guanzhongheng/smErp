@@ -9,7 +9,7 @@
 </head>
 <body>
 <ul class="nav nav-tabs">
-    <li><a href="${ctx}/tProduct/list/">产品操作</a></li>
+    <li><a href="${ctx}/tProduct/list/">产品列表</a></li>
     <li class="active"><a href="${ctx}/tProduct/get?id=">产品操作</a></li>
 </ul><br/>
 <form:form id="inputForm" modelAttribute="tProduct" action="${ctx}/tProduct/insert" method="post" class="form-horizontal">

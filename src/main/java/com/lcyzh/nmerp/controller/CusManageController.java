@@ -4,6 +4,8 @@ import com.lcyzh.nmerp.common.lang.StringUtils;
 import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.entity.CusFollowDetail;
 import com.lcyzh.nmerp.model.vo.CustomerAddModifyVo;
+import com.lcyzh.nmerp.model.vo.OrderAddModifyVo;
+import com.lcyzh.nmerp.model.vo.OrderItemVo;
 import com.lcyzh.nmerp.model.vo.OrderQueryVo;
 import com.lcyzh.nmerp.service.ICusFollowService;
 import com.lcyzh.nmerp.service.TCustomerService;
@@ -98,12 +100,17 @@ public class CusManageController  extends BaseController {
 
     /**
      * 订单详情
-     * @param order
      * @param model
      * @return
      */
     @RequestMapping(value = {"order/info"})
-    public String orderInfo(@ModelAttribute("order") OrderQueryVo order, Model model){
+    public String orderInfo(String ordCode, Model model){
+        // 获取订单信息
+        OrderAddModifyVo orderAddModifyVo = orderService.findModifyInfoByOrdCode(ordCode);
+        // 获取订单详情信息
+        List<OrderItemVo> list = orderService.findByOrdCode(ordCode);
+        model.addAttribute("order",orderAddModifyVo);
+        model.addAttribute("ordItems",list);
 
         return "modules/crm/orderInfo";
     }

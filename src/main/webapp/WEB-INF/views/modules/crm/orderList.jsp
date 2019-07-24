@@ -51,8 +51,8 @@
     </ul>
 </form:form>
 <div class="control-group">&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="/order/order_add" type="button" class="btn btn-primary" style="width: 67px;height: 22px"><i
-            class="icon-plus"></i>&nbsp;添加</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <%--<a href="/order/order_add" type="button" class="btn btn-primary" style="width: 67px;height: 22px"><i--%>
+            <%--class="icon-plus"></i>&nbsp;添加</a>&nbsp;&nbsp;&nbsp;&nbsp;--%>
     <a type="button" class="btn btn-primary" style="width: 67px;height: 22px" onclick="uploadFile()"><i
             class="icon-plus"></i>&nbsp;上传</a>
 </div>
@@ -74,7 +74,7 @@
         <tbody>
         <c:forEach items="${page.list}" var="ord">
             <tr>
-                <td>${ord.ordCode}</td>
+                <td><a href="/cus/order/info?ordCode=${ord.ordCode}">${ord.ordCode}</a></td>
                 <td>${ord.ordTitle}</td>
                 <td>${ord.cusName}</td>
                 <td>${ord.ordStatusValue}</td>

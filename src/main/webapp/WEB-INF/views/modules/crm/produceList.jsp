@@ -16,7 +16,7 @@
 </head>
 <body>
 <ul class="nav nav-tabs">
-    <li class="active">当前生产任务</li>
+    <li class="active"><a href="#">生产任务</a></li>
 </ul>
 <form:form id="searchForm" modelAttribute="vo" action="${ctx}/crm/produce/list" method="post"
            class="breadcrumb form-search">

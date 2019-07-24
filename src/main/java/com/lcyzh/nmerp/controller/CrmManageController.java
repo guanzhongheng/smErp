@@ -235,19 +235,17 @@ public class CrmManageController extends BaseController {
     }
 
     /**
-     * 出库清单列表页面流转
+     * 产品清单列表页面流转
      * @param model
      * @return
      */
-//    @RequestMapping(value = {"inventory/outStockList"})
-//    public String outStockList(@ModelAttribute("outStockVo") OutStockVo outStockVo, Model model, HttpServletRequest request, HttpServletResponse response) {
-//        Page<OutStockVo> page = new Page<>(request, response);
-//        List<OutStockVo> list = outStockService.findList(page, outStockVo);
-//        page.setCount(list.size());
-//        page.setList(list);
-//        model.addAttribute("page", page);
-//        return "modules/crm/outStockList";
-//    }
+    @RequestMapping(value = {"inventory/prodStockList"})
+    public String prodStockList(@ModelAttribute("orderQueryVo") OrderQueryVo orderQueryVo, Model model, HttpServletRequest request, HttpServletResponse response) {
+        Page<OutStockVo> page = new Page<>(request, response);
+
+        model.addAttribute("page", page);
+        return "modules/crm/prodStockList";
+    }
 
     /**========================生产计划相关流转==============================**/
     /**
