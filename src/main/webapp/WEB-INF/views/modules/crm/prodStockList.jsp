@@ -4,7 +4,6 @@
 <head>
     <title>全部客户</title>
     <script type="text/javascript">
-
         function page(n,s){
             debugger;
             if(n) $("#pageNo").val(n);

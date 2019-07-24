@@ -51,7 +51,7 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-sm-2">
-                                                        <a href="/cus/customer_add" class="btn btn-primary" style="width: 75px">客户添加</a>
+                                                        <a href="/cus/customer_add" class="btn btn-primary" style="width: 80px">客户添加</a>
                                                     </div>
                                                 </div>
                                                 <div class="hr-line-dashed"></div>
