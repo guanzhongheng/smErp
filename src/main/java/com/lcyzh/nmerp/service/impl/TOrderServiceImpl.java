@@ -26,9 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -50,10 +48,11 @@ public class TOrderServiceImpl implements TOrderService {
     public List<OrderItemVo> findByOrdCode(String ordCode) {
         List<OrderItemVo> list = tOrderItemMapper.findByOrdCode(ordCode);
         list.stream().forEach(vo -> {
-            vo.setItemUnitValue(DictUtils.getDictValueMaps().get(vo.getItemUnit()));
-            vo.setItemCgyCodeValue(DictUtils.getDictValueMaps().get(vo.getItemCgyCode()));
-            vo.setItemVaritemValue(DictUtils.getDictValueMaps().get(vo.getItemVariety()));
-            vo.setItemPriceTypeValue(DictUtils.getDictValueMaps().get(vo.getItemPriceType()));
+            vo.setItemUnitValue(DictUtils.getValueByDictKey(vo.getItemUnit()));
+            vo.setItemCgyCodeValue(DictUtils.getValueByDictKey(vo.getItemCgyCode()));
+            vo.setItemVaritemValue(DictUtils.getValueByDictKey(vo.getItemVariety()));
+            vo.setItemPriceTypeValue(DictUtils.getValueByDictKey(vo.getItemPriceType()));
+            vo.setItemStatusValue(DictUtils.getValueByDictKey(vo.getItemStatus()));
             vo.setItemColorValue(SysDictUtils.getDictLabel(vo.getItemColor(), "prod_color", ""));
         });
         return list;
@@ -64,9 +63,9 @@ public class TOrderServiceImpl implements TOrderService {
         PageHelper.startPage(page.getPageNo(), page.getPageSize());
         List<OrderQueryVo> list = tOrderMapper.findList(order);
         list.stream().forEach(vo -> {
-            vo.setOrdStatusValue(DictUtils.getDictValueMaps().get(vo.getOrdStatus()));
-            vo.setPayTypeValue(DictUtils.getDictValueMaps().get(vo.getPayType()));
-            vo.setPayStatusValue(DictUtils.getDictValueMaps().get(vo.getPayStatus()));
+            vo.setOrdStatusValue(DictUtils.getValueByDictKey(vo.getOrdStatus()));
+            vo.setPayTypeValue(DictUtils.getValueByDictKey(vo.getPayType()));
+            vo.setPayStatusValue(DictUtils.getValueByDictKey(vo.getPayStatus()));
         });
         PageInfo<OrderQueryVo> pageInfo = new PageInfo<>(list);
         page.setTotal(pageInfo.getTotal());
@@ -174,7 +173,12 @@ public class TOrderServiceImpl implements TOrderService {
                 res = tOrderMapper.update(order);
             } else {
                 order.setOrdCode(ordCode);
+                //初始化数据
                 order.setOrdStatus(Constants.ORD_STATUS_NEW);
+                order.setOrdTotalWeight(0d);
+                order.setOrdTotalSq(0d);
+                order.setOrdTotalNum(0L);
+                order.setOrdOutNum(0L);
                 res = tOrderMapper.insert(order);
             }
             if (res > 0) {
@@ -189,9 +193,9 @@ public class TOrderServiceImpl implements TOrderService {
     public OrderAddModifyVo findModifyInfoByOrdCode(String ordCode) {
         OrderAddModifyVo vo = tOrderMapper.findModifyInfoByOrdCode(ordCode);
         if (vo != null) {
-            vo.setOrdTypeValue(DictUtils.getDictValueMaps().get(vo.getOrdType()));
-            vo.setPayTypeValue(DictUtils.getDictValueMaps().get(vo.getPayType()));
-            vo.setPayStatusValue(DictUtils.getDictValueMaps().get(vo.getPayStatus()));
+            vo.setOrdTypeValue(DictUtils.getValueByDictKey(vo.getOrdType()));
+            vo.setPayTypeValue(DictUtils.getValueByDictKey(vo.getPayType()));
+            vo.setPayStatusValue(DictUtils.getValueByDictKey(vo.getPayStatus()));
         }
         return vo;
     }
@@ -204,18 +208,29 @@ public class TOrderServiceImpl implements TOrderService {
         TOrder order = new TOrder();
         order.setOrdCode(ordCode);
         Double amount = 0d;
+        Double totalSq = 0d;
+        Double totalWeight = 0d;
+        Long totalNum = 0L;
         List<TOrderItem> orderItems = new ArrayList<>();
         for (OrderItemVo vo : list) {
             TOrderItem orderItem = new TOrderItem();
             BeanUtils.copyProperties(vo, orderItem);
             orderItem.setCreateTime(date);
+            orderItem.setItemStatus(Constants.ORD_PROD_STATUS_NEW);
+            orderItem.setItemOutNum(0L);
             orderItems.add(orderItem);
             if (vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ)) {
                 amount += vo.getItemPrice() * vo.getItemTotalSq();
             } else if (vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)) {
                 amount += vo.getItemPrice() * vo.getItemTotalWeight();
             }
+            totalSq += orderItem.getItemTotalSq();
+            totalWeight += orderItem.getItemTotalWeight();
+            totalNum += orderItem.getItemNum();
         }
+        order.setOrdTotalNum(totalNum);
+        order.setOrdTotalSq(totalSq);
+        order.setOrdTotalWeight(totalWeight);
         order.setOrdTotalAmount(amount);
         order.setUpdateTime(date);
         tOrderItemMapper.deleteByOrdCode(ordCode);
@@ -233,7 +248,7 @@ public class TOrderServiceImpl implements TOrderService {
         } else if (state == 1) {
             order.setOrdStatus(Constants.ORD_STATUS_ABORT);
         }
-        if (tOrderMapper.update(order) > 0) {
+        if (tOrderMapper.update(order) > 0 && updateProdStatusByOrdCode(ordCode, Constants.ORD_PROD_STATUS_WAIT) > 0) {
             if (state == 0) {
                 //审批通过，加入生产计划
                 List<OrderItemVo> list = tOrderItemMapper.findByOrdCode(ordCode);
@@ -243,6 +258,13 @@ public class TOrderServiceImpl implements TOrderService {
         } else {
             return -1;
         }
+    }
+
+    public int updateProdStatusByOrdCode(String ordCode, Long status){
+        Map<String, Object> map = new HashMap<>();
+        map.put("ordCode", ordCode);
+        map.put("status", status);
+        return tOrderItemMapper.updateProdStatusByOrdCode(map);
     }
 
     @Override

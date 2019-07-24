@@ -13,6 +13,7 @@ public class TStock implements Serializable {
     private Long id;
     private String barCode;
     private String ordCode;
+    private Long orderItemId;
     private String itemCode;
     private Double itemLenth;
     private Double itemWidth;
@@ -38,8 +39,17 @@ public class TStock implements Serializable {
     public void setBarCode (String barCode) {this.barCode = barCode;}
     public String getBarCode(){ return barCode;}
     public void setOrdCode (String ordCode) {this.ordCode = ordCode;} 
-    public String getOrdCode(){ return ordCode;} 
-    public void setItemCode (String itemCode) {this.itemCode = itemCode;} 
+    public String getOrdCode(){ return ordCode;}
+
+    public Long getOrderItemId() {
+        return orderItemId;
+    }
+
+    public void setOrderItemId(Long orderItemId) {
+        this.orderItemId = orderItemId;
+    }
+
+    public void setItemCode (String itemCode) {this.itemCode = itemCode;}
     public String getItemCode(){ return itemCode;} 
     public void setItemLenth (Double itemLenth) {this.itemLenth = itemLenth;} 
     public Double getItemLenth(){ return itemLenth;} 

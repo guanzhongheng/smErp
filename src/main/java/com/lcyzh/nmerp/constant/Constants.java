@@ -721,5 +721,25 @@ public class Constants {
      * 延长类型
      */
     public static final String PROD_YC_TYPE = "prod_ycType";
+    /**
+     * 订单产品状态
+     */
+    public static final long ORD_PROD_STATUS = 107000L;
+    /**
+     * 订单产品状态-未生产
+     */
+    public static final long ORD_PROD_STATUS_NEW = 107001L;
+    /**
+     * 订单产品状态-排产
+     */
+    public static final long ORD_PROD_STATUS_WAIT = 107002L;
+    /**
+     * 订单产品状态-生产中
+     */
+    public static final long ORD_PROD_STATUS_PROCESSING = 107003L;
+    /**
+     * 订单产品状态-生产完成
+     */
+    public static final long ORD_PROD_STATUS_END = 107004L;
 
 }

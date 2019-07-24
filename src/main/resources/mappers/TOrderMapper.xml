@@ -20,6 +20,10 @@
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
         <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="ord_total_num" property="ordTotalNum" jdbcType="BIGINT"/>
+        <result column="ord_out_num" property="ordOutNum" jdbcType="BIGINT"/>
+        <result column="ord_total_sq" property="ordTotalSq" jdbcType="DOUBLE"/>
+        <result column="ord_total_weight" property="ordTotalWeight" jdbcType="DOUBLE"/>
     </resultMap>
 
 
@@ -39,7 +43,11 @@
         pay_status payStatus,
         cus_contractor cusContractor,
         com_contractor comContractor,
-        remarks remarks
+        remarks remarks,
+        ord_total_num ordTotalNum,
+        ord_out_num ordOutNum,
+        ord_total_sq ordTotalSq,
+        ord_total_weight ordTotalWeight
         from T_ORDER
         where ord_code = #{ordCode,jdbcType=VARCHAR}
         order by create_time desc
@@ -59,6 +67,10 @@
         od.pay_type payType,
         od.pay_status payStatus,
         od.ord_type ordType,
+        od.ord_total_num ordTotalNum,
+        od.ord_out_num ordOutNum,
+        od.ord_total_sq ordTotalSq,
+        od.ord_total_weight ordTotalWeight,
         pt.repay_amount repayAmount,
         pt.invoiced_amount invoicedAmount,
         pt.overdue_num overdueNum
@@ -147,7 +159,11 @@
             cont_attach_url,
             remarks,
             create_time,
-            update_time
+            update_time,
+            ord_total_num,
+            ord_out_num,
+            ord_total_sq,
+            ord_total_weight
         )
         VALUES (
             #{ordCode,jdbcType=VARCHAR},
@@ -166,7 +182,11 @@
             #{contAttachUrl,jdbcType=VARCHAR},
             #{remarks,jdbcType=VARCHAR},
             #{createTime,jdbcType=TIMESTAMP},
-            #{updateTime,jdbcType=TIMESTAMP}
+            #{updateTime,jdbcType=TIMESTAMP},
+            #{ordTotalNum,jdbcType=BIGINT},
+            #{ordOutNum,jdbcType=BIGINT},
+            #{ordTotalSq,jdbcType=DOUBLE},
+            #{ordTotalWeight,jdbcType=DOUBLE}
         )
     </insert>
 
@@ -187,7 +207,11 @@
         com_contractor,
         cont_attach_url,
         create_time,
-        update_time
+        update_time,
+        ord_total_num,
+        ord_out_num,
+        ord_total_sq,
+        ord_total_weight
         )
         VALUES
         <foreach collection="list" item="item" separator=",">
@@ -207,7 +231,11 @@
             #{item.comContractor,jdbcType=VARCHAR},
             #{item.contAttachUrl,jdbcType=VARCHAR},
             #{item.createTime,jdbcType=TIMESTAMP},
-            #{item.updateTime,jdbcType=TIMESTAMP}
+            #{item.updateTime,jdbcType=TIMESTAMP},
+            #{item.ordTotalNum,jdbcType=BIGINT},
+            #{item.ordOutNum,jdbcType=BIGINT},
+            #{item.ordTotalSq,jdbcType=DOUBLE},
+            #{item.ordTotalWeight,jdbcType=DOUBLE}
             )
         </foreach>
     </insert>
@@ -251,6 +279,18 @@
             <if test="payStatus!=null">
                 pay_status = #{payStatus,jdbcType=BIGINT}
             </if>
+            <if test="ordTotalNum!=null">
+                ord_total_num = #{ordTotalNum,jdbcType=BIGINT}
+            </if>
+            <if test="ordOutNum!=null">
+                ord_out_num = #{ordOutNum,jdbcType=BIGINT}
+            </if>
+            <if test="ordTotalSq!=null">
+                ord_total_sq = #{ordTotalSq,jdbcType=DOUBLE}
+            </if>
+            <if test="ordTotalWeight!=null">
+                ord_total_weight = #{ordTotalWeight,jdbcType=DOUBLE}
+            </if>
         </set>
         WHERE ord_code = #{ordCode,jdbcType=VARCHAR}
     </update>
@@ -259,5 +299,22 @@
         DELETE FROM T_ORDER
         WHERE ord_code = #{ordCode,jdbcType=VARCHAR}
     </delete>
+
+    <update id="updateBatchOutNumByOrdCode" parameterType="java.util.List">
+        update T_ORDER
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="ord_out_num =case" suffix="end,">
+                <foreach collection="list" item="i" index="index">
+                    <if test="i.ordOutNum!=null">
+                        when ord_code = #{i.ordCode} then ord_out_num + #{i.ordOutNum}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where
+        <foreach collection="list" separator="or" item="i" index="index">
+            ord_code = #{i.ordCode}
+        </foreach>
+    </update>
 
 </mapper>

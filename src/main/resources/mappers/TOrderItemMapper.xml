@@ -21,6 +21,8 @@
         <result column="item_yb_type" property="itemYbType" jdbcType="VARCHAR"/>
         <result column="item_yc_type" property="itemYcType" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="item_status" property="itemStatus" jdbcType="BIGINT"/>
+        <result column="item_out_num" property="itemOutNum" jdbcType="BIGINT"/>
     </resultMap>
 
     <select id="get" parameterType="java.lang.Long" resultMap="tOrderItemResultMap">
@@ -51,6 +53,8 @@
         toi.item_total_sq itemTotalSq,
         toi.item_yb_type itemYbType,
         toi.item_yc_type itemYcType,
+        toi.item_status itemStatus,
+        toi.item_out_num itemOutNum,
         toi.create_time createTime
     FROM
         T_ORDER_ITEM toi
@@ -90,7 +94,9 @@
             item_total_sq,
             item_yb_type,
             item_yc_type,
-            create_time
+            create_time,
+            item_status,
+            item_out_num
         )
         VALUES (
             #{ordCode,jdbcType=VARCHAR},
@@ -109,7 +115,9 @@
             #{itemTotalSq,jdbcType=DOUBLE},
             #{itemYbType,jdbcType=VARCHAR},
             #{itemYcType,jdbcType=VARCHAR},
-            #{createTime,jdbcType=TIMESTAMP}
+            #{createTime,jdbcType=TIMESTAMP},
+            #{itemStatus,jdbcType=BIGINT},
+            #{itemOutNum,jdbcType=BIGINT}
         )
     </insert>
 
@@ -131,7 +139,9 @@
             item_total_sq,
             item_yb_type,
             item_yc_type,
-            create_time
+            create_time,
+            item_status,
+            item_out_num
             )
         VALUES
         <foreach collection="list" item="tOrderItem" separator=",">
@@ -152,37 +162,76 @@
             #{tOrderItem.itemTotalSq,jdbcType=DOUBLE},
             #{tOrderItem.itemYbType,jdbcType=VARCHAR},
             #{tOrderItem.itemYcType,jdbcType=VARCHAR},
-            #{tOrderItem.createTime,jdbcType=TIMESTAMP}
+            #{tOrderItem.createTime,jdbcType=TIMESTAMP},
+            #{tOrderItem.itemStatus,jdbcType=BIGINT},
+            #{tOrderItem.itemOutNum,jdbcType=BIGINT}
             )
         </foreach>
     </insert>
 
     <update id="update" parameterType="com.lcyzh.nmerp.entity.TOrderItem">
         UPDATE T_ORDER_ITEM
-        SET
-        id = #{id},
-        ord_code = #{ordCode},
-        item_code = #{itemCode},
-        item_num = #{itemNum},
-        item_lenth = #{itemLenth},
-        item_width = #{itemWidth},
-        item_thick = #{itemThick},
-        item_color = #{itemColor},
-        item_unit = #{itemUnit},
-        item_owner = #{itemOwner},
-        remark = #{remark},
-        create_time = #{createTime}
-        WHERE id = #{id}
+        <set>
+            <if test="remarks != null">
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="itemLenth != null">
+                item_lenth = #{itemLenth,jdbcType=DOUBLE},
+            </if>
+            <if test="itemWidth != null">
+                item_width = #{itemWidth,jdbcType=DOUBLE},
+            </if>
+            <if test="itemThick != null">
+                item_thick = #{itemThick,jdbcType=DOUBLE},
+            </if>
+            <if test="itemColor != null">
+                item_color = #{itemColor,jdbcType=VARCHAR},
+            </if>
+            <if test="itemNum != null">
+                item_num = #{itemNum,jdbcType=BIGINT},
+            </if>
+            <if test="itemPrice != null">
+                item_price = #{itemPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="itemPriceType != null">
+                item_price_type = #{itemPriceType,jdbcType=BIGINT},
+            </if>
+            <if test="itemWeight != null">
+                item_weight = #{itemWeight,jdbcType=DOUBLE},
+            </if>
+            <if test="itemTotalWeight != null">
+                item_total_weight = #{itemTotalWeight,jdbcType=DOUBLE},
+            </if>
+            <if test="itemTotalSq != null">
+                item_total_sq = #{itemTotalSq,jdbcType=DOUBLE},
+            </if>
+            <if test="itemYbType != null">
+                item_yb_type = #{itemYbType,jdbcType=VARCHAR},
+            </if>
+            <if test="itemYcType != null">
+                item_yc_type = #{itemYcType,jdbcType=VARCHAR},
+            </if>
+            <if test="itemStatus != null">
+                item_status = #{itemStatus,jdbcType=BIGINT},
+            </if>
+            <if test="itemOutNum != null">
+                item_out_num = #{itemOutNum,jdbcType=BIGINT},
+            </if>
+        </set>
+        WHERE id = #{id,jdbcType=BIGINT}
     </update>
 
     <delete id="delete" parameterType="com.lcyzh.nmerp.entity.TOrderItem">
         DELETE FROM T_ORDER_ITEM
-        WHERE id = #{id}
+        WHERE id = #{id,jdbcType=BIGINT}
     </delete>
 
     <delete id="deleteByOrdCode" parameterType="java.lang.String">
         DELETE FROM T_ORDER_ITEM
         WHERE ord_code = #{ordCode}
     </delete>
+    <update id="updateProdStatusByOrdCode" parameterType="java.util.Map">
+        update T_ORDER_ITEM set item_status = #{status} where ord_code = #{ordCode}
+    </update>
 
 </mapper>

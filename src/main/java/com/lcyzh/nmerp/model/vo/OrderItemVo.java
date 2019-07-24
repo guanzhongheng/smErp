@@ -67,7 +67,12 @@ public class OrderItemVo {
     private String itemYbType;
     //延长类型
     private String itemYcType;
-
+    //产品状态字典
+    private Long itemStatus;
+    //产品状态字典值
+    private String itemStatusValue;
+    //产品出库数量
+    private Long itemOutNum;
     public Long getItemId() {
         return itemId;
     }
@@ -280,5 +285,29 @@ public class OrderItemVo {
 
     public void setItemColorValue(String itemColorValue) {
         this.itemColorValue = itemColorValue;
+    }
+
+    public Long getItemStatus() {
+        return itemStatus;
+    }
+
+    public void setItemStatus(Long itemStatus) {
+        this.itemStatus = itemStatus;
+    }
+
+    public String getItemStatusValue() {
+        return itemStatusValue;
+    }
+
+    public void setItemStatusValue(String itemStatusValue) {
+        this.itemStatusValue = itemStatusValue;
+    }
+
+    public Long getItemOutNum() {
+        return itemOutNum;
+    }
+
+    public void setItemOutNum(Long itemOutNum) {
+        this.itemOutNum = itemOutNum;
     }
 }

@@ -32,4 +32,6 @@ public interface TStockMapper {
     StockVo findByBarCode(String barCode);
 
     int updateByOutCode(Map<String, Object> map);
+
+    List<TStock> findByOutCode(String outCode);
 }

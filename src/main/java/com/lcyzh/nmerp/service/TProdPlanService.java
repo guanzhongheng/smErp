@@ -2,9 +2,7 @@ package com.lcyzh.nmerp.service;
 
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.entity.TProdPlan;
-import com.lcyzh.nmerp.entity.TProdPlanDetail;
 import com.lcyzh.nmerp.model.vo.OrderItemVo;
-import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
 import com.lcyzh.nmerp.model.vo.ProdPlanVo;
 
 import java.util.List;

@@ -29,4 +29,6 @@ public interface TOrderMapper {
     int delete(String tOrder);
 
     OrderAddModifyVo findModifyInfoByOrdCode(String ordCode);
+
+    int updateBatchOutNumByOrdCode(List<TOrder> orders);
 }

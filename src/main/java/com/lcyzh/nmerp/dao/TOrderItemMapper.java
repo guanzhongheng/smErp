@@ -5,6 +5,7 @@ import com.lcyzh.nmerp.model.vo.OrderItemVo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
 * Author ljk
@@ -30,4 +31,6 @@ public interface TOrderItemMapper {
     int deleteByOrdCode(String ordCode);
 
     TOrderItem get(Long id);
+
+    int updateProdStatusByOrdCode(Map<String, Object> map);
 }

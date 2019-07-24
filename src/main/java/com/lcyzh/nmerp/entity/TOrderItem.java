@@ -47,7 +47,10 @@ public class TOrderItem implements Serializable {
     private String itemYbType;
     //延长类型
     private String itemYcType;
-
+    //产品状态
+    private Long itemStatus;
+    //产品出库数量
+    private Long itemOutNum;
 
     public TOrderItem() {
     }
@@ -202,5 +205,21 @@ public class TOrderItem implements Serializable {
 
     public void setItemYcType(String itemYcType) {
         this.itemYcType = itemYcType;
+    }
+
+    public Long getItemStatus() {
+        return itemStatus;
+    }
+
+    public void setItemStatus(Long itemStatus) {
+        this.itemStatus = itemStatus;
+    }
+
+    public Long getItemOutNum() {
+        return itemOutNum;
+    }
+
+    public void setItemOutNum(Long itemOutNum) {
+        this.itemOutNum = itemOutNum;
     }
 }

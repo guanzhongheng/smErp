@@ -6,6 +6,7 @@
         <id column="id" property="id" jdbcType="BIGINT"/> 
         <result column="bar_code" property="barCode" jdbcType="VARCHAR"/>
         <result column="ord_code" property="ordCode" jdbcType="VARCHAR"/>
+        <result column="order_item_id" property="orderItemId" jdbcType="BIGINT"/>
         <result column="item_code" property="itemCode" jdbcType="VARCHAR"/>
         <result column="item_lenth" property="itemLenth" jdbcType="DOUBLE"/> 
         <result column="item_width" property="itemWidth" jdbcType="DOUBLE"/> 
@@ -29,6 +30,7 @@
         id stockId,
         bar_code barCode,
         ord_code ordCode,
+        order_item_id orderItemId,
         item_code itemCode,
         item_lenth itemLenth,
         item_width itemWidth,
@@ -84,6 +86,7 @@
         INSERT INTO t_stock(
             bar_code,
             ord_code,
+            order_item_id,
             item_code,
             item_lenth,
             item_width,
@@ -104,6 +107,7 @@
         VALUES (
             #{barCode,jdbcType=VARCHAR},
             #{ordCode,jdbcType=VARCHAR},
+            #{orderItemId,jdbcType=BIGINT},
             #{itemCode,jdbcType=VARCHAR},
             #{itemLenth,jdbcType=DOUBLE},
             #{itemWidth,jdbcType=DOUBLE},
@@ -128,6 +132,7 @@
             id,
             bar_code,
             ord_code,
+            order_item_id,
             item_code,
             item_lenth,
             item_width,
@@ -151,6 +156,7 @@
             #{item.id,jdbcType=BIGINT},
             #{item.barCode,jdbcType=VARCHAR},
             #{item.ordCode,jdbcType=VARCHAR},
+            #{item.orderItemId,jdbcType=BIGINT},
             #{item.itemCode,jdbcType=VARCHAR},
             #{item.itemLenth,jdbcType=DOUBLE},
             #{item.itemWidth,jdbcType=DOUBLE},
@@ -170,5 +176,11 @@
         )
         </foreach>
     </insert>
+
+    <select id="findByOutCode" parameterType="java.lang.String" resultMap="tStockResultMap">
+        select s.* from t_out_stock_detail osd
+        left join t_stock s on osd.bar_code = s.bar_code
+        where osd.out_code = #{outCode}
+    </select>
 
 </mapper>

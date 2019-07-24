@@ -48,6 +48,14 @@ public class OrderAddModifyVo {
     private String contAttachUrl;
     //订单备注
     private String remarks;
+    //订单产品总数量
+    private Long ordTotalNum;
+    //订单产品总面积
+    private Double ordTotalSq;
+    //订单产品总重量
+    private Double ordTotalWeight;
+    //订单产品出库数量
+    private Long ordOutNum;
 
     public String getOrdCode() {
         return ordCode;
@@ -191,5 +199,37 @@ public class OrderAddModifyVo {
 
     public void setPayStatusValue(String payStatusValue) {
         this.payStatusValue = payStatusValue;
+    }
+
+    public Long getOrdTotalNum() {
+        return ordTotalNum;
+    }
+
+    public void setOrdTotalNum(Long ordTotalNum) {
+        this.ordTotalNum = ordTotalNum;
+    }
+
+    public Double getOrdTotalSq() {
+        return ordTotalSq;
+    }
+
+    public void setOrdTotalSq(Double ordTotalSq) {
+        this.ordTotalSq = ordTotalSq;
+    }
+
+    public Double getOrdTotalWeight() {
+        return ordTotalWeight;
+    }
+
+    public void setOrdTotalWeight(Double ordTotalWeight) {
+        this.ordTotalWeight = ordTotalWeight;
+    }
+
+    public Long getOrdOutNum() {
+        return ordOutNum;
+    }
+
+    public void setOrdOutNum(Long ordOutNum) {
+        this.ordOutNum = ordOutNum;
     }
 }

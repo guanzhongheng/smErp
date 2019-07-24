@@ -3,6 +3,7 @@ package com.lcyzh.nmerp.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lcyzh.nmerp.common.persistence.Page;
+import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.dao.*;
 import com.lcyzh.nmerp.entity.*;
 import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
@@ -83,22 +84,28 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
         String barCode = getBarCode(IdGen.getNetBarCode());
         vo.setBarCode(barCode);
         vo.setItemNum(vo.getItemNum() - 1);
+        TOrderItem tOrderItem = tOrderItemMapper.get(vo.getOrderItemId());
         if(vo.getItemNum() > 0) {
             //该商品还没有生产完，更新计划单明细件数
             TProdPlanDetail prodPlanDetail = new TProdPlanDetail();
             BeanUtils.copyProperties(vo, prodPlanDetail);
             tProdPlanDetailMapper.update(prodPlanDetail);
+            if(!tOrderItem.getItemStatus().equals(Constants.ORD_PROD_STATUS_PROCESSING)) {
+                tOrderItem.setItemStatus(Constants.ORD_PROD_STATUS_PROCESSING);
+                tOrderItemMapper.update(tOrderItem);
+            }
         }else if(vo.getItemNum() == 0){
             //该商品生产完，更新计划单，将明细单该记录移到生产记录表
             THistoryProdRecord historyProdRecord = new THistoryProdRecord();
             BeanUtils.copyProperties(vo, historyProdRecord);
-            TOrderItem tOrderItem = tOrderItemMapper.get(historyProdRecord.getOrderItemId());
             historyProdRecord.setItemNum(tOrderItem.getItemNum());
             historyProdRecord.setCreateTime(date);
             TProdPlan prodPlan = new TProdPlan();
             prodPlan.setProdPlanCode(vo.getProdPlanCode());
             prodPlan.setTotalQuantity(1L);
             prodPlan.setQuantity(1L);
+            tOrderItem.setItemStatus(Constants.ORD_PROD_STATUS_END);
+            tOrderItemMapper.update(tOrderItem);
             tHistoryProdRecordMapper.insert(historyProdRecord);
             tProdPlanMapper.updateNum(prodPlan);
             tProdPlanDetailMapper.delete(vo.getProdPlanDetailId());

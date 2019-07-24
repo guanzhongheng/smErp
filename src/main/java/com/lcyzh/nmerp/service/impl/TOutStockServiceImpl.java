@@ -7,8 +7,10 @@ import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.controller.system.util.SysDictUtils;
 import com.lcyzh.nmerp.controller.system.util.UserUtils;
 import com.lcyzh.nmerp.dao.*;
+import com.lcyzh.nmerp.entity.TOrder;
 import com.lcyzh.nmerp.entity.TOutStock;
 import com.lcyzh.nmerp.entity.TOutStockDetail;
+import com.lcyzh.nmerp.entity.TStock;
 import com.lcyzh.nmerp.entity.sys.User;
 import com.lcyzh.nmerp.model.vo.*;
 import com.lcyzh.nmerp.service.TOutStockService;
@@ -37,6 +39,8 @@ public class TOutStockServiceImpl implements TOutStockService {
     private TStockMapper tStockMapper;
     @Autowired
     private TOutStockDetailMapper tOutStockDetailMapper;
+    @Autowired
+    private TOrderMapper tOrderMapper;
 
     @Override
     public List<TOutStock> findListNew() {
@@ -128,6 +132,24 @@ public class TOutStockServiceImpl implements TOutStockService {
         tOutStock.setUpdateTime(date);
         tOutStock.setUpdateBy(currUser.getLoginName());
         tOutStockMapper.update(tOutStock);
+        //更新订单出库数量
+        List<TStock> list = tStockMapper.findByOutCode(tOutStock.getOutCode());
+        Map<String, Long> ordMap = new HashMap<>(list.size());
+        String ordCode;
+        for(TStock tStock : list) {
+            ordCode = tStock.getOrdCode();
+            if(ordMap.containsKey(ordCode)) {
+                ordMap.put(ordCode, ordMap.get(ordCode) + 1);
+            }
+        }
+        List<TOrder> orders = new ArrayList<>(ordMap.size());
+        for(Map.Entry<String, Long> entry : ordMap.entrySet()) {
+            TOrder order = new TOrder();
+            order.setOrdCode(entry.getKey());
+            order.setOrdOutNum(entry.getValue());
+            orders.add(order);
+        }
+        tOrderMapper.updateBatchOutNumByOrdCode(orders);
         Map<String, Object> map = new HashMap<>();
         map.put("status", 1);
         map.put("updateTime", date);
