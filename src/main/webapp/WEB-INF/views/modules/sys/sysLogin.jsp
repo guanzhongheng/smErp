@@ -3,7 +3,7 @@
 
 <html>
 <head>
-    <title>农膜ERP登录</title>
+    <title>企业资源计划（ERP）管理系统</title>
     <style type="text/css">
         html, body, table {
             width: 100%;
