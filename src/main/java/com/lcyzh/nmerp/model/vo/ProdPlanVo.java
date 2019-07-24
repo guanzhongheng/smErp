@@ -1,7 +1,5 @@
 package com.lcyzh.nmerp.model.vo;
 
-import com.lcyzh.nmerp.common.persistence.DataEntity;
-
 /**
  * @Project :
  * @Description :
@@ -10,7 +8,7 @@ import com.lcyzh.nmerp.common.persistence.DataEntity;
  * @Date :
  * @ModificationHistory Who          When          What
  */
-public class ProdPlanVo extends DataEntity<ProdPlanVo> {
+public class ProdPlanVo{
     //计划单号
     private String prodPlanCode;
     //产品品种-字典
