@@ -3,6 +3,7 @@
 <html>
 <head>
 	<title>修改密码</title>
+	<link rel="stylesheet" href="/static/common/customize.css">
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#oldPassword").focus();
@@ -31,36 +32,58 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li><a href="${ctx}/sys/user/info">个人信息</a></li>
-		<li class="active"><a href="${ctx}/sys/user/modifyPwd">修改密码</a></li>
+		<li><a href="${ctx}/sys/user/info" class="global-font">个人信息</a></li>
+		<li class="active"><a href="${ctx}/sys/user/modifyPwd" class="global-font">修改密码</a></li>
 	</ul><br/>
 	<form:form id="inputForm" modelAttribute="user" action="${ctx}/sys/user/modifyPwd" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
 		<sys:message content="${message}"/>
-		<div class="control-group">
-			<label class="control-label">旧密码:</label>
-			<div class="controls">
-				<input id="oldPassword" name="oldPassword" type="password" value="" maxlength="50" minlength="3" class="required"/>
-				<span class="help-inline"><font color="red">*</font> </span>
+
+
+
+
+
+		<div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
+			<div class="panel-heading" style="background-color: #50B0E6">
+				<h3 class="panel-title global-panel-title" >
+					信息确认
+				</h3>
+			</div>
+			<div class="panel-body">
+				<div class="control-group"></div>
+				<div class="control-group">
+					<label class="control-label global-font">旧密码:</label>
+					<div class="controls">
+						<input id="oldPassword" name="oldPassword" type="password" value="" maxlength="50" minlength="3" class="required"/>
+						<span class="help-inline"><font color="red">*</font> </span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label global-font">新密码:</label>
+					<div class="controls">
+						<input id="newPassword" name="newPassword" type="password" value="" maxlength="50" minlength="3" class="required"/>
+						<span class="help-inline"><font color="red">*</font> </span>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label global-font">确认新密码:</label>
+					<div class="controls">
+						<input id="confirmNewPassword" name="confirmNewPassword" type="password" value="" maxlength="50" minlength="3" class="required" equalTo="#newPassword"/>
+						<span class="help-inline"><font color="red">*</font> </span>
+					</div>
+				</div>
+
+				<div class="global-button-padding">
+					<input id="btnSubmit" class="btn btn-primary global-button-style" style="width: 180px;" type="submit" value="确认修改"/>
+				</div>
 			</div>
 		</div>
-		<div class="control-group">
-			<label class="control-label">新密码:</label>
-			<div class="controls">
-				<input id="newPassword" name="newPassword" type="password" value="" maxlength="50" minlength="3" class="required"/>
-				<span class="help-inline"><font color="red">*</font> </span>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">确认新密码:</label>
-			<div class="controls">
-				<input id="confirmNewPassword" name="confirmNewPassword" type="password" value="" maxlength="50" minlength="3" class="required" equalTo="#newPassword"/>
-				<span class="help-inline"><font color="red">*</font> </span>
-			</div>
-		</div>
-		<div class="form-actions">
-			<input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>
-		</div>
+
+
+
+
+
+
 	</form:form>
 </body>
 </html>

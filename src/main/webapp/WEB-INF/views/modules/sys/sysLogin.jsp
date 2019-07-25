@@ -137,35 +137,35 @@
 </div>
 <%--<h1 class="form-signin-heading">农膜ERP操作系统</h1>--%>
 <form id="loginForm" class="form-signin" action="${ctx}/login" method="post">
-    <label class="input-label" for="username">登录名</label>
-    <input type="text" id="username" name="username" class="input-block-level required" value="${username}">
-    <label class="input-label" for="password">密码</label>
-    <input type="password" id="password" name="password" class="input-block-level required">
+    <label class="input-label global-font" for="username">登录名</label>
+    <input type="text" id="username" name="username" class="input-block-level required global-font" value="${username}">
+    <label class="input-label global-font" for="password">密码</label>
+    <input type="password" id="password" name="password" class="input-block-level required global-font">
     <c:if test="${isValidateCodeLogin}">
-        <div class="validateCode">
-            <label class="input-label mid" for="validateCode">验证码</label>
+        <div class="validateCode global-font">
+            <label class="input-label mid global-font" for="validateCode">验证码</label>
             <sys:validateCode name="validateCode" inputCssStyle="margin-bottom:0;"/>
         </div>
     </c:if><%--
 		<label for="mobile" title="手机登录"><input type="checkbox" id="mobileLogin" name="mobileLogin" ${mobileLogin ? 'checked' : ''}/></label> --%>
     <div style="text-align: center; width: 100%; height: 100%" >
-    <input class="btn btn-large btn-primary" style="text-align: center; width:100%" type="submit" value="登 录"/>&nbsp;&nbsp;
+    <input class="btn btn-large btn-primary" style="text-align: center; width:100%; font-size: 18px;" type="submit" value="登 录"/>&nbsp;&nbsp;
     <br/>
-    <label for="rememberMe" title="下次不需要再登录">
-        <input type="checkbox" style="text-align: center" id="rememberMe"
-                                                    name="rememberMe" ${rememberMe ? 'checked' : ''}/>
-        记住我（公共场所慎用）</label>
-    </div>
-    <div id="themeSwitch" class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown"
-           href="#"><b class="caret"></b></a>
-        <!--[if lte IE 6]>
-        <script type="text/javascript">$('#themeSwitch').hide();</script><![endif]-->
-    </div>
+    <%--<label for="rememberMe" title="下次不需要再登录">--%>
+        <%--<input type="checkbox" style="text-align: center" id="rememberMe"--%>
+                                                    <%--name="rememberMe" ${rememberMe ? 'checked' : ''}/>--%>
+        <%--记住我（公共场所慎用）</label>--%>
+    <%--</div>--%>
+    <%--<div id="themeSwitch" class="dropdown">--%>
+        <%--<a class="dropdown-toggle" data-toggle="dropdown"--%>
+           <%--href="#"><b class="caret"></b></a>--%>
+        <%--<!--[if lte IE 6]>--%>
+        <%--<script type="text/javascript">$('#themeSwitch').hide();</script><![endif]-->--%>
+    <%--</div>--%>
 </form>
 <div class="footer" style="z-index: auto">
     Copyright &copy; 2019-2020 <a
-        href="#" style="color: #0d0d0d">ERP管理系统</a> - Powered By
+        href="#" style="color: #0d0d0d">ERP管理系统</a> <br/>- Powered By
     <a href="http://jeesite.com" target="_blank" style="color: #0d0d0d">nmErp</a> v1.0.0
 </div>
 </div>
