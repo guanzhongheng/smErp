@@ -22,7 +22,8 @@
         <result column="item_cgy_code" property="itemCgyCode" jdbcType="BIGINT"/> 
         <result column="item_variety" property="itemVariety" jdbcType="BIGINT"/> 
         <result column="item_unit" property="itemUnit" jdbcType="BIGINT"/> 
-        <result column="item_color" property="itemColor" jdbcType="VARCHAR"/> 
+        <result column="item_color" property="itemColor" jdbcType="VARCHAR"/>
+        <result column="mac_code" property="macCode" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="findByBarCode" parameterType="java.lang.String" resultType="com.lcyzh.nmerp.model.vo.StockVo">
@@ -102,7 +103,8 @@
             item_cgy_code,
             item_variety,
             item_unit,
-            item_color
+            item_color,
+            mac_code
         )
         VALUES (
             #{barCode,jdbcType=VARCHAR},
@@ -123,7 +125,8 @@
             #{itemCgyCode,jdbcType=BIGINT},
             #{itemVariety,jdbcType=BIGINT},
             #{itemUnit,jdbcType=BIGINT},
-            #{itemColor,jdbcType=VARCHAR}
+            #{itemColor,jdbcType=VARCHAR},
+            #{macCode,jdbcType=VARCHAR}
         )
     </insert>
 
@@ -148,7 +151,8 @@
             item_cgy_code,
             item_variety,
             item_unit,
-            item_color
+            item_color,
+            mac_code
         )
         VALUES
         <foreach collection ="list" item="item" separator =",">
@@ -172,7 +176,8 @@
             #{item.itemCgyCode,jdbcType=BIGINT},
             #{item.itemVariety,jdbcType=BIGINT},
             #{item.itemUnit,jdbcType=BIGINT},
-            #{item.itemColor,jdbcType=VARCHAR}
+            #{item.itemColor,jdbcType=VARCHAR},
+            #{item.macCode,jdbcType=VARCHAR}
         )
         </foreach>
     </insert>

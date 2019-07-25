@@ -30,6 +30,7 @@ public class TStock implements Serializable {
     private Long itemVariety;
     private Long itemUnit;
     private String itemColor;
+    private String macCode;
 
     public TStock(){
     }
@@ -40,15 +41,12 @@ public class TStock implements Serializable {
     public String getBarCode(){ return barCode;}
     public void setOrdCode (String ordCode) {this.ordCode = ordCode;} 
     public String getOrdCode(){ return ordCode;}
-
     public Long getOrderItemId() {
         return orderItemId;
     }
-
     public void setOrderItemId(Long orderItemId) {
         this.orderItemId = orderItemId;
     }
-
     public void setItemCode (String itemCode) {this.itemCode = itemCode;}
     public String getItemCode(){ return itemCode;} 
     public void setItemLenth (Double itemLenth) {this.itemLenth = itemLenth;} 
@@ -80,6 +78,7 @@ public class TStock implements Serializable {
     public void setItemUnit (Long itemUnit) {this.itemUnit = itemUnit;} 
     public Long getItemUnit(){ return itemUnit;} 
     public void setItemColor (String itemColor) {this.itemColor = itemColor;} 
-    public String getItemColor(){ return itemColor;} 
-
+    public String getItemColor(){ return itemColor;}
+    public String getMacCode() { return macCode; }
+    public void setMacCode(String macCode) { this.macCode = macCode; }
 }

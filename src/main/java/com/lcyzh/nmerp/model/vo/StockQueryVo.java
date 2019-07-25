@@ -38,6 +38,7 @@ public class StockQueryVo {
     private Long itemUnit;
     private String itemUnitValue;
     private String itemColor;
+    private String macCode;
 
     public Long getStockId() {
         return stockId;
@@ -191,4 +192,8 @@ public class StockQueryVo {
     public void setItemColor(String itemColor) {
         this.itemColor = itemColor;
     }
+
+    public String getMacCode() { return macCode; }
+
+    public void setMacCode(String macCode) { this.macCode = macCode; }
 }
