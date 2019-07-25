@@ -17,7 +17,7 @@
 </head>
 <body>
 <ul class="nav nav-tabs">
-    <li class="active"><a href="${ctx}/crm/customer/list/">客户列表</a></li>
+    <li class="active"><a href="${ctx}/crm/customer/list/" class="global-font">客户列表</a></li>
 </ul>
 <form:form id="searchForm" modelAttribute="customer" action="${ctx}/crm/customer/list" method="post"
            class="breadcrumb form-search">
@@ -49,17 +49,17 @@
             <input type="checkbox" name="followType" id="type" value="1">归属模式
         </li>
         &nbsp;&nbsp;
-        <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
+        <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 100px;" value="查询"/></li>
     </ul>
 </form:form>
 <div class="control-group">&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="/cus/customer_add" type="button" class="btn btn-primary" style="width: 67px;height: 22px"><i
+    <a href="/cus/customer_add" type="button" class="btn btn-primary" style="width: 100px;height: 23px"><i
             class="icon-plus"></i>&nbsp;添加</a>
     &nbsp;&nbsp;
-    <a type="button" id="toCustomer" class="btn btn-default" style="width: 80px;height: 23px"><i
+    <a type="button" id="toCustomer" class="btn btn-default" style="width: 100px;height: 23px"><i
             class="icon-refresh"></i>&nbsp;转移客户</a>
     &nbsp;&nbsp;
-    <a type="button" id="toPoolCustomer" class="btn btn-default" style="width: 80px;height: 23px"><i
+    <a type="button" id="toPoolCustomer" class="btn btn-default" style="width: 100px;height: 23px"><i
             class="icon-group"></i>&nbsp;移入公海</a>
 </div>
 <div class="control-group">

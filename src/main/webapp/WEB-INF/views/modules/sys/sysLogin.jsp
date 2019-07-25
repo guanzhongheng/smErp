@@ -163,7 +163,7 @@
         <%--<script type="text/javascript">$('#themeSwitch').hide();</script><![endif]-->--%>
     <%--</div>--%>
 </form>
-<div class="footer" style="z-index: auto">
+<div class="footer" style="z-index: auto; font-size: 14px;">
     Copyright &copy; 2019-2020 <a
         href="#" style="color: #0d0d0d">ERP管理系统</a> <br/>- Powered By
     <a href="http://jeesite.com" target="_blank" style="color: #0d0d0d">nmErp</a> v1.0.0
