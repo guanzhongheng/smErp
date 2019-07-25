@@ -110,6 +110,9 @@ public class TOrderServiceImpl implements TOrderService {
         List<OrderItemVo> itemVos = vo.getItemVos();
         if (itemVos != null && !itemVos.isEmpty()) {
             double totalAmount = 0.0;
+            double totalSq = 0.0;
+            double totalWeight = 0.0;
+            long totalNum = 0;
             List<TOrderItem> orderItems = new ArrayList<>(itemVos.size());
             for (OrderItemVo itv : itemVos) {
                 TOrderItem tOrderItem = new TOrderItem();
@@ -151,11 +154,18 @@ public class TOrderServiceImpl implements TOrderService {
                 tOrderItem.setItemUnit(StringUtils.parseDictKey(itv.getItemUnitValue()));
                 tOrderItem.setItemWidth(itv.getItemWidth());
                 tOrderItem.setItemYbType(StringUtils.parseDictKey(itv.getItemYbType()).toString());
+                tOrderItem.setItemStatus(Constants.ORD_PROD_STATUS_NEW);
+                tOrderItem.setItemOutNum(0L);
                 orderItems.add(tOrderItem);
-
+                totalSq += tOrderItem.getItemTotalSq();
+                totalWeight += tOrderItem.getItemTotalWeight();
+                totalNum += tOrderItem.getItemNum();
             }
+            tOrder.setOrdTotalNum(totalNum);
+            tOrder.setOrdTotalSq(totalSq);
+            tOrder.setOrdTotalWeight(totalWeight);
+            tOrder.setOrdOutNum(0L);
             tOrder.setOrdTotalAmount(totalAmount);
-
             tOrderItemMapper.insertBatch(orderItems);
         }
         return tOrderMapper.insert(tOrder);
