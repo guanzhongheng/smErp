@@ -1,0 +1,20 @@
+.global-font{
+    font-size:18px
+}
+
+.global-button-style {
+    width: 180px;
+    font-size: 18px;
+    height: 40px;
+}
+
+.global-button-padding{
+    padding: 19px 180px 20px;
+}
+
+.global-panel-title{
+    color: white;
+    margin-left: 10px;
+    font-weight:normal;
+    font-size: 18px;
+}
