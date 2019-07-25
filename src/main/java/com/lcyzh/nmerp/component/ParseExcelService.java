@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.component;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.io.Resources;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.jxls.reader.ReaderBuilder;
 import org.jxls.reader.XLSReader;
@@ -35,15 +36,18 @@ public class ParseExcelService {
     public void parseExcel(String xmlConfigName, MultipartFile mpf, Map<String, Object> beans) {
         InputStream inputStream = null;
         FileInputStream xmlConfig = null;
+        InputStream is = null;
         InputStream inputXML = null;
         InputStream inputXLS = null;
         try {
             //上传的文件流
             inputStream = mpf.getInputStream();
             //xml配置的文件流
-            xmlConfig = new FileInputStream(xmlConfigName);
+            is = this.getClass().getClassLoader().getResourceAsStream(xmlConfigName);
+//            xmlConfig =new FileInputStream(abpath);
+//            xmlConfig = new FileInputStream(xmlConfigName);
             //执行解析
-            inputXML = new BufferedInputStream(xmlConfig);
+            inputXML = new BufferedInputStream(is);
             XLSReader mainReader = ReaderBuilder.buildFromXML(inputXML);
             inputXLS = new BufferedInputStream(inputStream);
             mainReader.read(inputXLS, beans);
@@ -65,6 +69,9 @@ public class ParseExcelService {
                     xmlConfig.close();
                 if (inputStream != null)
                     inputStream.close();
+                if(is!=null){
+                    is.close();
+                }
             } catch (IOException e) {
                 log.error("parse excel error", e);
             }

@@ -5,6 +5,7 @@ import com.lcyzh.nmerp.entity.ExcelHead;
 import com.lcyzh.nmerp.model.vo.OrderAddBatchVo;
 import com.lcyzh.nmerp.service.TOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,8 @@ public class ExcelController {
     private ParseExcelService parseExcelService;
     @Autowired
     private TOrderService tOrderService;
+    @Value("${template.path}")
+    private String xmlConfigPath;
 
     @GetMapping("/upload")
     public String upload() {
@@ -46,7 +49,7 @@ public class ExcelController {
         }
         //获取文件
         //获取xml文件头配置(我的xml文件是放在/config/import/point目录下的)
-        String xmlConfigPath = String.format("%s%s", request.getServletContext().getRealPath("/"), "/config/import/point/");
+//        String xmlConfigPath = String.format("%s%s", request.getServletContext().getRealPath("/"), "/config/import/point/");
         String xmlConfigName = String.format("%s%s", xmlConfigPath, "point-head.xml");
         Map<String, Object> beans = new HashMap<>();
         ExcelHead excelHead = new ExcelHead();
