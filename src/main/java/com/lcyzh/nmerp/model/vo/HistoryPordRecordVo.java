@@ -1,7 +1,5 @@
 package com.lcyzh.nmerp.model.vo;
 
-import com.lcyzh.nmerp.common.persistence.DataEntity;
-
 import java.util.Date;
 
 /**
@@ -12,7 +10,7 @@ import java.util.Date;
  * @Date :
  * @ModificationHistory Who          When          What
  */
-public class HistoryPordRecordVo extends DataEntity<HistoryPordRecordVo> {
+public class HistoryPordRecordVo{
     private String startDate;
     private String endDate;
     private Long historyProdRecordId;

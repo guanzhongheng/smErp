@@ -34,7 +34,8 @@ public class THistoryProdRecordServiceImpl implements ITHistoryProdRecordService
         List<HistoryPordRecordVo> list = tHistoryProdRecordMapper.findListVo(vo);
 
         PageInfo<HistoryPordRecordVo> p = new PageInfo<>(list);
-        page.setCount(p.getTotal());
+        page.setTotal(p.getTotal());
+        page.setCount(list.size());
         page.setList(list);
         return page;
     }
