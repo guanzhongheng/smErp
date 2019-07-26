@@ -59,17 +59,10 @@ public class TStockServiceImpl implements TStockService{
             vo.setEndDate(LocalDate.now().plusDays(1).toString());
         }
         PageHelper.startPage(page.getPageNo(),page.getPageSize());
-        List<TStock> list = tStockMapper.findList(vo);
-        List<StockQueryVo> vos = list.stream().map(tStock -> {
-            StockQueryVo stockQueryVo = new StockQueryVo();
-            BeanUtils.copyProperties(tStock, stockQueryVo);
-            stockQueryVo.setStockId(tStock.getId());
-            return stockQueryVo;
-        }).collect(Collectors.toList());
-
-        PageInfo<TStock> pageInfo = new PageInfo<>(list);
+        List<StockQueryVo> list = tStockMapper.findList(vo);
+        PageInfo<StockQueryVo> pageInfo = new PageInfo<>(list);
         page.setTotal(pageInfo.getTotal());
-        return vos;
+        return list;
     }
 
 }

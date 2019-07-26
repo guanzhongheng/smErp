@@ -35,52 +35,54 @@
 
     <select id="findListVo" parameterType="com.lcyzh.nmerp.model.vo.HistoryPordRecordVo" resultType="com.lcyzh.nmerp.model.vo.HistoryPordRecordVo">
         SELECT
-        id id,
-        ord_code ordCode,
-        order_item_id orderItemId,
-        mac_code macCode,
-        item_color itemColor,
-        item_owner itemOwner,
-        item_variety itemVariety,
-        item_cgy_code itemCgyCode,
-        item_yc_type itemYcType,
-        item_yb_type itemYbType,
-        item_total_sq itemTotalSq,
-        item_total_weight itemTotalWeight,
-        item_num itemNum,
-        item_thick itemThick,
-        item_width itemWidth,
-        item_lenth itemLenth,
-        item_code itemCode,
-        create_time createTime
-        FROM t_history_prod_record
+        hpr.id historyProdRecordId,
+        hpr.ord_code ordCode,
+        hpr.order_item_id orderItemId,
+        hpr.mac_code macCode,
+        hpr.item_color itemColor,
+        hpr.item_owner itemOwner,
+        hpr.item_variety itemVariety,
+        hpr.item_cgy_code itemCgyCode,
+        hpr.item_yc_type itemYcType,
+        hpr.item_yb_type itemYbType,
+        hpr.item_total_sq itemTotalSq,
+        hpr.item_total_weight itemTotalWeight,
+        hpr.item_num itemNum,
+        hpr.item_thick itemThick,
+        hpr.item_width itemWidth,
+        hpr.item_lenth itemLenth,
+        hpr.item_code itemCode,
+        hpr.create_time createTime,
+        o.ord_title orderTitle
+        FROM t_history_prod_record hpr
+        left join t_order o on hpr.ord_code = o.ord_code
         <where>
             <if test="ordCode!= null and ordCode!=''">
-                and ord_code like concat('%', concat(#{ordCode,jdbcType=VARCHAR}, '%'))
+                and hpr.ord_code like concat('%', concat(#{ordCode,jdbcType=VARCHAR}, '%'))
             </if>
             <if test="startDate!= null and startDate !=''">
-                and create_time between #{startDate} and #{endDate}
+                and hpr.create_time between #{startDate} and #{endDate}
             </if>
             <if test="macCode!= null and macCode!=''">
-                and mac_code = #{macCode,jdbcType=VARCHAR}
+                and hpr.mac_code = #{macCode,jdbcType=VARCHAR}
             </if>
             <if test="itemColor!= null and itemColor!= ''">
-                and item_color = #{itemColor,jdbcType=VARCHAR}
+                and hpr.item_color = #{itemColor,jdbcType=VARCHAR}
             </if>
             <if test="itemVariety!= null and itemVariety != ''">
-                and item_variety = #{itemVariety,jdbcType=BIGINT}
+                and hpr.item_variety = #{itemVariety,jdbcType=BIGINT}
             </if>
             <if test="itemCgyCode!= null and itemCgyCode != ''">
-                and item_cgy_code = #{itemCgyCode,jdbcType=BIGINT}
+                and hpr.item_cgy_code = #{itemCgyCode,jdbcType=BIGINT}
             </if>
             <if test="itemYcType!= null and itemYcType!= ''">
-                and item_yc_type = #{itemYcType,jdbcType=VARCHAR}
+                and hpr.item_yc_type = #{itemYcType,jdbcType=VARCHAR}
             </if>
             <if test="itemYbType!= null and itemYbType!= ''">
-                and item_yb_type = #{itemYbType,jdbcType=VARCHAR}
+                and hpr.item_yb_type = #{itemYbType,jdbcType=VARCHAR}
             </if>
             <if test="itemCode!= null and itemCode!= ''">
-                and item_code = #{itemCode,jdbcType=VARCHAR}
+                and hpr.item_code = #{itemCode,jdbcType=VARCHAR}
             </if>
         </where>
     </select>

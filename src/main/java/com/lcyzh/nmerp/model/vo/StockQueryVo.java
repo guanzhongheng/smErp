@@ -1,8 +1,5 @@
 package com.lcyzh.nmerp.model.vo;
 
-import com.lcyzh.nmerp.common.persistence.DataEntity;
-
-import java.util.Date;
 
 /**
  * @Project :
@@ -15,6 +12,8 @@ import java.util.Date;
 public class StockQueryVo {
     //订单编号（模糊匹配）
     private String ordCode;
+    //订单标题
+    private String orderTitle;
     //产品类别
     private Long itemCgyCode;
     //产品品种
@@ -55,6 +54,14 @@ public class StockQueryVo {
 
     public void setOrdCode(String ordCode) {
         this.ordCode = ordCode;
+    }
+
+    public String getOrderTitle() {
+        return orderTitle;
+    }
+
+    public void setOrderTitle(String orderTitle) {
+        this.orderTitle = orderTitle;
     }
 
     public Long getItemCgyCode() {

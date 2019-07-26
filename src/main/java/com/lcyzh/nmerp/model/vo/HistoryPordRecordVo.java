@@ -17,6 +17,7 @@ public class HistoryPordRecordVo extends DataEntity<HistoryPordRecordVo> {
     private String endDate;
     private Long historyProdRecordId;
     private String ordCode;
+    private String orderTitle;
     private Long orderItemId;
     private Date createTime;
     private String macCode;
@@ -64,6 +65,14 @@ public class HistoryPordRecordVo extends DataEntity<HistoryPordRecordVo> {
 
     public void setOrdCode(String ordCode) {
         this.ordCode = ordCode;
+    }
+
+    public String getOrderTitle() {
+        return orderTitle;
+    }
+
+    public void setOrderTitle(String orderTitle) {
+        this.orderTitle = orderTitle;
     }
 
     public Long getOrderItemId() {
