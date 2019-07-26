@@ -62,7 +62,7 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity<T>>
 	 * @return
 	 */
 	public Page<T> findPage(Page<T> page, T entity) {
-		entity.setPage(page);
+//		entity.setPage(page);
 		page.setList(dao.findList(entity));
 		return page;
 	}
@@ -75,11 +75,12 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity<T>>
 	 */
 	public Page<T> findPageForHelp(Page<T> page, T entity) {
 		PageHelper.startPage(page.getPageNo(),page.getPageSize());
-		entity.setPage(page);
+//		entity.setPage(page);
 		List<T> list = dao.findList(entity);
 		PageInfo<T> p = new PageInfo<>(list);
-		page.setCount(p.getTotal());
+		page.setTotal(p.getTotal());
 		page.setList(list);
+		page.setCount(list.size());
 		return page;
 	}
 

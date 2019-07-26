@@ -31,12 +31,12 @@ public class Dict extends DataEntity<Dict> {
 	public Dict(String id){
 		super(id);
 	}
-	
+
 	public Dict(String value, String label){
 		this.value = value;
 		this.label = label;
 	}
-	
+
 	@XmlAttribute
 	@Length(min=1, max=100)
 	public String getValue() {
