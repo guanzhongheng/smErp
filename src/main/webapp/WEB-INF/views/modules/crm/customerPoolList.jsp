@@ -45,15 +45,15 @@
         <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
     </ul>
 </form:form>
-<div class="control-group">&nbsp;&nbsp;&nbsp;&nbsp;
-    <%--<a href="/cus/customer_add" type="button" class="btn btn-primary" style="width: 67px;height: 22px"><i--%>
-            <%--class="icon-plus"></i>&nbsp;添加</a>--%>
+<%--<div class="control-group">&nbsp;&nbsp;&nbsp;&nbsp;--%>
+    <%--&lt;%&ndash;<a href="/cus/customer_add" type="button" class="btn btn-primary" style="width: 67px;height: 22px"><i&ndash;%&gt;--%>
+            <%--&lt;%&ndash;class="icon-plus"></i>&nbsp;添加</a>&ndash;%&gt;--%>
+    <%--&lt;%&ndash;&nbsp;&nbsp;&ndash;%&gt;--%>
+    <%--&lt;%&ndash;<a href="/crm/task_add" type="button" class="btn btn-default" style="width: 80px;height: 23px"><i class="icon-list-ul"></i>&nbsp;新建任务</a>&ndash;%&gt;--%>
     <%--&nbsp;&nbsp;--%>
-    <%--<a href="/crm/task_add" type="button" class="btn btn-default" style="width: 80px;height: 23px"><i class="icon-list-ul"></i>&nbsp;新建任务</a>--%>
-    &nbsp;&nbsp;
-    <%--<a type="button" id="toCustomer" class="btn btn-default" style="height: 23px"><i--%>
-            <%--class="icon-refresh"></i>添加归属人</a>--%>
-</div>
+    <%--&lt;%&ndash;<a type="button" id="toCustomer" class="btn btn-default" style="height: 23px"><i&ndash;%&gt;--%>
+            <%--&lt;%&ndash;class="icon-refresh"></i>添加归属人</a>&ndash;%&gt;--%>
+<%--</div>--%>
 <div class="control-group">
     <table id="contentTable" class="table table-striped table-bordered table-condensed">
         <thead>
