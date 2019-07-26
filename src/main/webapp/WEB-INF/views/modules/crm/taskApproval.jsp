@@ -58,7 +58,6 @@
     <table id="contentTable" class="table table-striped table-bordered table-condensed">
         <thead>
         <tr>
-            <th>订单编号</th>
             <th>订单标题</th>
             <th>关联客户</th>
             <th>审批状态</th>
@@ -70,7 +69,6 @@
         <tbody>
         <c:forEach items="${page.list}" var="ord">
             <tr>
-                <td>${ord.ordCode}</td>
                 <td>${ord.ordTitle}</td>
                 <td>${ord.cusName}</td>
                 <td>${ord.ordStatusValue}</td>

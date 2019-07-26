@@ -59,8 +59,7 @@
         <table id="contentTable" class="table table-striped table-bordered table-condensed" style=" table-layout: fixed;">
             <thead>
             <tr>
-                <th style="width: 150px">订单号</th>
-                <th style="width: 150px">产品编号</th>
+                <th style="width: 150px">订单标题</th>
                 <th style="width: 60px">所属人</th>
                 <th style="width: 80px">机台编号</th>
                 <th style="width: 80px">品种</th>
@@ -81,8 +80,7 @@
             <tbody>
             <c:forEach items="${page.list}" var="vo">
                 <tr>
-                    <td>${vo.ordCode}</td>
-                    <td>${vo.itemCode}</td>
+                    <td>${vo.orderTitle}</td>
                     <td>${vo.itemOwner}</td>
                     <td>${vo.macCode}</td>
                     <td>${fns:getValueByDictKey(vo.itemVariety)}</td>
