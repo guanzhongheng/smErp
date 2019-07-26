@@ -67,6 +67,10 @@ public class TCustomerServiceImpl implements TCustomerService {
     public int save(CustomerAddModifyVo vo) {
         int res = -1;
         if (vo != null) {
+            //校验
+            if(vo.getCusStatus().equals(Constants.CUS_STATUS_FLLOW)&&vo.getEmpCode()==null){
+                return res;
+            }
             Date current = new Date();
             Customer customer = buidCustomerFromVo(vo, current);
             if (StringUtils.isNotEmpty(vo.getCusCode())) {

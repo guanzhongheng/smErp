@@ -53,6 +53,9 @@ public class CrmManageController extends BaseController {
     @RequestMapping(value = {"customer/list"})
     public String list(@ModelAttribute("customer") CustomerQueryVo customer, Model model, HttpServletRequest request, HttpServletResponse response){
         Page<CustomerQueryVo> page = new Page<>(request, response);
+        if(customer.getFollowType()!=null && customer.getFollowType()==1){
+            customer.setCusStatus(Constants.CUS_STATUS_FLLOW);
+        }
         List<CustomerQueryVo> list = customerService.findPage(page, customer);
         page.setCount(list.size());
         page.setList(list);
@@ -62,7 +65,7 @@ public class CrmManageController extends BaseController {
 
     @RequestMapping(value = {"customer/poollist"})
     public String customerPoolList(@ModelAttribute("customer") CustomerQueryVo customer, Model model, HttpServletRequest request, HttpServletResponse response){
-        customer.setFollowType(0);
+        customer.setCusStatus(Constants.CUS_STATUS_UNFLLOW);
         Page<CustomerQueryVo> page = new Page<>(request, response);
         List<CustomerQueryVo> list = customerService.findPage(page, customer);
         page.setCount(list.size());
