@@ -63,24 +63,43 @@
         WHERE id = #{id,jdbcType=BIGINT}
     </select>
 
-    <select id="findList" parameterType ="com.lcyzh.nmerp.model.vo.StockQueryVo"  resultMap="tStockResultMap">
-        SELECT *
-        FROM t_stock
+    <select id="findList" parameterType ="com.lcyzh.nmerp.model.vo.StockQueryVo"  resultType="com.lcyzh.nmerp.model.vo.StockQueryVo">
+        SELECT
+          s.id stockId,
+          s.bar_code barCode,
+          s.ord_code ordCode,
+          o.ord_title orderTitle,
+          s.item_code itemCode,
+          s.item_lenth itemLenth,
+          s.item_width itemWidth,
+          s.item_thick itemThick,
+          s.item_weight itemWeight,
+          s.item_sq itemSq,
+          s.item_owner itemOwner,
+          s.item_yc_type itemYcType,
+          s.item_yb_type itemYbType,
+          s.item_cgy_code itemCgyCode,
+          s.item_variety itemVariety,
+          s.item_unit itemUnit,
+          s.item_color itemColor,
+          s.mac_code macCode
+        FROM t_stock s
+        left join t_order o on s.ord_code = o.ord_code
         <where>
             <if test="itemCgyCode!= null">
-                and item_cgy_code = #{itemCgyCode,jdbcType=BIGINT}
+                and s.item_cgy_code = #{itemCgyCode,jdbcType=BIGINT}
             </if>
             <if test="itemVariety!= null">
-                and item_variety = #{itemVariety,jdbcType=BIGINT}
+                and s.item_variety = #{itemVariety,jdbcType=BIGINT}
             </if>
             <if test="ordCode!= null">
-                and ord_code like concat('%', #{ordCode,jdbcType=VARCHAR}, '%')
+                and s.ord_code like concat('%', #{ordCode,jdbcType=VARCHAR}, '%')
             </if>
             <if test="startDate!= null">
-                and create_time between #{startDate} and #{endDate}
+                and s.create_time between #{startDate} and #{endDate}
             </if>
         </where>
-        order by create_time desc
+        order by s.create_time desc
     </select>
 
     <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TStock" useGeneratedKeys="true" keyProperty="id">

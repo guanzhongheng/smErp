@@ -84,8 +84,8 @@ public class SystemService extends BaseService {
         PageHelper.startPage(page.getPageNo(),page.getPageSize());
         List<User> userList = userDao.findList(user);
         PageInfo<User> p = new PageInfo<>(userList);
-        page.setCount(p.getTotal());
-
+        page.setTotal(p.getTotal());
+        page.setCount(userList.size());
         // 设置分页参数
         // user.setPage(page);
 

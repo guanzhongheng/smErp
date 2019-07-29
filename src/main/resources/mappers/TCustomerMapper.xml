@@ -109,14 +109,6 @@
                 and cf.latest_follow_time like concat('%', #{lastFollowDate,jdbcType=VARCHAR}, '%')
             </if>
 
-            <if test="followType!= null and followType == 1">
-                and cf.cus_code is not null
-            </if>
-
-            <if test="followType!= null and followType == 0">
-                and cf.cus_code is null
-            </if>
-
         </where>
     </select>
 

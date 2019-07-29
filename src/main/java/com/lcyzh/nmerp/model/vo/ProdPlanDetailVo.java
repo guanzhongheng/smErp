@@ -17,6 +17,7 @@ public class ProdPlanDetailVo{
     private Long prodPlanDetailId;
     private String prodPlanCode;
     private String ordCode;
+    private String orderTitle;
     private Long orderItemId;
     private String itemCode;
     private Double itemLenth;
@@ -85,6 +86,14 @@ public class ProdPlanDetailVo{
 
     public void setOrdCode(String ordCode) {
         this.ordCode = ordCode;
+    }
+
+    public String getOrderTitle() {
+        return orderTitle;
+    }
+
+    public void setOrderTitle(String orderTitle) {
+        this.orderTitle = orderTitle;
     }
 
     public Long getOrderItemId() {

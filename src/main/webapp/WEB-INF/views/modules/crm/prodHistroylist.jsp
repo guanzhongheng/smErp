@@ -59,7 +59,7 @@
     <table id="contentTable" class="table table-striped table-bordered table-condensed">
         <thead>
         <tr>
-            <th>订单编号</th>
+            <th>订单标题</th>
             <th>产品品种</th>
             <th>产品类别</th>
             <th>产品颜色</th>
@@ -73,7 +73,7 @@
         <tbody>
         <c:forEach items="${page.list}" var="cus">
             <tr>
-                <td>${cus.ordCode}</td>
+                <td>${cus.orderTitle}</td>
                 <td>${fns:getValueByDictKey(cus.itemVariety)}</td>
                 <td>${fns:getValueByDictKey(cus.itemCgyCode)}</td>
                 <td>${fns:getDictLabel(cus.itemColor,'prod_color','无')}</td>

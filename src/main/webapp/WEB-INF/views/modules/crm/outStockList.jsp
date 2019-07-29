@@ -25,23 +25,23 @@
         <ul class="ul-form">
             <li>
                 <form:input path="outCode" htmlEscape="false" maxlength="200"
-                            class="input-medium" placeholder="订单编号"/>
+                            class="input-medium" placeholder="出库单号"/>
             </li>
             <li>
                 &nbsp;&nbsp;
-                <select id="outStatus" name="outStatus" class="input-medium">
-                    <option value="">请选择</option>
+                <select id="outStatus" name="outStatus" class="input-medium" >
+                    <option value="">请选择出库单状态</option>
                     <option value="0">未出库</option>
                     <option value="1">已出库</option>
                 </select>
             </li>
             <li>
                 &nbsp;&nbsp;
-                <input id="startDate" name="startDate" placeholder="入库开始时间" type="text" readonly="readonly" maxlength="20"
+                <input id="startDate" name="startDate" placeholder="开始时间" type="text" readonly="readonly" maxlength="20"
                        class="input-small Wdate"
                        value="" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
                 ～
-                <input id="endDate" name="endDate" placeholder="入库结束时间" type="text" readonly="readonly" maxlength="20"
+                <input id="endDate" name="endDate" placeholder="结束时间" type="text" readonly="readonly" maxlength="20"
                        class="input-small Wdate"
                        value="" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
             </li>
@@ -57,6 +57,7 @@
             <th>客户名称</th>
             <th>联系方式</th>
             <th>出库单状态</th>
+            <th>创建时间</th>
             <th>操作</th>
         </tr>
         </thead>

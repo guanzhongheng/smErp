@@ -40,7 +40,7 @@ public abstract class BaseEntity<T> implements Serializable {
 	/**
 	 * 当前实体分页对象
 	 */
-	protected Page<T> page;
+//	protected Page<T> page;
 	
 	/**
 	 * 自定义SQL（SQL标识，SQL内容）
@@ -84,19 +84,19 @@ public abstract class BaseEntity<T> implements Serializable {
 		this.currenUser = currenUser;
 	}
 
-	@JsonIgnore
-	@XmlTransient
-	public Page<T> getPage() {
-		if (page == null){
-			page = new Page<T>();
-		}
-		return page;
-	}
-	
-	public Page<T> setPage(Page<T> page) {
-		this.page = page;
-		return page;
-	}
+//	@JsonIgnore
+//	@XmlTransient
+//	public Page<T> getPage() {
+//		if (page == null){
+//			page = new Page<T>();
+//		}
+//		return page;
+//	}
+//
+//	public Page<T> setPage(Page<T> page) {
+//		this.page = page;
+//		return page;
+//	}
 
 	@JsonIgnore
 	@XmlTransient

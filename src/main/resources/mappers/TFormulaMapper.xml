@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lcyzh.nmerp.dao.TFormulaMapper">
+
+    <resultMap id="tFormulaResultMap" type="com.lcyzh.nmerp.entity.TFormula">
+        <id column="f_code" property="fCode" jdbcType="VARCHAR"/> 
+        <result column="f_name" property="fName" jdbcType="VARCHAR"/> 
+        <result column="f_context" property="fContext" jdbcType="VARCHAR"/> 
+        <result column="prod_cgy_code" property="prodCgyCode" jdbcType="BIGINT"/> 
+        <result column="prod_variety" property="prodVariety" jdbcType="BIGINT"/> 
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/> 
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/> 
+        <result column="del_flag" property="delFlag" jdbcType="CHAR"/> 
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/> 
+    </resultMap>
+
+
+    <select id="findByCode" parameterType="java.lang.String" resultMap="tFormulaResultMap">
+        SELECT *
+        FROM t_formula
+        WHERE f_code = #{fCode,jdbcType=VARCHAR}
+    </select>
+
+    <select id="findList" parameterType ="com.lcyzh.nmerp.entity.TFormula"  resultMap="tFormulaResultMap">
+        SELECT *
+        FROM t_formula
+        <where>
+            <if test="fName!= null">
+            and f_name like concat('%', #{fName,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="fContext!= null">
+            and f_context like concat('%', #{fContext,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="prodCgyCode!= null">
+            and prod_cgy_code like concat('%', #{prodCgyCode,jdbcType=BIGINT}, '%')
+            </if>
+            <if test="prodVariety!= null">
+            and prod_variety like concat('%', #{prodVariety,jdbcType=BIGINT}, '%')
+            </if>
+            <if test="createDate!= null">
+            and create_date like concat('%', #{createDate,jdbcType=TIMESTAMP}, '%')
+            </if>
+            <if test="updateDate!= null">
+            and update_date like concat('%', #{updateDate,jdbcType=TIMESTAMP}, '%')
+            </if>
+            <if test="delFlag!= null">
+            and del_flag like concat('%', #{delFlag,jdbcType=CHAR}, '%')
+            </if>
+            <if test="remarks!= null">
+            and remarks like concat('%', #{remarks,jdbcType=VARCHAR}, '%')
+            </if>
+        </where>
+    </select>
+
+    <select id="findAllList" resultMap="tFormulaResultMap">
+        SELECT *
+        FROM t_formula
+    </select>
+
+    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TFormula">
+        INSERT INTO t_formula(
+            f_code,
+            f_name,
+            f_context,
+            prod_cgy_code,
+            prod_variety,
+            create_date,
+            update_date,
+            del_flag,
+            remarks
+        )
+        VALUES (
+            #{fCode,jdbcType=VARCHAR},
+            #{fName,jdbcType=VARCHAR},
+            #{fContext,jdbcType=VARCHAR},
+            #{prodCgyCode,jdbcType=BIGINT},
+            #{prodVariety,jdbcType=BIGINT},
+            #{createDate,jdbcType=TIMESTAMP},
+            #{updateDate,jdbcType=TIMESTAMP},
+            #{delFlag,jdbcType=CHAR},
+            #{remarks,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TFormula">
+        INSERT INTO t_formula(
+            f_code,
+            f_name,
+            f_context,
+            prod_cgy_code,
+            prod_variety,
+            create_date,
+            update_date,
+            del_flag,
+            remarks
+        )
+        VALUES
+        <foreach collection ="list" item="item" separator =",">
+        (
+            #{item.fCode,jdbcType=VARCHAR},
+            #{item.fName,jdbcType=VARCHAR},
+            #{item.fContext,jdbcType=VARCHAR},
+            #{item.prodCgyCode,jdbcType=BIGINT},
+            #{item.prodVariety,jdbcType=BIGINT},
+            #{item.createDate,jdbcType=TIMESTAMP},
+            #{item.updateDate,jdbcType=TIMESTAMP},
+            #{item.delFlag,jdbcType=CHAR},
+            #{item.remarks,jdbcType=VARCHAR}
+        )
+        </foreach>
+    </insert>
+
+    <update id="update"  parameterType ="com.lcyzh.nmerp.entity.TFormula">
+        UPDATE t_formula
+        <set>
+            <if test="fName!= null">
+            f_name = #{fName,jdbcType=VARCHAR},
+            </if>
+            <if test="fContext!= null">
+            f_context = #{fContext,jdbcType=VARCHAR},
+            </if>
+            <if test="prodCgyCode!= null">
+            prod_cgy_code = #{prodCgyCode,jdbcType=BIGINT},
+            </if>
+            <if test="prodVariety!= null">
+            prod_variety = #{prodVariety,jdbcType=BIGINT},
+            </if>
+            <if test="createDate!= null">
+            create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate!= null">
+            update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="delFlag!= null">
+            del_flag = #{delFlag,jdbcType=CHAR},
+            </if>
+            <if test="remarks!= null">
+            remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE f_code = #{fCode,jdbcType=VARCHAR}
+    </update>
+
+    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TFormula">
+        DELETE FROM t_formula
+        WHERE f_code = #{fCode,jdbcType=VARCHAR}
+    </delete>
+
+</mapper>

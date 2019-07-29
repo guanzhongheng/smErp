@@ -21,7 +21,7 @@ public interface TStockMapper {
     TStock findById(Long id);
 
     //List<TStock> findList(TStock tStock);
-    List<TStock> findList(StockQueryVo vo);
+    List<StockQueryVo> findList(StockQueryVo vo);
 
     int insert(TStock tStock);
 

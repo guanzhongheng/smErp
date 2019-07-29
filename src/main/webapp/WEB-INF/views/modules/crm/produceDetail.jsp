@@ -65,9 +65,9 @@
                                             <div class="ibox float-e-margins">
                                                 <form method="get" class="form-horizontal">
                                                     <div class="form-group">
-                                                        <label class="col-sm-5 control-label"> 订单号：</label>
+                                                        <label class="col-sm-5 control-label"> 订单标题：</label>
                                                         <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                                                ${detail.ordCode}
+                                                                ${detail.orderTitle}
                                                         </div>
                                                     </div>
                                                     <div class="hr-line-dashed"></div>
