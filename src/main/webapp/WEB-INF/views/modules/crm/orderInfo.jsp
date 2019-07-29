@@ -17,17 +17,35 @@
                 <form method="get" class="form-horizontal">
                     <div class="hr-line-dashed"></div>
                     <div class="form-group">
+
+                        <%--<div class="row">--%>
+                            <%--<div class="col-md-3">--%>
+                                <%--&lt;%&ndash;<div class="input-group">&ndash;%&gt;--%>
+                                    <%--<span for="memberName" class="input-group-addon" style="background-color: #eee">订单标题:</span>--%>
+                                    <%--<input type="text" maxlength="20" class="form-control"--%>
+                                           <%--value="${order.ordTitle}" readonly="true">--%>
+                                <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
+                            <%--</div>--%>
+                            <%--<div class="col-md-3">--%>
+                                <%--&lt;%&ndash;<div class="input-group">&ndash;%&gt;--%>
+                                    <%--<span for="memberName" class="input-group-addon" style="background-color: #eee">客户名称:</span>--%>
+                                    <%--<input type="text" maxlength="20" class="form-control" value="${order.cusCode}" readonly="true">--%>
+                                <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+
                         <div class="col-sm-4">
                             <label class="col-sm-3 control-label">订单标题:</label>
-                            <label class="col-sm-4 control-label">${order.ordTitle}</label>
+                            <input class="col-sm-4 global-input-readonly" value="${order.ordTitle}">
+                            <%--<label class="col-sm-4 control-label">${order.ordTitle}</label>--%>
                         </div>
                         <div class="col-sm-4">
                             <label class="col-sm-3 control-label">客户名称:</label>
-                            <label class="col-sm-4 control-label">${order.cusCode}</label>
+                            <input class="col-sm-4 global-input-readonly" value="${order.cusCode}">
                         </div>
                         <div class="col-sm-4">
                             <label class="col-sm-3 control-label">代理客户:</label>
-                            <label class="col-sm-4 control-label">${order.proxyName}</label>
+                            <input class="col-sm-4 global-input-readonly" value="${order.proxyName}">
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
@@ -35,30 +53,30 @@
 
                         <div class="col-sm-4">
                             <label class="col-sm-3 control-label">订单类型:</label>
-                            <label class="col-sm-4 control-label">${order.ordTypeValue}</label>
+                            <input class="col-sm-4 global-input-readonly" value="${order.ordTypeValue}">
                         </div>
                         <div class="col-sm-4">
                             <label class="col-sm-3 control-label">签单日期:</label>
-                            <label class="col-sm-4 control-label">${order.ordSignDate}</label>
+                            <input class="col-sm-4 global-input-readonly" value="${order.ordSignDate}">
                         </div>
                         <div class="col-sm-4">
                             <label class="col-sm-3 control-label">交货日期:</label>
-                            <label class="col-sm-4 control-label">${order.ordDeliveryDate}</label>
+                            <input class="col-sm-4 global-input-readonly" value="${order.ordDeliveryDate}">
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
                     <div class="form-group">
                         <div class="col-sm-4">
                             <label class="col-sm-3 control-label">我方签约:</label>
-                            <label class="col-sm-4 control-label">${order.comContractor==null?"":order.comContractor}</label>
+                            <input class="col-sm-4 global-input-readonly" value="${order.comContractor==null?"":order.comContractor}">
                         </div>
                         <div class="col-sm-4">
                             <label class="col-sm-3 control-label">客户签约:</label>
-                            <label class="col-sm-4 control-label">${order.cusContractor==null?"":order.cusContractor}</label>
+                            <input class="col-sm-4 global-input-readonly" value="${order.cusContractor==null?"":order.cusContractor}">
                         </div>
                         <div class="col-sm-4">
                             <label class="col-sm-3 control-label">备注信息:</label>
-                            <label class="col-sm-4 control-label">${order.remarks}</label>
+                            <input class="col-sm-4 global-input-readonly" value="${order.remarks}">
                         </div>
                     </div>
                 </form>
@@ -152,3 +170,4 @@
 <script src="${ctxStatic}/hPlugs/js/plugins/bootstrap-table/bootstrap-table.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/bootstrap-table/bootstrap-table-fixed-columns.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<link rel="stylesheet" href="/static/common/customize.css">

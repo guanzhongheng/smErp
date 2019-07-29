@@ -9,6 +9,7 @@
             <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true">客户详情</a>
             </li>
         </ul>
+
         <div class="tab-content">
             <div id="tab-1" class="tab-pane active">
                 <div class="panel-body">
@@ -51,16 +52,18 @@
                                                             <div class="form-group">
                                                                 <label class="col-sm-3 control-label"><i style="color: red">*</i> 客户名称：</label>
                                                                 <div class="col-sm-8">
-                                                                    <form:input path="cusName" htmlEscape="false" maxlength="200"
-                                                                                class="form-control" placeholder="客户名称" readonly="true"/>
+
+                                                                    <form:input path="cusName" htmlEscape="false" maxlength="200" disabled="ture"
+                                                                                cssClass="form-control global-input-readonly" placeholder="客户名称" readonly="true"/>
+
                                                                 </div>
                                                             </div>
                                                             <div class="hr-line-dashed"></div>
                                                             <div class="form-group">
                                                                 <label class="col-sm-3 control-label"><i style="color: red">*</i> 所属行业：</label>
-                                                                <div class="col-sm-8">
-                                                                    <form:select path="industry" class="chosen-select"
-                                                                                 cssStyle="min-width: 300px" readonly="true">
+                                                                <div class="col-sm-8 ">
+                                                                    <form:select path="industry" class="chosen-select " disabled="true"
+                                                                                 cssStyle="min-width: 300px" readonly="true" >
                                                                         <form:option value="" label=""/>
                                                                         <form:options items="${fns:getCusDictList(120000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                                                                     </form:select>
@@ -72,14 +75,14 @@
                                                                 <div class="col-sm-8">
                                                                     <div class="radio i-checks">
                                                                         <c:if test="${empty customerAddModifyVo.cusType}">
-                                                                            <input type="radio" checked  readonly="true" value="110002" id="optionsRadios1"
+                                                                            <input type="radio" checked  readonly="true" disabled="true" value="110002" id="optionsRadios1"
                                                                                    name="cusType"><i></i>&nbsp;企业客户
                                                                         </c:if>
                                                                         <c:if test="${not empty customerAddModifyVo.cusType}">
-                                                                            <input type="radio" ${customerAddModifyVo.cusType eq '110002' ? 'checked' : ''} readonly="true" value="110002" id="optionsRadios1"
+                                                                            <input type="radio" ${customerAddModifyVo.cusType eq '110002' ? 'checked' : ''} readonly="true" disabled="true" value="110002" id="optionsRadios1"
                                                                                    name="cusType"><i></i>&nbsp;企业客户
                                                                         </c:if>
-                                                                        <input type="radio" ${customerAddModifyVo.cusType eq '110001' ? 'checked' : ''} readonly="true" value="110001" id="optionsRadios2"
+                                                                        <input type="radio" ${customerAddModifyVo.cusType eq '110001' ? 'checked' : ''} readonly="true" disabled="true" value="110001" id="optionsRadios2"
                                                                                name="cusType"><i></i>&nbsp;个人客户
                                                                     </div>
                                                                 </div>
@@ -88,7 +91,7 @@
                                                             <div class="form-group">
                                                                 <label class="col-sm-3 control-label"><i style="color: red">*</i> 客户状态：</label>
                                                                 <div class="col-sm-8">
-                                                                    <form:select path="cusStatus" class="chosen-select"
+                                                                    <form:select path="cusStatus" class="chosen-select" disabled="true"
                                                                                  cssStyle="min-width: 300px" readonly="true">
                                                                         <form:option value="" label=""/>
                                                                         <form:options items="${fns:getCusDictList(104000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
@@ -99,7 +102,7 @@
                                                             <div class="form-group">
                                                                 <label class="col-sm-3 control-label"><i style="color: red">*</i> 客户星级：</label>
                                                                 <div class="col-sm-8">
-                                                                    <form:select path="cusGrade" class="chosen-select"
+                                                                    <form:select path="cusGrade" class="chosen-select" disabled="true"
                                                                                  cssStyle="min-width: 300px" readonly="true">
                                                                         <form:option value="" label=""/>
                                                                         <form:options items="${fns:getCusDictList(105000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
@@ -111,7 +114,7 @@
                                                             <div class="form-group">
                                                                 <label class="col-sm-3 control-label">客户来源：</label>
                                                                 <div class="col-sm-8">
-                                                                    <form:select path="cusSource" class="chosen-select"
+                                                                    <form:select path="cusSource" class="chosen-select" disabled="true"
                                                                                  cssStyle="min-width: 300px" readonly="true">
                                                                         <form:option value="" label=""/>
                                                                         <form:options items="${fns:getCusDictList(106000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
@@ -123,7 +126,7 @@
                                                             <div class="form-group">
                                                                 <label class="col-sm-3 control-label"><i style="color: red">*</i> 归属人员：</label>
                                                                 <div class="col-sm-8">
-                                                                    <form:select path="empCode" class="chosen-select"
+                                                                    <form:select path="empCode" class="chosen-select" disabled="true"
                                                                                  cssStyle="min-width: 300px" readonly="true">
                                                                         <form:option value="" label=""/>
                                                                         <form:options items="${fns:getEmpListByDept(109001)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
@@ -138,16 +141,16 @@
                                                             <div class="form-group">
                                                                 <label class="col-sm-3 control-label">详细地址：</label>
                                                                 <div class="col-sm-8">
-                                                                    <form:input path="cusAddress" htmlEscape="false" maxlength="200"
-                                                                                class="form-control" placeholder="详细地址" readonly="true"/>
+                                                                    <form:input path="cusAddress" htmlEscape="false" maxlength="200" disabled="true"
+                                                                                class="form-control global-input-readonly" placeholder="详细地址" readonly="true"/>
                                                                 </div>
                                                             </div>
                                                             <div class="hr-line-dashed"></div>
                                                             <div class="form-group">
                                                                 <label class="col-sm-3 control-label">备注信息：</label>
                                                                 <div class="col-sm-8">
-                                                                    <form:textarea path="remarks" htmlEscape="false"
-                                                                                   cssStyle="min-width: 300px;" rows="6" readonly="true"/>
+                                                                    <form:textarea path="remarks" htmlEscape="false" cssClass="form-control global-input-readonly"
+                                                                                   cssStyle="min-width: 300px;" rows="6" readonly="true" disabled="true"/>
                                                                 </div>
                                                             </div>
                                                             <c:if test="${not empty customerAddModifyVo.cusCode}">
@@ -155,14 +158,14 @@
                                                             <div class="form-group">
                                                                 <label class="col-sm-3 control-label">跟进内容：</label>
                                                                 <div class="col-sm-8">
-                                                                    <input type="text" class="form-control" name="">
+                                                                    <input type="text" class="form-control global-input-readonly" name="" disabled="true">
                                                                 </div>
                                                             </div>
                                                             <div class="hr-line-dashed"></div>
                                                             <div class="form-group">
                                                                 <label class="col-sm-3 control-label"><i style="color: red">*</i> 跟进人员：</label>
                                                                 <div class="col-sm-8">
-                                                                    <input type="text" class="form-control" name="password" readonly="true"
+                                                                    <input type="text" class="form-control global-input-readonly" name="password" readonly="true" disabled="true"
                                                                            value="${customerAddModifyVo.cusName}">
                                                                 </div>
                                                             </div>
@@ -178,15 +181,15 @@
                                                     <div class="form-group">
                                                         <label class="col-sm-3 control-label"><i style="color: red">*</i> 联系人姓名：</label>
                                                         <div class="col-sm-8">
-                                                            <form:input path="primaryContactorName" htmlEscape="false" maxlength="200"
-                                                                        class="form-control" placeholder="首要联系人姓名" readonly="true"/>
+                                                            <form:input path="primaryContactorName" htmlEscape="false" maxlength="200" disabled="ture"
+                                                                        class="form-control global-input-readonly" placeholder="首要联系人姓名" readonly="true"/>
                                                         </div>
                                                     </div>
                                                     <div class="hr-line-dashed"></div>
                                                     <div class="form-group">
                                                         <label class="col-sm-3 control-label">尊称：</label>
                                                         <div class="col-sm-8">
-                                                            <div class="radio i-checks">
+                                                            <div class="radio i-checks" readonly="readonly">
                                                                 <c:if test="${empty customerAddModifyVo.primaryContactorSex}">
                                                                     <input type="radio" name="primaryContactorSex" value="108003" readonly="true" checked> <i></i>未知
                                                                 </c:if>
@@ -206,7 +209,7 @@
                                                         <div class="col-sm-8">
                                                                 <%--<form:input path="primaryContactorRole" htmlEscape="false" maxlength="200"--%>
                                                                 <%--class="form-control" placeholder="首要联系人角色"/>--%>
-                                                            <form:select path="primaryContactorRole" class="chosen-select"
+                                                            <form:select path="primaryContactorRole" class="chosen-select" disabled="ture"
                                                                          cssStyle="min-width: 300px" readonly="true">
                                                                 <form:options items="${fns:getCusDictList(130000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                                                             </form:select>
@@ -218,8 +221,8 @@
                                                         <label class="col-sm-3 control-label">生日：</label>
 
                                                         <div class="col-sm-8">
-                                                            <form:input path="primaryContactorBirth" htmlEscape="false" maxlength="200"
-                                                                        class="form-control" placeholder="首要联系人生日" readonly="true"/>
+                                                            <form:input path="primaryContactorBirth" htmlEscape="false" maxlength="200" disabled="ture"
+                                                                        class="form-control global-input-readonly" placeholder="首要联系人生日" readonly="true"/>
                                                         </div>
                                                     </div>
                                                     <div class="hr-line-dashed"></div>
@@ -229,7 +232,7 @@
                                                         <div class="col-sm-8">
                                                                 <%--<form:input path="primaryContactorDepartment" htmlEscape="false" maxlength="200"--%>
                                                                 <%--class="form-control" placeholder="首要联系人部门"/>--%>
-                                                            <form:select path="primaryContactorDepartment" class="chosen-select"
+                                                            <form:select path="primaryContactorDepartment" class="chosen-select" disabled="ture"
                                                                          cssStyle="min-width: 300px" readonly="true">
                                                                 <form:options items="${fns:getCusDictList(109000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                                                             </form:select>
@@ -240,8 +243,8 @@
                                                         <label class="col-sm-3 control-label"><i style="color: red">*</i> 手机号码：</label>
 
                                                         <div class="col-sm-8">
-                                                            <form:input path="primaryContactorPhone" htmlEscape="false" maxlength="200"
-                                                                        class="form-control" placeholder="首要联系人手机号码" readonly="true"/>
+                                                            <form:input path="primaryContactorPhone" htmlEscape="false" maxlength="200" disabled="ture"
+                                                                        class="form-control global-input-readonly" placeholder="首要联系人手机号码" readonly="true"/>
                                                         </div>
                                                     </div>
                                                     <div class="hr-line-dashed"></div>
@@ -249,8 +252,8 @@
                                                         <label class="col-sm-3 control-label">电子邮箱：</label>
 
                                                         <div class="col-sm-8">
-                                                            <form:input path="primaryContactorEmail" htmlEscape="false" maxlength="200"
-                                                                        class="form-control" placeholder="首要联系人电子邮箱" readonly="true"/>
+                                                            <form:input path="primaryContactorEmail" htmlEscape="false" maxlength="200" disabled="ture"
+                                                                        class="form-control global-input-readonly" placeholder="首要联系人电子邮箱" readonly="true"/>
                                                         </div>
                                                     </div>
                                                     <div class="hr-line-dashed"></div>
@@ -258,8 +261,8 @@
                                                         <label class="col-sm-3 control-label">详细地址：</label>
 
                                                         <div class="col-sm-8">
-                                                            <form:input path="primaryContactorAddress" htmlEscape="false" maxlength="200"
-                                                                        class="form-control" placeholder="首要联系人详细地址" readonly="true"/>
+                                                            <form:input path="primaryContactorAddress" htmlEscape="false" maxlength="200" disabled="ture"
+                                                                        class="form-control global-input-readonly" placeholder="首要联系人详细地址" readonly="true"/>
                                                         </div>
                                                     </div>
                                                     <div class="hr-line-dashed"></div>
@@ -267,8 +270,8 @@
                                                         <label class="col-sm-3 control-label">备注信息：</label>
 
                                                         <div class="col-sm-8">
-                                                            <form:textarea path="primaryContactorRemark" htmlEscape="false"
-                                                                           cssStyle="min-width: 300px;" rows="6" readonly="true"/>
+                                                            <form:textarea path="primaryContactorRemark" htmlEscape="false" cssClass="form-control global-input-readonly"
+                                                                           cssStyle="min-width: 300px; " rows="6" readonly="true" disabled="ture"/>
                                                         </div>
                                                     </div>
                                                     <div class="hr-line-dashed"></div>

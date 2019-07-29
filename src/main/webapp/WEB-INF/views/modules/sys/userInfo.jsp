@@ -103,18 +103,46 @@
 				<div class="control-group">
 					<label class="control-label global-font">类型:</label>
 					<div class="controls global-font">
-						<label class="lbl global-font">${fns:getDictLabel(user.userType, 'sys_user_type', '无')}</label>
+						<%--<label class="lbl global-font">${fns:getDictLabel(user.userType, 'sys_user_type', '无')}</label>--%>
+						<input value="${fns:getDictLabel(user.userType, 'sys_user_type', '无')}"
+							   htmlEscape="false" maxlength="50" class="myself-input-readonly" readonly="true"/>
 
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						角色:&nbsp;&nbsp;&nbsp;&nbsp;
-						<label class="global-font">${user.roleNames}</label>
+						<%--<label class="global-font">${user.roleNames}</label>--%>
+							<input value="${user.roleNames}"
+								   htmlEscape="false" maxlength="50" class="myself-input-readonly" readonly="true"/>
+
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label global-font">时间:</label>
 					<div class="controls global-font">
-						<label class="lbl global-font"><fmt:formatDate value="${user.oldLoginDate}" type="both" dateStyle="full"/>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上次登录:IP: ${user.oldLoginIp}</label>
+						<label class="lbl global-font">
+							<%--<fmt:formatDate value="${user.oldLoginDate}" type="both" dateStyle="full"/>--%>
+							<input value="<fmt:formatDate value="${user.oldLoginDate}" pattern="yyyy-MM-dd HH:mm:ss" />"
+								   htmlEscape="false" maxlength="50" class="myself-input-readonly" readonly="true"/>
+
+							<%--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--%>
+							<%--上次登录IP:--%>
+						<%--<input value="${user.oldLoginIp}"--%>
+							   <%--htmlEscape="false" maxlength="50" class="myself-input-readonly" readonly="true"/>--%>
+						<%--</label>--%>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label global-font">上次登录IP:</label>
+					<div class="controls global-font">
+						<label class="lbl global-font">
+								<%--<fmt:formatDate value="${user.oldLoginDate}" type="both" dateStyle="full"/>--%>
+							<%--<input value="${user.oldLoginDate}" type="date"--%>
+								   <%--htmlEscape="false" maxlength="50" class="myself-input-readonly" readonly="true"/>--%>
+
+							<%--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--%>
+							<%--上次登录IP:--%>
+							<input value="${user.oldLoginIp}"
+								   htmlEscape="false" maxlength="50" class="myself-input-readonly" readonly="true"/>
+						</label>
 					</div>
 				</div>
 
