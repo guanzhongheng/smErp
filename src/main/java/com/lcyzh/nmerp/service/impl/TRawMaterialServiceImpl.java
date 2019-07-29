@@ -6,6 +6,7 @@ import com.lcyzh.nmerp.service.TRawMaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,6 +35,7 @@ public class TRawMaterialServiceImpl implements TRawMaterialService{
 
     @Override
     public int insert(TRawMaterial tRawMaterial) {
+        tRawMaterial.setCreateTime(new Date());
         return tRawMaterialMapper.insert(tRawMaterial);
     }
 
@@ -44,6 +46,7 @@ public class TRawMaterialServiceImpl implements TRawMaterialService{
 
     @Override
     public int update(TRawMaterial tRawMaterial) {
+        tRawMaterial.setUpdateTime(new Date());
         return tRawMaterialMapper.update(tRawMaterial);
     }
 
