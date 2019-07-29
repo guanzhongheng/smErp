@@ -174,7 +174,7 @@
         });
 
         function gotoFollowInfo(cusCode) {
-            top.$.jBox.open("iframe:${ctx}/crm/followInfo?cusCode="+cusCode, "客户跟踪", 500, $(top.document).height() - 300, {
+            top.$.jBox.open("iframe:${ctx}/crm/followInfo?cusCode="+cusCode, "客户跟踪", 500, $(top.document).height() - 550, {
                 buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
                     debugger;
                     var cusCode = h.find("iframe")[0].contentWindow.cusCode;
