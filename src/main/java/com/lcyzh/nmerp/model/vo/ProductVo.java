@@ -38,6 +38,10 @@ public class ProductVo extends DataEntity<TProduct> {
     private Long prodUnit;
     //单位-字典值
     private String prodUnitValue;
+    //产品颜色-字典
+    private String prodColor;
+    //产品颜色-字典值
+    private String prodColorValue;
 
 //    public Long getId() {
 //        return id;
@@ -149,5 +153,21 @@ public class ProductVo extends DataEntity<TProduct> {
 
     public void setProdUnitValue(String prodUnitValue) {
         this.prodUnitValue = prodUnitValue;
+    }
+
+    public String getProdColor() {
+        return prodColor;
+    }
+
+    public void setProdColor(String prodColor) {
+        this.prodColor = prodColor;
+    }
+
+    public String getProdColorValue() {
+        return prodColorValue;
+    }
+
+    public void setProdColorValue(String prodColorValue) {
+        this.prodColorValue = prodColorValue;
     }
 }

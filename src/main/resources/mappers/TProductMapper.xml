@@ -13,6 +13,7 @@
         <result column="prod_price_type" property="prodPriceType" jdbcType="BIGINT"/>
         <result column="prod_unit" property="prodUnit" jdbcType="BIGINT"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="prod_color" property="prodColor" jdbcType="VARCHAR"/>
     </resultMap>
 
 
@@ -34,6 +35,9 @@
             </if>
             <if test="prodCgyCode != null and prodCgyCode != ''">
                 and prod_cgy_code = #{prodCgyCode}
+            </if>
+            <if test="prodColor != null and prodColor != ''">
+                and prod_color = #{prodColor}
             </if>
             <if test="prodThick != null">
                 and prod_thick = #{prodThick}
@@ -65,7 +69,8 @@
             prod_guide_price,
             prod_price_type,
             prod_unit,
-            create_time
+            create_time,
+            prod_color
         )
         VALUES (
             #{prodCode,jdbcType=VARCHAR},
@@ -76,7 +81,8 @@
             #{prodGuidePrice,jdbcType=DOUBLE},
             #{prodPriceType,jdbcType=BIGINT},
             #{prodUnit,jdbcType=BIGINT},
-            #{createTime,jdbcType=TIMESTAMP}
+            #{createTime,jdbcType=TIMESTAMP},
+            #{prodColor,jdbcType=VARCHAR}
         )
     </insert>
 
@@ -90,7 +96,8 @@
             prod_guide_price,
             prod_price_type,
             prod_unit,
-            create_time
+            create_time,
+            prod_color
         )
         VALUES
         <foreach collection="list" item="tProduct" separator=",">
@@ -103,7 +110,8 @@
             #{tProduct.prodGuidePrice,jdbcType=DOUBLE},
             #{tProduct.prodPriceType,jdbcType=BIGINT},
             #{tProduct.prodUnit,jdbcType=BIGINT},
-            #{tProduct.createTime,jdbcType=TIMESTAMP}
+            #{tProduct.createTime,jdbcType=TIMESTAMP},
+            #{tProduct.prodColor,jdbcType=VARCHAR}
             )
         </foreach>
     </insert>
@@ -118,7 +126,8 @@
             prod_variety = #{prodVariety},
             prod_guide_price = #{prodGuidePrice},
             prod_price_type = #{prodPriceType},
-            prod_unit = #{prodUnit}
+            prod_unit = #{prodUnit},
+            prod_color = #{prodColor}
         WHERE id = #{id}
     </update>
 
