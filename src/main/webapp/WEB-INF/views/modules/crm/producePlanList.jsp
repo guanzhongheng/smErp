@@ -80,7 +80,7 @@
                 <td>${fns:getDictValue(pp.prodColor, 'prod_color', defaultValue)}</td>
                 <td>${pp.totalQuantity}</td>
                 <td>${pp.quantity}</td>
-                <td><a href="${ctx}/produce/producePlan/info?prodPlanCode=${pp.prodPlanCode}"><i class="icon-pencil">&nbsp;详情</i></a></td>
+                <td><a href="${ctx}/produce/producePlan/info?prodPlanCode=${pp.prodPlanCode}"><i class="icon-th-list">&nbsp;详情</i></a></td>
             </tr>
         </c:forEach>
         </tbody>

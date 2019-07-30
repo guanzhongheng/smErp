@@ -26,8 +26,8 @@
 				<%--<td>${role.office.name}</td>--%>
 				<td>
 					<%--<a href="${ctx}/sys/role/assign?id=${role.id}">分配</a>--%>
-					<a href="${ctx}/sys/role/form?id=${role.id}">修改</a>
-					<a href="${ctx}/sys/role/delete?id=${role.id}" onclick="return confirmx('确认要删除该角色吗？', this.href)">删除</a>
+					<a href="${ctx}/sys/role/form?id=${role.id}"><i class="icon-pencil">&nbsp;修改</i></a>
+						<a href="${ctx}/sys/role/delete?id=${role.id}" onclick="return confirmx('确认要删除该角色吗？', this.href)"><i class="icon-trash">&nbsp;删除</i></a>
 				</td>
 			</tr>
 		</c:forEach>

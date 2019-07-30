@@ -101,7 +101,7 @@
                     </td>
                     <td>
                         <c:if test="${vo.itemNum ne 0}">
-                            <a href="${ctx}/produce/produce/info?id=${vo.prodPlanDetailId}"><i class="icon-pencil">&nbsp;生产</i></a>
+                            <a href="${ctx}/produce/produce/info?id=${vo.prodPlanDetailId}"><i class="icon-wrench">&nbsp;生产</i></a>
                         </c:if>
                     </td>
                 </tr>

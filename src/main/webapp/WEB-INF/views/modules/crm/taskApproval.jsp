@@ -78,8 +78,8 @@
                 <td>${ord.ordDeliveryDate}</td>
                 <td>
                     <c:if test="${ord.ordStatus eq '100001'}">
-                        <a href="/cus/orderStatus_update?ordCode=${ord.ordCode}&&ordStatus=0"  type="button" class="btn btn-primary" >通过</a>&nbsp;&nbsp;
-                        <a href="/cus/orderStatus_update?ordCode=${ord.ordCode}&&ordStatus=1" type="button" class="btn btn-primary" >不通过</a>
+                        <a href="/cus/orderStatus_update?ordCode=${ord.ordCode}&&ordStatus=0"  type="button" class="btn btn-primary" ><i class="icon-ok-circle">&nbsp;通过</i></a>&nbsp;&nbsp;
+                        <a href="/cus/orderStatus_update?ordCode=${ord.ordCode}&&ordStatus=1" type="button" class="btn btn-primary" ><i class="icon-remove-circle">&nbsp;不通过</i></a>
                     </c:if>
                 </td>
             </tr>

@@ -72,8 +72,8 @@
                 <td>${cus.outStatus == '0'?"未出库":"已出库"}</td>
                 <td><fmt:formatDate value="${cus.createTime}" pattern="yyyy-MM-dd"/></td>
                 <td>
-                    <a href="/crm/inventory/outStockDetail?outCode=${cus.outCode}"><i class="icon-pencil">&nbsp;详情</i></a>
-                    <a href="/print/outStock_print?outCode=${cus.outCode}"><i class="icon-pencil">&nbsp;打印</i></a>
+                    <a href="/crm/inventory/outStockDetail?outCode=${cus.outCode}"><i class="icon-th-list">&nbsp;详情</i></a>
+                    <a href="/print/outStock_print?outCode=${cus.outCode}"><i class="icon-print">&nbsp;打印</i></a>
                 </td>
             </tr>
         </c:forEach>

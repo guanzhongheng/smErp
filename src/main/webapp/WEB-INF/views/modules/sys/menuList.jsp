@@ -52,10 +52,10 @@
                 <td>${menu.isShow eq '1'?'显示':'隐藏'}</td>
                 <td title="${menu.permission}">${fns:abbr(menu.permission,30)}</td>
                 <td nowrap>
-                    <a href="${ctx}/sys/menu/form?id=${menu.id}">修改</a>
+                    <a href="${ctx}/sys/menu/form?id=${menu.id}"><i class="icon-pencil">&nbsp;修改</i></a>
                     <a href="${ctx}/sys/menu/delete?id=${menu.id}"
-                       onclick="return confirmx('要删除该菜单及所有子菜单项吗？', this.href)">删除</a>
-                    <a href="${ctx}/sys/menu/form?parent.id=${menu.id}">添加下级菜单</a>
+                       onclick="return confirmx('要删除该菜单及所有子菜单项吗？', this.href)"><i class="icon-trash">&nbsp;删除</i></a>
+                    <a href="${ctx}/sys/menu/form?parent.id=${menu.id}"><i class="icon-plus">&nbsp;添加下级菜单</i></a>
                 </td>
             </tr>
         </c:forEach>
