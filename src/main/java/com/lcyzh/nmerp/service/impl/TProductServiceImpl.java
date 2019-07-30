@@ -3,6 +3,8 @@ package com.lcyzh.nmerp.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lcyzh.nmerp.common.persistence.Page;
+import com.lcyzh.nmerp.constant.Constants;
+import com.lcyzh.nmerp.controller.system.util.SysDictUtils;
 import com.lcyzh.nmerp.dao.TProductMapper;
 import com.lcyzh.nmerp.entity.TProduct;
 import com.lcyzh.nmerp.entity.sys.Dict;
@@ -61,6 +63,7 @@ public class TProductServiceImpl implements TProductService{
                 productVo.setProdVarietyValue(DictUtils.getDictValueMaps().get(vo.getProdVariety()));
                 productVo.setProdPriceTypeValue(DictUtils.getDictValueMaps().get(vo.getProdPriceType()));
                 productVo.setProdUnitValue(DictUtils.getDictValueMaps().get(vo.getProdUnit()));
+                productVo.setProdColorValue(SysDictUtils.getDictLabel(vo.getProdColor(), Constants.PROD_COLOR, ""));
                 return productVo;
             }).collect(Collectors.toList());
         }

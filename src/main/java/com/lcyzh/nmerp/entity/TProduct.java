@@ -28,6 +28,8 @@ public class TProduct implements Serializable {
     private Long prodPriceType;
     //单位
     private Long prodUnit;
+    //颜色
+    private String prodColor;
 
     public TProduct() {
     }
@@ -110,5 +112,13 @@ public class TProduct implements Serializable {
 
     public void setProdUnit(Long prodUnit) {
         this.prodUnit = prodUnit;
+    }
+
+    public String getProdColor() {
+        return prodColor;
+    }
+
+    public void setProdColor(String prodColor) {
+        this.prodColor = prodColor;
     }
 }
