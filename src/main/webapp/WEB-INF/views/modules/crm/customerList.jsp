@@ -62,21 +62,21 @@
     <a type="button" id="toPoolCustomer" class="btn btn-default" style="width: 100px;height: 23px"><i
             class="icon-group"></i>&nbsp;移入公海</a>
 </div>
-<div class="control-group">
-    <table id="contentTable" class="table table-striped table-bordered table-condensed">
+<div class="control-group table-responsive">
+    <table id="contentTable" class="table table-striped table-bordered table-hover text-nowrap">
         <thead>
         <tr>
             <th><input type="checkbox" id="checkAll" onchange="checkedAll(this)" /></th>
-            <th>客户编号</th>
-            <th>客户名称</th>
-            <th>客户状态</th>
-            <th>客户星级</th>
-            <th>首联系人</th>
-            <th>手机号码</th>
+            <th style="text-align: center">客户编号</th>
+            <th style="text-align: center">客户名称</th>
+            <th style="text-align: center">客户状态</th>
+            <th style="text-align: center">客户星级</th>
+            <th style="text-align: center">首联系人</th>
+            <th style="text-align: center">手机号码</th>
             <%--<th>客户维护人</th>--%>
-            <th>最后跟进日期</th>
-            <th>未跟进天数</th>
-            <th>操作</th>
+            <th style="text-align: center">最后跟进日期</th>
+            <th style="text-align: center">未跟进天数</th>
+            <th style="text-align: center">操作</th>
         </tr>
         </thead>
         <tbody>

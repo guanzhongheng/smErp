@@ -29,7 +29,7 @@
             </li>
             <li>
                 &nbsp;&nbsp;
-                <select id="outStatus" name="outStatus" class="input-medium" >
+                <select id="outStatus" name="outStatus" class="input-medium" style="width: 200px" >
                     <option value="">请选择出库单状态</option>
                     <option value="0">未出库</option>
                     <option value="1">已出库</option>
@@ -46,24 +46,26 @@
                        value="" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
             </li>
             &nbsp;&nbsp;
-            <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
+            <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 100px"  value="查询"/></li>
         </ul>
     </form:form>
-<div class="control-group">
-    <table id="contentTable" class="table table-striped table-bordered table-condensed">
+<div class="control-group table-responsive">
+    <table id="contentTable" class="table table-striped table-bordered table-hover text-nowrap">
         <thead>
         <tr>
-            <th>出库单号</th>
-            <th>客户名称</th>
-            <th>联系方式</th>
-            <th>出库单状态</th>
-            <th>创建时间</th>
-            <th>操作</th>
+            <th style="text-align: center">序号</th>
+            <th style="text-align: center">出库单号</th>
+            <th style="text-align: center">客户名称</th>
+            <th style="text-align: center">联系方式</th>
+            <th style="text-align: center">出库单状态</th>
+            <th style="text-align: center">创建时间</th>
+            <th style="text-align: center">操作</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${page.list}" var="cus">
+        <c:forEach items="${page.list}" var="cus" varStatus="status">
             <tr>
+                <td style="text-align: center">${status.index + 1}</td>
                 <td>${cus.outCode}</td>
                 <td>${cus.cusName}</td>
                 <td>${cus.phone}</td>

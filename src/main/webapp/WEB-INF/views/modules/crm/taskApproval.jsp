@@ -46,7 +46,7 @@
         <li>
             <label for="exception"><input id="exception" name="exception" type="checkbox" value="1"/>跟进状态</label>
         </li>
-        <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
+        <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 100px" value="查询"/></li>
         <li class="clearfix"></li>
     </ul>
 </form:form>
@@ -54,21 +54,23 @@
     <%--<a href="/order/order_add" type="button" class="btn btn-primary" style="width: 67px;height: 22px"><i--%>
             <%--class="icon-plus"></i>&nbsp;添加</a>--%>
 <%--</div>--%>
-<div class="control-group">
-    <table id="contentTable" class="table table-striped table-bordered table-condensed">
+<div class="control-group table-responsive">
+    <table id="contentTable" class="table table-striped table-bordered table-hover text-nowrap">
         <thead>
         <tr>
-            <th>订单标题</th>
-            <th>关联客户</th>
-            <th>审批状态</th>
-            <th>订单总金额</th>
-            <th>订单交付期</th>
-            <th>操作</th>
+            <th style="text-align: center">序号</th>
+            <th style="text-align: center">订单标题</th>
+            <th style="text-align: center">关联客户</th>
+            <th style="text-align: center">审批状态</th>
+            <th style="text-align: center">订单总金额</th>
+            <th style="text-align: center">订单交付期</th>
+            <th style="text-align: center">操作</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${page.list}" var="ord">
+        <c:forEach items="${page.list}" var="ord" varStatus="status">
             <tr>
+                <td style="text-align: center">${status.index + 1}</td>
                 <td>${ord.ordTitle}</td>
                 <td>${ord.cusName}</td>
                 <td>${ord.ordStatusValue}</td>

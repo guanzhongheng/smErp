@@ -10,10 +10,17 @@
 		<li><a href="${ctx}/sys/role/form">角色添加</a></li>
 	</ul>
 	<sys:message content="${message}"/>
-	<table id="contentTable" class="table table-striped table-bordered table-condensed">
-		<tr><th>角色名称</th><th>操作</th></tr>
-		<c:forEach items="${list}" var="role">
+	<div class="control-group table-responsive">
+	<table id="contentTable" class="table table-striped table-bordered  table-hover text-nowrap ">
+		<tr>
+			<th style="text-align: center">序号</th>
+			<th>角色名称</th>
+			<th>操作</th>
+		</tr>
+		<c:forEach items="${list}" var="role" varStatus="status">
 			<tr>
+
+				<td style="text-align: center">${status.index + 1}</td>
 				<td><a href="form?id=${role.id}">${role.name}</a></td>
 				<%--<td><a href="form?id=${role.id}">${role.enname}</a></td>--%>
 				<%--<td>${role.office.name}</td>--%>
@@ -25,5 +32,6 @@
 			</tr>
 		</c:forEach>
 	</table>
+	</div>
 </body>
 </html>

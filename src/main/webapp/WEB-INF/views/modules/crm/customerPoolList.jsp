@@ -42,7 +42,7 @@
                    value="" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
         </li>
         &nbsp;&nbsp;
-        <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
+        <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 100px" value="查询"/></li>
     </ul>
 </form:form>
 <%--<div class="control-group">&nbsp;&nbsp;&nbsp;&nbsp;--%>
@@ -54,19 +54,19 @@
     <%--&lt;%&ndash;<a type="button" id="toCustomer" class="btn btn-default" style="height: 23px"><i&ndash;%&gt;--%>
             <%--&lt;%&ndash;class="icon-refresh"></i>添加归属人</a>&ndash;%&gt;--%>
 <%--</div>--%>
-<div class="control-group">
-    <table id="contentTable" class="table table-striped table-bordered table-condensed">
+<div class="control-group table-responsive">
+    <table id="contentTable" class="table table-striped table-bordered  table-hover text-nowrap">
         <thead>
         <tr>
-            <th></th>
-            <th>客户名称</th>
-            <th>客户状态</th>
-            <th>客户星级</th>
-            <th>首联系人</th>
-            <th>手机号码</th>
-            <th>最后跟进日期</th>
-            <th>未跟进天数</th>
-            <th>操作</th>
+            <th style="text-align: center">序号</th>
+            <th style="text-align: center">客户名称</th>
+            <th style="text-align: center">客户状态</th>
+            <th style="text-align: center">客户星级</th>
+            <th style="text-align: center">首联系人</th>
+            <th style="text-align: center">手机号码</th>
+            <th style="text-align: center">最后跟进日期</th>
+            <th style="text-align: center">未跟进天数</th>
+            <th style="text-align: center">操作</th>
         </tr>
         </thead>
         <tbody>

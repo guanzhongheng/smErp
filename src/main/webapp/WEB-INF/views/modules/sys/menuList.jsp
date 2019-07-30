@@ -4,6 +4,7 @@
 <head>
     <title>菜单管理</title>
     <%@include file="/WEB-INF/views/include/treetable.jsp" %>
+    <link rel="stylesheet" href="/static/common/customize.css">
     <script type="text/javascript">
         $(document).ready(function () {
             $("#treeTable").treeTable({expandLevel: 3}).show();
@@ -22,16 +23,18 @@
     <li><a href="${ctx}/sys/menu/form">菜单添加</a></li>
 </ul>
 <sys:message content="${message}"/>
+
 <form id="listForm" method="post">
-    <table id="treeTable" class="table table-striped table-bordered table-condensed hide">
+    <div class="control-group table-responsive">
+    <table id="treeTable" class="table table-striped table-bordered  table-hover text-nowrap hide">
         <thead>
         <tr>
-            <th>名称</th>
-            <th>链接</th>
+            <th style="text-align: center">名称</th>
+            <th style="text-align: center">链接</th>
             <th style="text-align:center;">排序</th>
-            <th>可见</th>
-            <th>权限标识</th>
-            <th>操作</th>
+            <th style="text-align: center">可见</th>
+            <th style="text-align: center">权限标识</th>
+            <th style="text-align: center">操作</th>
         </tr>
         </thead>
         <tbody>
@@ -58,9 +61,14 @@
         </c:forEach>
         </tbody>
     </table>
-    <div class="form-actions pagination-left">
-        <input id="btnSubmit" class="btn btn-primary" type="button" value="保存排序" onclick="updateSort();"/>
+    <%--<div class="form-actions pagination-left">--%>
+        <%--<input id="btnSubmit" class="btn btn-primary global-button-style" type="button" value="保存排序" onclick="updateSort();"/>--%>
+    <%--</div>--%>
+        <div class="global-button-padding">
+            <input id="btnSubmit" class="btn btn-primary global-button-style" style="width: 180px;" type="submit" value="保存排序" onclick="updateSort();"/>
+        </div>
     </div>
 </form>
+
 </body>
 </html>

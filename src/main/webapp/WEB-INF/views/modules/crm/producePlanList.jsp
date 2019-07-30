@@ -52,26 +52,28 @@
             </form:select>
         </li>
         &nbsp;&nbsp;
-        <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
+        <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 100px" value="查询"/></li>
     </ul>
 </form:form>
 
-<div class="control-group">
-    <table id="contentTable" class="table table-striped table-bordered table-condensed">
+<div class="control-group table-responsive">
+    <table id="contentTable" class="table table-striped table-bordered table-hover text-nowrap">
         <thead>
         <tr>
-            <th>品种</th>
-            <th>类别</th>
-            <th>机台</th>
-            <th>颜色</th>
-            <th>总数量</th>
-            <th>已下发生产数量</th>
-            <th>操作</th>
+            <th style="text-align: center">序号</th>
+            <th style="text-align: center">品种</th>
+            <th style="text-align: center">类别</th>
+            <th style="text-align: center">机台</th>
+            <th style="text-align: center">颜色</th>
+            <th style="text-align: center">总数量</th>
+            <th style="text-align: center">已下发生产数量</th>
+            <th style="text-align: center">操作</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${page.list}" var="pp">
+        <c:forEach items="${page.list}" var="pp" varStatus="status">
             <tr>
+                <td style="text-align: center">${status.index + 1}</td>
                 <td>${fns:getValueByDictKey(pp.prodVariety)}</td>
                 <td>${fns:getValueByDictKey(pp.prodCgyCode)}</td>
                 <td>${pp.macCode}</td>

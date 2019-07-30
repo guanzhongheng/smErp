@@ -53,32 +53,34 @@
             </form:select>
         </li>
         &nbsp;&nbsp;
-        <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
+        <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 100px" value="查询"/></li>
     </ul>
 </form:form>
-<div class="control-group">
-    <table id="contentTable" class="table table-striped table-bordered table-condensed">
+<div class="control-group  table-responsive">
+    <table id="contentTable" class="table table-striped table-bordered table-hover text-nowrap">
         <thead>
         <tr>
-            <th>订单标题</th>
-            <th>条形码号</th>
-            <th>归属人</th>
-            <th>产品类别</th>
-            <th>产品品种</th>
-            <th>产品颜色</th>
-            <th>长</th>
-            <th>宽</th>
-            <th>厚</th>
-            <th>重量</th>
-            <th>压边类型</th>
-            <th>延长米方式</th>
-            <th>单价</th>
-            <th>操作</th>
+            <th style="text-align: center">序号</th>
+            <th style="text-align: center">订单标题</th>
+            <th style="text-align: center">条形码号</th>
+            <th style="text-align: center">归属人</th>
+            <th style="text-align: center">产品类别</th>
+            <th style="text-align: center">产品品种</th>
+            <th style="text-align: center">产品颜色</th>
+            <th style="text-align: center">长</th>
+            <th style="text-align: center">宽</th>
+            <th style="text-align: center">厚</th>
+            <th style="text-align: center">重量</th>
+            <th style="text-align: center">压边类型</th>
+            <th style="text-align: center">延长米方式</th>
+            <th style="text-align: center">单价</th>
+            <th style="text-align: center">操作</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${page.list}" var="cus">
+        <c:forEach items="${page.list}" var="cus" varStatus="status">
             <tr>
+                <td style="text-align: center">${status.index + 1}</td>
                 <td>${cus.orderTitle}</td>
                 <td>${cus.barCode}</td>
                 <td>${cus.itemOwner}</td>

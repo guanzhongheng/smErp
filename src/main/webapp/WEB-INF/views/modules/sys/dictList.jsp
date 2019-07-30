@@ -20,13 +20,22 @@
 	<form:form id="searchForm" modelAttribute="dict" action="${ctx}/sys/dict/" method="post" class="breadcrumb form-search">
 		<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 		<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
-		<label>类型：</label><form:select id="type" path="type" class="input-medium"><form:option value="" label=""/><form:options items="${typeList}" htmlEscape="false"/></form:select>
+		<label>类型：</label><form:select id="type" path="type" class="input-medium" cssStyle="width: 200px"><form:option value="" label=""/><form:options items="${typeList}" htmlEscape="false"/></form:select>
 		&nbsp;&nbsp;<label>描述 ：</label><form:input path="description" htmlEscape="false" maxlength="50" class="input-medium"/>
-		&nbsp;<input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/>
+		&nbsp;<input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 100px" value="查询"/>
 	</form:form>
 	<sys:message content="${message}"/>
-	<table id="contentTable" class="table table-striped table-bordered table-condensed">
-		<thead><tr><th>键值</th><th>标签</th><th>类型</th><th>描述</th><th>排序</th><th>操作</th></tr></thead>
+	<div class="control-group table-responsive">
+	<table id="contentTable" class="table table-striped table-bordered  table-hover text-nowrap">
+		<thead>
+		<tr>
+			<th style="text-align: center">键值</th>
+			<th style="text-align: center">标签</th>
+			<th style="text-align: center">类型</th>
+			<th style="text-align: center">描述</th>
+			<th style="text-align: center">排序</th>
+			<th style="text-align: center">操作</th>
+		</tr></thead>
 		<tbody>
 		<c:forEach items="${page.list}" var="dict">
 			<tr>

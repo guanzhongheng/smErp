@@ -3,6 +3,8 @@
 <html>
 <head>
     <title>全部订单</title>
+    <%--<link rel="stylesheet" href="/static/hPlugs/css/bootstrap.min.css">--%>
+    <link rel="stylesheet" href="/static/common/customize.css">
     <script type="text/javascript">
         function page(n,s){
             debugger;
@@ -56,24 +58,26 @@
     <a type="button" class="btn btn-primary" style="width: 67px;height: 22px" onclick="uploadFile()"><i
             class="icon-plus"></i>&nbsp;上传</a>
 </div>
-<div class="control-group">
-    <table id="contentTable" class="table table-striped table-bordered table-condensed">
+<div class="control-group table-responsive">
+    <table id="contentTable" class="table table-striped table-bordered table-hover text-nowrap">
         <thead>
         <tr>
-            <th>订单编号</th>
-            <th>订单标题</th>
-            <th>关联客户</th>
-            <th>审批状态</th>
-            <th>签单日期</th>
-            <th>订单总金额</th>
-            <th>已回款金额</th>
-            <th>已开票金额</th>
-            <th>操作</th>
+            <th style="text-align: center">序号</th>
+            <th style="text-align: center">订单编号</th>
+            <th style="text-align: center">订单标题</th>
+            <th style="text-align: center">关联客户</th>
+            <th style="text-align: center">审批状态</th>
+            <th style="text-align: center">签单日期</th>
+            <th style="text-align: center">订单总金额</th>
+            <th style="text-align: center">已回款金额</th>
+            <th style="text-align: center">已开票金额</th>
+            <th style="text-align: center">操作</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${page.list}" var="ord">
+        <c:forEach items="${page.list}" var="ord" varStatus="status">
             <tr>
+                <td style="text-align: center">${status.index + 1}</td>
                 <td><a href="/cus/order/info?ordCode=${ord.ordCode}">${ord.ordCode}</a></td>
                 <td>${ord.ordTitle}</td>
                 <td>${ord.cusName}</td>

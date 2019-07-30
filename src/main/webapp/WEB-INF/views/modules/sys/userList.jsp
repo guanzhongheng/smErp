@@ -50,22 +50,35 @@
 			<%--<li><label>归属公司：</label><sys:treeselect id="company" name="company.id" value="${user.company.id}" labelName="company.name" labelValue="${user.company.name}" --%>
 				<%--title="公司" url="/sys/office/treeData?type=1" cssClass="input-small" allowClear="true"/></li>--%>
 			<li><label>登录名：</label><form:input path="loginName" htmlEscape="false" maxlength="50" class="input-medium"/></li>
-			<li class="clearfix"></li>
+			<%--<li class="clearfix"></li>--%>
 			<%--<li><label>归属部门：</label><sys:treeselect id="office" name="office.id" value="${user.office.id}" labelName="office.name" labelValue="${user.office.name}" --%>
 				<%--title="部门" url="/sys/office/treeData?type=2" cssClass="input-small" allowClear="true" notAllowSelectParent="true"/></li>--%>
 			<li><label>姓&nbsp;&nbsp;&nbsp;名：</label><form:input path="name" htmlEscape="false" maxlength="50" class="input-medium"/></li>
-			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询" onclick="return page();"/>
-				<input id="btnExport" class="btn btn-primary" type="button" value="导出"/>
-				<input id="btnImport" class="btn btn-primary" type="button" value="导入"/></li>
+			<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 100px" value="查询" onclick="return page();"/>
+				<input id="btnExport" class="btn btn-primary" type="button" style="width: 100px" value="导出"/>
+				<input id="btnImport" class="btn btn-primary" type="button" style="width: 100px" value="导入"/></li>
 			<li class="clearfix"></li>
 		</ul>
 	</form:form>
 	<sys:message content="${message}"/>
-	<table id="contentTable" class="table table-striped table-bordered table-condensed">
-		<thead><tr><th class="sort-column login_name">登录名</th><th class="sort-column name">姓名</th><th>电话</th><th>手机</th><th>操作</th></tr></thead>
+	<div class="control-group table-responsive">
+	<table id="contentTable" class="table table-striped table-bordered table-hover text-nowrap">
+		<thead>
+		<tr>
+			<%--<th class="sort-column login_name">登录名</th>--%>
+			<%--<th class="sort-column name">姓名</th>--%>
+				<th style="text-align: center">序号</th>
+			<th  style="text-align: center">登录名</th>
+			<th style="text-align: center">姓名</th>
+			<th style="text-align: center">电话</th>
+			<th style="text-align: center">手机</th>
+			<th style="text-align: center">操作</th>
+		</tr>
+		</thead>
 		<tbody>
-		<c:forEach items="${page.list}" var="user">
+		<c:forEach items="${page.list}" var="user" varStatus="status">
 			<tr>
+				<td style="text-align: center">${status.index + 1}</td>
 				<td><a href="${ctx}/sys/user/form?id=${user.id}">${user.loginName}</a></td>
 				<td>${user.name}</td>
 				<td>${user.phone}</td>
@@ -79,6 +92,7 @@
 		</c:forEach>
 		</tbody>
 	</table>
+	</div>
 	<div class="pagination">${page}</div>
 </body>
 </html>

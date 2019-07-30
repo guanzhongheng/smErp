@@ -52,29 +52,29 @@
             </form:select>
         </li>
         &nbsp;&nbsp;
-        <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
+        <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 100px" value="查询"/></li>
     </ul>
 </form:form>
-<div class="control-group" style="overflow-x: auto; overflow-y: auto;">
-        <table id="contentTable" class="table table-striped table-bordered table-condensed" style=" table-layout: fixed;">
+<div class="control-group  table-responsive" style="overflow-x: auto; overflow-y: auto;">
+        <table id="contentTable" class="table table-striped table-bordered table-hover text-nowrap" style=" table-layout: fixed;">
             <thead>
             <tr>
-                <th style="width: 150px">订单标题</th>
-                <th style="width: 60px">所属人</th>
-                <th style="width: 80px">机台编号</th>
-                <th style="width: 80px">品种</th>
-                <th style="width: 80px">类别</th>
-                <th style="width: 60px">颜色</th>
-                <th style="width: 60px">长度(m)</th>
-                <th style="width: 60px">宽度(m)</th>
-                <th style="width: 60px">厚度(m)</th>
-                <th style="width: 60px">数量</th>
-                <th style="width: 60px">重量</th>
-                <th style="width: 60px">面积(㎡)</th>
-                <th style="width: 80px">压边类型</th>
-                <th style="width: 100px">延长米计算方式</th>
-                <th style="width: 50px">状态</th>
-                <th style="width: 50px">操作</th>
+                <th style="text-align: center">订单标题</th>
+                <th style="text-align: center">所属人</th>
+                <th style="text-align: center">机台编号</th>
+                <th style="text-align: center">品种</th>
+                <th style="text-align: center">类别</th>
+                <th style="text-align: center">颜色</th>
+                <th style="text-align: center">长度(m)</th>
+                <th style="text-align: center">宽度(m)</th>
+                <th style="text-align: center">厚度(m)</th>
+                <th style="text-align: center">数量</th>
+                <th style="text-align: center">重量</th>
+                <th style="text-align: center">面积(㎡)</th>
+                <th style="text-align: center">压边类型</th>
+                <th style="text-align: center">延长米计算方式</th>
+                <th style="text-align: center">状态</th>
+                <th style="text-align: center">操作</th>
             </tr>
             </thead>
             <tbody>
