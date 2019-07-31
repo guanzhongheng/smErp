@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
+<link rel="stylesheet" href="/static/common/customize.css">
 
 <style>
     td {
@@ -7,8 +8,8 @@
     }
 </style>
 
-<div class="gray-bg">
-    <div style="width:100%;">
+<div class="gray-bg" style="margin-left: 38px;width: 224px;margin-top: 8px;">
+    <div style="width:100%;height: 211px;">
         <table  border="1" cellspacing="0" style="width:80%;height:180px;">
             <tr>
                 <td colspan="2" style="height:1px;"></td>
@@ -36,12 +37,15 @@
             <tr>
                 <td colspan="2"><font size=1 >联系人：纪经理 131 2547 8852</font></td>
             </tr>
-            <tr>
-                <td colspan="2" >
-                    <button class="btn btn-primary" type="button" id="bth" >打印</button>
-                </td>
-            </tr>
+            <%--<tr>--%>
+                <%--<td colspan="2" >--%>
+                    <%--<button class="btn btn-primary" type="button" id="bth" >打印</button>--%>
+                <%--</td>--%>
+            <%--</tr>--%>
         </table>
+        <div style="text-align: center;    margin-top: 5px;">
+            <button class="btn btn-primary global-button-style" type="button" id="bth" >打印</button>
+        </div>
     </div>
 </div>
 
