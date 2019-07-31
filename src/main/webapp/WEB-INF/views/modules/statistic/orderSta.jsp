@@ -37,7 +37,6 @@
 <script src="${ctxStatic}/echart/echarts.js?v=2.1.4" type="text/javascript"></script>
 <script>
     var myChart = echarts.init(document.getElementById("charInfo"));
-
     var configParameters = {
         rotate: {
             min: -90,

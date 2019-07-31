@@ -92,7 +92,7 @@
                     <a href="/order/order_add?ordCode=${ord.ordCode}"><i class="icon-pencil">&nbsp;编辑</i></a>
                     <a href="/order/order_delete?ordCode=${ord.ordCode}" onclick="return confirmx('确认要删除该订单吗？', this.href)">
                         <i class="icon-trash">删除</i></a>
-                        <a href="/print/order_print?ordCode=${ord.ordCode}"><i class="icon-print">&nbsp;打印</i></a>
+                        <a href="/print/order_print?ordCode=${ord.ordCode}"><i class="icon-print">&nbsp;导出</i></a>
                 </td>
             </tr>
         </c:forEach>

@@ -264,7 +264,6 @@
             <if test="cusContractor!=null">
                 cus_contractor = #{cusContractor,jdbcType=VARCHAR},
             </if>
-
             <if test="comContractor!=null">
                 com_contractor = #{comContractor,jdbcType=VARCHAR},
             </if>
@@ -272,24 +271,23 @@
             <if test="contAttachUrl!=null">
                 cont_attach_url = #{contAttachUrl,jdbcType=VARCHAR},
             </if>
-
             <if test="updateTime!=null">
-                update_time = #{updateTime,jdbcType=TIMESTAMP}
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
             </if>
             <if test="payStatus!=null">
-                pay_status = #{payStatus,jdbcType=BIGINT}
+                pay_status = #{payStatus,jdbcType=BIGINT},
             </if>
             <if test="ordTotalNum!=null">
-                ord_total_num = #{ordTotalNum,jdbcType=BIGINT}
+                ord_total_num = #{ordTotalNum,jdbcType=BIGINT},
             </if>
             <if test="ordOutNum!=null">
-                ord_out_num = #{ordOutNum,jdbcType=BIGINT}
+                ord_out_num = #{ordOutNum,jdbcType=BIGINT},
             </if>
             <if test="ordTotalSq!=null">
-                ord_total_sq = #{ordTotalSq,jdbcType=DOUBLE}
+                ord_total_sq = #{ordTotalSq,jdbcType=DOUBLE},
             </if>
             <if test="ordTotalWeight!=null">
-                ord_total_weight = #{ordTotalWeight,jdbcType=DOUBLE}
+                ord_total_weight = #{ordTotalWeight,jdbcType=DOUBLE},
             </if>
         </set>
         WHERE ord_code = #{ordCode,jdbcType=VARCHAR}
