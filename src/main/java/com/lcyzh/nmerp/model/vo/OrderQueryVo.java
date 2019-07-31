@@ -3,6 +3,8 @@ package com.lcyzh.nmerp.model.vo;
 import com.github.pagehelper.Page;
 import com.lcyzh.nmerp.common.persistence.DataEntity;
 
+import java.util.List;
+
 /**
  * @Project : nm-erp
  * @Description :
@@ -62,6 +64,8 @@ public class OrderQueryVo{
     private Double ordTotalWeight;
     //订单产品出库数量
     private Long ordOutNum;
+    //订单产品明细
+    private List<OrderItemVo> orderItemVos;
 
     public OrderQueryVo(){
         super();
@@ -257,5 +261,13 @@ public class OrderQueryVo{
 
     public void setOrdOutNum(Long ordOutNum) {
         this.ordOutNum = ordOutNum;
+    }
+
+    public List<OrderItemVo> getOrderItemVos() {
+        return orderItemVos;
+    }
+
+    public void setOrderItemVos(List<OrderItemVo> orderItemVos) {
+        this.orderItemVos = orderItemVos;
     }
 }
