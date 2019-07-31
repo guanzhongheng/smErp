@@ -3,138 +3,373 @@
 
 <link href="${ctxStatic}/hPlugs/css/plugins/bootstrap-table/bootstrap-table.css" rel="stylesheet">
 <link href="${ctxStatic}/hPlugs/css/plugins/bootstrap-table/bootstrap-table-fixed-columns.css" rel="stylesheet">
+<link rel="stylesheet" href="/static/common/customize.css">
 
-<div class="wrapper wrapper-content animated fadeInRight">
-    <div class="row">
-      <input type="hidden" id="ordCode" value="${ordCode}"/>
-        <div class="ibox float-e-margins">
-            <div class="ibox-title">
-                <label class="col-sm-3 control-label">&nbsp;产品选择:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <select data-placeholder="产品选择" class="chosen-select" style="width:120px;" id="prodInfo" onchange="getResChange(this)">
-                        <option value="-1">请选择</option>
-                        <c:forEach items="${prod}" var="p">
-                            <option data-prodcode='${p.prodCode}'
-                                    data-prodcgycode='${p.prodCgyCode}' data-prodCgyCodeValue='${p.prodCgyCodeValue}'
-                                    data-prodvariety='${p.prodVariety}' data-prodVarietyValue='${p.prodVarietyValue}'
-                                    data-prodthick='${p.prodThick}'
-                                    data-prodpricetype='${p.prodPriceType}'  data-prodPriceTypeValue='${p.prodPriceTypeValue}'
-                                    data-prodguideprice='${p.prodGuidePrice}'
-                                    data-produnit='${p.prodUnit}' data-prodUnitValue='${p.prodUnitValue}'
-                                    data-color="${p.prodColor}" data-colorValue="${p.prodColorValue}"
-                                    value='${p.prodName}' > ${p.prodName}</option>
-                        </c:forEach>
-                    </select>
-                </label>
-            </div>
-            <div class="ibox-content">
-                <form method="get" class="form-horizontal">
-                    <div class="form-group">
-                        <div class="col-md-4">
-                            <label class="col-md-3">产品编码:</label>
-                            <label class="col-md-3" id="itemCode"></label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="col-md-3">产品名称:</label>
-                            <label class="col-md-3" id="itemName"></label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="col-md-3">产品品种:</label>
-                            <label class="col-md-3" id="itemCgyCode"></label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-4">
-                            <label class="col-md-3">产品类别:</label>
-                            <label class="col-md-3" id="itemVariety"></label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="col-md-3">产品厚度:</label>
-                            <label class="col-md-3" id="itemThick"></label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="col-md-3">计价方式:</label>
-                            <label class="col-md-3" id="itemPriceType"></label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-4">
-                            <label class="col-md-3">指导价格:</label>
-                            <label class="col-md-3" id="itemPrice"></label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="col-md-3">单位:</label>
-                            <label class="col-md-3" id="itemUnit"></label>
-                        </div>
-                        <div class="col-md-4" >
-                            <label class="col-md-3">颜色:</label>
-                            <label class="col-md-3" id="itemColor"></label>
-                        </div>
-                    </div>
-                    <%--<div class="form-group">--%>
-                        <%--<div class="col-md-4">--%>
-                            <%--<label class="col-md-3">宽度&nbsp;(m):</label>--%>
-                            <%--<label class="col-md-3">--%>
-                                <%--<input type="text" class="form-control" style="width: 120px" id="itemWidth" name="itemWidth" />--%>
-                            <%--</label>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-                </form>
-            </div>
+
+
+
+
+<div class="tabs-container" style="padding: 20px 20px;">
+    <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
+        <div class="panel-heading" style="background-color: #50B0E6">
+            <h3 class="panel-title global-panel-title" >
+                第一步：选择产品
+            </h3>
         </div>
-    </div>
-    <div class="row">
-        <div class="form-group">
-            &nbsp;&nbsp;
-            <button class="btn btn-primary" type="button" onclick="doProcess()">确认产品</button>
-        </div>
-    </div>
-</br>
-    <div class="row">
-        <div class="ibox float-e-margins">
-            <div class="ibox-title">
-                <h5>订单产品列表</h5>
-            </div>
-            <div class="ibox-content">
-                <div class="" style="max-height: 350px">
-                    <table id="cusProdDetail" data-height="300" style="min-width: 1500px">
-                        <thead>
-                        <tr>
-                            <th data-field="itemCode">编码</th>
-                            <th data-field="itemName">名称</th>
-                            <th data-field="itemCgyCodeValue">品种</th>
-                            <th data-field="itemVaritemValue">类别</th>
-                            <th data-field="itemLenth">长</th>
-                            <th data-field="itemWidth">宽</th>
-                            <th data-field="itemThick">厚度</th>
-                            <th data-field="itemColorValue">颜色</th>
-                            <th data-field="itemUnitValue">单位</th>
-                            <th data-field="itemOwner">归属人</th>
-                            <th data-field="itemPrice">单价</th>
-                            <th data-field="itemNum">数量</th>
-                            <th data-field="itemPriceTypeValue">计价方式</th>
-                            <th data-field="itemWeight">重量</th>
-                            <th data-field="itemTotalWeight">总重量</th>
-                            <th data-field="itemTotalSq">总面积</th>
-                            <th data-field="itemYcType">延长方式</th>
-                            <th data-field="itemYbType">压边类型</th>
-                            <th data-field="operator">操作</th>
-                        </tr>
-                        </thead>
-                    </table>
+        <div class="panel-body" style="padding: 10px 10px 0px 10px;">
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <input type="hidden" id="ordCode" value="${ordCode}"/>
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+
+                        <label class="col-md-2 control-label order-detail-label-margin" style="text-align: right"><i style="color: red"></i>
+                            产品选择:
+                        </label>
+                        <label class="col-md-2 control-label">
+                            <select data-placeholder="产品选择" class="chosen-select order-label-input-width global-input" id="prodInfo" onchange="getResChange(this)">
+                                <option value="-1">请选择</option>
+                                <c:forEach items="${prod}" var="p">
+                                    <option
+                                            data-prodcode='${p.prodCode}'
+                                            data-prodcgycode='${p.prodCgyCode}' data-prodCgyCodeValue='${p.prodCgyCodeValue}'
+                                            data-prodvariety='${p.prodVariety}' data-prodVarietyValue='${p.prodVarietyValue}'
+                                            data-prodthick='${p.prodThick}'
+                                            data-prodpricetype='${p.prodPriceType}'  data-prodPriceTypeValue='${p.prodPriceTypeValue}'
+                                            data-prodguideprice='${p.prodGuidePrice}'
+                                            data-produnit='${p.prodUnit}' data-prodUnitValue='${p.prodUnitValue}'
+                                            data-color="${p.prodColor}" data-colorValue="${p.prodColorValue}"
+                                            value='${p.prodName}' > ${p.prodName}</option>
+                                </c:forEach>
+                            </select>
+                        </label>
+
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    </br>
-    <div class="row">
-        <div class="form-group">
-                &nbsp;&nbsp;
-                <button class="btn btn-primary" type="submit" onclick="saveProd()">保存详情</button>
-                &nbsp;&nbsp;
-                <button class="btn btn-white" type="button" onclick="history.go(-1)">返回</button>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+
+                        <label class="col-md-2 control-label order-detail-label-margin" style="text-align: right"><i style="color: red"></i>
+                            产品编码:
+                        </label>
+                        <label class="col-md-2 control-label order-label-input-width">
+                            <input class="col-md-2 order-detail-input-readonly" id="itemCode" disabled>
+                        </label>
+
+                        <label class="col-md-2 control-label  order-detail-label-margin order-input-width" style="text-align: right">
+                            产品名称:
+                        </label>
+                        <label class="col-md-2 control-label order-input-width " style="text-align: left">
+                            <input class="col-md-2 order-detail-input-readonly" id="itemName" disabled>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+
+                        <label class="col-md-2 control-label order-detail-label-margin" style="text-align: right"><i style="color: red"></i>
+                            产品品种:
+                        </label>
+                        <label class="col-md-2 control-label order-label-input-width">
+                            <input class="col-md-2 order-detail-input-readonly" id="itemCgyCode" disabled>
+                        </label>
+
+                        <label class="col-md-2 control-label  order-detail-label-margin order-input-width" style="text-align: right">
+                            产品类别:
+                        </label>
+                        <label class="col-md-2 control-label order-input-width " style="text-align: left">
+                            <input class="col-md-2 order-detail-input-readonly" id="itemVariety" disabled>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+
+                        <label class="col-md-2 control-label order-detail-label-margin" style="text-align: right"><i style="color: red"></i>
+                            产品厚度:
+                        </label>
+                        <label class="col-md-2 control-label order-label-input-width">
+                            <input class="col-md-2 order-detail-input-readonly" id="itemThick" disabled>
+                        </label>
+
+                        <label class="col-md-2 control-label  order-detail-label-margin order-input-width" style="text-align: right">
+                            计价方式:
+                        </label>
+                        <label class="col-md-2 control-label order-input-width " style="text-align: left">
+                            <input class="col-md-2 order-detail-input-readonly" id="itemPriceType" disabled>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+
+                        <label class="col-md-2 control-label order-detail-label-margin" style="text-align: right"><i style="color: red"></i>
+                            指导价格:
+                        </label>
+                        <label class="col-md-2 control-label order-label-input-width">
+                            <input class="col-md-2 order-detail-input-readonly" id="itemPrice" disabled>
+                        </label>
+
+                        <label class="col-md-2 control-label  order-detail-label-margin order-input-width" style="text-align: right">
+                            单位:
+                        </label>
+                        <label class="col-md-2 control-label order-input-width " style="text-align: left">
+                            <input class="col-md-2 order-detail-input-readonly" id="itemUnit" disabled>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+
+                        <label class="col-md-2 control-label order-detail-label-margin" style="text-align: right"><i style="color: red"></i>
+                            颜色:
+                        </label>
+                        <label class="col-md-2 control-label order-label-input-width">
+                            <input class="col-md-2 order-detail-input-readonly" id="itemColor" disabled>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group" style="text-align: center">
+                        <div class="row">
+                            <div class="col-md-6 " >
+                                <button class="btn btn-primary global-button-style" type="button"
+                                        onclick="doProcess()">下一步
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
+<div class="tabs-container" style="padding: 20px 20px;">
+    <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
+        <div class="panel-heading" style="background-color: #50B0E6">
+            <h3 class="panel-title global-panel-title" >
+                第二步：确认产品定制化属性
+            </h3>
+        </div>
+        <div class="panel-body" style="padding: 10px 10px 0px 10px;">
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <%--<div class="hr-line-dashed"></div>--%>
+                    <div class="form-group" style="text-align: center">
+                        <div class="row">
+                            <div class="col-md-6 " >
+                                <button class="btn btn-primary global-button-style" type="button"
+                                        onclick="saveProd()">确认添加
+                                </button>
+                            </div>
+                            <div class="col-md-1 " >
+                                <button class="btn btn-white global-button-style" type="button" style="margin-left: -220px"
+                                        onclick="history.go(-1)">取消添加
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="control-group table-responsive" >
+                <table id="cusProdDetail" data-height="300"  class="table table-striped table-bordered table-hover text-nowrap">
+                    <thead>
+                    <tr>
+                        <th style="text-align: center" data-field="itemCode">编码</th>
+                        <th style="text-align: center" data-field="itemName">名称</th>
+                        <th style="text-align: center" data-field="itemCgyCodeValue">品种</th>
+                        <th style="text-align: center" data-field="itemVaritemValue">类别</th>
+                        <th style="text-align: center" data-field="itemLenth">长</th>
+                        <th style="text-align: center" data-field="itemWidth">宽</th>
+                        <th style="text-align: center" data-field="itemThick">厚度</th>
+                        <th style="text-align: center" data-field="itemColorValue">颜色</th>
+                        <th style="text-align: center" data-field="itemUnitValue">单位</th>
+                        <th style="text-align: center" data-field="itemOwner">归属人</th>
+                        <th style="text-align: center" data-field="itemPrice">单价</th>
+                        <th style="text-align: center" data-field="itemNum">数量</th>
+                        <th style="text-align: center" data-field="itemPriceTypeValue">计价方式</th>
+                        <th style="text-align: center" data-field="itemWeight">重量</th>
+                        <th style="text-align: center" data-field="itemTotalWeight">总重量</th>
+                        <th style="text-align: center" data-field="itemTotalSq">总面积</th>
+                        <th style="text-align: center" data-field="itemYcType">延长方式</th>
+                        <th style="text-align: center" data-field="itemYbType">压边类型</th>
+                        <th style="text-align: center" data-field="operator">操作</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<%--<div class="wrapper wrapper-content animated fadeInRight">--%>
+    <%--<div class="row">--%>
+      <%--<input type="hidden" id="ordCode" value="${ordCode}"/>--%>
+        <%--<div class="ibox float-e-margins">--%>
+            <%--<div class="ibox-title">--%>
+                <%--<label class="col-sm-3 control-label">&nbsp;产品选择:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--%>
+                    <%--<select data-placeholder="产品选择" class="chosen-select" style="width:120px;" id="prodInfo" onchange="getResChange(this)">--%>
+                        <%--<option value="-1">请选择</option>--%>
+                        <%--<c:forEach items="${prod}" var="p">--%>
+                            <%--<option data-prodcode='${p.prodCode}'--%>
+                                    <%--data-prodcgycode='${p.prodCgyCode}' data-prodCgyCodeValue='${p.prodCgyCodeValue}'--%>
+                                    <%--data-prodvariety='${p.prodVariety}' data-prodVarietyValue='${p.prodVarietyValue}'--%>
+                                    <%--data-prodthick='${p.prodThick}'--%>
+                                    <%--data-prodpricetype='${p.prodPriceType}'  data-prodPriceTypeValue='${p.prodPriceTypeValue}'--%>
+                                    <%--data-prodguideprice='${p.prodGuidePrice}'--%>
+                                    <%--data-produnit='${p.prodUnit}' data-prodUnitValue='${p.prodUnitValue}'--%>
+                                    <%--data-color="${p.prodColor}" data-colorValue="${p.prodColorValue}"--%>
+                                    <%--value='${p.prodName}' > ${p.prodName}</option>--%>
+                        <%--</c:forEach>--%>
+                    <%--</select>--%>
+                <%--</label>--%>
+            <%--</div>--%>
+            <%--<div class="ibox-content">--%>
+                <%--<form method="get" class="form-horizontal">--%>
+                    <%--<div class="form-group">--%>
+                        <%--<div class="col-md-4">--%>
+                            <%--<label class="col-md-3">产品编码:</label>--%>
+                            <%--<label class="col-md-3" id="itemCode"></label>--%>
+                        <%--</div>--%>
+                        <%--<div class="col-md-4">--%>
+                            <%--<label class="col-md-3">产品名称:</label>--%>
+                            <%--<label class="col-md-3" id="itemName"></label>--%>
+                        <%--</div>--%>
+                        <%--<div class="col-md-4">--%>
+                            <%--<label class="col-md-3">产品品种:</label>--%>
+                            <%--<label class="col-md-3" id="itemCgyCode"></label>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                    <%--<div class="form-group">--%>
+                        <%--<div class="col-md-4">--%>
+                            <%--<label class="col-md-3">产品类别:</label>--%>
+                            <%--<label class="col-md-3" id="itemVariety"></label>--%>
+                        <%--</div>--%>
+                        <%--<div class="col-md-4">--%>
+                            <%--<label class="col-md-3">产品厚度:</label>--%>
+                            <%--<label class="col-md-3" id="itemThick"></label>--%>
+                        <%--</div>--%>
+                        <%--<div class="col-md-4">--%>
+                            <%--<label class="col-md-3">计价方式:</label>--%>
+                            <%--<label class="col-md-3" id="itemPriceType"></label>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                    <%--<div class="form-group">--%>
+                        <%--<div class="col-md-4">--%>
+                            <%--<label class="col-md-3">指导价格:</label>--%>
+                            <%--<label class="col-md-3" id="itemPrice"></label>--%>
+                        <%--</div>--%>
+                        <%--<div class="col-md-4">--%>
+                            <%--<label class="col-md-3">单位:</label>--%>
+                            <%--<label class="col-md-3" id="itemUnit"></label>--%>
+                        <%--</div>--%>
+                        <%--<div class="col-md-4" >--%>
+                            <%--<label class="col-md-3">颜色:</label>--%>
+                            <%--<label class="col-md-3" id="itemColor"></label>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                    <%--&lt;%&ndash;<div class="form-group">&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;<div class="col-md-4">&ndash;%&gt;--%>
+                            <%--&lt;%&ndash;<label class="col-md-3">宽度&nbsp;(m):</label>&ndash;%&gt;--%>
+                            <%--&lt;%&ndash;<label class="col-md-3">&ndash;%&gt;--%>
+                                <%--&lt;%&ndash;<input type="text" class="form-control" style="width: 120px" id="itemWidth" name="itemWidth" />&ndash;%&gt;--%>
+                            <%--&lt;%&ndash;</label>&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
+                    <%--&lt;%&ndash;</div>&ndash;%&gt;--%>
+                <%--</form>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+    <%--<div class="row">--%>
+        <%--<div class="form-group">--%>
+            <%--&nbsp;&nbsp;--%>
+            <%--<button class="btn btn-primary" type="button" onclick="doProcess()">确认产品</button>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+<%--</br>--%>
+    <%--<div class="row">--%>
+        <%--<div class="ibox float-e-margins">--%>
+            <%--<div class="ibox-title">--%>
+                <%--<h5>订单产品列表</h5>--%>
+            <%--</div>--%>
+            <%--<div class="ibox-content">--%>
+                <%--<div class="" style="max-height: 350px">--%>
+                    <%--<table id="cusProdDetail" data-height="300" style="min-width: 1500px">--%>
+                        <%--<thead>--%>
+                        <%--<tr>--%>
+                            <%--<th data-field="itemCode">编码</th>--%>
+                            <%--<th data-field="itemName">名称</th>--%>
+                            <%--<th data-field="itemCgyCodeValue">品种</th>--%>
+                            <%--<th data-field="itemVaritemValue">类别</th>--%>
+                            <%--<th data-field="itemLenth">长</th>--%>
+                            <%--<th data-field="itemWidth">宽</th>--%>
+                            <%--<th data-field="itemThick">厚度</th>--%>
+                            <%--<th data-field="itemColorValue">颜色</th>--%>
+                            <%--<th data-field="itemUnitValue">单位</th>--%>
+                            <%--<th data-field="itemOwner">归属人</th>--%>
+                            <%--<th data-field="itemPrice">单价</th>--%>
+                            <%--<th data-field="itemNum">数量</th>--%>
+                            <%--<th data-field="itemPriceTypeValue">计价方式</th>--%>
+                            <%--<th data-field="itemWeight">重量</th>--%>
+                            <%--<th data-field="itemTotalWeight">总重量</th>--%>
+                            <%--<th data-field="itemTotalSq">总面积</th>--%>
+                            <%--<th data-field="itemYcType">延长方式</th>--%>
+                            <%--<th data-field="itemYbType">压边类型</th>--%>
+                            <%--<th data-field="operator">操作</th>--%>
+                        <%--</tr>--%>
+                        <%--</thead>--%>
+                    <%--</table>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+    <%--</br>--%>
+    <%--<div class="row">--%>
+        <%--<div class="form-group">--%>
+                <%--&nbsp;&nbsp;--%>
+                <%--<button class="btn btn-primary" type="submit" onclick="saveProd()">保存详情</button>--%>
+                <%--&nbsp;&nbsp;--%>
+                <%--<button class="btn btn-white" type="button" onclick="history.go(-1)">返回</button>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+<%--</div>--%>
 <script src="${ctxStatic}/hPlugs/js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
 <script src="${ctxStatic}/hPlugs/js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
 <script src="${ctxStatic}/hPlugs/js/content.min.js?v=1.0.0" type="text/javascript"></script>
@@ -207,26 +442,26 @@
             prodObj.itemColor = $(obj).find("option:selected").attr("data-color");
             prodObj.itemColorValue = $(obj).find("option:selected").attr("data-colorValue");
 
-            $("#itemCode").text($(obj).find("option:selected").attr("data-prodcode"));
-            $("#itemName").text($(obj).find("option:selected").val());
-            $("#itemCgyCode").text($(obj).find("option:selected").attr("data-prodCgyCodeValue"));
-            $("#itemVariety").text($(obj).find("option:selected").attr("data-prodVarietyValue"));
-            $("#itemThick").text($(obj).find("option:selected").attr("data-prodthick"));
-            $("#itemPriceType").text($(obj).find("option:selected").attr("data-prodPriceTypeValue"));
-            $("#itemPrice").text($(obj).find("option:selected").attr("data-prodguidePrice"));
-            $("#itemUnit").text($(obj).find("option:selected").attr("data-prodUnitValue"));
-            $("#itemColor").text($(obj).find("option:selected").attr("data-colorValue"));
+            $("#itemCode").val($(obj).find("option:selected").attr("data-prodcode"));
+            $("#itemName").val($(obj).find("option:selected").val());
+            $("#itemCgyCode").val($(obj).find("option:selected").attr("data-prodCgyCodeValue"));
+            $("#itemVariety").val($(obj).find("option:selected").attr("data-prodVarietyValue"));
+            $("#itemThick").val($(obj).find("option:selected").attr("data-prodthick"));
+            $("#itemPriceType").val($(obj).find("option:selected").attr("data-prodPriceTypeValue"));
+            $("#itemPrice").val($(obj).find("option:selected").attr("data-prodguidePrice"));
+            $("#itemUnit").val($(obj).find("option:selected").attr("data-prodUnitValue"));
+            $("#itemColor").val($(obj).find("option:selected").attr("data-colorValue"));
 
         }else{
-            $("#itemCode").text("");
-            $("#itemName").text("");
-            $("#itemCgyCode").text("");
-            $("#itemVariety").text("");
-            $("#itemThick").text("");
-            $("#itemPriceType").text("");
-            $("#itemPrice").text("");
-            $("#itemUnit").text("");
-            $("#itemColor").text("");
+            $("#itemCode").val("");
+            $("#itemName").val("");
+            $("#itemCgyCode").val("");
+            $("#itemVariety").val("");
+            $("#itemThick").val("");
+            $("#itemPriceType").val("");
+            $("#itemPrice").val("");
+            $("#itemUnit").val("");
+            $("#itemColor").val("");
         }
     }
 

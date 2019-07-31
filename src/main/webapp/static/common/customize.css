@@ -65,3 +65,34 @@
 .global-table-th{
     text-align: center;
 }
+
+.order-label-margin{
+    margin-top: 5px;
+}
+
+.order-detail-label-margin{
+    margin-top: 3px;
+}
+
+.order-label-input-width{
+    width: 300px;
+}
+
+.order-input-width{
+    width: 150px;
+}
+
+.order-date-width{
+    width: 194px;
+}
+
+.order-detail-input-readonly{
+    background-color: #f1f5f7;
+    /*padding: 4px 6px;*/
+    border: 1px solid #ccc;
+    border-radius: 5px 5px 5px 5px;
+    font-size: 18px;
+    color: #555;
+    text-align: left;
+    width: 300px;
+}
