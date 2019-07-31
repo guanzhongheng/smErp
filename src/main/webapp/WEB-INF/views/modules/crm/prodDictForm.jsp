@@ -13,7 +13,7 @@
     <li class="active"><a href="${ctx}/tProduct/get?id=">产品操作</a></li>
 </ul><br/>
 <form:form id="inputForm" modelAttribute="tProduct" action="${ctx}/tProduct/insert" method="post" class="form-horizontal">
-    <form:hidden path="id"/>
+    <input name="id" id="id" type="hidden" value="${prodId}">
     <sys:message content="${message}"/>
     <div class="control-group">
         <label class="control-label">产品编码:</label>
@@ -44,6 +44,15 @@
             <form:select path="prodVariety" class="input-medium" placeholder="产品类别">
                 <form:option value="" label=""/>
                 <form:options items="${fns:getCusDictList(149000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+            </form:select>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">产品颜色:</label>
+        <div class="controls">
+            <form:select path="prodColor" class="input-medium" placeholder="颜色">
+                <form:option value="" label=""/>
+                <form:options items="${fns:getDictList('prod_color')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
             </form:select>
         </div>
     </div>

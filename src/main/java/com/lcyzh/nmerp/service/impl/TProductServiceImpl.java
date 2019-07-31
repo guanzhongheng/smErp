@@ -59,6 +59,7 @@ public class TProductServiceImpl implements TProductService{
             list = products.stream().map(vo->{
                 ProductVo productVo = new ProductVo();
                 BeanUtils.copyProperties(vo, productVo);
+                productVo.setId("" + vo.getId());
                 productVo.setProdCgyCodeValue(DictUtils.getDictValueMaps().get(vo.getProdCgyCode()));
                 productVo.setProdVarietyValue(DictUtils.getDictValueMaps().get(vo.getProdVariety()));
                 productVo.setProdPriceTypeValue(DictUtils.getDictValueMaps().get(vo.getProdPriceType()));

@@ -14,7 +14,7 @@ import java.util.Date;
  * @ModificationHistory Who          When          What
  */
 public class ProductVo extends DataEntity<TProduct> {
- //   private Long id;
+    private Long id;
     private String prodCode;
     private String prodName;
     //类别-字典
@@ -42,14 +42,6 @@ public class ProductVo extends DataEntity<TProduct> {
     private String prodColor;
     //产品颜色-字典值
     private String prodColorValue;
-
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
 
     public String getProdCode() {
         return prodCode;

@@ -20,6 +20,7 @@
                                     data-prodpricetype='${p.prodPriceType}'  data-prodPriceTypeValue='${p.prodPriceTypeValue}'
                                     data-prodguideprice='${p.prodGuidePrice}'
                                     data-produnit='${p.prodUnit}' data-prodUnitValue='${p.prodUnitValue}'
+                                    data-color="${p.prodColor}" data-colorValue="${p.prodColorValue}"
                                     value='${p.prodName}' > ${p.prodName}</option>
                         </c:forEach>
                     </select>
@@ -64,23 +65,19 @@
                             <label class="col-md-3">单位:</label>
                             <label class="col-md-3" id="itemUnit"></label>
                         </div>
-                        <div class="col-md-4" style="padding-left: 30px;">
-                            <select data-placeholder="选择颜色" class="chosen-select" style="width: 120px" id="prodColor">
-                                <option value="-1">颜色选择</option>
-                                <c:forEach items="${color}" var="c">
-                                    <option value='${c.value}' data-label='${c.label}' >${c.label}</option>
-                                </c:forEach>
-                            </select>
+                        <div class="col-md-4" >
+                            <label class="col-md-3">颜色:</label>
+                            <label class="col-md-3" id="itemColor"></label>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-md-4">
-                            <label class="col-md-3">宽度&nbsp;(m):</label>
-                            <label class="col-md-3">
-                                <input type="text" class="form-control" style="width: 120px" id="itemWidth" name="itemWidth" />
-                            </label>
-                        </div>
-                    </div>
+                    <%--<div class="form-group">--%>
+                        <%--<div class="col-md-4">--%>
+                            <%--<label class="col-md-3">宽度&nbsp;(m):</label>--%>
+                            <%--<label class="col-md-3">--%>
+                                <%--<input type="text" class="form-control" style="width: 120px" id="itemWidth" name="itemWidth" />--%>
+                            <%--</label>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
                 </form>
             </div>
         </div>
@@ -154,7 +151,6 @@
 <script src="${ctxStatic}/hPlugs/js/plugins/clockpicker/clockpicker.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/cropper/cropper.min.js"></script>
 <script src="${ctxStatic}/hPlugs/js/demo/form-advanced-demo.min.js"></script>
-
 <script src="${ctxStatic}/hPlugs/js/plugins/layer/layer.min.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/bootstrap-table/bootstrap-table.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/bootstrap-table/bootstrap-table-fixed-columns.js"></script>
@@ -200,18 +196,16 @@
             prodObj.itemName = $(obj).find("option:selected").val();
             prodObj.itemCgyCode = $(obj).find("option:selected").attr("data-prodcgyCode");
             prodObj.itemCgyCodeValue = $(obj).find("option:selected").attr("data-prodCgyCodeValue");
-
             prodObj.itemVariety = $(obj).find("option:selected").attr("data-prodvariety");
             prodObj.itemVaritemValue = $(obj).find("option:selected").attr("data-prodVarietyValue");
-
             prodObj.itemThick = $(obj).find("option:selected").attr("data-prodthick");
             prodObj.itemPriceType = $(obj).find("option:selected").attr("data-prodpriceType");
             prodObj.itemPriceTypeValue = $(obj).find("option:selected").attr("data-prodPriceTypeValue");
-
             prodObj.itemPrice = $(obj).find("option:selected").attr("data-prodguidePrice");
-
             prodObj.itemUnit = $(obj).find("option:selected").attr("data-produnit");
             prodObj.itemUnitValue = $(obj).find("option:selected").attr("data-prodUnitValue");
+            prodObj.itemColor = $(obj).find("option:selected").attr("data-color");
+            prodObj.itemColorValue = $(obj).find("option:selected").attr("data-colorValue");
 
             $("#itemCode").text($(obj).find("option:selected").attr("data-prodcode"));
             $("#itemName").text($(obj).find("option:selected").val());
@@ -221,6 +215,8 @@
             $("#itemPriceType").text($(obj).find("option:selected").attr("data-prodPriceTypeValue"));
             $("#itemPrice").text($(obj).find("option:selected").attr("data-prodguidePrice"));
             $("#itemUnit").text($(obj).find("option:selected").attr("data-prodUnitValue"));
+            $("#itemColor").text($(obj).find("option:selected").attr("data-colorValue"));
+
         }else{
             $("#itemCode").text("");
             $("#itemName").text("");
@@ -230,28 +226,16 @@
             $("#itemPriceType").text("");
             $("#itemPrice").text("");
             $("#itemUnit").text("");
+            $("#itemColor").text("");
         }
     }
 
     function doProcess() {
         debugger;
-        var color = $("#prodColor").val();
-        var itemWidth =  $("#itemWidth").val();
-        if(color == -1){
-            layer.msg('请选择颜色');
-            return;
-        }
-        if($("#prodInfo").find("option:selected").val() != -1){
-            debugger;
-            prodObj.itemColor = color;
-            prodObj.itemColorValue = $("#prodColor").find("option:selected").attr("data-label");
-            prodObj.itemWidth = itemWidth;
-            cusProdList.push(tranObject(prodObj));
-            $("#cusProdDetail").bootstrapTable("load",cusProdList);
-            $('#cusProdDetail .chosen-select').trigger("chosen:updated");
-            $('#cusProdDetail .chosen-select').chosen();
-
-        }
+        cusProdList.push(tranObject(prodObj));
+        $("#cusProdDetail").bootstrapTable("load",cusProdList);
+        $('#cusProdDetail .chosen-select').trigger("chosen:updated");
+        $('#cusProdDetail .chosen-select').chosen();
     }
 
     var ycType;
@@ -270,11 +254,6 @@
             }
         }
     });
-
-    function getItemType() {
-
-    }
-
 
     $(document).ready(function(){
        // getItemType();
@@ -337,7 +316,10 @@
                 },{
                     field: 'itemWidth',
                     title: '宽',
-                    width: '60px'
+                    width: '60px',
+                    formatter:function (value,row,index) {
+                        return ['<input type="number" min="0" style="width: 80px" step="0.01" onchange="inserData(\'itemWidth\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
+                    }
                 },{
                     field: 'itemThick',
                     title: '厚',

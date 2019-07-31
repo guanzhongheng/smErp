@@ -39,33 +39,32 @@
             </form:select>
         </li>
         &nbsp;&nbsp;
-        <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 100px" value="查询"/></li>
+        <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
     </ul>
 </form:form>
 <div class="control-group">&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="/tProduct/get" type="button" class="btn btn-primary" style="width: 100px;height: 22px"><i
+    <a href="/tProduct/get" type="button" class="btn btn-primary" style="width: 71px;height: 22px"><i
             class="icon-plus"></i>&nbsp;添加产品</a>
 </div>
-<div class="control-group table-responsive">
-    <table id="contentTable" class="table table-striped table-bordered table-hover text-nowrap">
+<div class="control-group">
+    <table id="contentTable" class="table table-striped table-bordered table-condensed">
         <thead>
         <tr>
-            <th style="text-align: center">序号</th>
-            <th style="text-align: center">产品编号</th>
-            <th style="text-align: center">产品名称</th>
-            <th style="text-align: center">产品类别</th>
-            <th style="text-align: center">产品品种</th>
-            <th style="text-align: center">产品厚度</th>
-            <th style="text-align: center">产品单位</th>
-            <th style="text-align: center">计价方式</th>
-            <th style="text-align: center">指导价格</th>
-            <th style="text-align: center">操作</th>
+            <th>产品编号</th>
+            <th>产品名称</th>
+            <th>产品类别</th>
+            <th>产品品种</th>
+            <th>产品厚度</th>
+            <th>产品单位</th>
+            <th>产品颜色</th>
+            <th>计价方式</th>
+            <th>指导价格</th>
+            <th>操作</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${page.list}" var="cus" varStatus="status">
+        <c:forEach items="${page.list}" var="cus">
             <tr>
-                <td style="text-align: center">${status.index + 1}</td>
                     <%--${fns:getDictLabel(user.userType, 'sys_user_type', '无')}--%>
                 <td>${cus.prodCode}</td>
                 <td>${cus.prodName}</td>
@@ -73,6 +72,7 @@
                 <td>${fns:getValueByDictKey(cus.prodCgyCode)}</td>
                 <td>${cus.prodThick}</td>
                 <td>${fns:getValueByDictKey(cus.prodUnit)}</td>
+                <td>${fns:getDictLabel(cus.prodColor, 'prod_color', '无')}</td>
                 <td>${fns:getValueByDictKey(cus.prodPriceType)}</td>
                 <td>${cus.prodGuidePrice}</td>
                 <td>
