@@ -276,7 +276,7 @@
                                                     </div>
                                                     <div class="hr-line-dashed"></div>
                                                     <div class="form-group" style="text-align: center;">
-                                                        <button class="btn btn-primary global-button-style" type="button" onclick="history.go(-1)">返回</button>
+                                                        <button class="btn btn-white global-button-style" type="button" onclick="history.go(-1)">返回</button>
                                                     </div>
                                                 </div>
                                             </div>

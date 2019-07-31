@@ -160,7 +160,7 @@
                                     <div class="row">
                                         <div class="form-group">
                                             <button class="btn btn-primary" type="button" id="distribution">下发生产</button>
-                                            <button class="btn btn-primary" type="button" onclick="history.go(-1)">返回</button>
+                                            <button class="btn btn-white" type="button" onclick="history.go(-1)">返回</button>
                                         </div>
                                     </div>
                                 </div>
