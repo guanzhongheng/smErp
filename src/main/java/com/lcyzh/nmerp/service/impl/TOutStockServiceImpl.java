@@ -140,6 +140,8 @@ public class TOutStockServiceImpl implements TOutStockService {
             ordCode = tStock.getOrdCode();
             if(ordMap.containsKey(ordCode)) {
                 ordMap.put(ordCode, ordMap.get(ordCode) + 1);
+            }else{
+                ordMap.put(ordCode, 1L);
             }
         }
         List<TOrder> orders = new ArrayList<>(ordMap.size());

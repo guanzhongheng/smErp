@@ -28,7 +28,7 @@
         FROM T_PRODUCT
         <where>
             <if test="prodCode != null and prodCode != ''">
-                and prod_code = #{prodCode}
+                and prod_code like concat(concat('%', #{prodCode}),'%')
             </if>
             <if test="prodName != null and prodName != ''">
                 and prod_name like concat(concat('%', #{prodName}),'%')
@@ -118,17 +118,36 @@
 
     <update id="update" parameterType="com.lcyzh.nmerp.entity.TProduct">
         UPDATE T_PRODUCT
-        SET
-            prod_code = #{prodCode},
-            prod_name = #{prodName},
-            prod_cgy_code = #{prodCgyCode},
-            prod_thick = #{prodThick},
-            prod_variety = #{prodVariety},
-            prod_guide_price = #{prodGuidePrice},
-            prod_price_type = #{prodPriceType},
-            prod_unit = #{prodUnit},
-            prod_color = #{prodColor}
-        WHERE id = #{id}
+        <set>
+            <if test="prodCode!=null">
+                prod_code = #{prodCode,jdbcType=VARCHAR},
+            </if>
+            <if test="prodName!=null">
+                prod_name = #{prodName,jdbcType=VARCHAR},
+            </if>
+            <if test="prodCgyCode!=null">
+                prod_cgy_code = #{prodCgyCode, jdbcType=BIGINT},
+            </if>
+            <if test="prodThick!=null">
+                prod_thick = #{prodThick,jdbcType=DOUBLE},
+            </if>
+            <if test="prodVariety!=null">
+                prod_variety = #{prodVariety,jdbcType=BIGINT},
+            </if>
+            <if test="prodGuidePrice!=null">
+                prod_guide_price = #{prodGuidePrice,jdbcType=DOUBLE},
+            </if>
+            <if test="prodPriceType!=null">
+                prod_price_type = #{prodPriceType,jdbcType=BIGINT},
+            </if>
+            <if test="prodUnit!=null">
+                prod_unit = #{prodUnit,jdbcType=BIGINT},
+            </if>
+            <if test="prodColor!=null">
+                prod_color = #{prodColor,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE id = #{id,jdbcType=BIGINT}
     </update>
 
     <delete id="delete" parameterType="com.lcyzh.nmerp.entity.TProduct">

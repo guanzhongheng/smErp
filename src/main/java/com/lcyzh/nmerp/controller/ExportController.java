@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.controller;
 
 import com.lcyzh.nmerp.model.vo.CustomerQueryVo;
+import com.lcyzh.nmerp.model.vo.OrderQueryVo;
 import com.lcyzh.nmerp.model.vo.StockQueryVo;
 import com.lcyzh.nmerp.service.IReportService;
 import com.lcyzh.nmerp.utils.DateUtil;
@@ -47,5 +48,17 @@ public class ExportController {
         context.putVar("customerList", vos);
         return new ModelAndView(
                 new JxlsExcelView(TEMPLATE_PATH + "customer.xlsx", "客户列表-"+ DateUtil.date2Str(new Date(),"yyyy-MM-dd"), context));
+    }
+
+    /**
+     * 订单信息导出
+     */
+    @RequestMapping(value = "/export/order",method = RequestMethod.GET)
+    public ModelAndView orderInfoExport(HttpServletResponse response, String ordCode){
+        OrderQueryVo orderQueryVo = reportService.queryOrderInfo(ordCode);
+        Context context = new Context();
+        context.putVar("orderInfo", orderQueryVo);
+        return new ModelAndView(
+                new JxlsExcelView(TEMPLATE_PATH + "orderInfo.xlsx", "订单信息-"+ DateUtil.date2Str(new Date(),"yyyy-MM-dd"), context));
     }
 }
