@@ -53,7 +53,7 @@ public class ExportController {
     /**
      * 订单信息导出
      */
-    @RequestMapping(value = "/export/order",method = RequestMethod.GET)
+    @RequestMapping(value = "/export/orderInfo",method = RequestMethod.GET)
     public ModelAndView orderInfoExport(HttpServletResponse response, String ordCode){
         OrderQueryVo orderQueryVo = reportService.queryOrderInfo(ordCode);
         Context context = new Context();
