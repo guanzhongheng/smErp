@@ -98,6 +98,9 @@
             <if test="startDate!= null">
                 and s.create_time between #{startDate} and #{endDate}
             </if>
+            <if test="orderTitle!= null">
+                and o.ord_title like concat('%', #{orderTitle,jdbcType=VARCHAR}, '%')
+            </if>
         </where>
         order by s.create_time desc
     </select>
