@@ -36,8 +36,8 @@ public class TMachineInfoServiceImpl implements TMachineInfoService{
     private TProductMapper tProductMapper;
 
     @Override
-    public TMachineInfo get(String id){
-        return tMachineInfoMapper.get(id);
+    public TMachineInfo findById(Long id){
+        return tMachineInfoMapper.findById(id);
     }
 
     @Override

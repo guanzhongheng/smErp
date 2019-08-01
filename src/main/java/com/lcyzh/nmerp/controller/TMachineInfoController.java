@@ -29,7 +29,7 @@ public class TMachineInfoController {
 
     @RequestMapping(value = {"/get"}, method = RequestMethod.GET)
     public Object get(@RequestParam String id) {
-        TMachineInfo tMachineInfo = tMachineInfoService.get(id);
+        TMachineInfo tMachineInfo = tMachineInfoService.findById(Long.valueOf(id));
         return tMachineInfo;
     }
 

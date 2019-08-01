@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface TMachineInfoMapper {
 
-    TMachineInfo get(String id);
+    TMachineInfo findById(Long id);
 
     List<TMachineInfo> findList(TMachineInfo tMachineInfo);
 

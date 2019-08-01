@@ -11,7 +11,7 @@ import java.util.List;
 * Date  2019-06-06
 */
 public interface TMachineInfoService {
-    TMachineInfo get(String id);
+    TMachineInfo findById(Long id);
 
     TMachineInfo getByCode(String macCode);
 

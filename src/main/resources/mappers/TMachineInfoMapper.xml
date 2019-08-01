@@ -27,18 +27,18 @@
         SELECT *
         FROM t_machine_info
         <where>
-            <if test="macCode!= null">
-                and mac_code like concat('%', #{macCode,jdbcType=VARCHAR}, '%')
-            </if>
-            <if test="prodCodes!= null">
-                and prod_codes like concat('%', #{prodCodes,jdbcType=VARCHAR}, '%')
-            </if>
-            <if test="minWidth!= null">
-                and min_width like concat('%', #{minWidth,jdbcType=DOUBLE}, '%')
-            </if>
-            <if test="maxWidth!= null">
-                and max_width like concat('%', #{maxWidth,jdbcType=DOUBLE}, '%')
-            </if>
+        <if test="macCode!= null and macCode != ''">
+            and mac_code like concat('%', #{macCode,jdbcType=VARCHAR}, '%')
+        </if>
+        <if test="prodCodes!= null and prodCodes != ''">
+            and prod_codes like concat('%', #{prodCodes,jdbcType=VARCHAR}, '%')
+        </if>
+        <if test="minWidth!= null">
+            and min_width &gt; #{minWidth,jdbcType=DOUBLE}
+        </if>
+        <if test="maxWidth!= null">
+            and max_width &lt; #{maxWidth,jdbcType=DOUBLE}
+        </if>
         </where>
     </select>
 
