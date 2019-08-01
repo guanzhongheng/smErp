@@ -77,27 +77,27 @@ public class PrintManageController extends BaseController {
 
     /**
      * 出库收据打印
-     * @param ordCode
+     * @param outCode
      * @param model
      * @return
      */
     @RequestMapping(value = "outStockInvoice_print")
-    public String outStockInvoicePrint(String ordCode, Model model){
+    public String outStockInvoicePrint(String outCode, Model model){
         User currentUser = UserUtils.getUser();
 
-        // 获取订单信息
-        OrderAddModifyVo order =  orderService.findModifyInfoByOrdCode(ordCode);
-        // 获取客户信息
-        CustomerAddModifyVo customer = tCustomerMapper.findModifyInfoByCusCode(order.getCusCode());
-        // 获取订单详情
-        List<OrderItemVo> orderItemVos =   orderService.findByOrdCode(ordCode);
-
-        model.addAttribute("nowTime", DateUtils.getDate());
-        model.addAttribute("userName",currentUser.getName());
-        model.addAttribute("customer",customer);
-        model.addAttribute("order",order);
-        model.addAttribute("orderItem",orderItemVos);
-        getTotalInfo(model,orderItemVos);
+//        // 获取订单信息
+//        OrderAddModifyVo order =  orderService.findModifyInfoByOrdCode(ordCode);
+//        // 获取客户信息
+//        CustomerAddModifyVo customer = tCustomerMapper.findModifyInfoByCusCode(order.getCusCode());
+//        // 获取订单详情
+//        List<OrderItemVo> orderItemVos =   orderService.findByOrdCode(ordCode);
+//
+//        model.addAttribute("nowTime", DateUtils.getDate());
+//        model.addAttribute("userName",currentUser.getName());
+//        model.addAttribute("customer",customer);
+//        model.addAttribute("order",order);
+//        model.addAttribute("orderItem",orderItemVos);
+//        getTotalInfo(model,orderItemVos);
         return "modules/print/outStockInvoice";
     }
 

@@ -113,7 +113,7 @@
                             <td><fmt:formatDate value="${cus.lastFollowDate}" pattern="yyyy-MM-dd"/></td>
                             <td>${cus.unFollowDays}</td>
                             <td>
-                                <a href="" onclick="gotoFollowInfo(${cusCode})"><i class="icon-comment">&nbsp;跟进</i></a>
+                                <a href="" onclick="gotoFollowInfo(this)" data-value="${cus.cusCode}"><i class="icon-comment">&nbsp;跟进</i></a>
                                 <a href="${ctx}/cus/customer_add?cusCode=${cus.cusCode}"><i
                                         class="icon-pencil">&nbsp;编辑</i></a>
                                 <a href="${ctx}/cus/customer_delete?cusCode=${cus.cusCode}"
@@ -140,7 +140,6 @@
     </div>
     <script>
         $(document).ready(function () {
-
             $("#toCustomer").click(function () {
                 debugger;
                 <!-- 针对选中客户进行操作 -->
@@ -205,12 +204,12 @@
                     top.$.jBox.tip('最少选中一条记录');
                 }
             });
-        })
-            function gotoFollowInfo(cusCode) {
-                top.$.jBox.open("iframe:${ctx}/crm/followInfo?cusCode=" + cusCode, "客户跟踪", 500, $(top.document).height() - 300, {
+            gotoFollowInfo = function (obj) {
+                debugger;
+                top.$.jBox.open("iframe:${ctx}/crm/followInfo?cusCode=" + obj.attributes["data-value"].value, "客户跟踪", 500, $(top.document).height() - 300, {
                     buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
                         debugger;
-                        var cusCode = h.find("iframe")[0].contentWindow.cusCode;
+                        var cusCode = h.find("iframe")[0].contentWindow.userCusCode;
                         var followTitle = h.find("iframe")[0].contentWindow.followTitle;
                         var remarks = h.find("iframe")[0].contentWindow.remarks;
                         if (v == "ok") {
@@ -226,37 +225,44 @@
                                 }
                             })
                         }
-                    }, loaded: function (h) {
-                        debugger;
-                        $(".jbox-content", top.document).css("overflow-y", "hidden");
                     }
+                    // , loaded: function (h) {
+                    //     debugger;
+                    //     $(".jbox-content", top.document).css("overflow-y", "hidden");
+                    // }
                 });
             }
 
-            function getCheckValue() {
-                debugger;
-                var obj = document.getElementsByName("cuscode");
-                var check_val = '';
-                for (k in obj) {
-                    if (obj[k].checked)
-                        check_val = check_val + obj[k].value + ",";
-                }
-                check_val = check_val.replace(",,", ",");
-                return check_val;
-            }
+        })
 
-            function checkedAll(obj) {
-                var codes = document.getElementsByName("cuscode")
-                if (obj.checked) {
-                    for (var i = 0; i < codes.length; i++) {
-                        codes[i].checked = true;
-                    }
-                } else {
-                    for (var i = 0; i < codes.length; i++) {
-                        codes[i].checked = false;
-                    }
+        // function gotoFollowInfo(cusCode) {
+        //
+        // }
+
+        function getCheckValue() {
+            debugger;
+            var obj = document.getElementsByName("cuscode");
+            var check_val = '';
+            for (k in obj) {
+                if (obj[k].checked)
+                    check_val = check_val + obj[k].value + ",";
+            }
+            check_val = check_val.replace(",,", ",");
+            return check_val;
+        }
+
+        function checkedAll(obj) {
+            var codes = document.getElementsByName("cuscode")
+            if (obj.checked) {
+                for (var i = 0; i < codes.length; i++) {
+                    codes[i].checked = true;
+                }
+            } else {
+                for (var i = 0; i < codes.length; i++) {
+                    codes[i].checked = false;
                 }
             }
+        }
     </script>
 </div>
 </body>

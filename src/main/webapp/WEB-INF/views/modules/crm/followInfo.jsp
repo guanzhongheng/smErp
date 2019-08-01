@@ -2,8 +2,8 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <html>
 <body>
-<form method="post" class="form-horizontal" id="transferInfo">
-    <input type="hidden" id="cusCode" name="cusCode" value="${cusCode}">
+<form method="post" class="form-horizontal" >
+    <input type="hidden" id="userCusCode" name="userCusCode" value="${cusCode}">
     <br/><br/>
     <div class="control-group" style="margin-left: -30px">
         <label class="col-sm-1 control-label">跟进标题:</label>
