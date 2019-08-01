@@ -18,57 +18,82 @@
     </script>
 </head>
 <body>
-<ul class="nav nav-tabs">
-    <li class="active"><a href="${ctx}/sys/menu/">菜单列表</a></li>
-    <li><a href="${ctx}/sys/menu/form">菜单添加</a></li>
-</ul>
-<sys:message content="${message}"/>
+<%--<ul class="nav nav-tabs">--%>
+    <%--<li class="active"><a href="${ctx}/sys/menu/">菜单列表</a></li>--%>
+    <%--<li><a href="${ctx}/sys/menu/form">菜单添加</a></li>--%>
+<%--</ul>--%>
 
-<form id="listForm" method="post">
-    <div class="control-group table-responsive">
-    <table id="treeTable" class="table table-striped table-bordered  table-hover text-nowrap hide">
-        <thead>
-        <tr>
-            <th style="text-align: center">名称</th>
-            <th style="text-align: center">链接</th>
-            <th style="text-align:center;">排序</th>
-            <th style="text-align: center">可见</th>
-            <th style="text-align: center">权限标识</th>
-            <th style="text-align: center">操作</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${list}" var="menu">
-            <tr id="${menu.id}" pId="${menu.parent.id ne '1'?menu.parent.id:'0'}">
-                <td nowrap><i class="icon-${not empty menu.icon?menu.icon:' hide'}"></i><a
-                        href="${ctx}/sys/menu/form?id=${menu.id}">${menu.name}</a></td>
-                <td title="${menu.href}">${fns:abbr(menu.href,30)}</td>
-                <td style="text-align:center;">
-                    <input type="hidden" name="ids" value="${menu.id}"/>
-                    <input name="sorts" type="text" value="${menu.sort}"
-                           style="width:50px;margin:0;padding:0;text-align:center;">
-                        ${menu.sort}
-                </td>
-                <td>${menu.isShow eq '1'?'显示':'隐藏'}</td>
-                <td title="${menu.permission}">${fns:abbr(menu.permission,30)}</td>
-                <td nowrap>
-                    <a href="${ctx}/sys/menu/form?id=${menu.id}"><i class="icon-pencil">&nbsp;修改</i></a>
-                    <a href="${ctx}/sys/menu/delete?id=${menu.id}"
-                       onclick="return confirmx('要删除该菜单及所有子菜单项吗？', this.href)"><i class="icon-trash">&nbsp;删除</i></a>
-                    <a href="${ctx}/sys/menu/form?parent.id=${menu.id}"><i class="icon-plus">&nbsp;添加下级菜单</i></a>
-                </td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-    <%--<div class="form-actions pagination-left">--%>
-        <%--<input id="btnSubmit" class="btn btn-primary global-button-style" type="button" value="保存排序" onclick="updateSort();"/>--%>
-    <%--</div>--%>
-        <div class="global-button-padding">
-            <input id="btnSubmit" class="btn btn-primary global-button-style" style="width: 180px;" type="submit" value="保存排序" onclick="updateSort();"/>
+
+
+
+<div class="tabs-container" style="padding: 20px 20px;">
+    <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
+        <div class="panel-heading" style="background-color: #50B0E6">
+            <h3 class="panel-title global-panel-title" >
+                菜单列表
+            </h3>
+            <code class="pull-right" style="margin-top: -33px; margin-right: 8px;"><span style="color: red; ">*</span>
+                <small>为必填项</small>
+            </code>
+        </div>
+        <div class="panel-body" style="padding: 10px 10px 0px 10px;">
+
+            <sys:message content="${message}"/>
+
+            <form id="listForm" method="post">
+                <div class="control-group table-responsive">
+                    <table id="treeTable" class="table table-striped table-bordered  table-hover text-nowrap hide">
+                        <thead>
+                        <tr>
+                            <th style="text-align: center">名称</th>
+                            <th style="text-align: center">链接</th>
+                            <th style="text-align:center;">排序</th>
+                            <th style="text-align: center">可见</th>
+                            <th style="text-align: center">权限标识</th>
+                            <th style="text-align: center">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${list}" var="menu">
+                            <tr id="${menu.id}" pId="${menu.parent.id ne '1'?menu.parent.id:'0'}">
+                                <td nowrap><i class="icon-${not empty menu.icon?menu.icon:' hide'}"></i><a
+                                        href="${ctx}/sys/menu/form?id=${menu.id}">${menu.name}</a></td>
+                                <td title="${menu.href}">${fns:abbr(menu.href,30)}</td>
+                                <td style="text-align:center;">
+                                    <input type="hidden" name="ids" value="${menu.id}"/>
+                                    <input name="sorts" type="text" value="${menu.sort}"
+                                           style="width:50px;margin:0;padding:0;text-align:center;">
+                                        ${menu.sort}
+                                </td>
+                                <td>${menu.isShow eq '1'?'显示':'隐藏'}</td>
+                                <td title="${menu.permission}">${fns:abbr(menu.permission,30)}</td>
+                                <td nowrap>
+                                    <a href="${ctx}/sys/menu/form?id=${menu.id}"><i class="icon-pencil">&nbsp;修改</i></a>
+                                    <a href="${ctx}/sys/menu/delete?id=${menu.id}"
+                                       onclick="return confirmx('要删除该菜单及所有子菜单项吗？', this.href)"><i class="icon-trash">&nbsp;删除</i></a>
+                                    <a href="${ctx}/sys/menu/form?parent.id=${menu.id}"><i class="icon-plus">&nbsp;添加下级菜单</i></a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                    <%--<div class="form-actions pagination-left">--%>
+                    <%--<input id="btnSubmit" class="btn btn-primary global-button-style" type="button" value="保存排序" onclick="updateSort();"/>--%>
+                    <%--</div>--%>
+                    <div class="global-button-padding">
+                        <input id="btnSubmit" class="btn btn-primary global-button-style" style="width: 180px;" type="submit" value="保存排序" onclick="updateSort();"/>
+                        <%--<input  class="btn btn-success global-button-style" style="width: 180px;" type="submit" value="添加新菜单" onclick="updateSort();"/>--%>
+                        <a href="${ctx}/sys/menu/form" type="button" class="btn btn-success global-button-style" style="width: 180px;height: 30px;line-height: 29px;">添加新菜单</a>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-</form>
+</div>
+
+
+
+
 
 </body>
 </html>
