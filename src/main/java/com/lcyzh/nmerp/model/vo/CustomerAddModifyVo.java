@@ -47,10 +47,14 @@ public class CustomerAddModifyVo {
     private Long primaryContactorSex;
     //首要联系人备注
     private String primaryContactorRemark;
-    //员工编号
+    //归属员工编号
     private String empCode;
+    //归属人名称
+    private String empName;
     // 备注信息
     private String remarks;
+    //跟进员工编号
+    private String followEmpCode;
     // 跟进内容
     private String followDetail;
 
@@ -223,5 +227,21 @@ public class CustomerAddModifyVo {
 
     public void setEmpCode(String empCode) {
         this.empCode = empCode;
+    }
+
+    public String getEmpName() {
+        return empName;
+    }
+
+    public void setEmpName(String empName) {
+        this.empName = empName;
+    }
+
+    public String getFollowEmpCode() {
+        return followEmpCode;
+    }
+
+    public void setFollowEmpCode(String followEmpCode) {
+        this.followEmpCode = followEmpCode;
     }
 }

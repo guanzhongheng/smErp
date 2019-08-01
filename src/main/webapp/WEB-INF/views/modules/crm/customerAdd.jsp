@@ -115,11 +115,16 @@
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label"><i style="color: red">*</i> 归属人员：</label>
                                             <div class="col-sm-8">
-                                                <form:select path="empCode" class="chosen-select"
-                                                             cssStyle="min-width: 300px">
-                                                    <form:option value="" label=""/>
-                                                    <form:options items="${fns:getEmpListByDept(109001)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
-                                                </form:select>
+                                                <%--<form:select path="empCode" class="chosen-select"--%>
+                                                             <%--cssStyle="min-width: 300px">--%>
+                                                    <%--<form:option value="" label=""/>--%>
+                                                    <%--<form:options items="${fns:getEmpListByDept(109001)}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
+                                                <%--</form:select>--%>
+                                                    <select id="cusContent" name="empCode" class="input-medium">
+                                                        <c:forEach items="${userList}" var="us">
+                                                            <option value="${us.id}">${us.name}</option>
+                                                        </c:forEach>
+                                                    </select>
                                             </div>
                                         </div>
 
@@ -141,15 +146,18 @@
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">跟进内容：</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control global-input" name="">
+                                                <input type="text" class="form-control global-input" name="followDetail">
                                             </div>
                                         </div>
                                         <div class="hr-line-dashed"></div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label"><i style="color: red">*</i> 跟进人员：</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control global-input" name="password"
-                                                       value="${customerAddModifyVo.cusName}">
+                                                <select id="cusContent2" name="followEmpCode" class="input-medium">
+                                                    <c:forEach items="${userList}" var="us">
+                                                        <option value="${us.id}">${us.name}</option>
+                                                    </c:forEach>
+                                                </select>
                                             </div>
                                         </div>
                                         </c:if>

@@ -4,14 +4,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
-import com.lcyzh.nmerp.dao.CusEmpRelMapper;
-import com.lcyzh.nmerp.dao.CusFollowMapper;
-import com.lcyzh.nmerp.dao.PrimaryContactMapper;
-import com.lcyzh.nmerp.dao.TCustomerMapper;
-import com.lcyzh.nmerp.entity.CusEmpRel;
-import com.lcyzh.nmerp.entity.CusFollow;
-import com.lcyzh.nmerp.entity.Customer;
-import com.lcyzh.nmerp.entity.PrimaryContact;
+import com.lcyzh.nmerp.dao.*;
+import com.lcyzh.nmerp.entity.*;
 import com.lcyzh.nmerp.model.vo.CustomerAddModifyVo;
 import com.lcyzh.nmerp.model.vo.CustomerQueryVo;
 import com.lcyzh.nmerp.model.vo.CustomerUpdateVo;
@@ -42,6 +36,8 @@ public class TCustomerServiceImpl implements TCustomerService {
     private CusEmpRelMapper cusEmpRelMapper;
     @Autowired
     private CusFollowMapper cusFollowMapper;
+    @Autowired
+    private CusFollowDetailMapper cusFollowDetailMapper;
 
 
     @Override
@@ -95,6 +91,15 @@ public class TCustomerServiceImpl implements TCustomerService {
                             cusFollow.setLatestFollowTime(current);
                             cusFollow.setCreateTime(current);
                             res = cusFollowMapper.insert(cusFollow);
+                            if(res>0){
+                                CusFollowDetail followDetail = new CusFollowDetail();
+                                followDetail.setCusCode(cusCode);
+                                followDetail.setEmpCode(vo.getFollowEmpCode());
+                                followDetail.setFollowTime(current);
+                                followDetail.setCreateTime(current);
+                                followDetail.setFollowDetail(vo.getFollowDetail());
+                                cusFollowDetailMapper.insert(followDetail);
+                            }
                         }
                     }
                 }

@@ -7,10 +7,7 @@ import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.controller.system.util.SysDictUtils;
 import com.lcyzh.nmerp.controller.system.util.UserUtils;
 import com.lcyzh.nmerp.dao.*;
-import com.lcyzh.nmerp.entity.TOrder;
-import com.lcyzh.nmerp.entity.TOutStock;
-import com.lcyzh.nmerp.entity.TOutStockDetail;
-import com.lcyzh.nmerp.entity.TStock;
+import com.lcyzh.nmerp.entity.*;
 import com.lcyzh.nmerp.entity.sys.User;
 import com.lcyzh.nmerp.model.vo.*;
 import com.lcyzh.nmerp.service.TOutStockService;
@@ -186,5 +183,28 @@ public class TOutStockServiceImpl implements TOutStockService {
         OutStockVo vo = new OutStockVo();
         vo.setOutCode(outCode);
         return tOutStockMapper.getOutStockList(vo);
+    }
+
+    @Override
+    public List<OutItemVo> findItemByOutCode(String outCode) {
+        List<TStock> list = tStockMapper.findByOutCode(outCode);
+        if(list!=null && !list.isEmpty()){
+            List<OutItemVo> itemVos = list.stream().map(sto -> {
+                OutItemVo outItemVo = new OutItemVo();
+                outItemVo.setItemOwner(sto.getItemOwner());
+                outItemVo.setItemLenth(sto.getItemLenth());
+                outItemVo.setItemWidth(sto.getItemWidth());
+                outItemVo.setItemThick(sto.getItemThick());
+                TProduct prodduct = DictUtils.getProdCodeByProdCgyAndVari(sto.getItemCgyCode().toString() + sto.getItemVariety());
+                outItemVo.setItemName(prodduct.getProdName());
+                outItemVo.setProdColorValue(SysDictUtils.getDictLabel(sto.getItemColor(), "prod_color", ""));
+                outItemVo.setProdCgyCodeValue(DictUtils.getValueByDictKey(sto.getItemCgyCode()));
+                outItemVo.setProdVarietyValue(DictUtils.getValueByDictKey(sto.getItemVariety()));
+                outItemVo.setOrdCode(sto.getOrdCode());
+                return outItemVo;
+            }).collect(Collectors.toList());
+            return itemVos;
+        }
+        return null;
     }
 }

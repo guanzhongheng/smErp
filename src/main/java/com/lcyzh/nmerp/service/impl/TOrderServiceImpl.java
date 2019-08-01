@@ -45,7 +45,7 @@ public class TOrderServiceImpl implements TOrderService {
     private TProdPlanService prodPlanService;
 
     @Override
-    public List<OrderItemVo> findByOrdCode(String ordCode) {
+    public List<OrderItemVo> findItemsByOrdCode(String ordCode) {
         List<OrderItemVo> list = tOrderItemMapper.findByOrdCode(ordCode);
         list.stream().forEach(vo -> {
             vo.setItemUnitValue(DictUtils.getValueByDictKey(vo.getItemUnit()));
@@ -285,6 +285,11 @@ public class TOrderServiceImpl implements TOrderService {
             tOrderItemMapper.deleteByOrdCode(ordCode);
         }
         return res;
+    }
+
+    @Override
+    public OrderQueryVo findByOrdeCode(String ordCode) {
+        return tOrderMapper.findByPrimaryKey(ordCode);
     }
 
     /**

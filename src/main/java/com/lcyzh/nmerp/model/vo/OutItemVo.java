@@ -11,8 +11,6 @@ package com.lcyzh.nmerp.model.vo;
  * lijinku          2019/07/03    create
  */
 public class OutItemVo {
-    //条形码
-    private String barCode;
     //出库单
     private String outCode;
     //订单编号
@@ -21,8 +19,18 @@ public class OutItemVo {
     private String itemOwner;
     //产品名称
     private String itemName;
-    //产品规格
-    private String itemSpec;
+    //产品长度
+    private Double itemLenth;
+    //产品宽度
+    private Double itemWidth;
+    //产品厚度
+    private Double itemThick;
+    //产品颜色-字典值
+    private String prodColorValue;
+    //类别值
+    private String prodCgyCodeValue;
+    //品种、性质-字典值
+    private String prodVarietyValue;
 
     public String getOutCode() {
         return outCode;
@@ -30,13 +38,6 @@ public class OutItemVo {
 
     public void setOutCode(String outCode) {
         this.outCode = outCode;
-    }
-    public String getBarCode() {
-        return barCode;
-    }
-
-    public void setBarCode(String barCode) {
-        this.barCode = barCode;
     }
 
     public String getOrdCode() {
@@ -63,11 +64,55 @@ public class OutItemVo {
         this.itemName = itemName;
     }
 
-    public String getItemSpec() {
-        return itemSpec;
+    public Double getItemLenth() {
+        return itemLenth;
     }
 
-    public void setItemSpec(String itemSpec) {
-        this.itemSpec = itemSpec;
+    public void setItemLenth(Double itemLenth) {
+        this.itemLenth = itemLenth;
+    }
+
+    public Double getItemWidth() {
+        return itemWidth;
+    }
+
+    public void setItemWidth(Double itemWidth) {
+        this.itemWidth = itemWidth;
+    }
+
+    public Double getItemThick() {
+        return itemThick;
+    }
+
+    public void setItemThick(Double itemThick) {
+        this.itemThick = itemThick;
+    }
+
+    public String getProdColorValue() {
+        return prodColorValue;
+    }
+
+    public void setProdColorValue(String prodColorValue) {
+        this.prodColorValue = prodColorValue;
+    }
+
+
+
+    public String getProdCgyCodeValue() {
+        return prodCgyCodeValue;
+    }
+
+    public void setProdCgyCodeValue(String prodCgyCodeValue) {
+        this.prodCgyCodeValue = prodCgyCodeValue;
+    }
+
+
+
+    public String getProdVarietyValue() {
+        return prodVarietyValue;
+    }
+
+    public void setProdVarietyValue(String prodVarietyValue) {
+        this.prodVarietyValue = prodVarietyValue;
     }
 }

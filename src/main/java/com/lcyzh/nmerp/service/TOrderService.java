@@ -20,7 +20,7 @@ public interface TOrderService {
      * @Iteration : 1.0
      * @Date: 2019/7/2 11:16 AM
      */
-    List<OrderItemVo> findByOrdCode(String ordCode);
+    List<OrderItemVo> findItemsByOrdCode(String ordCode);
 
 
     /**
@@ -101,6 +101,16 @@ public interface TOrderService {
      * 订单删除
      */
     int detele(String ordCode);
+
+    /**
+     * @Description: 根据订单编号查订单信息
+     * @Param: [ordCode]
+     * @return: com.lcyzh.nmerp.entity.TOrder
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/8/2 12:01 AM
+     */
+    OrderQueryVo findByOrdeCode(String ordCode);
 
 
 

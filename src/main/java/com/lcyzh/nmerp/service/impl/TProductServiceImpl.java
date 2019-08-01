@@ -21,16 +21,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
-* Author ljk
-* Date  2019-06-06
-*/
+ * Author ljk
+ * Date  2019-06-06
+ */
 @Service
-public class TProductServiceImpl implements TProductService{
+public class TProductServiceImpl implements TProductService {
     @Autowired
     private TProductMapper tProductMapper;
 
     @Override
-    public ProductVo get(String id){
+    public ProductVo get(String id) {
         TProduct product = tProductMapper.get(id);
         ProductVo vo = new ProductVo();
         BeanUtils.copyProperties(product, vo);
@@ -55,8 +55,8 @@ public class TProductServiceImpl implements TProductService{
 
     private List<ProductVo> productConversion(List<TProduct> products) {
         List<ProductVo> list = new ArrayList<>(products.size());
-        if(!products.isEmpty()) {
-            list = products.stream().map(vo->{
+        if (!products.isEmpty()) {
+            list = products.stream().map(vo -> {
                 ProductVo productVo = new ProductVo();
                 BeanUtils.copyProperties(vo, productVo);
                 productVo.setId("" + vo.getId());
@@ -74,11 +74,15 @@ public class TProductServiceImpl implements TProductService{
     @Override
     public int insert(TProduct tProduct) {
         tProduct.setCreateTime(new Date());
-        return tProductMapper.insert(tProduct);
+        int res = tProductMapper.insert(tProduct);
+        if (res > 0) {
+            DictUtils.getProdMaps().put(String.valueOf(tProduct.getProdCgyCode()) + tProduct.getProdVariety(), tProduct);
+        }
+        return res;
     }
 
     @Override
-    public int insertBatch(List<TProduct> tProducts){
+    public int insertBatch(List<TProduct> tProducts) {
         return tProductMapper.insertBatch(tProducts);
     }
 
@@ -94,7 +98,7 @@ public class TProductServiceImpl implements TProductService{
 
     @Override
     public Page<ProductVo> findPage(Page<ProductVo> page, TProduct tProduct) {
-        PageHelper.startPage(page.getPageNo(),page.getPageSize());
+        PageHelper.startPage(page.getPageNo(), page.getPageSize());
         List<TProduct> list = tProductMapper.findList(tProduct);
         List<ProductVo> vos = productConversion(list);
         PageInfo<TProduct> p = new PageInfo<>(list);

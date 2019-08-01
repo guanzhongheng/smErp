@@ -1,9 +1,7 @@
 package com.lcyzh.nmerp.controller;
 
 import com.lcyzh.nmerp.common.lang.StringUtils;
-import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.controller.common.BaseController;
-import com.lcyzh.nmerp.model.vo.CustomerAddModifyVo;
 import com.lcyzh.nmerp.model.vo.OrderItemVo;
 import com.lcyzh.nmerp.service.TOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +45,7 @@ public class OrdDetailManageController extends BaseController {
         if(StringUtils.isEmpty(ordCode)){
             return null;
         }
-        List<OrderItemVo> list = orderService.findByOrdCode(ordCode);
+        List<OrderItemVo> list = orderService.findItemsByOrdCode(ordCode);
         return list;
     }
 

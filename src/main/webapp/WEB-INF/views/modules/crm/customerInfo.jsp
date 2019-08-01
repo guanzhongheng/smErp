@@ -138,11 +138,8 @@
                                                             <div class="form-group">
                                                                 <label class="col-sm-3 control-label"><i style="color: red">*</i> 归属人员：</label>
                                                                 <div class="col-sm-8">
-                                                                    <form:select path="empCode" class="chosen-select" disabled="true"
-                                                                                 cssStyle="min-width: 300px" readonly="true">
-                                                                        <form:option value="" label=""/>
-                                                                        <form:options items="${fns:getEmpListByDept(109001)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
-                                                                    </form:select>
+                                                                    <form:input path="empName" htmlEscape="false" maxlength="200" disabled="ture"
+                                                                                cssClass="form-control global-input-readonly" placeholder="归属人员" readonly="true"/>
                                                                 </div>
                                                             </div>
 

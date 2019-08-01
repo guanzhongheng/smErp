@@ -3,6 +3,7 @@ package com.lcyzh.nmerp.service;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.entity.TOutStock;
 import com.lcyzh.nmerp.entity.TOutStockDetail;
+import com.lcyzh.nmerp.model.vo.OutItemVo;
 import com.lcyzh.nmerp.model.vo.OutStockDetailVo;
 import com.lcyzh.nmerp.model.vo.OutStockVo;
 import com.lcyzh.nmerp.model.vo.StockRecordVo;
@@ -111,4 +112,14 @@ public interface TOutStockService {
      * @return
      */
     List<StockRecordVo> getOutStockList(String outCode);
+
+    /**
+     * @Description: 根据出库编号查看出库信息
+     * @Param: [outCode]
+     * @return: void
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/8/1 11:01 PM
+     */
+    List<OutItemVo> findItemByOutCode(String outCode);
 }

@@ -8,10 +8,7 @@ import com.lcyzh.nmerp.entity.TOutStock;
 import com.lcyzh.nmerp.entity.TProdPlan;
 import com.lcyzh.nmerp.entity.TProdPlanDetail;
 import com.lcyzh.nmerp.entity.sys.User;
-import com.lcyzh.nmerp.model.vo.CustomerAddModifyVo;
-import com.lcyzh.nmerp.model.vo.OrderAddModifyVo;
-import com.lcyzh.nmerp.model.vo.OrderItemVo;
-import com.lcyzh.nmerp.model.vo.StockRecordVo;
+import com.lcyzh.nmerp.model.vo.*;
 import com.lcyzh.nmerp.service.TOrderService;
 import com.lcyzh.nmerp.service.TOutStockService;
 import com.lcyzh.nmerp.service.TProdPlanDetailService;
@@ -65,7 +62,7 @@ public class PrintManageController extends BaseController {
         // 获取客户信息
         CustomerAddModifyVo customer = tCustomerMapper.findModifyInfoByCusCode(order.getCusCode());
         // 获取订单详情
-        List<OrderItemVo> orderItemVos =   orderService.findByOrdCode(ordCode);
+        List<OrderItemVo> orderItemVos =   orderService.findItemsByOrdCode(ordCode);
         model.addAttribute("nowTime", DateUtils.getDate());
         model.addAttribute("userName",currentUser.getName());
         model.addAttribute("customer",customer);
@@ -84,19 +81,20 @@ public class PrintManageController extends BaseController {
     @RequestMapping(value = "outStockInvoice_print")
     public String outStockInvoicePrint(String outCode, Model model){
         User currentUser = UserUtils.getUser();
-
-//        // 获取订单信息
-//        OrderAddModifyVo order =  orderService.findModifyInfoByOrdCode(ordCode);
-//        // 获取客户信息
-//        CustomerAddModifyVo customer = tCustomerMapper.findModifyInfoByCusCode(order.getCusCode());
+        // 获取出库单关联详情
+        List<OutItemVo> outItemVoList = outStockService.findItemByOutCode(outCode);
+        // 获取订单信息
+        OrderQueryVo order = orderService.findByOrdeCode(outItemVoList.get(0).getOrdCode());
+        // 获取客户信息
+        CustomerAddModifyVo customer = tCustomerMapper.findModifyInfoByCusCode(order.getCusCode());
 //        // 获取订单详情
-//        List<OrderItemVo> orderItemVos =   orderService.findByOrdCode(ordCode);
-//
-//        model.addAttribute("nowTime", DateUtils.getDate());
-//        model.addAttribute("userName",currentUser.getName());
-//        model.addAttribute("customer",customer);
-//        model.addAttribute("order",order);
-//        model.addAttribute("orderItem",orderItemVos);
+//        List<OrderItemVo> orderItemVos =   orderService.findItemsByOrdCode(ordCode);
+
+        model.addAttribute("nowTime", DateUtils.getDate());
+        model.addAttribute("userName",currentUser.getName());
+        model.addAttribute("customer",customer);
+        model.addAttribute("outItemVoList",outItemVoList);
+        model.addAttribute("order",order);
 //        getTotalInfo(model,orderItemVos);
         return "modules/print/outStockInvoice";
     }

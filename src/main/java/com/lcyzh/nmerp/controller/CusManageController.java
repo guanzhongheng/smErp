@@ -2,14 +2,16 @@ package com.lcyzh.nmerp.controller;
 
 import com.lcyzh.nmerp.common.lang.StringUtils;
 import com.lcyzh.nmerp.controller.common.BaseController;
+import com.lcyzh.nmerp.controller.system.util.UserUtils;
 import com.lcyzh.nmerp.entity.CusFollowDetail;
+import com.lcyzh.nmerp.entity.sys.User;
 import com.lcyzh.nmerp.model.vo.CustomerAddModifyVo;
 import com.lcyzh.nmerp.model.vo.OrderAddModifyVo;
 import com.lcyzh.nmerp.model.vo.OrderItemVo;
-import com.lcyzh.nmerp.model.vo.OrderQueryVo;
 import com.lcyzh.nmerp.service.ICusFollowService;
 import com.lcyzh.nmerp.service.TCustomerService;
 import com.lcyzh.nmerp.service.TOrderService;
+import com.lcyzh.nmerp.service.security.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,6 +43,8 @@ public class CusManageController  extends BaseController {
 
     @Autowired
     private TOrderService orderService;
+    @Autowired
+    private SystemService systemService;
 
     @ModelAttribute
     public CustomerAddModifyVo get(@RequestParam(required=false) String cusCode) {
@@ -55,6 +59,9 @@ public class CusManageController  extends BaseController {
     @RequestMapping(value = {"customer_add"})
     public String customerAdd(@ModelAttribute("customerAddModifyVo") CustomerAddModifyVo customerAddModifyVo,Model model){
         model.addAttribute("customerAddModifyVo",customerAddModifyVo);
+        List<User> userList = systemService.findUser(new User());
+        model.addAttribute("customerAddModifyVo",customerAddModifyVo);
+        model.addAttribute("userList",userList);
         return "modules/crm/customerAdd";
     }
 
@@ -77,7 +84,10 @@ public class CusManageController  extends BaseController {
         CusFollowDetail cusFollowDetail = new CusFollowDetail();
         cusFollowDetail.setCusCode(customerAddModifyVo.getCusCode());
         List<CusFollowDetail> list = cusFollowService.findList(cusFollowDetail);
-
+        User user =UserUtils.get(customerAddModifyVo.getEmpCode());
+        if(user!=null){
+            customerAddModifyVo.setEmpName(user.getName());
+        }
         model.addAttribute("customerAddModifyVo",customerAddModifyVo);
         model.addAttribute("follow",list);
         return "modules/crm/customerInfo";
@@ -108,7 +118,7 @@ public class CusManageController  extends BaseController {
         // 获取订单信息
         OrderAddModifyVo orderAddModifyVo = orderService.findModifyInfoByOrdCode(ordCode);
         // 获取订单详情信息
-        List<OrderItemVo> list = orderService.findByOrdCode(ordCode);
+        List<OrderItemVo> list = orderService.findItemsByOrdCode(ordCode);
         model.addAttribute("order",orderAddModifyVo);
         model.addAttribute("ordItems",list);
 

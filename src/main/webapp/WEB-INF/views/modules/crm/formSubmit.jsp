@@ -8,9 +8,9 @@
     <div class="control-group">
         <label class="col-sm-1 control-label">接收对象:</label>
         <div class="col-sm-8 controls">
-            <select id="cusContent" name="cusContent" class="input-medium">
+            <select id="cusContent" name="empCode" class="input-medium">
                 <c:forEach items="${userList}" var="us">
-                	<option value="${us.loginName}">${us.loginName}</option>
+                	<option value="${us.id}">${us.name}</option>
                 </c:forEach>
             </select>
         </div>
