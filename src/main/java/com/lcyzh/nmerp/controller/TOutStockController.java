@@ -94,22 +94,6 @@ public class TOutStockController {
     }
 
     /**
-     * @Description: 出库驳回
-     * @Param: [barCode, outCode]
-     * @return: java.lang.String
-     * @Author: wsm
-     * @Iteration : 1.0
-     * @Date: 2019/7/5 11:31 AM
-     */
-    @RequestMapping(value = {"/backOutStock"}, method = RequestMethod.POST)
-    @ResponseBody
-    public String backOutStock(String outCode){
-        Integer result = tOutStockService.updateStatus(outCode,'0');
-        return String.valueOf(result);
-    }
-
-
-    /**
      * @Description: 根据传入的code删除对应的资源
      * @Param: [barCode, outCode]
      * @return: java.lang.String
@@ -143,5 +127,36 @@ public class TOutStockController {
         return String.valueOf(result);
     }
 
+    /**
+     * 上面是android专用，下面是管理后台专用
+     */
 
+    /**
+     * @Description: 出库单审核通过
+     * @Param: [tOutStock]
+     * @return: java.lang.Integer
+     * @Author: wsm
+     * @Iteration : 1.0
+     * @Date: 2019/7/31 4:09 PM
+     */
+    @RequestMapping(value = {"/outStockAccept"}, method = RequestMethod.POST)
+    @ResponseBody
+    public Integer outStockAccept(TOutStock tOutStock){
+        return tOutStockService.doOutStock(tOutStock);
+    }
+
+    /**
+     * @Description: 出库驳回
+     * @Param: [barCode, outCode]
+     * @return: java.lang.String
+     * @Author: wsm
+     * @Iteration : 1.0
+     * @Date: 2019/7/5 11:31 AM
+     */
+    @RequestMapping(value = {"/backOutStock"}, method = RequestMethod.POST)
+    @ResponseBody
+    public String backOutStock(String outCode){
+        Integer result = tOutStockService.updateStatus(outCode,'0');
+        return String.valueOf(result);
+    }
 }

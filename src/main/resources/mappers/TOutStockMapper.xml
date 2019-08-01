@@ -34,6 +34,9 @@
         SELECT *
         FROM t_out_stock
         <where>
+            <if test="outCode!= null and outCode!= ''">
+                and out_code like concat('%', #{outCode,jdbcType=VARCHAR}, '%')
+            </if>
             <if test="cusName!= null and cusName!= ''">
                 and cus_name like concat('%', #{cusName,jdbcType=VARCHAR}, '%')
             </if>

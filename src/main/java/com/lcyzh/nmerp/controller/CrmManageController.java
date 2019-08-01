@@ -4,6 +4,7 @@ import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.controller.system.util.UserUtils;
+import com.lcyzh.nmerp.entity.TOutStock;
 import com.lcyzh.nmerp.entity.sys.User;
 import com.lcyzh.nmerp.model.vo.*;
 import com.lcyzh.nmerp.service.*;
@@ -238,6 +239,22 @@ public class CrmManageController extends BaseController {
     }
 
     /**
+     * 出库清单列表页面流转
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = {"inventory/outStockDetail"})
+    public String outStockDetail(String outCode, Model model) {
+        TOutStock outStock = outStockService.findByCode(outCode);
+        List<OutStockDetailVo> stockVos = outStockService.findOutItemsByOutCode(outCode);
+        model.addAttribute("outStock",outStock);
+        model.addAttribute("stocks", stockVos);
+        return "modules/crm/outStockListDetail";
+    }
+
+
+
+    /**
      * 产品清单列表页面流转
      * @param model
      * @return
@@ -289,18 +306,6 @@ public class CrmManageController extends BaseController {
         return "modules/crm/produceList";
     }
 
-    /**
-     * 出库清单列表页面流转
-     * @param model
-     * @return
-     */
-    @RequestMapping(value = {"inventory/outStockDetail"})
-    public String outStockDetail(String outCode, Model model) {
-       // OutStockVo outStockVo = outStockService.
-        List<OutStockDetailVo> stockVos = outStockService.findOutItemsByOutCode(outCode);
-        model.addAttribute("outCode",outCode);
-        model.addAttribute("stocks", stockVos);
-        return "modules/crm/outStockListDetail";
-    }
+
 
 }
