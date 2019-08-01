@@ -63,7 +63,7 @@
         <div class="text-right">
             <button class="btn btn-primary" onclick="print2()">打印</button>
             &nbsp;&nbsp;
-            <button class="btn btn-white" onclick="javascript:history.go(-1);">返回</button>
+            <button class="btn btn-primary" onclick="javascript:history.go(-1);">返回</button>
         </div>
     </div>
 
