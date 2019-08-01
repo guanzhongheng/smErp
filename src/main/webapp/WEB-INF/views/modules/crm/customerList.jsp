@@ -44,7 +44,15 @@
                     &nbsp;&nbsp;
                     <form:select path="cusType" class="input-medium" placeholder="客户类型">
                         <form:option value="" label=""/>
-                        <form:options items="${fns:getCusDictList(110000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+                        <form:option value="110002" label="经销商"/>
+                        <form:option value="110001" label="散户"/>
+                    </form:select>
+                </li>
+                <li>
+                    &nbsp;&nbsp;
+                    <form:select path="cusStatus" class="input-medium" placeholder="客户状态">
+                        <form:option value="" label=""/>
+                        <form:options items="${fns:getCusDictList(104000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                     </form:select>
                 </li>
                 <li>
@@ -73,11 +81,11 @@
                     <th><input type="checkbox" id="checkAll" onchange="checkedAll(this)" /></th>
                     <th style="text-align: center">客户编号</th>
                     <th style="text-align: center">客户名称</th>
+                    <th style="text-align: center">客户类型</th>
                     <th style="text-align: center">客户状态</th>
                     <th style="text-align: center">客户星级</th>
                     <th style="text-align: center">首联系人</th>
                     <th style="text-align: center">手机号码</th>
-                    <%--<th>客户维护人</th>--%>
                     <th style="text-align: center">最后跟进日期</th>
                     <th style="text-align: center">未跟进天数</th>
                     <th style="text-align: center">操作</th>
@@ -89,11 +97,14 @@
                         <td><input type="checkbox" name="cuscode" value="${cus.cusCode}"></td>
                         <td><a href="/cus/customer_info?cusCode=${cus.cusCode}" >${cus.cusCode}</a></td>
                         <td>${cus.cusName}</td>
+                        <td>
+                            <c:if test="${cus.cusType eq '110001'}">散户</c:if>
+                            <c:if test="${cus.cusType eq '110002'}">经销商</c:if>
+                        </td>
                         <td>${fns:getValueByDictKey(cus.cusStatus)}</td>
                         <td>${fns:getValueByDictKey(cus.cusGrade)}</td>
                         <td>${cus.primaryContactorName}</td>
                         <td>${cus.primaryContactorPhone}</td>
-                            <%--<td>${cus.cusAddress}</td>--%>
                         <td><fmt:formatDate value="${cus.lastFollowDate}" pattern="yyyy-MM-dd"/></td>
                         <td>${cus.unFollowDays}</td>
                         <td>
@@ -107,128 +118,6 @@
                 </tbody>
             </table>
             <div class="pagination">${page}</div>
-
-            <script>
-                $("#toCustomer").click(function () {
-                    debugger;
-                    <!-- 针对选中客户进行操作 -->
-                    // var checkValue = $(".td checkbox");
-                    var str = getCheckValue();
-                    if (str.length > 0) {
-                        top.$.jBox.open("iframe:${ctx}/crm/formSubmit?ids="+str, "转移客户", 500, $(top.document).height() - 300, {
-                            buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
-                                debugger;
-                                var ids = h.find("iframe")[0].contentWindow.ids;
-                                var cusContent = h.find("iframe")[0].contentWindow.cusContent;
-                                var remarks = h.find("iframe")[0].contentWindow.remarks;
-                                if (v == "ok") {
-                                    $.post('${ctx}/crmAjax/saveTransfer/', {
-                                        cusCodes: ids.value,
-                                        empCode: cusContent.value,
-                                        remark: remarks.value
-                                    }, function (data) {
-                                        if (data = "success") {
-                                            top.$.jBox.tip('保存成功');
-                                        } else {
-                                            top.$.jBox.tip('保存失败');
-                                        }
-                                    })
-                                }
-                            }, loaded: function (h) {
-                                debugger;
-                                $(".jbox-content", top.document).css("overflow-y", "hidden");
-                            }
-                        });
-                    }else{
-                        top.$.jBox.tip('最少选中一条记录');
-                    }
-
-                });
-
-                $("#toPoolCustomer").click(function () {
-                    <!-- 针对选中客户进行操作 -->
-
-                    var str = getCheckValue();
-                    if (str.length > 0) {
-                        top.$.jBox.open("iframe:${ctx}/crm/poolRemark?ids="+str, "移入公海", 500, $(top.document).height() - 300, {
-                            buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
-                                debugger;
-                                var ids = h.find("iframe")[0].contentWindow.ids;
-                                var remarks = h.find("iframe")[0].contentWindow.remarks;
-                                if (v == "ok") {
-                                    $.post('${ctx}/crmAjax/savePoolCustomer/', {
-                                        cusCodes: ids.value,
-                                        remark: remarks.value
-                                    }, function (data) {
-                                        if (data = "success") {
-                                            top.$.jBox.tip('移入成功');
-                                        } else {
-                                            top.$.jBox.tip('移入失败');
-                                        }
-                                    })
-                                }
-                            }, loaded: function (h) {
-                                debugger;
-                                $(".jbox-content", top.document).css("overflow-y", "hidden");
-                            }
-                        });
-                    }else{
-                        top.$.jBox.tip('最少选中一条记录');
-                    }
-                });
-
-                function gotoFollowInfo(cusCode) {
-                    top.$.jBox.open("iframe:${ctx}/crm/followInfo?cusCode="+cusCode, "客户跟踪", 500, $(top.document).height() - 550, {
-                        buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
-                            debugger;
-                            var cusCode = h.find("iframe")[0].contentWindow.cusCode;
-                            var followTitle = h.find("iframe")[0].contentWindow.followTitle;
-                            var remarks = h.find("iframe")[0].contentWindow.remarks;
-                            if (v == "ok") {
-                                $.post('${ctx}/crmAjax/saveFollow/', {
-                                    cusCode: cusCode.value,
-                                    followTitle: followTitle.value,
-                                    followRemarks: remarks.value
-                                }, function (data) {
-                                    if (data = "success") {
-                                        top.$.jBox.tip('记录成功');
-                                    } else {
-                                        top.$.jBox.tip('记录失败');
-                                    }
-                                })
-                            }
-                        }, loaded: function (h) {
-                            debugger;
-                            $(".jbox-content", top.document).css("overflow-y", "hidden");
-                        }
-                    });
-                }
-
-                function getCheckValue(){
-                    debugger;
-                    var obj = document.getElementsByName("cuscode");
-                    var check_val = '';
-                    for(k in obj){
-                        if(obj[k].checked)
-                            check_val = check_val + obj[k].value + ",";
-                    }
-                    check_val = check_val.replace(",,",",");
-                    return check_val;
-                }
-
-                function checkedAll(obj){
-                    var codes = document.getElementsByName("cuscode")
-                    if(obj.checked){
-                        for(var i=0;i<codes.length;i++){
-                            codes[i].checked = true;
-                        }
-                    }else{
-                        for(var i=0;i<codes.length;i++){
-                            codes[i].checked = false;
-                        }
-                    }
-                }
-            </script>
         </div>
 
         <div class="control-group">&nbsp;&nbsp;&nbsp;&nbsp;
@@ -245,4 +134,128 @@
 </div>
 </div>
 </body>
+<script>
+    $(document).ready(function () {
+        $("#toCustomer").click(function () {
+            debugger;
+            <!-- 针对选中客户进行操作 -->
+            // var checkValue = $(".td checkbox");
+            var str = getCheckValue();
+            if (str.length > 0) {
+                top.$.jBox.open("iframe:${ctx}/crm/formSubmit?ids="+str, "转移客户", 500, $(top.document).height() - 300, {
+                    buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
+                        debugger;
+                        var ids = h.find("iframe")[0].contentWindow.ids;
+                        var cusContent = h.find("iframe")[0].contentWindow.cusContent;
+                        var remarks = h.find("iframe")[0].contentWindow.remarks;
+                        if (v == "ok") {
+                            $.post('${ctx}/crmAjax/saveTransfer/', {
+                                cusCodes: ids.value,
+                                empCode: cusContent.value,
+                                remark: remarks.value
+                            }, function (data) {
+                                if (data = "success") {
+                                    top.$.jBox.tip('保存成功');
+                                } else {
+                                    top.$.jBox.tip('保存失败');
+                                }
+                            })
+                        }
+                    }, loaded: function (h) {
+                        debugger;
+                        $(".jbox-content", top.document).css("overflow-y", "hidden");
+                    }
+                });
+            }else{
+                top.$.jBox.tip('最少选中一条记录');
+            }
+
+        });
+
+        $("#toPoolCustomer").click(function () {
+            <!-- 针对选中客户进行操作 -->
+
+            var str = getCheckValue();
+            if (str.length > 0) {
+                top.$.jBox.open("iframe:${ctx}/crm/poolRemark?ids="+str, "移入公海", 500, $(top.document).height() - 300, {
+                    buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
+                        debugger;
+                        var ids = h.find("iframe")[0].contentWindow.ids;
+                        var remarks = h.find("iframe")[0].contentWindow.remarks;
+                        if (v == "ok") {
+                            $.post('${ctx}/crmAjax/savePoolCustomer/', {
+                                cusCodes: ids.value,
+                                remark: remarks.value
+                            }, function (data) {
+                                if (data = "success") {
+                                    top.$.jBox.tip('移入成功');
+                                } else {
+                                    top.$.jBox.tip('移入失败');
+                                }
+                            })
+                        }
+                    }, loaded: function (h) {
+                        debugger;
+                        $(".jbox-content", top.document).css("overflow-y", "hidden");
+                    }
+                });
+            }else{
+                top.$.jBox.tip('最少选中一条记录');
+            }
+        });
+
+        function gotoFollowInfo(cusCode) {
+            top.$.jBox.open("iframe:${ctx}/crm/followInfo?cusCode="+cusCode, "客户跟踪", 500, $(top.document).height() - 550, {
+                buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
+                    debugger;
+                    var cusCode = h.find("iframe")[0].contentWindow.cusCode;
+                    var followTitle = h.find("iframe")[0].contentWindow.followTitle;
+                    var remarks = h.find("iframe")[0].contentWindow.remarks;
+                    if (v == "ok") {
+                        $.post('${ctx}/crmAjax/saveFollow/', {
+                            cusCode: cusCode.value,
+                            followTitle: followTitle.value,
+                            followRemarks: remarks.value
+                        }, function (data) {
+                            if (data = "success") {
+                                top.$.jBox.tip('记录成功');
+                            } else {
+                                top.$.jBox.tip('记录失败');
+                            }
+                        })
+                    }
+                }, loaded: function (h) {
+                    debugger;
+                    $(".jbox-content", top.document).css("overflow-y", "hidden");
+                }
+            });
+        }
+
+        function getCheckValue(){
+            debugger;
+            var obj = document.getElementsByName("cuscode");
+            var check_val = '';
+            for(k in obj){
+                if(obj[k].checked)
+                    check_val = check_val + obj[k].value + ",";
+            }
+            check_val = check_val.replace(",,",",");
+            return check_val;
+        }
+
+        function checkedAll(obj){
+            var codes = document.getElementsByName("cuscode")
+            if(obj.checked){
+                for(var i=0;i<codes.length;i++){
+                    codes[i].checked = true;
+                }
+            }else{
+                for(var i=0;i<codes.length;i++){
+                    codes[i].checked = false;
+                }
+            }
+        }
+    })
+
+</script>
 </html>

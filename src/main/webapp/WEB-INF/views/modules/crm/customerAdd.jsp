@@ -24,26 +24,6 @@
                 <form:hidden path="cusCode"/>
                 <div class="row">
 
-
-
-
-
-
-
-
-
-                    <%--<div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">--%>
-                        <%--<div class="panel-heading" style="background-color: #50B0E6">--%>
-                            <%--<h3 class="panel-title global-panel-title" >--%>
-                                <%--创建客户--%>
-                            <%--</h3>--%>
-                            <%--<code class="pull-right" style="margin-top: -25px"><span style="color: red; ">*</span>--%>
-                                <%--<small>为必填项</small>--%>
-                            <%--</code>--%>
-                        <%--</div>--%>
-                        <%--<div class="panel-body">--%>
-
-
                             <div class="col-sm-6 b-r">
                                 <div class="ibox float-e-margins">
                                     <form method="get" class="form-horizontal">
