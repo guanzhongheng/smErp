@@ -44,10 +44,12 @@
             pc.contact_sex primaryContactorSex,
             pc.department primaryContactorDepartment,
             pc.fixed_phone primaryContactorFixedPhone,
-            pc.remark primaryContactorRemark
+            pc.remark primaryContactorRemark,
+            cer.emp_code empCode
         FROM
           T_CUSTOMER cu
         LEFT JOIN T_PRIMARY_CONTACT pc ON cu.cus_code = pc.cus_code
+        left join T_CUS_EMP_REL cer  ON cer.cus_code = cu.cus_code
        where cu.cus_code = #{cusCode,jdbcType=VARCHAR}
     </select>
 

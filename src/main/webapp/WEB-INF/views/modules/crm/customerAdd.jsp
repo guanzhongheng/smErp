@@ -103,6 +103,14 @@
                                             </div>
                                         </div>
                                         <div class="hr-line-dashed"></div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">详细地址：</label>
+                                            <div class="col-sm-8">
+                                                <form:input path="cusAddress" htmlEscape="false" maxlength="200"
+                                                            class="form-control global-input" placeholder="详细地址"/>
+                                            </div>
+                                        </div>
+                                        <div class="hr-line-dashed"></div>
 
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label"><i style="color: red">*</i> 归属人员：</label>
@@ -114,18 +122,7 @@
                                                 </form:select>
                                             </div>
                                         </div>
-                                        <div class="hr-line-dashed"></div>
-                                        <div class="ibox-title" style="border-width: 4px 0px 0px 4px; border-color: #eaeaea; background-color: #f1f5f7">
-                                            <h3>附加信息</h3>
-                                        </div>
-                                        <div class="hr-line-dashed"></div>
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">详细地址：</label>
-                                            <div class="col-sm-8">
-                                                <form:input path="cusAddress" htmlEscape="false" maxlength="200"
-                                                            class="form-control global-input" placeholder="详细地址"/>
-                                            </div>
-                                        </div>
+
                                         <div class="hr-line-dashed"></div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">备注信息：</label>
@@ -134,7 +131,12 @@
                                                                cssStyle="min-width: 300px;" rows="6"/>
                                             </div>
                                         </div>
-                                        <c:if test="${not empty customerAddModifyVo.cusCode}">
+
+                                        <c:if test="${empty customerAddModifyVo.cusCode}">
+                                        <div class="hr-line-dashed"></div>
+                                        <div class="ibox-title" style="border-width: 4px 0px 0px 4px; border-color: #eaeaea; background-color: #f1f5f7">
+                                            <h3>附加信息</h3>
+                                        </div>
                                         <div class="hr-line-dashed"></div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">跟进内容：</label>

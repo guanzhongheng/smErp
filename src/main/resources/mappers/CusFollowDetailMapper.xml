@@ -8,7 +8,7 @@
         <result column="emp_code" property="empCode" jdbcType="VARCHAR"/>
         <result column="follow_time" property="followTime" jdbcType="TIMESTAMP"/>
         <result column="follow_detail" property="followDetail" jdbcType="VARCHAR"/>
-        <result column="follow_type" property="followType" jdbcType="BIGINT"/>
+        <result column="follow_title" property="followTitle" jdbcType="VARCHAR"/>
         <result column="remark" property="remark" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
@@ -37,8 +37,8 @@
             <if test="followDetail!= null">
                 and follow_detail like concat('%', #{followDetail,jdbcType=VARCHAR}, '%')
             </if>
-            <if test="followType!= null">
-                and follow_type = #{followType,jdbcType=BIGINT}
+            <if test="followTitle!= null">
+                and follow_title = #{followTitle,jdbcType=VARCHAR}
             </if>
 
         </where>
@@ -51,7 +51,7 @@
             emp_code,
             follow_time,
             follow_detail,
-            follow_type,
+            follow_title,
             remark,
             create_time
         )
@@ -61,7 +61,7 @@
             #{empCode,jdbcType=VARCHAR},
             #{followTime,jdbcType=TIMESTAMP},
             #{followDetail,jdbcType=VARCHAR},
-            #{followType,jdbcType=BIGINT},
+            #{followTitle,jdbcType=VARCHAR},
             #{remark,jdbcType=VARCHAR},
             #{createTime,jdbcType=TIMESTAMP}
         )

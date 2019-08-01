@@ -50,7 +50,7 @@ public class CusFollowServiceImpl implements ICusFollowService {
                 CusFollowDetail followDetail = new CusFollowDetail();
                 followDetail.setCusCode(vo.getCusCode());
                 followDetail.setEmpCode(vo.getEmpCode());
-                followDetail.setFollowType(vo.getFollowType());
+                followDetail.setFollowTitle(vo.getFollowTitle());
                 followDetail.setFollowTime(vo.getFollowTime());
                 followDetail.setFollowDetail(vo.getFollowDetail());
                 followDetail.setRemark(vo.getRemark());

@@ -59,14 +59,9 @@
 
     <update id="update" parameterType="com.lcyzh.nmerp.entity.CusFollow">
         UPDATE T_CUS_FOLLOW
-        <set>
-            <if test="latestFollowTime!= null">
-                latest_follow_time = #{latestFollowTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateTime!= null">
-                update_time = #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-        </set>
+        set
+            latest_follow_time = #{latestFollowTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP}
         WHERE cus_code = #{cusCode,jdbcType=VARCHAR}
     </update>
 

@@ -121,6 +121,18 @@
                                                                     </form:select>
                                                                 </div>
                                                             </div>
+
+                                                            <div class="hr-line-dashed"></div>
+                                                            <div class="form-group">
+                                                                <label class="col-sm-3 control-label">详细地址：</label>
+                                                                <div class="col-sm-8">
+                                                                    <form:input path="cusAddress" htmlEscape="false"
+                                                                                maxlength="200" disabled="true"
+                                                                                class="form-control global-input-readonly"
+                                                                                placeholder="详细地址" readonly="true"/>
+                                                                </div>
+                                                            </div>
+
                                                             <div class="hr-line-dashed"></div>
 
                                                             <div class="form-group">
@@ -133,43 +145,39 @@
                                                                     </form:select>
                                                                 </div>
                                                             </div>
-                                                            <div class="hr-line-dashed"></div>
-                                                            <div class="ibox-title" style="border-width: 4px 0px 0px 4px; border-color: #eaeaea; background-color: #f1f5f7">
-                                                            <h3>附加信息</h3>
-                                                            </div>
-                                                            <div class="hr-line-dashed"></div>
-                                                            <div class="form-group">
-                                                                <label class="col-sm-3 control-label">详细地址：</label>
-                                                                <div class="col-sm-8">
-                                                                    <form:input path="cusAddress" htmlEscape="false" maxlength="200" disabled="true"
-                                                                                class="form-control global-input-readonly" placeholder="详细地址" readonly="true"/>
-                                                                </div>
-                                                            </div>
+
                                                             <div class="hr-line-dashed"></div>
                                                             <div class="form-group">
                                                                 <label class="col-sm-3 control-label">备注信息：</label>
                                                                 <div class="col-sm-8">
-                                                                    <form:textarea path="remarks" htmlEscape="false" cssClass="form-control global-input-readonly"
-                                                                                   cssStyle="min-width: 300px;" rows="6" readonly="true" disabled="true"/>
-                                                                </div>
-                                                            </div>
-                                                            <c:if test="${not empty customerAddModifyVo.cusCode}">
-                                                            <div class="hr-line-dashed"></div>
-                                                            <div class="form-group">
-                                                                <label class="col-sm-3 control-label">跟进内容：</label>
-                                                                <div class="col-sm-8">
-                                                                    <input type="text" class="form-control global-input-readonly" name="" disabled="true">
+                                                                    <form:textarea path="remarks" htmlEscape="false"
+                                                                                   cssClass="form-control global-input-readonly"
+                                                                                   cssStyle="min-width: 300px;" rows="6"
+                                                                                   readonly="true" disabled="true"/>
                                                                 </div>
                                                             </div>
                                                             <div class="hr-line-dashed"></div>
-                                                            <div class="form-group">
-                                                                <label class="col-sm-3 control-label"><i style="color: red">*</i> 跟进人员：</label>
-                                                                <div class="col-sm-8">
-                                                                    <input type="text" class="form-control global-input-readonly" name="password" readonly="true" disabled="true"
-                                                                           value="${customerAddModifyVo.cusName}">
-                                                                </div>
-                                                            </div>
-                                                            </c:if>
+                                                            <%--<div class="ibox-title" style="border-width: 4px 0px 0px 4px; border-color: #eaeaea; background-color: #f1f5f7">--%>
+                                                            <%--&lt;%&ndash;<h3>附加信息</h3>&ndash;%&gt;--%>
+                                                            <%--</div>--%>
+
+                                                            <%--<c:if test="${not empty customerAddModifyVo.cusCode}">--%>
+                                                            <%--<div class="hr-line-dashed"></div>--%>
+                                                            <%--<div class="form-group">--%>
+                                                                <%--<label class="col-sm-3 control-label">跟进内容：</label>--%>
+                                                                <%--<div class="col-sm-8">--%>
+                                                                    <%--<input type="text" class="form-control global-input-readonly" name="" disabled="true">--%>
+                                                                <%--</div>--%>
+                                                            <%--</div>--%>
+                                                            <%--<div class="hr-line-dashed"></div>--%>
+                                                            <%--<div class="form-group">--%>
+                                                                <%--<label class="col-sm-3 control-label"><i style="color: red">*</i> 跟进人员：</label>--%>
+                                                                <%--<div class="col-sm-8">--%>
+                                                                    <%--<input type="text" class="form-control global-input-readonly" name="password" readonly="true" disabled="true"--%>
+                                                                           <%--value="${customerAddModifyVo.cusName}">--%>
+                                                                <%--</div>--%>
+                                                            <%--</div>--%>
+                                                            <%--</c:if>--%>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
@@ -207,8 +215,6 @@
                                                         <label class="col-sm-3 control-label">角色：</label>
 
                                                         <div class="col-sm-8">
-                                                                <%--<form:input path="primaryContactorRole" htmlEscape="false" maxlength="200"--%>
-                                                                <%--class="form-control" placeholder="首要联系人角色"/>--%>
                                                             <form:select path="primaryContactorRole" class="chosen-select" disabled="ture"
                                                                          cssStyle="min-width: 300px" readonly="true">
                                                                 <form:options items="${fns:getCusDictList(130000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
@@ -230,8 +236,6 @@
                                                         <label class="col-sm-3 control-label">部门：</label>
 
                                                         <div class="col-sm-8">
-                                                                <%--<form:input path="primaryContactorDepartment" htmlEscape="false" maxlength="200"--%>
-                                                                <%--class="form-control" placeholder="首要联系人部门"/>--%>
                                                             <form:select path="primaryContactorDepartment" class="chosen-select" disabled="ture"
                                                                          cssStyle="min-width: 300px" readonly="true">
                                                                 <form:options items="${fns:getCusDictList(109000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
@@ -302,7 +306,7 @@
                                             <br>
                                         </div>
                                         <div class="col-xs-9 content">
-                                            <p class="m-b-xs"><strong>${fo.followType}</strong>
+                                            <p class="m-b-xs"><strong>${fo.followTitle}</strong>
                                             </p>
                                             <p>${fo.followDetail}</p>
                                         </div>

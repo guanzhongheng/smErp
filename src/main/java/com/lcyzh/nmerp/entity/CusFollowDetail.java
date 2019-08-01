@@ -14,7 +14,7 @@ public class CusFollowDetail implements Serializable {
     private String empCode;
     private Date followTime;
     private String followDetail;
-    private Long followType;
+    private String followTitle;
     private String remark;
     private Date createTime;
 
@@ -62,12 +62,12 @@ public class CusFollowDetail implements Serializable {
         this.followDetail = followDetail;
     }
 
-    public Long getFollowType() {
-        return followType;
+    public String getFollowTitle() {
+        return followTitle;
     }
 
-    public void setFollowType(Long followType) {
-        this.followType = followType;
+    public void setFollowTitle(String followTitle) {
+        this.followTitle = followTitle;
     }
 
     public String getRemark() {

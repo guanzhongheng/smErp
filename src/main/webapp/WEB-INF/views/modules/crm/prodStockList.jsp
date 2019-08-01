@@ -59,7 +59,6 @@
                 <td>${oq.ordTotalNum}</td>
                 <td>${oq.ordTotalNum - oq.ordOutNum}</td>
                 <td>${oq.ordOutNum}</td>
-            </tr>
         </c:forEach>
         </tbody>
     </table>
@@ -70,9 +69,8 @@
             var cusName = $("#cusName").val();
             var ordTitle = $("#ordTitle").val();
             if((cusName == null || cusName == undefined || cusName == '') &&
-                (ordTitle == null || ordTitle == undefined || ordTitle == ''){
+                (ordTitle == null || ordTitle == undefined || ordTitle == '')){
                 $.ajax({})
-            }
             }
 
         }

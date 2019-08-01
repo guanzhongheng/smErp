@@ -144,6 +144,7 @@ public class DictUtils {
         return null;
     }
 
+
     private static final Map<String,TProduct> prodMaps = new HashMap<>(100);
 
     public static Map<String, TProduct> getProdMaps() {

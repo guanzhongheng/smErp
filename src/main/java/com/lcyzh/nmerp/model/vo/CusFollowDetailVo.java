@@ -22,7 +22,7 @@ public class CusFollowDetailVo {
     //跟进内容
     private String followDetail;
     //跟进类型
-    private Long followType;
+    private String followTitle;
     //备注
     private String remark;
 
@@ -58,12 +58,12 @@ public class CusFollowDetailVo {
         this.followDetail = followDetail;
     }
 
-    public Long getFollowType() {
-        return followType;
+    public String getFollowTitle() {
+        return followTitle;
     }
 
-    public void setFollowType(Long followType) {
-        this.followType = followType;
+    public void setFollowTitle(String followTitle) {
+        this.followTitle = followTitle;
     }
 
     public String getRemark() {
