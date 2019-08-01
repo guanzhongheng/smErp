@@ -155,4 +155,11 @@
         WHERE id = #{id}
     </delete>
 
+    <select id="findListByCodes" parameterType="java.util.List" resultMap="tProductResultMap">
+        select * from T_PRODUCT where prod_code in
+        <foreach item="code" collection="list" open="(" close=")" separator=",">
+            #{code}
+        </foreach>
+    </select>
+
 </mapper>

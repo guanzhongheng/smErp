@@ -1,8 +1,8 @@
 package com.lcyzh.nmerp.service;
 
+import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.entity.TMachineInfo;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.lcyzh.nmerp.model.vo.MachineInfoVo;
 
 import java.util.List;
 
@@ -27,4 +27,5 @@ public interface TMachineInfoService {
 
     int delete(TMachineInfo tMachineInfo);
 
+    Page<MachineInfoVo> findPage(Page<MachineInfoVo> machineInfoVoPage, TMachineInfo tMachineInfo);
 }

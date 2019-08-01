@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.dao;
 
 import com.lcyzh.nmerp.entity.TProduct;
+import org.apache.commons.math3.stat.descriptive.summary.Product;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -26,4 +27,5 @@ public interface TProductMapper {
 
     int delete(TProduct tProduct);
 
+    List<TProduct> findListByCodes(List<String> codes);
 }
