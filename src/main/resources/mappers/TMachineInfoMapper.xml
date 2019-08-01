@@ -34,10 +34,10 @@
             and prod_codes like concat('%', #{prodCodes,jdbcType=VARCHAR}, '%')
         </if>
         <if test="minWidth!= null">
-            and min_width &gt; #{minWidth,jdbcType=DOUBLE}
+            and min_width &gt;= #{minWidth,jdbcType=DOUBLE}
         </if>
         <if test="maxWidth!= null">
-            and max_width &lt; #{maxWidth,jdbcType=DOUBLE}
+            and max_width &lt;= #{maxWidth,jdbcType=DOUBLE}
         </if>
         </where>
     </select>
