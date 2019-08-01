@@ -12,6 +12,12 @@
         </div>
     </div>
     <div class="control-group" style="margin-left: -30px">
+        <label class="col-sm-1 control-label">跟进时间:</label>
+        <div class="col-sm-8 controls">
+            <input type="text" name="followTime" id="followTime" />
+        </div>
+    </div>
+    <div class="control-group" style="margin-left: -30px">
         <label class="col-sm-1 control-label">跟进内容:</label>
         <div class="col-sm-8 controls">
             <textarea id="remarks" name="remarks" rows="5" maxlength="200" class="input-xlarge"></textarea>

@@ -54,6 +54,7 @@ public class CusFollowServiceImpl implements ICusFollowService {
                 followDetail.setFollowTime(vo.getFollowTime());
                 followDetail.setFollowDetail(vo.getFollowDetail());
                 followDetail.setRemark(vo.getRemark());
+                followDetail.setCreateTime(current);
                 res = cusFollowDetailMapper.insert(followDetail);
             }
 

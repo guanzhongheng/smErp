@@ -79,6 +79,18 @@ public class DateUtil {
 	 * 格式化日期
 	 * @return
 	 */
+	public static Date fomatDateFixFormat(String date) {
+		try {
+			return sdfDay.parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	/**
+	 * 格式化日期
+	 * @return
+	 */
 	public static Date fomatDate(String date) {
 		DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		try {

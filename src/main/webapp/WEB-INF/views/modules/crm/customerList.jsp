@@ -211,11 +211,13 @@
                         debugger;
                         var cusCode = h.find("iframe")[0].contentWindow.userCusCode;
                         var followTitle = h.find("iframe")[0].contentWindow.followTitle;
+                        var followTime = h.find("iframe")[0].contentWindow.followTime;
                         var remarks = h.find("iframe")[0].contentWindow.remarks;
                         if (v == "ok") {
                             $.post('${ctx}/crmAjax/saveFollow/', {
                                 cusCode: cusCode.value,
                                 followTitle: followTitle.value,
+                                followTime: followTime.value,
                                 followRemarks: remarks.value
                             }, function (data) {
                                 if (data = "success") {

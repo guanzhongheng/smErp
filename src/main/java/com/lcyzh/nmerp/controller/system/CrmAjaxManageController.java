@@ -2,13 +2,14 @@ package com.lcyzh.nmerp.controller.system;
 
 import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.controller.system.util.SysDictUtils;
+import com.lcyzh.nmerp.controller.system.util.UserUtils;
 import com.lcyzh.nmerp.entity.sys.Dict;
 import com.lcyzh.nmerp.model.vo.CusFollowDetailVo;
 import com.lcyzh.nmerp.model.vo.CustomerUpdateVo;
 import com.lcyzh.nmerp.service.ICusFollowService;
 import com.lcyzh.nmerp.service.TCustomerService;
-import com.lcyzh.nmerp.utils.DictEntity;
-import com.lcyzh.nmerp.utils.DictUtils;
+import com.lcyzh.nmerp.service.security.SystemAuthorizingRealm.Principal;
+import com.lcyzh.nmerp.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -75,11 +75,14 @@ public class CrmAjaxManageController extends BaseController {
      */
     @RequestMapping(value = "saveFollow")
     @ResponseBody
-    public String savePoolCustomer(String cusCode,String followTitle,String followRemarks) {
+    public String savePoolCustomer(String cusCode,String followTime,String followTitle,String followRemarks) {
         CusFollowDetailVo detailVo = new CusFollowDetailVo();
         detailVo.setCusCode(cusCode);
+        detailVo.setFollowTime(DateUtil.fomatDateFixFormat(followTime));
         detailVo.setFollowTitle(followTitle);
         detailVo.setFollowDetail(followRemarks);
+        Principal principal = UserUtils.getPrincipal();
+        detailVo.setEmpCode(principal.getId());
         cusFollowService.save(detailVo);
 
         return "success";
