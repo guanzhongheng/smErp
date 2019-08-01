@@ -1,45 +1,79 @@
 package com.lcyzh.nmerp.controller;
 
+import com.lcyzh.nmerp.common.persistence.Page;
+import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.entity.TMachineInfo;
+import com.lcyzh.nmerp.entity.TProduct;
+import com.lcyzh.nmerp.model.vo.MachineInfoVo;
+import com.lcyzh.nmerp.model.vo.ProductVo;
+import com.lcyzh.nmerp.model.vo.StockQueryVo;
 import com.lcyzh.nmerp.service.TMachineInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
  * Author ljk
  * Date  2019-06-06
  */
-@RestController
+@Controller
 @RequestMapping(value = "/tMachineInfo")
-public class TMachineInfoController {
+public class TMachineInfoController  extends BaseController {
     @Autowired
     private TMachineInfoService tMachineInfoService;
 
-    @RequestMapping(value = {"/list", ""}, method = RequestMethod.GET)
-    public Object list() {
-        List<TMachineInfo> tMachineInfos = tMachineInfoService.findAllList();
-        return tMachineInfos;
+    @RequestMapping(value = {"/list", ""})
+    public String list(@ModelAttribute("machine")TMachineInfo machine, Model model, HttpServletRequest request, HttpServletResponse response) {
+
+        Page<MachineInfoVo> page = tMachineInfoService.findPage(new Page<>(request, response), machine);
+        model.addAttribute("page", page);
+
+        return "modules/crm/machineList";
     }
 
     @RequestMapping(value = {"/get"}, method = RequestMethod.GET)
-    public Object get(@RequestParam String id) {
-        TMachineInfo tMachineInfo = tMachineInfoService.findById(Long.valueOf(id));
-        return tMachineInfo;
+    public String get(@ModelAttribute("machine") TMachineInfo machine, Model model) {
+        TMachineInfo machineInfo = new TMachineInfo();
+        if(machine.getId() != null){
+            machineInfo = tMachineInfoService.findById(machine.getId());
+        }
+        model.addAttribute("machine",machineInfo);
+        model.addAttribute("machineId",machineInfo.getId());
+        return "modules/crm/machineForm";
+    }
+
+    @RequestMapping(value = "addForm")
+    public String form(@ModelAttribute("machine") TMachineInfo machine, Model model) {
+        model.addAttribute("machine", machine);
+        return "modules/crm/machineForm";
     }
 
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public String insert(@RequestBody TMachineInfo tMachineInfo) {
-        if (tMachineInfoService.insert(tMachineInfo) > 0) {
-            return "success";
-        } else {
-            return "failed";
+    public String insert(@ModelAttribute("machine") TMachineInfo machine, Model model, RedirectAttributes redirectAttributes) {
+
+        if (!beanValidator(model, machine)){
+            return get(machine, model);
         }
+        if(machine.getId() != null){
+            if (tMachineInfoService.update(machine) > 0) {
+                addMessage(redirectAttributes, "更新设备成功");
+            } else {
+                addMessage(redirectAttributes, "更新设备失败");
+            }
+        }else{
+            if (tMachineInfoService.insert(machine) > 0) {
+                addMessage(redirectAttributes, "新增设备成功");
+            } else {
+                addMessage(redirectAttributes, "新增设备失败");
+            }
+        }
+        return "redirect:/tMachineInfo/list";
     }
 
     @RequestMapping(value = "/insertBatch", method = RequestMethod.POST)
@@ -60,12 +94,14 @@ public class TMachineInfoController {
         }
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public String delete(@RequestBody TMachineInfo tMachineInfo) {
+    @RequestMapping(value = "/delete")
+    public String delete( TMachineInfo tMachineInfo, RedirectAttributes redirectAttributes) {
         if (tMachineInfoService.delete(tMachineInfo) > 0) {
-            return "success";
+
+            return "redirect:/tMachineInfo/list";
         } else {
-            return "failed";
+            addMessage(redirectAttributes, "删除设备失败");
+            return "redirect:/tMachineInfo/list";
         }
     }
 

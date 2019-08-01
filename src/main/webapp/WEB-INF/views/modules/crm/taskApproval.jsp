@@ -30,7 +30,7 @@
     <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
         <div class="panel-heading" style="background-color: #50B0E6">
             <h3 class="panel-title global-panel-title" >
-                客户列表
+                订单列表
             </h3>
             <code class="pull-right" style="margin-top: -33px;margin-right: 8px;"><span style="color: red; ">*</span>
                 <small>为必填项</small>
