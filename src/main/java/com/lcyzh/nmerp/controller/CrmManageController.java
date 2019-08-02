@@ -4,6 +4,7 @@ import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.controller.system.util.UserUtils;
+import com.lcyzh.nmerp.entity.TFormula;
 import com.lcyzh.nmerp.entity.TOutStock;
 import com.lcyzh.nmerp.entity.sys.User;
 import com.lcyzh.nmerp.model.vo.*;
@@ -48,7 +49,8 @@ public class CrmManageController extends BaseController {
 
     @Autowired
     private SystemService systemService;
-
+    @Autowired
+    private ITFormulaService formulaService;
     /**========================客户相关流转==============================**/
 
     @RequestMapping(value = {"customer/list"})
@@ -309,5 +311,15 @@ public class CrmManageController extends BaseController {
     }
 
 
+    /**========================配方管理相关流转==============================**/
+    /**
+     * 配方列表
+     */
+    @RequestMapping(value = {"formula/list"})
+    public String formulaList(@ModelAttribute("formula") TFormula formula, Model model, HttpServletRequest request, HttpServletResponse response) {
+        Page<FormulaVo> page = new Page<>(request, response);
+        model.addAttribute("page", formulaService.findPage(page,formula));
+        return "modules/crm/formulaList";
+    }
 
 }
