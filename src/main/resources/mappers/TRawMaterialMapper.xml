@@ -11,8 +11,6 @@
         <result column="rawn_cty_code" property="rawnCtyCode" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
-
-
     </resultMap>
 
 
@@ -34,9 +32,8 @@
         FROM T_RAW_MATERIAL
     </select>
 
-    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TRawMaterial">
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TRawMaterial" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO T_RAW_MATERIAL(
-            id,
             rawm_code,
             rawm_name,
             rawn_specs,
@@ -46,7 +43,6 @@
             update_time
         )
         VALUES (
-            #{id,jdbcType=BIGINT},
             #{rawmCode,jdbcType=VARCHAR},
             #{rawmName,jdbcType=VARCHAR},
             #{rawnSpecs,jdbcType=VARCHAR},
@@ -57,9 +53,8 @@
         )
     </insert>
 
-    <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TRawMaterial">
+    <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TRawMaterial" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO T_RAW_MATERIAL(
-        id,
         rawm_code,
         rawm_name,
         rawn_specs,
@@ -71,7 +66,6 @@
         VALUES
         <foreach collection="list" item="tRawMaterial" separator=",">
             (
-            #{tRawMaterial.id,jdbcType=BIGINT},
             #{tRawMaterial.rawmCode,jdbcType=VARCHAR},
             #{tRawMaterial.rawmName,jdbcType=VARCHAR},
             #{tRawMaterial.rawnSpecs,jdbcType=VARCHAR},
@@ -86,7 +80,6 @@
     <update id="update" parameterType="com.lcyzh.nmerp.entity.TRawMaterial">
         UPDATE T_RAW_MATERIAL
         SET
-        id = #{id},
         rawm_code = #{rawmCode},
         rawm_name = #{rawmName},
         rawn_specs = #{rawnSpecs},
