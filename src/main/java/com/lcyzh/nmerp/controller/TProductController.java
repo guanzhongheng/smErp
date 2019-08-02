@@ -82,6 +82,10 @@ public class TProductController extends BaseController {
             addMessage(redirectAttributes,   "（产品性质/产品种类/产品颜色）不能修改！");
         }else if(res == -2){
             addMessage(redirectAttributes,   "（产品性质/产品种类/产品颜色）标示的产品已存在！");
+        }else if(res == -3){
+            addMessage(redirectAttributes,   "产品编号不能为空！");
+        }else if(res == -4){
+            addMessage(redirectAttributes,   "产品编号已存在！");
         }
         return "redirect:/tProduct/list";
     }

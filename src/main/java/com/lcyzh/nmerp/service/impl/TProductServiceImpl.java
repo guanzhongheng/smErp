@@ -93,8 +93,17 @@ public class TProductServiceImpl implements TProductService {
     @Transactional(isolation = Isolation.READ_COMMITTED)
     @Override
     public int save(TProduct product) {
+        if(product.getProdCode() == null){
+            return -3;
+        }
         Date current = new Date();
         int res;
+        TProduct prodt = new TProduct();
+        prodt.setProdCode(product.getProdCode());
+        List<TProduct> list = tProductMapper.findList(prodt);
+        if(list!=null && !list.isEmpty()){
+            return -4;
+        }
         if (product.getId() != null) {
             TProduct po = tProductMapper.get(product.getId());
             if (po != null && !(po.getProdVariety().equals(product.getProdVariety()) && po.getProdCgyCode().equals(product.getProdCgyCode()) && po.getProdColor().equals(product.getProdColor()))) {

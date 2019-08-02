@@ -108,9 +108,9 @@ public class TOutStockServiceImpl implements TOutStockService {
         vo.setItemVarietyValue(DictUtils.getValueByDictKey(vo.getItemVariety()));
         BeanUtils.copyProperties(vo, outStockDetailVo);
         List<TOutStockDetail> list = tOutStockDetailMapper.findByBarCode(barCode);
-        if(!list.isEmpty()) {
+        if (!list.isEmpty()) {
             outStockDetailVo.setIsOut('1');
-        }else{
+        } else {
             outStockDetailVo.setIsOut('0');
         }
         outStockDetailVo.setItemColorValue(SysDictUtils.getDictLabel(outStockDetailVo.getItemColor(), Constants.PROD_COLOR, ""));
@@ -133,16 +133,16 @@ public class TOutStockServiceImpl implements TOutStockService {
         List<TStock> list = tStockMapper.findByOutCode(tOutStock.getOutCode());
         Map<String, Long> ordMap = new HashMap<>(list.size());
         String ordCode;
-        for(TStock tStock : list) {
+        for (TStock tStock : list) {
             ordCode = tStock.getOrdCode();
-            if(ordMap.containsKey(ordCode)) {
+            if (ordMap.containsKey(ordCode)) {
                 ordMap.put(ordCode, ordMap.get(ordCode) + 1);
-            }else{
+            } else {
                 ordMap.put(ordCode, 1L);
             }
         }
         List<TOrder> orders = new ArrayList<>(ordMap.size());
-        for(Map.Entry<String, Long> entry : ordMap.entrySet()) {
+        for (Map.Entry<String, Long> entry : ordMap.entrySet()) {
             TOrder order = new TOrder();
             order.setOrdCode(entry.getKey());
             order.setOrdOutNum(entry.getValue());
@@ -178,6 +178,7 @@ public class TOutStockServiceImpl implements TOutStockService {
 
 
     }
+
     @Override
     public List<StockRecordVo> getOutStockList(String outCode) {
         OutStockVo vo = new OutStockVo();
@@ -188,14 +189,14 @@ public class TOutStockServiceImpl implements TOutStockService {
     @Override
     public List<OutItemVo> findItemByOutCode(String outCode) {
         List<TStock> list = tStockMapper.findByOutCode(outCode);
-        if(list!=null && !list.isEmpty()){
+        if (list != null && !list.isEmpty()) {
             List<OutItemVo> itemVos = list.stream().map(sto -> {
                 OutItemVo outItemVo = new OutItemVo();
                 outItemVo.setItemOwner(sto.getItemOwner());
                 outItemVo.setItemLenth(sto.getItemLenth());
                 outItemVo.setItemWidth(sto.getItemWidth());
                 outItemVo.setItemThick(sto.getItemThick());
-                TProduct prodduct = DictUtils.getProdCodeByProdCgyAndVari(sto.getItemCgyCode().toString() + sto.getItemVariety());
+                TProduct prodduct = DictUtils.getProdCodeByProdCgyAndVari(sto.getItemCgyCode().toString() + sto.getItemVariety() + sto.getItemColor());
                 outItemVo.setItemName(prodduct.getProdName());
                 outItemVo.setProdColorValue(SysDictUtils.getDictLabel(sto.getItemColor(), "prod_color", ""));
                 outItemVo.setProdCgyCodeValue(DictUtils.getValueByDictKey(sto.getItemCgyCode()));
