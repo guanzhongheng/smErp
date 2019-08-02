@@ -30,8 +30,16 @@ public class TFormulaServiceImpl implements ITFormulaService {
     private TFormulaMapper tFormulaMapper;
 
     @Override
-    public TFormula findByCode(String fCode){
-        return tFormulaMapper.findByCode(fCode);
+    public FormulaVo findByCode(String fCode){
+        TFormula formula = tFormulaMapper.findByCode(fCode);
+        FormulaVo formulaVo = new FormulaVo();
+        BeanUtils.copyProperties(formula, formulaVo);
+        formulaVo.setProdCgyCodeValue(DictUtils.getValueByDictKey(formulaVo.getProdCgyCode()));
+        formulaVo.setProdVarietyValue(DictUtils.getValueByDictKey(formulaVo.getProdVariety()));
+        Map<String, FormulaDetailVo> context = new HashMap<>();
+        context = JSON.parseObject(formula.getfContext(), context.getClass());
+        formulaVo.setContext(context);
+        return formulaVo;
     }
 
     @Override
@@ -76,9 +84,6 @@ public class TFormulaServiceImpl implements ITFormulaService {
                 BeanUtils.copyProperties(formula, formulaVo);
                 formulaVo.setProdCgyCodeValue(DictUtils.getValueByDictKey(formulaVo.getProdCgyCode()));
                 formulaVo.setProdVarietyValue(DictUtils.getValueByDictKey(formulaVo.getProdVariety()));
-                Map<String, FormulaDetailVo> context = new HashMap<>();
-                context = JSON.parseObject(formula.getfContext(), context.getClass());
-                formulaVo.setContext(context);
                 return formulaVo;
             }).collect(Collectors.toList());
             PageInfo<FormulaVo> p = new PageInfo<>(formulaVos);

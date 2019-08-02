@@ -12,7 +12,7 @@ import java.util.List;
 */
 public interface ITFormulaService {
 
-    TFormula findByCode(String fCode);
+    FormulaVo findByCode(String fCode);
 
     List<TFormula> findList(TFormula tFormula);
 
