@@ -25,29 +25,20 @@
         SELECT *
         FROM t_formula
         <where>
-            <if test="fName!= null">
+            <if test="1=1">
+                and del_flag = '0'
+            </if>
+            <if test="fCode != null and fCode != ''">
+                and f_code like concat('%', #{fCode,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="fName!= null and fName != ''">
             and f_name like concat('%', #{fName,jdbcType=VARCHAR}, '%')
             </if>
-            <if test="fContext!= null">
-            and f_context like concat('%', #{fContext,jdbcType=VARCHAR}, '%')
-            </if>
             <if test="prodCgyCode!= null">
-            and prod_cgy_code like concat('%', #{prodCgyCode,jdbcType=BIGINT}, '%')
+            and prod_cgy_code = #{prodCgyCode,jdbcType=BIGINT}
             </if>
             <if test="prodVariety!= null">
-            and prod_variety like concat('%', #{prodVariety,jdbcType=BIGINT}, '%')
-            </if>
-            <if test="createDate!= null">
-            and create_date like concat('%', #{createDate,jdbcType=TIMESTAMP}, '%')
-            </if>
-            <if test="updateDate!= null">
-            and update_date like concat('%', #{updateDate,jdbcType=TIMESTAMP}, '%')
-            </if>
-            <if test="delFlag!= null">
-            and del_flag like concat('%', #{delFlag,jdbcType=CHAR}, '%')
-            </if>
-            <if test="remarks!= null">
-            and remarks like concat('%', #{remarks,jdbcType=VARCHAR}, '%')
+            and prod_variety = #{prodVariety,jdbcType=BIGINT}
             </if>
         </where>
     </select>
