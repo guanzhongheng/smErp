@@ -16,7 +16,7 @@
 </head>
 <body>
 <ul class="nav nav-tabs">
-    <li class="active"><a href="${ctx}/crm/inventory/prodStockList">产品清单列表</a></li>
+    <li class="active"><a href="${ctx}/crm/inventory/prodStockList">订单库存汇总表</a></li>
 </ul>
 <form:form id="searchForm" modelAttribute="orderQueryVo" action="${ctx}/crm/inventory/prodStockList" method="post"
            class="breadcrumb form-search">
@@ -32,8 +32,8 @@
         </li>
         &nbsp;&nbsp;
         <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
-        &nbsp;&nbsp;
-        <li class="btns"><input id="btnExport" class="btn btn-primary" type="button" value="导出" onclick="exportInfo()"/></li>
+        <%--&nbsp;&nbsp;--%>
+        <%--<li class="btns"><input id="btnExport" class="btn btn-primary" type="button" value="导出" onclick="exportInfo()"/></li>--%>
     </ul>
 </form:form>
 <div class="control-group">
@@ -58,7 +58,7 @@
                 <td>${oq.ordTotalSq}</td>
                 <td>${oq.ordTotalNum}</td>
                 <td>${oq.ordTotalNum - oq.ordOutNum}</td>
-                <td>${oq.ordOutNum}</td>
+                <td>${oq.ordOutNum == null?"0":oq.ordOutNum}</td>
         </c:forEach>
         </tbody>
     </table>

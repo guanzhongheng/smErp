@@ -253,7 +253,6 @@ public class CrmManageController extends BaseController {
     }
 
 
-
     /**
      * 产品清单列表页面流转
      * @param model
@@ -261,8 +260,11 @@ public class CrmManageController extends BaseController {
      */
     @RequestMapping(value = {"inventory/prodStockList"})
     public String prodStockList(@ModelAttribute("orderQueryVo") OrderQueryVo orderQueryVo, Model model, HttpServletRequest request, HttpServletResponse response) {
-        Page<OutStockVo> page = new Page<>(request, response);
-
+        Page<OrderQueryVo> page = new Page<>(request, response);
+        List<OrderQueryVo> list = orderService.findPage(page,orderQueryVo);
+        page.setCount(list.size());
+        page.setList(list);
+        model.addAttribute("page", page);
         model.addAttribute("page", page);
         return "modules/crm/prodStockList";
     }
