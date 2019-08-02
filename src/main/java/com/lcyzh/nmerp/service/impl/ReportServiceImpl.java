@@ -1,5 +1,6 @@
 package com.lcyzh.nmerp.service.impl;
 
+import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.controller.system.util.SysDictUtils;
 import com.lcyzh.nmerp.dao.TCustomerMapper;
 import com.lcyzh.nmerp.dao.TOrderItemMapper;
@@ -34,14 +35,22 @@ public class ReportServiceImpl implements IReportService {
         /*
         .........
          */
-        return tStockMapper.findList(vo);
+        List<StockQueryVo> vos = tStockMapper.findList(vo);
+        vos.stream().forEach(item ->{
+            item.setItemCgyCodeValue(DictUtils.getValueByDictKey(item.getItemCgyCode()));
+            item.setItemVarietyValue(DictUtils.getValueByDictKey(item.getItemVariety()));
+            item.setItemColorValue(SysDictUtils.getDictLabel(item.getItemColor(), Constants.PROD_COLOR, ""));
+            item.setItemYbTypeValue(SysDictUtils.getDictLabel(item.getItemYbType(), Constants.PROD_YB_TYPE, ""));
+            item.setItemYcTypeValue(SysDictUtils.getDictLabel(item.getItemYcType(), Constants.PROD_YC_TYPE, ""));
+        });
+        return vos;
     }
 
     @Override
     public List<CustomerQueryVo> queryCustomerList(CustomerQueryVo customer) {
         List<CustomerQueryVo> listPo = tCustomerMapper.findList(customer);
         if (listPo != null && !listPo.isEmpty()) {
-            listPo.forEach(po -> {
+            listPo.stream().forEach(po -> {
                 po.setCusGradeValue(DictUtils.getValueByDictKey(po.getCusGrade()));
                 po.setCusSourceValue(DictUtils.getValueByDictKey(po.getCusSource()));
                 po.setCusStatusValue(DictUtils.getValueByDictKey(po.getCusStatus()));
@@ -67,7 +76,7 @@ public class ReportServiceImpl implements IReportService {
                 item.setItemVaritemValue(DictUtils.getValueByDictKey(item.getItemVariety()));
                 item.setItemPriceTypeValue(DictUtils.getValueByDictKey(item.getItemPriceType()));
                 item.setItemStatusValue(DictUtils.getValueByDictKey(item.getItemStatus()));
-                item.setItemColorValue(SysDictUtils.getDictLabel(item.getItemColor(), "prod_color", ""));
+                item.setItemColorValue(SysDictUtils.getDictLabel(item.getItemColor(), Constants.PROD_COLOR, ""));
             });
             vo.setOrderItemVos(orderItemVos);
             return vo;

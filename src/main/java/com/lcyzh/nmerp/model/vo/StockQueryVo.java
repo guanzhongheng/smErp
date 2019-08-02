@@ -1,6 +1,8 @@
 package com.lcyzh.nmerp.model.vo;
 
 
+import java.io.Serializable;
+
 /**
  * @Project :
  * @Description :补签查询vo
@@ -9,15 +11,19 @@ package com.lcyzh.nmerp.model.vo;
  * @Date :
  * @ModificationHistory Who          When          What
  */
-public class StockQueryVo {
+public class StockQueryVo implements Serializable {
     //订单编号（模糊匹配）
     private String ordCode;
     //订单标题
     private String orderTitle;
-    //产品类别
+    //产品类别-字典
     private Long itemCgyCode;
-    //产品品种
+    //产品类型-字典值
+    private String itemCgyCodeValue;
+    //产品品种-字典
     private Long itemVariety;
+    //产品品种-字典值
+    private String itemVarietyValue;
     //开始时间
     private String startDate;
     //结束时间
@@ -33,10 +39,13 @@ public class StockQueryVo {
     private Double itemSq;
     private String itemOwner;
     private String itemYcType;
+    private String itemYcTypeValue;
     private String itemYbType;
+    private String itemYbTypeValue;
     private Long itemUnit;
     private String itemUnitValue;
     private String itemColor;
+    private String itemColorValue;
     private String macCode;
 
     public Long getStockId() {
@@ -203,4 +212,76 @@ public class StockQueryVo {
     public String getMacCode() { return macCode; }
 
     public void setMacCode(String macCode) { this.macCode = macCode; }
+
+    public String getItemCgyCodeValue() {
+        return itemCgyCodeValue;
+    }
+
+    public void setItemCgyCodeValue(String itemCgyCodeValue) {
+        this.itemCgyCodeValue = itemCgyCodeValue;
+    }
+
+    public String getItemVarietyValue() {
+        return itemVarietyValue;
+    }
+
+    public void setItemVarietyValue(String itemVarietyValue) {
+        this.itemVarietyValue = itemVarietyValue;
+    }
+
+    public String getItemYcTypeValue() {
+        return itemYcTypeValue;
+    }
+
+    public void setItemYcTypeValue(String itemYcTypeValue) {
+        this.itemYcTypeValue = itemYcTypeValue;
+    }
+
+    public String getItemYbTypeValue() {
+        return itemYbTypeValue;
+    }
+
+    public void setItemYbTypeValue(String itemYbTypeValue) {
+        this.itemYbTypeValue = itemYbTypeValue;
+    }
+
+    public String getItemColorValue() {
+        return itemColorValue;
+    }
+
+    public void setItemColorValue(String itemColorValue) {
+        this.itemColorValue = itemColorValue;
+    }
+
+    @Override
+    public String toString() {
+        return "StockQueryVo{" +
+                "ordCode='" + ordCode + '\'' +
+                ", orderTitle='" + orderTitle + '\'' +
+                ", itemCgyCode=" + itemCgyCode +
+                ", itemCgyCodeValue='" + itemCgyCodeValue + '\'' +
+                ", itemVariety=" + itemVariety +
+                ", itemVarietyValue='" + itemVarietyValue + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", stockId=" + stockId +
+                ", barCode='" + barCode + '\'' +
+                ", itemCode='" + itemCode + '\'' +
+                ", itemLenth=" + itemLenth +
+                ", itemWidth=" + itemWidth +
+                ", itemThick=" + itemThick +
+                ", itemWeight=" + itemWeight +
+                ", itemSq=" + itemSq +
+                ", itemOwner='" + itemOwner + '\'' +
+                ", itemYcType='" + itemYcType + '\'' +
+                ", itemYcTypeValue='" + itemYcTypeValue + '\'' +
+                ", itemYbType='" + itemYbType + '\'' +
+                ", itemYbTypeValue='" + itemYbTypeValue + '\'' +
+                ", itemUnit=" + itemUnit +
+                ", itemUnitValue='" + itemUnitValue + '\'' +
+                ", itemColor='" + itemColor + '\'' +
+                ", itemColorValue='" + itemColorValue + '\'' +
+                ", macCode='" + macCode + '\'' +
+                '}';
+    }
 }
