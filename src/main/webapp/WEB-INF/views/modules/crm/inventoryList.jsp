@@ -25,17 +25,15 @@
                 content: ['/produce/produce/rePrint?stockId='+stockId+'"', 'yes'] //iframe的url，no代表不显示滚动条
             });
         }
+
+        function exportInfo() {
+            $("#searchForm").attr('action','/export/stock');
+            $("#searchForm").submit();
+            $("#searchForm").attr('action','/crm/inventory/list');
+        }
     </script>
 </head>
 <body>
-<%--<ul class="nav nav-tabs">--%>
-    <%--<li class="active"><a href="${ctx}/crm/inventory/list/">库存列表</a></li>--%>
-    <%--&lt;%&ndash;<li><a href="${ctx}/crm/inventory/info/">出库清单</a></li>&ndash;%&gt;--%>
-<%--</ul>--%>
-
-
-
-
 
 <div class="tabs-container" style="padding: 20px 20px;">
     <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
@@ -70,6 +68,8 @@
                     </li>
                     &nbsp;&nbsp;
                     <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 100px" value="查询"/></li>
+                    &nbsp;&nbsp;
+                    <li class="btns"><input id="btnExport" class="btn btn-primary" type="button" style="width: 100px" value="导出" onclick="exportInfo()"/></li>
                 </ul>
             </form:form>
             <div class="control-group  table-responsive">

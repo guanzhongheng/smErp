@@ -28,7 +28,7 @@ public class ExportController {
      * @param response
      * @return
      */
-    @RequestMapping(value = "/export/stock",method = RequestMethod.GET)
+    @RequestMapping(value = "/export/stock")
     public ModelAndView stockExport(HttpServletResponse response, StockQueryVo vo){
         List<StockQueryVo> vos = reportService.queryStockList(vo);
         Context context = new Context();
