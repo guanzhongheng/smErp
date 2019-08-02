@@ -32,7 +32,7 @@
                         <label class="col-md-2 control-label  order-detail-label-margin order-input-width" style="text-align: right">
                             联系方式:
                         </label>
-                        <label class="col-md-2 control-label order-input-width " style="text-align: left">
+                        <label class="col-md-2 control-label order-label-input-width " style="text-align: left">
                             <input type="text" class="form-control" value="${outStock.phone}" maxlength="20" id="phone"/>
                         </label>
                     </div>

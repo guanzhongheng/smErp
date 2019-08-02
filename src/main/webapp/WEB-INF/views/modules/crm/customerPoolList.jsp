@@ -6,19 +6,20 @@
     <link rel="stylesheet" href="/static/common/customize.css">
 
     <script type="text/javascript">
-        debugger;
-        if(n) $("#pageNo").val(n);
-        if(s) $("#pageSize").val(s);
-        $("#searchForm").attr("action","${ctx}/crm/customer/poollist");
-        $("#searchForm").submit();
-        return false;
+        function page(n, s) {
+            debugger;
+            if(n) $("#pageNo").val(n);
+            if(s) $("#pageSize").val(s);
+            $("#searchForm").attr("action","${ctx}/crm/customer/poollist");
+            $("#searchForm").submit();
+            return false;
+        }
     </script>
 </head>
 <body>
 <%--<ul class="nav nav-tabs">--%>
     <%--<li class="active"><a href="${ctx}/crm/customer/poollist/">公海列表</a></li>--%>
 <%--</ul>--%>
-
 
 
 <div class="tabs-container" style="padding: 20px 20px;">

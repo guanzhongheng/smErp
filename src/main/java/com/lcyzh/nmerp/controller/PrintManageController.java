@@ -17,9 +17,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 项目名称：nm-erp
@@ -87,16 +91,44 @@ public class PrintManageController extends BaseController {
         OrderQueryVo order = orderService.findByOrdeCode(outItemVoList.get(0).getOrdCode());
         // 获取客户信息
         CustomerAddModifyVo customer = tCustomerMapper.findModifyInfoByCusCode(order.getCusCode());
-//        // 获取订单详情
-//        List<OrderItemVo> orderItemVos =   orderService.findItemsByOrdCode(ordCode);
+       // 获取订单详情
+        List<OrderItemVo> orderItemVos =   orderService.findItemsByOrdCode(outItemVoList.get(0).getOrdCode());
+
+        List<OrderItemVo> newItems = doProcessOrder(outItemVoList,orderItemVos);
 
         model.addAttribute("nowTime", DateUtils.getDate());
         model.addAttribute("userName",currentUser.getName());
         model.addAttribute("customer",customer);
-        model.addAttribute("outItemVoList",outItemVoList);
         model.addAttribute("order",order);
-//        getTotalInfo(model,orderItemVos);
+        model.addAttribute("orderItem",newItems);
+        getTotalInfo(model,doProcessOrder(outItemVoList,orderItemVos));
         return "modules/print/outStockInvoice";
+    }
+
+    public List<OrderItemVo> doProcessOrder(List<OutItemVo> outItemVoList,List<OrderItemVo> oldOrderItem){
+        List<OrderItemVo> list = new ArrayList<>();
+        Map<String,Long> ite = new HashMap<>();
+        if(!StringUtils.isEmpty(outItemVoList)){
+            for(OutItemVo vo : outItemVoList){
+                String newName = vo.getOrdCode() + vo.getItemOwner() + vo.getItemName();
+                if(ite.get(newName) == null){
+                    ite.put(newName,1L);
+                }else{
+                    Long n = ite.get(newName) + 1L;
+                    ite.put(newName,n);
+                }
+            }
+        }
+        if(!StringUtils.isEmpty(oldOrderItem)){
+            for(OrderItemVo vo : oldOrderItem){
+                String newName = vo.getOrdCode() + vo.getItemOwner() + vo.getItemName();
+                if(ite.get(newName) != null && !list.contains(vo)){
+                    vo.setItemNum(ite.get(newName));
+                    list.add(vo);
+                }
+            }
+        }
+        return list;
     }
 
 

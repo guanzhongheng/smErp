@@ -56,13 +56,11 @@
                     </li>
                     <li>
                         &nbsp;&nbsp;
-                        <input id="startDate" name="startDate" placeholder="入库开始时间" type="text" readonly="readonly" maxlength="20"
-                               class="input-small Wdate"
-                               value="" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
+                        <form:input path="startDate" htmlEscape="false" readonly="readonly" class="input-small Wdate"
+                                    placeholder="开始时间" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
                         ～
-                        <input id="endDate" name="endDate" placeholder="入库结束时间" type="text" readonly="readonly" maxlength="20"
-                               class="input-small Wdate"
-                               value="" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
+                        <form:input path="endDate" htmlEscape="false" readonly="readonly" class="input-small Wdate"
+                                    placeholder="开始时间" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
                     </li>
                     &nbsp;&nbsp;
                     <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 100px" value="查询"/></li>
