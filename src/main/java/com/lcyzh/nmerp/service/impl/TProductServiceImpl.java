@@ -6,14 +6,18 @@ import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.controller.system.util.SysDictUtils;
 import com.lcyzh.nmerp.dao.TProductMapper;
+import com.lcyzh.nmerp.entity.ProductRel;
 import com.lcyzh.nmerp.entity.TProduct;
 import com.lcyzh.nmerp.entity.sys.Dict;
 import com.lcyzh.nmerp.model.vo.ProductVo;
 import com.lcyzh.nmerp.service.TProductService;
 import com.lcyzh.nmerp.utils.DictUtils;
+import org.apache.commons.math3.stat.descriptive.summary.Product;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,7 +34,7 @@ public class TProductServiceImpl implements TProductService {
     private TProductMapper tProductMapper;
 
     @Override
-    public ProductVo get(String id) {
+    public ProductVo get(Long id) {
         TProduct product = tProductMapper.get(id);
         ProductVo vo = new ProductVo();
         BeanUtils.copyProperties(product, vo);
@@ -76,7 +80,7 @@ public class TProductServiceImpl implements TProductService {
         tProduct.setCreateTime(new Date());
         int res = tProductMapper.insert(tProduct);
         if (res > 0) {
-            DictUtils.getProdMaps().put(String.valueOf(tProduct.getProdCgyCode()) + tProduct.getProdVariety(), tProduct);
+            DictUtils.getProdMaps().put(String.valueOf(tProduct.getProdCgyCode()) + tProduct.getProdVariety() + tProduct.getProdColor(), tProduct);
         }
         return res;
     }
@@ -84,6 +88,43 @@ public class TProductServiceImpl implements TProductService {
     @Override
     public int insertBatch(List<TProduct> tProducts) {
         return tProductMapper.insertBatch(tProducts);
+    }
+
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    @Override
+    public int save(TProduct product) {
+        Date current = new Date();
+        int res;
+        if (product.getId() != null) {
+            TProduct po = tProductMapper.get(product.getId());
+            if (po != null && !(po.getProdVariety().equals(product.getProdVariety()) && po.getProdCgyCode().equals(product.getProdCgyCode()) && po.getProdColor().equals(product.getProdColor()))) {
+                TProduct prod = new TProduct();
+                prod.setId(product.getId());
+                prod.setProdName(product.getProdName());
+                prod.setProdCode(product.getProdCode());
+                prod.setProdGuidePrice(product.getProdGuidePrice());
+                prod.setProdPriceType(product.getProdPriceType());
+                prod.setProdThick(product.getProdThick());
+                prod.setProdUnit(product.getProdUnit());
+                res = tProductMapper.update(prod);
+            } else {
+                res = -1;
+            }
+        } else {
+            TProduct po = tProductMapper.findByUqKey(product.getProdCgyCode(), product.getProdVariety(), product.getProdColor());
+            if (po != null) {
+                res = -2;
+            } else {
+                product.setCreateTime(current);
+                res = tProductMapper.insert(product);
+
+            }
+        }
+
+        if (res > 0) {
+            DictUtils.getProdMaps().put(String.valueOf(product.getProdCgyCode()) + product.getProdVariety() + product.getProdColor(), product);
+        }
+        return res;
     }
 
     @Override

@@ -17,10 +17,10 @@
     </resultMap>
 
 
-    <select id="get" resultMap="tProductResultMap">
+    <select id="get" parameterType="java.lang.Long" resultMap="tProductResultMap">
         SELECT *
         FROM T_PRODUCT
-        WHERE id = #{id}
+        WHERE id = #{id,jdbcType=BIGINT}
     </select>
 
     <select id="findList" parameterType="com.lcyzh.nmerp.entity.TProduct" resultMap="tProductResultMap">
@@ -59,7 +59,7 @@
         FROM T_PRODUCT
     </select>
 
-    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TProduct"  useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TProduct" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO T_PRODUCT(
             prod_code,
             prod_name,
@@ -88,16 +88,16 @@
 
     <insert id="insertBatch" parameterType="com.lcyzh.nmerp.entity.TProduct" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO T_PRODUCT(
-            prod_code,
-            prod_name,
-            prod_cgy_code,
-            prod_thick,
-            prod_variety,
-            prod_guide_price,
-            prod_price_type,
-            prod_unit,
-            create_time,
-            prod_color
+        prod_code,
+        prod_name,
+        prod_cgy_code,
+        prod_thick,
+        prod_variety,
+        prod_guide_price,
+        prod_price_type,
+        prod_unit,
+        create_time,
+        prod_color
         )
         VALUES
         <foreach collection="list" item="tProduct" separator=",">
@@ -160,6 +160,10 @@
         <foreach item="code" collection="list" open="(" close=")" separator=",">
             #{code}
         </foreach>
+    </select>
+
+    <select id="findByUqKey" parameterType="java.util.Map" resultMap="tProductResultMap">
+        select * from T_PRODUCT where prod_cgy_code = #{prodCgyCode, jdbcType=BIGINT} and prod_variety = #{prodVariety,jdbcType=BIGINT} and  prod_color = #{prodColor,jdbcType=VARCHAR}
     </select>
 
 </mapper>

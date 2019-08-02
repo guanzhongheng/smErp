@@ -46,7 +46,7 @@
                 </mapping>
                 <!-- 颜色 -->
                 <mapping row="6" col="5" nullAllowed="true">
-                    item.itemColor
+                    item.itemColorValue
                 </mapping>
                 <!-- 单件计数 -->
                 <mapping row="6" col="6" nullAllowed="true">

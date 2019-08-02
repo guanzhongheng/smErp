@@ -2,6 +2,7 @@ package com.lcyzh.nmerp.dao;
 
 import com.lcyzh.nmerp.entity.TProduct;
 import org.apache.commons.math3.stat.descriptive.summary.Product;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
 @Repository
 public interface TProductMapper {
 
-    TProduct get(String id);
+    TProduct get(Long id);
 
     List<TProduct> findList(TProduct tProduct);
 
@@ -26,6 +27,8 @@ public interface TProductMapper {
     int update(TProduct tProduct);
 
     int delete(TProduct tProduct);
+
+    TProduct findByUqKey(@Param("prodCgyCode") Long prodCgyCode,@Param("prodVariety") Long prodVariety, @Param("prodColor") String prodColor);
 
     List<TProduct> findListByCodes(List<String> codes);
 }

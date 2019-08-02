@@ -78,7 +78,7 @@ public class DictLoader implements CommandLineRunner {
         if(prods!=null && !prods.isEmpty()){
             Map<String, TProduct> prodMaps = DictUtils.getProdMaps();
             prods.forEach(prod->{
-              prodMaps.put(String.valueOf(prod.getProdCgyCode())+prod.getProdVariety(),prod);
+              prodMaps.put(String.valueOf(prod.getProdCgyCode())+prod.getProdVariety()+prod.getProdColor(),prod);
             });
         }
     }

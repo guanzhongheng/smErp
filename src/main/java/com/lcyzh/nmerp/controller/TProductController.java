@@ -35,8 +35,10 @@ public class TProductController extends BaseController {
 
     @Autowired
     private TOutStockService outStockService;
+
     /**
      * 列表页面流转
+     *
      * @param tProduct
      * @param model
      * @return
@@ -50,42 +52,39 @@ public class TProductController extends BaseController {
 
     /**
      * 新增/修改页面流转
+     *
      * @param
      * @return
      */
     @RequestMapping(value = {"get"}, method = RequestMethod.GET)
-    public String get(@ModelAttribute("tProduct") TProduct tProduct,Model model) {
+    public String get(@ModelAttribute("tProduct") TProduct tProduct, Model model) {
         ProductVo newTProduct = new ProductVo();
-        if(tProduct.getId() != null){
-            newTProduct = tProductService.get(tProduct.getId().toString());
+        if (tProduct.getId() != null) {
+            newTProduct = tProductService.get(tProduct.getId());
         }
-        model.addAttribute("tProduct",newTProduct);
-        model.addAttribute("prodId",tProduct.getId());
+        model.addAttribute("tProduct", newTProduct);
+        model.addAttribute("prodId", tProduct.getId());
         return "modules/crm/prodDictForm";
     }
 
 
     @RequestMapping("insert")
-    public String insert(TProduct tProduct,Model model,RedirectAttributes redirectAttributes) {
-        if (!beanValidator(model, tProduct)){
+    public String insert(TProduct tProduct, Model model, RedirectAttributes redirectAttributes) {
+        if (!beanValidator(model, tProduct)) {
             return get(tProduct, model);
         }
-        if(tProduct.getId() != null){
-            if (tProductService.update(tProduct) > 0) {
-                addMessage(redirectAttributes, "更新产品:'" + tProduct.getProdName() + "'成功");
-            } else {
-                addMessage(redirectAttributes, "更新产品:'" + tProduct.getProdName() + "'失败");
-            }
-        }else{
-            if (tProductService.insert(tProduct) > 0) {
-                addMessage(redirectAttributes, "保存产品:'" + tProduct.getProdName() + "'成功");
-            } else {
-                addMessage(redirectAttributes, "保存产品:'" + tProduct.getProdName() + "'失败");
-            }
+        int res = tProductService.save(tProduct);
+        if (res > 0) {
+            addMessage(redirectAttributes, "保存产品:'" + tProduct.getProdName() + "'成功");
+        } else if(res==0) {
+            addMessage(redirectAttributes, "保存产品:'" + tProduct.getProdName() + "'失败，系统错误！");
+        }else if(res == -1){
+            addMessage(redirectAttributes,   "（产品性质/产品种类/产品颜色）不能修改！");
+        }else if(res == -2){
+            addMessage(redirectAttributes,   "（产品性质/产品种类/产品颜色）标示的产品已存在！");
         }
         return "redirect:/tProduct/list";
     }
-
 
 
     @RequestMapping(value = "/insertBatch")
@@ -119,6 +118,7 @@ public class TProductController extends BaseController {
 
     /**
      * 历史列表页面流转
+     *
      * @param model
      * @return
      */

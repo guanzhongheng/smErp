@@ -13,7 +13,7 @@ import java.util.List;
 * Date  2019-06-06
 */
 public interface TProductService {
-    ProductVo get(String id);
+    ProductVo get(Long id);
 
     List<ProductVo> findList(TProduct tProduct);
 
@@ -22,6 +22,16 @@ public interface TProductService {
     int insert(TProduct tProduct);
 
     int insertBatch(List<TProduct> tProducts);
+
+    /**
+     * @Description: 保存产品信息
+     * @Param: [product]
+     * @return: int
+     * @Author: lijinku
+     * @Iteration : 1.0
+     * @Date: 2019/8/2 4:05 PM
+     */
+    int save(TProduct product);
 
     int update(TProduct tProduct);
 

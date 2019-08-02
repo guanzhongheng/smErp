@@ -119,15 +119,18 @@ public class TOrderServiceImpl implements TOrderService {
                 tOrderItem.setCreateTime(date);
                 String prodCgy = StringUtils.parseDictKey(itv.getItemCgyCodeValue()).toString();
                 String prodVerity = StringUtils.parseDictKey(itv.getItemVaritemValue()).toString();
+                String prodColor = StringUtils.parseDictKey(itv.getItemColorValue()).toString();
+
                 tOrderItem.setOrdCode(tOrder.getOrdCode());
-                TProduct product = DictUtils.getProdCodeByProdCgyAndVari(prodCgy + prodVerity);
+                TProduct product = DictUtils.getProdCodeByProdCgyAndVari(prodCgy + prodVerity + prodColor);
                 if (product != null) {
                     tOrderItem.setItemCode(product.getProdCode());
                     tOrderItem.setItemUnit(product.getProdUnit());
                     tOrderItem.setItemPrice(product.getProdGuidePrice());
                     tOrderItem.setItemPriceType(product.getProdPriceType());
+                    tOrderItem.setItemColor(prodColor);
+
                 }
-                tOrderItem.setItemColor(StringUtils.parseColorDictKey(itv.getItemColor()));
                 tOrderItem.setItemLenth(itv.getItemLenth());
                 if (tOrderItem.getItemPriceType() != null) {
                     if (tOrderItem.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)) {
@@ -270,7 +273,7 @@ public class TOrderServiceImpl implements TOrderService {
         }
     }
 
-    public int updateProdStatusByOrdCode(String ordCode, Long status){
+    public int updateProdStatusByOrdCode(String ordCode, Long status) {
         Map<String, Object> map = new HashMap<>();
         map.put("ordCode", ordCode);
         map.put("status", status);

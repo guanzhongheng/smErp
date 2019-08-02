@@ -32,7 +32,7 @@
                                 <option value="-1">请选择</option>
                                 <c:forEach items="${prod}" var="p">
                                     <option
-                                            data-prodcode='${p.prodCode}'
+                                            data-prodName='${p.prodName}'
                                             data-prodcgycode='${p.prodCgyCode}' data-prodCgyCodeValue='${p.prodCgyCodeValue}'
                                             data-prodvariety='${p.prodVariety}' data-prodVarietyValue='${p.prodVarietyValue}'
                                             data-prodthick='${p.prodThick}'
@@ -40,7 +40,7 @@
                                             data-prodguideprice='${p.prodGuidePrice}'
                                             data-produnit='${p.prodUnit}' data-prodUnitValue='${p.prodUnitValue}'
                                             data-color="${p.prodColor}" data-colorValue="${p.prodColorValue}"
-                                            value='${p.prodName}' > ${p.prodName}</option>
+                                            value='${p.prodCode}' > ${p.prodCode}</option>
                                 </c:forEach>
                             </select>
                         </label>
@@ -427,8 +427,8 @@
     function getResChange(obj) {
         if($(obj).find("option:selected").val() != -1){
             debugger;
-            prodObj.itemCode = $(obj).find("option:selected").attr("data-prodcode");
-            prodObj.itemName = $(obj).find("option:selected").val();
+            prodObj.itemName = $(obj).find("option:selected").attr("data-prodName");
+            prodObj.itemCode = $(obj).find("option:selected").val();
             prodObj.itemCgyCode = $(obj).find("option:selected").attr("data-prodcgyCode");
             prodObj.itemCgyCodeValue = $(obj).find("option:selected").attr("data-prodCgyCodeValue");
             prodObj.itemVariety = $(obj).find("option:selected").attr("data-prodvariety");
@@ -442,8 +442,8 @@
             prodObj.itemColor = $(obj).find("option:selected").attr("data-color");
             prodObj.itemColorValue = $(obj).find("option:selected").attr("data-colorValue");
 
-            $("#itemCode").val($(obj).find("option:selected").attr("data-prodcode"));
-            $("#itemName").val($(obj).find("option:selected").val());
+            $("#itemName").val($(obj).find("option:selected").attr("data-prodName"));
+            $("#itemCode").val($(obj).find("option:selected").val());
             $("#itemCgyCode").val($(obj).find("option:selected").attr("data-prodCgyCodeValue"));
             $("#itemVariety").val($(obj).find("option:selected").attr("data-prodVarietyValue"));
             $("#itemThick").val($(obj).find("option:selected").attr("data-prodthick"));

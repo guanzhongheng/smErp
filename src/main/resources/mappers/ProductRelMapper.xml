@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lcyzh.nmerp.dao.ProductRelMapper">
+
+    <resultMap id="resultMap" type="com.lcyzh.nmerp.entity.ProductRel">
+        <id column="custom_code" property="customCode" jdbcType="VARCHAR"/>
+        <result column="prod_code" property="prodCode" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <select id="selectByPrimaryId" parameterType="java.lang.String" resultMap="resultMap">
+        select * from T_PRODUCT_REL where custom_code = #{customCode,jdbcType=VARCHAR}
+    </select>
+
+
+    <delete id="deleteByPrimaryId" parameterType="java.lang.String">
+        delete from T_PRODUCT_REL where custom_code = #{customCode,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.lcyzh.nmerp.entity.ProductRel">
+        insert into T_PRODUCT_REL (
+           custom_code,
+           prod_code,
+           create_time
+        )values {
+            #{customCode,jdbcType=VARCHAR},
+            #{prodCode,jdbcType=VARCHAR},
+            #{createTime,jdbcType=TIMESTAMP}
+        }
+    </insert>
+
+</mapper>
