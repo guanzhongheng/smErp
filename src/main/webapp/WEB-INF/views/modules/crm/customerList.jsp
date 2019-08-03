@@ -3,6 +3,8 @@
 <html>
 <head>
     <title>全部客户</title>
+    <link href="${ctxStatic}/hPlugs/css/plugins/bootstrap-table/bootstrap-table.css" rel="stylesheet">
+    <link href="${ctxStatic}/hPlugs/css/plugins/bootstrap-table/bootstrap-table-fixed-columns.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/common/customize.css">
 
     <script type="text/javascript">

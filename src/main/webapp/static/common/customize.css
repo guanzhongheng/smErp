@@ -96,3 +96,13 @@
     text-align: left;
     width: 300px;
 }
+
+.produceDetail-input-readonly{
+    /*background-color: #f1f5f7;*/
+    /*padding: 4px 6px;*/
+    border: 1px solid #ccc;
+    border-radius: 5px 5px 5px 5px;
+    font-size: 18px;
+    color: #555;
+    text-align: left;
+}

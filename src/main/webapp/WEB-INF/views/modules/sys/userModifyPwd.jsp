@@ -35,6 +35,7 @@
 		<%--<li><a href="${ctx}/sys/user/info" class="global-font">个人信息</a></li>--%>
 		<%--<li class="active"><a href="${ctx}/sys/user/modifyPwd" class="global-font">修改密码</a></li>--%>
 	<%--</ul><br/>--%>
+	<div class="tabs-container" style="padding: 20px 9px;">
 
 	<form:form id="inputForm" modelAttribute="user" action="${ctx}/sys/user/modifyPwd" method="post" class="form-horizontal">
 		<form:hidden path="id"/>
@@ -47,7 +48,7 @@
 		<div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
 			<div class="panel-heading" style="background-color: #50B0E6">
 				<h3 class="panel-title global-panel-title" >
-					信息确认
+					修改密码
 				</h3>
 			</div>
 			<div class="panel-body">
@@ -86,7 +87,7 @@
 
 
 	</form:form>
-
+	</div>
 
 
 </body>

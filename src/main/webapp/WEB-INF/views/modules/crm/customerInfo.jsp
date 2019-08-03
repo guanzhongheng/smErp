@@ -1,14 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 
-<div class="wrapper wrapper-content animated fadeInRight">
-        <div class="tabs-container">
+<div class="">
+    <div class="">
 
 
-            <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true">客户详情</a>
-                </li>
-            </ul>
+        <%--<ul class="nav nav-tabs">--%>
+            <%--<li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true">客户详情</a>--%>
+            <%--</li>--%>
+        <%--</ul>--%>
 
         <div class="tab-content">
             <div id="tab-1" class="tab-pane active">
@@ -154,27 +154,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="hr-line-dashed"></div>
-                                                            <%--<div class="ibox-title" style="border-width: 4px 0px 0px 4px; border-color: #eaeaea; background-color: #f1f5f7">--%>
-                                                            <%--&lt;%&ndash;<h3>附加信息</h3>&ndash;%&gt;--%>
-                                                            <%--</div>--%>
-
-                                                            <%--<c:if test="${not empty customerAddModifyVo.cusCode}">--%>
-                                                            <%--<div class="hr-line-dashed"></div>--%>
-                                                            <%--<div class="form-group">--%>
-                                                                <%--<label class="col-sm-3 control-label">跟进内容：</label>--%>
-                                                                <%--<div class="col-sm-8">--%>
-                                                                    <%--<input type="text" class="form-control global-input-readonly" name="" disabled="true">--%>
-                                                                <%--</div>--%>
-                                                            <%--</div>--%>
-                                                            <%--<div class="hr-line-dashed"></div>--%>
-                                                            <%--<div class="form-group">--%>
-                                                                <%--<label class="col-sm-3 control-label"><i style="color: red">*</i> 跟进人员：</label>--%>
-                                                                <%--<div class="col-sm-8">--%>
-                                                                    <%--<input type="text" class="form-control global-input-readonly" name="password" readonly="true" disabled="true"--%>
-                                                                           <%--value="${customerAddModifyVo.cusName}">--%>
-                                                                <%--</div>--%>
-                                                            <%--</div>--%>
-                                                            <%--</c:if>--%>
+                                                        </form>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
