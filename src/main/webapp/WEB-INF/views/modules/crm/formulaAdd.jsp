@@ -87,7 +87,7 @@
                                                         <button class="btn btn-primary global-button-style" type="submit">保存</button>
                                                     </div>
                                                     <div class="col-sm-4 " >
-                                                        <button class="btn btn-white global-button-style" type="button" onclick="javascript:window.location.replace(document.referrer); ">返回</button>
+                                                        <a href="/crm/formula/list" class="btn btn-white global-button-style" type="button" >返回</a>
                                                     </div>
                                                 </div>
                                             </div>

@@ -80,6 +80,7 @@ public class TFormulaServiceImpl implements ITFormulaService {
         String fCode = String.valueOf(rm.nextInt(100000));
         tFormula.setfCode(fCode);
         tFormula.setCreateDate(new Date());
+        tFormula.setfContext("{}");
         tFormula.setDelFlag('0');
         int result = tFormulaMapper.insert(tFormula);
         if(result > 0){

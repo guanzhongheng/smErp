@@ -46,7 +46,7 @@
                                                 <label class="col-sm-3 control-label"><i style="color: red">*</i> 温度标准（℃）：</label>
                                                 <div class="col-sm-8">
                                                     <form:input path="temperature" htmlEscape="false" maxlength="10"
-                                                                class="form-control global-input" placeholder="温度"/>
+                                                                class="form-control global-input" placeholder="温度" value="${detail.temperature}"/>
                                                 </div>
                                             </div>
 
@@ -54,15 +54,18 @@
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label">备注信息：</label>
                                                 <div class="col-sm-8">
-                                                    <form:textarea path="remarks" htmlEscape="false" cssClass="form-control global-input"
-                                                                   cssStyle="min-width: 300px;" rows="6" maxlength="255"/>
+                                                    <%--<form:textarea path="remarks" htmlEscape="false" cssClass="form-control global-input"--%>
+                                                                   <%--cssStyle="min-width: 300px;" rows="6" maxlength="255" value=""/>--%>
+                                                    <textarea name="remarks" cssClass="form-control global-input" cssStyle="min-width: 300px;" rows="6" maxlength="255">
+                                                            ${detail.remarks}
+                                                    </textarea>
                                                 </div>
                                             </div>
                                             <div class="hr-line-dashed"></div>
                                             <div class="form-group" style="text-align: center">
                                                     <button class="btn btn-primary global-button-style" onclick="addRow()" type="button">增加原料</button>
                                                     <button class="btn btn-primary global-button-style" type="submit">保存</button>
-                                                    <button class="btn btn-white global-button-style" type="button" onclick="javascript:window.location.replace(document.referrer); ">返回</button>
+                                                    <a href="/crm/formula/list" class="btn btn-white global-button-style" type="button" >返回</a>
                                             </div>
                                         </form>
                                     </div>
