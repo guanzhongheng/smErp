@@ -39,6 +39,20 @@ public class CrmAjaxManageController extends BaseController {
 
 
     /**
+     * 添加归属人
+     * @return
+     */
+    @RequestMapping(value = "addBlongPerson")
+    @ResponseBody
+    public String saveFlowEmp(CustomerUpdateVo vo) {
+        int res = customerService.updateBatch(vo);
+        if(res < 1){
+            return "error";
+        }
+        return "success";
+    }
+
+    /**
      * 转移客户-保存
      * @return
      */

@@ -121,7 +121,7 @@
                                         var cusContent = h.find("iframe")[0].contentWindow.cusContent;
                                         var remarks = h.find("iframe")[0].contentWindow.remarks;
                                         if (v == "ok") {
-                                            $.post('${ctx}/crmAjax/saveTransfer/', {
+                                            $.post('${ctx}/crmAjax/addBlongPerson/', {
                                                 cusIds: ids.value,
                                                 userId: cusContent.value,
                                                 remarks: remarks.value
