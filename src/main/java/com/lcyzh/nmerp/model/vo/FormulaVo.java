@@ -123,34 +123,4 @@ public class FormulaVo implements Serializable {
     public void setProdVarietyValue(String prodVarietyValue) {
         this.prodVarietyValue = prodVarietyValue;
     }
-//public static void main(String[] args) {
-//        List<RawMaterialVo> rawMaterialVos = new ArrayList<>();
-//        for(int i = 0; i < 3; i++) {
-//            RawMaterialVo rawMaterialVo = new RawMaterialVo();
-//            rawMaterialVo.setRawmCode("AAA");
-//            rawMaterialVo.setRawmName("高压M21");
-//            rawMaterialVo.setWeight("1袋");
-//            rawMaterialVos.add(rawMaterialVo);
-//        }
-//        FormulaDetailVo fdVo1 = new FormulaDetailVo();
-//        fdVo1.setRawMaterialVos(rawMaterialVos);
-//        fdVo1.setRemarks("内层");
-//        fdVo1.setTemperature("210℃");
-//        FormulaDetailVo fdVo2 = new FormulaDetailVo();
-//        fdVo2.setRawMaterialVos(rawMaterialVos);
-//        fdVo2.setRemarks("外层");
-//        fdVo2.setTemperature("200℃");
-//        FormulaDetailVo fdVo3 = new FormulaDetailVo();
-//        fdVo3.setRawMaterialVos(rawMaterialVos);
-//        fdVo3.setRemarks("中层");
-//        fdVo3.setTemperature("195℃");
-//        Map<String, FormulaDetailVo> context = new HashMap<>();
-//        context.put("inner", fdVo1);
-//        context.put("midder", fdVo3);
-//        context.put("outer", fdVo2);
-//        String jsonStr = JSON.toJSONString(context);
-//        Map<String, FormulaDetailVo> context1 = JSON.parseObject(jsonStr, context.getClass());
-//        System.out.println(context1.size());
-//        System.out.println(context1.get("midder"));
-//    }
 }
