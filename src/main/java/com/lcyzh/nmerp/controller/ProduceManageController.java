@@ -10,10 +10,7 @@ import com.lcyzh.nmerp.entity.TStock;
 import com.lcyzh.nmerp.model.vo.LabelPrint;
 import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
 import com.lcyzh.nmerp.model.vo.ProdPlanVo;
-import com.lcyzh.nmerp.service.TMachineInfoService;
-import com.lcyzh.nmerp.service.TProdPlanDetailService;
-import com.lcyzh.nmerp.service.TProdPlanService;
-import com.lcyzh.nmerp.service.TStockService;
+import com.lcyzh.nmerp.service.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -47,6 +44,8 @@ public class ProduceManageController extends BaseController {
     private TMachineInfoService machineInfoService;
     @Autowired
     private TStockService stockService;
+    @Autowired
+    private ITFormulaService formulaService;
     /**
      * @Description: 跳转到生产计划详情页面
      * @Param: [vo, prodPlanCode, model, request, response]
@@ -60,6 +59,8 @@ public class ProduceManageController extends BaseController {
         model.addAttribute("list",prodPlanDetailService.findListByProdPlanCode(prodPlanCode));
         model.addAttribute("prodPlan",prodPlanService.findByProdPanCode(prodPlanCode));
         model.addAttribute("macList",machineInfoService.findAllList());
+        // add formula by zj 0802
+        model.addAttribute("formulaList",formulaService.findAllList());
         return "modules/crm/producePlanDetail";
     }
 

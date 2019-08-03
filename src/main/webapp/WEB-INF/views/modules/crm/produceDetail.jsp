@@ -65,137 +65,459 @@
 
                     <div class="ibox-content">
                         <div class="row">
-                            <div class="col-sm-6 b-r">
+                            <div class="col-sm-8 b-r">
                                 <div class="ibox float-e-margins">
                                     <form method="get" class="form-horizontal">
+                                        <div class="ibox-title" style="border-width: 4px 0px 0px 4px; border-color: #eaeaea; background-color: #f1f5f7">
+                                            <h3>基本信息</h3>
+                                        </div>
+                                        <div class="hr-line-dashed" ></div>
                                         <div class="form-group">
-                                            <label class="col-sm-5 control-label"> 订单标题：</label>
-                                            <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                                ${detail.orderTitle}
+                                            <label class="col-sm-2 control-label" style="margin-left: -25px;"><i style="color: red"></i>订单标题:</label>
+                                            <div class="col-sm-4">
+
+                                                <input disabled="ture" placeholder="订单标题" value="${detail.orderTitle}"
+                                                       class="form-control produceDetail-input-readonly" readonly="true"/>
+
+                                            </div>
+                                            <label class="col-sm-2 control-label"><i style="color: red"></i>所属人:</label>
+                                            <div class="col-sm-4 ">
+                                                <input disabled="ture" placeholder="所属人" value="${detail.itemOwner}"
+                                                       class="form-control produceDetail-input-readonly" readonly="true"/>
+                                            </div>
+                                        </div>
+                                        <%--<div class="hr-line-dashed"></div>--%>
+                                        <%--<div class="form-group">--%>
+                                            <%--<label class="col-sm-3 control-label"><i style="color: red"></i>所属人:</label>--%>
+                                            <%--<div class="col-sm-8 ">--%>
+                                                <%--<input disabled="ture" placeholder="所属人" value="${detail.itemOwner}"--%>
+                                                       <%--class="form-control produceDetail-input-readonly" readonly="true"/>--%>
+                                            <%--</div>--%>
+                                        <%--</div>--%>
+                                        <div class="hr-line-dashed"></div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" style="margin-left: -25px;"><i style="color: red"></i>机台编号:</label>
+                                            <div class="col-sm-4">
+                                                <input disabled="ture" placeholder="机台编号" value="${detail.macCode}"
+                                                       class="form-control produceDetail-input-readonly" readonly="true"/>
+                                            </div>
+                                            <label class="col-sm-2 control-label"><i style="color: red"></i>产品编号:</label>
+                                            <div class="col-sm-4">
+                                                <input disabled="ture" placeholder="产品编号" value="${detail.itemCode}"
+                                                       class="form-control produceDetail-input-readonly" readonly="true"/>
+                                            </div>
+                                        </div>
+                                        <%--<div class="hr-line-dashed"></div>--%>
+                                        <%--<div class="form-group">--%>
+                                            <%--<label class="col-sm-3 control-label"><i style="color: red"></i>产品编号:</label>--%>
+                                            <%--<div class="col-sm-8">--%>
+                                                <%--<input disabled="ture" placeholder="产品编号" value="${detail.itemCode}"--%>
+                                                       <%--class="form-control global-input-readonly" readonly="true"/>--%>
+                                            <%--</div>--%>
+                                        <%--</div>--%>
+                                        <div class="hr-line-dashed"></div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" style="margin-left: -25px;"><i style="color: red"></i>品种:</label>
+                                            <div class="col-sm-4">
+                                                <input disabled="ture" placeholder="品种" value="${fns:getValueByDictKey(detail.itemVariety)}"
+                                                       class="form-control produceDetail-input-readonly" readonly="true"/>
+                                            </div>
+                                            <label class="col-sm-2 control-label">颜色:</label>
+                                            <div class="col-sm-4">
+                                                <input disabled="ture" placeholder="颜色" value="${fns:getDictValue(detail.itemColor, 'prod_color', defaultValue)}"
+                                                       class="form-control produceDetail-input-readonly" readonly="true"/>
+                                            </div>
+                                        </div>
+                                        <%--<div class="hr-line-dashed"></div>--%>
+                                        <%--<div class="form-group">--%>
+                                            <%--<label class="col-sm-3 control-label">颜色:</label>--%>
+                                            <%--<div class="col-sm-8">--%>
+                                                <%--<input disabled="ture" placeholder="颜色" value="${fns:getDictValue(detail.itemColor, 'prod_color', defaultValue)}"--%>
+                                                       <%--class="form-control global-input-readonly" readonly="true"/>--%>
+                                            <%--</div>--%>
+                                        <%--</div>--%>
+
+                                        <div class="hr-line-dashed"></div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" style="margin-left: -25px;">长度(米):</label>
+                                            <div class="col-sm-4">
+                                                <input disabled="ture" placeholder="长度" value="${detail.itemLenth}"
+                                                       class="form-control produceDetail-input-readonly" readonly="true"/>
+                                            </div>
+                                            <label class="col-sm-2 control-label"><i style="color: red"></i>宽度(米):</label>
+                                            <div class="col-sm-4">
+                                                <input disabled="ture" placeholder="宽度" value="${detail.itemWidth}"
+                                                       class="form-control produceDetail-input-readonly" readonly="true"/>
+                                            </div>
+                                        </div>
+
+                                        <%--<div class="hr-line-dashed"></div>--%>
+
+                                        <%--<div class="form-group">--%>
+                                            <%--<label class="col-sm-3 control-label"><i style="color: red"></i>宽度(米):</label>--%>
+                                            <%--<div class="col-sm-8">--%>
+                                                <%--<input disabled="ture" placeholder="宽度" value="${detail.itemWidth}"--%>
+                                                       <%--class="form-control global-input-readonly" readonly="true"/>--%>
+                                            <%--</div>--%>
+                                        <%--</div>--%>
+
+                                        <div class="hr-line-dashed"></div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" style="margin-left: -25px;">厚度(米):</label>
+                                            <div class="col-sm-4">
+                                                <input disabled="ture" placeholder="厚度" value="${detail.itemThick}"
+                                                       class="form-control produceDetail-input-readonly" readonly="true"/>
+                                            </div>
+                                            <label class="col-sm-2 control-label">数量:</label>
+                                            <div class="col-sm-4">
+                                                <input disabled="ture" placeholder="数量" value="${detail.itemNum}"
+                                                       class="form-control produceDetail-input-readonly" readonly="true"/>
+                                            </div>
+                                        </div>
+                                        <%--<div class="hr-line-dashed"></div>--%>
+                                        <%--<div class="form-group">--%>
+                                            <%--<label class="col-sm-3 control-label">数量:</label>--%>
+                                            <%--<div class="col-sm-8">--%>
+                                                <%--<input disabled="ture" placeholder="数量" value="${detail.itemNum}"--%>
+                                                       <%--class="form-control global-input-readonly" readonly="true"/>--%>
+                                            <%--</div>--%>
+                                        <%--</div>--%>
+                                        <div class="hr-line-dashed"></div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" style="margin-left: -25px;">重量:</label>
+                                            <div class="col-sm-4">
+                                                <input disabled="ture" placeholder="重量" value="${detail.itemTotalWeight}"
+                                                       class="form-control produceDetail-input-readonly" readonly="true"/>
+                                            </div>
+                                            <label class="col-sm-2 control-label">面积(平方米):</label>
+                                            <div class="col-sm-4">
+                                                <input disabled="ture" placeholder="面积" value="${detail.itemTotalSq}"
+                                                       class="form-control produceDetail-input-readonly" readonly="true"/>
+                                            </div>
+                                        </div>
+                                        <%--<div class="hr-line-dashed"></div>--%>
+                                        <%--<div class="form-group">--%>
+                                            <%--<label class="col-sm-3 control-label">面积(平方米):</label>--%>
+                                            <%--<div class="col-sm-8">--%>
+                                                <%--<input disabled="ture" placeholder="面积" value="${detail.itemTotalSq}"--%>
+                                                       <%--class="form-control global-input-readonly" readonly="true"/>--%>
+                                            <%--</div>--%>
+                                        <%--</div>--%>
+                                        <div class="hr-line-dashed"></div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" style="margin-left: -25px;">压边类型:</label>
+                                            <div class="col-sm-4">
+                                                <input disabled="ture" placeholder="压边类型" value="${fns:getValueByDictKey(detail.itemYbType)}"
+                                                       class="form-control produceDetail-input-readonly" readonly="true"/>
+                                            </div>
+                                            <label class="col-sm-2 control-label"  style="padding-left: inherit;">延长米计算方式:</label>
+                                            <div class="col-sm-4">
+                                                <input disabled="ture" placeholder="延长米计算方式" value="${fns:getValueByDictKey(detail.itemYcType)}"
+                                                       class="form-control produceDetail-input-readonly" readonly="true"/>
                                             </div>
                                         </div>
                                         <div class="hr-line-dashed"></div>
                                         <div class="form-group">
-                                            <label class="col-sm-5 control-label"> 所属人：</label>
-                                            <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                                ${detail.itemOwner}
-                                            </div>
+                                            <%--<label class="col-sm-2 control-label">延长米计算方式:</label>--%>
+                                            <%--<div class="col-sm-4">--%>
+                                                <%--<input disabled="ture" placeholder="延长米计算方式" value="${fns:getValueByDictKey(detail.itemYcType)}"--%>
+                                                       <%--class="form-control produceDetail-input-readonly" readonly="true"/>--%>
+                                            <%--</div>--%>
                                         </div>
                                         <div class="hr-line-dashed"></div>
-                                        <div class="form-group">
-                                            <label class="col-sm-5 control-label"> 机台编号：</label>
-                                            <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                                ${detail.macCode}
+                                        <div class="form-group" style="text-align: center">
+                                            <div class="row">
+                                                <div class="col-sm-2" >
+                                                    <button class="btn btn-primary global-button-style" type="submit">入   库</button>
+                                                </div>
+                                                <div class="col-sm-2 col-sm-offset-2" >
+                                                    <button class="btn btn-warning global-button-style" type="submit">重新打签</button>
+                                                </div>
+                                                <div class="col-sm-2  col-sm-offset-2" >
+                                                    <button class="btn btn-white global-button-style" type="button" onclick="javascript:window.location.replace(document.referrer); ">返回</button>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="hr-line-dashed"></div>
-                                        <div class="form-group">
-                                            <label class="col-sm-5 control-label"> 长度：</label>
-                                            <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                                ${detail.itemLenth}m
-                                            </div>
-                                        </div>
-                                        <div class="hr-line-dashed"></div>
-                                        <div class="form-group">
-                                            <label class="col-sm-5 control-label"> 厚度：</label>
-                                            <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                                ${detail.itemThick}m
-                                            </div>
-                                        </div>
-                                        <div class="hr-line-dashed"></div>
-                                        <div class="form-group">
-                                            <label class="col-sm-5 control-label"> 重量：</label>
-                                            <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                                ${detail.itemTotalWeight}
-                                            </div>
-                                        </div>
-                                        <div class="hr-line-dashed"></div>
-                                        <div class="form-group">
-                                            <label class="col-sm-5 control-label"> 压边类型：</label>
-                                            <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                                ${fns:getValueByDictKey(detail.itemYbType)}
-                                            </div>
-                                        </div>
-                                        <div class="hr-line-dashed"></div>
-                                        <div class="form-group">
-                                            <label class="col-sm-5 control-label"> 配方：</label>
-                                            <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                                <textarea style="width: 250px;height: 200px;" readonly>${detail.formula}</textarea>
-                                            </div>
-                                        </div>
-                                        <div class="hr-line-dashed"></div>
                                     </form>
+
+
+
+
+
+
+
+
+                                    <%--<form method="get" class="form-horizontal">--%>
+                                        <%--<div class="form-group">--%>
+                                            <%--<label class="col-sm-5 control-label"> 订单标题：</label>--%>
+                                            <%--<div class="col-sm-5" style="text-align:center;padding-top: 7px;">--%>
+                                                <%--${detail.orderTitle}--%>
+                                            <%--</div>--%>
+                                        <%--</div>--%>
+                                        <%--<div class="hr-line-dashed"></div>--%>
+                                        <%--<div class="form-group">--%>
+                                            <%--<label class="col-sm-5 control-label"> 所属人：</label>--%>
+                                            <%--<div class="col-sm-5" style="text-align:center;padding-top: 7px;">--%>
+                                                <%--${detail.itemOwner}--%>
+                                            <%--</div>--%>
+                                        <%--</div>--%>
+                                        <%--<div class="hr-line-dashed"></div>--%>
+                                        <%--<div class="form-group">--%>
+                                            <%--<label class="col-sm-5 control-label"> 机台编号：</label>--%>
+                                            <%--<div class="col-sm-5" style="text-align:center;padding-top: 7px;">--%>
+                                                <%--${detail.macCode}--%>
+                                            <%--</div>--%>
+                                        <%--</div>--%>
+                                        <%--<div class="hr-line-dashed"></div>--%>
+                                        <%--<div class="form-group">--%>
+                                            <%--<label class="col-sm-5 control-label"> 长度：</label>--%>
+                                            <%--<div class="col-sm-5" style="text-align:center;padding-top: 7px;">--%>
+                                                <%--${detail.itemLenth}m--%>
+                                            <%--</div>--%>
+                                        <%--</div>--%>
+                                        <%--<div class="hr-line-dashed"></div>--%>
+                                        <%--<div class="form-group">--%>
+                                            <%--<label class="col-sm-5 control-label"> 厚度：</label>--%>
+                                            <%--<div class="col-sm-5" style="text-align:center;padding-top: 7px;">--%>
+                                                <%--${detail.itemThick}m--%>
+                                            <%--</div>--%>
+                                        <%--</div>--%>
+                                        <%--<div class="hr-line-dashed"></div>--%>
+                                        <%--<div class="form-group">--%>
+                                            <%--<label class="col-sm-5 control-label"> 重量：</label>--%>
+                                            <%--<div class="col-sm-5" style="text-align:center;padding-top: 7px;">--%>
+                                                <%--${detail.itemTotalWeight}--%>
+                                            <%--</div>--%>
+                                        <%--</div>--%>
+                                        <%--<div class="hr-line-dashed"></div>--%>
+                                        <%--<div class="form-group">--%>
+                                            <%--<label class="col-sm-5 control-label"> 压边类型：</label>--%>
+                                            <%--<div class="col-sm-5" style="text-align:center;padding-top: 7px;">--%>
+                                                <%--${fns:getValueByDictKey(detail.itemYbType)}--%>
+                                            <%--</div>--%>
+                                        <%--</div>--%>
+                                        <%--<div class="hr-line-dashed"></div>--%>
+                                        <%--<div class="form-group">--%>
+                                            <%--<label class="col-sm-5 control-label"> 配方：</label>--%>
+                                            <%--<div class="col-sm-5" style="text-align:center;padding-top: 7px;">--%>
+                                                <%--<textarea style="width: 250px;height: 200px;" readonly>${detail.formula}</textarea>--%>
+                                            <%--</div>--%>
+                                        <%--</div>--%>
+                                        <%--<div class="hr-line-dashed"></div>--%>
+                                    <%--</form>--%>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
-                                <form method="get" class="form-horizontal">
-                                    <div class="form-group">
-                                        <label class="col-sm-5 control-label"> 产品编号：</label>
-                                        <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                            ${detail.itemCode}
-                                        </div>
+                            <div class="col-sm-4">
+                                <div class="ibox-title" style="border-width: 4px 0px 0px 4px; border-color: #eaeaea; background-color: #f1f5f7">
+                                    <h3>配方信息</h3>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+
+
+
+                                <div class="row" style="text-align: center;">
+                                    <label class="control-label">外层配比(190℃)</label>
+                                </div>
+                                <div class="form-group" style="text-align: -webkit-center;">
+                                    <div class="control-group table-responsive" style="width:400px;text-align: center;" >
+                                        <table id="outerTable" class="table table-striped table-bordered table-hover text-nowrap" >
+                                            <thead>
+                                            <tr>
+                                            <th style="text-align: center">原料</th>
+                                            <th style="text-align: center">数量</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <c:forEach items="${list}" var="vo">
+                                            <tr>
+                                            <td>${vo.ordCode}</td>
+                                            <td>${vo.itemCode}</td>
+                                            </tr>
+                                            </c:forEach>
+                                            <tr>
+                                                <td>南方一年长寿母料（5%）</td>
+                                                <td>0.5袋（12.5公斤）</td>
+                                            </tr>
+                                            <tr>
+                                                <td>南方一年长寿母料（5%）</td>
+                                                <td>0.5袋（12.5公斤）</td>
+                                            </tr>
+                                            <tr>
+                                                <td>南方一年长寿母料（5%）</td>
+                                                <td>0.5袋（12.5公斤）</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                    <div class="hr-line-dashed"></div>
-                                    <div class="form-group">
-                                        <label class="col-sm-5 control-label"> 品种：</label>
-                                        <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                            ${fns:getValueByDictKey(detail.itemVariety)}
-                                        </div>
+                                </div>
+
+                                <div class="row" style="text-align: center;">
+                                    <label class="control-label">中层配比(195℃)</label>
+                                </div>
+                                <div class="form-group"  style="text-align: -webkit-center;">
+                                    <div class="control-group table-responsive" style="width:400px;text-align: center;" >
+                                        <table id="midderTable" data-height="300" class="table table-striped table-bordered table-hover text-nowrap" >
+                                            <thead>
+                                            <tr>
+                                            <th style="text-align: center">原料</th>
+                                            <th style="text-align: center">数量</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <c:forEach items="${list}" var="vo">
+                                            <tr>
+                                            <td>${vo.ordCode}</td>
+                                            <td>${vo.itemCode}</td>
+                                            </tr>
+                                            </c:forEach>
+                                            <tr>
+                                            <td>南方一年长寿母料（5%）</td>
+                                            <td>0.5袋（12.5公斤）</td>
+                                            </tr>
+                                            <tr>
+                                                <td>南方一年长寿母料（5%）</td>
+                                                <td>0.5袋（12.5公斤）</td>
+                                            </tr>
+                                            <tr>
+                                                <td>南方一年长寿母料（5%）</td>
+                                                <td>0.5袋（12.5公斤）</td>
+                                            </tr>
+                                            <tr>
+                                                <td>南方一年长寿母料（5%）</td>
+                                                <td>0.5袋（12.5公斤）</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                    <div class="hr-line-dashed"></div>
-                                    <div class="form-group">
-                                        <label class="col-sm-5 control-label"> 颜色：</label>
-                                        <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                            ${fns:getDictValue(detail.itemColor, 'prod_color', defaultValue)}
-                                        </div>
+                                </div>
+
+                                <div class="row" style="text-align: center;">
+                                    <label class="control-label">内层配比(210℃)</label>
+                                </div>
+                                <div class="form-group"  style="text-align: -webkit-center;">
+                                    <div class="control-group table-responsive" style="width:400px;text-align: center;" >
+                                        <table id="innerTable" data-height="300" class="table table-striped table-bordered table-hover text-nowrap" >
+                                            <thead>
+                                            <tr>
+                                            <th style="text-align: center">原料</th>
+                                            <th style="text-align: center">数量</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <c:forEach items="${list}" var="vo">
+                                            <tr>
+                                            <td>${vo.ordCode}</td>
+                                            <td>${vo.itemCode}</td>
+                                            </tr>
+                                            </c:forEach>
+
+                                            <tr>
+                                                <td>南方一年长寿母料（5%）</td>
+                                                <td>0.5袋（12.5公斤）</td>
+                                            </tr>
+                                            <tr>
+                                                <td>南方一年长寿母料（5%）</td>
+                                                <td>0.5袋（12.5公斤）</td>
+                                            </tr>
+                                            <tr>
+                                                <td>南方一年长寿母料（5%）</td>
+                                                <td>0.5袋（12.5公斤）</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>南方一年长寿母料（5%）</td>
+                                                <td>0.5袋（12.5公斤）</td>
+                                            </tr>
+                                            <tr>
+                                                <td>南方一年长寿母料（5%）</td>
+                                                <td>0.5袋（12.5公斤）</td>
+                                            </tr>
+                                            <tr>
+                                                <td>南方一年长寿母料（5%）</td>
+                                                <td>0.5袋（12.5公斤）</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
-                                    <div class="hr-line-dashed"></div>
-                                    <div class="form-group">
-                                        <label class="col-sm-5 control-label"> 宽度：</label>
-                                        <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                            ${detail.itemWidth}m
-                                        </div>
-                                    </div>
-                                    <div class="hr-line-dashed"></div>
-                                    <div class="form-group">
-                                        <label class="col-sm-5 control-label"> 数量：</label>
-                                        <div class="col-sm-5" style="text-align:center;padding-top: 7px;" id="itemNum">
-                                            ${detail.itemNum}
-                                        </div>
-                                    </div>
-                                    <div class="hr-line-dashed"></div>
-                                    <div class="form-group">
-                                        <label class="col-sm-5 control-label"> 面积：</label>
-                                        <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                            ${detail.itemTotalSq}㎡
-                                        </div>
-                                    </div>
-                                    <div class="hr-line-dashed"></div>
-                                    <div class="form-group">
-                                        <label class="col-sm-5 control-label"> 延长米计算方式：</label>
-                                        <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                            ${fns:getValueByDictKey(detail.itemYcType)}
-                                        </div>
-                                    </div>
-                                    <div class="hr-line-dashed"></div>
-                                    <div class="form-group">
-                                        <label class="col-sm-5 control-label"> 操作：</label>
-                                        <div class="col-sm-5" style="text-align:center;padding-top: 7px;">
-                                            <button class="btn btn-primary" type="button" id="inStock">入库</button>
-                                        </div>
-                                    </div>
-                                    <div class="hr-line-dashed"></div>
-                                    <input id="prodPlanDetailId" value="${detail.prodPlanDetailId}" type="hidden">
-                                </form>
+                                </div>
+
+
+
+
+
+
+
+
+
+
+                                <%--<form method="get" class="form-horizontal">--%>
+                                    <%--<div class="form-group">--%>
+                                        <%--<label class="col-sm-5 control-label"> 产品编号：</label>--%>
+                                        <%--<div class="col-sm-5" style="text-align:center;padding-top: 7px;">--%>
+                                            <%--${detail.itemCode}--%>
+                                        <%--</div>--%>
+                                    <%--</div>--%>
+                                    <%--<div class="hr-line-dashed"></div>--%>
+                                    <%--<div class="form-group">--%>
+                                        <%--<label class="col-sm-5 control-label"> 品种：</label>--%>
+                                        <%--<div class="col-sm-5" style="text-align:center;padding-top: 7px;">--%>
+                                            <%--${fns:getValueByDictKey(detail.itemVariety)}--%>
+                                        <%--</div>--%>
+                                    <%--</div>--%>
+                                    <%--<div class="hr-line-dashed"></div>--%>
+                                    <%--<div class="form-group">--%>
+                                        <%--<label class="col-sm-5 control-label"> 颜色：</label>--%>
+                                        <%--<div class="col-sm-5" style="text-align:center;padding-top: 7px;">--%>
+                                            <%--${fns:getDictValue(detail.itemColor, 'prod_color', defaultValue)}--%>
+                                        <%--</div>--%>
+                                    <%--</div>--%>
+                                    <%--<div class="hr-line-dashed"></div>--%>
+                                    <%--<div class="form-group">--%>
+                                        <%--<label class="col-sm-5 control-label"> 宽度：</label>--%>
+                                        <%--<div class="col-sm-5" style="text-align:center;padding-top: 7px;">--%>
+                                            <%--${detail.itemWidth}m--%>
+                                        <%--</div>--%>
+                                    <%--</div>--%>
+                                    <%--<div class="hr-line-dashed"></div>--%>
+                                    <%--<div class="form-group">--%>
+                                        <%--<label class="col-sm-5 control-label"> 数量：</label>--%>
+                                        <%--<div class="col-sm-5" style="text-align:center;padding-top: 7px;" id="itemNum">--%>
+                                            <%--${detail.itemNum}--%>
+                                        <%--</div>--%>
+                                    <%--</div>--%>
+                                    <%--<div class="hr-line-dashed"></div>--%>
+                                    <%--<div class="form-group">--%>
+                                        <%--<label class="col-sm-5 control-label"> 面积：</label>--%>
+                                        <%--<div class="col-sm-5" style="text-align:center;padding-top: 7px;">--%>
+                                            <%--${detail.itemTotalSq}㎡--%>
+                                        <%--</div>--%>
+                                    <%--</div>--%>
+                                    <%--<div class="hr-line-dashed"></div>--%>
+                                    <%--<div class="form-group">--%>
+                                        <%--<label class="col-sm-5 control-label"> 延长米计算方式：</label>--%>
+                                        <%--<div class="col-sm-5" style="text-align:center;padding-top: 7px;">--%>
+                                            <%--${fns:getValueByDictKey(detail.itemYcType)}--%>
+                                        <%--</div>--%>
+                                    <%--</div>--%>
+                                    <%--<div class="hr-line-dashed"></div>--%>
+                                    <%--<div class="form-group">--%>
+                                        <%--<label class="col-sm-5 control-label"> 操作：</label>--%>
+                                        <%--<div class="col-sm-5" style="text-align:center;padding-top: 7px;">--%>
+                                            <%--<button class="btn btn-primary" type="button" id="inStock">入库</button>--%>
+                                        <%--</div>--%>
+                                    <%--</div>--%>
+                                    <%--<div class="hr-line-dashed"></div>--%>
+                                    <%--<input id="prodPlanDetailId" value="${detail.prodPlanDetailId}" type="hidden">--%>
+                                <%--</form>--%>
                             </div>
 
                         </div>
-                        <div class="row">
-                            <div class="form-group">
-                                <button class="btn btn-primary" type="button" id="rePrint">重新打签</button>
-                                <a class="btn btn-white"  href="${ctx}/crm/produce/list">返回</a>
-                            </div>
-                        </div>
+                        <%--<div class="row">--%>
+                            <%--<div class="form-group">--%>
+                                <%--<button class="btn btn-primary" type="button" id="rePrint">重新打签</button>--%>
+                                <%--<a class="btn btn-white"  href="${ctx}/crm/produce/list">返回</a>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
                     </div>
                 </div>
             </div>
