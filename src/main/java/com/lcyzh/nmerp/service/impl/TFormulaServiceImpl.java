@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lcyzh.nmerp.common.persistence.Page;
@@ -14,10 +15,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Method;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -36,10 +35,33 @@ public class TFormulaServiceImpl implements ITFormulaService {
         BeanUtils.copyProperties(formula, formulaVo);
         formulaVo.setProdCgyCodeValue(DictUtils.getValueByDictKey(formulaVo.getProdCgyCode()));
         formulaVo.setProdVarietyValue(DictUtils.getValueByDictKey(formulaVo.getProdVariety()));
+        JSONObject jsonObject = JSON.parseObject(formula.getfContext());
         Map<String, FormulaDetailVo> context = new HashMap<>();
-        context = JSON.parseObject(formula.getfContext(), context.getClass());
+        for(String key : jsonObject.keySet()) {
+            context.put(key, toJavaBean(new FormulaDetailVo(), jsonObject.getJSONObject(key)));
+        }
         formulaVo.setContext(context);
         return formulaVo;
+    }
+
+    public static FormulaDetailVo toJavaBean(FormulaDetailVo javabean, JSONObject data) {
+        Method[] methods = javabean.getClass().getDeclaredMethods();
+        for (Method method : methods) {
+            try {
+                if (method.getName().startsWith("set")) {
+                    String field = method.getName(); //set()
+                    field = field.substring(field.indexOf("set") + 3);//
+                    field = field.toLowerCase().charAt(0) + field.substring(1);//
+                    method.invoke(javabean, new Object[]
+                            {
+                                    data.get(field)
+                            });
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return javabean;
     }
 
     @Override
@@ -53,9 +75,17 @@ public class TFormulaServiceImpl implements ITFormulaService {
     }
 
     @Override
-    public int insert(TFormula tFormula) {
+    public String insert(TFormula tFormula) {
+        Random rm = new Random();
+        String fCode = String.valueOf(rm.nextInt(100000));
+        tFormula.setfCode(fCode);
         tFormula.setCreateDate(new Date());
-        return tFormulaMapper.insert(tFormula);
+        tFormula.setDelFlag('0');
+        int result = tFormulaMapper.insert(tFormula);
+        if(result > 0){
+            return fCode;
+        }
+        return null;
     }
 
     @Override

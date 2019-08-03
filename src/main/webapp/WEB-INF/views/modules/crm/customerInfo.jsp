@@ -2,13 +2,13 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 
 <div class="wrapper wrapper-content animated fadeInRight">
-    <div class="tabs-container">
+        <div class="tabs-container">
 
 
-        <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true">客户详情</a>
-            </li>
-        </ul>
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true">客户详情</a>
+                </li>
+            </ul>
 
         <div class="tab-content">
             <div id="tab-1" class="tab-pane active">

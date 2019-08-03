@@ -16,11 +16,6 @@
     </script>
 </head>
 <body>
-<%--<ul class="nav nav-tabs">--%>
-    <%--<li class="active"><a href="#">待生产计划</a></li>--%>
-<%--</ul>--%>
-
-
 
 <div class="tabs-container" style="padding: 20px 20px;">
     <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
@@ -54,6 +49,7 @@
                     </li>
                     &nbsp;&nbsp;
                     <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 100px" value="查询"/></li>
+                    <li class="btns"><a href="/formula/addOrUpdate" class="btn btn-primary" style="width: 100px">新增配方</a></li>
                 </ul>
             </form:form>
 
@@ -78,7 +74,7 @@
                             <td>${fns:getValueByDictKey(f.prodCgyCode)}</td>
                             <td><fmt:formatDate value="${f.createDate}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
                             <td>
-                                <a href="${ctx}/produce/producePlan/info?prodPlanCode=${pp.prodPlanCode}"><i class="icon-th-list">&nbsp;编辑</i></a>
+                                <a href="${ctx}/formula/addOrUpdate?fCode=${f.fCode}"><i class="icon-th-list">&nbsp;编辑</i></a>
                                 <a href="${ctx}/produce/producePlan/info?prodPlanCode=${pp.prodPlanCode}"><i class="icon-th-list">&nbsp;删除</i></a>
                             </td>
                         </tr>

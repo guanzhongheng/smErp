@@ -18,7 +18,7 @@ public interface ITFormulaService {
 
     List<TFormula> findAllList();
 
-    int insert(TFormula tFormula);
+    String insert(TFormula tFormula);
 
     int insertBatch(List<TFormula> tFormulas);
 
