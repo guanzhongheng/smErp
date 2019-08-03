@@ -140,20 +140,14 @@
         dataType:'json',
         cache: false,
         success: function(data){
-            debugger;
             if(data != null){
                 rmList = data.rmList;
             }
         }
     });
 
-    var detail = '${detail}';
-    var current;
-    if(detail.rawMaterialVos == null || detail.rawMaterialVos == undefined){
-        current = 0;
-    }else{
-        current = detail.rawMaterialVos.length;
-    }
+    var current = '${detail.rawMaterialVos == null ? 0:detail.rawMaterialVos.size()}';
+    console.log(current);
 
     /*逻辑部分*/
     function delRow(obj){
