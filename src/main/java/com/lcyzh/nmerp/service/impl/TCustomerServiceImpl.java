@@ -154,6 +154,7 @@ public class TCustomerServiceImpl implements TCustomerService {
         customer.setCusType(vo.getCusType());
         customer.setIndustry(vo.getIndustry());
         customer.setRemark(vo.getRemarks());
+        customer.setCusAddress(vo.getCusAddress());
         customer.setCusStatus(vo.getCusStatus());
         customer.setUpdateTime(current);
         customer.setCreateTime(current);
