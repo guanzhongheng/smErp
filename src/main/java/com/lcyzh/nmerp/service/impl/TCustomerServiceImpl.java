@@ -17,10 +17,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Author ljk
@@ -215,6 +214,37 @@ public class TCustomerServiceImpl implements TCustomerService {
 
             res = tCustomerMapper.updateBatch(cusList);
 
+        }
+        return res;
+    }
+
+    @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
+    @Override
+    public int addAttributor(String cusIds, String empCode, String remark) {
+        int res = -1;
+        if(StringUtils.isBlank(cusIds) || StringUtils.isBlank(empCode)){
+            return  res;
+        }
+        String[] cusIdArray = cusIds.split(",");
+        List<String> list = Arrays.stream(cusIdArray).filter(arr -> StringUtils.isNotBlank(arr)).collect(Collectors.toList());
+        Date current = new Date();
+        if(list!=null&&!list.isEmpty()){
+            List<Customer> customerList = new ArrayList<>(list.size());
+            List<CusEmpRel> cusEmpRels = new ArrayList<>(list.size());
+            list.forEach(str->{
+                Customer customer = new Customer();
+                customer.setCusCode(str);
+                customer.setCusStatus(Constants.CUS_STATUS_FLLOW);
+                customer.setUpdateTime(current);
+                customerList.add(customer);
+                CusEmpRel cusEmpRel = new CusEmpRel();
+                cusEmpRel.setEmpCode(empCode);
+                cusEmpRel.setCusCode(str);
+                cusEmpRel.setCreateTime(current);
+                cusEmpRels.add(cusEmpRel);
+            });
+            tCustomerMapper.updateBatch(customerList);
+            res = cusEmpRelMapper.insertBatch(cusEmpRels);
         }
         return res;
     }

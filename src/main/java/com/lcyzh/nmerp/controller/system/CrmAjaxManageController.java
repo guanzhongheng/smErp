@@ -40,13 +40,14 @@ public class CrmAjaxManageController extends BaseController {
 
     /**
      * 添加归属人
+     *
      * @return
      */
     @RequestMapping(value = "addBlongPerson")
     @ResponseBody
-    public String saveFlowEmp(CustomerUpdateVo vo) {
-        int res = customerService.updateBatch(vo);
-        if(res < 1){
+    public String saveFlowEmp(String cusIds, String empCode, String remark) {
+        int res = customerService.addAttributor(cusIds, empCode, remark);
+        if (res < 1) {
             return "error";
         }
         return "success";
@@ -54,13 +55,14 @@ public class CrmAjaxManageController extends BaseController {
 
     /**
      * 转移客户-保存
+     *
      * @return
      */
     @RequestMapping(value = "saveTransfer")
     @ResponseBody
     public String saveTransfer(CustomerUpdateVo vo) {
         int res = customerService.updateBatch(vo);
-        if(res < 1){
+        if (res < 1) {
             return "error";
         }
         return "success";
@@ -68,6 +70,7 @@ public class CrmAjaxManageController extends BaseController {
 
     /**
      * 转移公海-保存
+     *
      * @param cusIds
      * @param remarks
      * @return
@@ -76,7 +79,7 @@ public class CrmAjaxManageController extends BaseController {
     @ResponseBody
     public String savePoolCustomer(CustomerUpdateVo vo) {
         int res = customerService.updateBatch(vo);
-        if(res < 1){
+        if (res < 1) {
             return "error";
         }
         return "success";
@@ -85,11 +88,12 @@ public class CrmAjaxManageController extends BaseController {
 
     /**
      * 客户跟踪-保存
+     *
      * @return
      */
     @RequestMapping(value = "saveFollow")
     @ResponseBody
-    public String savePoolCustomer(String cusCode,String followTime,String followTitle,String followRemarks) {
+    public String savePoolCustomer(String cusCode, String followTime, String followTitle, String followRemarks) {
         CusFollowDetailVo detailVo = new CusFollowDetailVo();
         detailVo.setCusCode(cusCode);
         detailVo.setFollowTime(DateUtil.fomatDateFixFormat(followTime));
@@ -105,11 +109,12 @@ public class CrmAjaxManageController extends BaseController {
 
     /**
      * 任务分配
+     *
      * @return
      */
     @RequestMapping(value = "saveTaskInfo")
     @ResponseBody
-    public String saveTaskInfo(String taskIds,String devInfo,Integer followRemarks) {
+    public String saveTaskInfo(String taskIds, String devInfo, Integer followRemarks) {
 
 
         return "success";
@@ -117,11 +122,12 @@ public class CrmAjaxManageController extends BaseController {
 
     /**
      * 流程审批处理
+     *
      * @return
      */
     @RequestMapping(value = "inventoryInfo")
     @ResponseBody
-    public String inventoryInfo(String taskIds,String devInfo,Integer followRemarks) {
+    public String inventoryInfo(String taskIds, String devInfo, Integer followRemarks) {
 
 
         return "success";
@@ -129,19 +135,19 @@ public class CrmAjaxManageController extends BaseController {
 
     /**
      * 获取字典信息
+     *
      * @return
      */
     @RequestMapping(value = "ajaxDictInfo")
     @ResponseBody
-    public Map<String,Object> getDictInfo() {
-        Map<String,Object> map = new HashMap<>();
+    public Map<String, Object> getDictInfo() {
+        Map<String, Object> map = new HashMap<>();
         List<Dict> ycType = SysDictUtils.getDictList("prod_ycType");
-        List<Dict> ybType =  SysDictUtils.getDictList("prod_ybType");
-        map.put("ycType",ycType);
-        map.put("ybType",ybType);
+        List<Dict> ybType = SysDictUtils.getDictList("prod_ybType");
+        map.put("ycType", ycType);
+        map.put("ybType", ybType);
         return map;
     }
-    
 
 
     @RequestMapping("orderFileUpload")

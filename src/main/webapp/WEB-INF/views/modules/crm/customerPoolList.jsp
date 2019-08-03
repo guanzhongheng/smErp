@@ -123,8 +123,8 @@
                                         if (v == "ok") {
                                             $.post('${ctx}/crmAjax/addBlongPerson/', {
                                                 cusIds: ids.value,
-                                                userId: cusContent.value,
-                                                remarks: remarks.value
+                                                empCode: cusContent.value,
+                                                remark: remarks.value
                                             }, function (data) {
                                                 if (data = "success") {
                                                     top.$.jBox.tip('保存成功');

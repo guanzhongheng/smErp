@@ -22,5 +22,7 @@ public interface TCustomerService {
 
     int delete(List<String> cusCodeList);
 
+    int addAttributor(String cusIds,String empCode,String remark);
+
     CustomerAddModifyVo findModifyInfoByCusCode(String cusCode);
 }
