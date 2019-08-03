@@ -85,7 +85,6 @@
         rawn_specs = #{rawnSpecs},
         rawn_supplier = #{rawnSupplier},
         rawn_cty_code = #{rawnCtyCode},
-        create_time = #{createTime},
         update_time = #{updateTime}
         WHERE id = #{id}
     </update>
