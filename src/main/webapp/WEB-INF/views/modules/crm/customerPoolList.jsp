@@ -65,14 +65,14 @@
             <%--&lt;%&ndash;&nbsp;&nbsp;&ndash;%&gt;--%>
             <%--&lt;%&ndash;<a href="/crm/task_add" type="button" class="btn btn-default" style="width: 80px;height: 23px"><i class="icon-list-ul"></i>&nbsp;新建任务</a>&ndash;%&gt;--%>
             <%--&nbsp;&nbsp;--%>
-            <%--&lt;%&ndash;<a type="button" id="toCustomer" class="btn btn-default" style="height: 23px"><i&ndash;%&gt;--%>
-            <%--&lt;%&ndash;class="icon-refresh"></i>添加归属人</a>&ndash;%&gt;--%>
-            <%--</div>--%>
+            <a type="button" id="toCustomer" class="btn btn-default" style="height: 23px"><i
+            class="icon-refresh"></i>添加归属人</a>
+            </div>
             <div class="control-group table-responsive">
                 <table id="contentTable" class="table table-striped table-bordered  table-hover text-nowrap">
                     <thead>
                     <tr>
-                        <th><input type="checkbox" id="checkAll" onchange="checkedAll(this)" /></th>
+                        <th><input type="checkbox" id="checkAll" onchange="poolCheckedAll(this)" /></th>
                         <th style="text-align: center">编号</th>
                         <th style="text-align: center">客户名称</th>
                         <th style="text-align: center">客户状态</th>
@@ -109,40 +109,63 @@
                 <div class="pagination">${page}</div>
 
                 <script>
-                    $("#toCustomer").click(function () {
-                        <!-- 针对选中客户进行操作 -->
-                        var checkValue = $(".td checkbox");
-                        var str = '';
-
-                        if (str.length > 0) {
-                            top.$.jBox.open("iframe:${ctx}/crm/formSubmit?ids=1,2,3,4,", "添加归属人", 500, $(top.document).height() - 300, {
-                                buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
-                                    debugger;
-                                    var ids = h.find("iframe")[0].contentWindow.ids;
-                                    var cusContent = h.find("iframe")[0].contentWindow.cusContent;
-                                    var remarks = h.find("iframe")[0].contentWindow.remarks;
-                                    if (v == "ok") {
-                                        $.post('${ctx}/crmAjax/saveTransfer/', {
-                                            cusIds: ids.value,
-                                            userId: cusContent.value,
-                                            remarks: remarks.value
-                                        }, function (data) {
-                                            if (data = "success") {
-                                                top.$.jBox.tip('保存成功');
-                                            } else {
-                                                top.$.jBox.tip('保存失败');
-                                            }
-                                        })
+                    $(document).ready(function () {
+                        $("#toCustomer").click(function () {
+                            <!-- 针对选中客户进行操作 -->
+                            var str = getPoolCheckValue();
+                            if (str.length > 0) {
+                                top.$.jBox.open("iframe:${ctx}/crm/formSubmit?ids=" + str, "添加归属人", 500, $(top.document).height() - 300, {
+                                    buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
+                                        debugger;
+                                        var ids = h.find("iframe")[0].contentWindow.ids;
+                                        var cusContent = h.find("iframe")[0].contentWindow.cusContent;
+                                        var remarks = h.find("iframe")[0].contentWindow.remarks;
+                                        if (v == "ok") {
+                                            $.post('${ctx}/crmAjax/saveTransfer/', {
+                                                cusIds: ids.value,
+                                                userId: cusContent.value,
+                                                remarks: remarks.value
+                                            }, function (data) {
+                                                if (data = "success") {
+                                                    top.$.jBox.tip('保存成功');
+                                                } else {
+                                                    top.$.jBox.tip('保存失败');
+                                                }
+                                            })
+                                        }
+                                    }, loaded: function (h) {
+                                        debugger;
+                                        $(".jbox-content", top.document).css("overflow-y", "hidden");
                                     }
-                                }, loaded: function (h) {
-                                    debugger;
-                                    $(".jbox-content", top.document).css("overflow-y", "hidden");
-                                }
-                            });
+                                });
+                            }
+
+                        });
+                    })
+                    function getPoolCheckValue() {
+                        debugger;
+                        var obj = document.getElementsByName("cuscode");
+                        var check_val = '';
+                        for (k in obj) {
+                            if (obj[k].checked)
+                                check_val = check_val + obj[k].value + ",";
                         }
+                        check_val = check_val.replace(",,", ",");
+                        return check_val;
+                    }
 
-                    });
-
+                    function poolCheckedAll(obj) {
+                        var codes = document.getElementsByName("cuscode")
+                        if (obj.checked) {
+                            for (var i = 0; i < codes.length; i++) {
+                                codes[i].checked = true;
+                            }
+                        } else {
+                            for (var i = 0; i < codes.length; i++) {
+                                codes[i].checked = false;
+                            }
+                        }
+                    }
                 </script>
             </div>
         </div>
