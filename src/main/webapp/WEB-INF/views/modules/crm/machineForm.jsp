@@ -33,7 +33,7 @@
                     <div class="controls">
                         <form:input path="macCode" htmlEscape="false" maxlength="50" class="required"/>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <i style="color: red">*</i>&nbsp;生产产品:&nbsp;&nbsp;&nbsp;&nbsp;
+                        <i style="color: red">*</i>&nbsp;支持产品:&nbsp;&nbsp;&nbsp;&nbsp;
                         <form:select path="prodCodes" class="input-medium" cssStyle="width: 220px" placeholder="生产产品">
                             <form:option value="" label=""/>
                             <form:option value="0" label="所有产品"/>
@@ -42,11 +42,11 @@
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label"><i style="color: red"></i>&nbsp;最小宽度:</label>
+                    <label class="control-label"><i style="color: red">*</i>&nbsp;最小宽度(m):</label>
                     <div class="controls">
                         <form:input path="minWidth" htmlEscape="false" maxlength="50" class="required"/>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <i style="color: white">*</i>&nbsp;最大宽度:&nbsp;&nbsp;&nbsp;&nbsp;
+                        <i style="color: red">*</i>&nbsp;最大宽度(m):&nbsp;&nbsp;&nbsp;&nbsp;
                         <form:input path="maxWidth" htmlEscape="false" maxlength="50" class="required"/>
                     </div>
                 </div>

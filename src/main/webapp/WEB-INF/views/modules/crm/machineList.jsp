@@ -30,8 +30,8 @@
 					<sys:tableSort id="orderBy" name="orderBy" value="${page.orderBy}" callback="page();"/>
 					<ul class="ul-form">
 						<li><label>设备编号：</label><form:input path="macCode" htmlEscape="false" maxlength="50" class="input-medium"/></li>
-						<li><label>最小宽度：</label><form:input path="minWidth" htmlEscape="false" maxlength="50" class="input-medium"/></li>
-						<li><label>最大宽度：</label><form:input path="maxWidth" htmlEscape="false" maxlength="50" class="input-medium"/></li>
+						<li><label>最小宽度(m)：</label><form:input path="minWidth" htmlEscape="false" maxlength="50" class="input-medium"/></li>
+						<li><label>最大宽度(m)：</label><form:input path="maxWidth" htmlEscape="false" maxlength="50" class="input-medium"/></li>
 						<li class="btns">
 							<input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 100px" value="查询" onclick="return page();"/>
 						<li class="clearfix"></li>
@@ -45,8 +45,8 @@
 							<th style="text-align: center">序号</th>
 							<th style="text-align: center">设备编号</th>
 							<th style="text-align: center">可生产产品</th>
-							<th style="text-align: center">最小宽度</th>
-							<th style="text-align: center">最大宽度</th>
+							<th style="text-align: center">最小宽度(m)</th>
+							<th style="text-align: center">最大宽度(m)</th>
 							<th style="text-align: center">操作</th>
 						</tr>
 						</thead>
