@@ -137,9 +137,9 @@
                                         <div class="col-md-2 col-sm-offset-2" >
                                             <button class="btn btn-primary global-button-style" type="submit">保存订单</button>
                                         </div>
-                                        <div class="col-md-2 " >
+                                        <%--<div class="col-md-2 " >
                                             <button type="button"  class="btn btn-primary global-button-style" onclick="prodlistAdd()">产品添加</button>
-                                        </div>
+                                        </div>--%>
                                         <div class="col-md-2 " >
                                             <button class="btn btn-primary global-button-style" type="button"
                                                     onclick="history.go(-1)">返  回

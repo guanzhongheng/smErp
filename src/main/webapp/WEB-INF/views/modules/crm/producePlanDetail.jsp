@@ -160,7 +160,7 @@
                                                         </div>
                                                         <div class="form-group"  style="text-align: -webkit-center;">
                                                             <div class="control-group table-responsive" style="width:400px;text-align: center;" >
-                                                                <table id="midderTable" data-height="300" class="table table-striped table-bordered table-hover text-nowrap" >
+                                                                <table id="midderTable" class="table table-striped table-bordered table-hover text-nowrap" >
                                                                     <%--<thead>--%>
                                                                     <%--<tr>--%>
                                                                         <%--<th style="text-align: center">原料</th>--%>
@@ -188,7 +188,7 @@
                                                         </div>
                                                         <div class="form-group"  style="text-align: -webkit-center;">
                                                             <div class="control-group table-responsive" style="width:400px;text-align: center;" >
-                                                                <table id="innerTable" data-height="300" class="table table-striped table-bordered table-hover text-nowrap" >
+                                                                <table id="innerTable" class="table table-striped table-bordered table-hover text-nowrap" >
                                                                     <%--<thead>--%>
                                                                     <%--<tr>--%>
                                                                         <%--<th style="text-align: center">原料</th>--%>

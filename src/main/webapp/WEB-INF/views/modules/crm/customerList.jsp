@@ -66,15 +66,15 @@
                             <form:options items="${fns:getCusDictList(105000)}" itemLabel="label" itemValue="value"
                                           htmlEscape="false"/>
                         </form:select>
-                        <input id="beginDate" name="beginDate" placeholder="最后跟进" type="text" readonly="readonly"
+                        <%--<input id="beginDate" name="beginDate" placeholder="最后跟进" type="text" readonly="readonly"
                                maxlength="20"
                                class="input-small Wdate"
-                               value="" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
+                               value="" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>--%>
                     </li>
-                    <li>
+                    <%--<li>
                         &nbsp;&nbsp;
                         <input type="checkbox" name="followType" id="type" value="1">归属模式
-                    </li>
+                    </li>--%>
                     &nbsp;&nbsp;
                     <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 100px;"
                                             value="查询"/></li>
@@ -133,7 +133,7 @@
                         class="icon-plus"></i>&nbsp;添加</a>
                 &nbsp;&nbsp;
                 <a type="button" id="toCustomer" class="btn btn-default" style="width: 100px;height: 23px"><i
-                        class="icon-refresh"></i>&nbsp;转移客户</a>
+                        class="icon-refresh"></i>&nbsp;修改归属人</a>
                 &nbsp;&nbsp;
                 <a type="button" id="toPoolCustomer" class="btn btn-default" style="width: 100px;height: 23px"><i
                         class="icon-group"></i>&nbsp;移入公海</a>

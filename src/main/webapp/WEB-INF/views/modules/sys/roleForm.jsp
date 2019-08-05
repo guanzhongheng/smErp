@@ -156,24 +156,24 @@
 					工作流组用户组类型（任务分配：assignment、管理角色：security-role、普通角色：user）</span>
 						</div>
 					</div>
-					<div class="control-group">
-						<label class="control-label">是否系统数据:</label>
-						<div class="controls">
-							<form:select path="sysData">
-								<form:options items="${fns:getDictList('yes_no')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
-							</form:select>
-							<span class="help-inline">“是”代表此数据只有超级管理员能进行修改，“否”则表示拥有角色修改人员的权限都能进行修改</span>
-						</div>
-					</div>
-					<div class="control-group">
-						<label class="control-label">是否可用</label>
-						<div class="controls">
-							<form:select path="useable">
-								<form:options items="${fns:getDictList('yes_no')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
-							</form:select>
-							<span class="help-inline">“是”代表此数据可用，“否”则表示此数据不可用</span>
-						</div>
-					</div>
+					<%--<div class="control-group">--%>
+						<%--<label class="control-label">是否系统数据:</label>--%>
+						<%--<div class="controls">--%>
+							<%--<form:select path="sysData">--%>
+								<%--<form:options items="${fns:getDictList('yes_no')}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
+							<%--</form:select>--%>
+							<%--<span class="help-inline">“是”代表此数据只有超级管理员能进行修改，“否”则表示拥有角色修改人员的权限都能进行修改</span>--%>
+						<%--</div>--%>
+					<%--</div>--%>
+					<%--<div class="control-group">--%>
+						<%--<label class="control-label">是否可用</label>--%>
+						<%--<div class="controls">--%>
+							<%--<form:select path="useable">--%>
+								<%--<form:options items="${fns:getDictList('yes_no')}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
+							<%--</form:select>--%>
+							<%--<span class="help-inline">“是”代表此数据可用，“否”则表示此数据不可用</span>--%>
+						<%--</div>--%>
+					<%--</div>--%>
 					<%--<div class="control-group">--%>
 					<%--<label class="control-label">数据范围:</label>--%>
 					<%--<div class="controls">--%>

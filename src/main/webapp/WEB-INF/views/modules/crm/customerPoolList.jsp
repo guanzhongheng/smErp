@@ -98,7 +98,7 @@
                             <td>${cus.unFollowDays}</td>
                             <td>
                                     <%--<a href=""><i class="icon-comment">&nbsp;跟进</i></a>--%>
-                                <a href="${ctx}/cus/customer_add?cusCode=${cus.cusCode}"><i class="icon-pencil">&nbsp;编辑</i></a>
+                                <%--<a href="${ctx}/cus/customer_add?cusCode=${cus.cusCode}"><i class="icon-pencil">&nbsp;编辑</i></a>--%>
                                 <a href="${ctx}/cus/customer_delete?cusCode=${cus.cusCode}"
                                    onclick="return confirmx('确认要删除该客户吗？', this.href)"><i class="icon-trash">&nbsp;删除</i></a>
                             </td>

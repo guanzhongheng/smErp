@@ -47,6 +47,8 @@ public class ProdPlanDetailVo{
     private String itemSq;
 
     private Date createTime;
+    //皮重
+    private Double itemTareWeight;
 
     public String getItemColorValue() {
         return itemColorValue;
@@ -262,5 +264,13 @@ public class ProdPlanDetailVo{
 
     public void setItemSq(String itemSq) {
         this.itemSq = itemSq;
+    }
+
+    public Double getItemTareWeight() {
+        return itemTareWeight;
+    }
+
+    public void setItemTareWeight(Double itemTareWeight) {
+        this.itemTareWeight = itemTareWeight;
     }
 }

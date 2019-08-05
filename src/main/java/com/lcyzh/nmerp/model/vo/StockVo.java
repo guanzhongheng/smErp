@@ -33,6 +33,7 @@ public class StockVo {
     private String itemUnitValue;
     private String itemColor;
     private String macCode;
+    private Double itemTareWeight;
 
     public Long getStockId() {
         return stockId;
@@ -197,4 +198,12 @@ public class StockVo {
     public String getMacCode() { return macCode; }
 
     public void setMacCode(String macCode) { this.macCode = macCode; }
+
+    public Double getItemTareWeight() {
+        return itemTareWeight;
+    }
+
+    public void setItemTareWeight(Double itemTareWeight) {
+        this.itemTareWeight = itemTareWeight;
+    }
 }

@@ -56,9 +56,9 @@
                                class="input-small Wdate"
                                value="" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
                     </li>
-                    <li>
+                    <%--<li>
                         <label for="exception"><input id="exception" name="exception" type="checkbox" value="1"/>跟进状态</label>
-                    </li>
+                    </li>--%>
                     <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 100px" value="查询"/></li>
                     <li class="clearfix"></li>
                 </ul>

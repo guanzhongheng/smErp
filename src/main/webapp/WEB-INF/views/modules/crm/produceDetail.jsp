@@ -75,7 +75,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" style="margin-left: -25px;"><i style="color: red"></i>订单标题:</label>
                                             <div class="col-sm-4">
-
+                                                <input id="prodPlanDetailId" value="${detail.prodPlanDetailId}" type="hidden">
                                                 <input disabled="ture" placeholder="订单标题" value="${detail.orderTitle}"
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
 
@@ -228,7 +228,7 @@
                                         <div class="form-group" style="text-align: center">
                                             <div class="row">
                                                 <div class="col-sm-2" >
-                                                    <button class="btn btn-primary global-button-style" type="submit">入   库</button>
+                                                    <button class="btn btn-primary global-button-style" type="button" id="inStock">入   库</button>
                                                 </div>
                                                 <div class="col-sm-2 col-sm-offset-2" >
                                                     <button class="btn btn-warning global-button-style" type="submit">重新打签</button>

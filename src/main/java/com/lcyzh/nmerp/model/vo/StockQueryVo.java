@@ -47,6 +47,7 @@ public class StockQueryVo implements Serializable {
     private String itemColor;
     private String itemColorValue;
     private String macCode;
+    private Double itemTareWeight;
 
     public Long getStockId() {
         return stockId;
@@ -253,6 +254,14 @@ public class StockQueryVo implements Serializable {
         this.itemColorValue = itemColorValue;
     }
 
+    public Double getItemTareWeight() {
+        return itemTareWeight;
+    }
+
+    public void setItemTareWeight(Double itemTareWeight) {
+        this.itemTareWeight = itemTareWeight;
+    }
+
     @Override
     public String toString() {
         return "StockQueryVo{" +
@@ -282,6 +291,7 @@ public class StockQueryVo implements Serializable {
                 ", itemColor='" + itemColor + '\'' +
                 ", itemColorValue='" + itemColorValue + '\'' +
                 ", macCode='" + macCode + '\'' +
+                ", itemTareWeight=" + itemTareWeight +
                 '}';
     }
 }
