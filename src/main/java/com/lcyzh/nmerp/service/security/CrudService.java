@@ -73,15 +73,13 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity<T>>
 	 * @param entity
 	 * @return
 	 */
-	public Page<T> findPageForHelp(Page<T> page, T entity) {
+	public List<T> findPageForHelp(Page<T> page, T entity) {
 		PageHelper.startPage(page.getPageNo(),page.getPageSize());
 //		entity.setPage(page);
 		List<T> list = dao.findList(entity);
 		PageInfo<T> p = new PageInfo<>(list);
 		page.setTotal(p.getTotal());
-		page.setList(list);
-		page.setCount(list.size());
-		return page;
+		return list;
 	}
 
 	/**
