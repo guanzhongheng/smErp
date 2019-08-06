@@ -29,7 +29,7 @@
                         <!-- /.box-header -->
                         <div class="box-body" >
                             <div style="float:left;    margin-bottom: 10px;">
-                                <a class="btn btn-success" id="wsStart" >
+                                <a class="btn btn-success" id="totalStart" >
                                     <i class="fa fa-play"></i> 启动
                                 </a>
                                 <a class="btn btn-danger" id="wsStop" style="display: none;">
@@ -38,25 +38,25 @@
                                 <a class="btn btn-warning" disabled="true">
                                     <i class="fa fa-repeat"></i> 归零
                                 </a>
-                                <a class="btn" disabled="true">
+                                <a class="btn" disabled="true" id="tareStart">
                                     <i class="fa fa-circle-o"></i> 去皮
                                 </a>
-                                <a class="btn btn-primary" disabled="true">
-                                    <i class="fa fa-balance-scale"></i> 标重
-                                </a>
-                                <a class="btn btn-inverse" disabled="true">
-                                    <i class="fa fa-tachometer"></i> 刻度
-                                </a>
-                                <a class="btn btn-info" disabled="true">
-                                    <i class="fa fa-save"></i> 存盘
-                                </a>
+                                <%--<a class="btn btn-primary" disabled="true">--%>
+                                    <%--<i class="fa fa-balance-scale"></i> 标重--%>
+                                <%--</a>--%>
+                                <%--<a class="btn btn-inverse" disabled="true">--%>
+                                    <%--<i class="fa fa-tachometer"></i> 刻度--%>
+                                <%--</a>--%>
+                                <%--<a class="btn btn-info" disabled="true">--%>
+                                    <%--<i class="fa fa-save"></i> 存盘--%>
+                                <%--</a>--%>
                             </div>
 
                             <div style="min-width: 270px;background-color: black;color:green; font-size: 30px;float:left;text-align: center;margin-left:15px;">
                                 毛重：<span id="totalWeight">0.00</span> KG
                             </div>
                             <div style="min-width: 270px;background-color: black;color:green; font-size: 30px;float:left;text-align: center;margin-left:15px;">
-                                皮：0.00 KG
+                                皮：<span id="tareWeight">0.00</span> KG
                             </div>
                         </div>
                         <!-- /.box-body -->
@@ -558,6 +558,7 @@
             $("#inStock").attr('disabled',"true");
 
             var totalWeight = $("#totalWeight").text();
+            var tareWeight = $("#tareWeight").text();
             // if(totalWeight == null || parseFloat(totalWeight)<=0){
             //     top.$.jBox.tip('入库失败！原因：重量为0，请开启电子秤并称重后再行入库');
             //     $("#inStock").removeAttr('disabled');
@@ -567,7 +568,7 @@
             $.ajax({
                 url: "/produce/produce/inStock",
                 type: 'POST',
-                data: {id:$("#prodPlanDetailId").val(),weight:totalWeight},
+                data: {id:$("#prodPlanDetailId").val(),weight:totalWeight,tare:tareWeight},
                 dataType: 'json',
                 success: function (result) {
                     if (result.itemNum>0) {
@@ -598,16 +599,29 @@
             });
         }
 
-
-        $("#wsStart").click(function () {
-            send("start");
-            $("#wsStart").hide();
-            $("#wsStop").show();
+        /*计重相关逻辑*/
+        var weightType ;
+        var openFlag;
+        $("#totalStart").click(function () {
+            weightType = 'total';
+            if(!openFlag){
+                send("start");
+            }
         });
-        $("#wsStop").click(function () {
-            send("stop");
-            $("#wsStart").show();
-            $("#wsStop").hide();
+        // $("#wsStop").click(function () {
+        //     send("stop");
+        //     $("#wsStart").show();
+        //     $("#wsStop").hide();
+        // });
+        $("#clear").click(function () {
+            $("#totalWeight").text("0.00");
+            $("#tareWeight").text("0.00");
+        });
+        $("#tareStart").click(function () {
+            weightType = 'tare';
+            if(!openFlag){
+                send("start");
+            }
         });
 
         var socket;
@@ -617,18 +631,22 @@
         if(window.WebSocket){
             socket = new WebSocket("ws://127.0.0.1:12345/ws");
             socket.onmessage = function(event){
-                // document.getElementById('ttt').value =  event.data;
                 var data = event.data.replace(" ","").replace("+","").replace("kg","");
-                console.log(event.data);
+                if(weightType == 'total'){
+                    $("#totalWeight").text(data);
+                }else if(weightType == 'tare'){
+                    $("#tareWeight").text(data);
+                }
 
-                $("#totalWeight").text(data);
             };
             socket.onopen = function(event){
+                openFlag = true;
                 // var ta = document.getElementById('responseText');
                 // document.getElementById('ttt').value = ta;
                 // ta.value = "Netty-WebSocket服务器。。。。。。连接  \r\n";
             };
             socket.onclose = function(event){
+                openFlag = false;
                 // var ta = document.getElementById('responseText');
                 //document.getElementById('ttt').value = ta;
                 // ta.value = "Netty-WebSocket服务器。。。。。。关闭 \r\n";

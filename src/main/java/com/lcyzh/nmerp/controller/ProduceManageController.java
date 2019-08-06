@@ -114,12 +114,14 @@ public class ProduceManageController extends BaseController {
 
     @RequestMapping(value = {"produce/inStock"})
     @ResponseBody
-    public ProdPlanDetailVo doInStock(Long id,Double weight, HttpServletRequest request){
+    public ProdPlanDetailVo doInStock(Long id,Double weight,Double tare,
+                                      HttpServletRequest request){
         ProdPlanDetailVo vo = new ProdPlanDetailVo();
         vo.setProdPlanDetailId(id);
 
         ProdPlanDetailVo voInDB = prodPlanDetailService.findProdTask(vo);
         voInDB.setItemWeight(weight);
+        voInDB.setItemTareWeight(tare);
 
         ProdPlanDetailVo result = prodPlanDetailService.labelAndInStock(voInDB);
         result.setItemColorValue(SysDictUtils.getDictLabel(result.getItemColor(), Constants.PROD_COLOR, ""));
