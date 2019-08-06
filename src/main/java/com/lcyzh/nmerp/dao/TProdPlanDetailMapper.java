@@ -25,8 +25,8 @@ public interface TProdPlanDetailMapper {
     int update(TProdPlanDetail tProdPlanDetail);
 
     List<TProdPlanDetail> findListByProdPlanCode(String prodPlanCode);
-
-
     int delete(Long id);
     int updateByIds(@Param("ids") List<String> ids);
+
+    List<TProdPlanDetail> findByIds(List<String> ids);
 }

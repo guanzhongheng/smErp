@@ -1,20 +1,27 @@
 package com.lcyzh.nmerp.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.dao.*;
 import com.lcyzh.nmerp.entity.*;
+import com.lcyzh.nmerp.model.vo.FormulaDetailVo;
+import com.lcyzh.nmerp.model.vo.FormulaVo;
 import com.lcyzh.nmerp.model.vo.OrderItemVo;
 import com.lcyzh.nmerp.model.vo.ProdPlanVo;
 import com.lcyzh.nmerp.service.TProdPlanService;
+import com.lcyzh.nmerp.utils.DictUtils;
 import com.lcyzh.nmerp.utils.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.reflect.Method;
 import java.util.*;
 
 /**
@@ -29,22 +36,51 @@ public class TProdPlanServiceImpl implements TProdPlanService {
     private TProdPlanDetailMapper prodPlanDetailMapper;
     @Autowired
     private TMachineInfoMapper machineInfoMapper;
+    @Autowired
+    private TFormulaMapper tFormulaMapper;
 
 
 
     @Override
-    public TProdPlan findByProdPanCode(String prodPlanCode) {
-        return tProdPlanMapper.findByProdPanCode(prodPlanCode);
+    public ProdPlanVo findByProdPanCode(String prodPlanCode) {
+        ProdPlanVo prodPlanVo = new ProdPlanVo();
+        TProdPlan prodPlan = tProdPlanMapper.findByProdPanCode(prodPlanCode);
+        BeanUtils.copyProperties(prodPlan, prodPlanVo);
+        // 查询、装配配方对象
+        TFormula formula = tFormulaMapper.findByCode(prodPlanVo.getFormula());
+        FormulaVo formulaVo = new FormulaVo();
+        BeanUtils.copyProperties(formula, formulaVo);
+        formulaVo.setProdCgyCodeValue(DictUtils.getValueByDictKey(formulaVo.getProdCgyCode()));
+        formulaVo.setProdVarietyValue(DictUtils.getValueByDictKey(formulaVo.getProdVariety()));
+        JSONObject jsonObject = JSON.parseObject(formula.getfContext());
+        Map<String, FormulaDetailVo> context = new HashMap<>();
+        for(String key : jsonObject.keySet()) {
+            context.put(key, toJavaBean(new FormulaDetailVo(), jsonObject.getJSONObject(key)));
+        }
+        formulaVo.setContext(context);
+        prodPlanVo.setFormulaVo(formulaVo);
+        return prodPlanVo;
     }
 
-    //@Override
-    //public Page<ProdPlanDetailVo> findPage(Page<ProdPlanDetailVo> page,ProdPlanDetailVo vo) {
-    //    PageHelper.startPage(page.getPageNo(),page.getPageSize());
-    //    List<ProdPlanDetailVo> list = tProdPlanMapper.findList(vo);
-    //    //获取产品信息
-    //    page.setList(list);
-    //    return page;
-    //}
+    public static FormulaDetailVo toJavaBean(FormulaDetailVo javabean, JSONObject data) {
+        Method[] methods = javabean.getClass().getDeclaredMethods();
+        for (Method method : methods) {
+            try {
+                if (method.getName().startsWith("set")) {
+                    String field = method.getName(); //set()
+                    field = field.substring(field.indexOf("set") + 3);//
+                    field = field.toLowerCase().charAt(0) + field.substring(1);//
+                    method.invoke(javabean, new Object[]
+                            {
+                                    data.get(field)
+                            });
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return javabean;
+    }
 
     @Override
     public List<ProdPlanVo> findPage(Page<ProdPlanVo> page, ProdPlanVo vo) {

@@ -46,9 +46,13 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
     public int updateByIds(String id) {
         if(id!=null && id.length() != 0) {
             List<String> ids = Arrays.asList(id.trim().split(","));
-            TProdPlanDetail tProdPlanDetail = tProdPlanDetailMapper.findById(Long.valueOf(ids.get(0)));
-            TProdPlan tProdPlan = tProdPlanMapper.findByProdPanCode(tProdPlanDetail.getProdPlanCode());
-            tProdPlan.setQuantity(Long.valueOf(ids.size()));
+            List<TProdPlanDetail> list = tProdPlanDetailMapper.findByIds(ids);
+            TProdPlan tProdPlan = tProdPlanMapper.findByProdPanCode(list.get(0).getProdPlanCode());
+            long quantity = 0;
+            for(TProdPlanDetail ppd : list) {
+                quantity += ppd.getItemNum();
+            }
+            tProdPlan.setQuantity(quantity);
             tProdPlan.setTotalQuantity(0L);
             tProdPlanMapper.updateAddNum(tProdPlan);
             return tProdPlanDetailMapper.updateByIds(ids);
@@ -81,7 +85,7 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
     public ProdPlanDetailVo labelAndInStock(ProdPlanDetailVo vo) {
         Date date = new Date();
         //生成条形码字符串
-        String barCode = getBarCode(IdGen.getNetBarCode());
+        String barCode = getBarCode(IdGen.getNetBarCode(11));
         vo.setBarCode(barCode);
         vo.setItemNum(vo.getItemNum() - 1);
         TOrderItem tOrderItem = tOrderItemMapper.get(vo.getOrderItemId());
@@ -100,16 +104,17 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
             BeanUtils.copyProperties(vo, historyProdRecord);
             historyProdRecord.setItemNum(tOrderItem.getItemNum());
             historyProdRecord.setCreateTime(date);
-            TProdPlan prodPlan = new TProdPlan();
-            prodPlan.setProdPlanCode(vo.getProdPlanCode());
-            prodPlan.setTotalQuantity(1L);
-            prodPlan.setQuantity(1L);
             tOrderItem.setItemStatus(Constants.ORD_PROD_STATUS_END);
             tOrderItemMapper.update(tOrderItem);
             tHistoryProdRecordMapper.insert(historyProdRecord);
-            tProdPlanMapper.updateNum(prodPlan);
             tProdPlanDetailMapper.delete(vo.getProdPlanDetailId());
         }
+        //更新计划单产品总数量与下发生产数量
+        TProdPlan prodPlan = new TProdPlan();
+        prodPlan.setProdPlanCode(vo.getProdPlanCode());
+        prodPlan.setTotalQuantity(1L);
+        prodPlan.setQuantity(1L);
+        tProdPlanMapper.updateNum(prodPlan);
         //入库
         TStock tStock = new TStock();
         BeanUtils.copyProperties(vo, tStock);
@@ -127,7 +132,7 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
     public String getBarCode(String barCode){
         List<TStock> list = tStockMapper.getByBarCode(barCode);
         if(!list.isEmpty()) {
-            barCode = getBarCode(IdGen.getNetBarCode());
+            barCode = getBarCode(IdGen.getNetBarCode(11));
         }
         return barCode;
     }

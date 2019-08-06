@@ -31,7 +31,7 @@ public interface TProdPlanService {
      * @Iteration : 1.0
      * @Date: 2019/7/4 10:54 PM
      */
-    TProdPlan findByProdPanCode(String prodPlanCode);
+    ProdPlanVo findByProdPanCode(String prodPlanCode);
     //
     //
     ///**

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.io.Serializable;
 import java.security.SecureRandom;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Random;
 import java.util.UUID;
 
@@ -55,13 +56,6 @@ public class IdGen implements  SessionIdGenerator {
 		return Encodes.encodeBase62(randomBytes);
 	}
 	/**
-	 * 条形码生成
-	 */
-	public static String getNetBarCode() {
-		return randomBase62(3).toUpperCase() + randomInt();
-	}
-	
-	/**
 	 * Activiti ID 生成
 	 */
 	public String getNextId() {
@@ -73,15 +67,16 @@ public class IdGen implements  SessionIdGenerator {
 		return IdGen.uuid();
 	}
 	
-	public static void main(String[] args) {
-		//System.out.println(IdGen.uuid());
-		//System.out.println(IdGen.uuid().length());
-		//System.out.println(new IdGen().getNextId());
-		//for (int i=0; i<2; i++){
-		//	System.out.println(Math.abs(random.nextInt()) + "  " + IdGen.randomBase62(3));
-		//}
-		//LocalDate ld = LocalDate.now().minusMonths(1);
-		//System.out.println(ld.toString());
-	}
+    /**
+     * 条形码生成
+     */
+    public static String getNetBarCode(int strLength) {
+        // 获得随机数
+        double pross = (1 + random.nextDouble()) * Math.pow(10, strLength);
+        // 将获得的获得随机数转化为字符串
+        String fixLenthString = String.valueOf(pross);
+        // 返回固定的长度的随机数
+        return fixLenthString.substring(2, strLength + 2);
+    }
 
 }

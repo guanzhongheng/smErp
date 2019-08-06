@@ -189,7 +189,7 @@ public class PrintManageController extends BaseController {
      */
     @RequestMapping("remark_print")
     public String prodRemarkInfo(String prodPlanCode,Model model){
-        TProdPlan prodPlan = planService.findByProdPanCode(prodPlanCode);
+        ProdPlanVo prodPlan = planService.findByProdPanCode(prodPlanCode);
         model.addAttribute("prod",prodPlan);
         return "modules/print/prodFormula";
     }
@@ -202,7 +202,7 @@ public class PrintManageController extends BaseController {
      */
     @RequestMapping("prodProduce_print")
     public String prodProduceList(String prodPlanCode,Model model){
-        TProdPlan prodPlan = planService.findByProdPanCode(prodPlanCode);
+        ProdPlanVo prodPlan = planService.findByProdPanCode(prodPlanCode);
         List<TProdPlanDetail> details = prodPlanDetailService.findListByProdPlanCode(prodPlanCode);
 
         Double totalMj = details.stream().mapToDouble(i -> i.getItemTotalSq()==null?0: i.getItemTotalSq()).sum();

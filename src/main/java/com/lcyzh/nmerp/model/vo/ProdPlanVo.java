@@ -27,10 +27,13 @@ public class ProdPlanVo{
     private Long totalQuantity;
     //已下发生产数量
     private Long quantity;
-    //配方
+    //配方code
     private String formula;
     //自动下发开关；0-关闭；1-开启
     private Character isAuto;
+
+    //配方VO
+    private FormulaVo formulaVo;
 
     public Long getProdCgyCode() {
         return prodCgyCode;
@@ -118,5 +121,13 @@ public class ProdPlanVo{
 
     public void setIsAuto(Character isAuto) {
         this.isAuto = isAuto;
+    }
+
+    public FormulaVo getFormulaVo() {
+        return formulaVo;
+    }
+
+    public void setFormulaVo(FormulaVo formulaVo) {
+        this.formulaVo = formulaVo;
     }
 }

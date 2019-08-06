@@ -37,6 +37,13 @@
         </foreach>
     </update>
 
+    <select id="findByIds" parameterType="java.util.List" resultMap="tProdPlanDetailResultMap">
+        select * from t_prod_plan_detail where id in
+        <foreach item = "id" index = "index" collection = "ids" open = "(" separator = "," close = ")">
+            #{id}
+        </foreach>
+    </select>
+
 
     <select id="findById" parameterType="java.lang.Long" resultMap="tProdPlanDetailResultMap">
         SELECT *
