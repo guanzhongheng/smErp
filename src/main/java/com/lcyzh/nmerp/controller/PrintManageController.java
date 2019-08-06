@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.controller;
 
 import com.lcyzh.nmerp.common.lang.DateUtils;
+import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.controller.system.util.UserUtils;
 import com.lcyzh.nmerp.dao.TCustomerMapper;
@@ -227,12 +228,25 @@ public class PrintManageController extends BaseController {
      */
     public void getTotalInfo(Model model,List<OrderItemVo> orderItemVos){
 
-        Double totalMj = orderItemVos.stream().mapToDouble(i -> i.getItemTotalSq()==null?0: i.getItemTotalSq()).sum();
-        Double totalZl = orderItemVos.stream().mapToDouble(i -> i.getItemTotalWeight()==null?0: i.getItemTotalWeight()).sum();
+//        Double totalMj = orderItemVos.stream().mapToDouble(i -> (i.getItemTotalSq()==null?0: i.getItemTotalSq())).sum();
+        Double totalMj = orderItemVos.stream().mapToDouble(i->((i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ)&&i.getItemTotalSq()!=null)?i.getItemTotalSq():0)).sum();
+//        Double totalZl = orderItemVos.stream().mapToDouble(i -> i.getItemTotalWeight()==null?0: i.getItemTotalWeight()).sum();
+        Double totalZl = orderItemVos.stream().mapToDouble(i -> ((i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)&&i.getItemTotalWeight()!=null)?i.getItemTotalWeight():0)).sum();
         Double totalNum = orderItemVos.stream().mapToDouble(i -> i.getItemNum()==null?0: i.getItemNum()).sum();
-        Double totalPrice = orderItemVos.stream().mapToDouble(i -> {
-           return i.getItemNum()*i.getItemPrice();
-        }).sum();
+
+        double totoalPriceByMj = 0d;
+        double totalPriceByZL = 0d;
+      if(orderItemVos!=null && !orderItemVos.isEmpty()){
+          for (OrderItemVo item: orderItemVos){
+              if(item.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)){
+                  totalPriceByZL += item.getItemNum() * item.getItemPrice() * item.getItemWeight();
+              }else{
+                  totoalPriceByMj += item.getItemNum() * item.getItemPrice() *(item.getItemLenth()*item.getItemWidth());
+              }
+          }
+      }
+
+        double totalPrice = totoalPriceByMj + totalPriceByZL;
         model.addAttribute("totalMj",totalMj);
         model.addAttribute("totalZl",totalZl);
         model.addAttribute("totalNum",totalNum);

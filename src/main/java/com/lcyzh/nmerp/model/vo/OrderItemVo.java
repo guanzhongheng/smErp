@@ -73,6 +73,7 @@ public class OrderItemVo {
     private String itemStatusValue;
     //产品出库数量
     private Long itemOutNum;
+
     public Long getItemId() {
         return itemId;
     }

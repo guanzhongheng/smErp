@@ -61,6 +61,7 @@
                             <th>规格(长*宽*厚)</th>
                             <th>重量</th>
                             <th>数量</th>
+                            <th>计价方式</th>
                             <th>总面积(M&sup2)</th>
                             <th>总重量(kg)</th>
                             <th>单价</th>
@@ -78,10 +79,17 @@
                                 <td>${ord.itemLenth}*${ord.itemWidth}*${ord.itemThick}</td>
                                 <td>${ord.itemWeight}</td>
                                 <td>${ord.itemNum}</td>
+                                <td>${ord.itemPriceTypeValue}</td>
                                 <td>${ord.itemTotalSq}</td>
                                 <td>${ord.itemTotalWeight}</td>
                                 <td>&yen;${ord.itemPrice}</td>
-                                <td>&yen;${ord.itemPrice * ord.itemNum}</td>
+                                <c:if test="${ord.itemPriceType eq '141001'}">
+                                    <td>&yen;${(ord.itemNum * (ord.itemPrice*100) * (ord.itemWeight*100))/10000}</td>
+                                </c:if>
+                                <c:if test="${ord.itemPriceType eq '141002'}">
+                                    <td>&yen;${(ord.itemNum * (ord.itemPrice*100) * (ord.itemLenth*10) * (ord.itemWidth*10))/10000}</td>
+                                </c:if>
+
                             </tr>
                         </c:forEach>
                         </tbody>

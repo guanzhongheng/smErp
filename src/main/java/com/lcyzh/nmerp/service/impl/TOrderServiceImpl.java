@@ -234,11 +234,11 @@ public class TOrderServiceImpl implements TOrderService {
             orderItems.add(orderItem);
             if (vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ)) {
                 amount += vo.getItemPrice() * vo.getItemTotalSq();
+                totalSq += orderItem.getItemTotalSq();
             } else if (vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)) {
                 amount += vo.getItemPrice() * vo.getItemTotalWeight();
+                totalWeight += orderItem.getItemTotalWeight();
             }
-            totalSq += orderItem.getItemTotalSq();
-            totalWeight += orderItem.getItemTotalWeight();
             totalNum += orderItem.getItemNum();
         }
         order.setOrdTotalNum(totalNum);
