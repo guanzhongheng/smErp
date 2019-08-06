@@ -23,6 +23,12 @@
         WHERE id = #{id,jdbcType=BIGINT}
     </select>
 
+    <select id="findByProdCode" parameterType="java.lang.String" resultMap="tProductResultMap">
+        SELECT *
+        FROM T_PRODUCT
+        WHERE prod_code = #{prodCode,jdbcType=VARCHAR}
+    </select>
+
     <select id="findList" parameterType="com.lcyzh.nmerp.entity.TProduct" resultMap="tProductResultMap">
         SELECT *
         FROM T_PRODUCT

@@ -76,6 +76,7 @@
         cu.cus_code cusCode,
         cu.cus_grade cusGrade,
         cu.industry industry,
+        cu.cus_type cusType,
         cu.cus_status cusStatus,
         pc.contact_name primaryContactorName,
         pc.contact_phone primaryContactorPhone,

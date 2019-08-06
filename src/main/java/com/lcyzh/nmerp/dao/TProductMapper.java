@@ -18,6 +18,8 @@ public interface TProductMapper {
 
     List<TProduct> findList(TProduct tProduct);
 
+    TProduct findByProdCode(String prodCode);
+
     List<TProduct> findAllList();
 
     int insert(TProduct tProduct);

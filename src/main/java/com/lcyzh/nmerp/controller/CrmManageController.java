@@ -1,5 +1,6 @@
 package com.lcyzh.nmerp.controller;
 
+import com.lcyzh.nmerp.common.lang.StringUtils;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.controller.common.BaseController;
@@ -59,6 +60,7 @@ public class CrmManageController extends BaseController {
         if(customer.getFollowType()!=null && customer.getFollowType()==1){
             customer.setCusStatus(Constants.CUS_STATUS_FLLOW);
         }
+        customer.setCusName(StringUtils.trimToNull(customer.getCusName()));
         List<CustomerQueryVo> list = customerService.findPage(page, customer);
         page.setCount(list.size());
         page.setList(list);

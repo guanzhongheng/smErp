@@ -93,24 +93,18 @@ public class TProductServiceImpl implements TProductService {
     @Transactional(isolation = Isolation.READ_COMMITTED)
     @Override
     public int save(TProduct product) {
-        if(product.getProdCode() == null){
+        if (product.getProdCode() == null) {
             return -3;
         }
         Date current = new Date();
         int res;
-        TProduct prodt = new TProduct();
-        prodt.setProdCode(product.getProdCode());
-        List<TProduct> list = tProductMapper.findList(prodt);
-        if(list!=null && !list.isEmpty()){
-            return -4;
-        }
         if (product.getId() != null) {
             TProduct po = tProductMapper.get(product.getId());
-            if (po != null && !(po.getProdVariety().equals(product.getProdVariety()) && po.getProdCgyCode().equals(product.getProdCgyCode()) && po.getProdColor().equals(product.getProdColor()))) {
+            if (po != null && po.getProdVariety().equals(product.getProdVariety()) && po.getProdCgyCode().equals(product.getProdCgyCode()) && po.getProdColor().equals(product.getProdColor())) {
                 TProduct prod = new TProduct();
                 prod.setId(product.getId());
                 prod.setProdName(product.getProdName());
-                prod.setProdCode(product.getProdCode());
+//                prod.setProdCode(product.getProdCode());
                 prod.setProdGuidePrice(product.getProdGuidePrice());
                 prod.setProdPriceType(product.getProdPriceType());
                 prod.setProdThick(product.getProdThick());
@@ -124,6 +118,11 @@ public class TProductServiceImpl implements TProductService {
             if (po != null) {
                 res = -2;
             } else {
+                TProduct pt = tProductMapper.findByProdCode(product.getProdCode());
+                if (pt != null) {
+                    return -4;
+                }
+
                 product.setCreateTime(current);
                 res = tProductMapper.insert(product);
 
