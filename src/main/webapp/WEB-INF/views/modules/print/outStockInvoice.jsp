@@ -10,10 +10,10 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <link rel="shortcut icon" href="favicon.ico">
-    <link href="${ctxStatic}/hPlugs/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="${ctxStatic}/hPlugs/css/bootstrap.min14ed.css?v=3.3.7" rel="stylesheet">
     <link href="${ctxStatic}/hPlugs/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
     <link href="${ctxStatic}/hPlugs/css/animate.min.css" rel="stylesheet">
-    <link href="${ctxStatic}/hPlugs/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="${ctxStatic}/hPlugs/css/style.min862f.css?v=4.1.1" rel="stylesheet">
 </head>
 
 <body class="gray-bg">

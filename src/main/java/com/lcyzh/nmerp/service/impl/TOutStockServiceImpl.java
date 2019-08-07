@@ -196,7 +196,7 @@ public class TOutStockServiceImpl implements TOutStockService {
                 outItemVo.setItemLenth(sto.getItemLenth());
                 outItemVo.setItemWidth(sto.getItemWidth());
                 outItemVo.setItemThick(sto.getItemThick());
-                TProduct prodduct = DictUtils.getProdCodeByProdCgyAndVari(sto.getItemCgyCode().toString() + sto.getItemVariety() + sto.getItemColor());
+                TProduct prodduct = DictUtils.getProdCodeByProdCgyAndVari(sto.getItemVariety() + sto.getItemCgyCode().toString() + sto.getItemColor());
                 outItemVo.setItemName(prodduct.getProdName());
                 outItemVo.setProdColorValue(SysDictUtils.getDictLabel(sto.getItemColor(), "prod_color", ""));
                 outItemVo.setProdCgyCodeValue(DictUtils.getValueByDictKey(sto.getItemCgyCode()));

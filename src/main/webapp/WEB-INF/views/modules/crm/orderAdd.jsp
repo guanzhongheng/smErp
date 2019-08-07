@@ -15,9 +15,6 @@
             </code>
         </div>
         <div class="panel-body" style="padding: 10px 10px 0px 10px;">
-
-
-
             <div class="">
                 <form:form id="inputForm" modelAttribute="orderAddModifyVo"
                            action="${ctx}/order/order_save"
@@ -27,7 +24,6 @@
                     <div class="col-sm-12">
                         <div class="">
                             <form method="get" class="form-horizontal">
-
 
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">

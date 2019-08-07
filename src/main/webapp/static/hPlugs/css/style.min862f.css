@@ -1692,7 +1692,7 @@ table.dataTable thead .sorting:after {
     -webkit-transition: border-color .15s ease-in-out 0s, box-shadow .15s ease-in-out 0s;
     transition: border-color .15s ease-in-out 0s, box-shadow .15s ease-in-out 0s;
     width: 100%;
-    font-size: 18px
+    font-size: 14px
 }
 
 .form-control:focus, .single-line:focus {
@@ -2847,7 +2847,7 @@ a.forum-item-title:hover {
 
 body {
     font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 18px;
+    font-size: 13px;
     color: #676a6c;
     overflow-x: hidden
 }
@@ -2916,7 +2916,7 @@ a:focus, a:hover {
     color: #fff;
     background-color: #fff;
     height: 1px;
-    margin: 8px 0
+    margin: 20px 0
 }
 
 .hr-line-solid {

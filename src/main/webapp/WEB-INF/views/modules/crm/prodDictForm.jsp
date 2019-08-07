@@ -32,85 +32,32 @@
             <form:form id="inputForm" modelAttribute="tProduct" action="${ctx}/tProduct/insert" method="post" class="form-horizontal">
                 <input name="id" id="id" type="hidden" value="${prodId}">
                 <sys:message content="${message}"/>
-                <%--<div class="row">--%>
-                    <%--<div class="col-sm-12">--%>
-                        <%--<div class="hr-line-dashed"></div>--%>
-                        <%--<div class="form-group">--%>
-
-                            <%--<label class="col-md-2 control-label order-detail-label-margin" style="text-align: right"><i style="color: red">*</i>--%>
-                                <%--产品编码:--%>
-                            <%--</label>--%>
-                            <%--<label class="col-md-2 control-label order-label-input-width">--%>
-                                <%--<form:input path="prodCode" htmlEscape="false"--%>
-                                            <%--class="form-control global-input order-label-input-width" placeholder="产品编码"/>--%>
-                            <%--</label>--%>
-
-                            <%--<label class="col-md-2 control-label  order-detail-label-margin order-input-width" style="text-align: right">--%>
-                                <%--产品名称:--%>
-                            <%--</label>--%>
-                            <%--<label class="col-md-2 control-label order-input-width " style="text-align: left">--%>
-                                <%--<form:input path="prodName" htmlEscape="false"--%>
-                                            <%--class="form-control global-input order-label-input-width" placeholder="产品名称"/>--%>
-                            <%--</label>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-
-
-
-
-
-
 
                 <div class="control-group">
                     <label class="control-label"><i style="color: red">*</i>&nbsp;产品编码:</label>
                     <div class="controls">
-                        <form:input path="prodCode" htmlEscape="false" maxlength="50" class="required"/>
+                        <form:input path="prodCode" htmlEscape="false" maxlength="50" class="required" disabled="${prodId == null?'false':'true'}"/>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <i style="color: red">*</i>&nbsp;产品名称:&nbsp;&nbsp;&nbsp;&nbsp;
-                        <form:input path="prodName" htmlEscape="false" maxlength="50" class="required"/>
+                        <form:input path="prodName" htmlEscape="false" maxlength="50" class="required" disabled="${prodId == null?'false':'true'}"/>
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label"><i style="color: red"></i>&nbsp;产品品种:</label>
+                    <label class="control-label"><i style="color: red"></i>&nbsp;产品品种</label>
                     <div class="controls">
-                        <form:select path="prodCgyCode" class="input-medium" cssStyle="width: 220px" placeholder="产品品种">
+                        <form:select path="prodCgyCode" class="input-medium" cssStyle="width: 220px" placeholder="产品品种"  disabled="${prodId == null?'false':'true'}" >
                             <form:option value="" label=""/>
                             <form:options items="${fns:getCusDictList(148000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                         </form:select>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <i style="color: white">*</i>&nbsp;产品类别:&nbsp;&nbsp;&nbsp;&nbsp;
-                        <form:select path="prodVariety" class="input-medium" cssStyle="width: 220px" placeholder="产品类别">
+                        <form:select path="prodVariety" class="input-medium" cssStyle="width: 220px" placeholder="产品类别"  disabled="${prodId == null?'false':'true'}" >
                             <form:option value="" label=""/>
                             <form:options items="${fns:getCusDictList(149000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                         </form:select>
                     </div>
                 </div>
-                <%--<div class="control-group">--%>
-                    <%--<label class="control-label">产品名称:</label>--%>
-                    <%--<div class="controls">--%>
-                        <%--<form:input path="prodName" htmlEscape="false" maxlength="50" class="required"/>--%>
-                        <%--<span class="help-inline"><font color="red">*</font> </span>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--<div class="control-group">--%>
-                    <%--<label class="control-label">产品品种:</label>--%>
-                    <%--<div class="controls">--%>
-                        <%--<form:select path="prodCgyCode" class="input-medium" placeholder="产品品种">--%>
-                            <%--<form:option value="" label=""/>--%>
-                            <%--<form:options items="${fns:getCusDictList(148000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
-                        <%--</form:select>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--<div class="control-group">--%>
-                    <%--<label class="control-label">产品类别:</label>--%>
-                    <%--<div class="controls">--%>
-                        <%--<form:select path="prodVariety" class="input-medium" placeholder="产品类别">--%>
-                            <%--<form:option value="" label=""/>--%>
-                            <%--<form:options items="${fns:getCusDictList(149000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
-                        <%--</form:select>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
+
                 <div class="control-group">
                     <label class="control-label"><i style="color: red"></i>&nbsp;产品颜色:</label>
                     <div class="controls">
@@ -132,7 +79,7 @@
                         </form:select>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <i style="color: white">*</i>&nbsp;计价方式:&nbsp;&nbsp;&nbsp;&nbsp;
-                        <form:select path="prodPriceType" class="input-medium" cssStyle="width: 220px" placeholder="计价方式">
+                        <form:select path="prodPriceType" class="input-medium" cssStyle="width: 220px" placeholder="计价方式"  disabled="${prodId == null?'false':'true'}">
                             <form:option value="" label=""/>
                             <form:options items="${fns:getCusDictList(141000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                         </form:select>

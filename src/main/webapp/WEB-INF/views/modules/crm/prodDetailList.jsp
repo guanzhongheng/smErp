@@ -580,7 +580,7 @@
                 },{
                     field: 'itemPrice',
                     title: '单价',
-                    width: '80px',
+                    width: '90px',
                     formatter:function (value,row,index) {
                         return ['<input type="number" min="0" style="width: 80px" step="0.01" onchange="inserData(\'itemPrice\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
                     }
@@ -594,13 +594,13 @@
                 },{
                     field: 'itemPriceType',
                     title: '计价方式',
-                    width: '100px',
+                    width: '130px',
                     formatter:operPriceType
                 },
                 {
                     field: 'itemWeight',
                     title: '重量',
-                    width: '55px',
+                    width: '75px',
                     formatter:function (value,row,index) {
                         return ['<input type="number" min="0" step="0.001" style="width: 55px" onchange="inserData(\'itemWeight\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
                     }

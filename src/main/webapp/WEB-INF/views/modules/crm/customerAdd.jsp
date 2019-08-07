@@ -1,11 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 
-
-
-
-
-
 <div class="tabs-container" style="padding: 20px 20px;">
 
 
@@ -23,7 +18,6 @@
                        method="post" class="form-horizontal">
                 <form:hidden path="cusCode"/>
                 <div class="row">
-
                             <div class="col-sm-6 b-r">
                                 <div class="ibox float-e-margins">
                                     <form method="get" class="form-horizontal">
@@ -120,7 +114,7 @@
                                                     <%--<form:option value="" label=""/>--%>
                                                     <%--<form:options items="${fns:getEmpListByDept(109001)}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
                                                 <%--</form:select>--%>
-                                                    <select id="cusContent" name="empCode" class="input-medium">
+                                                    <select id="cusContent" name="empCode" class="chosen-select" style="min-width: 300px">
                                                         <c:forEach items="${userList}" var="us">
                                                             <option value="${us.id}">${us.name}</option>
                                                         </c:forEach>
@@ -153,7 +147,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label"><i style="color: red">*</i> 跟进人员：</label>
                                             <div class="col-sm-8">
-                                                <select id="cusContent2" name="followEmpCode" class="input-medium">
+                                                <select id="cusContent2" name="followEmpCode" class="chosen-select" style="min-width: 300px">
                                                     <c:forEach items="${userList}" var="us">
                                                         <option value="${us.id}">${us.name}</option>
                                                     </c:forEach>

@@ -7,7 +7,7 @@
         <script type="text/javascript" src="${ctxStatic}/jerichotab/js/jquery.jerichotab.js"></script></c:if>
     <style type="text/css">
         #main {padding:0;margin:0;} #main .container-fluid{padding:0 4px 0 6px;}
-        #header {margin:0 0 8px;position:static;} #header li {font-size:14px;_font-size:12px;}
+        #header {margin:0 0 8px;position:static;} #header li {font-size:16px;_font-size:12px;}
         #header .brand {font-family:Helvetica, Georgia, Arial, sans-serif, 黑体;font-size:26px;padding-left:33px;}
         #footer {margin:8px 0 0 0;padding:3px 0 0 0;font-size:11px;text-align:center;border-top:2px solid #0663A2;}
         #footer, #footer a {color:#999;} #left{overflow-x:hidden;overflow-y:auto;} #left .collapse{position:static;}
@@ -142,19 +142,19 @@
 <div id="main">
     <div id="header" class="navbar navbar-fixed-top">
         <div class="navbar-inner">
-            <div class="brand"><span id="productName">企业资源计划(ERP)管理系统</span></div>
+            <div class="brand"><span id="productName">云智(ERP)管理系统</span></div>
             <ul id="userControl" class="nav pull-right">
                 <%--<li><a href="${pageContext.request.contextPath}/index-${fnc:getCurrentSiteId()}.html" target="_blank" title="访问网站主页"><i class="icon-home"></i></a></li>--%>
 
                 <li id="userInfo" class="dropdown">
-                    <a class="dropdown-toggle " data-toggle="dropdown" href="#" title="个人信息" style="font-size: 18px;">您好, ${fns:getUser().name}&nbsp;<span id="notifyNum" class="label label-info hide"></span></a>
+                    <a class="dropdown-toggle " data-toggle="dropdown" href="#" title="个人信息" style="font-size: 17px;">您好, ${fns:getUser().name}&nbsp;<span id="notifyNum" class="label label-info hide"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="${ctx}/sys/user/info" target="mainFrame" style="font-size: 18px;"><i class="icon-user"></i>&nbsp; 个人信息</a></li>
-                        <li><a href="${ctx}/sys/user/modifyPwd" target="mainFrame" style="font-size: 18px;"><i class="icon-lock"></i>&nbsp;  修改密码</a></li>
-                        <li><a href="${ctx}/oa/oaNotify/self" target="mainFrame" style="font-size: 18px;"><i class="icon-bell"></i>&nbsp;  我的通知 <span id="notifyNum2" class="label label-info hide"></span></a></li>
+                        <li><a href="${ctx}/sys/user/info" target="mainFrame" style="font-size: 17px;"><i class="icon-user"></i>&nbsp; 个人信息</a></li>
+                        <li><a href="${ctx}/sys/user/modifyPwd" target="mainFrame" style="font-size: 17px;"><i class="icon-lock"></i>&nbsp;  修改密码</a></li>
+                        <li><a href="${ctx}/oa/oaNotify/self" target="mainFrame" style="font-size: 17px;"><i class="icon-bell"></i>&nbsp;  我的通知 <span id="notifyNum2" class="label label-info hide"></span></a></li>
                     </ul>
                 </li>
-                <li><a href="${ctx}/logout" title="退出登录" class="global-font" style="font-size: 18px;">退出</a></li>
+                <li><a href="${ctx}/logout" title="退出登录" class="global-font" style="font-size: 17px;">退出</a></li>
                 <li>&nbsp;</li>
             </ul>
             <%-- <c:if test="${cookie.theme.value eq 'cerulean'}">
@@ -173,10 +173,10 @@
                         <c:if test="${menu.parent.id eq '1'&&menu.isShow eq '1'}">
                             <li class="menu ${not empty firstMenu && firstMenu ? ' active' : ''}">
                                 <c:if test="${empty menu.href}">
-                                    <a class="menu" href="javascript:" data-href="${ctx}/sys/menu/tree?parentId=${menu.id}" data-id="${menu.id}" style="font-size: 18px;"><span>${menu.name}</span></a>
+                                    <a class="menu" href="javascript:" data-href="${ctx}/sys/menu/tree?parentId=${menu.id}" data-id="${menu.id}" ><span>${menu.name}</span></a>
                                 </c:if>
                                 <c:if test="${not empty menu.href}">
-                                    <a class="menu" href="${fn:indexOf(menu.href, '://') eq -1 ? ctx : ''}${menu.href}" data-id="${menu.id}" target="mainFrame" style="font-size: 18px;"><span>${menu.name}</span></a>
+                                    <a class="menu" href="${fn:indexOf(menu.href, '://') eq -1 ? ctx : ''}${menu.href}" data-id="${menu.id}" target="mainFrame" ><span>${menu.name}</span></a>
                                 </c:if>
                             </li>
                             <c:if test="${firstMenu}">
@@ -200,7 +200,7 @@
             </div>
         </div>
         <div id="footer" class="row-fluid">
-            Copyright &copy; 2019-2020 企业资源计划(ERP)管理系统 - Powered By <a href="#" target="_blank">erp</a> Ver 1.0.0
+            Copyright &copy; 2019-2020 云智(ERP)管理系统 - Powered By <a href="#" target="_blank">erp</a> Ver 1.0.0
         </div>
     </div>
 </div>
