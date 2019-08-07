@@ -18,6 +18,7 @@ public class ProdPlanDetailVo{
     private String prodPlanCode;
     private String ordCode;
     private String orderTitle;
+    private String proxyName;
     private Long orderItemId;
     private String itemCode;
     private Double itemLenth;
@@ -49,6 +50,14 @@ public class ProdPlanDetailVo{
     private Date createTime;
     //皮重
     private Double itemTareWeight;
+
+    public String getProxyName() {
+        return proxyName;
+    }
+
+    public void setProxyName(String proxyName) {
+        this.proxyName = proxyName;
+    }
 
     public String getItemColorValue() {
         return itemColorValue;

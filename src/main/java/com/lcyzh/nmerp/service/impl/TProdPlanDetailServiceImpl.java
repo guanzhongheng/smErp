@@ -94,7 +94,7 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
             TProdPlanDetail prodPlanDetail = new TProdPlanDetail();
             BeanUtils.copyProperties(vo, prodPlanDetail);
             tProdPlanDetailMapper.update(prodPlanDetail);
-            if(!tOrderItem.getItemStatus().equals(Constants.ORD_PROD_STATUS_PROCESSING)) {
+            if(!Constants.ORD_PROD_STATUS_PROCESSING.equals(tOrderItem.getItemStatus())) {
                 tOrderItem.setItemStatus(Constants.ORD_PROD_STATUS_PROCESSING);
                 tOrderItemMapper.update(tOrderItem);
             }

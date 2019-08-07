@@ -736,7 +736,7 @@ public class Constants {
     /**
      * 订单产品状态-生产中
      */
-    public static final long ORD_PROD_STATUS_PROCESSING = 107003L;
+    public static final Long ORD_PROD_STATUS_PROCESSING = 107003L;
     /**
      * 订单产品状态-生产完成
      */

@@ -75,7 +75,8 @@
         ppd.item_color itemColor,
         ppd.mac_code macCode,
         pp.formula formula,
-        o.ord_title orderTitle
+        o.ord_title orderTitle,
+        o.proxy_name proxyName
         FROM t_prod_plan_detail ppd
         left join t_prod_plan pp on ppd.prod_plan_code = pp.prod_plan_code
         left join t_order o on ppd.ord_code = o.ord_code
