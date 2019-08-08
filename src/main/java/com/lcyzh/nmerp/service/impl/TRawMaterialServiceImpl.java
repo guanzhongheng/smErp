@@ -55,4 +55,10 @@ public class TRawMaterialServiceImpl implements TRawMaterialService{
         return tRawMaterialMapper.delete(tRawMaterial);
     }
 
+    @Override
+    public boolean rawmCodeIsExistence(String code) {
+        Integer count = tRawMaterialMapper.findCntByCode(code);
+        return count > 0;
+    }
+
 }

@@ -33,4 +33,6 @@ public interface TProductMapper {
     TProduct findByUqKey(@Param("prodCgyCode") Long prodCgyCode,@Param("prodVariety") Long prodVariety, @Param("prodColor") String prodColor);
 
     List<TProduct> findListByCodes(List<String> codes);
+
+    Integer findCntByCode(String code);
 }

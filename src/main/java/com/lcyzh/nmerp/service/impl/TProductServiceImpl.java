@@ -156,4 +156,10 @@ public class TProductServiceImpl implements TProductService {
         return page;
     }
 
+    @Override
+    public boolean prodCodeIsExistence(String code) {
+        Integer count = tProductMapper.findCntByCode(code);
+        return count > 0;
+    }
+
 }

@@ -94,4 +94,8 @@
         WHERE id = #{id}
     </delete>
 
+    <select id="findCntByCode" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) cnt from T_RAW_MATERIAL where rawm_code = #{code}
+    </select>
+
 </mapper>

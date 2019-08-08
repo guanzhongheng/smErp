@@ -24,5 +24,7 @@ public interface TRawMaterialService {
     int update(TRawMaterial tRawMaterial);
 
     int delete(TRawMaterial tRawMaterial);
+    
+    boolean rawmCodeIsExistence(String code);
 
 }
