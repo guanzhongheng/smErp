@@ -30,10 +30,10 @@
                         <div class="box-body" >
                             <div style="float:left;    margin-bottom: 10px;">
                                 <a class="btn btn-success" id="totalStart" >
-                                    <i class="fa fa-play"></i> 启动
+                                    <i class="fa fa-play"></i> 启动称重
                                 </a>
                                 <a class="btn btn-danger" id="wsStop" style="display: none;">
-                                    <i class="fa fa-stop"></i> 停止
+                                    <i class="fa fa-stop"></i> 停止称重
                                 </a>
                                 <a class="btn btn-warning" id="clear">
                                     <i class="fa fa-repeat"></i> 归零
@@ -53,10 +53,10 @@
                             </div>
 
                             <div style="min-width: 270px;background-color: black;color:green; font-size: 30px;float:left;text-align: center;margin-left:15px;">
-                                毛重：<span id="totalWeight">0.00</span> KG
+                                毛重：<span id="totalWeight">100.00</span> KG
                             </div>
                             <div style="min-width: 270px;background-color: black;color:green; font-size: 30px;float:left;text-align: center;margin-left:15px;">
-                                皮：<span id="tareWeight">0.00</span> KG
+                                皮：<span id="tareWeight">10.00</span> KG
                             </div>
                         </div>
                         <!-- /.box-body -->
@@ -92,7 +92,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" style="margin-left: -25px;"><i style="color: red"></i>机台编号:</label>
                                             <div class="col-sm-4">
-                                                <input disabled="ture" placeholder="机台编号" value="${detail.macCode}"
+                                                <input disabled="ture" placeholder="机台编号" value="${detail.macCode}" id="macCode"
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
                                             </div>
                                             <label class="col-sm-2 control-label"><i style="color: red"></i>产品编号:</label>
@@ -176,7 +176,9 @@
                                                 </div>
                                                 <div class="col-md-8 " >
                                                     <button class="btn btn-primary global-button-style" type="button" id="inStock">入 库</button>&nbsp;&nbsp;&nbsp;
-                                                    <button class="btn btn-warning global-button-style" type="submit">重新打签</button>&nbsp;&nbsp;&nbsp;
+                                                    <button class="btn btn-warning global-button-style" type="submit" id="rePrint">重新打签</button>&nbsp;&nbsp;&nbsp;
+                                                    <button class="btn btn-warning global-button-style" type="button" id="printCertRed" disabled="true">打印红色合格证</button>
+                                                    <button class="btn btn-warning global-button-style" type="button" id="printCertGreen" disabled="true">打印绿色合格证</button>
                                                     <button class="btn btn-white global-button-style" type="button" onclick="javascript:window.location.replace(document.referrer); ">返回</button>
                                                 </div>
                                             </div>
@@ -351,30 +353,54 @@
                     if (result.itemNum>0) {
                         top.$.jBox.tip('入库成功');
                         $("#itemNum").text(result.itemNum);
-                        doPrint();
+                        doPrint($("#macCode").val());
                     } else if (result.itemNum == 0) {
                         top.$.jBox.tip('入库成功');
-                        doPrint();
+                        doPrint($("#macCode").val());
                         // var path = 'window.location.href = "/produce/producePlan/info?prodPlanCode='+prodPlanCode+'"';
 
                     }
                 }
             });
             $("#inStock").removeAttr('disabled');
+            $("#rePrint").removeAttr('disabled');
+            $("#printCertRed").removeAttr('disabled');
+            $("#printCertGreen").removeAttr('disabled');
         });
 
         $("#rePrint").click(function () {
-            doPrint();
+            doPrint($("#macCode").val());
         });
-        function doPrint(){
+        function doPrint(macCode){
             layer.open({
                 type: 2,
                 title: '打印标签确认',
                 skin: 'layui-layer-rim', //加上边框
-                area: ['300px', '300px'],
-                content: ['/produce/produce/doPrint', 'yes'] //iframe的url，no代表不显示滚动条
+                area: ['350px', '350px'],
+                content: ['/produce/produce/doPrint?macCode='+macCode, 'yes'] //iframe的url，no代表不显示滚动条
             });
         }
+        $("#printCertRed").click(function () {
+
+            layer.open({
+                type: 2,
+                title: '打印合格证确认',
+                skin: 'layui-layer-rim', //加上边框
+                area: ['800px', '800px'],
+                content: ['/produce/produce/printCert?type=red&macCode='+$("#macCode").val(), 'yes'] //iframe的url，no代表不显示滚动条
+            });
+        });
+
+        $("#printCertGreen").click(function () {
+
+            layer.open({
+                type: 2,
+                title: '打印合格证确认',
+                skin: 'layui-layer-rim', //加上边框
+                area: ['800px', '800px'],
+                content: ['/produce/produce/printCert?type=green&macCode='+$("#macCode").val(), 'yes'] //iframe的url，no代表不显示滚动条
+            });
+        });
 
         /*计重相关逻辑*/
         var weightType ;
@@ -384,22 +410,26 @@
             // if(!openFlag){
                 send("start");
             // }
+            $("#totalStart").hide();
+            $("#wsStop").show();
         });
-        // $("#wsStop").click(function () {
-        //     send("stop");
-        //     $("#wsStart").show();
-        //     $("#wsStop").hide();
-        // });
+        $("#wsStop").click(function () {
+            send("stop");
+            $("#totalStart").show();
+            $("#wsStop").hide();
+        });
         $("#clear").click(function () {
             weightType ='';
             $("#totalWeight").text("0.00");
             $("#tareWeight").text("0.00");
+            $("#tareStart").removeAttr('disabled');
         });
         $("#tareStart").click(function () {
             weightType = 'tare';
             // if(!openFlag){
                 send("start");
             // }
+            $("#tareStart").attr('disabled',"true");
         });
 
         var socket;

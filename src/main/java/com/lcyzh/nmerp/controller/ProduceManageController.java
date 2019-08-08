@@ -127,35 +127,38 @@ public class ProduceManageController extends BaseController {
         result.setItemColorValue(SysDictUtils.getDictLabel(result.getItemColor(), Constants.PROD_COLOR, ""));
 
         HttpSession session = request.getSession();
-        session.setAttribute("vo",result);
+        session.setAttribute(result.getMacCode(),result);
 
         return result;
     }
 
     @RequestMapping(value = {"produce/doPrint"})
-    public String doPrint( Model model, HttpServletRequest request, HttpServletResponse response){
+    public String doPrint(String macCode, Model model, HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
-        ProdPlanDetailVo print = (ProdPlanDetailVo)session.getAttribute("vo");
+        ProdPlanDetailVo print = (ProdPlanDetailVo)session.getAttribute(macCode);
+
         model.addAttribute("vo",print);
-        if(print.getItemNum()>0){
-            model.addAttribute("jump",1);
-        }else{
-            model.addAttribute("jump",0);
+//        if(print.getItemNum()>0){
+//            model.addAttribute("jump",1);
+//        }else{
+//            model.addAttribute("jump",0);
+//        }
+        return "modules/crm/stockPrint";
+    }
+
+    @RequestMapping(value = {"produce/printCert"})
+    public String rePrint(String macCode, String type, Model model,
+                          HttpServletRequest request, HttpServletResponse response){
+        HttpSession session = request.getSession();
+        ProdPlanDetailVo print = (ProdPlanDetailVo)session.getAttribute(macCode);
+
+        model.addAttribute("vo",print);
+        String pageStr = "";
+        if("red".equals(type)){
+            pageStr = "modules/crm/stockCertificateRed";
+        }else if("green".equals(type)){
+            pageStr = "modules/crm/stockCertificateGreen";
         }
-        return "modules/crm/stockPrint";
+        return pageStr;
     }
-
-    @RequestMapping(value = {"produce/rePrint"})
-    public String rePrint(Long stockId, Model model, HttpServletRequest request, HttpServletResponse response){
-        TStock stock = stockService.findById(stockId);
-        ProdPlanDetailVo print = new ProdPlanDetailVo();
-        BeanUtils.copyProperties(stock, print);
-        print.setItemColorValue(SysDictUtils.getDictLabel(print.getItemColor(), Constants.PROD_COLOR, ""));
-
-        model.addAttribute("vo",print);
-        model.addAttribute("jump",1);
-        return "modules/crm/stockPrint";
-    }
-
-
 }
