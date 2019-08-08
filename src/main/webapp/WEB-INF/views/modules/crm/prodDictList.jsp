@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/static/common/customize.css">
     <script type="text/javascript">
         function page(n,s){
-            debugger;
+
             if(n) $("#pageNo").val(n);
             if(s) $("#pageSize").val(s);
             $("#searchForm").attr("action","${ctx}/tProduct/list");
@@ -52,11 +52,15 @@
                         </form:select>
                     </li>
                     &nbsp;&nbsp;
-                    <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 100px" value="查询"/></li>
+                    <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 80px" value="查询"/></li>
+                    &nbsp;&nbsp;
+                    <li class="btns"><a href="/tProduct/get" type="button" class="btn btn-primary" style="width: 54px;height: 20px">新增</a></li>
+                    &nbsp;&nbsp;
+                    <li class="btns"><input class="btn btn-primary" type="button" style="width: 80px" onclick="formReset()" value="重置"/></li>
                 </ul>
             </form:form>
 
-            <div class="control-group  table-responsive">
+            <div class="table-responsive">
                 <table id="contentTable" class="table table-striped table-bordered  table-hover text-nowrap">
                     <thead>
                     <tr>
@@ -98,14 +102,14 @@
 
                 <script>
                     $("#toCustomer").click(function () {
-                        debugger;
+
                         <!-- 针对选中客户进行操作 -->
                         // var checkValue = $(".td checkbox");
                         var str = getCheckValue();
                         if (str.length > 0) {
                             top.$.jBox.open("iframe:${ctx}/crm/formSubmit?ids="+str, "转移客户", 500, $(top.document).height() - 300, {
                                 buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
-                                    debugger;
+
                                     var ids = h.find("iframe")[0].contentWindow.ids;
                                     var cusContent = h.find("iframe")[0].contentWindow.cusContent;
                                     var remarks = h.find("iframe")[0].contentWindow.remarks;
@@ -123,7 +127,7 @@
                                         })
                                     }
                                 }, loaded: function (h) {
-                                    debugger;
+
                                     $(".jbox-content", top.document).css("overflow-y", "hidden");
                                 }
                             });
@@ -140,7 +144,7 @@
                         if (str.length > 0) {
                             top.$.jBox.open("iframe:${ctx}/crm/poolRemark?ids="+str, "移入公海", 500, $(top.document).height() - 300, {
                                 buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
-                                    debugger;
+
                                     var ids = h.find("iframe")[0].contentWindow.ids;
                                     var remarks = h.find("iframe")[0].contentWindow.remarks;
                                     if (v == "ok") {
@@ -156,7 +160,7 @@
                                         })
                                     }
                                 }, loaded: function (h) {
-                                    debugger;
+
                                     $(".jbox-content", top.document).css("overflow-y", "hidden");
                                 }
                             });
@@ -168,7 +172,7 @@
                     function gotoFollowInfo(cusCode) {
                         top.$.jBox.open("iframe:${ctx}/crm/followInfo?cusCode="+cusCode, "客户跟踪", 500, $(top.document).height() - 300, {
                             buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
-                                debugger;
+
                                 var cusCode = h.find("iframe")[0].contentWindow.cusCode;
                                 var followTitle = h.find("iframe")[0].contentWindow.followTitle;
                                 var remarks = h.find("iframe")[0].contentWindow.remarks;
@@ -186,7 +190,7 @@
                                     })
                                 }
                             }, loaded: function (h) {
-                                debugger;
+
                                 $(".jbox-content", top.document).css("overflow-y", "hidden");
                             }
                         });
@@ -217,14 +221,16 @@
                     }
                 </script>
             </div>
-            <div class="control-group">&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="/tProduct/get" type="button" class="btn btn-primary" style="width: 100px;height: 23px"><i
-                        class="icon-plus"></i>&nbsp;添加产品</a>
-            </div>
         </div>
     </div>
 </div>
-
+<script>
+    function formReset() {
+        $("#prodCode").val("");
+        $("#prodName").val("");
+        $("#prodCgyCode").val("").select2();
+    }
+</script>
 
 
 </body>

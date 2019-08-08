@@ -8,7 +8,7 @@
 
     <script type="text/javascript">
         function page(n,s){
-            debugger;
+
             if(n) $("#pageNo").val(n);
             if(s) $("#pageSize").val(s);
             $("#searchForm").attr("action","${ctx}/crm/inventory/list");
@@ -39,7 +39,7 @@
     <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
         <div class="panel-heading" style="background-color: #50B0E6">
             <h3 class="panel-title global-panel-title" >
-                库存列表
+                条形码列表
             </h3>
         </div>
         <div class="panel-body" style="padding: 10px 10px 0px 10px;">
@@ -67,9 +67,11 @@
                         </form:select>
                     </li>
                     &nbsp;&nbsp;
-                    <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 100px" value="查询"/></li>
+                    <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 80px" value="查询"/></li>
                     &nbsp;&nbsp;
-                    <li class="btns"><input id="btnExport" class="btn btn-primary" type="button" style="width: 100px" value="导出" onclick="exportInfo()"/></li>
+                    <li class="btns"><input id="btnExport" class="btn btn-primary" type="button" style="width: 80px" value="导出" onclick="exportInfo()"/></li>
+                    &nbsp;&nbsp;
+                    <li class="btns"><input class="btn btn-primary" type="button" style="width: 80px" onclick="invenFormReset()" value="重置"/></li>
                 </ul>
             </form:form>
             <div class="control-group  table-responsive">
@@ -124,16 +126,15 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
 </body>
 
 <script type="text/javascript">
 
+    function invenFormReset() {
+        $("#ordCode").val("");
+        $("#itemCgyCode").val("").select2();
+        $("#itemVariety").val("").select2();
+    }
 
 </script>
 

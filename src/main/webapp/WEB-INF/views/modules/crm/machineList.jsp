@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="/static/common/customize.css">
 	<script type="text/javascript">
 		function page(n,s){
-		    debugger;
+
 			if(n) $("#pageNo").val(n);
 			if(s) $("#pageSize").val(s);
 			$("#searchForm").attr("action","${ctx}/tMachineInfo/list");
@@ -33,8 +33,11 @@
 						<li><label>最小宽度(m)：</label><form:input path="minWidth" htmlEscape="false" maxlength="50" class="input-medium"/></li>
 						<li><label>最大宽度(m)：</label><form:input path="maxWidth" htmlEscape="false" maxlength="50" class="input-medium"/></li>
 						<li class="btns">
-							<input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 100px" value="查询" onclick="return page();"/>
-						<li class="clearfix"></li>
+							<input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 80px" value="查询" onclick="return page();"/>
+						<li class="btns">
+							<a href="${ctx}/tMachineInfo/addForm" type="button" class="btn btn-primary" style="width: 54px;height: 20px">新增</a>
+						</li>
+						<li class="btns"><input class="btn btn-primary" type="button" style="width: 80px" onclick="macFormReset()" value="重置"/></li>
 					</ul>
 				</form:form>
 				<sys:message content="${message}"/>
@@ -70,13 +73,13 @@
 				</div>
 				<div class="pagination">${page}</div>
 
-				<div class="control-group">&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href="${ctx}/tMachineInfo/addForm" type="button" class="btn btn-primary" style="width: 140px;height: 23px"><i
-							class="icon-plus"></i>&nbsp;添加新设备</a>
-				</div>
 			</div>
 		</div>
 	</div>
-
+<script>
+	function macFormReset() {
+        $("#searchForm")[0].reset();
+    }
+</script>
 </body>
 </html>

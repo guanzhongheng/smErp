@@ -7,7 +7,7 @@
 
     <script type="text/javascript">
         function page(n, s) {
-            debugger;
+
             if(n) $("#pageNo").val(n);
             if(s) $("#pageSize").val(s);
             $("#searchForm").attr("action","${ctx}/crm/customer/poollist");
@@ -55,18 +55,20 @@
                                class="input-small Wdate"
                                value="" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
                     </li>
-                    &nbsp;&nbsp;
-                    <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 100px" value="查询"/></li>
+                    <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 80px" value="查询"/></li>
+                    <li class="btns"><a type="button" id="toCustomer" class="btn btn-success" style="height: 20px">分配归属</a></li>
+                    <li class="btns"><input class="btn btn-primary" type="button" style="width: 80px" onclick="cusPoolFormReset()" value="重置"/></li>
+
+
                 </ul>
             </form:form>
             <%--<div class="control-group">&nbsp;&nbsp;&nbsp;&nbsp;--%>
             <%--&lt;%&ndash;<a href="/cus/customer_add" type="button" class="btn btn-primary" style="width: 67px;height: 22px"><i&ndash;%&gt;--%>
-            <%--&lt;%&ndash;class="icon-plus"></i>&nbsp;添加</a>&ndash;%&gt;--%>
+            <%--&lt;%&ndash;class="icon-plus"></i>&nbsp;新增</a>&ndash;%&gt;--%>
             <%--&lt;%&ndash;&nbsp;&nbsp;&ndash;%&gt;--%>
             <%--&lt;%&ndash;<a href="/crm/task_add" type="button" class="btn btn-default" style="width: 80px;height: 23px"><i class="icon-list-ul"></i>&nbsp;新建任务</a>&ndash;%&gt;--%>
             <%--&nbsp;&nbsp;--%>
-            <a type="button" id="toCustomer" class="btn btn-default" style="height: 23px"><i
-            class="icon-refresh"></i>添加归属人</a>
+
             </div>
             <div class="control-group table-responsive">
                 <table id="contentTable" class="table table-striped table-bordered  table-hover text-nowrap">
@@ -114,9 +116,9 @@
                             <!-- 针对选中客户进行操作 -->
                             var str = getPoolCheckValue();
                             if (str.length > 0) {
-                                top.$.jBox.open("iframe:${ctx}/crm/formSubmit?ids=" + str, "添加归属人", 500, $(top.document).height() - 300, {
+                                top.$.jBox.open("iframe:${ctx}/crm/formSubmit?ids=" + str, "分配归属人", 500, $(top.document).height() - 300, {
                                     buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
-                                        debugger;
+
                                         var ids = h.find("iframe")[0].contentWindow.ids;
                                         var cusContent = h.find("iframe")[0].contentWindow.cusContent;
                                         var remarks = h.find("iframe")[0].contentWindow.remarks;
@@ -134,7 +136,7 @@
                                             })
                                         }
                                     }, loaded: function (h) {
-                                        debugger;
+
                                         $(".jbox-content", top.document).css("overflow-y", "hidden");
                                     }
                                 });
@@ -143,7 +145,7 @@
                         });
                     })
                     function getPoolCheckValue() {
-                        debugger;
+
                         var obj = document.getElementsByName("cuscode");
                         var check_val = '';
                         for (k in obj) {
@@ -171,7 +173,13 @@
         </div>
     </div>
 </div>
-
+<script>
+    function cusPoolFormReset() {
+        $("#searchForm")[0].reset();
+        $("#cusType").val("").select2();
+        $("#cusGrade").val("").select2();
+    }
+</script>
 
 
 

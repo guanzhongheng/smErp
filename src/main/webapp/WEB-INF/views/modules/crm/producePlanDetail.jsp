@@ -342,7 +342,7 @@
     });
 
     function getCheckValue(){
-        debugger;
+
         var obj = document.getElementsByName("detailId");
         var check_val = '';
         for(k in obj){
@@ -375,7 +375,7 @@
     //             escape:false, //启动转义字符
     //             queryParamsType:'',//设置请求参数格式
     //             queryParams: function queryParams(params) {
-    //                 debugger;
+    //
     //                 var fCode = $("#formulaSelect").val()
     //                 if(fCode != null && fCode != '' && fCode != 'undefined'){
     //                     var params = {
@@ -429,7 +429,7 @@
             escape:false, //启动转义字符
             queryParamsType:'',//设置请求参数格式
             queryParams: function queryParams(params) {
-                debugger;
+
                 var fCode = $("#formulaSelect").val()
                 if(fCode != null && fCode != '' && fCode != 'undefined'){
                     var params = {
@@ -480,7 +480,7 @@
             escape:false, //启动转义字符
             queryParamsType:'',//设置请求参数格式
             queryParams: function queryParams(params) {
-                debugger;
+
                 var fCode = $("#formulaSelect").val()
                 if(fCode != null && fCode != '' && fCode != 'undefined'){
                     var params = {
@@ -531,7 +531,7 @@
             escape:false, //启动转义字符
             queryParamsType:'',//设置请求参数格式
             queryParams: function queryParams(params) {
-                debugger;
+
                 var fCode = $("#formulaSelect").val()
                 if(fCode != null && fCode != '' && fCode != 'undefined'){
                     var params = {

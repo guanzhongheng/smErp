@@ -21,7 +21,6 @@
 			});;
 		})
 		function page(n,s){
-		    debugger;
 			if(n) $("#pageNo").val(n);
 			if(s) $("#pageSize").val(s);
 			$("#searchForm").attr("action","${ctx}/sys/user/list");
@@ -41,7 +40,7 @@
 	</div>
 	<%--<ul class="nav nav-tabs">--%>
 		<%--<li class="active"><a href="${ctx}/sys/user/list">用户列表</a></li>--%>
-		<%--<li><a href="${ctx}/sys/user/form">用户添加</a></li>--%>
+		<%--<li><a href="${ctx}/sys/user/form">用户新增</a></li>--%>
 	<%--</ul>--%>
 
 
@@ -65,9 +64,9 @@
 							<%--<li><label>归属部门：</label><sys:treeselect id="office" name="office.id" value="${user.office.id}" labelName="office.name" labelValue="${user.office.name}" --%>
 							<%--title="部门" url="/sys/office/treeData?type=2" cssClass="input-small" allowClear="true" notAllowSelectParent="true"/></li>--%>
 						<li><label>姓&nbsp;&nbsp;&nbsp;名：</label><form:input path="name" htmlEscape="false" maxlength="50" class="input-medium"/></li>
-						<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 100px" value="查询" onclick="return page();"/>
-							<input id="btnExport" class="btn btn-primary" type="button" style="width: 100px" value="导出"/>
-							<input id="btnImport" class="btn btn-primary" type="button" style="width: 100px" value="导入"/></li>
+						<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 80px" value="查询" onclick="return page();"/>
+							<input id="btnExport" class="btn btn-primary" type="button" style="width: 80px" value="导出"/>
+							<input id="btnImport" class="btn btn-primary" type="button" style="width: 80px" value="导入"/></li>
 						<li class="clearfix"></li>
 					</ul>
 				</form:form>

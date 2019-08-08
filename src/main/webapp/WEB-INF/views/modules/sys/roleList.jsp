@@ -9,7 +9,7 @@
 <body>
 	<%--<ul class="nav nav-tabs">--%>
 		<%--<li class="active"><a href="${ctx}/sys/role/">角色列表</a></li>--%>
-		<%--<li><a href="${ctx}/sys/role/form">角色添加</a></li>--%>
+		<%--<li><a href="${ctx}/sys/role/form">角色新增</a></li>--%>
 	<%--</ul>--%>
 
 

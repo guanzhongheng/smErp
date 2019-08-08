@@ -5,7 +5,7 @@
     <title>全部客户</title>
     <script type="text/javascript">
         function page(n,s){
-            debugger;
+
             if(n) $("#pageNo").val(n);
             if(s) $("#pageSize").val(s);
             $("#searchForm").attr("action","${ctx}/tProduct/stockHistoryList");

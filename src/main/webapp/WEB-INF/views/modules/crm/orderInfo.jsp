@@ -21,20 +21,15 @@
                     <input type="hidden" id="ordCode" value="${ordCode}"/>
                     <div class="hr-line-dashed"></div>
                     <div class="form-group">
+                        <div class="col-md-5">
+                            <label class="col-md-5" style="text-align: right;font-size: 17px;">订单标题:</label>
+                            <label class="col-md-5" style="font-size: 17px;">${order.ordTitle}</label>
+                        </div>
 
-                        <label class="col-md-2 control-label order-detail-label-margin" style="text-align: right"><i style="color: red">*</i>
-                            订单标题:
-                        </label>
-                        <label class="col-md-2 control-label order-label-input-width">
-                            <input class="col-md-2 order-detail-input-readonly" value="${order.ordTitle}" disabled>
-                        </label>
-
-                        <label class="col-md-2 control-label  order-detail-label-margin order-input-width" style="text-align: right">
-                            客户名称:
-                        </label>
-                        <label class="col-md-2 control-label order-input-width " style="text-align: left">
-                            <input class="col-md-2 order-detail-input-readonly" value="${order.cusCode}" disabled>
-                        </label>
+                        <div class="col-md-5">
+                            <label class="col-md-5" style="text-align: right;font-size: 16px;">客户名称:</label>
+                            <label class="col-md-5" style="font-size: 17px;">${order.cusCode}</label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -42,20 +37,15 @@
                 <div class="col-sm-12">
                     <div class="hr-line-dashed"></div>
                     <div class="form-group">
+                        <div class="col-md-5">
+                            <label class="col-md-5" style="text-align: right;font-size: 17px;">代理客户:</label>
+                            <label class="col-md-5" style="font-size: 17px;">${order.proxyName}</label>
+                        </div>
 
-                        <label class="col-md-2 control-label order-detail-label-margin" style="text-align: right"><i style="color: red">*</i>
-                            代理客户:
-                        </label>
-                        <label class="col-md-2 control-label order-label-input-width">
-                            <input class="col-md-2 order-detail-input-readonly" value="${order.proxyName}" disabled>
-                        </label>
-
-                        <label class="col-md-2 control-label  order-detail-label-margin order-input-width" style="text-align: right">
-                            订单类型:
-                        </label>
-                        <label class="col-md-2 control-label order-input-width " style="text-align: left">
-                            <input class="col-md-2 order-detail-input-readonly" value="${order.ordTypeValue}" disabled>
-                        </label>
+                        <div class="col-md-5">
+                            <label class="col-md-5" style="text-align: right;font-size: 16px;">订单类型:</label>
+                            <label class="col-md-5" style="font-size: 17px;">${order.ordTypeValue}</label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -63,51 +53,38 @@
                 <div class="col-sm-12">
                     <div class="hr-line-dashed"></div>
                     <div class="form-group">
+                        <div class="col-md-5">
+                            <label class="col-md-5" style="text-align: right;font-size: 17px;">签单日期:</label>
+                            <label class="col-md-5" style="font-size: 17px;">${order.ordSignDate}</label>
+                        </div>
 
-                        <label class="col-md-2 control-label order-detail-label-margin" style="text-align: right"><i style="color: red">*</i>
-                            签单日期:
-                        </label>
-                        <label class="col-md-2 control-label order-label-input-width">
-                            <input class="col-md-2 order-detail-input-readonly" value="${order.ordSignDate}" disabled>
-                        </label>
-
-                        <label class="col-md-2 control-label  order-detail-label-margin order-input-width" style="text-align: right">
-                            交货日期:
-                        </label>
-                        <label class="col-md-2 control-label order-input-width " style="text-align: left">
-                            <input class="col-md-2 order-detail-input-readonly" value="${order.ordDeliveryDate}" disabled>
-                        </label>
+                        <div class="col-md-5">
+                            <label class="col-md-5" style="text-align: right;font-size: 16px;">交货日期:</label>
+                            <label class="col-md-5" style="font-size: 17px;">${order.ordDeliveryDate}</label>
+                        </div>
                     </div>
                 </div>
             </div>
                     <div class="hr-line-dashed"></div>
                     <div class="form-group">
+                        <div class="col-md-5">
+                            <label class="col-md-5" style="text-align: right;font-size: 17px;">我方签约:</label>
+                            <label class="col-md-5" style="font-size: 17px;">${order.comContractor==null?"":order.comContractor}</label>
+                        </div>
 
-                        <label class="col-md-2 control-label order-detail-label-margin" style="text-align: right"><i style="color: red">*</i>
-                            我方签约:
-                        </label>
-                        <label class="col-md-2 control-label order-label-input-width">
-                            <input class="col-md-2 order-detail-input-readonly" value="${order.comContractor==null?"":order.comContractor}" disabled>
-                        </label>
-
-                        <label class="col-md-2 control-label  order-detail-label-margin order-input-width" style="text-align: right">
-                            客户签约:
-                        </label>
-                        <label class="col-md-2 control-label order-input-width " style="text-align: left">
-                            <input class="col-md-2 order-detail-input-readonly" value="${order.cusContractor==null?"":order.cusContractor}" disabled>
-                        </label>
+                        <div class="col-md-5">
+                            <label class="col-md-5" style="text-align: right;font-size: 16px;">客户签约:</label>
+                            <label class="col-md-5" style="font-size: 17px;">${order.cusContractor==null?"":order.cusContractor}</label>
+                        </div>
                     </div>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="hr-line-dashed"></div>
                     <div class="form-group">
-
-                        <label class="col-md-2 control-label order-detail-label-margin" style="text-align: right"><i style="color: red">*</i>
-                            备注信息:
-                        </label>
-                        <label class="col-md-2 control-label order-label-input-width">
-                            <input class="col-md-2 order-detail-input-readonly" value="${order.remarks}" disabled>
-                        </label>
+                        <div class="col-md-8">
+                            <label class="col-md-3" style="text-align: right;font-size: 17px;">备注:</label>
+                            <label class="col-md-5" style="font-size: 17px;">${order.remarks}</label>
+                        </div>
 
                     </div>
                 </div>
@@ -115,8 +92,11 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="hr-line-dashed"></div>
-                    <div class="form-group" style="text-align: center">
+                    <div class="form-group" >
                         <div class="row">
+                            <div class="col-md-1">
+                                &nbsp;
+                            </div>
                             <div class="col-md-6 " >
                                 <button class="btn btn-primary global-button-style" type="button"
                                         onclick="history.go(-1)">返  回

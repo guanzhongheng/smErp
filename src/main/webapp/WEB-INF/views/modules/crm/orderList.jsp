@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/static/common/customize.css">
     <script type="text/javascript">
         function page(n,s){
-            debugger;
+
             if(n) $("#pageNo").val(n);
             if(s) $("#pageSize").val(s);
             $("#searchForm").attr("action","${ctx}/crm/order/list");
@@ -59,8 +59,9 @@
                     <%--<li>
                         <label for="exception"><input id="exception" name="exception" type="checkbox" value="1"/>跟进状态</label>
                     </li>--%>
-                    <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 100px" value="查询"/></li>
-                    <li class="clearfix"></li>
+                    <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 80px" value="查询"/></li>
+                    <li class="btns"><a type="button" class="btn btn-primary" style="width: 54px;height: 20px" onclick="uploadFile()">上 传</a></li>
+                    <li class="btns"><input class="btn btn-primary" type="button" style="width: 80px" onclick="ordFormReset()" value="重置"/></li>
                 </ul>
             </form:form>
 
@@ -74,9 +75,6 @@
                         <th style="text-align: center">关联客户</th>
                         <th style="text-align: center">审批状态</th>
                         <th style="text-align: center">签单日期</th>
-                        <th style="text-align: center">订单总金额</th>
-                        <th style="text-align: center">已回款金额</th>
-                        <th style="text-align: center">已开票金额</th>
                         <th style="text-align: center">操作</th>
                     </tr>
                     </thead>
@@ -89,16 +87,11 @@
                             <td>${ord.cusName}</td>
                             <td>${ord.ordStatusValue}</td>
                             <td>${ord.ordSignDate}</td>
-                            <td>${ord.ordTotalAmount}</td>
-                            <td>${ord.repayAmount}</td>
-                            <td>${ord.invoicedAmount}</td>
                             <td>
-                                    <%--<a href=""><i class="icon-comment">跟进</i></a>--%>
-                                <a href="/order/prodDetailList?ordCode=${ord.ordCode}"><i class="icon-plus">&nbsp;产品添加</i></a>
+                                <a href="/order/prodDetailList?ordCode=${ord.ordCode}"><i class="icon-plus">&nbsp;产品新增</i></a>
                                 <a href="/order/order_add?ordCode=${ord.ordCode}"><i class="icon-pencil">&nbsp;编辑</i></a>
                                 <a href="/order/order_delete?ordCode=${ord.ordCode}" onclick="return confirmx('确认要删除该订单吗？', this.href)">
                                     <i class="icon-trash">删除</i></a>
-                                <a href="/print/order_print?ordCode=${ord.ordCode}"><i class="icon-print">&nbsp;打印</i></a>
                             </td>
                         </tr>
                     </c:forEach>
@@ -106,24 +99,15 @@
                 </table>
                 <div class="pagination">${page}</div>
             </div>
-            <div class="control-group">&nbsp;&nbsp;&nbsp;&nbsp;
-                <%--<a href="/order/order_add" type="button" class="btn btn-primary" style="width: 67px;height: 22px"><i--%>
-                <%--class="icon-plus"></i>&nbsp;添加</a>&nbsp;&nbsp;&nbsp;&nbsp;--%>
-                <a type="button" class="btn btn-primary" style="width: 100px;height: 23px" onclick="uploadFile()">上  传</a>
-            </div>
         </div>
     </div>
 </div>
-
-
-
-
 
 <script>
     function uploadFile() {
         top.$.jBox.open("iframe:${ctx}/crm/order/upload", "文件上传", 500, $(top.document).height() - 300, {
             buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
-                debugger;
+
 
                 var file = h.find("iframe")[0].contentWindow.orderFile;
                 var formData = new FormData();
@@ -147,13 +131,17 @@
                     });
                 }
             }, loaded: function (h) {
-                debugger;
+
                 $(".jbox-content", top.document).css("overflow-y", "hidden");
             }
         });
     };
+
+    function ordFormReset() {
+        $("#searchForm")[0].reset();
+    }
 </script>
-<%--<sys:message content="${message}"/>--%>
+<sys:message content="${message}"/>
 </body>
 
 

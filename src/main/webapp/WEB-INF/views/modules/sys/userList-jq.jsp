@@ -39,7 +39,7 @@
 	</div>
 	<%--<ul class="nav nav-tabs">--%>
 		<%--<li class="active"><a href="${ctx}/sys/user/list">用户列表</a></li>--%>
-		<%--<li><a href="${ctx}/sys/user/form">用户添加</a></li>--%>
+		<%--<li><a href="${ctx}/sys/user/form">用户新增</a></li>--%>
 	<%--</ul>--%>
 
 

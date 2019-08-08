@@ -24,8 +24,7 @@
                     <div class="col-sm-12">
                         <div class="">
                             <form method="get" class="form-horizontal">
-
-                                <div class="hr-line-dashed"></div>
+                                </br>
                                 <div class="form-group">
 
                                     <label class="col-md-2 control-label order-label-margin"><i style="color: red">*</i>
@@ -47,7 +46,7 @@
                                         </select>
                                     </label>
                                     <div class="col-md-2 control-label order-input-width">
-                                        <a href="/cus/customer_add" class="btn btn-primary" style="width: 100px">客户添加</a>
+                                        <a href="/cus/customer_add" class="btn btn-primary" style="width: 100px">客户新增</a>
                                     </div>
                                 </div>
 
@@ -105,7 +104,7 @@
                                                     maxlength="10"
                                                     class="form-control global-input order-label-input-width" placeholder="我方签约人"/>
                                     </div>
-                                    <label class="col-md-2 control-label order-label-margin"><i style="color: red">*</i>
+                                    <label class="col-md-2 control-label order-label-margin order-input-width"><i style="color: red">*</i>
                                         客户签约人:
                                     </label>
                                     <div class="col-md-2 control-label order-label-input-width">
@@ -128,15 +127,13 @@
 
 
                                 <div class="hr-line-dashed"></div>
-                                <div class="form-group" style="text-align: center">
+                                <div class="form-group" >
                                     <div class="row">
-                                        <div class="col-md-2 col-sm-offset-2" >
-                                            <button class="btn btn-primary global-button-style" type="submit">保存订单</button>
+                                        <div class="col-md-1">
+                                            &nbsp;
                                         </div>
-                                        <%--<div class="col-md-2 " >
-                                            <button type="button"  class="btn btn-primary global-button-style" onclick="prodlistAdd()">产品添加</button>
-                                        </div>--%>
-                                        <div class="col-md-2 " >
+                                        <div class="col-md-6 " >
+                                            <button class="btn btn-primary global-button-style" type="submit">保存订单</button>&nbsp;&nbsp;&nbsp;
                                             <button class="btn btn-primary global-button-style" type="button"
                                                     onclick="history.go(-1)">返  回
                                             </button>
@@ -234,7 +231,7 @@
         });
     });
     function prodlistAdd() {
-        debugger;
+
         var orderCode = $("#ordCode").val();
         if(orderCode == null || orderCode == '' || orderCode == undefined){
             layer.msg('请先保存订单');

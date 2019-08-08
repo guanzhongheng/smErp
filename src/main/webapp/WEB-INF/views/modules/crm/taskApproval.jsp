@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/static/common/customize.css">
     <script type="text/javascript">
         function page(n,s){
-            debugger;
+
             if(n) $("#pageNo").val(n);
             if(s) $("#pageSize").val(s);
             $("#searchForm").attr("action","${ctx}/crm/approval/list");
@@ -30,7 +30,7 @@
     <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
         <div class="panel-heading" style="background-color: #50B0E6">
             <h3 class="panel-title global-panel-title" >
-                订单列表
+                订单审核
             </h3>
             <code class="pull-right" style="margin-top: -33px;margin-right: 8px;"><span style="color: red; ">*</span>
                 <small>为必填项</small>
@@ -63,17 +63,11 @@
                                class="input-small Wdate"
                                value="" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
                     </li>
-                    <li>
-                        <label for="exception"><input id="exception" name="exception" type="checkbox" value="1"/>跟进状态</label>
-                    </li>
-                    <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 100px" value="查询"/></li>
-                    <li class="clearfix"></li>
+                    <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 80px" value="查询"/></li>
+                    &nbsp;&nbsp;
+                    <li class="btns"><input class="btn btn-primary" type="button" style="width: 80px" onclick="apprFormReset()" value="重置"/></li>
                 </ul>
             </form:form>
-            <%--<div class="control-group">&nbsp;&nbsp;&nbsp;&nbsp;--%>
-            <%--<a href="/order/order_add" type="button" class="btn btn-primary" style="width: 67px;height: 22px"><i--%>
-            <%--class="icon-plus"></i>&nbsp;添加</a>--%>
-            <%--</div>--%>
             <div class="control-group table-responsive">
                 <table id="contentTable" class="table table-striped table-bordered table-hover text-nowrap">
                     <thead>
@@ -111,7 +105,14 @@
         </div>
     </div>
 </div>
-
+<script>
+    function apprFormReset() {
+        $("#ordCode").val("");
+        $("#ordTitle").val("");
+        $("#cusName").val("");
+        $("#ordSignDate").val("");
+    }
+</script>
 
 
 

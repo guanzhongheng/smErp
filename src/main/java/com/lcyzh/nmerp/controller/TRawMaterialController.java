@@ -31,7 +31,7 @@ public class TRawMaterialController extends BaseController {
     @Autowired
     private ITFormulaService formulaService;
 
-    @RequestMapping(value = {"/list", ""}, method = RequestMethod.GET)
+    @RequestMapping(value = {"list", ""})
     public String list(@ModelAttribute("rawMaterial") TRawMaterial rawMaterial,Model model, HttpServletRequest request, HttpServletResponse response) {
         Page<TRawMaterial> page = new Page<>(request, response);
         List<TRawMaterial> list = rawMaterialService.findAllList();
@@ -41,7 +41,7 @@ public class TRawMaterialController extends BaseController {
         return "modules/crm/rawMaterialList";
     }
 
-    @RequestMapping(value = {"/get"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"get"}, method = RequestMethod.GET)
     public String get(@ModelAttribute("rawMaterial") TRawMaterial rawMaterial, Model model) {
         TRawMaterial rawMaterialInfo = new TRawMaterial();
         if(rawMaterial.getId() != null){

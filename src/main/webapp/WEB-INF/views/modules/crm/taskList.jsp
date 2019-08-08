@@ -5,7 +5,7 @@
     <title>任务分配</title>
     <script type="text/javascript">
         function page(n,s){
-            debugger;
+
             if(n) $("#pageNo").val(n);
             if(s) $("#pageSize").val(s);
             $("#searchForm").attr("action","${ctx}/crm/order/taskList");
@@ -85,14 +85,14 @@
 <sys:message content="${message}"/>
 <script>
     $("#taskDoWork").click(function () {
-        debugger;
+
         <!-- 针对选中客户进行操作 -->
         // var checkValue = $(".td checkbox");
         var str = getTaskCheckValue();
         if (str.length > 0) {
             top.$.jBox.open("iframe:${ctx}/crm/taskForm?ids="+str, "任务分配", 500, $(top.document).height() - 300, {
                 buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
-                    debugger;
+
                     var taskIds = h.find("iframe")[0].contentWindow.taskIds;
                     var devInfo = h.find("iframe")[0].contentWindow.devInfo;
                     if (v == "ok") {
@@ -109,7 +109,7 @@
                         })
                     }
                 }, loaded: function (h) {
-                    debugger;
+
                     $(".jbox-content", top.document).css("overflow-y", "hidden");
                 }
             });
@@ -120,7 +120,7 @@
     });
 
     function getTaskCheckValue() {
-        debugger;
+
         var obj = document.getElementsByName("orderCode");
         var check_val = '';
         for(k in obj){

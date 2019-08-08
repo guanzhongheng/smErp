@@ -15,7 +15,7 @@
     </style>
     <script type="text/javascript">
         $(document).ready(function() {
-            debugger;
+
             // <c:if test="${tabmode eq '1'}"> 初始化页签
             $.fn.initJerichoTab({
                 renderTo: '#right', uniqueId: 'jerichotab',
@@ -24,7 +24,7 @@
             });//</c:if>
             // 绑定菜单单击事件
             $("#menu a.menu").click(function(){
-                debugger;
+
                 // 一级菜单焦点
                 $("#menu li.menu").removeClass("active");
                 $(this).parent().addClass("active");
@@ -46,7 +46,7 @@
                 var menuId = "#menu-" + $(this).attr("data-id");
 
                 if ($(menuId).length > 0){
-                    debugger;
+
                     $("#left .accordion").hide();
                     $(menuId).show();
                     // 初始化点击第一个二级菜单
@@ -61,9 +61,9 @@
                 }else{
                     // 获取二级菜单数据
                     $.get($(this).attr("data-href"), function(data){
-                        debugger;
+
                         if (data.indexOf("id=\"loginForm\"") != -1){
-                            debugger;
+
                             alert('未登录或登录超时。请重新登录，谢谢！');
                             top.location = "${ctx}";
                             return false;
@@ -91,7 +91,7 @@
                         // 展现三级
                         $(menuId + " .accordion-inner a").click(function(){
                             var href = $(this).attr("data-href");
-                            debugger;
+
                             if($(href).length > 0){
                                 $(href).toggle().parent().toggle();
                                 return false;

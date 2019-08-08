@@ -9,7 +9,7 @@
 
     <script type="text/javascript">
         function page(n, s) {
-            debugger;
+
             if (n) $("#pageNo").val(n);
             if (s) $("#pageSize").val(s);
             $("#searchForm").attr("action", "${ctx}/crm/customer/list");
@@ -75,13 +75,14 @@
                         &nbsp;&nbsp;
                         <input type="checkbox" name="followType" id="type" value="1">归属模式
                     </li>--%>
-                    &nbsp;&nbsp;
-                    <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 100px;"
+                    <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 80px;"
                                             value="查询"/></li>
+                    <li class="btns"> <a href="/cus/customer_add" type="button" class="btn btn-primary" style="width: 54px;height: 20px">新增</a></li>
+                    <li class="btns"><input class="btn btn-primary" type="button" style="width: 80px" onclick="orderFormReset()" value="重置"/></li>
                 </ul>
             </form:form>
 
-            <div class="control-group table-responsive">
+            <div class="">
                 <table id="contentTable" class="table table-striped table-bordered table-hover text-nowrap">
                     <thead>
                     <tr>
@@ -128,29 +129,25 @@
                 <div class="pagination">${page}</div>
             </div>
 
-            <div class="control-group">&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="/cus/customer_add" type="button" class="btn btn-primary" style="width: 100px;height: 23px"><i
-                        class="icon-plus"></i>&nbsp;添加</a>
+            <div class="control-group">
                 &nbsp;&nbsp;
-                <a type="button" id="toCustomer" class="btn btn-default" style="width: 100px;height: 23px"><i
-                        class="icon-refresh"></i>&nbsp;修改归属人</a>
+                <a type="button" id="toCustomer" class="btn btn-success" style="width: 100px;height: 22px">分配归属</a>
                 &nbsp;&nbsp;
-                <a type="button" id="toPoolCustomer" class="btn btn-default" style="width: 100px;height: 23px"><i
-                        class="icon-group"></i>&nbsp;移入公海</a>
+                <a type="button" id="toPoolCustomer" class="btn btn-success" style="width: 100px;height: 22px">移入公海</a>
             </div>
         </div>
     </div>
     <script>
         $(document).ready(function () {
             $("#toCustomer").click(function () {
-                debugger;
+
                 <!-- 针对选中客户进行操作 -->
                 // var checkValue = $(".td checkbox");
                 var str = getCheckValue();
                 if (str.length > 0) {
                     top.$.jBox.open("iframe:${ctx}/crm/formSubmit?ids=" + str, "转移客户", 500, $(top.document).height() - 300, {
                         buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
-                            debugger;
+
                             var ids = h.find("iframe")[0].contentWindow.ids;
                             var cusContent = h.find("iframe")[0].contentWindow.cusContent;
                             var remarks = h.find("iframe")[0].contentWindow.remarks;
@@ -168,7 +165,7 @@
                                 })
                             }
                         }, loaded: function (h) {
-                            debugger;
+
                             $(".jbox-content", top.document).css("overflow-y", "hidden");
                         }
                     });
@@ -182,7 +179,7 @@
                 if (str.length > 0) {
                     top.$.jBox.open("iframe:${ctx}/crm/poolRemark?ids=" + str, "移入公海", 500, $(top.document).height() - 300, {
                         buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
-                            debugger;
+
                             var ids = h.find("iframe")[0].contentWindow.ids;
                             var remarks = h.find("iframe")[0].contentWindow.remarks;
                             if (v == "ok") {
@@ -198,7 +195,7 @@
                                 })
                             }
                         }, loaded: function (h) {
-                            debugger;
+
                             $(".jbox-content", top.document).css("overflow-y", "hidden");
                         }
                     });
@@ -207,10 +204,10 @@
                 }
             });
             gotoFollowInfo = function (obj) {
-                debugger;
+
                 top.$.jBox.open("iframe:${ctx}/crm/followInfo?cusCode=" + obj.attributes["data-value"].value, "客户跟踪", 500, $(top.document).height() - 300, {
                     buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
-                        debugger;
+
                         var cusCode = h.find("iframe")[0].contentWindow.userCusCode;
                         var followTitle = h.find("iframe")[0].contentWindow.followTitle;
                         var followTime = h.find("iframe")[0].contentWindow.followTime;
@@ -231,7 +228,7 @@
                         }
                     }
                     // , loaded: function (h) {
-                    //     debugger;
+                    //
                     //     $(".jbox-content", top.document).css("overflow-y", "hidden");
                     // }
                 });
@@ -244,7 +241,7 @@
         // }
 
         function getCheckValue() {
-            debugger;
+
             var obj = document.getElementsByName("cuscode");
             var check_val = '';
             for (k in obj) {
@@ -266,6 +263,12 @@
                     codes[i].checked = false;
                 }
             }
+        }
+        function orderFormReset() {
+            $("#searchForm")[0].reset();
+            $("#cusType").val("").select2();
+            $("#cusStatus").val("").select2();
+            $("#cusGrade").val("").select2();
         }
     </script>
 </div>

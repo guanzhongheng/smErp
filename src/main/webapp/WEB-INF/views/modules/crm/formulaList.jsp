@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/static/common/customize.css">
     <script type="text/javascript">
         function page(n,s){
-            debugger;
+
             if(n) $("#pageNo").val(n);
             if(s) $("#pageSize").val(s);
             $("#searchForm").attr("action","${ctx}/crm/formula/list");
@@ -48,8 +48,10 @@
                         </form:select>
                     </li>
                     &nbsp;&nbsp;
-                    <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 100px" value="查询"/></li>
-                    <li class="btns"><a href="/formula/addOrUpdate" class="btn btn-primary" style="width: 100px">新增配方</a></li>
+                    <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 80px" value="查询"/></li>
+                    <li class="btns"><a href="/formula/addOrUpdate" class="btn btn-primary" style="width: 54px">新增</a></li>
+                    <li class="btns"><input class="btn btn-primary" type="button" style="width: 80px" onclick="formFormReset()" value="重置"/></li>
+
                 </ul>
             </form:form>
 
@@ -86,5 +88,12 @@
         </div>
     </div>
 </div>
+<script>
+    function formFormReset() {
+        $("#searchForm")[0].reset();
+        $("#prodVariety").val("").select2();
+        $("#prodCgyCode").val("").select2();
+    }
+</script>
 </body>
 </html>

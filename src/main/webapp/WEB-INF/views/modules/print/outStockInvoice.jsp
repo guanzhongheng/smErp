@@ -59,7 +59,7 @@
                             <th>品种</th>
                             <th>颜色</th>
                             <th>规格(长*宽*厚)</th>
-                            <th>重量</th>
+                            <%--<th>重量</th>--%>
                             <th>数量</th>
                             <th>总面积(M&sup2)</th>
                             <th>总重量(kg)</th>
@@ -76,7 +76,7 @@
                                 <td>${fns:getValueByDictKey(ord.itemCgyCode)}</td>
                                 <td>${fns:getDictLabel(ord.itemColor,'prod_color','无')}</td>
                                 <td>${ord.itemLenth}*${ord.itemWidth}*${ord.itemThick}</td>
-                                <td>${ord.itemWeight}</td>
+                                <%--<td>${ord.itemWeight}</td>--%>
                                 <td>${ord.itemNum}</td>
                                 <td>${ord.itemTotalSq}</td>
                                 <td>${ord.itemTotalWeight}</td>

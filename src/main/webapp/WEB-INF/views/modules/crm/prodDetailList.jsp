@@ -151,22 +151,26 @@
                     </div>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-sm-12">
                     <div class="hr-line-dashed"></div>
-                    <div class="form-group" style="text-align: center">
+                    <div class="form-group" >
                         <div class="row">
+                            <div class="col-md-1">
+                                &nbsp;
+                            </div>
                             <div class="col-md-6 " >
                                 <button class="btn btn-primary global-button-style" type="button"
-                                        onclick="doProcess()">下一步
+                                        onclick="doProcess()">添 加
+                                </button>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button class="btn btn-primary global-button-style" type="button"
+                                        onclick="history.go(-1)">返 回
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
@@ -178,27 +182,18 @@
             </h3>
         </div>
         <div class="panel-body" style="padding: 10px 10px 0px 10px;">
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <%--<div class="hr-line-dashed"></div>--%>
-                    <div class="form-group" style="text-align: center">
-                        <div class="row">
-                            <div class="col-md-6 " >
-                                <button class="btn btn-primary global-button-style" type="button"
-                                        onclick="saveProd()">确认添加
-                                </button>
-                            </div>
-                            <div class="col-md-1 " >
-                                <button class="btn btn-white global-button-style" type="button" style="margin-left: -220px"
-                                        onclick="history.go(-1)">取消添加
-                                </button>
-                            </div>
-                        </div>
+            <div class="form-group" >
+                <div class="row">
+                    <div class="col-md-1">
+                        &nbsp;
+                    </div>
+                    <div class="col-md-6 " >
+                        <button class="btn btn-primary global-button-style" type="button"
+                                onclick="saveProd()">保存
+                        </button>&nbsp;&nbsp;
                     </div>
                 </div>
             </div>
-
             <div class="control-group table-responsive" >
                 <table id="cusProdDetail" data-height="300"  class="table table-striped table-bordered table-hover text-nowrap">
                     <thead>
@@ -426,7 +421,7 @@
     }
     function getResChange(obj) {
         if($(obj).find("option:selected").val() != -1){
-            debugger;
+
             prodObj.itemName = $(obj).find("option:selected").attr("data-prodName");
             prodObj.itemCode = $(obj).find("option:selected").val();
             prodObj.itemCgyCode = $(obj).find("option:selected").attr("data-prodcgyCode");
@@ -466,7 +461,7 @@
     }
 
     function doProcess() {
-        debugger;
+
         cusProdList.push(tranObject(prodObj));
         $("#cusProdDetail").bootstrapTable("load",cusProdList);
         $('#cusProdDetail .chosen-select').trigger("chosen:updated");
@@ -482,7 +477,7 @@
         dataType:'json',
         cache: false,
         success: function(data){
-            debugger;
+
             if(data != null){
                 ycType = data.ycType;
                 ybType = data.ybType;
@@ -499,7 +494,7 @@
             escape:false, //启动转义字符
             queryParamsType:'',//设置请求参数格式
             queryParams: function queryParams(params) {
-                debugger;
+
                 var ordCode = $("#ordCode").val()
                 if(ordCode != null && ordCode != '' && ordCode != 'undefined'){
                     var params = {
@@ -514,7 +509,7 @@
                     title: '序号',
                     width: '0px',
                     formatter:function (value,row,index){
-                        debugger;
+
                         if(index == 0){
                             maxDataIndex = 1;
                         }else{
@@ -600,9 +595,9 @@
                 {
                     field: 'itemWeight',
                     title: '重量',
-                    width: '75px',
+                    width: '80px',
                     formatter:function (value,row,index) {
-                        return ['<input type="number" min="0" step="0.001" style="width: 55px" onchange="inserData(\'itemWeight\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
+                        return ['<input type="number" min="0" step="0.001" style="width: 80px;" onchange="inserData(\'itemWeight\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
                     }
                 },{
                     field: 'itemYcType',
@@ -631,7 +626,7 @@
                 }
             ],
             onLoadSuccess:function (data) {
-                debugger;
+
                 cusProdList = $('#cusProdDetail').bootstrapTable("getData");
                 $('#cusProdDetail .chosen-select').trigger("chosen:updated");
                 $('#cusProdDetail .chosen-select').chosen();
@@ -656,14 +651,14 @@
         }else{
             headOption = headOption + "<option value='141002'>面积</option>";
         }
-        option  = '<select class="chosen-select" id="itemPriceType"'+row.ckId+' onchange="inserData(\'itemPriceType\','+row.ckId+',this)" style="width: 80px;height:33px;">'+
+        option  = '<select class="chosen-select" id="itemPriceType"'+row.ckId+' onchange="inserData(\'itemPriceType\','+row.ckId+',this)" style="width: 100px;height:33px;">'+
             headOption + '</select>';
 
         return [option].join('');
     }
     
     function operYbType(value,row,index){
-        debugger;
+
         var option;
         var headOption = "<option value =''>请选择</option>";
         if(ybType != null || ybType != undefined){
@@ -675,7 +670,7 @@
                 }
             });
         }
-        option  = '<select class="chosen-select" id="itemYbType"'+row.ckId+' onchange="inserData(\'itemYbType\','+row.ckId+',this)" style="height:33px;">'+
+        option  = '<select class="chosen-select" id="itemYbType"'+row.ckId+' onchange="inserData(\'itemYbType\','+row.ckId+',this)" style="width: 150px;height:33px;">'+
             headOption + '</select>';
 
         return [option].join('');
@@ -683,7 +678,7 @@
 
 
     function operYcType(value,row,index){
-        debugger;
+
         var option;
         var headOption = "<option value =''>请选择</option>";
         if(ycType != null || ycType != undefined){
@@ -695,14 +690,14 @@
                 }
             });
         }
-        option  = '<select class="chosen-select" id="itemYcType"'+row.ckId+' onchange="inserData(\'itemYcType\','+row.ckId+',this)" style="height:33px;">'+
+        option  = '<select class="chosen-select" id="itemYcType"'+row.ckId+' onchange="inserData(\'itemYcType\','+row.ckId+',this)" style="width: 150px;height:33px;">'+
             headOption + '</select>';
         return [option].join('');
     }
 
     function operFormatter(value, row, index) {
         return [
-            ' <button id="tableRowAdd" type="button" class="btn btn-default" ">添加</button>'
+            ' <button id="tableRowAdd" type="button" class="btn btn-default" ">新增</button>'
         ].join('');
     };
 
@@ -716,7 +711,7 @@
 
     window.operateEvents = {
         "click #tableRowAdd" : function(e,value,row,index){
-            debugger;
+
             cusProdList.push(tranObject(row));
             $("#cusProdDetail").bootstrapTable("load",cusProdList);
         },
@@ -729,7 +724,7 @@
                 }
             }
             $("#cusProdDetail").bootstrapTable("load",cusProdList);
-            debugger;
+
         },
         "click #tableRowCope" : function(e,value,row,index){
             cusProdList.push(tranObject(row));
@@ -739,7 +734,7 @@
     
     function tranObject(data) {
         indexCkId = indexCkId + 1;
-        debugger;
+
         var obj = {
             "ckId":indexCkId,
             "ordCode":$("#ordCode").val(),
@@ -798,7 +793,7 @@
                 }
             }
         }
-        debugger;
+
         $("#cusProdDetail").bootstrapTable("load",cusProdList);
         $('#cusProdDetail .chosen-select').trigger("chosen:updated");
         $('#cusProdDetail .chosen-select').chosen();
@@ -829,7 +824,7 @@
                     layer.msg("保存失败！")
                 },
                 success: function(r) {
-                    debugger;
+
                     if(r.res == "success"){
                         window.location.href = "/crm/order/list"
                     }else{

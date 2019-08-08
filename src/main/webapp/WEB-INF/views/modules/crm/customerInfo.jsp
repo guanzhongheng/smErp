@@ -15,12 +15,6 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <%--<div class="ibox-title">--%>
-                                <%--<h5>客户详情</h5>--%>
-                                <%--<code class="pull-right"><span style="color: red">*</span>--%>
-                                    <%--<small>为必填项</small>--%>
-                                <%--</code>--%>
-                            <%--</div>--%>
                             <div style="padding: 15px 20px 20px;">
 
                                 <form:form id="inputForm" modelAttribute="customerAddModifyVo" action="${ctx}/cus/customer_save"
@@ -45,8 +39,13 @@
                                                 <div class="col-sm-6 b-r">
                                                     <div class="ibox float-e-margins">
                                                         <form method="get" class="form-horizontal">
-                                                            <div class="ibox-title" style="border-width: 4px 0px 0px 4px; border-color: #eaeaea; background-color: #f1f5f7">
-                                                                <h3>基本信息</h3>
+                                                            <div>
+                                                                <div class="col-sm-1" style="text-align: right">
+                                                                    <i style="background-color: blue;width: 10px;">&nbsp;</i>
+                                                                </div>
+                                                                <div style="width: 150px">
+                                                                    <h3>基础信息</h3>
+                                                                </div>
                                                             </div>
                                                             <div class="hr-line-dashed" ></div>
                                                             <div class="form-group">
@@ -158,8 +157,13 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <div class="ibox-title" style="border-width: 4px 0px 0px 4px; border-color: #eaeaea; background-color: #f1f5f7">
-                                                    <h3>首要联系人</h3>
+                                                    <div>
+                                                        <div class="col-sm-1" style="text-align: right">
+                                                            <i style="background-color: blue;width: 10px;">&nbsp;</i>
+                                                        </div>
+                                                        <div style="width: 150px">
+                                                            <h3>首要联系人</h3>
+                                                        </div>
                                                     </div>
                                                     <div class="hr-line-dashed"></div>
 
@@ -279,7 +283,7 @@
                                 <div class="timeline-item">
                                     <div class="row">
                                         <div class="col-xs-3 date">
-                                            <i class="fa fa-file-text"></i>${fo.followTime}
+                                            <i class="fa fa-file-text"></i><fmt:formatDate value="${fo.followTime}" pattern="yyyy-MM-dd"/>
                                             <br>
                                         </div>
                                         <div class="col-xs-9 content">

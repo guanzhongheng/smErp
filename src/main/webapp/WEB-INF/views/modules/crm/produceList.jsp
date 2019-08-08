@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/static/common/customize.css">
     <script type="text/javascript">
         function page(n,s){
-            debugger;
+
             if(n) $("#pageNo").val(n);
             if(s) $("#pageSize").val(s);
             $("#searchForm").attr("action","${ctx}/crm/produce/list");
@@ -68,7 +68,9 @@
                         </form:select>
                     </li>
                     &nbsp;&nbsp;
-                    <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 100px" value="查询"/></li>
+                    <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 80px" value="查询"/></li>
+                    &nbsp;&nbsp;
+                    <li class="btns"><input class="btn btn-primary" type="button" style="width: 80px" onclick="produceFormReset()" value="重置"/></li>
                 </ul>
             </form:form>
             <div class="control-group  table-responsive">
@@ -134,7 +136,14 @@
         </div>
     </div>
 </div>
-
+<script>
+    function produceFormReset() {
+        $("#itemVariety").val("").select2();
+        $("#itemCgyCode").val("").select2();
+        $("#itemColor").val("").select2();
+        $("#macCode").val("").select2();
+    }
+</script>
 
 
 

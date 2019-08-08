@@ -46,27 +46,69 @@
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label"><i style="color: red">*</i>&nbsp;原料分类:</label>
+                    <label class="control-label">&nbsp;原料分类:</label>
                     <div class="controls">
-                        <form:input path="rawnCtyCode" htmlEscape="false" maxlength="50" class="required"/>
+                        <form:input path="rawnCtyCode" htmlEscape="false" maxlength="50"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="row">
+                        <div class="col-md-6 ">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button class="btn btn-primary global-button-style" type="submit">保 存</button>&nbsp;&nbsp;&nbsp;
+
+                            <button class="btn btn-white global-button-style" type="button"
+                                    onclick="history.go(-1)">返 回
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <div class="">
-                    <input id="btnSubmit" class="btn btn-primary"
-                           style="width: 180px;font-size: 18px;height: 40px;margin-left: 179px;margin-bottom: 10px;"
-                           type="submit" value="保  存"/>
-                    <input id="btnCancel" class="btn" type="button"
-                           style="width: 180px;font-size: 18px;height: 40px;margin-left: 95px;margin-bottom: 10px;"
-                           value="返  回" onclick="history.go(-1)"/>
-
-                </div>
             </form:form>
 
         </div>
     </div>
 </div>
 
+<script>
+    $(document).ready(function () {
+
+        $("#inputForm").validate({
+            rules: {
+                rawmCode: {
+                    required: true
+                },
+                rawmName: {
+                    required: true
+                },
+                rawnSpecs: {
+                    required: true
+                },
+                rawnSupplier: {
+                    required: true
+                }
+            },
+            messages: {
+                rawmCode: {
+                    required: "请输入原料编号"
+                },
+                rawmName: {
+                    required: "请输入名称"
+                },
+                rawnSpecs: {
+                    required: "请输入规格"
+                },
+                rawnSupplier: {
+                    required: "请输入供应商"
+                }
+            },
+            ignore: ":hidden:not(select)",
+            errorPlacement: function (error, element) {
+                error.appendTo(element.parent());
+            },
+        });
+    });
+</script>
 
 
 

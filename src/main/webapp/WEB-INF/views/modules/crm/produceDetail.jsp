@@ -68,8 +68,10 @@
                             <div class="col-sm-8 b-r">
                                 <div class="ibox float-e-margins">
                                     <form method="get" class="form-horizontal">
-                                        <div class="ibox-title" style="border-width: 4px 0px 0px 4px; border-color: #eaeaea; background-color: #f1f5f7">
-                                            <h3>基本信息</h3>
+                                        <div>
+                                            <div style="width: 170px">
+                                                <h3><i style="background-color: blue;width: 10px;">&nbsp;</i> &nbsp;&nbsp;基本信息</h3>
+                                            </div>
                                         </div>
                                         <div class="hr-line-dashed" ></div>
                                         <div class="form-group">
@@ -168,17 +170,13 @@
                                         </div>
                                         <div class="hr-line-dashed"></div>
                                         <div class="form-group">
-                                        </div>
-                                        <div class="hr-line-dashed"></div>
-                                        <div class="form-group" style="text-align: center">
                                             <div class="row">
-                                                <div class="col-sm-2" >
-                                                    <button class="btn btn-primary global-button-style" type="button" id="inStock">入   库</button>
+                                                <div class="col-md-1">
+                                                    &nbsp;
                                                 </div>
-                                                <div class="col-sm-2 col-sm-offset-2" >
-                                                    <button class="btn btn-warning global-button-style" type="submit">重新打签</button>
-                                                </div>
-                                                <div class="col-sm-2  col-sm-offset-2" >
+                                                <div class="col-md-8 " >
+                                                    <button class="btn btn-primary global-button-style" type="button" id="inStock">入 库</button>&nbsp;&nbsp;&nbsp;
+                                                    <button class="btn btn-warning global-button-style" type="submit">重新打签</button>&nbsp;&nbsp;&nbsp;
                                                     <button class="btn btn-white global-button-style" type="button" onclick="javascript:window.location.replace(document.referrer); ">返回</button>
                                                 </div>
                                             </div>
@@ -187,8 +185,13 @@
                                 </div>
                             </div>
                             <div class="col-sm-4">
-                                <div class="ibox-title" style="border-width: 4px 0px 0px 4px; border-color: #eaeaea; background-color: #f1f5f7">
-                                    <h3>配方信息</h3>
+                                <div>
+                                    <div class="col-sm-1" style="text-align: right">
+                                        <i style="background-color: blue;width: 10px;">&nbsp;</i>
+                                    </div>
+                                    <div style="width: 150px">
+                                        <h3>配方信息</h3>
+                                    </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
 

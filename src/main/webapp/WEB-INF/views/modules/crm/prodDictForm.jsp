@@ -36,7 +36,7 @@
                 <div class="control-group">
                     <label class="control-label"><i style="color: red">*</i>&nbsp;产品编码:</label>
                     <div class="controls">
-                        <form:input path="prodCode" htmlEscape="false" maxlength="50" class="required" disabled="${prodId == null?'false':'true'}"/>
+                        <form:input path="prodCode" htmlEscape="false" maxlength="50" class="required" disabled="${prodId == null?'false':'true'}" onblur="checkInfo(this)"/>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <i style="color: red">*</i>&nbsp;产品名称:&nbsp;&nbsp;&nbsp;&nbsp;
                         <form:input path="prodName" htmlEscape="false" maxlength="50" class="required" disabled="${prodId == null?'false':'true'}"/>
@@ -63,7 +63,7 @@
                     <div class="controls">
                         <form:select path="prodColor" class="input-medium" cssStyle="width: 220px" placeholder="颜色">
                             <form:option value="" label=""/>
-                            <form:options items="${fns:getDictList('prod_color')}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+                            <form:options items="${fns:getDictList('prod_color')}" itemLabel="label" itemValue="value" htmlEscape="false" disabled="${prodId == null?'false':'true'}"/>
                         </form:select>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <i style="color: white">*</i>&nbsp;产品厚度:&nbsp;&nbsp;&nbsp;&nbsp;
@@ -94,66 +94,82 @@
                 </div>
                 <div class="">
                     <input id="btnSubmit" class="btn btn-primary"
-                           style="width: 180px;font-size: 18px;height: 40px;margin-left: 179px;margin-bottom: 10px;"
+                           style="width: 130px;font-size: 18px;height: 40px;margin-left: 59px;margin-bottom: 10px;"
                            type="submit" value="保  存"/>
                     <input id="btnCancel" class="btn" type="button"
-                           style="width: 180px;font-size: 18px;height: 40px;margin-left: 95px;margin-bottom: 10px;"
+                           style="width: 130px;font-size: 18px;height: 40px;margin-left: 43px;margin-bottom: 10px;"
                            value="返  回" onclick="history.go(-1)"/>
 
                 </div>
-                <%--<div class="control-group">--%>
-                    <%--<label class="control-label">产品颜色:</label>--%>
-                    <%--<div class="controls">--%>
-                        <%--<form:select path="prodColor" class="input-medium" placeholder="颜色">--%>
-                            <%--<form:option value="" label=""/>--%>
-                            <%--<form:options items="${fns:getDictList('prod_color')}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
-                        <%--</form:select>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--<div class="control-group">--%>
-                    <%--<label class="control-label">产品厚度:</label>--%>
-                    <%--<div class="controls">--%>
-                        <%--<form:input path="prodThick" htmlEscape="false" maxlength="100" class="required"/>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--<div class="control-group">--%>
-                    <%--<label class="control-label">产品单位:</label>--%>
-                    <%--<div class="controls">--%>
-                        <%--<form:select path="prodUnit" class="input-medium" placeholder="产品单位">--%>
-                            <%--<form:option value="" label=""/>--%>
-                            <%--<form:options items="${fns:getCusDictList(142000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
-                        <%--</form:select>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--<div class="control-group">--%>
-                    <%--<label class="control-label">计价方式:</label>--%>
-                    <%--<div class="controls">--%>
-                        <%--<form:select path="prodPriceType" class="input-medium" placeholder="计价方式">--%>
-                            <%--<form:option value="" label=""/>--%>
-                            <%--<form:options items="${fns:getCusDictList(141000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
-                        <%--</form:select>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--<div class="control-group">--%>
-                    <%--<label class="control-label">参考单价:</label>--%>
-                    <%--<div class="controls">--%>
-                        <%--<form:input path="prodGuidePrice" htmlEscape="false" maxlength="100" class="required"/>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--<div class="form-actions">--%>
-                    <%--<input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;--%>
-                    <%--<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>--%>
-                <%--</div>--%>
             </form:form>
 
         </div>
     </div>
 </div>
+<script>
+    function checkInfo(obj){
+        alert(1);
+        // $.ajax({
+        //     url:
+        // })
 
-
-
-
-
+    }
+    $("select").change(function(){
+        $("#inputForm").valid();
+    })
+    $("#inputForm").validate({
+        rules: {
+            prodCode: {
+                required: true
+            },
+            prodName:{
+                required: true
+            },
+            prodCgyCode: {
+                required: true
+            },
+            prodVariety: {
+                required: true
+            },
+            prodColor: {
+                required: true
+            },
+            prodPriceType: {
+                required: true
+            },
+            prodUnit: {
+                required: true
+            }
+        },
+        messages: {
+            prodCode: {
+                required: "请填写产品编号"
+            },
+            prodName: {
+                required: "请填写产品名称"
+            },
+            prodCgyCode: {
+                required: "请选择产品品种"
+            },
+            prodVariety: {
+                required: "请选择产品类别"
+            },
+            prodColor: {
+                required: "请选择产品颜色"
+            },
+            prodPriceType: {
+                required: "请选择计价方式"
+            },
+            prodUnit: {
+                required: "请选择单位"
+            }
+        },
+        ignore:":hidden:not(select)",
+        errorPlacement:function(error,element) {
+            error.appendTo(element.parent());
+        },
+    });
+</script>
 
 </body>
 </html>

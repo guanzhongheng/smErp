@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="/static/common/customize.css">
 	<script type="text/javascript">
 		function page(n,s){
-		    debugger;
+
 			if(n) $("#pageNo").val(n);
 			if(s) $("#pageSize").val(s);
 			$("#searchForm").attr("action","${ctx}/tMachineInfo/list");
@@ -27,15 +27,20 @@
 				<form:form id="searchForm" modelAttribute="rawMaterial" action="${ctx}/tRawMaterial/list" method="post" class=" form-search ">
 					<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 					<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
-					<sys:tableSort id="orderBy" name="orderBy" value="${page.orderBy}" callback="page();"/>
-					<%--<ul class="ul-form">--%>
-						<%--<li><label>设备编号：</label><form:input path="macCode" htmlEscape="false" maxlength="50" class="input-medium"/></li>--%>
-						<%--<li><label>最小宽度：</label><form:input path="minWidth" htmlEscape="false" maxlength="50" class="input-medium"/></li>--%>
-						<%--<li><label>最大宽度：</label><form:input path="maxWidth" htmlEscape="false" maxlength="50" class="input-medium"/></li>--%>
-						<%--<li class="btns">--%>
-							<%--<input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 100px" value="查询" onclick="return page();"/>--%>
-						<%--<li class="clearfix"></li>--%>
-					<%--</ul>--%>
+					<ul class="ul-form">
+						<li>
+							<form:input path="rawmCode" htmlEscape="false" maxlength="200" class="input-medium"
+										placeholder="原料编号"/>
+						</li>
+						<li>
+							&nbsp;&nbsp;
+							<form:input path="rawmName" htmlEscape="false" maxlength="200" class="input-medium"
+										placeholder="原料名称"/>
+						</li>
+						<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
+						<li class="btns"><a href="${ctx}/tRawMaterial/addForm" type="button" class="btn btn-primary" style="width: 38px;height: 20px">新增</a></li>
+						<li class="btns"><input class="btn btn-primary" type="button" onclick="rawFormRest()" value="重置"/></li>
+					</ul>
 				</form:form>
 				<sys:message content="${message}"/>
 				<div class="control-group table-responsive">
@@ -71,13 +76,14 @@
 				</div>
 				<div class="pagination">${page}</div>
 
-				<div class="control-group">&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href="${ctx}/tRawMaterial/addForm" type="button" class="btn btn-primary" style="width: 140px;height: 23px"><i
-							class="icon-plus"></i>&nbsp;添加原材料</a>
-				</div>
 			</div>
 		</div>
 	</div>
-
+<script>
+	function rawFormRest() {
+        $("#rawmCode").val("");
+        $("#rawmName").val("");
+    }
+</script>
 </body>
 </html>
