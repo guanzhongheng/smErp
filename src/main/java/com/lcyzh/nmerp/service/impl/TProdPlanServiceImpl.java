@@ -46,12 +46,14 @@ public class TProdPlanServiceImpl implements TProdPlanService {
         ProdPlanVo prodPlanVo = new ProdPlanVo();
         TProdPlan prodPlan = tProdPlanMapper.findByProdPanCode(prodPlanCode);
         BeanUtils.copyProperties(prodPlan, prodPlanVo);
-        JSONObject jsonObject = JSON.parseObject(prodPlanVo.getFormula());
-        Map<String, FormulaDetailVo> context = new HashMap<>();
-        for(String key : jsonObject.keySet()) {
-            context.put(key, toJavaBean(new FormulaDetailVo(), jsonObject.getJSONObject(key)));
+        if(prodPlanVo.getFormula() != null && !prodPlanVo.getFormula().isEmpty()) {
+            JSONObject jsonObject = JSON.parseObject(prodPlanVo.getFormula());
+            Map<String, FormulaDetailVo> context = new HashMap<>();
+            for(String key : jsonObject.keySet()) {
+                context.put(key, toJavaBean(new FormulaDetailVo(), jsonObject.getJSONObject(key)));
+            }
+            prodPlanVo.setContext(context);
         }
-        prodPlanVo.setContext(context);
         return prodPlanVo;
     }
 
