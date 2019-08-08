@@ -34,5 +34,5 @@ public interface TProductMapper {
 
     List<TProduct> findListByCodes(List<String> codes);
 
-    Integer findCntByCode(String code);
+    Integer getCntByCode(String code);
 }

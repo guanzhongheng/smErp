@@ -172,7 +172,7 @@
         select * from T_PRODUCT where prod_cgy_code = #{prodCgyCode, jdbcType=BIGINT} and prod_variety = #{prodVariety,jdbcType=BIGINT} and  prod_color = #{prodColor,jdbcType=VARCHAR}
     </select>
 
-    <select id="findCntByCode" parameterType="java.lang.String" resultType="java.lang.Integer">
+    <select id="getCntByCode" parameterType="java.lang.String" resultType="java.lang.Integer">
         select count(*) cnt from T_PRODUCT where prod_code = #{code}
     </select>
 

@@ -107,4 +107,10 @@ public class TMachineInfoServiceImpl implements TMachineInfoService{
         return page;
     }
 
+    @Override
+    public boolean macCodeIsExistence(String code) {
+        Integer count = tMachineInfoMapper.getCntByCode(code);
+        return false;
+    }
+
 }

@@ -27,4 +27,6 @@ public interface TMachineInfoMapper {
     int delete(TMachineInfo tMachineInfo);
 
     TMachineInfo getByCode(String macCode);
+
+    Integer getCntByCode(String code);
 }

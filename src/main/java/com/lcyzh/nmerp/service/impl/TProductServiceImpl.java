@@ -158,7 +158,7 @@ public class TProductServiceImpl implements TProductService {
 
     @Override
     public boolean prodCodeIsExistence(String code) {
-        Integer count = tProductMapper.findCntByCode(code);
+        Integer count = tProductMapper.getCntByCode(code);
         return count > 0;
     }
 

@@ -57,7 +57,7 @@ public class TRawMaterialServiceImpl implements TRawMaterialService{
 
     @Override
     public boolean rawmCodeIsExistence(String code) {
-        Integer count = tRawMaterialMapper.findCntByCode(code);
+        Integer count = tRawMaterialMapper.getCntByCode(code);
         return count > 0;
     }
 

@@ -117,4 +117,8 @@
         WHERE id = #{id,jdbcType=BIGINT}
     </delete>
 
+    <select id="getCntByCode" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) cnt from t_machine_info where mac_code = #{code}
+    </select>
+
 </mapper>

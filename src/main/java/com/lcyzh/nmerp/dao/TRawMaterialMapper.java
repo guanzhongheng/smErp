@@ -26,5 +26,5 @@ public interface TRawMaterialMapper {
 
     int delete(TRawMaterial tRawMaterial);
 
-    Integer findCntByCode(String code);
+    Integer getCntByCode(String code);
 }
