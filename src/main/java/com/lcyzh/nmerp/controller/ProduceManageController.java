@@ -139,11 +139,6 @@ public class ProduceManageController extends BaseController {
         ProdPlanDetailVo print = (ProdPlanDetailVo)session.getAttribute(macCode);
 
         model.addAttribute("vo",print);
-//        if(print.getItemNum()>0){
-//            model.addAttribute("jump",1);
-//        }else{
-//            model.addAttribute("jump",0);
-//        }
         return "modules/crm/stockPrint";
     }
 
@@ -162,5 +157,16 @@ public class ProduceManageController extends BaseController {
             pageStr = "modules/crm/stockCertificateGreen";
         }
         return pageStr;
+    }
+
+    @RequestMapping(value = {"produce/rePrint"})
+    public String rePrint(Long stockId, Model model, HttpServletRequest request, HttpServletResponse response){
+        TStock stock = stockService.findById(stockId);
+        ProdPlanDetailVo print = new ProdPlanDetailVo();
+        BeanUtils.copyProperties(stock, print);
+        print.setItemColorValue(SysDictUtils.getDictLabel(print.getItemColor(), Constants.PROD_COLOR, ""));
+
+        model.addAttribute("vo",print);
+        return "modules/crm/stockPrint";
     }
 }
