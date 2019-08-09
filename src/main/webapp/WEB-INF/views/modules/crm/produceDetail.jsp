@@ -176,7 +176,7 @@
                                                 </div>
                                                 <div class="col-md-8 " >
                                                     <button class="btn btn-primary global-button-style" type="button" id="inStock">入 库</button>&nbsp;&nbsp;&nbsp;
-                                                    <button class="btn btn-warning global-button-style" type="submit" id="rePrint">重新打签</button>&nbsp;&nbsp;&nbsp;
+                                                    <button class="btn btn-warning global-button-style" type="submit" id="rePrint" disabled="true">重新打签</button>&nbsp;&nbsp;&nbsp;
                                                     <button class="btn btn-warning global-button-style" type="button" id="printCertRed" disabled="true">打印红色合格证</button>
                                                     <button class="btn btn-warning global-button-style" type="button" id="printCertGreen" disabled="true">打印绿色合格证</button>
                                                     <button class="btn btn-white global-button-style" type="button" onclick="javascript:window.location.replace(document.referrer); ">返回</button>

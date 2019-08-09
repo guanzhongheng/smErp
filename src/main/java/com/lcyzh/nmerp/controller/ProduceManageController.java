@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.controller.system.util.SysDictUtils;
+import com.lcyzh.nmerp.controller.system.util.UserUtils;
 import com.lcyzh.nmerp.entity.TProdPlan;
 import com.lcyzh.nmerp.entity.TStock;
 import com.lcyzh.nmerp.model.vo.LabelPrint;
@@ -152,6 +153,7 @@ public class ProduceManageController extends BaseController {
         HttpSession session = request.getSession();
         ProdPlanDetailVo print = (ProdPlanDetailVo)session.getAttribute(macCode);
 
+        model.addAttribute("user",UserUtils.getUser());
         model.addAttribute("vo",print);
         String pageStr = "";
         if("red".equals(type)){

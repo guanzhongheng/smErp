@@ -65,9 +65,9 @@
     <div class="page">
         <div class="subpage">
 
-            <div class="gray-bg">
+            <div class="gray-bg" style="background-color: white">
             <div>
-                <div style="width:100%;padding-left:0px;    padding-top: 33px;margin-top: 0px;">
+                <div style="width:100%;padding-left:0px;    padding-top: 33px;margin-top: 40px;">
                     <table  border="0" cellspacing="0" style="width:30%;height:180px;width: 170px;">
                         <tr>
                             <td colspan="2" style="height:1px;"></td>
@@ -82,13 +82,13 @@
                             <td colspan="2"  style="text-align:left;height:26px"><font size=4>${vo.itemWeight-vo.itemTareWeight}</font></td>
                         </tr>
                         <tr>
-                            <td colspan="2"  style="text-align:left;height:26px"><font size=4>18</font></td>
+                            <td colspan="2"  style="text-align:left;height:26px"><font size=4>生产班</font></td>
                         </tr>
                         <tr>
                             <td colspan="2" style="text-align:left;height:26px" ><font size=4><fmt:formatDate value="${vo.createTime}" pattern="yyyy年MM月dd日"/></font></td>
                         </tr>
                         <tr>
-                            <td colspan="2"  style="text-align:left;height:26px"><font size=4>张三丰</font></td>
+                            <td colspan="2"  style="text-align:left;height:26px"><font size=4>${user.name}</font></td>
                         </tr>
                         <tr>
                             <td colspan="2"  style="text-align:left;height:26px"><font size=4></font></td>
@@ -97,7 +97,7 @@
                             <td colspan="2"  style="text-align:left;height:26px"><font size=4></font></td>
                         </tr>
                         <tr>
-                            <td colspan="2"  style="text-align:left;height:26px"><font size=4>${vo.barCode}</font></td>
+                            <td colspan="2"  style="text-align:left;height:26px"><font size=4>jr<fmt:formatDate value="${vo.createTime}" pattern="yyyyMMddHHmm"/></font></td>
                         </tr>
                     </table>
                     <div style="text-align: center;    margin-top: 5px;">
