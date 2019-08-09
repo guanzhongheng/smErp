@@ -175,7 +175,7 @@
             tk.item_lenth,
             tk.item_width,
             tk.item_thick,
-            tk.item_weight,
+            tn.item_weight,
             tk.item_yb_type,
             tn.ord_code,
             tn.item_num
@@ -185,7 +185,8 @@
         SELECT
             ts.item_code,
             ts.ord_code,
-            count( ts.item_code ) AS item_num
+            count( ts.item_code ) AS item_num,
+            sum(ts.item_weight) as item_weight
         FROM
             t_out_stock t
             INNER JOIN t_out_stock_detail td ON t.out_code = td.out_code

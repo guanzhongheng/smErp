@@ -109,7 +109,7 @@
 <script>
     function checkInfo(obj){
         alert(1);
-        // $.ajax({
+        // $.ajax({pr
         //     url:
         // })
 

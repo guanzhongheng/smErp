@@ -1,13 +1,10 @@
 package com.lcyzh.nmerp.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.controller.system.util.SysDictUtils;
 import com.lcyzh.nmerp.entity.TProdPlan;
 import com.lcyzh.nmerp.entity.TStock;
-import com.lcyzh.nmerp.model.vo.LabelPrint;
 import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
 import com.lcyzh.nmerp.model.vo.ProdPlanVo;
 import com.lcyzh.nmerp.service.*;
@@ -16,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -46,6 +44,8 @@ public class ProduceManageController extends BaseController {
     private TStockService stockService;
     @Autowired
     private ITFormulaService formulaService;
+    @Autowired
+    private TRawMaterialService rawMaterialService;
     /**
      * @Description: 跳转到生产计划详情页面
      * @Param: [vo, prodPlanCode, model, request, response]
@@ -61,6 +61,7 @@ public class ProduceManageController extends BaseController {
         model.addAttribute("macList",machineInfoService.findAllList());
         // add formula by zj 0802
         model.addAttribute("formulaList",formulaService.findAllList());
+
         return "modules/crm/producePlanDetail";
     }
 
@@ -73,12 +74,17 @@ public class ProduceManageController extends BaseController {
      * @Date: 2019/7/16 9:14 AM
      */
     @RequestMapping(value = {"producePlan/update"})
-    public String prodPlanUpdate(@ModelAttribute("vo") ProdPlanVo vo){
+    @ResponseBody
+    public String prodPlanUpdate(@RequestBody TProdPlan prodPlan){
         TProdPlan plan = new TProdPlan();
-        plan.setProdPlanCode(vo.getProdPlanCode());
-        plan.setFormula(vo.getFormula());
+        plan.setProdPlanCode(prodPlan.getProdPlanCode());
+        plan.setFormula(prodPlan.getFormula());
         int result = prodPlanService.update(plan);
-        return "redirect:/produce/producePlan/info?prodPlanCode="+vo.getProdPlanCode();
+        if(result > 0){
+            return "success";
+        }else{
+            return "error";
+        }
     }
 
     /**

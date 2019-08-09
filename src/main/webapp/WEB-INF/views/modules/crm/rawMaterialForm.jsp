@@ -30,10 +30,10 @@
                 <div class="control-group">
                     <label class="control-label"><i style="color: red">*</i>&nbsp;原料编号:</label>
                     <div class="controls">
-                        <form:input path="rawmCode" htmlEscape="false" maxlength="50" class="required"/>
+                        <form:input path="rawmCode" htmlEscape="false" maxlength="50" class="required" disabled="${rawMaterialId == null?'false':'true'}" />
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <i style="color: red">*</i>&nbsp;原料名称:&nbsp;&nbsp;&nbsp;&nbsp;
-                        <form:input path="rawmName" htmlEscape="false" maxlength="50" class="required"/>
+                        <form:input path="rawmName" htmlEscape="false" maxlength="50" class="required" disabled="${rawMaterialId == null?'false':'true'}"/>
                     </div>
                 </div>
                 <div class="control-group">
@@ -42,7 +42,7 @@
                         <form:input path="rawnSpecs" htmlEscape="false" maxlength="50" class="required"/>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp
                         <i style="color: red">*</i>&nbsp;原料供应商:&nbsp;&nbsp;&nbsp;&nbsp;
-                        <form:input path="rawnSupplier" htmlEscape="false" maxlength="50" class="required"/>
+                        <form:input path="rawnSupplier" htmlEscape="false" maxlength="50" />
                     </div>
                 </div>
                 <div class="control-group">
@@ -83,9 +83,6 @@
                 },
                 rawnSpecs: {
                     required: true
-                },
-                rawnSupplier: {
-                    required: true
                 }
             },
             messages: {
@@ -97,9 +94,6 @@
                 },
                 rawnSpecs: {
                     required: "请输入规格"
-                },
-                rawnSupplier: {
-                    required: "请输入供应商"
                 }
             },
             ignore: ":hidden:not(select)",

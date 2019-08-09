@@ -78,7 +78,9 @@
 	</div>
 <script>
 	function macFormReset() {
-        $("#searchForm")[0].reset();
+	    $("#macCode").val("");
+	    $("#minWidth").val("");
+	    $("#maxWidth").val("");
     }
 </script>
 </body>

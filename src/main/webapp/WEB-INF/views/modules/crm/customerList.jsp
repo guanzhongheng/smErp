@@ -131,9 +131,9 @@
 
             <div class="control-group">
                 &nbsp;&nbsp;
-                <a type="button" id="toCustomer" class="btn btn-success" style="width: 100px;height: 22px">分配归属</a>
+                <a type="button" id="toCustomer" class="btn btn-success" style="width: 80px;height: 22px">分配归属</a>
                 &nbsp;&nbsp;
-                <a type="button" id="toPoolCustomer" class="btn btn-success" style="width: 100px;height: 22px">移入公海</a>
+                <a type="button" id="toPoolCustomer" class="btn btn-success" style="width: 80px;height: 22px">移入公海</a>
             </div>
         </div>
     </div>

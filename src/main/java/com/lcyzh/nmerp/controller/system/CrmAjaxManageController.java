@@ -8,6 +8,7 @@ import com.lcyzh.nmerp.model.vo.CusFollowDetailVo;
 import com.lcyzh.nmerp.model.vo.CustomerUpdateVo;
 import com.lcyzh.nmerp.service.ICusFollowService;
 import com.lcyzh.nmerp.service.TCustomerService;
+import com.lcyzh.nmerp.service.TProductService;
 import com.lcyzh.nmerp.service.security.SystemAuthorizingRealm.Principal;
 import com.lcyzh.nmerp.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,8 @@ public class CrmAjaxManageController extends BaseController {
     @Autowired
     private ICusFollowService cusFollowService;
 
+    @Autowired
+    private TProductService productService;
 
     /**
      * 添加归属人
@@ -156,4 +159,17 @@ public class CrmAjaxManageController extends BaseController {
 
         return "";
     }
+
+
+    @RequestMapping("checkProdCode")
+    @ResponseBody
+    public String caseFileUpload(String code) {
+        boolean flag = productService.prodCodeIsExistence(code);
+        if(flag){
+            return "1";
+        }
+        return "0";
+    }
+
+
 }

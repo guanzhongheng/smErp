@@ -17,7 +17,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Author ljk
@@ -54,40 +56,13 @@ public class TRawMaterialController extends BaseController {
 
     @RequestMapping(value = {"/getByFormula"})
     @ResponseBody
-    public List<RawMaterialVo> getByFormula( String fCode, String key) {
+    public Map<String, FormulaDetailVo> getByFormula(String fCode) {
         // TODO 流程未通
         FormulaVo formulaVo = formulaService.findByCode(fCode);
-        List<RawMaterialVo> rawMaterialList = formulaVo.getContext().get(key).getRawMaterialVos();
-//        List<RawMaterialVo> rawMaterialList = new ArrayList<>();
-//        if (fCode.equals("0001")) {
-//            RawMaterialVo vo = new RawMaterialVo();
-//            vo.setRawmName("原料一");
-//            vo.setWeight("1吨");
-//            rawMaterialList.add(vo);
-//            vo = new RawMaterialVo();
-//            vo.setRawmName("原料er");
-//            vo.setWeight("1.63333吨");
-//            rawMaterialList.add(vo);
-//            vo = new RawMaterialVo();
-//            vo.setRawmName("sd电视机分子");
-//            vo.setWeight("1.双方都");
-//            rawMaterialList.add(vo);
-//        } else if (fCode.equals("0002")){
-//            RawMaterialVo vo = new RawMaterialVo();
-//            vo.setRawmName("2原料一");
-//            vo.setWeight("21吨");
-//            rawMaterialList.add(vo);
-//            vo = new RawMaterialVo();
-//            vo.setRawmName("2原料er");
-//            vo.setWeight("21.63333吨");
-//            rawMaterialList.add(vo);
-//            vo = new RawMaterialVo();
-//            vo.setRawmName("2sd电视机分子");
-//            vo.setWeight("212.双方都");
-//            rawMaterialList.add(vo);
-//    }
-
-        return rawMaterialList;
+        if(formulaVo.getContext().size() > 0){
+            return formulaVo.getContext();
+        }
+        return new HashMap<>();
     }
 
     @RequestMapping(value = "addForm")

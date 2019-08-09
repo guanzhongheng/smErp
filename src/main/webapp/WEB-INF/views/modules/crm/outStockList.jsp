@@ -66,7 +66,7 @@
                     <tr>
                         <th style="text-align: center">序号</th>
                         <th style="text-align: center">出库单号</th>
-                        <th style="text-align: center">客户名称</th>
+                        <th style="text-align: center">收货人</th>
                         <th style="text-align: center">联系方式</th>
                         <th style="text-align: center">出库单状态</th>
                         <th style="text-align: center">创建时间</th>
@@ -78,7 +78,7 @@
                         <tr>
                             <td style="text-align: center">${status.index + 1}</td>
                             <td>${cus.outCode}</td>
-                            <td>${cus.cusName}</td>
+                            <td>${cus.receiver}</td>
                             <td>${cus.phone}</td>
                             <td>
                                 <c:if test="${cus.outStatus eq '48'}">新建</c:if>

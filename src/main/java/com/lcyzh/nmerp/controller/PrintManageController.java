@@ -154,7 +154,7 @@ public class PrintManageController extends BaseController {
             }).sum();
             totalZl = list.stream().mapToDouble(i -> {
                 if(i.getItemWeight() != null){
-                    return i.getItemWeight() * i.getItemNum();
+                    return i.getItemWeight();
                 }else{
                     return 0d;
                 }

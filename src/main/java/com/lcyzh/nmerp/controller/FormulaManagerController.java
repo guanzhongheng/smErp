@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.controller.system.util.SysDictUtils;
 import com.lcyzh.nmerp.entity.TFormula;
+import com.lcyzh.nmerp.entity.TRawMaterial;
 import com.lcyzh.nmerp.entity.sys.Dict;
 import com.lcyzh.nmerp.model.vo.FormulaDetailVo;
 import com.lcyzh.nmerp.model.vo.FormulaVo;
@@ -119,9 +120,7 @@ public class FormulaManagerController extends BaseController {
      */
     @RequestMapping(value = "ajaxRmList")
     @ResponseBody
-    public Map<String,Object> ajaxRmList() {
-        Map<String,Object> map = new HashMap<>();
-        map.put("rmList",rawMaterialService.findAllList());
-        return map;
+    public List<TRawMaterial> ajaxRmList() {
+        return rawMaterialService.findAllList();
     }
 }

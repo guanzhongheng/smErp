@@ -141,7 +141,7 @@
         cache: false,
         success: function(data){
             if(data != null){
-                rmList = data.rmList;
+                rmList = data;
             }
         }
     });
