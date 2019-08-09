@@ -45,13 +45,13 @@
                 <div class="control-group">
                     <label class="control-label"><i style="color: red"></i>&nbsp;产品品种</label>
                     <div class="controls">
-                        <form:select path="prodCgyCode" class="input-medium" cssStyle="width: 220px" placeholder="产品品种"  disabled="${prodId == null?'false':'true'}" >
+                        <form:select path="prodVariety" class="input-medium" cssStyle="width: 220px" placeholder="产品品种"  disabled="${prodId == null?'false':'true'}" >
                             <form:option value="" label=""/>
                             <form:options items="${fns:getCusDictList(148000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                         </form:select>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <i style="color: white">*</i>&nbsp;产品类别:&nbsp;&nbsp;&nbsp;&nbsp;
-                        <form:select path="prodVariety" class="input-medium" cssStyle="width: 220px" placeholder="产品类别"  disabled="${prodId == null?'false':'true'}" >
+                        <form:select path="prodCgyCode" class="input-medium" cssStyle="width: 220px" placeholder="产品类别"  disabled="${prodId == null?'false':'true'}" >
                             <form:option value="" label=""/>
                             <form:options items="${fns:getCusDictList(149000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                         </form:select>

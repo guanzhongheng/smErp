@@ -33,10 +33,7 @@ public class TRawMaterialController extends BaseController {
 
     @RequestMapping(value = {"list", ""})
     public String list(@ModelAttribute("rawMaterial") TRawMaterial rawMaterial,Model model, HttpServletRequest request, HttpServletResponse response) {
-        Page<TRawMaterial> page = new Page<>(request, response);
-        List<TRawMaterial> list = rawMaterialService.findAllList();
-        page.setCount(list.size());
-        page.setList(list);
+        Page<TRawMaterial> page = rawMaterialService.findPage(new Page<TRawMaterial>(request, response), rawMaterial);
         model.addAttribute("page", page);
         return "modules/crm/rawMaterialList";
     }

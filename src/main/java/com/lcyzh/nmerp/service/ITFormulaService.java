@@ -14,7 +14,7 @@ public interface ITFormulaService {
 
     FormulaVo findByCode(String fCode);
 
-    List<TFormula> findList(TFormula tFormula);
+    List<FormulaVo> findList(TFormula tFormula);
 
     List<TFormula> findAllList();
 

@@ -65,8 +65,22 @@ public class TFormulaServiceImpl implements ITFormulaService {
     }
 
     @Override
-    public List<TFormula> findList(TFormula tFormula) {
-        return tFormulaMapper.findList(tFormula);
+    public List<FormulaVo> findList(TFormula tFormula) {
+        List<TFormula> list = tFormulaMapper.findList(tFormula);
+        List<FormulaVo> vos = list.stream().map(item ->{
+            FormulaVo vo = new FormulaVo();
+            BeanUtils.copyProperties(item, vo);
+            vo.setProdCgyCodeValue(DictUtils.getValueByDictKey(vo.getProdCgyCode()));
+            vo.setProdVarietyValue(DictUtils.getValueByDictKey(vo.getProdVariety()));
+            JSONObject jsonObject = JSON.parseObject(item.getfContext());
+            Map<String, FormulaDetailVo> context = new HashMap<>();
+            for(String key : jsonObject.keySet()) {
+                context.put(key, toJavaBean(new FormulaDetailVo(), jsonObject.getJSONObject(key)));
+            }
+            vo.setContext(context);
+            return vo;
+        }).collect(Collectors.toList());
+        return vos;
     }
 
     @Override

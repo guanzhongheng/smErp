@@ -147,6 +147,7 @@ public class TProductServiceImpl implements TProductService {
 
     @Override
     public Page<ProductVo> findPage(Page<ProductVo> page, TProduct tProduct) {
+        System.out.println("*** " + tProduct);
         PageHelper.startPage(page.getPageNo(), page.getPageSize());
         List<TProduct> list = tProductMapper.findList(tProduct);
         List<ProductVo> vos = productConversion(list);

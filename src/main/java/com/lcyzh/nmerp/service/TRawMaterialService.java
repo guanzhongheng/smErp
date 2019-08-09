@@ -1,5 +1,6 @@
 package com.lcyzh.nmerp.service;
 
+import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.entity.TRawMaterial;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,5 +27,7 @@ public interface TRawMaterialService {
     int delete(TRawMaterial tRawMaterial);
 
     boolean rawmCodeIsExistence(String code);
+
+    Page<TRawMaterial> findPage(Page<TRawMaterial> page, TRawMaterial rawMaterial);
 
 }
