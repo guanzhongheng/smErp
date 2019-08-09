@@ -52,6 +52,11 @@ public class Constants {
      * @Date: 2019/7/4 10:41 PM
      */
     public static final String PROD_PLAN_PRE_FIX="PP";
+
+    /**
+     * 配方编号前缀
+     */
+    public static final String FORMULA_FIX="PF";
     /***
      * @Description: 订单状态
      * @Param:

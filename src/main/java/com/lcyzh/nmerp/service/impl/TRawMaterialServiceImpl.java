@@ -1,5 +1,8 @@
 package com.lcyzh.nmerp.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.dao.TRawMaterialMapper;
 import com.lcyzh.nmerp.entity.TRawMaterial;
 import com.lcyzh.nmerp.service.TRawMaterialService;
@@ -59,6 +62,16 @@ public class TRawMaterialServiceImpl implements TRawMaterialService{
     public boolean rawmCodeIsExistence(String code) {
         Integer count = tRawMaterialMapper.getCntByCode(code);
         return count > 0;
+    }
+
+    @Override
+    public Page<TRawMaterial> findPage(Page<TRawMaterial> page, TRawMaterial rawMaterial) {
+        PageHelper.startPage(page.getPageNo(),page.getPageSize());
+        List<TRawMaterial> list = tRawMaterialMapper.findList(rawMaterial);
+        PageInfo<TRawMaterial> pageInfo = new PageInfo<>(list);
+        page.setCount(pageInfo.getTotal());
+        page.setList(list);
+        return page;
     }
 
 }

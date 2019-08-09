@@ -2,12 +2,15 @@ package com.lcyzh.nmerp.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lcyzh.nmerp.controller.common.BaseController;
-import com.lcyzh.nmerp.controller.system.util.SysDictUtils;
 import com.lcyzh.nmerp.entity.TFormula;
+<<<<<<< HEAD
 import com.lcyzh.nmerp.entity.TRawMaterial;
 import com.lcyzh.nmerp.entity.sys.Dict;
+=======
+>>>>>>> origin/master
 import com.lcyzh.nmerp.model.vo.FormulaDetailVo;
 import com.lcyzh.nmerp.model.vo.FormulaVo;
+import com.lcyzh.nmerp.model.vo.RawMaterialVo;
 import com.lcyzh.nmerp.service.ITFormulaService;
 import com.lcyzh.nmerp.service.TRawMaterialService;
 import org.springframework.beans.BeanUtils;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -61,8 +65,12 @@ public class FormulaManagerController extends BaseController {
         if(formula.getfCode() != null && !"".equals(formula.getfCode())){
             result = formulaService.update(tFormula);
             model.addAttribute("fCode",tFormula.getfCode());
+            model.addAttribute("formula",formula);
         }else{
-            model.addAttribute("fCode",formulaService.insert(tFormula));
+            String fCode = formulaService.insert(tFormula);
+            formula.setfCode(fCode);
+            model.addAttribute("fCode",fCode);
+            model.addAttribute("formula",formula);
         }
         return "modules/crm/formulaAdd";
     }
@@ -84,6 +92,14 @@ public class FormulaManagerController extends BaseController {
         return "modules/crm/formulaDetailEdit";
     }
 
+    @RequestMapping(value = {"delete"})
+    public String delete(String fCode,Model model){
+        TFormula formulam = new TFormula();
+        formulam.setfCode(fCode);
+        formulaService.delete(formulam);
+        return "redirect:/crm/formula/list";
+    }
+
     @RequestMapping(value = {"detailSave"})
     public String detailSave(@ModelAttribute("detailVo") FormulaDetailVo detailVo,@ModelAttribute("fCode") String fCode,
                              @ModelAttribute("type") String type, Model model,
@@ -91,6 +107,18 @@ public class FormulaManagerController extends BaseController {
         int result = 0;
         FormulaVo vo = formulaService.findByCode(fCode);
         Map<String, FormulaDetailVo> context = vo.getContext();
+
+        // 去除由于批量form提交而可能导致的空对象
+        List<RawMaterialVo> rawMaterialVos = detailVo.getRawMaterialVos();
+        if(rawMaterialVos!= null && rawMaterialVos.size() != 0){
+            Iterator<RawMaterialVo> iterator = rawMaterialVos.iterator();
+            while (iterator.hasNext()){
+                RawMaterialVo rawMaterialVo = iterator.next();
+                if(rawMaterialVo.getWeight() == null ){
+                    iterator.remove();
+                }
+            }
+        }
 
         if(context == null){
             context = new HashMap<>();

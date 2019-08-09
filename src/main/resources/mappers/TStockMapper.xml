@@ -126,7 +126,8 @@
             item_variety,
             item_unit,
             item_color,
-            mac_code
+            mac_code,
+            item_tare_weight
         )
         VALUES (
             #{barCode,jdbcType=VARCHAR},
@@ -148,7 +149,8 @@
             #{itemVariety,jdbcType=BIGINT},
             #{itemUnit,jdbcType=BIGINT},
             #{itemColor,jdbcType=VARCHAR},
-            #{macCode,jdbcType=VARCHAR}
+            #{macCode,jdbcType=VARCHAR},
+            #{itemTareWeight,jdbcType=DOUBLE}
         )
     </insert>
 

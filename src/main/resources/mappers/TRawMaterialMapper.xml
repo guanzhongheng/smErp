@@ -24,6 +24,12 @@
         SELECT *
         FROM T_RAW_MATERIAL
         <where>
+            <if test="rawmCode!=null and rawmCode!=''">
+                and rawm_code like concat(concat('%', #{rawmCode}),'%')
+            </if>
+            <if test="rawmName!=null and rawmName!=''">
+                and rawm_name like concat(concat('%', #{rawmName}),'%')
+            </if>
         </where>
     </select>
 

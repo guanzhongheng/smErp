@@ -8,9 +8,9 @@
     }
 </style>
 
-<div class="gray-bg" style="margin-left: 38px;width: 224px;margin-top: 8px;">
-    <div style="width:100%;height: 211px;">
-        <table  border="1" cellspacing="0" style="width:80%;height:180px;">
+<div class="gray-bg" >
+    <div style="width:100%;">
+        <table  border="1" cellspacing="0" style="width:100%;">
             <tr>
                 <td colspan="2" style="height:1px;"></td>
             </tr>
@@ -32,58 +32,15 @@
                 <td colspan="2"><font size=2>重量：${vo.itemWeight} kg</font></td>
             </tr>
             <tr>
-                <td colspan="2"><font size=2>生产时间：<fmt:formatDate value="${vo.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></font></td>
+                <td colspan="2"><font size=2>生产时间：<fmt:formatDate value="${vo.createTime}" pattern="yyyy年MM月dd日"/></font></td>
             </tr>
 
-            <%--<tr>--%>
-                <%--<td colspan="2" >--%>
-                    <%--<button class="btn btn-primary" type="button" id="bth" >打印</button>--%>
-                <%--</td>--%>
-            <%--</tr>--%>
         </table>
-        <div style="text-align: center;    margin-top: 5px;">
-            <button class="btn btn-primary global-button-style" type="button" id="bth" >打印</button>
+        <div style="text-align: center;    margin-top: 5px;" id="btnArea">
+            <button class="btn btn-primary " type="button" id="bth" >打印</button>
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        var LODOP = getLodop();
-        console.log(LODOP);
-        LODOP.SET_PRINT_MODE("TRYLINKPRINTER_NOALERT",true);//这个语句设置网络共享打印机连接不通时是否提示一下
-        if (LODOP.SET_PRINTER_INDEX(0)){
-            LODOP.PRINT();
-        }//这里指定第0号打印机打印
-
-
-        var barCode = '${vo.barCode}';
-        var jump = '${jump}';
-        JsBarcode("#imgcode", barCode,{
-            format: "CODE128",//选择要使用的条形码类型
-            height:28,//高度
-            width:1.5,
-            displayValue:true,//是否在条形码下方显示文字
-            fontSize:1,//设置文本的大小
-            textPosition:"top",//设置文本的垂直位置
-        });
-
-        $("#bth").click(function () {
-            $("#bth").hide();
-            window.print();
-            if(jump == 0) {
-                parent.setTimeout('window.location.href = "/crm/produce/list"', 100);
-            }
-            parent.layer.closeAll();
-        });
-    });
-
-
-    function print33(){
-
-    }
-</script>
-
 <script src="${ctxStatic}/hPlugs/js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
 <script src="${ctxStatic}/hPlugs/js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
 <script src="${ctxStatic}/hPlugs/js/content.min.js?v=1.0.0" type="text/javascript"></script>
@@ -102,3 +59,39 @@
 <script src="${ctxStatic}/hPlugs/js/plugins/cropper/cropper.min.js"></script>
 <script src="${ctxStatic}/hPlugs/js/demo/form-advanced-demo.min.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/JsBarcode/JsBarcode.all.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        // var LODOP = getLodop();
+        // console.log(LODOP);
+        // LODOP.SET_PRINT_MODE("TRYLINKPRINTER_NOALERT",true);//这个语句设置网络共享打印机连接不通时是否提示一下
+        // if (LODOP.SET_PRINTER_INDEX(0)){
+        //     LODOP.PRINT();
+        // }//这里指定第0号打印机打印
+
+
+        var barCode = '${vo.barCode}';
+        var jump = '${jump}';
+        JsBarcode("#imgcode", barCode,{
+            format: "CODE128",//选择要使用的条形码类型
+            height:26,//高度
+            width:1.5,
+            displayValue:true,//是否在条形码下方显示文字
+            fontSize:12,//设置文本的大小
+            textPosition:"top",//设置文本的垂直位置
+        });
+
+        $("#bth").click(function () {
+            $("#btnArea").hide();
+            window.print();
+            // if(jump == 0) {
+            //     parent.setTimeout('window.location.href = "/crm/produce/list"', 100);
+            // }
+            parent.layer.closeAll();
+        });
+    });
+
+
+    function print33(){
+
+    }
+</script>

@@ -59,7 +59,15 @@ public class TOutStockServiceImpl implements TOutStockService {
 
     @Override
     public List<OutStockDetailVo> findOutItemsByOutCode(String outCode) {
-        return tOutStockDetailMapper.findOutItemsByOutCode(outCode);
+        List<OutStockDetailVo> vos = tOutStockDetailMapper.findOutItemsByOutCode(outCode);
+        vos.forEach(vo ->{
+            vo.setItemCgyCodeValue(DictUtils.getValueByDictKey(vo.getItemCgyCode()));
+            vo.setItemVarietyValue(DictUtils.getValueByDictKey(vo.getItemVariety()));
+            vo.setItemColorValue(SysDictUtils.getDictLabel(vo.getItemColor(), Constants.PROD_COLOR, ""));
+            vo.setItemYbTypeValue(SysDictUtils.getDictLabel(vo.getItemYbType(), Constants.PROD_YB_TYPE, ""));
+            vo.setItemYcTypeValue(SysDictUtils.getDictLabel(vo.getItemYcType(), Constants.PROD_YC_TYPE, ""));
+        });
+        return vos;
     }
 
     @Override

@@ -5,12 +5,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lcyzh.nmerp.common.persistence.Page;
+import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.dao.TFormulaMapper;
 import com.lcyzh.nmerp.entity.TFormula;
 import com.lcyzh.nmerp.model.vo.FormulaDetailVo;
 import com.lcyzh.nmerp.model.vo.FormulaVo;
 import com.lcyzh.nmerp.service.ITFormulaService;
 import com.lcyzh.nmerp.utils.DictUtils;
+import com.lcyzh.nmerp.utils.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,12 +37,14 @@ public class TFormulaServiceImpl implements ITFormulaService {
         BeanUtils.copyProperties(formula, formulaVo);
         formulaVo.setProdCgyCodeValue(DictUtils.getValueByDictKey(formulaVo.getProdCgyCode()));
         formulaVo.setProdVarietyValue(DictUtils.getValueByDictKey(formulaVo.getProdVariety()));
-        JSONObject jsonObject = JSON.parseObject(formula.getfContext());
-        Map<String, FormulaDetailVo> context = new HashMap<>();
-        for(String key : jsonObject.keySet()) {
-            context.put(key, toJavaBean(new FormulaDetailVo(), jsonObject.getJSONObject(key)));
+        if(!StringUtils.isBlank(formula.getfContext())) {
+            JSONObject jsonObject = JSON.parseObject(formula.getfContext());
+            Map<String, FormulaDetailVo> context = new HashMap<>();
+            for(String key : jsonObject.keySet()) {
+                context.put(key, toJavaBean(new FormulaDetailVo(), jsonObject.getJSONObject(key)));
+            }
+            formulaVo.setContext(context);
         }
-        formulaVo.setContext(context);
         return formulaVo;
     }
 
@@ -65,8 +69,22 @@ public class TFormulaServiceImpl implements ITFormulaService {
     }
 
     @Override
-    public List<TFormula> findList(TFormula tFormula) {
-        return tFormulaMapper.findList(tFormula);
+    public List<FormulaVo> findList(TFormula tFormula) {
+        List<TFormula> list = tFormulaMapper.findList(tFormula);
+        List<FormulaVo> vos = list.stream().map(item ->{
+            FormulaVo vo = new FormulaVo();
+            BeanUtils.copyProperties(item, vo);
+            vo.setProdCgyCodeValue(DictUtils.getValueByDictKey(vo.getProdCgyCode()));
+            vo.setProdVarietyValue(DictUtils.getValueByDictKey(vo.getProdVariety()));
+            JSONObject jsonObject = JSON.parseObject(item.getfContext());
+            Map<String, FormulaDetailVo> context = new HashMap<>();
+            for(String key : jsonObject.keySet()) {
+                context.put(key, toJavaBean(new FormulaDetailVo(), jsonObject.getJSONObject(key)));
+            }
+            vo.setContext(context);
+            return vo;
+        }).collect(Collectors.toList());
+        return vos;
     }
 
     @Override
@@ -76,11 +94,9 @@ public class TFormulaServiceImpl implements ITFormulaService {
 
     @Override
     public String insert(TFormula tFormula) {
-        Random rm = new Random();
-        String fCode = String.valueOf(rm.nextInt(100000));
+        String fCode = StringUtils.genFixPreFixStr(Constants.FORMULA_FIX);
         tFormula.setfCode(fCode);
         tFormula.setCreateDate(new Date());
-        tFormula.setfContext("{}");
         tFormula.setDelFlag('0');
         int result = tFormulaMapper.insert(tFormula);
         if(result > 0){
