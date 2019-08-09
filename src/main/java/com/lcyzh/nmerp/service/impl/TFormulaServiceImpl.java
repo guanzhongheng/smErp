@@ -37,12 +37,14 @@ public class TFormulaServiceImpl implements ITFormulaService {
         BeanUtils.copyProperties(formula, formulaVo);
         formulaVo.setProdCgyCodeValue(DictUtils.getValueByDictKey(formulaVo.getProdCgyCode()));
         formulaVo.setProdVarietyValue(DictUtils.getValueByDictKey(formulaVo.getProdVariety()));
-        JSONObject jsonObject = JSON.parseObject(formula.getfContext());
-        Map<String, FormulaDetailVo> context = new HashMap<>();
-        for(String key : jsonObject.keySet()) {
-            context.put(key, toJavaBean(new FormulaDetailVo(), jsonObject.getJSONObject(key)));
+        if(!StringUtils.isBlank(formula.getfContext())) {
+            JSONObject jsonObject = JSON.parseObject(formula.getfContext());
+            Map<String, FormulaDetailVo> context = new HashMap<>();
+            for(String key : jsonObject.keySet()) {
+                context.put(key, toJavaBean(new FormulaDetailVo(), jsonObject.getJSONObject(key)));
+            }
+            formulaVo.setContext(context);
         }
-        formulaVo.setContext(context);
         return formulaVo;
     }
 
