@@ -46,7 +46,7 @@
                     </li>
                     <li>
                         &nbsp;&nbsp;
-                        <form:select path="prodCgyCode" class="input-medium" placeholder="产品类型">
+                        <form:select path="prodVariety" class="input-medium" placeholder="产品类型">
                             <form:option value="" label=""/>
                             <form:options items="${fns:getCusDictList(149000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                         </form:select>
@@ -66,8 +66,8 @@
                     <tr>
                         <th style="text-align: center">产品编号</th>
                         <th style="text-align: center">产品名称</th>
-                        <th style="text-align: center">产品类别</th>
                         <th style="text-align: center">产品品种</th>
+                        <th style="text-align: center">产品类别</th>
                         <th style="text-align: center">产品厚度</th>
                         <th style="text-align: center">产品单位</th>
                         <th style="text-align: center">产品颜色</th>
@@ -228,7 +228,7 @@
     function formReset() {
         $("#prodCode").val("");
         $("#prodName").val("");
-        $("#prodCgyCode").val("").select2();
+        $("#prodVariety").val("").select2();
     }
 </script>
 

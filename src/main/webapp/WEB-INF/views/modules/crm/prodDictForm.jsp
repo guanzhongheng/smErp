@@ -61,9 +61,9 @@
                 <div class="control-group">
                     <label class="control-label"><i style="color: red"></i>&nbsp;产品颜色:</label>
                     <div class="controls">
-                        <form:select path="prodColor" class="input-medium" cssStyle="width: 220px" placeholder="颜色">
+                        <form:select path="prodColor" class="input-medium" cssStyle="width: 220px" placeholder="颜色" disabled="${prodId == null?'false':'true'}">
                             <form:option value="" label=""/>
-                            <form:options items="${fns:getDictList('prod_color')}" itemLabel="label" itemValue="value" htmlEscape="false" disabled="${prodId == null?'false':'true'}"/>
+                            <form:options items="${fns:getDictList('prod_color')}" itemLabel="label" itemValue="value" htmlEscape="false" />
                         </form:select>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <i style="color: white">*</i>&nbsp;产品厚度:&nbsp;&nbsp;&nbsp;&nbsp;
@@ -108,10 +108,17 @@
 </div>
 <script>
     function checkInfo(obj){
-        alert(1);
-        // $.ajax({pr
-        //     url:
-        // })
+        debugger;
+        if(obj.length > 0){
+            $.post('${ctx}/crmAjax/checkProdCode', {
+                code: obj.value
+            }, function (data) {
+                if (data == "1") {
+                    top.$.jBox.tip('当前编码存在重复');
+                    $("#prodCode").val("");
+                }
+            })
+        }
 
     }
     $("select").change(function(){

@@ -82,9 +82,9 @@ public class ProduceManageController extends BaseController {
         plan.setFormula(prodPlan.getFormula());
         int result = prodPlanService.update(plan);
         if(result > 0){
-            return "success";
+            return "1";
         }else{
-            return "error";
+            return "0";
         }
     }
 

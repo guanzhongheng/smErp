@@ -682,12 +682,6 @@
 
     }
 
-    <!--  下拉封装结束  -->
-
-    <!--  数量封装开始  -->
-
-    <!--  数量封装结束  -->
-
     function inserNumData(name,index,obj,target) {
         debugger;
         if(target == "outer"){
@@ -696,7 +690,7 @@
                     for(var key in outFormuList[i]){
                         if(key == name){
                             if(name == 'rawmCode' && obj.value.length > 0){
-                                outFormuList[i]['rawmCode'] = obj.value.split("_")[0];
+                                outFormuList[i]['rawmCode'] = obj.value;
                                 outFormuList[i]['rawmName'] = obj.selectedOptions[0].text;
                             }else{
                                 outFormuList[i][key] = obj.value;
@@ -733,7 +727,7 @@
                     for(var key in innerFormuList[i]){
                         if(key == name){
                             if(name == 'rawmCode' && obj.value.length > 0){
-                                innerFormuList[i]['rawmCode'] = obj.value.split("_")[0];
+                                innerFormuList[i]['rawmCode'] = obj.value;
                                 innerFormuList[i]['rawmName'] = obj.selectedOptions[0].text;
                             }else{
                                 innerFormuList[i][key] = obj.value;
@@ -801,11 +795,15 @@
                 dataType: "json",
                 contentType:"application/json",
                 success: function (msg) {
-                    if(msg == "success"){
-                        toastr.success("保存成功！");
+                    debugger;
+                    if(msg == "1"){
+                        top.$.jBox.tip('保存成功！');
                     }else{
-                        toastr.error(msg.msg);
+                        top.$.jBox.tip('保存失败！');
                     }
+                },
+                error:function(msg){
+                    debugger;
                 }
             });
         }
