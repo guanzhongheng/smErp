@@ -226,11 +226,4 @@ public class TProdPlanServiceImpl implements TProdPlanService {
     }
 
 
-    //@Override
-    //public List<TProdPlanDetail> findByPlanCode(String planCode) {
-    //    TProdPlanDetail planDetail = new TProdPlanDetail();
-    //    planDetail.setProdPlanCode(planCode);
-    //    return prodPlanDetailMapper.findList(planDetail);
-    //}
-
 }
