@@ -801,13 +801,11 @@
                     }else{
                         top.$.jBox.tip('保存失败！');
                     }
-                },
-                error:function(msg){
-                    debugger;
                 }
             });
         }
     }
+
 
     function insertOutTable(target){
         debugger;
