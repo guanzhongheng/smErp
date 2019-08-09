@@ -4,21 +4,6 @@
 <link rel="stylesheet" href="/static/common/customize.css">
 
 <div class="wrapper wrapper-content animated fadeInRight">
-    <div class="tabs-container">
-
-
-        <ul class="nav nav-tabs">
-
-            <li <c:if test="${type eq null}"> class="active" </c:if>
-                    ><a href="${ctx}/formula/addOrUpdate?fCode=${fCode}">配方基本信息</a></li>
-            <li <c:if test="${type eq 'outer'}"> class="active" </c:if>
-                    ><a href="${ctx}/formula/updateDetail?fCode=${fCode}&type=outer">外层配比</a></li>
-            <li <c:if test="${type eq 'midder'}"> class="active" </c:if>
-                    ><a href="${ctx}/formula/updateDetail?fCode=${fCode}&type=midder">中层配比</a></li>
-            <li <c:if test="${type eq 'inner'}"> class="active" </c:if>
-                    ><a href="${ctx}/formula/updateDetail?fCode=${fCode}&type=inner">内层配比</a></li>
-        </ul>
-
         <div class="tab-content">
             <div id="tab-1" class="tab-pane active">
                 <div class="panel-body" style="padding: 10px 10px 0px 10px;">
@@ -34,11 +19,23 @@
                                 <small>为必填项</small>
                             </code>
                         </div>
+                        <ul class="nav nav-tabs">
+
+                            <li <c:if test="${type eq null}"> class="active" </c:if>
+                            ><a href="${ctx}/formula/addOrUpdate?fCode=${fCode}">配方基本信息</a></li>
+                            <li <c:if test="${type eq 'outer'}"> class="active" </c:if>
+                            ><a href="${ctx}/formula/updateDetail?fCode=${fCode}&type=outer">外层配比</a></li>
+                            <li <c:if test="${type eq 'midder'}"> class="active" </c:if>
+                            ><a href="${ctx}/formula/updateDetail?fCode=${fCode}&type=midder">中层配比</a></li>
+                            <li <c:if test="${type eq 'inner'}"> class="active" </c:if>
+                            ><a href="${ctx}/formula/updateDetail?fCode=${fCode}&type=inner">内层配比</a></li>
+                        </ul>
                         <form:form id="inputForm" modelAttribute="detailVo" action="${ctx}/formula/detailSave"
                                    method="post" class="form-horizontal">
                             <input type="hidden" name="fCode" value="${fCode}"/>
                             <input type="hidden" name="type" value="${type}"/>
                             <div class="row">
+                                <br/>
                                 <div class="col-sm-6 b-r">
                                     <div class="ibox float-e-margins">
                                         <form method="get" class="form-horizontal">
@@ -111,7 +108,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </div>
 <script src="${ctxStatic}/hPlugs/js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
 <script src="${ctxStatic}/hPlugs/js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>

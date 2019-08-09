@@ -4,44 +4,49 @@
 
 
 <div class="wrapper wrapper-content animated fadeInRight">
-    <div class="tabs-container">
-
-
-        <ul class="nav nav-tabs">
-            <c:if test="${fCode eq null}">
-                <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true">配方基本信息</a></li>
-            </c:if>
-            <c:if test="${fCode ne null}">
-                <li <c:if test="${type eq null}"> class="active" </c:if>
-                ><a href="${ctx}/formula/addOrUpdate?fCode=${fCode}">配方基本信息</a></li>
-                <li <c:if test="${type eq 'outer'}"> class="active" </c:if>
-                ><a href="${ctx}/formula/updateDetail?fCode=${fCode}&type=outer">外层配比</a></li>
-                <li <c:if test="${type eq 'midder'}"> class="active" </c:if>
-                ><a href="${ctx}/formula/updateDetail?fCode=${fCode}&type=midder">中层配比</a></li>
-                <li <c:if test="${type eq 'inner'}"> class="active" </c:if>
-                ><a href="${ctx}/formula/updateDetail?fCode=${fCode}&type=inner">内层配比</a></li>
-            </c:if>
-        </ul>
-
         <div class="tab-content">
             <div id="tab-1" class="tab-pane active">
                 <div class="panel-body" style="padding: 10px 10px 0px 10px;">
                     <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
                         <div class="panel-heading" style="background-color: #50B0E6">
                             <h3 class="panel-title global-panel-title" >
-                                创建配方
+                                <c:if test="${fCode eq null}">
+                                    创建配方
+                                </c:if>
+                                <c:if test="${fCode ne null}">
+                                    编辑配方
+                                </c:if>
                             </h3>
                             <code class="pull-right" style="margin-top: -25px"><span style="color: red; ">*</span>
                                 <small>为必填项</small>
                             </code>
                         </div>
+
+                        <ul class="nav nav-tabs">
+                            <c:if test="${fCode eq null}">
+                                <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true">配方基本信息</a></li>
+                            </c:if>
+                            <c:if test="${fCode ne null}">
+                                <li <c:if test="${type eq null}"> class="active" </c:if>
+                                ><a href="${ctx}/formula/addOrUpdate?fCode=${fCode}">配方基本信息</a></li>
+                                <li <c:if test="${type eq 'outer'}"> class="active" </c:if>
+                                ><a href="${ctx}/formula/updateDetail?fCode=${fCode}&type=outer">外层配比</a></li>
+                                <li <c:if test="${type eq 'midder'}"> class="active" </c:if>
+                                ><a href="${ctx}/formula/updateDetail?fCode=${fCode}&type=midder">中层配比</a></li>
+                                <li <c:if test="${type eq 'inner'}"> class="active" </c:if>
+                                ><a href="${ctx}/formula/updateDetail?fCode=${fCode}&type=inner">内层配比</a></li>
+                            </c:if>
+                        </ul>
+
                         <form:form id="inputForm" modelAttribute="formula" action="${ctx}/formula/save"
                                    method="post" class="form-horizontal">
                             <c:if test="${fCode ne null}"><form:hidden path="fCode"/></c:if>
                             <div class="row">
+                                <br/>
                                 <div class="col-sm-12">
                                     <div class="ibox float-e-margins">
                                         <form method="get" class="form-horizontal">
+
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label"><i style="color: red">*</i> 配方名称：</label>
                                                 <div class="col-sm-8">
@@ -54,7 +59,9 @@
                                                 <label class="col-sm-3 control-label"><i style="color: red">*</i> 产品品种：</label>
                                                 <div class="col-sm-8">
                                                     <form:select path="prodVariety" cssClass="chosen-select global-input"
+                                                                 disabled="${formula.prodVariety ne null ? 'true':'false'}"
                                                                  cssStyle="min-width: 300px">
+
                                                         <form:option value="" label=""/>
                                                         <form:options items="${fns:getCusDictList(148000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                                                     </form:select>
@@ -65,6 +72,7 @@
                                                 <label class="col-sm-3 control-label"><i style="color: red">*</i> 产品类别：</label>
                                                 <div class="col-sm-8">
                                                     <form:select path="prodCgyCode" cssClass="chosen-select global-input"
+                                                                 disabled="${formula.prodCgyCode ne null ? 'true':'false'}"
                                                                  cssStyle="min-width: 300px">
                                                         <form:option value="" label=""/>
                                                         <form:options items="${fns:getCusDictList(149000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
@@ -100,15 +108,19 @@
                 </div>
             </div>
         </div>
-    </div>
 </div>
 
 <script>
     $(document).ready(function () {
         $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",});
+        var fCode = '${fCode}';
+        if(fCode != '' && fCode != undefined){
+            $("#fName").attr("readonly","readonly");
+        }
+
         $("select").change(function(){
-            validate();
-        })
+            $("#inputForm").valid();
+        });
         $("#inputForm").validate({
             rules: {
                 fName: {
@@ -137,6 +149,7 @@
                 error.appendTo(element.parent());
             },
         });
+        $("#prodVariety").append("<option value='${formula.prodVariety}' selected>Text</option>");
     });
 
 

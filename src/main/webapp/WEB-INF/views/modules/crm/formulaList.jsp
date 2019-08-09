@@ -77,7 +77,8 @@
                             <td><fmt:formatDate value="${f.createDate}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
                             <td>
                                 <a href="${ctx}/formula/addOrUpdate?fCode=${f.fCode}"><i class="icon-th-list">&nbsp;编辑</i></a>
-                                <a href="${ctx}/produce/producePlan/info?prodPlanCode=${pp.prodPlanCode}"><i class="icon-th-list">&nbsp;删除</i></a>
+                                <a href="${ctx}/formula/delete/?fCode=${f.fCode}" onclick="return confirmx('确认要删除该配方吗？', this.href)">
+                                    <i class="icon-th-list">&nbsp;删除</i></a>
                             </td>
                         </tr>
                     </c:forEach>
