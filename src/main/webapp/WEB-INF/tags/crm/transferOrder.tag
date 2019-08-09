@@ -11,7 +11,7 @@
         <!-- 针对选中客户进行操作 -->
         top.$.jBox.open("iframe:${ctx}/crm/formSubmit?ids=1,2,3,4,", "转移客户", 500, $(top.document).height() - 300, {
             buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
-                debugger;
+
                 var ids = h.find("iframe")[0].contentWindow.ids;
                 var cusContent = h.find("iframe")[0].contentWindow.cusContent;
                 var remarks = h.find("iframe")[0].contentWindow.remarks;
@@ -29,7 +29,7 @@
                     })
                 }
             }, loaded: function (h) {
-                debugger;
+
                 $(".jbox-content", top.document).css("overflow-y", "hidden");
             }
         });

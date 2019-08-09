@@ -313,7 +313,7 @@
     });
 
     function doProcessData(){
-        debugger;
+
         if(FormuInfo != null && FormuInfo.length > 0){
             var obj = JSON.parse(FormuInfo);
             if(obj.outer != null){
@@ -443,7 +443,7 @@
                 }
             ],
             onLoadSuccess: function (res) {  //加载成功时执行
-                debugger;
+
                 midderFormuList = $("#outerTable").bootstrapTable("getData");
             },
             onLoadError: function () {  //加载失败时执行
@@ -509,7 +509,7 @@
 
     window.operatePdEvents = {
         "click #outTableRowdelete" : function(e,value,row,index){
-            debugger;
+
             for(var i=0;i<outFormuList.length;i++){
                 if(outFormuList[i].ckId == row.ckId){
                     outFormuList.splice(i,1);
@@ -521,7 +521,7 @@
             document.getElementsByName("fixed-table-body01")[0].setAttribute("class","");
         },
         "click #midTableRowdelete" : function(e,value,row,index){
-            debugger;
+
             for(var i=0;i<midderFormuList.length;i++){
                 if(midderFormuList[i].ckId == row.ckId){
                     midderFormuList.splice(i,1);
@@ -533,7 +533,7 @@
             document.getElementsByName("fixed-table-body01")[1].setAttribute("class","");
         },
         "click #innerTableRowdelete" : function(e,value,row,index){
-            debugger;
+
             for(var i=0;i<innerFormuList.length;i++){
                 if(innerFormuList[i].ckId == row.ckId){
                     innerFormuList.splice(i,1);
@@ -549,7 +549,7 @@
     <!--  下拉封装开始  -->
 
     function rawOutFormater(value,row,index) {
-        debugger;
+
         var option;
         var headOption = "<option value =''>请选择</option>";
 
@@ -594,7 +594,7 @@
     }
 
     function rawMidFormater(value,row,index) {
-        debugger;
+
         var option;
         var headOption = "<option value =''>请选择</option>";
         if(rawList == null || rawList.length == 0){
@@ -637,7 +637,7 @@
     }
 
     function rawInFormater(value,row,index) {
-        debugger;
+
         var option;
         var headOption = "<option value =''>请选择</option>";
         if(rawList == null || rawList.length == 0){
@@ -683,7 +683,7 @@
     }
 
     function inserNumData(name,index,obj,target) {
-        debugger;
+
         if(target == "outer"){
             for(var i=0;i<outFormuList.length;i++){
                 if(outFormuList[i].ckId == index){
@@ -766,7 +766,7 @@
         var midTem = $("#midTemp").text();
         var inTem = $("#inTemp").text();
         var prodPlanId = $("#prodPlanId").val();
-        debugger;
+
         if(prodPlanId != null){
             var formula =
                 {
@@ -795,7 +795,7 @@
                 dataType: "json",
                 contentType:"application/json",
                 success: function (msg) {
-                    debugger;
+
                     if(msg == "1"){
                         top.$.jBox.tip('保存成功！');
                     }else{
@@ -806,9 +806,8 @@
         }
     }
 
-
     function insertOutTable(target){
-        debugger;
+
         if(target == "outer"){
             outFormuList.push(tranDate(target));
             $("#outerTable").bootstrapTable("load",outFormuList);
@@ -879,7 +878,7 @@
         }
     }
     function loadTableData(obj) {
-        debugger;
+
         $("#outerTable").bootstrapTable({});
         $("#midderTable").bootstrapTable({});
         $("#innerTable").bootstrapTable({});
@@ -892,7 +891,7 @@
                 },
                 dataType: 'json',
                 success: function (result) {
-                    debugger;
+
                     if(result.outer != null && result.outer != undefined){
                         $("#outTemp").text(result.outer.temperature);
                         $("#outerTable").bootstrapTable("load",result.outer.rawMaterialVos);

@@ -108,7 +108,7 @@
 </div>
 <script>
     function checkInfo(obj){
-        debugger;
+
         if(obj.length > 0){
             $.post('${ctx}/crmAjax/checkProdCode', {
                 code: obj.value
