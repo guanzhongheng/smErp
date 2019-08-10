@@ -23,6 +23,7 @@
 
 
 
+<sys:message content="${message}"/>
 <div class="tabs-container" style="padding: 20px 20px;">
     <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
         <div class="panel-heading" style="background-color: #50B0E6">
@@ -52,14 +53,14 @@
                     </li>
                     <li>
                         &nbsp;&nbsp;
-                        <input id="ordSignDate" name="ordSignDate" placeholder="签单日期" type="text" readonly="readonly" maxlength="20"
-                               class="input-small Wdate"
-                               value="" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
+                        <form:input path="ordSignDate" htmlEscape="false" maxlength="20"
+                                    class="input-small Wdate" placeholder="签单日期" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
                     </li>
                     <%--<li>
                         <label for="exception"><input id="exception" name="exception" type="checkbox" value="1"/>跟进状态</label>
                     </li>--%>
                     <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 80px" value="查询"/></li>
+                    <li class="btns"><a href="/order/order_add" type="button" class="btn btn-primary" style="width: 54px;height: 20px">新增</a></li>
                     <li class="btns"><a type="button" class="btn btn-primary" style="width: 54px;height: 20px" onclick="uploadFile()">上 传</a></li>
                     <li class="btns"><input class="btn btn-primary" type="button" style="width: 80px" onclick="ordFormReset()" value="重置"/></li>
                 </ul>
@@ -144,7 +145,6 @@
         $("#ordSignDate").val("");
     }
 </script>
-<sys:message content="${message}"/>
 </body>
 
 

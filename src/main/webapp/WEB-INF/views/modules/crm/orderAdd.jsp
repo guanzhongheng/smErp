@@ -2,13 +2,16 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 
 
+<link rel="stylesheet" href="/static/common/customize.css">
+
 
 <sys:message content="${message}"/>
 <div class="tabs-container" style="padding: 20px 20px;">
     <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
         <div class="panel-heading" style="background-color: #50B0E6">
             <h3 class="panel-title global-panel-title" >
-                创建订单
+                <c:if test="${empty orderAddModifyVo.ordCode}">创建订单</c:if>
+                <c:if test="${not empty orderAddModifyVo.ordCode}">编辑订单</c:if>
             </h3>
             <code class="pull-right" style="margin-top: -25px"><span style="color: red; ">*</span>
                 <small>为必填项</small>
@@ -26,13 +29,12 @@
                             <form method="get" class="form-horizontal">
                                 </br>
                                 <div class="form-group">
-
                                     <label class="col-md-2 control-label order-label-margin"><i style="color: red">*</i>
                                         订单标题:
                                     </label>
                                     <label class="col-md-2 control-label order-label-input-width">
                                         <form:input path="ordTitle" htmlEscape="false" maxlength="255"
-                                                    class="form-control global-input order-label-input-width" placeholder="订单标题"/>
+                                                    class="form-control global-input" placeholder="订单标题"/>
                                     </label>
 
                                     <label class="col-md-2 control-label  order-label-margin order-input-width">
@@ -134,9 +136,7 @@
                                         </div>
                                         <div class="col-md-6 " >
                                             <button class="btn btn-primary global-button-style" type="submit">保存订单</button>&nbsp;&nbsp;&nbsp;
-
-                                            <button type="button"  class="btn btn-primary global-button-style" onclick="prodlistAdd()">产品添加</button>
-
+                                                <button class="btn btn-primary global-button-style" onclick="prodlistAdd()">产品添加</button>&nbsp;&nbsp;&nbsp;
                                             <button class="btn btn-primary global-button-style" type="button"
                                                     onclick="history.go(-1)">返  回
                                             </button>
@@ -156,28 +156,6 @@
 </div>
 
 
-<script src="${ctxStatic}/hPlugs/js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
-<script src="${ctxStatic}/hPlugs/js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
-<script src="${ctxStatic}/hPlugs/js/content.min.js?v=1.0.0" type="text/javascript"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/layer/layer.min.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/chosen/chosen.jquery.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/jsKnob/jquery.knob.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/jasny/jasny-bootstrap.min.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/datapicker/bootstrap-datepicker.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/switchery/switchery.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/iCheck/icheck.min.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/clockpicker/clockpicker.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/cropper/cropper.min.js"></script>
-<script src="${ctxStatic}/hPlugs/js/demo/form-advanced-demo.min.js"></script>
-
-<script src="${ctxStatic}/hPlugs/js/plugins/validate/jquery.validate.min.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/validate/messages_zh.min.js"></script>
-<link rel="stylesheet" href="/static/common/customize.css">
-
 
 <script>
     $(document).ready(function () {
@@ -196,9 +174,9 @@
             calendarWeeks: !0,
             autoclose: !0
         })
-        $("select").change(function(){
-            validate();
-        })
+        // $("select").change(function(){
+        //     validate();
+        // })
         $("#inputForm").validate({
             rules: {
                 ordTitle: {
@@ -245,3 +223,24 @@
 
 
 </script>
+
+<script src="${ctxStatic}/hPlugs/js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+<script src="${ctxStatic}/hPlugs/js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+<script src="${ctxStatic}/hPlugs/js/content.min.js?v=1.0.0" type="text/javascript"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/layer/layer.min.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/chosen/chosen.jquery.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/jsKnob/jquery.knob.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/switchery/switchery.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/iCheck/icheck.min.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/clockpicker/clockpicker.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/cropper/cropper.min.js"></script>
+<script src="${ctxStatic}/hPlugs/js/demo/form-advanced-demo.min.js"></script>
+
+<script src="${ctxStatic}/hPlugs/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/validate/messages_zh.min.js"></script>

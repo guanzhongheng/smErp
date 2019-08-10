@@ -16,7 +16,7 @@
 				top.$('.jbox-body .jbox-icon').css('top','55px');
 			});
 			$("#btnImport").click(function(){
-				$.jBox($("#importBox").html(), {title:"导入数据", buttons:{"关闭":true}, 
+				$.jBox($("#importBox").html(), {title:"导入数据", buttons:{"关闭":true},
 					bottomText:"导入文件不能超过5M，仅允许导入“xls”或“xlsx”格式文件！"});
 			});;
 		})
@@ -48,7 +48,7 @@
 		<div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
 			<div class="panel-heading" style="background-color: #50B0E6">
 				<h3 class="panel-title global-panel-title" >
-					客户列表
+					用户列表
 				</h3>
 			</div>
 			<div class="panel-body" style="padding: 10px 10px 0px 10px;">
@@ -57,16 +57,11 @@
 					<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 					<sys:tableSort id="orderBy" name="orderBy" value="${page.orderBy}" callback="page();"/>
 					<ul class="ul-form">
-							<%--<li><label>归属公司：</label><sys:treeselect id="company" name="company.id" value="${user.company.id}" labelName="company.name" labelValue="${user.company.name}" --%>
-							<%--title="公司" url="/sys/office/treeData?type=1" cssClass="input-small" allowClear="true"/></li>--%>
-						<li><label>登录名：</label><form:input path="loginName" htmlEscape="false" maxlength="50" class="input-medium"/></li>
-							<%--<li class="clearfix"></li>--%>
-							<%--<li><label>归属部门：</label><sys:treeselect id="office" name="office.id" value="${user.office.id}" labelName="office.name" labelValue="${user.office.name}" --%>
-							<%--title="部门" url="/sys/office/treeData?type=2" cssClass="input-small" allowClear="true" notAllowSelectParent="true"/></li>--%>
-						<li><label>姓&nbsp;&nbsp;&nbsp;名：</label><form:input path="name" htmlEscape="false" maxlength="50" class="input-medium"/></li>
-						<li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 80px" value="查询" onclick="return page();"/>
-							<input id="btnExport" class="btn btn-primary" type="button" style="width: 80px" value="导出"/>
-							<input id="btnImport" class="btn btn-primary" type="button" style="width: 80px" value="导入"/></li>
+						<li>&nbsp;&nbsp;<form:input path="loginName" htmlEscape="false" maxlength="50" class="input-medium" placeholder="登录名" /></li>
+						<li>&nbsp;&nbsp;<form:input path="name" htmlEscape="false" maxlength="50" class="input-medium" placeholder="姓名"/></li>
+                        <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 80px" value="查询" onclick="return page();"/></li>
+                        <li class="btns"><a href="${ctx}/sys/user/form" type="button" class="btn btn-primary" style="width: 54px;height: 20px">新建</a></li>
+                        <li class="btns"><input class="btn btn-primary" type="button" style="width: 80px" onclick="userFormReset()" value="重置"/></li>
 						<li class="clearfix"></li>
 					</ul>
 				</form:form>
@@ -92,8 +87,7 @@
 								<td><a href="${ctx}/sys/user/form?id=${user.id}">${user.loginName}</a></td>
 								<td>${user.name}</td>
 								<td>${user.phone}</td>
-								<td>${user.mobile}</td><%--
-				<td>${user.roleNames}</td> --%>
+								<td>${user.mobile}</td>
 								<td>
 									<a href="${ctx}/sys/user/form?id=${user.id}"><i class="icon-pencil">&nbsp;修改</i></a>
 									<a href="${ctx}/sys/user/delete?id=${user.id}" onclick="return confirmx('确认要删除该用户吗？', this.href)"><i class="icon-trash">&nbsp;删除</i></a>
@@ -105,13 +99,14 @@
 				</div>
 				<div class="pagination">${page}</div>
 
-				<div class="control-group">&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href="${ctx}/sys/user/form" type="button" class="btn btn-primary" style="width: 140px;height: 23px"><i
-							class="icon-plus"></i>&nbsp;添加新用户</a>
-				</div>
 			</div>
 		</div>
 	</div>
-
+<script>
+	function userFormReset() {
+        $("#loginName").val("");
+        $("#name").val("");
+    }
+</script>
 </body>
 </html>

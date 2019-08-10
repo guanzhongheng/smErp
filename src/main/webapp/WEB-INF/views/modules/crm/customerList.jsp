@@ -77,7 +77,7 @@
                     </li>--%>
                     <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 80px;"
                                             value="查询"/></li>
-                    <li class="btns"> <a href="/cus/customer_add" type="button" class="btn btn-primary" style="width: 54px;height: 20px">新增</a></li>
+                    <li class="btns"><a href="/cus/customer_add" type="button" class="btn btn-primary" style="width: 54px;height: 20px">新增</a></li>
                     <li class="btns"><input class="btn btn-primary" type="button" style="width: 80px" onclick="orderFormReset()" value="重置"/></li>
                 </ul>
             </form:form>
@@ -265,7 +265,7 @@
             }
         }
         function orderFormReset() {
-            $("#searchForm")[0].reset();
+            $("#cusName").val("");
             $("#cusType").val("").select2();
             $("#cusStatus").val("").select2();
             $("#cusGrade").val("").select2();

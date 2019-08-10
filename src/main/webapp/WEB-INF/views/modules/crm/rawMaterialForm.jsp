@@ -40,8 +40,7 @@
                     <label class="control-label"><i style="color: red">*</i>&nbsp;原料规格:</label>
                     <div class="controls">
                         <form:input path="rawnSpecs" htmlEscape="false" maxlength="50" class="required"/>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp
-                        <i style="color: red">*</i>&nbsp;原料供应商:&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;原料供应商:&nbsp;&nbsp;&nbsp;&nbsp;
                         <form:input path="rawnSupplier" htmlEscape="false" maxlength="50" />
                     </div>
                 </div>

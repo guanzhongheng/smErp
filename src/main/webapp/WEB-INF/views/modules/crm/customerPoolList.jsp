@@ -51,9 +51,11 @@
                             <form:option value="" label=""/>
                             <%--<form:options items="${fns:getDictList('oa_notify_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
                         </form:select>
-                        <input id="beginDate" name="beginDate" placeholder="最后跟进" type="text" readonly="readonly" maxlength="20"
-                               class="input-small Wdate"
-                               value="" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
+                    </li>
+                    <li>
+                        &nbsp;&nbsp;
+                        <form:input path="beginDate" htmlEscape="false" maxlength="20"
+                                    class="input-small Wdate" placeholder="最后跟进日期" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
                     </li>
                     <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 80px" value="查询"/></li>
                     <li class="btns"><a type="button" id="toCustomer" class="btn btn-success" style="height: 20px">分配归属</a></li>
@@ -175,7 +177,7 @@
 </div>
 <script>
     function cusPoolFormReset() {
-        $("#searchForm")[0].reset();
+        $("#cusName").val("");
         $("#cusType").val("").select2();
         $("#cusGrade").val("").select2();
     }

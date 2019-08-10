@@ -44,10 +44,6 @@
                 <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
                 <ul class="ul-form">
                     <li>
-                        <form:input path="ordCode" htmlEscape="false" maxlength="200"
-                                    class="input-medium" placeholder="订单编号"/>
-                    </li>
-                    <li>
                         &nbsp;&nbsp;
                         <form:input path="ordTitle" htmlEscape="false" maxlength="200"
                                     class="input-medium" placeholder="订单标题"/>
@@ -59,9 +55,8 @@
                     </li>
                     <li>
                         &nbsp;&nbsp;
-                        <input id="ordSignDate" name="ordSignDate" placeholder="签单日期" type="text" readonly="readonly" maxlength="20"
-                               class="input-small Wdate"
-                               value="" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
+                        <form:input path="ordSignDate" htmlEscape="false" maxlength="20"
+                                    class="input-small Wdate" placeholder="签单日期" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
                     </li>
                     <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 80px" value="查询"/></li>
                     &nbsp;&nbsp;
@@ -107,7 +102,6 @@
 </div>
 <script>
     function apprFormReset() {
-        $("#ordCode").val("");
         $("#ordTitle").val("");
         $("#cusName").val("");
         $("#ordSignDate").val("");

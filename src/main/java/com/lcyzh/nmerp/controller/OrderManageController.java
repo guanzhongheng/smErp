@@ -67,10 +67,14 @@ public class OrderManageController extends BaseController {
         if (!beanValidator(model, ordAddModifyVo)){
             return orderAdd(ordAddModifyVo, model);
         }
+        String orderCodeInfo = ordAddModifyVo.getOrdCode();
         orderService.save(ordAddModifyVo);
         addMessage(redirectAttributes, "保存订单'" + ordAddModifyVo.getOrdTitle() + "'成功");
         model.addAttribute("orderAddModifyVo",ordAddModifyVo);
-        return orderAdd(ordAddModifyVo, model);
+        if(StringUtils.isNotBlank(orderCodeInfo)){
+            return "redirect:/crm/order/list";
+        }
+        return "redirect:/order/order_add?ordCode=" + ordAddModifyVo.getOrdCode();
     }
 
     /**

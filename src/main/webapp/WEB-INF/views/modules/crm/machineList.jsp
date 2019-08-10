@@ -29,9 +29,9 @@
 					<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 					<sys:tableSort id="orderBy" name="orderBy" value="${page.orderBy}" callback="page();"/>
 					<ul class="ul-form">
-						<li><label>设备编号：</label><form:input path="macCode" htmlEscape="false" maxlength="50" class="input-medium"/></li>
-						<li><label>最小宽度(m)：</label><form:input path="minWidth" htmlEscape="false" maxlength="50" class="input-medium"/></li>
-						<li><label>最大宽度(m)：</label><form:input path="maxWidth" htmlEscape="false" maxlength="50" class="input-medium"/></li>
+						<li>&nbsp;&nbsp;<form:input path="macCode" htmlEscape="false" maxlength="50" class="input-medium" placeholder="设备编号"/></li>
+						<li>&nbsp;&nbsp;<form:input path="minWidth" htmlEscape="false" maxlength="50" class="input-medium" placeholder="最小宽度(m)"/></li>
+						<li>&nbsp;&nbsp;<form:input path="maxWidth" htmlEscape="false" maxlength="50" class="input-medium" placeholder="最大宽度(m)"/></li>
 						<li class="btns">
 							<input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 80px" value="查询" onclick="return page();"/>
 						<li class="btns">

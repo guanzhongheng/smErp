@@ -24,7 +24,7 @@
 				</h3>
 			</div>
 			<div class="panel-body" style="padding: 10px 10px 0px 10px;">
-				<form:form id="searchForm" modelAttribute="rawMaterial" action="${ctx}/tRawMaterial/list" method="post" class=" form-search ">
+				<form:form id="searchForm" modelAttribute="rawMaterial" action="${ctx}/tRawMaterial/list" method="post" class="breadcrumb form-search ">
 					<input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
 					<input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
 					<ul class="ul-form">

@@ -27,8 +27,8 @@
                         <label class="col-md-2 control-label order-detail-label-margin" style="text-align: right"><i style="color: red"></i>
                             产品选择:
                         </label>
-                        <label class="col-md-2 control-label">
-                            <select data-placeholder="产品选择" class="chosen-select order-label-input-width global-input" id="prodInfo" onchange="getResChange(this)">
+                        <label class="col-md-2 control-label order-label-input-width">
+                            <select data-placeholder="产品选择" class="chosen-select order-label-input-width" style="width: 270px" id="prodInfo" onchange="getResChange(this)">
                                 <option value="-1">请选择</option>
                                 <c:forEach items="${prod}" var="p">
                                     <option
@@ -45,6 +45,13 @@
                             </select>
                         </label>
 
+                        <label class="col-md-2 control-label order-detail-label-margin order-input-width" style="text-align: right"><i style="color: red"></i>
+                            产品编码:
+                        </label>
+                        <label class="col-md-2 control-label order-label-input-width">
+                            <input class="form-control" id="itemCode" disabled>
+                        </label>
+
                     </div>
                 </div>
             </div>
@@ -54,18 +61,18 @@
                     <div class="hr-line-dashed"></div>
                     <div class="form-group">
 
-                        <label class="col-md-2 control-label order-detail-label-margin" style="text-align: right"><i style="color: red"></i>
-                            产品编码:
-                        </label>
-                        <label class="col-md-2 control-label order-label-input-width">
-                            <input class="col-md-2 order-detail-input-readonly" id="itemCode" disabled>
-                        </label>
-
-                        <label class="col-md-2 control-label  order-detail-label-margin order-input-width" style="text-align: right">
+                        <label class="col-md-2 control-label order-detail-label-margin" style="text-align: right">
                             产品名称:
                         </label>
-                        <label class="col-md-2 control-label order-input-width " style="text-align: left">
-                            <input class="col-md-2 order-detail-input-readonly" id="itemName" disabled>
+                        <label class="col-md-2 control-label order-label-input-width" style="text-align: left">
+                            <input class="form-control" id="itemName" disabled>
+                        </label>
+
+                        <label class="col-md-2 control-label order-detail-label-margin order-input-width" style="text-align: right"><i style="color: red"></i>
+                            颜色:
+                        </label>
+                        <label class="col-md-2 control-label order-label-input-width">
+                            <input class="form-control" id="itemColor" disabled>
                         </label>
                     </div>
                 </div>
@@ -80,14 +87,14 @@
                             产品品种:
                         </label>
                         <label class="col-md-2 control-label order-label-input-width">
-                            <input class="col-md-2 order-detail-input-readonly" id="itemCgyCode" disabled>
+                            <input class="form-control" id="itemCgyCode" disabled>
                         </label>
 
                         <label class="col-md-2 control-label  order-detail-label-margin order-input-width" style="text-align: right">
                             产品类别:
                         </label>
-                        <label class="col-md-2 control-label order-input-width " style="text-align: left">
-                            <input class="col-md-2 order-detail-input-readonly" id="itemVariety" disabled>
+                        <label class="col-md-2 control-label order-label-input-width" style="text-align: left">
+                            <input class="form-control" id="itemVariety" disabled>
                         </label>
                     </div>
                 </div>
@@ -102,14 +109,14 @@
                             产品厚度:
                         </label>
                         <label class="col-md-2 control-label order-label-input-width">
-                            <input class="col-md-2 order-detail-input-readonly" id="itemThick" disabled>
+                            <input class="form-control" id="itemThick" disabled>
                         </label>
 
                         <label class="col-md-2 control-label  order-detail-label-margin order-input-width" style="text-align: right">
                             计价方式:
                         </label>
-                        <label class="col-md-2 control-label order-input-width " style="text-align: left">
-                            <input class="col-md-2 order-detail-input-readonly" id="itemPriceType" disabled>
+                        <label class="col-md-2 control-label order-label-input-width" style="text-align: left">
+                            <input class="form-control" id="itemPriceType" disabled>
                         </label>
                     </div>
                 </div>
@@ -124,33 +131,27 @@
                             指导价格:
                         </label>
                         <label class="col-md-2 control-label order-label-input-width">
-                            <input class="col-md-2 order-detail-input-readonly" id="itemPrice" disabled>
+                            <input class="form-control" id="itemPrice" disabled>
                         </label>
 
                         <label class="col-md-2 control-label  order-detail-label-margin order-input-width" style="text-align: right">
                             单位:
                         </label>
-                        <label class="col-md-2 control-label order-input-width " style="text-align: left">
-                            <input class="col-md-2 order-detail-input-readonly" id="itemUnit" disabled>
+                        <label class="col-md-2 control-label order-label-input-width" style="text-align: left">
+                            <input class="form-control" id="itemUnit" disabled>
                         </label>
                     </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="hr-line-dashed"></div>
-                    <div class="form-group">
+            <%--<div class="row">--%>
+                <%--<div class="col-sm-12">--%>
+                    <%--<div class="hr-line-dashed"></div>--%>
+                    <%--<div class="form-group">--%>
 
-                        <label class="col-md-2 control-label order-detail-label-margin" style="text-align: right"><i style="color: red"></i>
-                            颜色:
-                        </label>
-                        <label class="col-md-2 control-label order-label-input-width">
-                            <input class="col-md-2 order-detail-input-readonly" id="itemColor" disabled>
-                        </label>
-                    </div>
-                </div>
-            </div>
+                    <%--</div>--%>
+                <%--</div>--%>
+            <%--</div>--%>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="hr-line-dashed"></div>
@@ -184,13 +185,15 @@
         <div class="panel-body" style="padding: 10px 10px 0px 10px;">
             <div class="form-group" >
                 <div class="row">
-                    <div class="col-md-1">
-                        &nbsp;
-                    </div>
-                    <div class="col-md-6 " >
-                        <button class="btn btn-primary global-button-style" type="button"
-                                onclick="saveProd()">保存
-                        </button>&nbsp;&nbsp;
+                    <div class="col-sm-8">
+                        <div class="col-md-1">
+                            &nbsp;
+                        </div>
+                        <div class="col-md-6 " >
+                            <button class="btn btn-primary global-button-style" type="button"
+                                    onclick="saveProd()">保存
+                            </button>&nbsp;&nbsp;
+                        </div>
                     </div>
                 </div>
             </div>
@@ -202,9 +205,9 @@
                         <th style="text-align: center" data-field="itemName">名称</th>
                         <th style="text-align: center" data-field="itemCgyCodeValue">品种</th>
                         <th style="text-align: center" data-field="itemVaritemValue">类别</th>
-                        <th style="text-align: center" data-field="itemLenth">长</th>
-                        <th style="text-align: center" data-field="itemWidth">宽</th>
-                        <th style="text-align: center" data-field="itemThick">厚度</th>
+                        <th style="text-align: center" data-field="itemLenth">长(m)</th>
+                        <th style="text-align: center" data-field="itemWidth">宽(m)</th>
+                        <th style="text-align: center" data-field="itemThick">厚度(cm)</th>
                         <th style="text-align: center" data-field="itemColorValue">颜色</th>
                         <th style="text-align: center" data-field="itemUnitValue">单位</th>
                         <th style="text-align: center" data-field="itemOwner">归属人</th>
