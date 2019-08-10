@@ -71,7 +71,6 @@
                         <th style="text-align: center">订单标题</th>
                         <th style="text-align: center">关联客户</th>
                         <th style="text-align: center">审批状态</th>
-                        <th style="text-align: center">订单总金额</th>
                         <th style="text-align: center">订单交付期</th>
                         <th style="text-align: center">操作</th>
                     </tr>
@@ -80,10 +79,9 @@
                     <c:forEach items="${page.list}" var="ord" varStatus="status">
                         <tr>
                             <td style="text-align: center">${status.index + 1}</td>
-                            <td>${ord.ordTitle}</td>
+                            <td><a href="/cus/order/info?ordCode=${ord.ordCode}">${ord.ordTitle}</a></td>
                             <td>${ord.cusName}</td>
                             <td>${ord.ordStatusValue}</td>
-                            <td>${ord.ordTotalAmount}</td>
                             <td>${ord.ordDeliveryDate}</td>
                             <td>
                                 <c:if test="${ord.ordStatus eq '100001'}">

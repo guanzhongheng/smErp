@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/static/common/customize.css">
 
 
-<div class="tabs-container" style="padding: 20px 20px;">
+<div class="tabs-container" style="padding: 0px 20px;">
     <div class="panel panel-default"
          style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
         <div class="panel-heading" style="background-color: #50B0E6">
@@ -103,7 +103,7 @@
 </div>
 
 
-<div class="tabs-container" style="padding: 20px 20px;">
+<div class="tabs-container" style="padding: 0px 20px;">
     <div class="panel panel-default"
          style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
         <div class="panel-heading" style="background-color: #50B0E6">
