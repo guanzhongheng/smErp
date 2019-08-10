@@ -134,6 +134,9 @@
                                         </div>
                                         <div class="col-md-6 " >
                                             <button class="btn btn-primary global-button-style" type="submit">保存订单</button>&nbsp;&nbsp;&nbsp;
+
+                                            <button type="button"  class="btn btn-primary global-button-style" onclick="prodlistAdd()">产品添加</button>
+
                                             <button class="btn btn-primary global-button-style" type="button"
                                                     onclick="history.go(-1)">返  回
                                             </button>
@@ -174,6 +177,7 @@
 <script src="${ctxStatic}/hPlugs/js/plugins/validate/jquery.validate.min.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/validate/messages_zh.min.js"></script>
 <link rel="stylesheet" href="/static/common/customize.css">
+
 
 <script>
     $(document).ready(function () {
@@ -231,7 +235,6 @@
         });
     });
     function prodlistAdd() {
-
         var orderCode = $("#ordCode").val();
         if(orderCode == null || orderCode == '' || orderCode == undefined){
             layer.msg('请先保存订单');

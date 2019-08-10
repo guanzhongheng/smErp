@@ -4,8 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.entity.TFormula;
 import com.lcyzh.nmerp.entity.TRawMaterial;
-import com.lcyzh.nmerp.entity.sys.Dict;
-import com.lcyzh.nmerp.entity.TRawMaterial;
 import com.lcyzh.nmerp.model.vo.FormulaDetailVo;
 import com.lcyzh.nmerp.model.vo.FormulaVo;
 import com.lcyzh.nmerp.model.vo.RawMaterialVo;

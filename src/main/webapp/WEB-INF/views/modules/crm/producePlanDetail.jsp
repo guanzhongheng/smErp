@@ -370,21 +370,21 @@
                     title: '原料',
                     align: 'center',
                     valign: 'middle',
-                    width: '200px',
+                    width: '30%',
                     formatter:rawOutFormater
                 }, {
                     field: 'weight',
                     title: '数量',
                     align: 'center',
+                    width: '30%',
                     valign: 'middle',
                     formatter:function (value,row,index) {
-                        return ['<input type="text" style="width: 100px;" onchange="inserNumData(\'weight\','+row.ckId+',this,\'outer\')" class="form-control" value="'+value+'"/>'].join('');
+                        return ['<input type="text" style="width: 100%;" onchange="inserNumData(\'weight\','+row.ckId+',this,\'outer\')" class="form-control" value="'+value+'"/>'].join('');
                     }
                 },{
                     field: 'oper',
                     title: '操作',
                     align: 'center',
-                    width: '100',
                     events: operatePdEvents,
                     formatter:operForOutFormatter
                 }
@@ -422,22 +422,22 @@
                     field: 'rawmCode',
                     title: '原料',
                     align: 'center',
-                    width: '200px',
+                    width: '30%',
                     valign: 'middle',
                     formatter:rawMidFormater
                 }, {
                     field: 'weight',
                     title: '数量',
                     align: 'center',
+                    width: '30%',
                     valign: 'middle',
                     formatter:function (value,row,index) {
-                        return ['<input type="text" style="width: 100px;" onchange="inserNumData(\'weight\','+row.ckId+',this,\'midder\')" class="form-control" value="'+value+'"/>'].join('');
+                        return ['<input type="text" style="width: 100%;" onchange="inserNumData(\'weight\','+row.ckId+',this,\'midder\')" class="form-control" value="'+value+'"/>'].join('');
                     }
                 },{
                     field: 'oper',
                     title: '操作',
                     align: 'center',
-                    width: '100',
                     events: operatePdEvents,
                     formatter:operForMidFormatter
                 }
@@ -476,22 +476,22 @@
                     field: 'rawmCode',
                     title: '原料',
                     align: 'center',
-                    width: '200px',
+                    width: '30%',
                     valign: 'middle',
                     formatter:rawInFormater
                 }, {
                     field: 'weight',
                     title: '数量',
                     align: 'center',
+                    width: '30%',
                     valign: 'middle',
                     formatter:function (value,row,index) {
-                        return ['<input type="text" style="width: 100px;" onchange="inserNumData(\'weight\','+row.ckId+',this,\'inner\')" class="form-control" value="'+value+'"/>'].join('');
+                        return ['<input type="text" style="width: 100%;" onchange="inserNumData(\'weight\','+row.ckId+',this,\'inner\')" class="form-control" value="'+value+'"/>'].join('');
                     }
                 },{
                     field: 'oper',
                     title: '操作',
                     align: 'center',
-                    width: '100',
                     events: operatePdEvents,
                     formatter:operForInnerFormatter
                 }
@@ -745,19 +745,19 @@
 
     function operForOutFormatter(){
         return [
-            ' <button id="outTableRowdelete" type="button" class="btn-primary" style="height: 25px;">删除</button>'
+            ' <button id="outTableRowdelete" type="button" class="btn-primary" style="height: 28px;">删除</button>'
         ].join('');
     }
 
     function operForMidFormatter(){
         return [
-            ' <button id="midTableRowdelete" type="button" class="btn-primary" style="height: 25px;">删除</button>'
+            ' <button id="midTableRowdelete" type="button" class="btn-primary" style="height: 28px;">删除</button>'
         ].join('');
     }
 
     function operForInnerFormatter(){
         return [
-            ' <button id="innerTableRowdelete" type="button" class="btn-primary" style="height: 25px;">删除</button>'
+            ' <button id="innerTableRowdelete" type="button" class="btn-primary" style="height: 28px;">删除</button>'
         ].join('');
     }
 

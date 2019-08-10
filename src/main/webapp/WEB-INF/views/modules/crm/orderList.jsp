@@ -138,7 +138,10 @@
     };
 
     function ordFormReset() {
-        $("#searchForm")[0].reset();
+        $("#ordCode").val("");
+        $("#ordTitle").val("");
+        $("#cusName").val("");
+        $("#ordSignDate").val("");
     }
 </script>
 <sys:message content="${message}"/>

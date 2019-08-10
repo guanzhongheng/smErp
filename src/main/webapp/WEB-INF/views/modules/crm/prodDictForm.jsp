@@ -36,7 +36,7 @@
                 <div class="control-group">
                     <label class="control-label"><i style="color: red">*</i>&nbsp;产品编码:</label>
                     <div class="controls">
-                        <form:input path="prodCode" htmlEscape="false" maxlength="50" class="required" disabled="${prodId == null?'false':'true'}" onblur="checkInfo(this)"/>
+                        <form:input path="prodCode" htmlEscape="false" maxlength="50" class="required"  onblur="checkInfo(this)"/>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <i style="color: red">*</i>&nbsp;产品名称:&nbsp;&nbsp;&nbsp;&nbsp;
                         <form:input path="prodName" htmlEscape="false" maxlength="50" class="required" disabled="${prodId == null?'false':'true'}"/>
@@ -79,7 +79,7 @@
                         </form:select>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <i style="color: white">*</i>&nbsp;计价方式:&nbsp;&nbsp;&nbsp;&nbsp;
-                        <form:select path="prodPriceType" class="input-medium" cssStyle="width: 220px" placeholder="计价方式"  disabled="${prodId == null?'false':'true'}">
+                        <form:select path="prodPriceType" class="input-medium" cssStyle="width: 220px" placeholder="计价方式" >
                             <form:option value="" label=""/>
                             <form:options items="${fns:getCusDictList(141000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                         </form:select>
