@@ -86,7 +86,7 @@
                             <td>
                                 <c:if test="${ord.ordStatus eq '100001'}">
                                     <a href="/cus/orderStatus_update?ordCode=${ord.ordCode}&&ordStatus=0"  ><i class="icon-ok-circle">&nbsp;通过</i></a>&nbsp;&nbsp;
-                                    <a href="/cus/orderStatus_update?ordCode=${ord.ordCode}&&ordStatus=1" style="color: red"  ><i class="icon-remove-circle">&nbsp;不通过</i></a>
+                                    <a href="/cus/orderStatus_update?ordCode=${ord.ordCode}&&ordStatus=1" style="color: red" onclick="return confirmx('确认审核不通过？', this.href)" ><i class="icon-remove-circle">&nbsp;不通过</i></a>
                                 </c:if>
                             </td>
                         </tr>

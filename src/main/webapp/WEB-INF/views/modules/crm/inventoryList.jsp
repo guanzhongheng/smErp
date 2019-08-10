@@ -85,9 +85,9 @@
                         <th style="text-align: center">产品类别</th>
                         <th style="text-align: center">产品品种</th>
                         <th style="text-align: center">产品颜色</th>
-                        <th style="text-align: center">长</th>
-                        <th style="text-align: center">宽</th>
-                        <th style="text-align: center">厚</th>
+                        <th style="text-align: center">长(m)</th>
+                        <th style="text-align: center">宽(m)</th>
+                        <th style="text-align: center">厚(cm)</th>
                         <th style="text-align: center">重量</th>
                         <th style="text-align: center">压边类型</th>
                         <th style="text-align: center">延长米方式</th>

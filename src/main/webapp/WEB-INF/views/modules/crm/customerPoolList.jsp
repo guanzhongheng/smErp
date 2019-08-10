@@ -54,7 +54,7 @@
                     </li>
                     <li>
                         &nbsp;&nbsp;
-                        <form:input path="beginDate" htmlEscape="false" maxlength="20"
+                        <form:input path="lastFollowDate" htmlEscape="false" maxlength="20" cssStyle="width: 140px;"
                                     class="input-small Wdate" placeholder="最后跟进日期" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
                     </li>
                     <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 80px" value="查询"/></li>
