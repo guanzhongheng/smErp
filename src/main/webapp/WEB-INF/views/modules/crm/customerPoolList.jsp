@@ -142,6 +142,8 @@
                                         $(".jbox-content", top.document).css("overflow-y", "hidden");
                                     }
                                 });
+                            }else {
+                                top.$.jBox.tip('最少选中一条记录');
                             }
 
                         });
