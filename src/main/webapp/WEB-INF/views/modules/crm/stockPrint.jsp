@@ -22,14 +22,14 @@
             </tr>
             <tr>
                 <td style="width:50%"><font size=2>幅宽：${vo.itemWidth}m</font></td>
-                <td><font size=2>厚度：${vo.itemThick}m</font></td>
+                <td><font size=2>厚度：${vo.itemThick}cm</font></td>
             </tr>
             <tr>
                 <td><font size=2>长度：${vo.itemLenth}m</font></td>
                 <td><font size=2>颜色：${vo.itemColorValue}</font></td>
             </tr>
             <tr>
-                <td colspan="2"><font size=2>重量：${vo.itemWeight} kg</font></td>
+                <td colspan="2"><font size=2>毛重：${vo.itemWeight} kg</font></td>
             </tr>
             <tr>
                 <td colspan="2"><font size=2>生产时间：<fmt:formatDate value="${vo.createTime}" pattern="yyyy年MM月dd日"/></font></td>

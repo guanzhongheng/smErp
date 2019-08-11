@@ -53,10 +53,10 @@
                             </div>
 
                             <div style="min-width: 270px;background-color: black;color:green; font-size: 30px;float:left;text-align: center;margin-left:15px;">
-                                毛重：<span id="totalWeight">100.00</span> KG
+                                毛重：<span id="totalWeight">0.00</span> KG
                             </div>
                             <div style="min-width: 270px;background-color: black;color:green; font-size: 30px;float:left;text-align: center;margin-left:15px;">
-                                皮：<span id="tareWeight">10.00</span> KG
+                                皮：<span id="tareWeight">0.00</span> KG
                             </div>
                         </div>
                         <!-- /.box-body -->
@@ -138,7 +138,7 @@
                                             </div>
                                             <label class="col-sm-2 control-label">数量:</label>
                                             <div class="col-sm-4">
-                                                <input disabled="ture" placeholder="数量" value="${detail.itemNum}"
+                                                <input disabled="ture" placeholder="数量" value="${detail.itemNum}" id="itemNum"
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
                                             </div>
                                         </div>
@@ -177,8 +177,9 @@
                                                 <div class="col-md-8 " >
                                                     <button class="btn btn-primary global-button-style" type="button" id="inStock">入 库</button>&nbsp;&nbsp;&nbsp;
                                                     <button class="btn btn-warning global-button-style" type="submit" id="rePrint" disabled="true">重新打签</button>&nbsp;&nbsp;&nbsp;
-                                                    <button class="btn btn-warning global-button-style" type="button" id="printCertRed" disabled="true">打印红色合格证</button>
-                                                    <button class="btn btn-warning global-button-style" type="button" id="printCertGreen" disabled="true">打印绿色合格证</button>
+                                                    <button class="btn btn-warning global-button-style" type="button" id="printCertRed" disabled="true">合格证(红)</button>
+                                                    <button class="btn btn-warning global-button-style" type="button" id="printCertGreen" disabled="true">合格证(绿)</button>
+                                                    <button class="btn btn-warning global-button-style" type="button" id="printCertYellow" disabled="true">合格证(黄)</button>
                                                     <button class="btn btn-white global-button-style" type="button" onclick="javascript:window.location.replace(document.referrer); ">返回</button>
                                                 </div>
                                             </div>
@@ -366,6 +367,7 @@
             $("#rePrint").removeAttr('disabled');
             $("#printCertRed").removeAttr('disabled');
             $("#printCertGreen").removeAttr('disabled');
+            $("#printCertYellow").removeAttr('disabled');
         });
 
         $("#rePrint").click(function () {
@@ -381,7 +383,6 @@
             });
         }
         $("#printCertRed").click(function () {
-
             layer.open({
                 type: 2,
                 title: '打印合格证确认',
@@ -390,7 +391,6 @@
                 content: ['/produce/produce/printCert?type=red&macCode='+$("#macCode").val(), 'yes'] //iframe的url，no代表不显示滚动条
             });
         });
-
         $("#printCertGreen").click(function () {
 
             layer.open({
@@ -399,6 +399,15 @@
                 skin: 'layui-layer-rim', //加上边框
                 area: ['800px', '800px'],
                 content: ['/produce/produce/printCert?type=green&macCode='+$("#macCode").val(), 'yes'] //iframe的url，no代表不显示滚动条
+            });
+        });
+        $("#printCertYellow").click(function () {
+            layer.open({
+                type: 2,
+                title: '打印合格证确认',
+                skin: 'layui-layer-rim', //加上边框
+                area: ['800px', '800px'],
+                content: ['/produce/produce/printCert?type=yellow&macCode='+$("#macCode").val(), 'yes'] //iframe的url，no代表不显示滚动条
             });
         });
 
@@ -420,9 +429,12 @@
         });
         $("#clear").click(function () {
             weightType ='';
+            send("stop");
             $("#totalWeight").text("0.00");
             $("#tareWeight").text("0.00");
             $("#tareStart").removeAttr('disabled');
+            $("#totalStart").show();
+            $("#wsStop").hide();
         });
         $("#tareStart").click(function () {
             weightType = 'tare';

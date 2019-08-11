@@ -161,6 +161,8 @@ public class ProduceManageController extends BaseController {
             pageStr = "modules/crm/stockCertificateRed";
         }else if("green".equals(type)){
             pageStr = "modules/crm/stockCertificateGreen";
+        }else if("yellow".equals(type)){
+            pageStr = "modules/crm/stockCertificateYellow";
         }
         return pageStr;
     }

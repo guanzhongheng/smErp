@@ -85,7 +85,7 @@
                         <th style="text-align: center">颜色</th>
                         <th style="text-align: center">长度(m)</th>
                         <th style="text-align: center">宽度(m)</th>
-                        <th style="text-align: center">厚度(m)</th>
+                        <th style="text-align: center">厚度(cm)</th>
                         <th style="text-align: center">数量</th>
                         <th style="text-align: center">重量</th>
                         <th style="text-align: center">面积(㎡)</th>
