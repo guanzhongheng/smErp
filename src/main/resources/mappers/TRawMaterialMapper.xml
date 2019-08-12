@@ -85,13 +85,26 @@
 
     <update id="update" parameterType="com.lcyzh.nmerp.entity.TRawMaterial">
         UPDATE T_RAW_MATERIAL
-        SET
-        rawm_code = #{rawmCode},
-        rawm_name = #{rawmName},
-        rawn_specs = #{rawnSpecs},
-        rawn_supplier = #{rawnSupplier},
-        rawn_cty_code = #{rawnCtyCode},
-        update_time = #{updateTime}
+        <set>
+            <if test="rawmCode!=null">
+                rawm_code = #{rawmCode},
+            </if>
+            <if test="rawmName!=null">
+                rawm_name = #{rawmName},
+            </if>
+            <if test="rawnSpecs!=null">
+                rawn_specs = #{rawnSpecs},
+            </if>
+            <if test="rawnSupplier!=null">
+                rawn_supplier = #{rawnSupplier},
+            </if>
+            <if test="rawnCtyCode!=null">
+                rawn_cty_code = #{rawnCtyCode},
+            </if>
+            <if test="updateTime!=null">
+                update_time = #{updateTime}
+            </if>
+        </set>
         WHERE id = #{id}
     </update>
 

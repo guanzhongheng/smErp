@@ -99,20 +99,16 @@ public class TProductServiceImpl implements TProductService {
         Date current = new Date();
         int res;
         if (product.getId() != null) {
-            TProduct po = tProductMapper.get(product.getId());
-            if (po != null && po.getProdVariety().equals(product.getProdVariety()) && po.getProdCgyCode().equals(product.getProdCgyCode()) && po.getProdColor().equals(product.getProdColor())) {
+            // TProduct po = tProductMapper.get(product.getId());
+           // if (po != null && po.getProdVariety().equals(product.getProdVariety()) && po.getProdCgyCode().equals(product.getProdCgyCode()) && po.getProdColor().equals(product.getProdColor())) {
                 TProduct prod = new TProduct();
                 prod.setId(product.getId());
                 prod.setProdName(product.getProdName());
-//                prod.setProdCode(product.getProdCode());
                 prod.setProdGuidePrice(product.getProdGuidePrice());
                 prod.setProdPriceType(product.getProdPriceType());
                 prod.setProdThick(product.getProdThick());
                 prod.setProdUnit(product.getProdUnit());
                 res = tProductMapper.update(prod);
-            } else {
-                res = -1;
-            }
         } else {
             TProduct po = tProductMapper.findByUqKey(product.getProdCgyCode(), product.getProdVariety(), product.getProdColor());
             if (po != null) {
