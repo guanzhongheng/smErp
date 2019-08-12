@@ -8,10 +8,6 @@
 <link rel="stylesheet" href="/static/common/customize.css">
 
 
-
-
-
-
 <div class="tabs-container" style="padding: 20px 20px;">
     <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
         <div class="panel-heading" style="background-color: #50B0E6">
@@ -201,10 +197,10 @@
 
 
                                 <div class="row" style="text-align: center;">
-                                    <label class="control-label">外层配比(190℃)</label>
+                                    <label class="control-label">外层配比(<span id="outTemp">0</span>℃)</label>
                                 </div>
                                 <div class="form-group" style="text-align: -webkit-center;">
-                                    <div class="control-group table-responsive" style="width:400px;text-align: center;" >
+                                    <div class="control-group table-responsive" style="text-align: center;" >
                                         <table id="outerTable" class="table table-striped table-bordered table-hover text-nowrap" >
                                             <thead>
                                             <tr>
@@ -213,34 +209,16 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <c:forEach items="${list}" var="vo">
-                                            <tr>
-                                            <td>${vo.ordCode}</td>
-                                            <td>${vo.itemCode}</td>
-                                            </tr>
-                                            </c:forEach>
-                                            <tr>
-                                                <td>南方一年长寿母料（5%）</td>
-                                                <td>0.5袋（12.5公斤）</td>
-                                            </tr>
-                                            <tr>
-                                                <td>南方一年长寿母料（5%）</td>
-                                                <td>0.5袋（12.5公斤）</td>
-                                            </tr>
-                                            <tr>
-                                                <td>南方一年长寿母料（5%）</td>
-                                                <td>0.5袋（12.5公斤）</td>
-                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
 
                                 <div class="row" style="text-align: center;">
-                                    <label class="control-label">中层配比(195℃)</label>
+                                    <label class="control-label">中层配比(<span id="midTemp">0</span>℃)</label>
                                 </div>
                                 <div class="form-group"  style="text-align: -webkit-center;">
-                                    <div class="control-group table-responsive" style="width:400px;text-align: center;" >
+                                    <div class="control-group table-responsive" style="text-align: center;" >
                                         <table id="midderTable" data-height="300" class="table table-striped table-bordered table-hover text-nowrap" >
                                             <thead>
                                             <tr>
@@ -249,38 +227,16 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <c:forEach items="${list}" var="vo">
-                                            <tr>
-                                            <td>${vo.ordCode}</td>
-                                            <td>${vo.itemCode}</td>
-                                            </tr>
-                                            </c:forEach>
-                                            <tr>
-                                            <td>南方一年长寿母料（5%）</td>
-                                            <td>0.5袋（12.5公斤）</td>
-                                            </tr>
-                                            <tr>
-                                                <td>南方一年长寿母料（5%）</td>
-                                                <td>0.5袋（12.5公斤）</td>
-                                            </tr>
-                                            <tr>
-                                                <td>南方一年长寿母料（5%）</td>
-                                                <td>0.5袋（12.5公斤）</td>
-                                            </tr>
-                                            <tr>
-                                                <td>南方一年长寿母料（5%）</td>
-                                                <td>0.5袋（12.5公斤）</td>
-                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
 
                                 <div class="row" style="text-align: center;">
-                                    <label class="control-label">内层配比(210℃)</label>
+                                    <label class="control-label">内层配比(<span id="inTemp">0</span>℃)</label>
                                 </div>
                                 <div class="form-group"  style="text-align: -webkit-center;">
-                                    <div class="control-group table-responsive" style="width:400px;text-align: center;" >
+                                    <div class="control-group table-responsive" style="text-align: center;" >
                                         <table id="innerTable" data-height="300" class="table table-striped table-bordered table-hover text-nowrap" >
                                             <thead>
                                             <tr>
@@ -289,38 +245,6 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <c:forEach items="${list}" var="vo">
-                                            <tr>
-                                            <td>${vo.ordCode}</td>
-                                            <td>${vo.itemCode}</td>
-                                            </tr>
-                                            </c:forEach>
-
-                                            <tr>
-                                                <td>南方一年长寿母料（5%）</td>
-                                                <td>0.5袋（12.5公斤）</td>
-                                            </tr>
-                                            <tr>
-                                                <td>南方一年长寿母料（5%）</td>
-                                                <td>0.5袋（12.5公斤）</td>
-                                            </tr>
-                                            <tr>
-                                                <td>南方一年长寿母料（5%）</td>
-                                                <td>0.5袋（12.5公斤）</td>
-                                            </tr>
-
-                                            <tr>
-                                                <td>南方一年长寿母料（5%）</td>
-                                                <td>0.5袋（12.5公斤）</td>
-                                            </tr>
-                                            <tr>
-                                                <td>南方一年长寿母料（5%）</td>
-                                                <td>0.5袋（12.5公斤）</td>
-                                            </tr>
-                                            <tr>
-                                                <td>南方一年长寿母料（5%）</td>
-                                                <td>0.5袋（12.5公斤）</td>
-                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -336,6 +260,49 @@
 </div>
 
 <script>
+
+
+    var FormuInfo = '${detail.formula}';
+
+    function getTableInfo(){
+        debugger;
+        var outerTable = "";
+        var midderTable = "";
+        var innerTable = "";
+
+        if(FormuInfo != null && FormuInfo != undefined){
+
+            var obj = JSON.parse(FormuInfo);
+            if(obj.outer != null){
+                $("#outTemp").text(obj.outer.temperature);
+                $.each(obj.outer.rawMaterialVos,function (index,o) {
+                    outerTable += "<tr><td>" + o.rawmName + "</td><td>" + o.weight + "</td></tr>";
+                })
+            }
+            if(obj.midder != null){
+                $("#midTemp").text(obj.midder.temperature);
+                if(obj.midder!=null && obj.midder.rawMaterialVos != null) {
+                    $.each(obj.midder.rawMaterialVos, function (index, o) {
+                        midderTable += "<tr><td>" + o.rawmName + "</td><td>" + o.weight + "</td></tr>";
+                    })
+                }
+            }
+            if(obj.inner != null){
+                $("#inTemp").text(obj.inner.temperature);
+                if(obj.inner!=null && obj.inner.rawMaterialVos != null){
+                    $.each(obj.inner.rawMaterialVos,function (index,o) {
+                        innerTable += "<tr><td>" + o.rawmName + "</td><td>" + o.weight + "</td></tr>";
+                    })
+                }
+            }
+            debugger;
+            $("#outerTable").append(outerTable);
+            $("#midderTable").append(midderTable);
+            $("#innerTable").append(innerTable);
+        }
+
+    }
+
     $(document).ready(function () {
 
         $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",})
@@ -481,9 +448,8 @@
             }else{
                 alert("WebSocket 连接没有建立成功！");
             }
-
         }
-
+        getTableInfo();
     });
 </script>
 <script src="${ctxStatic}/hPlugs/js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
