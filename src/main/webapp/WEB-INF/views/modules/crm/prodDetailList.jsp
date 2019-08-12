@@ -412,21 +412,21 @@
                     width: '100px'
                 },{
                     field: 'itemLenth',
-                    title: '长',
+                    title: '长(m)',
                     width: '80px',
                     formatter:function (value,row,index) {
                         return ['<input type="number" min="0" style="width: 80px" step="0.01" onchange="inserData(\'itemLenth\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
                     }
                 },{
                     field: 'itemWidth',
-                    title: '宽',
+                    title: '宽(m)',
                     width: '60px',
                     formatter:function (value,row,index) {
                         return ['<input type="number" min="0" style="width: 80px" step="0.01" onchange="inserData(\'itemWidth\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
                     }
                 },{
                     field: 'itemThick',
-                    title: '厚',
+                    title: '厚(cm)',
                     width: '60px',
                     formatter:function (value,row,index){
                         return ['<input type="text"  style="width: 80px" onchange="inserData(\'itemThick\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');

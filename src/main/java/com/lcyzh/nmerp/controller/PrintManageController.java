@@ -88,21 +88,27 @@ public class PrintManageController extends BaseController {
         User currentUser = UserUtils.getUser();
         // 获取出库单关联详情
         List<OutItemVo> outItemVoList = outStockService.findItemByOutCode(outCode);
-        // 获取订单信息
-        OrderQueryVo order = orderService.findByOrdeCode(outItemVoList.get(0).getOrdCode());
-        // 获取客户信息
-        CustomerAddModifyVo customer = tCustomerMapper.findModifyInfoByCusCode(order.getCusCode());
-       // 获取订单详情
-        List<OrderItemVo> orderItemVos =   orderService.findItemsByOrdCode(outItemVoList.get(0).getOrdCode());
+        if(!CollectionUtils.isEmpty(outItemVoList)){
+            // 获取订单信息
+            OrderQueryVo order = orderService.findByOrdeCode(outItemVoList.get(0).getOrdCode());
+            // 获取客户信息
+            CustomerAddModifyVo customer = tCustomerMapper.findModifyInfoByCusCode(order.getCusCode());
+            // 获取订单详情
+            List<OrderItemVo> orderItemVos =   orderService.findItemsByOrdCode(outItemVoList.get(0).getOrdCode());
 
-        List<OrderItemVo> newItems = doProcessOrder(outItemVoList,orderItemVos);
+            List<OrderItemVo> newItems = doProcessOrder(outItemVoList,orderItemVos);
+            model.addAttribute("customer",customer);
+            model.addAttribute("order",order);
+            model.addAttribute("orderItem",newItems);
+            getTotalInfo(model,doProcessOrder(outItemVoList,orderItemVos));
+        }else{
 
+            model.addAttribute("customer",new CustomerAddModifyVo());
+            model.addAttribute("order",new OrderQueryVo());
+            model.addAttribute("orderItem",new ArrayList<>());
+        }
         model.addAttribute("nowTime", DateUtils.getDate());
         model.addAttribute("userName",currentUser.getName());
-        model.addAttribute("customer",customer);
-        model.addAttribute("order",order);
-        model.addAttribute("orderItem",newItems);
-        getTotalInfo(model,doProcessOrder(outItemVoList,orderItemVos));
         return "modules/print/outStockInvoice";
     }
 

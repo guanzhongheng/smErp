@@ -197,23 +197,29 @@ public class TOutStockServiceImpl implements TOutStockService {
     @Override
     public List<OutItemVo> findItemByOutCode(String outCode) {
         List<TStock> list = tStockMapper.findByOutCode(outCode);
-        if (list != null && !list.isEmpty()) {
-            List<OutItemVo> itemVos = list.stream().map(sto -> {
-                OutItemVo outItemVo = new OutItemVo();
-                outItemVo.setItemOwner(sto.getItemOwner());
-                outItemVo.setItemLenth(sto.getItemLenth());
-                outItemVo.setItemWidth(sto.getItemWidth());
-                outItemVo.setItemThick(sto.getItemThick());
-                TProduct prodduct = DictUtils.getProdCodeByProdCgyAndVari(sto.getItemVariety() + sto.getItemCgyCode().toString() + sto.getItemColor());
-                outItemVo.setItemName(prodduct.getProdName());
-                outItemVo.setProdColorValue(SysDictUtils.getDictLabel(sto.getItemColor(), "prod_color", ""));
-                outItemVo.setProdCgyCodeValue(DictUtils.getValueByDictKey(sto.getItemCgyCode()));
-                outItemVo.setProdVarietyValue(DictUtils.getValueByDictKey(sto.getItemVariety()));
-                outItemVo.setOrdCode(sto.getOrdCode());
-                return outItemVo;
-            }).collect(Collectors.toList());
-            return itemVos;
+        // TODO 异常处理 临时
+        try {
+            if (list != null && !list.isEmpty()) {
+                List<OutItemVo> itemVos = list.stream().map(sto -> {
+                    OutItemVo outItemVo = new OutItemVo();
+                    outItemVo.setItemOwner(sto.getItemOwner());
+                    outItemVo.setItemLenth(sto.getItemLenth());
+                    outItemVo.setItemWidth(sto.getItemWidth());
+                    outItemVo.setItemThick(sto.getItemThick());
+                    TProduct prodduct = DictUtils.getProdCodeByProdCgyAndVari(sto.getItemVariety() + sto.getItemCgyCode().toString() + sto.getItemColor());
+                    outItemVo.setItemName(prodduct.getProdName());
+                    outItemVo.setProdColorValue(SysDictUtils.getDictLabel(sto.getItemColor(), "prod_color", ""));
+                    outItemVo.setProdCgyCodeValue(DictUtils.getValueByDictKey(sto.getItemCgyCode()));
+                    outItemVo.setProdVarietyValue(DictUtils.getValueByDictKey(sto.getItemVariety()));
+                    outItemVo.setOrdCode(sto.getOrdCode());
+                    return outItemVo;
+                }).collect(Collectors.toList());
+                return itemVos;
+            }
+        }catch (Exception e){
+            return null;
         }
+
         return null;
     }
 }
