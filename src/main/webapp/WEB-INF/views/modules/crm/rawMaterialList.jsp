@@ -51,8 +51,6 @@
 							<th style="text-align: center">原料编号</th>
 							<th style="text-align: center">原料名称</th>
 							<th style="text-align: center">原料规格</th>
-							<th style="text-align: center">原料供应商</th>
-							<th style="text-align: center">原料分类</th>
 							<th style="text-align: center">操作</th>
 						</tr>
 						</thead>
@@ -63,8 +61,6 @@
 								<td>${rawMaterial.rawmCode}</td>
 								<td>${rawMaterial.rawmName}</td>
 								<td>${rawMaterial.rawnSpecs}</td>
-								<td>${rawMaterial.rawnSupplier}</td>
-								<td>${rawMaterial.rawnCtyCode}</td>
 								<td>
 									<a href="${ctx}/tRawMaterial/get?id=${rawMaterial.id}"><i class="icon-pencil">&nbsp;修改</i></a>
 									<a href="${ctx}/tRawMaterial/delete?id=${rawMaterial.id}" onclick="return confirmx('确认要删除该原料吗？', this.href)"><i class="icon-trash">&nbsp;删除</i></a>

@@ -9,48 +9,92 @@
 
 
 
-<div class="tabs-container" style="padding: 20px 20px;">
+<div class="tabs-container" style="padding: 0px 20px;">
     <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
         <div class="panel-heading" style="background-color: #50B0E6">
             <h3 class="panel-title global-panel-title" >
                 第一步：选择产品
             </h3>
         </div>
-        <div class="panel-body" style="padding: 10px 10px 0px 10px;">
-
+        <div class="panel-body" style="padding: 10px 10px 10px 10px;">
             <div class="row">
                 <div class="col-sm-12">
                     <input type="hidden" id="ordCode" value="${ordCode}"/>
                     <div class="hr-line-dashed"></div>
                     <div class="form-group">
+                        <div class="col-md-4">
+                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
+                                产品选择:
+                            </label>
+                            <label class="col-md-8 control-label">
+                                <select data-placeholder="产品选择" class="chosen-select order-label-input-width" style="width: 209px" id="prodInfo" onchange="getResChange(this)">
+                                    <option value="-1">请选择</option>
+                                    <c:forEach items="${prod}" var="p">
+                                        <option
+                                                data-prodName='${p.prodName}'
+                                                data-prodcgycode='${p.prodCgyCode}' data-prodCgyCodeValue='${p.prodCgyCodeValue}'
+                                                data-prodvariety='${p.prodVariety}' data-prodVarietyValue='${p.prodVarietyValue}'
+                                                data-prodthick='${p.prodThick}'
+                                                data-prodpricetype='${p.prodPriceType}'  data-prodPriceTypeValue='${p.prodPriceTypeValue}'
+                                                data-prodguideprice='${p.prodGuidePrice}'
+                                                data-produnit='${p.prodUnit}' data-prodUnitValue='${p.prodUnitValue}'
+                                                data-color="${p.prodColor}" data-colorValue="${p.prodColorValue}"
+                                                value='${p.prodCode}' > ${p.prodCode}</option>
+                                    </c:forEach>
+                                </select>
+                            </label>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
+                                产品编码:
+                            </label>
+                            <label class="col-md-8 control-label">
+                                <input class="form-control" id="itemCode" disabled>
+                            </label>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
+                                产品名称:
+                            </label>
+                            <label class="col-md-8 control-label" style="text-align: left">
+                                <input class="form-control" id="itemName" disabled>
+                            </label>
+                        </div>
+                    </div>
+                    </br>
+                </div>
+            </div>
 
-                        <label class="col-md-2 control-label order-detail-label-margin" style="text-align: right"><i style="color: red"></i>
-                            产品选择:
-                        </label>
-                        <label class="col-md-2 control-label order-label-input-width">
-                            <select data-placeholder="产品选择" class="chosen-select order-label-input-width" style="width: 270px" id="prodInfo" onchange="getResChange(this)">
-                                <option value="-1">请选择</option>
-                                <c:forEach items="${prod}" var="p">
-                                    <option
-                                            data-prodName='${p.prodName}'
-                                            data-prodcgycode='${p.prodCgyCode}' data-prodCgyCodeValue='${p.prodCgyCodeValue}'
-                                            data-prodvariety='${p.prodVariety}' data-prodVarietyValue='${p.prodVarietyValue}'
-                                            data-prodthick='${p.prodThick}'
-                                            data-prodpricetype='${p.prodPriceType}'  data-prodPriceTypeValue='${p.prodPriceTypeValue}'
-                                            data-prodguideprice='${p.prodGuidePrice}'
-                                            data-produnit='${p.prodUnit}' data-prodUnitValue='${p.prodUnitValue}'
-                                            data-color="${p.prodColor}" data-colorValue="${p.prodColorValue}"
-                                            value='${p.prodCode}' > ${p.prodCode}</option>
-                                </c:forEach>
-                            </select>
-                        </label>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right"><i style="color: red"></i>
+                                颜色:
+                            </label>
+                            <label class="col-md-8 control-label">
+                                <input class="form-control" id="itemColor" disabled>
+                            </label>
+                        </div>
 
-                        <label class="col-md-2 control-label order-detail-label-margin order-input-width" style="text-align: right"><i style="color: red"></i>
-                            产品编码:
-                        </label>
-                        <label class="col-md-2 control-label order-label-input-width">
-                            <input class="form-control" id="itemCode" disabled>
-                        </label>
+                        <div class="col-md-4">
+                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
+                                产品品种:
+                            </label>
+                            <label class="col-md-8 control-label" style="text-align: left">
+                                <input class="form-control" id="itemCgyCode" disabled>
+                            </label>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
+                                产品类别:
+                            </label>
+                            <label class="col-md-8 control-label" style="text-align: left">
+                                <input class="form-control" id="itemVariety" disabled>
+                            </label>
+                        </div>
 
                     </div>
                 </div>
@@ -61,19 +105,30 @@
                     <div class="hr-line-dashed"></div>
                     <div class="form-group">
 
-                        <label class="col-md-2 control-label order-detail-label-margin" style="text-align: right">
-                            产品名称:
-                        </label>
-                        <label class="col-md-2 control-label order-label-input-width" style="text-align: left">
-                            <input class="form-control" id="itemName" disabled>
-                        </label>
-
-                        <label class="col-md-2 control-label order-detail-label-margin order-input-width" style="text-align: right"><i style="color: red"></i>
-                            颜色:
-                        </label>
-                        <label class="col-md-2 control-label order-label-input-width">
-                            <input class="form-control" id="itemColor" disabled>
-                        </label>
+                        <div class="col-md-4">
+                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right"><i style="color: red"></i>
+                                产品厚度:
+                            </label>
+                            <label class="col-md-8 control-label">
+                                <input class="form-control" id="itemThick" disabled>
+                            </label>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
+                                计价方式:
+                            </label>
+                            <label class="col-md-8 control-label" style="text-align: left">
+                                <input class="form-control" id="itemPriceType" disabled>
+                            </label>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
+                                指导价格:
+                            </label>
+                            <label class="col-md-8 control-label" style="text-align: left">
+                                <input class="form-control" id="itemPrice" disabled>
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -83,80 +138,16 @@
                     <div class="hr-line-dashed"></div>
                     <div class="form-group">
 
-                        <label class="col-md-2 control-label order-detail-label-margin" style="text-align: right"><i style="color: red"></i>
-                            产品品种:
-                        </label>
-                        <label class="col-md-2 control-label order-label-input-width">
-                            <input class="form-control" id="itemCgyCode" disabled>
-                        </label>
+                        <div class="col-md-4">
+                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
+                                单位:
+                            </label>
+                            <label class="col-md-8 control-label" style="text-align: left">
+                                <input class="form-control" id="itemUnit" disabled>
+                            </label>
+                        </div>
 
-                        <label class="col-md-2 control-label  order-detail-label-margin order-input-width" style="text-align: right">
-                            产品类别:
-                        </label>
-                        <label class="col-md-2 control-label order-label-input-width" style="text-align: left">
-                            <input class="form-control" id="itemVariety" disabled>
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="hr-line-dashed"></div>
-                    <div class="form-group">
-
-                        <label class="col-md-2 control-label order-detail-label-margin" style="text-align: right"><i style="color: red"></i>
-                            产品厚度:
-                        </label>
-                        <label class="col-md-2 control-label order-label-input-width">
-                            <input class="form-control" id="itemThick" disabled>
-                        </label>
-
-                        <label class="col-md-2 control-label  order-detail-label-margin order-input-width" style="text-align: right">
-                            计价方式:
-                        </label>
-                        <label class="col-md-2 control-label order-label-input-width" style="text-align: left">
-                            <input class="form-control" id="itemPriceType" disabled>
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="hr-line-dashed"></div>
-                    <div class="form-group">
-
-                        <label class="col-md-2 control-label order-detail-label-margin" style="text-align: right"><i style="color: red"></i>
-                            指导价格:
-                        </label>
-                        <label class="col-md-2 control-label order-label-input-width">
-                            <input class="form-control" id="itemPrice" disabled>
-                        </label>
-
-                        <label class="col-md-2 control-label  order-detail-label-margin order-input-width" style="text-align: right">
-                            单位:
-                        </label>
-                        <label class="col-md-2 control-label order-label-input-width" style="text-align: left">
-                            <input class="form-control" id="itemUnit" disabled>
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <%--<div class="row">--%>
-                <%--<div class="col-sm-12">--%>
-                    <%--<div class="hr-line-dashed"></div>--%>
-                    <%--<div class="form-group">--%>
-
-                    <%--</div>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="hr-line-dashed"></div>
-                    <div class="form-group" >
-                        <div class="row">
+                        <div class="col-md-8">
                             <div class="col-md-1">
                                 &nbsp;
                             </div>
@@ -172,10 +163,31 @@
                     </div>
                 </div>
             </div>
+            <div class="row" style="height: 3px;">&nbsp;
+            </div>
+            <%--<div class="row">--%>
+                <%--<div class="col-sm-12">--%>
+                    <%--<div class="hr-line-dashed"></div>--%>
+                    <%--<div class="form-group" >--%>
+                        <%--<div class="row">--%>
+                            <%--<div class="col-md-1">--%>
+                                <%--&nbsp;--%>
+                            <%--</div>--%>
+                            <%--<div class="col-md-6 " >--%>
+                                <%--<button class="btn btn-primary global-button-style" type="button"--%>
+                                        <%--onclick="doProcess()">添 加--%>
+                                <%--</button>&nbsp;&nbsp;&nbsp;&nbsp;--%>
+                                <%--<button class="btn btn-primary global-button-style" type="button"--%>
+                                        <%--onclick="history.go(-1)">返 回--%>
+                                <%--</button>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+            <%--</div>--%>
         </div>
-    </div>
 </div>
-<div class="tabs-container" style="padding: 20px 20px;">
+<div class="tabs-container" style="padding: 0px 20px;">
     <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
         <div class="panel-heading" style="background-color: #50B0E6">
             <h3 class="panel-title global-panel-title" >
@@ -185,11 +197,11 @@
         <div class="panel-body" style="padding: 10px 10px 0px 10px;">
             <div class="form-group" >
                 <div class="row">
-                    <div class="col-sm-8">
-                        <div class="col-md-1">
+                    <div class="col-sm-12">
+                        <div class="col-md-10">
                             &nbsp;
                         </div>
-                        <div class="col-md-6 " >
+                        <div class="col-md-2" >
                             <button class="btn btn-primary global-button-style" type="button"
                                     onclick="saveProd()">保存
                             </button>&nbsp;&nbsp;
