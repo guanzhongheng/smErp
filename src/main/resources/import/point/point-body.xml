@@ -26,11 +26,11 @@
             <section startRow="6" endRow="6">
                 <!-- 产品类别 -->
                 <mapping row="6" col="0" nullAllowed="true">
-                    item.itemCgyCodeValue
+                    item.itemVaritemValue
                 </mapping>
                 <!-- 产品品种 -->
                 <mapping row="6" col="1" nullAllowed="true">
-                    item.itemVaritemValue
+                    item.itemCgyCodeValue
                 </mapping>
                 <!-- 长度 -->
                 <mapping row="6" col="2" nullAllowed="true">

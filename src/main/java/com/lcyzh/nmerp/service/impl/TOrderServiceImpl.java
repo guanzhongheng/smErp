@@ -119,7 +119,7 @@ public class TOrderServiceImpl implements TOrderService {
                 tOrderItem.setCreateTime(date);
                 String prodCgy = StringUtils.parseDictKey(itv.getItemCgyCodeValue()).toString();
                 String prodVerity = StringUtils.parseDictKey(itv.getItemVaritemValue()).toString();
-                String prodColor = StringUtils.parseDictKey(itv.getItemColorValue()).toString();
+                String prodColor = StringUtils.parseColorDictKey(itv.getItemColorValue()).toString();
 
                 tOrderItem.setOrdCode(tOrder.getOrdCode());
                 TProduct product = DictUtils.getProdCodeByProdCgyAndVari(prodCgy + prodVerity + prodColor);
@@ -160,9 +160,15 @@ public class TOrderServiceImpl implements TOrderService {
                 tOrderItem.setItemStatus(Constants.ORD_PROD_STATUS_NEW);
                 tOrderItem.setItemOutNum(0L);
                 orderItems.add(tOrderItem);
-                totalSq += tOrderItem.getItemTotalSq();
-                totalWeight += tOrderItem.getItemTotalWeight();
-                totalNum += tOrderItem.getItemNum();
+                if(tOrderItem.getItemTotalSq() != null && tOrderItem.getItemTotalSq() > 0d){
+                    totalSq += tOrderItem.getItemTotalSq();
+                }
+                if(tOrderItem.getItemTotalWeight() != null && tOrderItem.getItemTotalWeight() > 0d){
+                    totalWeight += tOrderItem.getItemTotalWeight();
+                }
+                if(tOrderItem.getItemNum() != null && tOrderItem.getItemNum() > 0d){
+                    totalNum += tOrderItem.getItemNum();
+                }
             }
             tOrder.setOrdTotalNum(totalNum);
             tOrder.setOrdTotalSq(totalSq);

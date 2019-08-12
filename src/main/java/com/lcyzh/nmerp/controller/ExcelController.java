@@ -49,7 +49,6 @@ public class ExcelController {
         }
         //获取文件
         //获取xml文件头配置(我的xml文件是放在/config/import/point目录下的)
-//        String xmlConfigPath = String.format("%s%s", request.getServletContext().getRealPath("/"), "/config/import/point/");
         String xmlConfigName = String.format("%s%s", xmlConfigPath, "point-head.xml");
         Map<String, Object> beans = new HashMap<>();
         ExcelHead excelHead = new ExcelHead();

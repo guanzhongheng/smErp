@@ -99,7 +99,7 @@ public class TProductServiceImpl implements TProductService {
         Date current = new Date();
         int res;
         if (product.getId() != null) {
-            // TProduct po = tProductMapper.get(product.getId());
+
            // if (po != null && po.getProdVariety().equals(product.getProdVariety()) && po.getProdCgyCode().equals(product.getProdCgyCode()) && po.getProdColor().equals(product.getProdColor())) {
                 TProduct prod = new TProduct();
                 prod.setId(product.getId());
@@ -109,6 +109,11 @@ public class TProductServiceImpl implements TProductService {
                 prod.setProdThick(product.getProdThick());
                 prod.setProdUnit(product.getProdUnit());
                 res = tProductMapper.update(prod);
+                if (res > 0) {
+                    TProduct po = tProductMapper.get(product.getId());
+                    DictUtils.getProdMaps().put(String.valueOf(po.getProdCgyCode()) + po.getProdVariety() + po.getProdColor(), po);
+                }
+
         } else {
             TProduct po = tProductMapper.findByUqKey(product.getProdCgyCode(), product.getProdVariety(), product.getProdColor());
             if (po != null) {
@@ -118,15 +123,13 @@ public class TProductServiceImpl implements TProductService {
                 if (pt != null) {
                     return -4;
                 }
-
                 product.setCreateTime(current);
                 res = tProductMapper.insert(product);
 
             }
-        }
-
-        if (res > 0) {
-            DictUtils.getProdMaps().put(String.valueOf(product.getProdCgyCode()) + product.getProdVariety() + product.getProdColor(), product);
+            if (res > 0) {
+                DictUtils.getProdMaps().put(String.valueOf(product.getProdCgyCode()) + product.getProdVariety() + product.getProdColor(), product);
+            }
         }
         return res;
     }
