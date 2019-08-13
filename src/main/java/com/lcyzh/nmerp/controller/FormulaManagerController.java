@@ -61,12 +61,12 @@ public class FormulaManagerController extends BaseController {
         if(formula.getfCode() != null && !"".equals(formula.getfCode())){
             result = formulaService.update(tFormula);
             model.addAttribute("fCode",tFormula.getfCode());
-            model.addAttribute("formula",formula);
+            model.addAttribute("formula",formulaService.findByCode(tFormula.getfCode()));
         }else{
             String fCode = formulaService.insert(tFormula);
             formula.setfCode(fCode);
             model.addAttribute("fCode",fCode);
-            model.addAttribute("formula",formula);
+            model.addAttribute("formula",formulaService.findByCode(fCode));
         }
         return "modules/crm/formulaAdd";
     }
@@ -79,7 +79,7 @@ public class FormulaManagerController extends BaseController {
             if(vo.getContext() != null){
                 FormulaDetailVo detailVo = vo.getContext().get(type);
                 if(detailVo != null){
-                    model.addAttribute("detail",detailVo);
+                    model.addAttribute("detailVo",detailVo);
                 }
             }
         }

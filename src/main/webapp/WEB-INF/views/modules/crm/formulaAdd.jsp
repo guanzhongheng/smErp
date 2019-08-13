@@ -45,7 +45,6 @@
                                 <br/>
                                 <div class="col-sm-12">
                                     <div class="ibox float-e-margins">
-                                        <form method="get" class="form-horizontal">
 
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label"><i style="color: red">*</i> 配方名称：</label>
@@ -99,7 +98,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -109,7 +107,26 @@
             </div>
         </div>
 </div>
+<script src="${ctxStatic}/hPlugs/js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+<script src="${ctxStatic}/hPlugs/js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+<script src="${ctxStatic}/hPlugs/js/content.min.js?v=1.0.0" type="text/javascript"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/chosen/chosen.jquery.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/jsKnob/jquery.knob.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/jasny/jasny-bootstrap.min.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/switchery/switchery.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/iCheck/icheck.min.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/clockpicker/clockpicker.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/cropper/cropper.min.js"></script>
+<script src="${ctxStatic}/hPlugs/js/demo/form-advanced-demo.min.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/validate/jquery.validate.min.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/validate/messages_zh.min.js"></script>
 
+<link rel="stylesheet" href="/static/common/customize.css">
 <script>
     $(document).ready(function () {
         $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",});
@@ -154,23 +171,3 @@
 
 
 </script>
-<script src="${ctxStatic}/hPlugs/js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
-<script src="${ctxStatic}/hPlugs/js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
-<script src="${ctxStatic}/hPlugs/js/content.min.js?v=1.0.0" type="text/javascript"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/chosen/chosen.jquery.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/jsKnob/jquery.knob.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/jasny/jasny-bootstrap.min.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/datapicker/bootstrap-datepicker.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/switchery/switchery.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/iCheck/icheck.min.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/clockpicker/clockpicker.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/cropper/cropper.min.js"></script>
-<script src="${ctxStatic}/hPlugs/js/demo/form-advanced-demo.min.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/validate/jquery.validate.min.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/validate/messages_zh.min.js"></script>
-
-<link rel="stylesheet" href="/static/common/customize.css">

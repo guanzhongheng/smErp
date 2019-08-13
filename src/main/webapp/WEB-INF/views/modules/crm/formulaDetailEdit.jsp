@@ -43,7 +43,7 @@
                                                 <label class="col-sm-3 control-label"><i style="color: red">*</i> 温度标准（℃）：</label>
                                                 <div class="col-sm-8">
                                                     <form:input path="temperature" htmlEscape="false" maxlength="10"
-                                                                class="form-control global-input" placeholder="温度" value="${detail.temperature}"/>
+                                                                class="form-control global-input" placeholder="温度" />
                                                 </div>
                                             </div>
 
@@ -51,11 +51,8 @@
                                             <div class="form-group">
                                                 <label class="col-sm-3 control-label">备注信息：</label>
                                                 <div class="col-sm-8">
-                                                    <%--<form:textarea path="remarks" htmlEscape="false" cssClass="form-control global-input"--%>
-                                                                   <%--cssStyle="min-width: 300px;" rows="6" maxlength="255" value=""/>--%>
-                                                    <textarea name="remarks" cssClass="form-control global-input" cssStyle="min-width: 300px;" rows="6" maxlength="255">
-                                                            ${detail.remarks}
-                                                    </textarea>
+                                                    <form:textarea path="remarks" htmlEscape="false" cssClass="form-control global-input"
+                                                                   cssStyle="min-width: 300px;" rows="6" maxlength="255" value=""/>
                                                 </div>
                                             </div>
                                             <div class="hr-line-dashed"></div>
@@ -79,17 +76,23 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                <c:forEach items="${detail.rawMaterialVos}" var="vo" varStatus="status">
+                                                <c:forEach items="${detailVo.rawMaterialVos}" var="vo" varStatus="status">
                                                     <tr>
                                                         <td>
                                                             <input type="hidden" name="rawMaterialVos[${status.index}].rawmName" value="${vo.rawmName}">
                                                             <select name="rawMaterialVos[${status.index}].rawmCode">
-                                                                <option value ="${vo.rawmCode}" selected>${vo.rawmName}(${vo.rawnSpecs})</option>
+                                                                <option value ="${vo.rawmCode}" selected>${vo.rawmName}</option>
                                                                 <c:forEach items="${rmList}" var="rm">
-                                                                    <option value ="${rm.rawmCode}">${rm.rawmName}(${rm.rawnSpecs})</option>
+                                                                    <option value ="${rm.rawmCode}">${rm.rawmName}</option>
                                                                 </c:forEach>
                                                             </select>
-                                                            <input type="hidden" name="rawMaterialVos[${status.index}].rawnSpecs" value="${vo.rawnSpecs}">
+                                                            <%--<select name="rawMaterialVos[${status.index}].rawmCode">--%>
+                                                                <%--<option value ="${vo.rawmCode}" selected>${vo.rawmName}(${vo.rawnSpecs})</option>--%>
+                                                                <%--<c:forEach items="${rmList}" var="rm">--%>
+                                                                    <%--<option value ="${rm.rawmCode}">${rm.rawmName}(${rm.rawnSpecs})</option>--%>
+                                                                <%--</c:forEach>--%>
+                                                            <%--</select>--%>
+                                                            <%--<input type="hidden" name="rawMaterialVos[${status.index}].rawnSpecs" value="${vo.rawnSpecs}">--%>
                                                         </td>
                                                         <td><input type="text" name="rawMaterialVos[${status.index}].weight" value="${vo.weight}"/></td>
                                                         <td>
@@ -155,7 +158,7 @@
         $.each(rmList,function(i,rm){
             if(rawmCode == rm.rawmCode){
                 $(obj).prev().val(rm.rawmName);
-                $(obj).next().val(rm.rawnSpecs);
+                // $(obj).next().val(rm.rawnSpecs);
             }
         });
     }
@@ -166,7 +169,8 @@
         var headOption = "<option value =''>请选择原料</option>";
         if(rmList != null || rmList != undefined){
             $.each(rmList,function(i,obj){
-                headOption = headOption + "<option value='"+obj.rawmCode+"'>"+obj.rawmName+"("+obj.rawnSpecs+")"+"</option>";
+                headOption = headOption + "<option value='"+obj.rawmCode+"'>"+obj.rawmName+"</option>";
+                // headOption = headOption + "<option value='"+obj.rawmCode+"'>"+obj.rawmName+"("+obj.rawnSpecs+")"+"</option>";
             });
         }
         var option = "<select name='rawMaterialVos["+ rownum +"].rawmCode' onchange='setRmValue(this)'>" + headOption + "</select>";
@@ -174,7 +178,7 @@
         var tr ="<tr><td>" +
                 "<input type='hidden' name='rawMaterialVos["+ rownum +"].rawmName' value=''>" +
                 option +
-                "<input type='hidden' name='rawMaterialVos["+ rownum +"].rawnSpecs' value=''>" +
+                // "<input type='hidden' name='rawMaterialVos["+ rownum +"].rawnSpecs' value=''>" +
                 "</td>" +
                 "<td><input type='text' name='rawMaterialVos["+ rownum +"].weight' /></td>" +
                 "<td><button class='btn btn-primary global-button-style' onclick='delRow(this)' type='button'>删除</button></td></tr>";
