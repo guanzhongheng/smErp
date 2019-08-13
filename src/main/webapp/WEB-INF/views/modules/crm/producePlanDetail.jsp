@@ -504,7 +504,7 @@
                 toastr.error("加载数据失败");
             }
         });
-        setTimeout("doProcessData()",1000); //();
+        setTimeout("doProcessData()",600); //();
     });
 
     window.operatePdEvents = {

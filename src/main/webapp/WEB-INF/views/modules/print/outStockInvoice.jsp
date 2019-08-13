@@ -32,8 +32,9 @@
                     <div class="col-sm-6">
                         <address>
                             <strong>青州市嘉润塑业有限公司</strong><br>
-                            青州市十街10号<br>
-                            <abbr title="Phone">联系方式：</abbr> (+123) 123 11111
+                            山东省青州市水源路188号<br>
+                            <abbr title="Phone">联系方式：</abbr> 0536-3260569<br>
+                            <abbr type="ip">网址:</abbr> www.wfjiarun.com
                         </address>
                     </div>
 
