@@ -3,6 +3,8 @@ package com.lcyzh.nmerp;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.HashSet;
+import java.util.stream.Collectors;
 
 import javax.print.Doc;
 import javax.print.DocFlavor;
@@ -35,9 +37,9 @@ public class PrintTest {
     }
 
     public void print(){
-        String str = "123/边境";
-        String[] strs = str.split("/");
-        System.out.println(strs);
+//        String str = "123/边境";
+//        String[] strs = str.split("/");
+//        System.out.println(strs);
 //        //创建选择文件弹出框
 //		/*JFileChooser fileChooser=new JFileChooser();
 //		//对话框打开时默认盘符
@@ -70,6 +72,13 @@ public class PrintTest {
 //                e.printStackTrace();
 //            }
 //        }
+
+        HashSet<String> strs = new HashSet<>();
+        strs.add("AA");
+        strs.add("BB");
+        strs.add("CC");
+        String str = strs.stream().collect(Collectors.joining(";"));
+        System.out.println(str);
     }
 
 }
