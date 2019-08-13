@@ -257,7 +257,6 @@
 
 <script>
 
-
     var FormuInfo = '${detail.formula}';
 
     function getTableInfo(){
@@ -377,6 +376,7 @@
         var weightType ;
         var openFlag = false;
         $("#totalStart").click(function () {
+            debugger;
             weightType = 'total';
             // if(!openFlag){
                 send("start");
@@ -411,15 +411,16 @@
             window.WebSocket = window.MozWebSocket;
         }
         if(window.WebSocket){
+            debugger;
             socket = new WebSocket("ws://127.0.0.1:12345/ws");
             socket.onmessage = function(event){
+                debugger;
                 var data = event.data.replace(" ","").replace("+","").replace("kg","");
                 if(weightType == 'total'){
                     $("#totalWeight").text(data);
                 }else if(weightType == 'tare'){
                     $("#tareWeight").text(data);
                 }
-
             };
             socket.onopen = function(event){
                 openFlag = true;
@@ -437,6 +438,7 @@
             alert("您的浏览器不支持WebSocket协议！");
         }
         function send(message){
+            debugger;
             if(!window.WebSocket){return;}
             if(socket.readyState == WebSocket.OPEN){
                 socket.send(message);
