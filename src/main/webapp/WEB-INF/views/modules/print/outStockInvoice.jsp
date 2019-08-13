@@ -95,7 +95,7 @@
                     <tr>
                         <td><strong>总面积：</strong>
                         </td>
-                        <td>${totalMj} M&sup2</td>
+                        <td>${totalMj} m&sup2</td>
                     </tr>
                     <tr>
                         <td><strong>总重量：</strong>

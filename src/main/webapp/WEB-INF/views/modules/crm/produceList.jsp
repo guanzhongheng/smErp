@@ -110,8 +110,8 @@
                             <td>${vo.itemNum}</td>
                             <td>${vo.itemTotalWeight}</td>
                             <td>${vo.itemTotalSq}</td>
-                            <td>${fns:getValueByDictKey(vo.itemYbType)}</td>
-                            <td>${fns:getValueByDictKey(vo.itemYcType)}</td>
+                            <td>${fns:getDictValue(vo.itemYbType, 'prod_ybType', defaultValue)}</td>
+                            <td>${fns:getDictValue(vo.itemYcType, 'prod_ycType', defaultValue)}</td>
                             <td>
                                 <c:if test="${vo.itemStatus eq '48'}">待确认</c:if>
                                 <c:if test="${vo.itemStatus eq '49'}">下发生产</c:if>

@@ -106,8 +106,8 @@
                             <td>${cus.ordCode}</td>
                             <td>${fns:getValueByDictKey(cus.itemVariety)}</td>
                             <td>${fns:getValueByDictKey(cus.itemCgyCode)}</td>
-                            <td>${fns:getDictLabel('prod_color',cus.itemColor,'无')}</td>
-                            <td>${cus.itemLenth}m*${cus.itemWidth}m*${cus.itemThick}m</td>
+                            <td>${fns:getDictLabel(cus.itemColor, 'prod_color', defaultValue)}</td>
+                            <td>${cus.itemLenth}m*${cus.itemWidth}m*${cus.itemThick}cm</td>
                             <td>${cus.itemOwner}</td>
                         </tr>
                     </c:forEach>

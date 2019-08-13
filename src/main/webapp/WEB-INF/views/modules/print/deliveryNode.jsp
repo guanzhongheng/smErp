@@ -29,15 +29,13 @@
         </div>
         <div style="height: 5px"></div>
         <div class="row" style="text-align: left;">
-            <label class="col-sm-4" style="width: 180px">单据编号：${stock.outCode}</label>
-            <label class="col-sm-4" style="width: 170px"></label>
-            <label class="col-sm-4 " style="width: 170px">发货日期：${stock.createTime}</label>
+            <label class="col-sm-4" style="width: 350px">单据编号：${stock.outCode}</label>
+            <label class="col-sm-4 " style="width: 350px">发货日期：<fmt:formatDate value="${stock.createTime}" pattern="yyyy年MM月dd日"/></label>
         </div>
         <div style="height: 5px"></div>
         <div class="row" style="text-align: left;">
-            <label class="col-sm-4" style="width: 180px">收货人：${stock.receiver}</label>
-            <label class="col-sm-4" style="width:170px"></label>
-            <label class="col-sm-4" style="width: 180px">联系方式：${stock.phone}</label>
+            <label class="col-sm-4" style="width: 350px">收货人：${stock.receiver}</label>
+            <label class="col-sm-4" style="width: 350px">联系方式：${stock.phone}</label>
         </div>
         <div style="height: 5px"></div>
         <div class="row" style="text-align: left;">
@@ -45,7 +43,7 @@
         </div>
         <div style="height: 5px"></div>
         <div class="row" style="text-align: left;">
-            <label class="col-sm-12">备注: </label>
+            <label class="col-sm-12">备注: ${stock.remarks}</label>
         </div>
 
         <!-- /table-responsive -->
@@ -80,7 +78,7 @@
             </c:forEach>
             <tr>
                 <td colspan="5">合计</td>
-                <td>${totalMj} M&sup2</td>
+                <td>${totalMj} m&sup2</td>
                 <td>${totalZl} kg</td>
                 <td>${totalNum}</td>
                 <td></td>

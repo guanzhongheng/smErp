@@ -201,7 +201,7 @@
                                         <th style="text-align: center">颜色</th>
                                         <th style="text-align: center">长度(m)</th>
                                         <th style="text-align: center">宽度(m)</th>
-                                        <th style="text-align: center">厚度(m)</th>
+                                        <th style="text-align: center">厚度(cm)</th>
                                         <th style="text-align: center">数量</th>
                                         <th style="text-align: center">重量</th>
                                         <th style="text-align: center">面积(㎡)</th>
@@ -232,8 +232,8 @@
                                             <td>${vo.itemNum}</td>
                                             <td>${vo.itemTotalWeight}</td>
                                             <td>${vo.itemTotalSq}</td>
-                                            <td>${fns:getValueByDictKey(vo.itemYbType)}</td>
-                                            <td>${fns:getValueByDictKey(vo.itemYcType)}</td>
+                                            <td>${fns:getDictValue(vo.itemYbType, 'prod_ybType', defaultValue)}</td>
+                                            <td>${fns:getDictValue(vo.itemYcType, 'prod_ycType', defaultValue)}</td>
                                             <td style="color: #08c;">
                                                 <c:if test="${vo.itemStatus eq '48'}">待确认</c:if>
                                                 <c:if test="${vo.itemStatus eq '49'}">已下发</c:if>

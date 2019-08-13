@@ -25,16 +25,16 @@
                         <!-- /.box-header -->
                         <div class="box-body" >
                             <div style="float:left;    margin-bottom: 10px;">
-                                <a class="btn btn-success" id="totalStart" >
+                                <a class="btn btn-success" id="totalStart" style="width: 120px;">
                                     <i class="fa fa-play"></i> 启动称重
                                 </a>
-                                <a class="btn btn-danger" id="wsStop" style="display: none;">
+                                <a class="btn btn-danger" id="wsStop" style="display: none;width: 120px;">
                                     <i class="fa fa-stop"></i> 停止称重
                                 </a>
-                                <a class="btn btn-warning" id="clear">
+                                <a class="btn btn-warning" id="clear" style="width: 120px;">
                                     <i class="fa fa-repeat"></i> 归零
                                 </a>
-                                <a class="btn" id="tareStart">
+                                <a class="btn btn-info" id="tareStart" style="width: 120px;">
                                     <i class="fa fa-circle-o"></i> 去皮
                                 </a>
                                 <%--<a class="btn btn-primary" disabled="true">--%>
@@ -113,12 +113,12 @@
 
                                         <div class="hr-line-dashed"></div>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label" style="margin-left: -25px;">长度(米):</label>
+                                            <label class="col-sm-2 control-label" style="margin-left: -25px;">长度(m):</label>
                                             <div class="col-sm-4">
                                                 <input disabled="ture" placeholder="长度" value="${detail.itemLenth}"
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
                                             </div>
-                                            <label class="col-sm-2 control-label"><i style="color: red"></i>宽度(米):</label>
+                                            <label class="col-sm-2 control-label"><i style="color: red"></i>宽度(m):</label>
                                             <div class="col-sm-4">
                                                 <input disabled="ture" placeholder="宽度" value="${detail.itemWidth}"
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
@@ -127,7 +127,7 @@
 
                                         <div class="hr-line-dashed"></div>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label" style="margin-left: -25px;">厚度(米):</label>
+                                            <label class="col-sm-2 control-label" style="margin-left: -25px;">厚度(cm):</label>
                                             <div class="col-sm-4">
                                                 <input disabled="ture" placeholder="厚度" value="${detail.itemThick}"
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
@@ -145,7 +145,7 @@
                                                 <input disabled="ture" placeholder="重量" value="${detail.itemTotalWeight}"
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
                                             </div>
-                                            <label class="col-sm-2 control-label">面积(平方米):</label>
+                                            <label class="col-sm-2 control-label">面积(m&sup2):</label>
                                             <div class="col-sm-4">
                                                 <input disabled="ture" placeholder="面积" value="${detail.itemTotalSq}"
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
@@ -155,24 +155,21 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" style="margin-left: -25px;">压边类型:</label>
                                             <div class="col-sm-4">
-                                                <input disabled="ture" placeholder="压边类型" value="${fns:getValueByDictKey(detail.itemYbType)}"
+                                                <input disabled="ture" placeholder="压边类型" value="${fns:getDictValue(detail.itemYbType, 'prod_ybType', defaultValue)}"
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
                                             </div>
                                             <label class="col-sm-2 control-label"  style="padding-left: inherit;">延长米计算方式:</label>
                                             <div class="col-sm-4">
-                                                <input disabled="ture" placeholder="延长米计算方式" value="${fns:getValueByDictKey(detail.itemYcType)}"
+                                                <input disabled="ture" placeholder="延长米计算方式" value="${fns:getDictValue(detail.itemYcType, 'prod_ycType', defaultValue)}"
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
                                             </div>
                                         </div>
                                         <div class="hr-line-dashed"></div>
                                         <div class="form-group">
                                             <div class="row">
-                                                <div class="col-md-1">
-                                                    &nbsp;
-                                                </div>
-                                                <div class="col-md-8 " >
-                                                    <button class="btn btn-primary global-button-style" type="button" id="inStock">入 库</button>&nbsp;&nbsp;&nbsp;
-                                                    <button class="btn btn-warning global-button-style" type="submit" id="rePrint" disabled="true">重新打签</button>&nbsp;&nbsp;&nbsp;
+                                                <div class="col-md-12 " >
+                                                    <button class="btn btn-primary global-button-style" type="button" id="inStock">入 库</button>
+                                                    <button class="btn btn-warning global-button-style" type="button" id="rePrint" disabled="true">重新打签</button>
                                                     <button class="btn btn-warning global-button-style" type="button" id="printCertRed" disabled="true">合格证(红)</button>
                                                     <button class="btn btn-warning global-button-style" type="button" id="printCertGreen" disabled="true">合格证(绿)</button>
                                                     <button class="btn btn-warning global-button-style" type="button" id="printCertYellow" disabled="true">合格证(黄)</button>
@@ -319,17 +316,16 @@
                 success: function (result) {
                     if (result.itemNum>0) {
                         top.$.jBox.tip('入库成功');
-                        $("#itemNum").text(result.itemNum);
-                        doPrint($("#macCode").val());
+                        $("#inStock").removeAttr('disabled');
                     } else if (result.itemNum == 0) {
-                        top.$.jBox.tip('入库成功');
-                        doPrint($("#macCode").val());
+                        top.$.jBox.tip('入库成功,请在完成打印操作后点击返回按钮');
                         // var path = 'window.location.href = "/produce/producePlan/info?prodPlanCode='+prodPlanCode+'"';
-
                     }
+                    $("#itemNum").val(result.itemNum);
+                    doPrint($("#macCode").val());
                 }
             });
-            $("#inStock").removeAttr('disabled');
+
             $("#rePrint").removeAttr('disabled');
             $("#printCertRed").removeAttr('disabled');
             $("#printCertGreen").removeAttr('disabled');
