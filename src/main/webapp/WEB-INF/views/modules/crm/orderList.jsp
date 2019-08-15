@@ -83,8 +83,8 @@
                     <c:forEach items="${page.list}" var="ord" varStatus="status">
                         <tr>
                             <td style="text-align: center">${status.index + 1}</td>
-                            <td><a href="/cus/order/info?ordCode=${ord.ordCode}">${ord.ordCode}</a></td>
-                            <td>${ord.ordTitle}</td>
+                            <td>${ord.ordCode}</td>
+                            <td><a href="/cus/order/info?ordCode=${ord.ordCode}">${ord.ordTitle}</a></td>
                             <td>${ord.cusName}</td>
                             <td>${ord.ordStatusValue}</td>
                             <td>${ord.ordSignDate}</td>

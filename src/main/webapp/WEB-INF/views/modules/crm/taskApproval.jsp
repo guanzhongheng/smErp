@@ -16,15 +16,6 @@
     </script>
 </head>
 <body>
-<%--<ul class="nav nav-tabs">--%>
-    <%--<li class="active"><a href="${ctx}/crm/approval/list/">任务审批</a></li>--%>
-<%--</ul>--%>
-
-
-
-
-
-
 
 <div class="tabs-container" style="padding: 20px 20px;">
     <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
@@ -85,7 +76,7 @@
                             <td>${ord.ordDeliveryDate}</td>
                             <td>
                                 <c:if test="${ord.ordStatus eq '100001'}">
-                                    <a href="/cus/orderStatus_update?ordCode=${ord.ordCode}&&ordStatus=0"  ><i class="icon-ok-circle">&nbsp;通过</i></a>&nbsp;&nbsp;
+                                    <a href="/cus/orderStatus_update?ordCode=${ord.ordCode}&&ordStatus=0" onclick="return confirmx('确认审核通过？', this.href)" ><i class="icon-ok-circle">&nbsp;通过</i></a>&nbsp;&nbsp;
                                     <a href="/cus/orderStatus_update?ordCode=${ord.ordCode}&&ordStatus=1" style="color: red" onclick="return confirmx('确认审核不通过？', this.href)" ><i class="icon-remove-circle">&nbsp;不通过</i></a>
                                 </c:if>
                             </td>

@@ -21,15 +21,15 @@
     <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
         <div class="panel-heading" style="background-color: #50B0E6">
             <h3 class="panel-title global-panel-title" >
-                <c:if test="${empty tProduct.id}">产品新增</c:if>
-                <c:if test="${not empty tProduct.id}">产品编辑</c:if>
+                <c:if test="${empty prodId}">产品新增</c:if>
+                <c:if test="${not empty prodId}">产品编辑</c:if>
             </h3>
             <code class="pull-right" style="margin-top: -33px; margin-right: 8px"><span style="color: red; ">*</span>
                 <small>为必填项</small>
             </code>
         </div>
         <div class="panel-body" style="padding: 10px 10px 0px 10px;">
-
+            <input type="hidden" id="oldId" value="${tProduct.prodCode}" />
             <form:form id="inputForm" modelAttribute="tProduct" action="${ctx}/tProduct/insert" method="post" class="form-horizontal">
                 <input name="id" id="id" type="hidden" value="${prodId}">
                 <sys:message content="${message}"/>
@@ -109,8 +109,9 @@
 </div>
 <script>
     function checkInfo(obj){
-
-        if(obj.length > 0){
+        debugger;
+        var oldId = $("#oldId").val();
+        if(obj.value.length > 0 && oldId != obj.value){
             $.post('${ctx}/crmAjax/checkProdCode', {
                 code: obj.value
             }, function (data) {

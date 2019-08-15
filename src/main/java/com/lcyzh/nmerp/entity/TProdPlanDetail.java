@@ -13,6 +13,7 @@ public class TProdPlanDetail implements Serializable {
     private Long id;
     private String prodPlanCode;
     private String ordCode;
+    private String ordTitle;
     private Long orderItemId;
     private String itemCode;
     private Double itemLenth;
@@ -32,6 +33,14 @@ public class TProdPlanDetail implements Serializable {
     private String macCode;
 
     public TProdPlanDetail(){
+    }
+
+    public String getOrdTitle() {
+        return ordTitle;
+    }
+
+    public void setOrdTitle(String ordTitle) {
+        this.ordTitle = ordTitle;
     }
 
     public void setId (Long id) {this.id = id;}

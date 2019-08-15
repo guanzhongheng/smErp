@@ -192,16 +192,16 @@
                                     <tr>
                                         <th style="text-align: center"><input type="checkbox" id="checkAll"
                                                                               onchange="checkedAll(this)"/></th>
-                                        <th style="text-align: center">订单号</th>
-                                        <th style="text-align: center">产品编号</th>
-                                        <th style="text-align: center">所属人</th>
-                                        <th style="text-align: center">机台编号</th>
+                                        <th style="text-align: center">订单标题</th>
+                                        <%--<th style="text-align: center">产品名称</th>--%>
                                         <th style="text-align: center">品种</th>
                                         <th style="text-align: center">类别</th>
                                         <th style="text-align: center">颜色</th>
+                                        <th style="text-align: center">所属人</th>
+                                        <th style="text-align: center">机台编号</th>
                                         <th style="text-align: center">长度(m)</th>
                                         <th style="text-align: center">宽度(m)</th>
-                                        <th style="text-align: center">厚度(cm)</th>
+                                        <th style="text-align: center">厚度(mm)</th>
                                         <th style="text-align: center">数量</th>
                                         <th style="text-align: center">重量</th>
                                         <th style="text-align: center">面积(㎡)</th>
@@ -219,13 +219,13 @@
                                                     <input type="checkbox" name="detailId" value="${vo.id}">
                                                 </c:if>
                                             </td>
-                                            <td>${vo.ordCode}</td>
-                                            <td>${vo.itemCode}</td>
-                                            <td>${vo.itemOwner}</td>
-                                            <td>${vo.macCode}</td>
+                                            <td>${vo.ordTitle}</td>
+                                            <%--<td>${vo.itemCode}</td>--%>
                                             <td>${fns:getValueByDictKey(vo.itemVariety)}</td>
                                             <td>${fns:getValueByDictKey(vo.itemCgyCode)}</td>
                                             <td>${fns:getDictValue(vo.itemColor, 'prod_color', defaultValue)}</td>
+                                            <td>${vo.itemOwner}</td>
+                                            <td>${vo.macCode}</td>
                                             <td>${vo.itemLenth}</td>
                                             <td>${vo.itemWidth}</td>
                                             <td>${vo.itemThick}</td>
@@ -745,19 +745,19 @@
 
     function operForOutFormatter(){
         return [
-            ' <button id="outTableRowdelete" type="button" class="btn-primary" style="height: 28px;">删除</button>'
+            ' <button id="outTableRowdelete" type="button" class="btn-primary" style="height: 28px;min-width: 50px;">删除</button>'
         ].join('');
     }
 
     function operForMidFormatter(){
         return [
-            ' <button id="midTableRowdelete" type="button" class="btn-primary" style="height: 28px;">删除</button>'
+            ' <button id="midTableRowdelete" type="button" class="btn-primary" style="height: 28px;min-width: 50px;">删除</button>'
         ].join('');
     }
 
     function operForInnerFormatter(){
         return [
-            ' <button id="innerTableRowdelete" type="button" class="btn-primary" style="height: 28px;">删除</button>'
+            ' <button id="innerTableRowdelete" type="button" class="btn-primary" style="height: 28px;min-width: 50px;">删除</button>'
         ].join('');
     }
 

@@ -123,7 +123,7 @@
                         <th style="text-align: center" data-field="itemVaritemValue">类别</th>
                         <th style="text-align: center" data-field="itemLenth">长(m)</th>
                         <th style="text-align: center" data-field="itemWidth">宽(m)</th>
-                        <th style="text-align: center" data-field="itemThick">厚度(cm)</th>
+                        <th style="text-align: center" data-field="itemThick">厚度(mm)</th>
                         <th style="text-align: center" data-field="itemColorValue">颜色</th>
                         <th style="text-align: center" data-field="itemUnitValue">单位</th>
                         <th style="text-align: center" data-field="itemOwner">归属人</th>

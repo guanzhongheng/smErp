@@ -6,6 +6,7 @@
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="prod_plan_code" property="prodPlanCode" jdbcType="VARCHAR"/>
         <result column="ord_code" property="ordCode" jdbcType="VARCHAR"/>
+        <result column="ord_title" property="ordTitle" jdbcType="VARCHAR"/>
         <result column="order_item_id" property="orderItemId" jdbcType="BIGINT"/>
         <result column="item_code" property="itemCode" jdbcType="VARCHAR"/>
         <result column="item_lenth" property="itemLenth" jdbcType="DOUBLE"/>
@@ -26,8 +27,16 @@
     </resultMap>
 
     <select id="findListByProdPlanCode" parameterType="java.lang.String" resultMap="tProdPlanDetailResultMap">
-        select * from t_prod_plan_detail where prod_plan_code = #{prodPlanCode,jdbcType=VARCHAR}
-        order by item_status, item_width desc
+        SELECT
+            td.*,od.ord_title
+        FROM
+            t_prod_plan_detail td
+            inner join T_ORDER od on od.ord_code = td.ord_code
+        WHERE
+            td.prod_plan_code = #{prodPlanCode,jdbcType=VARCHAR}
+        ORDER BY
+            td.item_status,
+            td.item_width DESC
     </select>
 
     <update id="updateByIds" parameterType="java.util.List">

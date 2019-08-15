@@ -127,7 +127,7 @@
 
                                         <div class="hr-line-dashed"></div>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label" style="margin-left: -25px;">厚度(cm):</label>
+                                            <label class="col-sm-2 control-label" style="margin-left: -25px;">厚度(mm):</label>
                                             <div class="col-sm-4">
                                                 <input disabled="ture" placeholder="厚度" value="${detail.itemThick}"
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>

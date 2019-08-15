@@ -16,7 +16,8 @@
     <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
         <div class="panel-heading" style="background-color: #50B0E6">
             <h3 class="panel-title global-panel-title" >
-                设备操作
+                <c:if test="${empty machineId}">设备新增</c:if>
+                <c:if test="${not empty machineId}">设备编辑</c:if>
             </h3>
             <code class="pull-right" style="margin-top: -33px; margin-right: 8px"><span style="color: red; ">*</span>
                 <small>为必填项</small>
