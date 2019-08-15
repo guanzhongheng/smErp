@@ -26,7 +26,7 @@
                         <div class="box-body" >
                             <div style="float:left;    margin-bottom: 10px;">
                                 <a class="btn btn-success" id="totalStart" style="width: 120px;">
-                                    <i class="fa fa-play"></i> 启动称重
+                                    <i class="fa fa-play"></i> 毛重称重
                                 </a>
                                 <a class="btn btn-danger" id="wsStop" style="display: none;width: 120px;">
                                     <i class="fa fa-stop"></i> 停止称重
@@ -170,6 +170,7 @@
                                                 <div class="col-md-12 " >
                                                     <button class="btn btn-primary global-button-style" type="button" id="inStock">入 库</button>
                                                     <button class="btn btn-warning global-button-style" type="button" id="rePrint" disabled="true">重新打签</button>
+                                                    <button class="btn btn-warning global-button-style" type="button" id="printCertNew" disabled="true">合格证(新版)</button>
                                                     <button class="btn btn-warning global-button-style" type="button" id="printCertRed" disabled="true">合格证(红)</button>
                                                     <button class="btn btn-warning global-button-style" type="button" id="printCertGreen" disabled="true">合格证(绿)</button>
                                                     <button class="btn btn-warning global-button-style" type="button" id="printCertYellow" disabled="true">合格证(黄)</button>
@@ -326,6 +327,7 @@
             });
 
             $("#rePrint").removeAttr('disabled');
+            $("#printCertNew").removeAttr('disabled');
             $("#printCertRed").removeAttr('disabled');
             $("#printCertGreen").removeAttr('disabled');
             $("#printCertYellow").removeAttr('disabled');
@@ -343,6 +345,15 @@
                 content: ['/produce/produce/doPrint?macCode='+macCode, 'yes'] //iframe的url，no代表不显示滚动条
             });
         }
+        $("#printCertNew").click(function () {
+            layer.open({
+                type: 2,
+                title: '打印合格证确认',
+                skin: 'layui-layer-rim', //加上边框
+                area: ['800px', '800px'],
+                content: ['/produce/produce/printCert?type=new&macCode='+$("#macCode").val(), 'yes'] //iframe的url，no代表不显示滚动条
+            });
+        });
         $("#printCertRed").click(function () {
             layer.open({
                 type: 2,
@@ -383,6 +394,7 @@
             // }
             $("#totalStart").hide();
             $("#wsStop").show();
+            $("#tareStart").attr('disabled',"true");
         });
         $("#wsStop").click(function () {
             send("stop");
