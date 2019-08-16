@@ -121,6 +121,7 @@
             od.ord_code ordCode,
             od.ord_title ordTitle,
             cs.cus_name cusName,
+            cs.cus_code cusCode,
             od.ord_status ordStatus,
             od.ord_total_amount ordTotalAmount,
             od.ord_sign_date ordSignDate,

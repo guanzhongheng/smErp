@@ -31,6 +31,16 @@ public class OutItemVo {
     private String prodCgyCodeValue;
     //品种、性质-字典值
     private String prodVarietyValue;
+    // 产品重量
+    private Double itemWeight;
+
+    public Double getItemWeight() {
+        return itemWeight;
+    }
+
+    public void setItemWeight(Double itemWeight) {
+        this.itemWeight = itemWeight;
+    }
 
     public String getOutCode() {
         return outCode;

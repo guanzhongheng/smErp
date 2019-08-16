@@ -14,6 +14,7 @@ import com.lcyzh.nmerp.service.TOrderService;
 import com.lcyzh.nmerp.service.TOutStockService;
 import com.lcyzh.nmerp.service.TProdPlanDetailService;
 import com.lcyzh.nmerp.service.TProdPlanService;
+import com.lcyzh.nmerp.utils.Arith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -100,7 +101,7 @@ public class PrintManageController extends BaseController {
             model.addAttribute("customer",customer);
             model.addAttribute("order",order);
             model.addAttribute("orderItem",newItems);
-            getTotalInfo(model,doProcessOrder(outItemVoList,orderItemVos));
+            getTotalInfo(model,newItems);
         }else{
 
             model.addAttribute("customer",new CustomerAddModifyVo());
@@ -115,14 +116,19 @@ public class PrintManageController extends BaseController {
     public List<OrderItemVo> doProcessOrder(List<OutItemVo> outItemVoList,List<OrderItemVo> oldOrderItem){
         List<OrderItemVo> list = new ArrayList<>();
         Map<String,Long> ite = new HashMap<>();
+        Map<String,Double> iteWight = new HashMap<>();
+
         if(!StringUtils.isEmpty(outItemVoList)){
             for(OutItemVo vo : outItemVoList){
                 String newName = vo.getOrdCode() + vo.getItemOwner() + vo.getItemName();
                 if(ite.get(newName) == null){
                     ite.put(newName,1L);
+                    iteWight.put(newName,vo.getItemWeight());
                 }else{
                     Long n = ite.get(newName) + 1L;
+                    Double d = Arith.add(iteWight.get(newName),vo.getItemWeight());
                     ite.put(newName,n);
+                    iteWight.put(newName,d);
                 }
             }
         }
@@ -131,6 +137,8 @@ public class PrintManageController extends BaseController {
                 String newName = vo.getOrdCode() + vo.getItemOwner() + vo.getItemName();
                 if(ite.get(newName) != null && !list.contains(vo)){
                     vo.setItemNum(ite.get(newName));
+                    vo.setItemTotalSq(ite.get(newName) * vo.getItemLenth() * vo.getItemWidth());
+                    vo.setItemTotalWeight(iteWight.get(newName));
                     list.add(vo);
                 }
             }
@@ -245,7 +253,7 @@ public class PrintManageController extends BaseController {
       if(orderItemVos!=null && !orderItemVos.isEmpty()){
           for (OrderItemVo item: orderItemVos){
               if(item.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)){
-                  totalPriceByZL += item.getItemNum() * item.getItemPrice() * item.getItemWeight();
+                  totalPriceByZL += item.getItemPrice() * item.getItemTotalWeight();
               }else{
                   totoalPriceByMj += item.getItemNum() * item.getItemPrice() *(item.getItemLenth()*item.getItemWidth());
               }

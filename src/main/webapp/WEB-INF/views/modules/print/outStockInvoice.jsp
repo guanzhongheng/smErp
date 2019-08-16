@@ -33,8 +33,7 @@
                         <address>
                             <strong>青州市嘉润塑业有限公司</strong><br>
                             山东省青州市水源路188号<br>
-                            <abbr title="Phone">联系方式：</abbr> 0536-3260569<br>
-                            <abbr type="ip">网址:</abbr> www.wfjiarun.com
+                            <abbr title="Phone">联系方式：</abbr> 0536-3260569
                         </address>
                     </div>
 
@@ -82,7 +81,7 @@
                                 <td>${ord.itemTotalSq}</td>
                                 <td>${ord.itemTotalWeight}</td>
                                 <td>&yen;${ord.itemPrice}</td>
-                                <td>&yen;${ord.itemPrice * ord.itemNum}</td>
+                                <td>&yen;${ord.itemPriceType == 141002?ord.itemTotalSq *ord.itemPrice:ord.itemPrice*ord.itemTotalWeight}</td>
                             </tr>
                         </c:forEach>
                         </tbody>

@@ -5,12 +5,13 @@ import com.github.pagehelper.PageInfo;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.controller.system.util.SysDictUtils;
-import com.lcyzh.nmerp.dao.PrimaryContactMapper;
 import com.lcyzh.nmerp.dao.TCustomerMapper;
 import com.lcyzh.nmerp.dao.TOrderItemMapper;
 import com.lcyzh.nmerp.dao.TOrderMapper;
-import com.lcyzh.nmerp.entity.*;
-import com.lcyzh.nmerp.entity.sys.Dict;
+import com.lcyzh.nmerp.entity.Customer;
+import com.lcyzh.nmerp.entity.TOrder;
+import com.lcyzh.nmerp.entity.TOrderItem;
+import com.lcyzh.nmerp.entity.TProduct;
 import com.lcyzh.nmerp.model.vo.OrderAddBatchVo;
 import com.lcyzh.nmerp.model.vo.OrderAddModifyVo;
 import com.lcyzh.nmerp.model.vo.OrderItemVo;
@@ -27,7 +28,6 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Author ljk
