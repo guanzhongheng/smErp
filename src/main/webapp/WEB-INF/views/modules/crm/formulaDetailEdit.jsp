@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="ibox float-e-margins">
-                                        <div class="control-group table-responsive">
+                                        <div class="table-responsive" style="min-height: 300px;">
                                             <table id="contentTable" class="table table-striped table-bordered table-hover text-nowrap">
                                                 <thead>
                                                 <tr>
@@ -80,7 +80,7 @@
                                                     <tr>
                                                         <td>
                                                             <input type="hidden" name="rawMaterialVos[${status.index}].rawmName" value="${vo.rawmName}">
-                                                            <select name="rawMaterialVos[${status.index}].rawmCode">
+                                                            <select class="chosen-select" name="rawMaterialVos[${status.index}].rawmCode">
                                                                 <option value ="${vo.rawmCode}" selected>${vo.rawmName}</option>
                                                                 <c:forEach items="${rmList}" var="rm">
                                                                     <option value ="${rm.rawmCode}">${rm.rawmName}</option>
@@ -94,7 +94,7 @@
                                                             <%--</select>--%>
                                                             <%--<input type="hidden" name="rawMaterialVos[${status.index}].rawnSpecs" value="${vo.rawnSpecs}">--%>
                                                         </td>
-                                                        <td><input type="text" name="rawMaterialVos[${status.index}].weight" value="${vo.weight}"/></td>
+                                                        <td><input type="text" class="form-control" name="rawMaterialVos[${status.index}].weight" value="${vo.weight}"/></td>
                                                         <td>
                                                             <button class="btn btn-primary global-button-style" onclick="delRow(this)" type="button">删除</button>
                                                         </td>
@@ -173,20 +173,21 @@
                 // headOption = headOption + "<option value='"+obj.rawmCode+"'>"+obj.rawmName+"("+obj.rawnSpecs+")"+"</option>";
             });
         }
-        var option = "<select name='rawMaterialVos["+ rownum +"].rawmCode' onchange='setRmValue(this)'>" + headOption + "</select>";
+        var option = "<select class='chosen-select' name='rawMaterialVos["+ rownum +"].rawmCode' onchange='setRmValue(this)'>" + headOption + "</select>";
 
         var tr ="<tr><td>" +
                 "<input type='hidden' name='rawMaterialVos["+ rownum +"].rawmName' value=''>" +
                 option +
                 // "<input type='hidden' name='rawMaterialVos["+ rownum +"].rawnSpecs' value=''>" +
                 "</td>" +
-                "<td><input type='text' name='rawMaterialVos["+ rownum +"].weight' /></td>" +
+                "<td><input  class='form-control' type='text' name='rawMaterialVos["+ rownum +"].weight' /></td>" +
                 "<td><button class='btn btn-primary global-button-style' onclick='delRow(this)' type='button'>删除</button></td></tr>";
         $("#contentTable").append(tr);
+
+        $('.chosen-select').chosen();
     }
 
     $(document).ready(function () {
-
 
         $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",});
         $("select").change(function(){
@@ -208,6 +209,8 @@
                 error.appendTo(element.parent());
             },
         });
+
+
     });
 
 

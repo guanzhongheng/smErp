@@ -12,6 +12,7 @@ import com.lcyzh.nmerp.model.vo.ProdPlanVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -76,7 +77,15 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity<T>>
 	public List<T> findPageForHelp(Page<T> page, T entity) {
 		PageHelper.startPage(page.getPageNo(),page.getPageSize());
 //		entity.setPage(page);
-		List<T> list = dao.findList(entity);
+		List<T> list = new ArrayList<>();
+		try {
+			if(entity == null){
+				System.out.println("123");
+			}
+			list = dao.findList(entity);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 		PageInfo<T> p = new PageInfo<>(list);
 		page.setTotal(p.getTotal());
 		return list;
