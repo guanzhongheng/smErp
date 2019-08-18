@@ -101,6 +101,9 @@
                                                                 type="button" style="width: 85px" onclick="saveFormu()">保存配方
                                                         </button>
                                                     </div>
+                                                    <div class="col-md-2 " style="text-align: left">
+                                                        <a href="/print/remark_print?prodPlanCode=${prodPlan.prodPlanCode}" class="btn btn-primary">配方打印</a>
+                                                    </div>
 
                                                 </div>
                                                 <div class="hr-line-dashed"></div>
@@ -253,7 +256,7 @@
                                 </button>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 <button class="btn btn-white global-button-style" style="margin-bottom: 10px;"
-                                        type="button" onclick="history.go(-1)">返回
+                                        type="button" id="backHistory" >返回
                                 </button>
                                 <br/>
                             </div>
@@ -853,7 +856,11 @@
         }
 
     });
-
+    <!-- 返回 -->
+    $("#backHistory").click(function () {
+        window.location.href = "/crm/producePlan/list";
+    });
+    
     function getCheckValue() {
         var obj = document.getElementsByName("detailId");
         var check_val = '';

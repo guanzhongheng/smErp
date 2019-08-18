@@ -61,7 +61,7 @@
                         <th>订单总重量</th>
                         <th>订单总面积</th>
                         <th>订单总数量</th>
-                        <th>出库产品数量</th>
+                        <th>已出库产品数量</th>
                         <th>未出库产品数量</th>
                     </tr>
                     </thead>
@@ -73,8 +73,8 @@
                         <td>${oq.ordTotalWeight}</td>
                         <td>${oq.ordTotalSq}</td>
                         <td>${oq.ordTotalNum}</td>
-                        <td>${oq.ordTotalNum - oq.ordOutNum}</td>
                         <td>${oq.ordOutNum == null?"0":oq.ordOutNum}</td>
+                        <td>${oq.ordTotalNum - oq.ordOutNum}</td>
                         </c:forEach>
                     </tbody>
                 </table>

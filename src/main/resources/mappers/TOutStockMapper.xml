@@ -178,6 +178,7 @@
             tn.item_weight,
             tk.item_yb_type,
             tn.ord_code,
+            t.ord_title,
             tn.item_num
         FROM
             t_stock tk
@@ -206,6 +207,7 @@
             ts.item_owner,
             ts.item_weight
             ) tn on tn.item_code = tk.item_code and tn.ord_code = tk.ord_code
+		  inner join T_ORDER t on t.ord_code = tn.ord_code
     </select>
 
 </mapper>

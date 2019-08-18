@@ -215,8 +215,8 @@
                     <tr>
                         <th style="text-align: center" data-field="itemCode">编码</th>
                         <th style="text-align: center" data-field="itemName">名称</th>
-                        <th style="text-align: center" data-field="itemCgyCodeValue">品种</th>
-                        <th style="text-align: center" data-field="itemVaritemValue">类别</th>
+                        <th style="text-align: center" data-field="itemVaritemValue">品种</th>
+                        <th style="text-align: center" data-field="itemCgyCodeValue">类别</th>
                         <th style="text-align: center" data-field="itemLenth">长(m)</th>
                         <th style="text-align: center" data-field="itemWidth">宽(m)</th>
                         <th style="text-align: center" data-field="itemThick">厚度(mm)</th>

@@ -51,10 +51,10 @@
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th>订单编号</th>
+                <th>订单标题</th>
                 <th>归属人</th>
-                <th>类别</th>
                 <th>品种</th>
+                <th>类别</th>
                 <th>颜色</th>
                 <th>规格(长*宽*厚)</th>
                 <th>总重量</th>
@@ -65,7 +65,7 @@
             <tbody>
             <c:forEach items="${stockDetails}" var="s">
                 <tr>
-                    <td>${s.ordCode}</td>
+                    <td>${s.ordTitle}</td>
                     <td>${s.itemOwner}</td>
                     <td>${fns:getValueByDictKey(s.itemVariety)}</td>
                     <td>${fns:getValueByDictKey(s.itemCgyCode)}</td>

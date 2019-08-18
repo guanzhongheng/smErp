@@ -54,7 +54,6 @@
                         <thead>
                         <tr>
                             <th>归属人</th>
-                            <th>名称</th>
                             <th>类别</th>
                             <th>品种</th>
                             <th>颜色</th>
@@ -71,7 +70,6 @@
                         <c:forEach items="${orderItem}" var="ord">
                             <tr>
                                 <td>${ord.itemOwner}</td>
-                                <td>${ord.itemName}</td>
                                 <td>${fns:getValueByDictKey(ord.itemVariety)}</td>
                                 <td>${fns:getValueByDictKey(ord.itemCgyCode)}</td>
                                 <td>${fns:getDictLabel(ord.itemColor,'prod_color','无')}</td>

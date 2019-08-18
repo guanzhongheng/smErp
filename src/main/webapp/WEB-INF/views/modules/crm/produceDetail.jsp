@@ -234,7 +234,59 @@
                                         </div>
                                         <div class="form-group"  style="text-align: -webkit-center;">
                                             <div class="control-group table-responsive" style="text-align: center;" >
-                                                <table id="innerTable" data-height="300" class="table table-striped table-bordered table-hover text-nowrap" >
+                                                <table id="inne<div class="row" style="text-align: center;">
+                                                <label class="control-label">外层配比(<span id="outTemp">0</span>℃)</label>
+                                            </div>
+                                            <div class="form-group" style="text-align: -webkit-center;">
+                                                <div class="control-group table-responsive" style="text-align: center;" >
+                                                    <table id="outerTable" class="table table-striped table-bordered table-hover text-nowrap" >
+                                                        <thead>
+                                                        <tr>
+                                                            <th style="text-align: center">原料</th>
+                                                            <th style="text-align: center">数量</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <div class="row" style="text-align: center;">
+                                                <label class="control-label">中层配比(<span id="midTemp">0</span>℃)</label>
+                                            </div>
+                                            <div class="form-group"  style="text-align: -webkit-center;">
+                                                <div class="control-group table-responsive" style="text-align: center;" >
+                                                    <table id="midderTable" data-height="300" class="table table-striped table-bordered table-hover text-nowrap" >
+                                                        <thead>
+                                                        <tr>
+                                                            <th style="text-align: center">原料</th>
+                                                            <th style="text-align: center">数量</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <div class="row" style="text-align: center;">
+                                                <label class="control-label">内层配比(<span id="inTemp">0</span>℃)</label>
+                                            </div>
+                                            <div class="form-group"  style="text-align: -webkit-center;">
+                                                <div class="control-group table-responsive" style="text-align: center;" >
+                                                    <table id="innerTable" data-height="300" class="table table-striped table-bordered table-hover text-nowrap" >
+                                                        <thead>
+                                                        <tr>
+                                                            <th style="text-align: center">原料</th>
+                                                            <th style="text-align: center">数量</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>rTable" data-height="300" class="table table-striped table-bordered table-hover text-nowrap" >
                                                     <thead>
                                                     <tr>
                                                     <th style="text-align: center">原料</th>

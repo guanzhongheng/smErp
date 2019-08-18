@@ -15,6 +15,7 @@ public class StockVo {
     private Long stockId;
     private String barCode;
     private String ordCode;
+    private String ordTitle;
     private Long orderItemId;
     private String itemCode;
     private Double itemLenth;
@@ -34,6 +35,15 @@ public class StockVo {
     private String itemColor;
     private String macCode;
     private Double itemTareWeight;
+
+
+    public String getOrdTitle() {
+        return ordTitle;
+    }
+
+    public void setOrdTitle(String ordTitle) {
+        this.ordTitle = ordTitle;
+    }
 
     public Long getStockId() {
         return stockId;

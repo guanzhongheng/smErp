@@ -91,7 +91,7 @@
                         <th style="text-align: center">重量</th>
                         <th style="text-align: center">压边类型</th>
                         <th style="text-align: center">延长米方式</th>
-                        <th style="text-align: center">单价</th>
+                        <th style="text-align: center">计价方式</th>
                         <th style="text-align: center">操作</th>
                     </tr>
                     </thead>
@@ -111,7 +111,7 @@
                             <td>${cus.itemWeight}</td>
                             <td>${fns:getDictLabel(cus.itemYbType,'prod_ybType','无')}</td>
                             <td>${fns:getDictLabel(cus.itemYcType,'prod_ycType','无')}</td>
-                            <td>${cus.itemUnit}</td>
+                            <td>${fns:getValueByDictKey(cus.itemUnit)}</td>
                             <%--<td><button class="btn btn-primary" type="button" onclick="rePrint(${cus.stockId})"  >补签</button></td>--%>
                             <td><a href="#" rel="external nofollow"
                                    onclick="rePrint(${cus.stockId});return false;"><i class="icon-print">&nbsp;补签</i></a></td>

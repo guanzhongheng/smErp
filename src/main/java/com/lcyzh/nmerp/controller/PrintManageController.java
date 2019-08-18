@@ -53,6 +53,7 @@ public class PrintManageController extends BaseController {
     @Autowired
     private TProdPlanDetailService prodPlanDetailService;
 
+
     /**
      * 收据打印
      * @param ordCode

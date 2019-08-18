@@ -1,20 +1,15 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 <!DOCTYPE html>
 <html>
 
-
-<!-- Mirrored from www.zi-han.net/theme/hplus/invoice_print.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:47 GMT -->
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
     <title>配方信息</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
-
     <link rel="shortcut icon" href="favicon.ico">
-
     <link href="${ctxStatic}/hPlugs/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
     <link href="${ctxStatic}/hPlugs/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
     <link href="${ctxStatic}/hPlugs/css/animate.min.css" rel="stylesheet">
@@ -31,25 +26,62 @@
                 <h2>配方单</h2>
             </div>
             <div style="height: 5px"></div>
-            <div class="row" style="text-align: left;">
-                <label class="col-sm-4" style="width: 250px">产品名称：${fns:getValueByDictKey(prod.itemCgyCode)}（${fns:getValueByDictKey(prod.itemVariety)}）</label>
-                <label class="col-sm-4" style="width: 60px"></label>
-                <label class="col-sm-4 " style="width: 150px">产品品种：${fns:getValueByDictKey(prod.itemCgyCode)}</label>
+            <div class="row" style="text-align: center;">
+                <label class="control-label">外层配比(<span id="outTemp">0</span>℃)</label>
             </div>
-            <div style="height: 5px"></div>
-            <div class="row" style="text-align: left;">
-                <label class="col-sm-4" style="width: 250px">产品类别：${fns:getValueByDictKey(prod.itemVariety)}</label>
-                <label class="col-sm-4" style="width: 60px"></label>
-                <label class="col-sm-4 " style="width: 150px">产品颜色：${fns:getDictLabel(prod.itemColor,'prod_color','无')}</label>
+            <div class="form-group" style="text-align: -webkit-center;">
+                <div class="control-group table-responsive" style="text-align: center;" >
+                    <table id="outerTable" class="table table-striped table-bordered table-hover text-nowrap" >
+                        <thead>
+                        <tr>
+                            <th style="text-align: center">原料</th>
+                            <th style="text-align: center;width: 40%;">数量</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row" style="text-align: center;">
+                <label class="control-label">中层配比(<span id="midTemp">0</span>℃)</label>
+            </div>
+            <div class="form-group"  style="text-align: -webkit-center;">
+                <div class="control-group table-responsive" style="text-align: center;" >
+                    <table id="midderTable" data-height="300" class="table table-striped table-bordered table-hover text-nowrap" >
+                        <thead>
+                        <tr>
+                            <th style="text-align: center">原料</th>
+                            <th style="text-align: center;width: 40%;">数量</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row" style="text-align: center;">
+                <label class="control-label">内层配比(<span id="inTemp">0</span>℃)</label>
+            </div>
+            <div class="form-group"  style="text-align: -webkit-center;">
+                <div class="control-group table-responsive" style="text-align: center;" >
+                    <table id="innerTable" data-height="300" class="table table-striped table-bordered table-hover text-nowrap" >
+                        <thead>
+                        <tr>
+                            <th style="text-align: center">原料</th>
+                            <th style="text-align: center;width: 40%;">数量</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <br>
         <div class="row">
-            <div class="row">
-                <div class="table-bordered" style="height: 300px">
-                    ${prod.formula}
-                </div>
-            </div>
             <p>注意：</p>
             <p>（随幅宽增减而增减高压和线性的比例！其他比例不变！）</p>
             <p>1.以上温度仅供参考，随时注意塑化情况，开口情况，</p>
@@ -69,9 +101,49 @@
 
 </div>
 
-<script src="js/jquery.min.js?v=2.1.4"></script>
-<script src="js/bootstrap.min.js?v=3.3.6"></script>
+<script src="${ctxStatic}/hPlugs/js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+<script src="${ctxStatic}/hPlugs/js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
+<script src="${ctxStatic}/hPlugs/js/content.min.js?v=1.0.0" type="text/javascript"></script>
 <script type="text/javascript">
+
+    var FormuInfo = '${prod.formula}';
+    $(document).ready(function () {
+        var outerTable = "";
+        var midderTable = "";
+        var innerTable = "";
+
+        if(FormuInfo != null && FormuInfo != undefined){
+
+            var obj = JSON.parse(FormuInfo);
+            if(obj.outer != null){
+                $("#outTemp").text(obj.outer.temperature);
+                $.each(obj.outer.rawMaterialVos,function (index,o) {
+                    outerTable += "<tr><td>" + o.rawmName + "</td><td>" + o.weight + "</td></tr>";
+                })
+            }
+            if(obj.midder != null){
+                $("#midTemp").text(obj.midder.temperature);
+                if(obj.midder!=null && obj.midder.rawMaterialVos != null) {
+                    $.each(obj.midder.rawMaterialVos, function (index, o) {
+                        midderTable += "<tr><td>" + o.rawmName + "</td><td>" + o.weight + "</td></tr>";
+                    })
+                }
+            }
+            if(obj.inner != null){
+                $("#inTemp").text(obj.inner.temperature);
+                if(obj.inner!=null && obj.inner.rawMaterialVos != null){
+                    $.each(obj.inner.rawMaterialVos,function (index,o) {
+                        innerTable += "<tr><td>" + o.rawmName + "</td><td>" + o.weight + "</td></tr>";
+                    })
+                }
+            }
+            debugger;
+            $("#outerTable").append(outerTable);
+            $("#midderTable").append(midderTable);
+            $("#innerTable").append(innerTable);
+        }
+    })
+
     function doPrint() {
         window.print();
     }
