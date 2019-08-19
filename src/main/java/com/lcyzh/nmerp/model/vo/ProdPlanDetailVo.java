@@ -51,6 +51,8 @@ public class ProdPlanDetailVo{
     //皮重
     private Double itemTareWeight;
 
+    private Long itemPriceType;
+
     public String getProxyName() {
         return proxyName;
     }
@@ -281,5 +283,13 @@ public class ProdPlanDetailVo{
 
     public void setItemTareWeight(Double itemTareWeight) {
         this.itemTareWeight = itemTareWeight;
+    }
+
+    public Long getItemPriceType() {
+        return itemPriceType;
+    }
+
+    public void setItemPriceType(Long itemPriceType) {
+        this.itemPriceType = itemPriceType;
     }
 }

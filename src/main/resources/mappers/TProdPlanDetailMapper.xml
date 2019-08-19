@@ -24,6 +24,7 @@
         <result column="item_owner" property="itemOwner" jdbcType="VARCHAR"/>
         <result column="item_color" property="itemColor" jdbcType="VARCHAR"/>
         <result column="mac_code" property="macCode" jdbcType="VARCHAR"/>
+        <result column="item_price_type" property="itemPriceType" jdbcType="BIGINT"/>
     </resultMap>
 
     <select id="findListByProdPlanCode" parameterType="java.lang.String" resultMap="tProdPlanDetailResultMap">
@@ -83,6 +84,7 @@
         ppd.item_owner itemOwner,
         ppd.item_color itemColor,
         ppd.mac_code macCode,
+        ppd.item_price_type itemPriceType,
         pp.formula formula,
         o.ord_title orderTitle,
         o.proxy_name proxyName
@@ -137,7 +139,8 @@
             item_unit,
             item_owner,
             item_color,
-            mac_code
+            mac_code,
+            item_price_type
         )
         VALUES (
             #{prodPlanCode,jdbcType=VARCHAR},
@@ -158,7 +161,8 @@
             #{itemUnit,jdbcType=BIGINT},
             #{itemOwner,jdbcType=VARCHAR},
             #{itemColor,jdbcType=VARCHAR},
-            #{macCode,jdbcType=VARCHAR}
+            #{macCode,jdbcType=VARCHAR},
+            #{itemPriceType, jdbcType=BIGINT}
         )
     </insert>
 
@@ -182,7 +186,8 @@
         item_unit,
         item_owner,
         item_color,
-        mac_code
+        mac_code,
+        item_price_type
         )
         VALUES
         <foreach collection ="list" item="item" separator =",">
@@ -205,7 +210,8 @@
             #{item.itemUnit,jdbcType=BIGINT},
             #{item.itemOwner,jdbcType=VARCHAR},
             #{item.itemColor,jdbcType=VARCHAR},
-            #{item.macCode,jdbcType=VARCHAR}
+            #{item.macCode,jdbcType=VARCHAR},
+            #{item.itemPriceType,jdbcType=BIGINT}
             )
         </foreach>
     </insert>

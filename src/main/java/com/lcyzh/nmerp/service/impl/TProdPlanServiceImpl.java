@@ -210,6 +210,7 @@ public class TProdPlanServiceImpl implements TProdPlanService {
         detail.setItemOwner(vo.getItemOwner());
         detail.setItemColor(vo.getItemColor());
         detail.setMacCode(macCode);
+        detail.setItemPriceType(vo.getItemPriceType());
         return detail;
     }
 

@@ -31,6 +31,7 @@ public class TProdPlanDetail implements Serializable {
     private String itemOwner;
     private String itemColor;
     private String macCode;
+    private Long itemPriceType;
 
     public TProdPlanDetail(){
     }
@@ -87,4 +88,6 @@ public class TProdPlanDetail implements Serializable {
     public void setItemColor(String itemColor) { this.itemColor = itemColor; }
     public String getMacCode() { return macCode; }
     public void setMacCode(String macCode) { this.macCode = macCode; }
+    public Long getItemPriceType() { return itemPriceType; }
+    public void setItemPriceType(Long itemPriceType) { this.itemPriceType = itemPriceType; }
 }
