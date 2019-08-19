@@ -30,27 +30,29 @@
     <select id="findModifyInfoByOrdCode" parameterType="java.lang.String"
             resultType="com.lcyzh.nmerp.model.vo.OrderAddModifyVo">
         select
-        ord_code ordCode,
-        cus_code cusCode,
-        proxy_name proxyName,
-        ord_title ordTitle,
-        ord_total_amount ordTotalAmount,
-        ord_type ordType,
-        ord_sign_date ordSignDate,
-        ord_status ordStatus,
-        ord_delivery_date ordDeliveryDate,
-        pay_type payType,
-        pay_status payStatus,
-        cus_contractor cusContractor,
-        com_contractor comContractor,
-        remarks remarks,
-        ord_total_num ordTotalNum,
-        ord_out_num ordOutNum,
-        ord_total_sq ordTotalSq,
-        ord_total_weight ordTotalWeight
-        from T_ORDER
-        where ord_code = #{ordCode,jdbcType=VARCHAR}
-        order by create_time desc
+        o.ord_code ordCode,
+        o.cus_code cusCode,
+		t.cus_name cusName,
+        o.proxy_name proxyName,
+        o.ord_title ordTitle,
+        o.ord_total_amount ordTotalAmount,
+        o.ord_type ordType,
+        o.ord_sign_date ordSignDate,
+        o.ord_status ordStatus,
+        o.ord_delivery_date ordDeliveryDate,
+        o.pay_type payType,
+        o.pay_status payStatus,
+        o.cus_contractor cusContractor,
+        o.com_contractor comContractor,
+        o.remarks remarks,
+        o.ord_total_num ordTotalNum,
+        o.ord_out_num ordOutNum,
+        o.ord_total_sq ordTotalSq,
+        o.ord_total_weight ordTotalWeight
+        from T_ORDER o
+		inner join T_CUSTOMER t on o.cus_code = t.cus_code
+        where o.ord_code =#{ordCode,jdbcType=VARCHAR}
+        order by o.create_time desc
     </select>
 
 

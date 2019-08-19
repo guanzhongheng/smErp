@@ -16,6 +16,8 @@ public class OrderAddModifyVo {
     private String ordCode;
     //客户资料编号
     private String cusCode;
+    // 客户名称
+    private String cusName;
     //代理商名称
     private String proxyName;
     //订单标题
@@ -56,6 +58,14 @@ public class OrderAddModifyVo {
     private Double ordTotalWeight;
     //订单产品出库数量
     private Long ordOutNum;
+
+    public String getCusName() {
+        return cusName;
+    }
+
+    public void setCusName(String cusName) {
+        this.cusName = cusName;
+    }
 
     public String getOrdCode() {
         return ordCode;

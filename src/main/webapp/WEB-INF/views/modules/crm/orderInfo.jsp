@@ -28,7 +28,7 @@
 
                         <div class="col-md-4">
                             <label class="col-md-5" style="text-align: right;font-size: 16px;">客户名称:</label>
-                            <label class="col-md-5" style="font-size: 17px;">${order.cusCode}</label>
+                            <label class="col-md-5" style="font-size: 17px;">${order.cusName}</label>
                         </div>
 
                         <div class="col-md-4">
