@@ -2,10 +2,22 @@
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 
 <style>
-    /*.btn-app{    background-color: #f4f4f4;    font-size: 20px;}*/
+    /*谷歌，去掉input type=number 时框内的加减按钮*/
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        appearance: none;
+        margin: 0;
+    }
+    /* 火狐，去掉input type=number 时框内的加减按钮 */
+    input{
+        -moz-appearance:textfield;
+    }
+
 </style>
 
 <link rel="stylesheet" href="/static/common/customize.css">
+<link rel="stylesheet" href="${ctxStatic}/hPlugs/css/plugins/switch/bootstrap-switch.min.css">
 
 
 <div class="tabs-container" style="padding: 20px 20px;">
@@ -37,6 +49,12 @@
                                 <a class="btn btn-info" id="tareStart" style="width: 120px;">
                                     <i class="fa fa-circle-o"></i> 去皮
                                 </a>
+                                <a class="btn btn-primary" id="weightHand" style="width: 120px;">
+                                    <i class="fa fa-hand-pointer-o"></i> 手录重量
+                                </a>
+                                <a class="btn btn-primary" id="weightAuto" style="width: 120px;display: none;">
+                                    <i class="fa fa-retweet"></i> 称量重量
+                                </a>
                                 <%--<a class="btn btn-primary" disabled="true">--%>
                                     <%--<i class="fa fa-balance-scale"></i> 标重--%>
                                 <%--</a>--%>
@@ -49,10 +67,17 @@
                             </div>
 
                             <div style="min-width: 270px;background-color: black;color:green; font-size: 30px;float:left;text-align: center;margin-left:15px;">
-                                毛重：<span id="totalWeight">0.00</span> KG
+                                重量：<span id="totalWeightAuto">0.00</span>
+                                <input id="totalWeightHand" hidden type="number" style="background-color: #4f4b19;width: 100px;height: 40px;"/>
+                                KG
+                            </div>
+                            <div>
+                                
                             </div>
                             <div style="min-width: 270px;background-color: black;color:green; font-size: 30px;float:left;text-align: center;margin-left:15px;">
-                                皮：<span id="tareWeight">0.00</span> KG
+                                皮：<span id="tareWeightAuto">0.00</span>
+                                <input id="tareWeightHand" hidden type="number" style="background-color: #4f4b19;width: 100px;height: 40px;"/>
+                                KG
                             </div>
                         </div>
                         <!-- /.box-body -->
@@ -115,7 +140,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" style="margin-left: -25px;">长度(m):</label>
                                             <div class="col-sm-4">
-                                                <input disabled="ture" placeholder="长度" value="${detail.itemLenth}"
+                                                <input disabled="ture" placeholder="长度" value="${detail.itemLenth}" id="itemLenth"
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
                                             </div>
                                             <label class="col-sm-2 control-label"><i style="color: red"></i>宽度(m):</label>
@@ -161,6 +186,24 @@
                                             <label class="col-sm-2 control-label"  style="padding-left: inherit;">延长米计算方式:</label>
                                             <div class="col-sm-4">
                                                 <input disabled="ture" placeholder="延长米计算方式" value="${fns:getDictValue(detail.itemYcType, 'prod_ycType', defaultValue)}"
+                                                       class="form-control produceDetail-input-readonly" readonly="true"/>
+                                            </div>
+                                        </div>
+                                        <div class="hr-line-dashed"></div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" style="margin-left: -25px;">起止码:</label>
+                                            <div class="col-sm-4">
+                                                <input type="checkbox" checked class="checkbox" />
+                                                <input type="number" placeholder="起码" id="seCode_s" style="width: 65px;display: inline"
+                                                       class="form-control produceDetail-input-readonly">
+                                                 一
+                                                <input disabled="ture" placeholder="止码" style="width: 65px;display:inline" id="seCode_e"
+                                                       class="form-control produceDetail-input-readonly" readonly="true"/>
+                                            </div>
+                                            <label class="col-sm-2 control-label"  style="padding-left: inherit;">计价方式:</label>
+                                            <div class="col-sm-4">
+                                                <input type="hidden" value="${detail.itemPriceType}" id="itemPriceType">
+                                                <input disabled="ture" placeholder="计价方式" value="${fns:getValueByDictKey(detail.itemPriceType)}"
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
                                             </div>
                                         </div>
@@ -301,17 +344,130 @@
 
     $(document).ready(function () {
 
-        $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",})
+        /*计重相关逻辑*/
+        var weightType ;
+        var weightFlag = 'auto';
+        var openFlag = false;
+        $("#totalStart").click(function () {
+            debugger;
+            weightType = 'total';
+            // if(!openFlag){
+                send("start");
+            // }
+            $("#totalStart").hide();
+            $("#wsStop").show();
+            $("#tareStart").attr('disabled',"true");
+        });
+        $("#wsStop").click(function () {
+            send("stop");
+            $("#totalStart").show();
+            $("#wsStop").hide();
+        });
+        $("#clear").click(function () {
+            weightType ='';
+            send("stop");
+            $("#totalWeightAuto").text("0.00");
+            $("#tareWeightAuto").text("0.00");
+            $("#tareStart").removeAttr('disabled');
+            $("#totalStart").show();
+            $("#wsStop").hide();
+        });
+        $("#tareStart").click(function () {
+            weightType = 'tare';
+            // if(!openFlag){
+                send("start");
+            // }
+            $("#tareStart").attr('disabled',"true");
+        });
+
+        $("#weightHand").click(function () {
+            weightFlag = 'hand';
+            $("#totalWeightHand").show();
+            $("#totalWeightAuto").hide();
+
+            $("#tareWeightHand").show();
+            $("#tareWeightAuto").hide();
+            if(parseInt($("#totalWeightAuto").text()) != 0 && $("#totalWeightAuto").text() != null){
+                $("#tareWeightHand").val($("#tareWeightAuto").text());
+            }
+
+            $("#weightAuto").show();
+            $("#weightHand").hide();
+        });
+        $("#weightAuto").click(function () {
+            weightFlag = 'auto';
+            $("#totalWeightHand").hide();
+            $("#totalWeightAuto").show();
+
+            $("#tareWeightHand").hide();
+            $("#tareWeightAuto").show();
+            if(parseInt($("#tareWeightHand").val()) != 0 && $("#tareWeightHand").val() != null){
+                $("#tareWeightAuto").text($("#tareWeightHand").val());
+            }
+
+            $("#weightAuto").hide();
+            $("#weightHand").show();
+        });
+
+        // 起止码逻辑
+        $(".checkbox").bootstrapSwitch({
+            onText : "开启",      // 设置ON文本  
+            offText : "关闭",    // 设置OFF文本  
+            onColor : "success",// 设置ON文本颜色     (info/success/warning/danger/primary)  
+            offColor : "danger",  // 设置OFF文本颜色        (info/success/warning/danger/primary)  
+            size : "normal",    // 设置控件大小,从小到大  (mini/small/normal/large)  
+            handleWidth:"30",//设置控件宽度
+            // 当开关状态改变时触发  
+            onSwitchChange : function(event, state) {
+                if (state == true) {
+                    $("#seCode_s").removeAttr('disabled');
+                } else {
+                    $("#seCode_s").attr('disabled',"true");
+                    $("#seCode_s").val("");
+                    $("#seCode_e").val("");
+                }
+            }
+        });  
+
+        $("#seCode_s").bind('input propertychange', function(){
+            var itemLenth = $("#itemLenth").val();
+            if(itemLenth != null){
+                if($("#seCode_s").val() == null || $("#seCode_s").val() == ''){
+                    $("#seCode_e").val('');
+                }else{
+                    $("#seCode_e").val(parseFloat(itemLenth)+parseFloat($("#seCode_s").val()));
+                }
+            }
+        });
+
         $("#inStock").click(function () {
+            if($("#itemPriceType").val() == 141001){
+                if(weightFlag == 'auto'){
+                    if(parseInt($("#totalWeightAuto").text()) == 0 || $("#totalWeightAuto").text() == null){
+                        top.$.jBox.tip('当前计价方式必须称重后才能入库！');
+                        return;
+                    }
+                }else{
+                    if(parseInt($("#totalWeightHand").text()) == 0 || $("#totalWeightHand").text() == null){
+                        top.$.jBox.tip('当前计价方式必须称重后才能入库！');
+                        return;
+                    }
+                }
+            }
+
             $("#inStock").attr('disabled',"true");
 
-            var totalWeight = $("#totalWeight").text();
-            var tareWeight = $("#tareWeight").text();
+            var totalWeight = weightFlag == 'auto' ? $("#totalWeightAuto").text():$("#totalWeightHand").val();
+            var tareWeight = weightFlag == 'auto' ? $("#tareWeightAuto").text():$("#tareWeightHand").val();
+            var seCode;
+            if($("#seCode_s").val() != null && $("#seCode_s").val() != ''){
+                seCode = $("#seCode_s").val()+'-'+ $("#seCode_e").val();
+            }
 
             $.ajax({
                 url: "/produce/produce/inStock",
                 type: 'POST',
-                data: {id:$("#prodPlanDetailId").val(),weight:totalWeight,tare:tareWeight},
+                data: {id:$("#prodPlanDetailId").val(),weight:totalWeight,tare:tareWeight,seCode:seCode},
                 dataType: 'json',
                 success: function (result) {
                     if (result.itemNum>0) {
@@ -333,6 +489,8 @@
             $("#printCertYellow").removeAttr('disabled');
         });
 
+
+        // 打印逻辑
         $("#rePrint").click(function () {
             doPrint($("#macCode").val());
         });
@@ -383,41 +541,7 @@
             });
         });
 
-        /*计重相关逻辑*/
-        var weightType ;
-        var openFlag = false;
-        $("#totalStart").click(function () {
-            debugger;
-            weightType = 'total';
-            // if(!openFlag){
-                send("start");
-            // }
-            $("#totalStart").hide();
-            $("#wsStop").show();
-            $("#tareStart").attr('disabled',"true");
-        });
-        $("#wsStop").click(function () {
-            send("stop");
-            $("#totalStart").show();
-            $("#wsStop").hide();
-        });
-        $("#clear").click(function () {
-            weightType ='';
-            send("stop");
-            $("#totalWeight").text("0.00");
-            $("#tareWeight").text("0.00");
-            $("#tareStart").removeAttr('disabled');
-            $("#totalStart").show();
-            $("#wsStop").hide();
-        });
-        $("#tareStart").click(function () {
-            weightType = 'tare';
-            // if(!openFlag){
-                send("start");
-            // }
-            $("#tareStart").attr('disabled',"true");
-        });
-
+        // 连接电子秤逻辑
         var socket;
         if(!window.WebSocket){
             window.WebSocket = window.MozWebSocket;
@@ -455,7 +579,7 @@
             if(socket.readyState == WebSocket.OPEN){
                 socket.send(message);
             }else{
-                alert("WebSocket 连接没有建立成功！");
+                alert("电子秤连接失败！");
             }
         }
         getTableInfo();
@@ -480,3 +604,4 @@
 <script src="${ctxStatic}/hPlugs/js/demo/form-advanced-demo.min.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/JsBarcode/JsBarcode.all.min.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/layer/layer.min.js"></script>
+<script src="${ctxStatic}/hPlugs/js/plugins/switch/bootstrap-switch.min.js"></script>

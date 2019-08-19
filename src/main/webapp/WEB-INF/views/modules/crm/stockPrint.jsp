@@ -29,10 +29,10 @@
                 <td><font size=2>颜色：${vo.itemColorValue}</font></td>
             </tr>
             <tr>
-                <td colspan="2"><font size=2>毛重：${vo.itemWeight} kg</font></td>
+                <td colspan="2"><font size=2>重量：${vo.itemWeight-vo.itemTareWeight} kg</font></td>
             </tr>
             <tr>
-                <td colspan="2"><font size=2>生产时间：<fmt:formatDate value="${vo.createTime}" pattern="yyyy年MM月dd日"/></font></td>
+                <td colspan="2"><font size=2>生产时间：<fmt:formatDate value="${vo.createTime}" pattern="yyyy年MM月dd日 HH:mm"/></font></td>
             </tr>
 
         </table>

@@ -24,6 +24,7 @@
         <result column="item_unit" property="itemUnit" jdbcType="BIGINT"/> 
         <result column="item_color" property="itemColor" jdbcType="VARCHAR"/>
         <result column="mac_code" property="macCode" jdbcType="VARCHAR"/>
+        <result column="se_code" property="seCode" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="findByBarCode" parameterType="java.lang.String" resultType="com.lcyzh.nmerp.model.vo.StockVo">
@@ -127,7 +128,8 @@
             item_unit,
             item_color,
             mac_code,
-            item_tare_weight
+            item_tare_weight,
+            se_code
         )
         VALUES (
             #{barCode,jdbcType=VARCHAR},
@@ -150,7 +152,8 @@
             #{itemUnit,jdbcType=BIGINT},
             #{itemColor,jdbcType=VARCHAR},
             #{macCode,jdbcType=VARCHAR},
-            #{itemTareWeight,jdbcType=DOUBLE}
+            #{itemTareWeight,jdbcType=DOUBLE},
+            #{seCode,jdbcType=VARCHAR}
         )
     </insert>
 

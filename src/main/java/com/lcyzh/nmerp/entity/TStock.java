@@ -32,6 +32,7 @@ public class TStock implements Serializable {
     private String itemColor;
     private String macCode;
     private Double itemTareWeight;
+    private String seCode;
 
     public TStock(){
     }
@@ -89,5 +90,13 @@ public class TStock implements Serializable {
 
     public void setItemTareWeight(Double itemTareWeight) {
         this.itemTareWeight = itemTareWeight;
+    }
+
+    public String getSeCode() {
+        return seCode;
+    }
+
+    public void setSeCode(String seCode) {
+        this.seCode = seCode;
     }
 }

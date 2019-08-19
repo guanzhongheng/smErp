@@ -67,7 +67,7 @@
 
             <div class="gray-bg" style="background-color: white">
             <div>
-                <div style="width:100%;padding-left:0px;    padding-top: 33px;margin-top: 15px;">
+                <div style="width:100%;padding-left:0px;    padding-top: 5px;margin-top: 15px;">
                     <table  border="0" cellspacing="0" style="width:30%;height:180px;width: 170px;">
                         <tr>
                             <td colspan="2" style="height:1px;"></td>
@@ -98,6 +98,9 @@
                         </tr>
                         <tr>
                             <td colspan="2"  style="text-align:left;height:26px"><font size=4>jr<fmt:formatDate value="${vo.createTime}" pattern="yyyyMMddHHmm"/></font></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"  style="text-align:left;height:26px"><font size=4>${vo.seCode}</font></td>
                         </tr>
                     </table>
                     <div style="text-align: center;    margin-top: 5px;">

@@ -53,7 +53,17 @@ public class ProdPlanDetailVo{
 
     private Long itemPriceType;
 
+    private String seCode;
+
     private int ordSort = 0;
+
+    public String getSeCode() {
+        return seCode;
+    }
+
+    public void setSeCode(String seCode) {
+        this.seCode = seCode;
+    }
 
     public int getOrdSort() {
         return ordSort;
