@@ -50,7 +50,7 @@
         o.ord_total_sq ordTotalSq,
         o.ord_total_weight ordTotalWeight
         from T_ORDER o
-		inner join T_CUSTOMER t on o.cus_code = t.cus_code
+		left join T_CUSTOMER t on o.cus_code = t.cus_code
         where o.ord_code =#{ordCode,jdbcType=VARCHAR}
         order by o.create_time desc
     </select>

@@ -13,7 +13,7 @@
                     <div class="col-sm-12">
                         <div style="padding: 15px 20px 20px;">
                             <form class="form-horizontal" >
-                                <input type="hidden" id="prodPlanId" value="${prodPlan.prodPlanCode}">
+                                <input type="hidden" id="prodPlanCode" value="${prodPlan.prodPlanCode}">
                                 <div class="row">
                                     <div class="panel panel-default"
                                          style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
@@ -843,7 +843,8 @@
                 success: function (result) {
                     if (result > 0) {
                         top.$.jBox.tip('下发成功');
-                        self.setTimeout(path, 2000);
+                        console.log("跳转地址:" + path);
+                        self.setTimeout(gotNewPath(), 2000);
                     } else {
                         top.$.jBox.tip('下发失败，请联系管理员');
                     }
@@ -856,6 +857,12 @@
         }
 
     });
+
+    function gotNewPath(){
+        window.location.href = "/produce/producePlan/info?prodPlanCode=" + $("#prodPlanCode").val();
+    }
+
+
     <!-- 返回 -->
     $("#backHistory").click(function () {
         window.location.href = "/crm/producePlan/list";
@@ -898,22 +905,22 @@
                 },
                 dataType: 'json',
                 success: function (result) {
-
-                    if(result.outer != null && result.outer != undefined){
+                    debugger;
+                    if(result.outer != null && result.outer != undefined && result.outer.rawMaterialVos != null){
                         $("#outTemp").text(result.outer.temperature);
                         $("#outerTable").bootstrapTable("load",result.outer.rawMaterialVos);
                         outFormuList = result.outer.rawMaterialVos;
                         $('#outerTable .chosen-select').chosen();
                         document.getElementsByName("fixed-table-body01")[0].setAttribute("class","");
                     }
-                    if(result.midder != null && result.midder != undefined){
+                    if(result.midder != null && result.midder != undefined && result.midder.rawMaterialVos != null){
                         $("#midTemp").text(result.midder.temperature);
                         $("#midderTable").bootstrapTable("load",result.midder.rawMaterialVos);
                         midderFormuList = result.midder.rawMaterialVos;
                         $('#midderTable .chosen-select').chosen();
                         document.getElementsByName("fixed-table-body01")[1].setAttribute("class","");
                     }
-                    if(result.inner != null && result.inner != undefined){
+                    if(result.inner != null && result.inner != undefined && result.inner.rawMaterialVos != null){
                         $("#inTemp").text(result.inner.temperature);
                         $("#innerTable").bootstrapTable("load",result.inner.rawMaterialVos);
                         innerFormuList = result.inner.rawMaterialVos;
