@@ -111,7 +111,11 @@
                 and ppd.item_color = #{itemColor,jdbcType=VARCHAR}
             </if>
         </where>
-        order by ppd.mac_code,ppd.item_variety,ppd.item_color,ppd.item_width desc
+        order by ppd.item_width
+        <if test="ordSort!= null and ordSort == 1">
+            desc
+        </if>
+        ,ppd.item_yb_type,ppd.ord_code desc
     </select>
 
     <select id="findAllList" resultMap="tProdPlanDetailResultMap">

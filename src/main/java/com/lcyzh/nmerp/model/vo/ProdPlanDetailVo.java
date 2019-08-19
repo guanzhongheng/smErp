@@ -53,6 +53,16 @@ public class ProdPlanDetailVo{
 
     private Long itemPriceType;
 
+    private int ordSort = 0;
+
+    public int getOrdSort() {
+        return ordSort;
+    }
+
+    public void setOrdSort(int ordSort) {
+        this.ordSort = ordSort;
+    }
+
     public String getProxyName() {
         return proxyName;
     }

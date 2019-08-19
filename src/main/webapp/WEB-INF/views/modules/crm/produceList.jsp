@@ -67,6 +67,9 @@
                             <form:options items="${macList}" itemLabel="macCode" itemValue="macCode" htmlEscape="false"/>
                         </form:select>
                     </li>
+                    <li>
+                        <input id="ordSort" name="ordSort" type="checkbox" value="1" ${vo.ordSort == 1?"checked":""}/>宽度倒序
+                    </li>
                     &nbsp;&nbsp;
                     <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 80px" value="查询"/></li>
                     &nbsp;&nbsp;
@@ -105,7 +108,7 @@
                             <td>${fns:getValueByDictKey(vo.itemCgyCode)}</td>
                             <td>${fns:getDictValue(vo.itemColor, 'prod_color', defaultValue)}</td>
                             <td>${vo.itemLenth}</td>
-                            <td>${vo.itemWidth}</td>
+                            <td><span style="color: #00a2d4">${vo.itemWidth}</span></td>
                             <td>${vo.itemThick}</td>
                             <td>${vo.itemNum}</td>
                             <td>${vo.itemTotalWeight}</td>
