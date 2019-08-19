@@ -123,10 +123,10 @@
                         </div>
                         <div class="col-md-4">
                             <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
-                                指导价格:
+                                单位:
                             </label>
                             <label class="col-md-8 control-label" style="text-align: left">
-                                <input class="form-control" id="itemPrice" disabled>
+                                <input class="form-control" id="itemUnit" disabled>
                             </label>
                         </div>
                     </div>
@@ -139,11 +139,13 @@
                     <div class="form-group">
 
                         <div class="col-md-4">
+
+
                             <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
-                                单位:
+                                指导价格:
                             </label>
                             <label class="col-md-8 control-label" style="text-align: left">
-                                <input class="form-control" id="itemUnit" disabled>
+                                <input class="form-control" id="itemPrice" >
                             </label>
                         </div>
 
@@ -151,7 +153,7 @@
                             <div class="col-md-1">
                                 &nbsp;
                             </div>
-                            <div class="col-md-6 " >
+                            <div class="col-md-11 " style="text-align: right;">
                                 <button class="btn btn-primary global-button-style" type="button"
                                         onclick="doProcess()">添 加
                                 </button>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -165,29 +167,9 @@
             </div>
             <div class="row" style="height: 3px;">&nbsp;
             </div>
-            <%--<div class="row">--%>
-                <%--<div class="col-sm-12">--%>
-                    <%--<div class="hr-line-dashed"></div>--%>
-                    <%--<div class="form-group" >--%>
-                        <%--<div class="row">--%>
-                            <%--<div class="col-md-1">--%>
-                                <%--&nbsp;--%>
-                            <%--</div>--%>
-                            <%--<div class="col-md-6 " >--%>
-                                <%--<button class="btn btn-primary global-button-style" type="button"--%>
-                                        <%--onclick="doProcess()">添 加--%>
-                                <%--</button>&nbsp;&nbsp;&nbsp;&nbsp;--%>
-                                <%--<button class="btn btn-primary global-button-style" type="button"--%>
-                                        <%--onclick="history.go(-1)">返 回--%>
-                                <%--</button>--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-            <%--</div>--%>
         </div>
 </div>
-<div class="tabs-container" style="padding: 0px 20px;">
+<div class="tabs-container" >
     <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
         <div class="panel-heading" style="background-color: #50B0E6">
             <h3 class="panel-title global-panel-title" >
@@ -201,7 +183,7 @@
                         <div class="col-md-10">
                             &nbsp;
                         </div>
-                        <div class="col-md-2" >
+                        <div class="col-md-2" style="text-align: right">
                             <button class="btn btn-primary global-button-style" type="button"
                                     onclick="saveProd()">保存
                             </button>&nbsp;&nbsp;
@@ -210,7 +192,7 @@
                 </div>
             </div>
             <div class="control-group table-responsive" >
-                <table id="cusProdDetail" data-height="300"  class="table table-striped table-bordered table-hover text-nowrap">
+                <table id="cusProdDetail" data-height="320"  class="table table-striped table-bordered table-hover text-nowrap">
                     <thead>
                     <tr>
                         <th style="text-align: center" data-field="itemCode">编码</th>
@@ -337,10 +319,16 @@
 
     function doProcess() {
 
-        cusProdList.push(tranObject(prodObj));
-        $("#cusProdDetail").bootstrapTable("load",cusProdList);
-        $('#cusProdDetail .chosen-select').trigger("chosen:updated");
-        $('#cusProdDetail .chosen-select').chosen();
+        debugger;
+        if(prodObj.itemCode != ""){
+            cusProdList.push(tranObject(prodObj));
+            $("#cusProdDetail").bootstrapTable("load",cusProdList);
+            $('#cusProdDetail .chosen-select').trigger("chosen:updated");
+            $('#cusProdDetail .chosen-select').chosen();
+        }else{
+            layer.msg("请先选中一个产品！");
+        }
+
     }
 
     var ycType;
@@ -426,7 +414,7 @@
                     }
                 },{
                     field: 'itemThick',
-                    title: '厚(cm)',
+                    title: '厚度(mm)',
                     width: '60px',
                     formatter:function (value,row,index){
                         return ['<input type="text"  style="width: 80px" onchange="inserData(\'itemThick\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
@@ -567,26 +555,14 @@
         return [option].join('');
     }
 
-    function operFormatter(value, row, index) {
-        return [
-            ' <button id="tableRowAdd" type="button" class="btn btn-default" ">新增</button>'
-        ].join('');
-    };
-
     function operProdFormatter(value, row, index) {
         return [
-            // ' <button id="tableRowCope" type="button" class="btn btn-default" ">复制</button>'+
             ' <button id="tableRowdelete" type="button" class="btn btn-primary" ">删除</button>'
         ].join('');
     };
 
 
     window.operateEvents = {
-        "click #tableRowAdd" : function(e,value,row,index){
-
-            cusProdList.push(tranObject(row));
-            $("#cusProdDetail").bootstrapTable("load",cusProdList);
-        },
 
         "click #tableRowdelete" : function(e,value,row,index){
             for(var i=0;i<cusProdList.length;i++){
@@ -596,17 +572,15 @@
                 }
             }
             $("#cusProdDetail").bootstrapTable("load",cusProdList);
-
-        },
-        "click #tableRowCope" : function(e,value,row,index){
-            cusProdList.push(tranObject(row));
-            $("#cusProdDetail").bootstrapTable("load",cusProdList);
         }
     }
     
     function tranObject(data) {
         indexCkId = indexCkId + 1;
-
+        var price = $("#itemPrice").val();
+        if(price != null && price != undefined){
+            data.itemPrice = price;
+        }
         var obj = {
             "ckId":indexCkId,
             "ordCode":$("#ordCode").val(),
@@ -643,7 +617,6 @@
         for(var i=0;i<cusProdList.length;i++){
             if(cusProdList[i].ckId == index){
                 for(var key in cusProdList[i]){
-                    console.log(key,cusProdList[i][key]);
                     if(key == name){
                         if(name == "itemNum"){
                             var totalWeigth = cusProdList[i]['itemWeight'] * obj.value;
@@ -687,7 +660,7 @@
                 contentType:"application/json",
                 error: function(r) {
                     layer.msg("保存失败！")
-                },
+        },
                 success: function(r) {
 
                     if(r.res == "success"){

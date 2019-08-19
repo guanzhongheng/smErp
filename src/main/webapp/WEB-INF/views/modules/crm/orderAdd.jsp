@@ -3,7 +3,7 @@
 
 
 <link rel="stylesheet" href="/static/common/customize.css">
-
+<script src="${ctxStatic}/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
 
 <sys:message content="${message}"/>
 <div class="tabs-container" style="padding: 20px 20px;">
@@ -83,7 +83,7 @@
                                     <div class="col-md-2 control-label order-date-width">
                                         <form:input path="ordSignDate" id="ordSignDate" htmlEscape="false"
                                                     maxlength="200"
-                                                    class="input-sm form-control global-input order-date-width" placeholder="订单签订日期"/>
+                                                    class="input-sm form-control global-input order-date-width" placeholder="订单签订日期" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
                                     </div>
                                     <label class="col-md-2 control-label  order-label-margin order-input-width" style="margin-left: 107px;"><i style="color: red"></i>
                                         订单交付日期:
@@ -91,7 +91,7 @@
                                     <div class="col-md-2 control-label order-date-width ">
                                         <form:input path="ordDeliveryDate" id="ordDeliveryDate" htmlEscape="false"
                                                     maxlength="200"
-                                                    class="input-sm form-control global-input order-date-width" placeholder="订单交付日期"/>
+                                                    class="input-sm form-control global-input order-date-width" placeholder="订单交付日期" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
                                     </div>
                                 </div>
 
@@ -136,9 +136,9 @@
                                         </div>
                                         <div class="col-md-6 " >
                                             <button class="btn btn-primary global-button-style" type="submit">保存订单</button>&nbsp;&nbsp;&nbsp;
-                                                <button class="btn btn-primary global-button-style" onclick="prodlistAdd()">产品添加</button>&nbsp;&nbsp;&nbsp;
+                                            <button class="btn btn-primary global-button-style" type="button" onclick="prodlistAdd()">产品添加</button>&nbsp;&nbsp;&nbsp;
                                             <button class="btn btn-primary global-button-style" type="button"
-                                                    onclick="history.go(-1)">返  回
+                                                    onclick="gotBackList()">返  回
                                             </button>
                                         </div>
                                     </div>
@@ -158,22 +158,26 @@
 
 
 <script>
+    function gotBackList(){
+        window.location.href = "/crm/order/list";
+    }
+
     $(document).ready(function () {
         $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",});
-        $("#ordSignDate").datepicker({
-            todayBtn: "linked",
-            keyboardNavigation: !1,
-            forceParse: !1,
-            calendarWeeks: !0,
-            autoclose: !0
-        });
-        $("#ordDeliveryDate").datepicker({
-            todayBtn: "linked",
-            keyboardNavigation: !1,
-            forceParse: !1,
-            calendarWeeks: !0,
-            autoclose: !0
-        })
+        // $("#ordSignDate").datepicker({
+        //     todayBtn: "linked",
+        //     keyboardNavigation: !1,
+        //     forceParse: !1,
+        //     calendarWeeks: !0,
+        //     autoclose: !0
+        // });
+        // $("#ordDeliveryDate").datepicker({
+        //     todayBtn: "linked",
+        //     keyboardNavigation: !1,
+        //     forceParse: !1,
+        //     calendarWeeks: !0,
+        //     autoclose: !0
+        // })
         // $("select").change(function(){
         //     validate();
         // })

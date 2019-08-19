@@ -81,7 +81,7 @@
                                                         <td>
                                                             <input type="hidden" name="rawMaterialVos[${status.index}].rawmName" value="${vo.rawmName}">
                                                             <select class="chosen-select" name="rawMaterialVos[${status.index}].rawmCode">
-                                                                <option value ="${vo.rawmCode}" selected>${vo.rawmName}</option>
+                                                                <option value ="${vo.rawmCode}" selected>${vo.rawmName}(${vo.rawnSpecs})</option>
                                                                 <c:forEach items="${rmList}" var="rm">
                                                                     <option value ="${rm.rawmCode}">${rm.rawmName}</option>
                                                                 </c:forEach>
@@ -183,16 +183,15 @@
                 "<td><input  class='form-control' type='text' name='rawMaterialVos["+ rownum +"].weight' /></td>" +
                 "<td><button class='btn btn-primary global-button-style' onclick='delRow(this)' type='button'>删除</button></td></tr>";
         $("#contentTable").append(tr);
-
-        $('.chosen-select').chosen();
+         $('.chosen-select').chosen();
     }
 
     $(document).ready(function () {
 
         $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",});
-        $("select").change(function(){
-            validate();
-        })
+        // $("select").change(function(){
+        //     validate();
+        // })
         $("#inputForm").validate({
             rules: {
                 temperature: {
@@ -209,7 +208,7 @@
                 error.appendTo(element.parent());
             },
         });
-
+        $('.chosen-select').chosen();
 
     });
 
