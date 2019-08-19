@@ -126,8 +126,6 @@
         </div>
     </div>
 </div>
-</body>
-
 <script type="text/javascript">
 
     function invenFormReset() {
@@ -137,5 +135,7 @@
     }
 
 </script>
+</body>
+
 
 </html>

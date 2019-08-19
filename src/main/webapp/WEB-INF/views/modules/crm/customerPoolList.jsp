@@ -42,14 +42,16 @@
                         &nbsp;&nbsp;
                         <form:select path="cusType" class="input-medium" placeholder="客户类型">
                             <form:option value="" label=""/>
-                            <%--<form:options items="${fns:getDictList('oa_notify_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
+                            <form:option value="110002" label="经销商"/>
+                            <form:option value="110001" label="散户"/>
                         </form:select>
                     </li>
                     <li>
                         &nbsp;&nbsp;
                         <form:select path="cusGrade" class="input-medium" placeholder="客户星级">
                             <form:option value="" label=""/>
-                            <%--<form:options items="${fns:getDictList('oa_notify_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
+                            <form:options items="${fns:getCusDictList(105000)}" itemLabel="label" itemValue="value"
+                                          htmlEscape="false"/>
                         </form:select>
                     </li>
                     <li>
@@ -180,6 +182,7 @@
 <script>
     function cusPoolFormReset() {
         $("#cusName").val("");
+        $("#lastFollowDate").val("");
         $("#cusType").val("").select2();
         $("#cusGrade").val("").select2();
     }
