@@ -80,8 +80,8 @@
                                                     <tr>
                                                         <td>
                                                             <input type="hidden" name="rawMaterialVos[${status.index}].rawmName" value="${vo.rawmName}">
-                                                            <select class="chosen-select" name="rawMaterialVos[${status.index}].rawmCode">
-                                                                <option value ="${vo.rawmCode}" selected>${vo.rawmName}(${vo.rawnSpecs})</option>
+                                                            <select class="chosen-select" name="rawMaterialVos[${status.index}].rawmCode" disabled="disabled" readonly="readonly">
+                                                                <option value ="${vo.rawmCode}" selected>${vo.rawmName}</option>
                                                                 <c:forEach items="${rmList}" var="rm">
                                                                     <option value ="${rm.rawmCode}">${rm.rawmName}</option>
                                                                 </c:forEach>
@@ -145,7 +145,7 @@
         }
     });
 
-    var current = '${detail.rawMaterialVos == null ? 0:detail.rawMaterialVos.size()}';
+    var current = '${detailVo.rawMaterialVos == null ? 0:detailVo.rawMaterialVos.size()}';
     console.log(current);
 
     /*逻辑部分*/
