@@ -9,7 +9,7 @@
 
 
 
-<div class="tabs-container" style="padding: 20px 20px;">
+<div class="tabs-container" style="padding: 0px 20px;">
     <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
         <div class="panel-heading" style="background-color: #50B0E6">
             <h3 class="panel-title global-panel-title" >
@@ -56,14 +56,17 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="hr-line-dashed"></div>
-                    <div class="form-group" style="text-align: center">
+                    <div class="form-group">
                         <div class="row">
-                            <div class="col-md-9 " >
+                            <div class="col-md-1">
+                                &nbsp;
+                            </div>
+                            <div class="col-md-11 " style="text-align: right;">
                                 <c:if test="${outStock.outStatus eq '49'}">
                                     <button class="btn btn-primary global-button-style" type="button" onclick="saveAddress()">审核通过</button>
                                     <button class="btn btn-danger global-button-style" type="button" onclick="getBack()">审核驳回</button>
                                 </c:if>
-                                <button class="btn btn-white global-button-style" type="button"
+                                <button class="btn btn-primary global-button-style" type="button"
                                         onclick="javascript:window.location.replace(document.referrer);">返回
                                 </button>
                             </div>
@@ -76,7 +79,7 @@
     </div>
 </div>
 
-<div class="tabs-container" style="padding: 20px 20px;">
+<div class="tabs-container" style="padding: 0px 20px;">
     <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
         <div class="panel-heading" style="background-color: #50B0E6">
             <h3 class="panel-title global-panel-title" >
@@ -90,7 +93,7 @@
                     <tr>
                         <th style="text-align: center">序号</th>
                         <th style="text-align: center">条形码号</th>
-                        <th style="text-align: center">订单编号</th>
+                        <th style="text-align: center">订单标题</th>
                         <th style="text-align: center">产品类别</th>
                         <th style="text-align: center">产品品种</th>
                         <th style="text-align: center">产品颜色</th>
@@ -103,7 +106,7 @@
                         <tr>
                             <td style="text-align: center">${status.index + 1}</td>
                             <td>${cus.barCode}</td>
-                            <td>${cus.ordCode}</td>
+                            <td><a href="/cus/order/info?ordCode=${cus.ordCode}">${cus.ordTitle}</a></td>
                             <td>${fns:getValueByDictKey(cus.itemVariety)}</td>
                             <td>${fns:getValueByDictKey(cus.itemCgyCode)}</td>
                             <td>${fns:getDictLabel(cus.itemColor, 'prod_color', defaultValue)}</td>

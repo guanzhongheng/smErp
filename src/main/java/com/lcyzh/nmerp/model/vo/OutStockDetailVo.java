@@ -16,6 +16,7 @@ public class OutStockDetailVo {
     private String barCode;
     private Long stockId;
     private String ordCode;
+    private String ordTitle;
     private String itemCode;
     private Double itemLenth;
     private Double itemWidth;
@@ -37,6 +38,14 @@ public class OutStockDetailVo {
     private String itemColorValue;
     //0-未扫描 1-已扫描确认过
     private Character isOut;
+
+    public String getOrdTitle() {
+        return ordTitle;
+    }
+
+    public void setOrdTitle(String ordTitle) {
+        this.ordTitle = ordTitle;
+    }
 
     public Long getOutStockDetailId() {
         return outStockDetailId;

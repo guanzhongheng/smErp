@@ -40,6 +40,10 @@
                 <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
                 <ul class="ul-form">
                     <li>
+                        <form:input path="orderTitle" htmlEscape="false" maxlength="200" cssStyle="width: 120px;"
+                                    class="input-medium" placeholder="订单标题"/>
+                    </li>
+                    <li>
                         &nbsp;&nbsp;
                         <form:select path="itemVariety" class="input-medium" placeholder="品种">
                             <form:option value="" label=""/>
@@ -68,6 +72,7 @@
                         </form:select>
                     </li>
                     <li>
+                        &nbsp;&nbsp;
                         <input id="ordSort" name="ordSort" type="checkbox" value="1" ${vo.ordSort == 1?"checked":""}/>宽度倒序
                     </li>
                     &nbsp;&nbsp;

@@ -89,7 +89,7 @@
                             <div class="col-md-1">
                                 &nbsp;
                             </div>
-                            <div class="col-md-6 ">
+                            <div class="col-md-11 " style="text-align: right;">
                                 <button class="btn btn-primary global-button-style" type="button"
                                         onclick="history.go(-1)">返 回
                                 </button>

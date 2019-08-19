@@ -110,6 +110,9 @@
             <if test="itemColor!= null and itemColor!=''">
                 and ppd.item_color = #{itemColor,jdbcType=VARCHAR}
             </if>
+            <if test="orderTitle!= null and orderTitle!=''">
+                and o.ord_title like concat('%',#{orderTitle,jdbcType=VARCHAR},'%')
+            </if>
         </where>
         order by ppd.item_width
         <if test="ordSort!= null and ordSort == 1">

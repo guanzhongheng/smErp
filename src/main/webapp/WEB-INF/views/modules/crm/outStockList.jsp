@@ -90,8 +90,8 @@
                                 <a href="/crm/inventory/outStockDetail?outCode=${cus.outCode}"><i class="icon-th-list">&nbsp;详情</i></a>
                                 <c:if test="${cus.outStatus eq '50'}">
                                     <a href="/print/outStock_print?outCode=${cus.outCode}"><i class="icon-print">&nbsp;打印</i></a>
+                                    <a href="/print/outStockInvoice_print?outCode=${cus.outCode}"><i class="icon-print">&nbsp;单据</i></a>
                                 </c:if>
-                                <a href="/print/outStockInvoice_print?outCode=${cus.outCode}"><i class="icon-print">&nbsp;单据</i></a>
                             </td>
                         </tr>
                     </c:forEach>

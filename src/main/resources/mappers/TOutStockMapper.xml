@@ -165,35 +165,29 @@
 
 
     <select id="getOutStockList" parameterType="com.lcyzh.nmerp.model.vo.OutStockVo" resultType="com.lcyzh.nmerp.model.vo.StockRecordVo">
-        SELECT
-            DISTINCT
-            tk.item_owner,
-            tk.item_code,
-            tk.item_variety,
-            tk.item_cgy_code,
-            tk.item_color,
-            tk.item_lenth,
-            tk.item_width,
-            tk.item_thick,
-            tn.item_weight,
-            tk.item_yb_type,
-            tn.ord_code,
-            t.ord_title,
-            tn.item_num
-        FROM
-            t_stock tk
-        inner join (
-        SELECT
+         SELECT
             ts.item_code,
             ts.ord_code,
+            ts.item_variety,
+            ts.ord_code,
+            ts.item_code,
+            ts.item_cgy_code,
+            ts.item_color,
+            ts.item_lenth,
+            ts.item_width,
+            ts.item_thick,
+            ts.item_yb_type,
+            ts.item_owner,
+            tod.ord_title,
             count( ts.item_code ) AS item_num,
-            sum(ts.item_weight) as item_weight
+            sum( ts.item_weight ) AS item_weight
         FROM
             t_out_stock t
             INNER JOIN t_out_stock_detail td ON t.out_code = td.out_code
             INNER JOIN T_STOCK ts ON ts.bar_code = td.bar_code
+            inner join T_ORDER tod on tod.ord_code = ts.ord_code
         WHERE
-            t.out_code = #{outCode}
+            t.out_code =  #{outCode}
         GROUP BY
             ts.item_variety,
             ts.ord_code,
@@ -203,11 +197,9 @@
             ts.item_lenth,
             ts.item_width,
             ts.item_thick,
-	        ts.item_yb_type,
+            ts.item_yb_type,
             ts.item_owner,
-            ts.item_weight
-            ) tn on tn.item_code = tk.item_code and tn.ord_code = tk.ord_code
-		  inner join T_ORDER t on t.ord_code = tn.ord_code
+            ts.ord_code
     </select>
 
 </mapper>

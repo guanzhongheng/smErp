@@ -120,10 +120,10 @@
                 <div class="well m-t">
 
                     <div class="row">
-                        <div class="col-sm-2"> 应收金额：&yen;${totalPrice}</div>
-                        <div class="col-sm-2"> 实收金额：&yen;${totalPrice}</div>
+                        <div class="col-sm-3"> 应收金额：&yen;${totalPrice}</div>
+                        <div class="col-sm-3"> 实收金额：&yen;${totalPrice}</div>
                         <div class="col-sm-2"> 制单人：${userName}</div>
-                        <div class="col-sm-2"> 制单时间：${nowTime}</div>
+                        <div class="col-sm-3"> 制单时间：${nowTime}</div>
                     </div>
                 </div>
                 <!--endprint-->

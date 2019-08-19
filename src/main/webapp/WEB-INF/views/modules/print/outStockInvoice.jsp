@@ -58,8 +58,8 @@
                             <th>品种</th>
                             <th>颜色</th>
                             <th>规格(长*宽*厚)</th>
-                            <%--<th>重量</th>--%>
                             <th>数量</th>
+                            <th>计价方式</th>
                             <th>总面积(M&sup2)</th>
                             <th>总重量(kg)</th>
                             <th>单价</th>
@@ -76,6 +76,7 @@
                                 <td>${ord.itemLenth}*${ord.itemWidth}*${ord.itemThick}</td>
                                 <%--<td>${ord.itemWeight}</td>--%>
                                 <td>${ord.itemNum}</td>
+                                <td>${ord.itemPriceTypeValue}</td>
                                 <td>${ord.itemTotalSq}</td>
                                 <td>${ord.itemTotalWeight}</td>
                                 <td>&yen;${ord.itemPrice}</td>
@@ -90,12 +91,12 @@
                 <table class="table invoice-total">
                     <tbody>
                     <tr>
-                        <td><strong>总面积：</strong>
+                        <td><strong>计价总面积：</strong>
                         </td>
                         <td>${totalMj} m&sup2</td>
                     </tr>
                     <tr>
-                        <td><strong>总重量：</strong>
+                        <td><strong>计价总重量：</strong>
                         </td>
                         <td>${totalZl} kg</td>
                     </tr>
@@ -110,10 +111,10 @@
                 <div class="well m-t">
 
                     <div class="row">
-                        <div class="col-sm-2"> 应收金额：&yen;${totalPrice}</div>
-                        <div class="col-sm-2"> 实收金额：&yen;${totalPrice}</div>
+                        <div class="col-sm-3"> 应收金额：&yen;${totalPrice}</div>
+                        <div class="col-sm-3"> 实收金额：&yen;${totalPrice}</div>
                         <div class="col-sm-2"> 制单人：${userName}</div>
-                        <div class="col-sm-2"> 制单时间：${nowTime}</div>
+                        <div class="col-sm-3"> 制单时间：${nowTime}</div>
                     </div>
                 </div>
                 <!--endprint-->

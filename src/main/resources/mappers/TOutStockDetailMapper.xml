@@ -17,6 +17,7 @@
         osd.out_code outCode,
         s.id stockId,
         s.ord_code ordCode,
+		o.ord_title ordTitle,
         s.bar_code barCode,
         s.item_code itemCode,
         s.item_lenth itemLenth,
@@ -33,6 +34,7 @@
         s.item_color itemColor
         from t_out_stock_detail osd
         left join t_stock s on osd.bar_code = s.bar_code
+		inner join T_ORDER o on o.ord_code = s.ord_code
         where osd.out_code = #{outCode}
     </select>
 
