@@ -765,12 +765,13 @@
     }
 
     function saveFormu(){
+        debugger;
         var outTem = $("#outTemp").text();
         var midTem = $("#midTemp").text();
         var inTem = $("#inTemp").text();
-        var prodPlanId = $("#prodPlanId").val();
+        var prodPlanCode = $("#prodPlanCode").val();
 
-        if(prodPlanId != null){
+        if(prodPlanCode != null){
             var formula =
                 {
                     "outer": {
@@ -788,7 +789,7 @@
 
                 };
             var reqData = {
-                "prodPlanCode":prodPlanId,
+                "prodPlanCode":prodPlanCode,
                 "formula": JSON.stringify(formula)
             }
             $.ajax({
