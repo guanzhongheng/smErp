@@ -23,7 +23,7 @@
                 <small>为必填项</small>
             </code>
         </div>
-        <div class="panel-body" style="padding: 10px 10px 0px 10px;">
+        <div class="panel-body" style="padding: 10px 10px 10px 10px;">
 
             <form:form id="inputForm" modelAttribute="rawMaterial" action="${ctx}/tRawMaterial/insert" method="post" class="form-horizontal">
                 <input name="id" id="id" type="hidden" value="${rawMaterialId}">
@@ -51,19 +51,14 @@
                         <form:input path="rawnCtyCode" htmlEscape="false" maxlength="50"/>
                     </div>
                 </div>
-                <div class="control-group">
-                    <div class="row">
-                        <div class="col-md-6 ">
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <button class="btn btn-primary global-button-style" type="submit">保 存</button>&nbsp;&nbsp;&nbsp;
+                <div class="">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button class="btn btn-primary global-button-style" type="submit">保 存</button>&nbsp;&nbsp;&nbsp;
 
-                            <button class="btn btn-white global-button-style" type="button"
-                                    onclick="history.go(-1)">返 回
-                            </button>
-                        </div>
-                    </div>
+                        <button class="btn btn-white global-button-style" type="button"
+                                onclick="history.go(-1)">返 回
+                        </button>
                 </div>
-
             </form:form>
 
         </div>

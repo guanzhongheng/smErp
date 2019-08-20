@@ -56,7 +56,7 @@
                     <input id="btnSubmit" class="btn btn-primary"
                            style="width: 130px;font-size: 18px;height: 40px;margin-left: 59px;margin-bottom: 10px;"
                            type="submit" value="保  存"/>
-                    <input id="btnCancel" class="btn" type="button"
+                    <input id="btnCancel" class="btn " type="button"
                            style="width: 130px;font-size: 18px;height: 40px;margin-left: 43px;margin-bottom: 10px;"
                            value="返  回" onclick="history.go(-1)"/>
                 </div>
