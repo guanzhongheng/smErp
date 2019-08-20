@@ -85,7 +85,7 @@
                             <td colspan="2"  style="text-align:left;height:40px"><font size=4>${vo.itemLenth} m</font></td>
                         </tr>
                         <tr>
-                            <td colspan="2" style="text-align:left;height:40px" ><font size=4></font></td>
+                            <td colspan="2" style="text-align:left;height:40px" ><font size=4>${vo.seCode}</font></td>
                         </tr>
                         <tr>
                             <td colspan="2"  style="text-align:left;height:40px"><font size=4></font></td>
