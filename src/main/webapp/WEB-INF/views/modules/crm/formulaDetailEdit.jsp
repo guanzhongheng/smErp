@@ -80,19 +80,12 @@
                                                     <tr>
                                                         <td>
                                                             <input type="hidden" name="rawMaterialVos[${status.index}].rawmName" value="${vo.rawmName}">
-                                                            <select class="chosen-select" name="rawMaterialVos[${status.index}].rawmCode" disabled="disabled" readonly="readonly">
-                                                                <option value ="${vo.rawmCode}" selected>${vo.rawmName}</option>
+                                                            <select class="chosen-select" name="rawMaterialVos[${status.index}].rawmCode" onchange="setRmValue(this)">
+                                                                <option value ="${vo.rawmCode}" >${vo.rawmName}</option>
                                                                 <c:forEach items="${rmList}" var="rm">
-                                                                    <option value ="${rm.rawmCode}">${rm.rawmName}</option>
+                                                                    <option value ="${rm.rawmCode}" >${rm.rawmName}</option>
                                                                 </c:forEach>
                                                             </select>
-                                                            <%--<select name="rawMaterialVos[${status.index}].rawmCode">--%>
-                                                                <%--<option value ="${vo.rawmCode}" selected>${vo.rawmName}(${vo.rawnSpecs})</option>--%>
-                                                                <%--<c:forEach items="${rmList}" var="rm">--%>
-                                                                    <%--<option value ="${rm.rawmCode}">${rm.rawmName}(${rm.rawnSpecs})</option>--%>
-                                                                <%--</c:forEach>--%>
-                                                            <%--</select>--%>
-                                                            <%--<input type="hidden" name="rawMaterialVos[${status.index}].rawnSpecs" value="${vo.rawnSpecs}">--%>
                                                         </td>
                                                         <td><input type="text" class="form-control" name="rawMaterialVos[${status.index}].weight" value="${vo.weight}"/></td>
                                                         <td>
