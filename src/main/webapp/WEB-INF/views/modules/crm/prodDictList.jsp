@@ -46,7 +46,7 @@
                     </li>
                     <li>
                         &nbsp;&nbsp;
-                        <form:select path="prodVariety" class="input-medium" placeholder="产品类型">
+                        <form:select path="prodCgyCode" class="input-medium" placeholder="产品类别">
                             <form:option value="" label=""/>
                             <form:options items="${fns:getCusDictList(149000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                         </form:select>
@@ -82,8 +82,8 @@
                                 <%--${fns:getDictLabel(user.userType, 'sys_user_type', '无')}--%>
                             <td>${cus.prodCode}</td>
                             <td>${cus.prodName}</td>
-                            <td>${fns:getValueByDictKey(cus.prodCgyCode)}</td>
                             <td>${fns:getValueByDictKey(cus.prodVariety)}</td>
+                            <td>${fns:getValueByDictKey(cus.prodCgyCode)}</td>
                             <td>${cus.prodThick}</td>
                             <td>${fns:getValueByDictKey(cus.prodUnit)}</td>
                             <td>${fns:getDictLabel(cus.prodColor, 'prod_color', '无')}</td>
@@ -228,7 +228,7 @@
     function formReset() {
         $("#prodCode").val("");
         $("#prodName").val("");
-        $("#prodVariety").val("").select2();
+        $("#prodCgyCode").val("").select2();
     }
 </script>
 
