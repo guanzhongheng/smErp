@@ -3,51 +3,38 @@
 <link rel="stylesheet" href="/static/common/customize.css">
 
 <style>
-    body {
-        font-family:楷体;
-    }
     td {
-        text-align:left;
+        text-align:center;
     }
 </style>
 
 <div class="gray-bg" >
-    <div style="width:90%;padding:7px 8px 5px 32px;">
+    <div style="width:100%;">
+        <table  border="1" cellspacing="0" style="width:100%;">
+            <tr>
+                <td colspan="2" style="height:1px;"></td>
+            </tr>
+            <tr>
+                <td colspan="2" ><img id="imgcode" /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><font size4>${vo.proxyName}-${vo.itemOwner}-${fns:getValueByDictKey(vo.itemVariety)}</font></td>
+            </tr>
+            <tr>
+                <td style="width:50%"><font size=2>幅宽：${vo.itemWidth}m</font></td>
+                <td><font size=2>厚度：${vo.itemThick}cm</font></td>
+            </tr>
+            <tr>
+                <td><font size=2>长度：${vo.itemLenth}m</font></td>
+                <td><font size=2>颜色：${vo.itemColorValue}</font></td>
+            </tr>
+            <tr>
+                <td colspan="2"><font size=2>重量：${vo.itemWeight-vo.itemTareWeight} kg</font></td>
+            </tr>
+            <tr>
+                <td colspan="2"><font size=2>生产时间：<fmt:formatDate value="${vo.createTime}" pattern="yyyy年MM月dd日 HH:mm"/></font></td>
+            </tr>
 
-        <table>
-            <tr style="height:30px;">
-                <td colspan="4" style=""><span style="font-size: 22px;">${vo.proxyName}-${vo.itemOwner}-${fns:getValueByDictKey(vo.itemVariety)}</span></td>
-            </tr>
-        </table>
-        <table>
-            <tr>
-                <td>
-                    <img id="imgcode"/>
-                </td>
-                <td style="width:70px;"><b><span style="font-size: 22px;">${vo.itemWeight-vo.itemTareWeight}<br>公斤</span></b></td>
-            </tr>
-        </table>
-
-
-        <table>
-            <tr>
-                <td colspan="2"><font style=";font-size: 16px;">幅宽 : ${vo.itemWidth}m</font></td>
-                <td colspan="2">&nbsp;&nbsp;&nbsp;<font style="font-size: 15px;">厚度 : ${vo.itemThick}mm</font></td>
-            </tr>
-            <tr>
-                <td colspan="2"><font style="font-size: 16px;">长度 : ${vo.itemLenth}m</font></td>
-                <td colspan="2">&nbsp;&nbsp;&nbsp;<font style="font-size: 15px;">颜色 : ${vo.itemColorValue}</font></td>
-            </tr>
-            <tr>
-                <td colspan="2"><font style="font-size: 16px;">生产机台 : ${vo.macCode}</font></td>
-                <td colspan="2">&nbsp;&nbsp;&nbsp;<font style="font-size: 15px;">质检 : ${user.name}</font></td>
-            </tr>
-            <tr>
-                <td colspan="4"><font style="font-size: 16px;" >生产时间 : <fmt:formatDate value="${vo.createTime}" pattern="yyyy年MM月dd日 HH:mm"/></font></td>
-            </tr>
-            <tr>
-                <td colspan="4"><font style="font-size: 16px;" >起止码 : ${vo.seCode}</font></td>
-            </tr>
         </table>
         <div style="text-align: center;    margin-top: 5px;" id="btnArea">
             <button class="btn btn-primary " type="button" id="bth" >打印</button>
