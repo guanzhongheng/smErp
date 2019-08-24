@@ -19,7 +19,6 @@
             <div class="row">
                 <div class="col-sm-12">
                     <input type="hidden" id="ordCode" value="${ordCode}"/>
-                    <div class="hr-line-dashed"></div>
                     <div class="form-group">
                         <div class="col-md-4">
                             <label class="col-md-5" style="text-align: right;font-size: 17px;">订单标题:</label>
@@ -42,7 +41,6 @@
                 <div class="col-sm-12">
                     <div class="hr-line-dashed"></div>
                     <div class="form-group">
-
                         <div class="col-md-4">
                             <label class="col-md-5" style="text-align: right;font-size: 16px;">订单类型:</label>
                             <label class="col-md-5" style="font-size: 17px;">${order.ordTypeValue}</label>
@@ -112,7 +110,6 @@
             </h3>
         </div>
         <div class="panel-body" style="padding: 10px 10px 0px 10px;">
-
             <div class="control-group table-responsive">
                 <table id="cusProdInfo" class="table table-striped table-bordered table-hover text-nowrap">
                     <thead>

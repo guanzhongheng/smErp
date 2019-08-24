@@ -30,7 +30,7 @@ public interface TProductMapper {
 
     int delete(TProduct tProduct);
 
-    TProduct findByUqKey(@Param("prodCgyCode") Long prodCgyCode,@Param("prodVariety") Long prodVariety, @Param("prodColor") String prodColor);
+    TProduct findByUqKey(TProduct tProduct);
 
     List<TProduct> findListByCodes(List<String> codes);
 

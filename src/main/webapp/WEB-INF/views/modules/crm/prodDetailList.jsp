@@ -20,7 +20,6 @@
             <div class="row">
                 <div class="col-sm-12">
                     <input type="hidden" id="ordCode" value="${ordCode}"/>
-                    <div class="hr-line-dashed"></div>
                     <div class="form-group">
                         <div class="col-md-4">
                             <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
@@ -67,7 +66,6 @@
 
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="hr-line-dashed"></div>
                     <div class="form-group">
                         <div class="col-md-4">
                             <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right"><i style="color: red"></i>
@@ -102,9 +100,7 @@
 
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="hr-line-dashed"></div>
                     <div class="form-group">
-
                         <div class="col-md-4">
                             <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right"><i style="color: red"></i>
                                 产品厚度:
@@ -135,12 +131,8 @@
 
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="hr-line-dashed"></div>
                     <div class="form-group">
-
                         <div class="col-md-4">
-
-
                             <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
                                 指导价格:
                             </label>
@@ -164,8 +156,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row" style="height: 3px;">&nbsp;
             </div>
         </div>
 </div>

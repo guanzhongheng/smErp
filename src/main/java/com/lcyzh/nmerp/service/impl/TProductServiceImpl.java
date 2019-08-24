@@ -115,7 +115,7 @@ public class TProductServiceImpl implements TProductService {
                 }
 
         } else {
-            TProduct po = tProductMapper.findByUqKey(product.getProdCgyCode(), product.getProdVariety(), product.getProdColor());
+            TProduct po = tProductMapper.findByUqKey(product);
             if (po != null) {
                 res = -2;
             } else {
@@ -146,7 +146,6 @@ public class TProductServiceImpl implements TProductService {
 
     @Override
     public Page<ProductVo> findPage(Page<ProductVo> page, TProduct tProduct) {
-        System.out.println("*** " + tProduct);
         PageHelper.startPage(page.getPageNo(), page.getPageSize());
         List<TProduct> list = tProductMapper.findList(tProduct);
         List<ProductVo> vos = productConversion(list);

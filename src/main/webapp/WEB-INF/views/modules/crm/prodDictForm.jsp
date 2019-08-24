@@ -44,7 +44,7 @@
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label"><i style="color: red">*</i>&nbsp;产品品种</label>
+                    <label class="control-label"><i style="color: red">*</i>&nbsp;产品品种:</label>
                     <div class="controls">
                         <form:select path="prodVariety" class="input-medium" cssStyle="width: 220px" placeholder="产品品种"  disabled="${prodId == null?'false':'true'}" >
                             <form:option value="" label=""/>
@@ -68,19 +68,19 @@
                         </form:select>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <i style="color: red">*</i>&nbsp;产品厚度:&nbsp;&nbsp;&nbsp;&nbsp;
-                        <form:input path="prodThick" htmlEscape="false" maxlength="100" class="required"/>
+                        <form:input path="prodThick" htmlEscape="false" maxlength="100" class="required" disabled="${prodId == null?'false':'true'}"/>
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label"><i style="color: red">*</i>&nbsp;产品单位:</label>
                     <div class="controls">
-                        <form:select path="prodUnit" class="input-medium" cssStyle="width: 220px" placeholder="产品单位">
+                        <form:select path="prodUnit" class="input-medium" cssStyle="width: 220px" placeholder="产品单位" disabled="${prodId == null?'false':'true'}">
                             <form:option value="" label=""/>
-                            <form:options items="${fns:getCusDictList(142000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
+                            <form:options items="${fns:getCusDictList(142000)}" itemLabel="label" itemValue="value" htmlEscape="false" />
                         </form:select>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <i style="color: red">*</i>&nbsp;计价方式:&nbsp;&nbsp;&nbsp;&nbsp;
-                        <form:select path="prodPriceType" class="input-medium" cssStyle="width: 220px" placeholder="计价方式" >
+                        <form:select path="prodPriceType" class="input-medium" cssStyle="width: 220px" placeholder="计价方式" disabled="${prodId == null?'false':'true'}">
                             <form:option value="" label=""/>
                             <form:options items="${fns:getCusDictList(141000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                         </form:select>

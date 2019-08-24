@@ -168,8 +168,14 @@
         </foreach>
     </select>
 
-    <select id="findByUqKey" parameterType="java.util.Map" resultMap="tProductResultMap">
-        select * from T_PRODUCT where prod_cgy_code = #{prodCgyCode, jdbcType=BIGINT} and prod_variety = #{prodVariety,jdbcType=BIGINT} and  prod_color = #{prodColor,jdbcType=VARCHAR}
+    <select id="findByUqKey" parameterType="com.lcyzh.nmerp.entity.TProduct" resultMap="tProductResultMap">
+        select * from T_PRODUCT where
+        prod_cgy_code = #{prodCgyCode, jdbcType=BIGINT}
+        and prod_variety = #{prodVariety,jdbcType=BIGINT}
+        and  prod_color = #{prodColor,jdbcType=VARCHAR}
+        and  prod_price_type = #{prodPriceType}
+        and  prod_thick = #{prodThick}
+        and  prod_unit = #{prodUnit}
     </select>
 
     <select id="getCntByCode" parameterType="java.lang.String" resultType="java.lang.Integer">
