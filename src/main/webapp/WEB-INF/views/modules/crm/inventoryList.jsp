@@ -21,7 +21,7 @@
                 type: 2,
                 title: '打印标签确认',
                 skin: 'layui-layer-rim', //加上边框
-                area: ['300px', '315px'],
+                area: ['450px', '350px'],
                 content: ['/produce/produce/rePrint?stockId='+stockId+'"', 'yes'] //iframe的url，no代表不显示滚动条
             });
         }

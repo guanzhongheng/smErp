@@ -143,7 +143,7 @@ public class ProduceManageController extends BaseController {
         result.setItemColorValue(SysDictUtils.getDictLabel(result.getItemColor(), Constants.PROD_COLOR, ""));
 
         HttpSession session = request.getSession();
-        session.setAttribute(result.getMacCode(),result);
+        session.setAttribute(UserUtils.getUser().getId(),result);
 
         return result;
     }
@@ -151,7 +151,7 @@ public class ProduceManageController extends BaseController {
     @RequestMapping(value = {"produce/doPrint"})
     public String doPrint(String macCode, Model model, HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
-        ProdPlanDetailVo print = (ProdPlanDetailVo)session.getAttribute(macCode);
+        ProdPlanDetailVo print = (ProdPlanDetailVo)session.getAttribute(UserUtils.getUser().getId());
         model.addAttribute("user",UserUtils.getUser());
         model.addAttribute("vo",print);
         return "modules/crm/stockPrint";
@@ -161,7 +161,7 @@ public class ProduceManageController extends BaseController {
     public String rePrint(String macCode, String type, Model model,
                           HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
-        ProdPlanDetailVo print = (ProdPlanDetailVo)session.getAttribute(macCode);
+        ProdPlanDetailVo print = (ProdPlanDetailVo)session.getAttribute(UserUtils.getUser().getId());
 
         model.addAttribute("user",UserUtils.getUser());
         model.addAttribute("vo",print);
