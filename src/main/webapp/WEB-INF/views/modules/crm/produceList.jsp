@@ -95,10 +95,10 @@
                         <th style="text-align: center">宽度(m)</th>
                         <th style="text-align: center">厚度(mm)</th>
                         <th style="text-align: center">数量</th>
-                        <th style="text-align: center">重量</th>
-                        <th style="text-align: center">面积(㎡)</th>
-                        <th style="text-align: center">压边类型</th>
-                        <th style="text-align: center">延长米计算方式</th>
+                        <%--<th style="text-align: center">重量</th>--%>
+                        <%--<th style="text-align: center">面积(㎡)</th>--%>
+                        <%--<th style="text-align: center">压边类型</th>--%>
+                        <%--<th style="text-align: center">延长米计算方式</th>--%>
                         <th style="text-align: center">状态</th>
                         <th style="text-align: center">操作</th>
                     </tr>
@@ -116,10 +116,10 @@
                             <td><span style="color: #00a2d4">${vo.itemWidth}</span></td>
                             <td>${vo.itemThick}</td>
                             <td>${vo.itemNum}</td>
-                            <td>${vo.itemTotalWeight}</td>
-                            <td>${vo.itemTotalSq}</td>
-                            <td>${fns:getDictValue(vo.itemYbType, 'prod_ybType', defaultValue)}</td>
-                            <td>${fns:getDictValue(vo.itemYcType, 'prod_ycType', defaultValue)}</td>
+                            <%--<td>${vo.itemTotalWeight}</td>--%>
+                            <%--<td>${vo.itemTotalSq}</td>--%>
+                            <%--<td>${fns:getDictValue(vo.itemYbType, 'prod_ybType', defaultValue)}</td>--%>
+                            <%--<td>${fns:getDictValue(vo.itemYcType, 'prod_ycType', defaultValue)}</td>--%>
                             <td>
                                 <c:if test="${vo.itemStatus eq '48'}">待确认</c:if>
                                 <c:if test="${vo.itemStatus eq '49'}">下发生产</c:if>
