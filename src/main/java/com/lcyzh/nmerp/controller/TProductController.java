@@ -45,7 +45,10 @@ public class TProductController extends BaseController {
      */
     @RequestMapping(value = {"/list", ""})
     public String list(@ModelAttribute("tProduct") TProduct tProduct, Model model, HttpServletRequest request, HttpServletResponse response) {
-        Page<ProductVo> page = tProductService.findPage(new Page<ProductVo>(request, response), tProduct);
+        Page<ProductVo> page = new Page<>(request,response);
+        List<ProductVo> list = tProductService.findPage(page, tProduct);
+        page.setCount(list.size());
+        page.setList(list);
         model.addAttribute("page", page);
         return "modules/crm/prodDictList";
     }

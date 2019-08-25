@@ -23,6 +23,7 @@
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="item_status" property="itemStatus" jdbcType="BIGINT"/>
         <result column="item_out_num" property="itemOutNum" jdbcType="BIGINT"/>
+        <result column="item_remarks" property="itemRemarks" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="get" parameterType="java.lang.Long" resultMap="tOrderItemResultMap">
@@ -55,6 +56,7 @@
         toi.item_yc_type itemYcType,
         toi.item_status itemStatus,
         toi.item_out_num itemOutNum,
+        toi.item_remarks itemRemarks,
         toi.create_time createTime
     FROM
         T_ORDER_ITEM toi
@@ -96,7 +98,8 @@
             item_yc_type,
             create_time,
             item_status,
-            item_out_num
+            item_out_num,
+            item_remarks
         )
         VALUES (
             #{ordCode,jdbcType=VARCHAR},
@@ -117,7 +120,8 @@
             #{itemYcType,jdbcType=VARCHAR},
             #{createTime,jdbcType=TIMESTAMP},
             #{itemStatus,jdbcType=BIGINT},
-            #{itemOutNum,jdbcType=BIGINT}
+            #{itemOutNum,jdbcType=BIGINT},
+            #{itemRemarks,jdbcType=VARCHAR}
         )
     </insert>
 
@@ -141,7 +145,8 @@
             item_yc_type,
             create_time,
             item_status,
-            item_out_num
+            item_out_num,
+            item_remarks
             )
         VALUES
         <foreach collection="list" item="tOrderItem" separator=",">
@@ -164,7 +169,8 @@
             #{tOrderItem.itemYcType,jdbcType=VARCHAR},
             #{tOrderItem.createTime,jdbcType=TIMESTAMP},
             #{tOrderItem.itemStatus,jdbcType=BIGINT},
-            #{tOrderItem.itemOutNum,jdbcType=BIGINT}
+            #{tOrderItem.itemOutNum,jdbcType=BIGINT},
+            #{tOrderItem.itemRemarks,jdbcType=VARCHAR}
             )
         </foreach>
     </insert>
@@ -216,6 +222,9 @@
             </if>
             <if test="itemOutNum != null">
                 item_out_num = #{itemOutNum,jdbcType=BIGINT},
+            </if>
+            <if test="itemRemarks != null">
+                item_remarks = #{itemRemarks,jdbcType=BIGINT},
             </if>
         </set>
         WHERE id = #{id,jdbcType=BIGINT}

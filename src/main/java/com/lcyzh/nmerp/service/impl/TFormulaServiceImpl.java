@@ -133,8 +133,9 @@ public class TFormulaServiceImpl implements ITFormulaService {
                 formulaVo.setProdVarietyValue(DictUtils.getValueByDictKey(formulaVo.getProdVariety()));
                 return formulaVo;
             }).collect(Collectors.toList());
-            PageInfo<FormulaVo> p = new PageInfo<>(formulaVos);
-            page.setCount(p.getTotal());
+            PageInfo<TFormula> p = new PageInfo<>(formulas);
+            page.setTotal(p.getTotal());
+            page.setCount(formulaVos.size());
             page.setList(formulaVos);
             return page;
         }

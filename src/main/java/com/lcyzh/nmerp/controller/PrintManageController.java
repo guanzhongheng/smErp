@@ -207,6 +207,7 @@ public class PrintManageController extends BaseController {
     public String prodRemarkInfo(String prodPlanCode,Model model){
         ProdPlanVo prodPlan = planService.findByProdPanCode(prodPlanCode);
         model.addAttribute("prod",prodPlan);
+        model.addAttribute("prodPlanCode",prodPlanCode);
         return "modules/print/prodFormula";
     }
 

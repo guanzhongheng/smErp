@@ -145,14 +145,13 @@ public class TProductServiceImpl implements TProductService {
     }
 
     @Override
-    public Page<ProductVo> findPage(Page<ProductVo> page, TProduct tProduct) {
+    public List<ProductVo> findPage(Page<ProductVo> page, TProduct tProduct) {
         PageHelper.startPage(page.getPageNo(), page.getPageSize());
         List<TProduct> list = tProductMapper.findList(tProduct);
         List<ProductVo> vos = productConversion(list);
         PageInfo<TProduct> p = new PageInfo<>(list);
-        page.setCount(p.getTotal());
-        page.setList(vos);
-        return page;
+        page.setTotal(p.getTotal());
+        return vos;
     }
 
     @Override

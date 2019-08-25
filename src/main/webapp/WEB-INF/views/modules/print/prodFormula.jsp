@@ -107,13 +107,13 @@
 <script type="text/javascript">
 
     var FormuInfo = '${prod.formula}';
+    var prodPlanFormula = '${prodPlanCode}';
     $(document).ready(function () {
         var outerTable = "";
         var midderTable = "";
         var innerTable = "";
 
         if(FormuInfo != null && FormuInfo != undefined){
-
             var obj = JSON.parse(FormuInfo);
             if(obj.outer != null){
                 $("#outTemp").text(obj.outer.temperature);
@@ -155,7 +155,7 @@
         prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr));
         window.document.body.innerHTML = prnhtml;
         window.print();
-        window.history.go(-1);
+        window.location.href = "/produce/producePlan/info?prodPlanCode=" + prodPlanFormula;
     }
 </script>
 </body>

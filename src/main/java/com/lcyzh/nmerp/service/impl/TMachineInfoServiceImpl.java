@@ -78,7 +78,7 @@ public class TMachineInfoServiceImpl implements TMachineInfoService{
     }
 
     @Override
-    public Page<MachineInfoVo> findPage(Page<MachineInfoVo> page, TMachineInfo tMachineInfo) {
+    public List<MachineInfoVo> findPage(Page<MachineInfoVo> page, TMachineInfo tMachineInfo) {
         PageHelper.startPage(page.getPageNo(),page.getPageSize());
         List<TMachineInfo> list = tMachineInfoMapper.findList(tMachineInfo);
         List<MachineInfoVo> vos = list.stream().map(item ->{
@@ -101,10 +101,9 @@ public class TMachineInfoServiceImpl implements TMachineInfoService{
             }
             return vo;
         }).collect(Collectors.toList());
-        PageInfo<MachineInfoVo> p = new PageInfo<>(vos);
-        page.setCount(p.getTotal());
-        page.setList(vos);
-        return page;
+        PageInfo<TMachineInfo> p = new PageInfo<>(list);
+        page.setTotal(p.getTotal());
+        return vos;
     }
 
     @Override

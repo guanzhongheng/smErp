@@ -6,9 +6,6 @@
 <link rel="stylesheet" href="/static/common/customize.css">
 
 
-
-
-
 <div class="tabs-container" style="padding: 0px 20px;">
     <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
         <div class="panel-heading" style="background-color: #50B0E6">
@@ -147,10 +144,13 @@
                             </div>
                             <div class="col-md-11 " style="text-align: right;">
                                 <button class="btn btn-primary global-button-style" type="button"
-                                        onclick="doProcess()">添 加
+                                        onclick="doProcess()">添加产品
                                 </button>&nbsp;&nbsp;&nbsp;&nbsp;
                                 <button class="btn btn-primary global-button-style" type="button"
                                         onclick="history.go(-1)">返 回
+                                </button>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button class="btn btn-primary global-button-style" type="button"
+                                        onclick="saveProd()">保存订单
                                 </button>
                             </div>
                         </div>
@@ -167,20 +167,6 @@
             </h3>
         </div>
         <div class="panel-body" style="padding: 10px 10px 0px 10px;">
-            <div class="form-group" >
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="col-md-10">
-                            &nbsp;
-                        </div>
-                        <div class="col-md-2" style="text-align: right">
-                            <button class="btn btn-primary global-button-style" type="button"
-                                    onclick="saveProd()">保存
-                            </button>&nbsp;&nbsp;
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="control-group table-responsive" >
                 <table id="cusProdDetail" data-height="320"  class="table table-striped table-bordered table-hover text-nowrap">
                     <thead>
@@ -203,6 +189,7 @@
                         <th style="text-align: center" data-field="itemTotalSq">总面积</th>
                         <th style="text-align: center" data-field="itemYcType">延长方式</th>
                         <th style="text-align: center" data-field="itemYbType">压边类型</th>
+                        <th style="text-align: center" data-field="itemRemarks">备注</th>
                         <th style="text-align: center" data-field="operator">操作</th>
                     </tr>
                     </thead>
@@ -264,7 +251,8 @@
         "itemTotalWeight":0.000,
         "itemTotalSq":0.000,
         "itemYcType":"",
-        "itemYbType":""
+        "itemYbType":"",
+        "itemRemarks":""
     }
     function getResChange(obj) {
         if($(obj).find("option:selected").val() != -1){
@@ -469,6 +457,13 @@
                     field: 'itemTotalSq',
                     title: '总面积',
                     width: '100px'
+                },{
+                    field: 'itemRemarks',
+                    title: '备注',
+                    width: '150px',
+                    formatter:function (value,row,index) {
+                        return ['<input type="text"  style="width: 150px" onchange="inserData(\'itemRemarks\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
+                    }
                 },
                 {
                     field: 'oper',
@@ -527,6 +522,9 @@
         return [option].join('');
     }
 
+    function operRemarkFormatter(value,row,index) {
+
+    }
 
     function operYcType(value,row,index){
         var option;
@@ -596,14 +594,14 @@
             "itemTotalWeight":0,
             "itemTotalSq":0,
             "itemYcType":"",
-            "itemYbType":""
+            "itemYbType":"",
+            "itemRemarks":""
         }
         return obj;
     }
 
     function inserData(name,index,obj,tIndex) {
 
-        debugger
         for(var i=0;i<cusProdList.length;i++){
             if(cusProdList[i].ckId == index){
                 for(var key in cusProdList[i]){

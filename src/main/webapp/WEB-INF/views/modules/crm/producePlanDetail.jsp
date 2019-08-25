@@ -371,16 +371,13 @@
                 {
                     field: 'rawmCode',
                     title: '原料',
-                    align: 'center',
-                    valign: 'middle',
-                    width: '30%',
+                    width: '45%',
                     formatter:rawOutFormater
                 }, {
                     field: 'weight',
                     title: '数量',
                     align: 'center',
-                    width: '30%',
-                    valign: 'middle',
+                    width: '20%',
                     formatter:function (value,row,index) {
                         return ['<input type="text" style="width: 100%;" onchange="inserNumData(\'weight\','+row.ckId+',this,\'outer\')" class="form-control" value="'+value+'"/>'].join('');
                     }
@@ -424,16 +421,12 @@
                 {
                     field: 'rawmCode',
                     title: '原料',
-                    align: 'center',
-                    width: '30%',
-                    valign: 'middle',
+                    width: '45%',
                     formatter:rawMidFormater
                 }, {
                     field: 'weight',
                     title: '数量',
-                    align: 'center',
-                    width: '30%',
-                    valign: 'middle',
+                    width: '20%',
                     formatter:function (value,row,index) {
                         return ['<input type="text" style="width: 100%;" onchange="inserNumData(\'weight\','+row.ckId+',this,\'midder\')" class="form-control" value="'+value+'"/>'].join('');
                     }
@@ -464,6 +457,7 @@
                 {
                     field: 'ckId',
                     title: '序号',
+                    align: 'center',
                     width: '60px',
                     formatter:function (value,row,index){
                         if(index == 0){
@@ -478,16 +472,13 @@
                 {
                     field: 'rawmCode',
                     title: '原料',
-                    align: 'center',
-                    width: '30%',
-                    valign: 'middle',
+                    width: '45%',
                     formatter:rawInFormater
                 }, {
                     field: 'weight',
                     title: '数量',
+                    width: '20%',
                     align: 'center',
-                    width: '30%',
-                    valign: 'middle',
                     formatter:function (value,row,index) {
                         return ['<input type="text" style="width: 100%;" onchange="inserNumData(\'weight\','+row.ckId+',this,\'inner\')" class="form-control" value="'+value+'"/>'].join('');
                     }
@@ -568,13 +559,13 @@
                         if(rawList != null || rawList != undefined){
                             $.each(rawList,function(i,obj){
                                 if(value == obj.rawmCode){
-                                    headOption = headOption + "<option value='"+obj.rawmCode+"' selected>"+obj.rawmName+"</option>";
+                                    headOption = headOption + "<option value='"+obj.rawmCode+"' selected>"+ obj.rawmCode + "_" +obj.rawmName+"</option>";
                                 }else{
-                                    headOption = headOption + "<option value='"+obj.rawmCode+"'>"+obj.rawmName+"</option>";
+                                    headOption = headOption + "<option value='"+obj.rawmCode+"'>"+ obj.rawmCode + "_" +obj.rawmName+"</option>";
                                 }
                             });
                         }
-                        option  = '<select class="chosen-select" id="rawmCode"'+row.ckId+' onchange="inserNumData(\'rawmCode\','+row.ckId+',this,\'outer\')" style="width: 150px;height:33px;">'+
+                        option  = '<select class="chosen-select" id="rawmCode"'+row.ckId+' onchange="inserNumData(\'rawmCode\','+row.ckId+',this,\'outer\')" style="height:33px;">'+
                             headOption + '</select>';
 
                         return [option].join('');
@@ -584,12 +575,12 @@
         }else{
             $.each(rawList,function(i,obj){
                 if(value == obj.rawmCode){
-                    headOption = headOption + "<option value='"+obj.rawmCode+"' selected>"+obj.rawmName+"</option>";
+                    headOption = headOption + "<option value='"+obj.rawmCode+"' selected>"+ obj.rawmCode + "_" + obj.rawmName+"</option>";
                 }else{
-                    headOption = headOption + "<option value='"+obj.rawmCode+"'>"+obj.rawmName+"</option>";
+                    headOption = headOption + "<option value='"+obj.rawmCode+"'>"+ obj.rawmCode + "_" + obj.rawmName+"</option>";
                 }
             });
-            option  = '<select class="chosen-select" id="rawmCode"'+row.ckId+' onchange="inserNumData(\'rawmCode\','+row.ckId+',this,\'outer\')" style="width: 150px;height:33px;">'+
+            option  = '<select class="chosen-select" id="rawmCode"'+row.ckId+' onchange="inserNumData(\'rawmCode\','+row.ckId+',this,\'outer\')" style="height:33px;">'+
                 headOption + '</select>';
 
             return [option].join('');
@@ -612,13 +603,13 @@
                         if(rawList != null || rawList != undefined){
                             $.each(rawList,function(i,obj){
                                 if(value == obj.rawmCode){
-                                    headOption = headOption + "<option value='"+obj.rawmCode+"' selected>"+obj.rawmName+"</option>";
+                                    headOption = headOption + "<option value='"+obj.rawmCode+"' selected>"+ obj.rawmCode + "_"+obj.rawmName+"</option>";
                                 }else{
-                                    headOption = headOption + "<option value='"+obj.rawmCode+"'>"+obj.rawmName+"</option>";
+                                    headOption = headOption + "<option value='"+obj.rawmCode+"'>"+ obj.rawmCode + "_"+obj.rawmName+"</option>";
                                 }
                             });
                         }
-                        option  = '<select class="chosen-select" id="rawmCode"'+row.ckId+' onchange="inserNumData(\'rawmCode\','+row.ckId+',this,\'midder\')" style="width: 150px;height:33px;">'+
+                        option  = '<select class="chosen-select" id="rawmCode"'+row.ckId+' onchange="inserNumData(\'rawmCode\','+row.ckId+',this,\'midder\')" style="height:33px;">'+
                             headOption + '</select>';
                         return [option].join('');
                     }
@@ -627,12 +618,12 @@
         }else{
             $.each(rawList,function(i,obj){
                 if(value == obj.rawmCode){
-                    headOption = headOption + "<option value='"+obj.rawmCode+"' selected>"+obj.rawmName+"</option>";
+                    headOption = headOption + "<option value='"+obj.rawmCode+"' selected>"+ obj.rawmCode + "_"+obj.rawmName+"</option>";
                 }else{
-                    headOption = headOption + "<option value='"+obj.rawmCode+"'>"+obj.rawmName+"</option>";
+                    headOption = headOption + "<option value='"+obj.rawmCode+"'>"+ obj.rawmCode + "_"+obj.rawmName+"</option>";
                 }
             });
-            option  = '<select class="chosen-select" id="rawmCode"'+row.ckId+' onchange="inserNumData(\'rawmCode\','+row.ckId+',this,\'midder\')" style="width: 150px;height:33px;">'+
+            option  = '<select class="chosen-select" id="rawmCode"'+row.ckId+' onchange="inserNumData(\'rawmCode\','+row.ckId+',this,\'midder\')" style="height:33px;">'+
                 headOption + '</select>';
 
             return [option].join('');
@@ -655,13 +646,13 @@
                         if(rawList != null || rawList != undefined){
                             $.each(rawList,function(i,obj){
                                 if(value == obj.rawmCode){
-                                    headOption = headOption + "<option value='"+obj.rawmCode+"' selected>"+obj.rawmName+"</option>";
+                                    headOption = headOption + "<option value='"+obj.rawmCode+"' selected>"+ obj.rawmCode + "_"+obj.rawmName+"</option>";
                                 }else{
-                                    headOption = headOption + "<option value='"+obj.rawmCode+"'>"+obj.rawmName+"</option>";
+                                    headOption = headOption + "<option value='"+obj.rawmCode+"'>"+ obj.rawmCode + "_"+obj.rawmName+"</option>";
                                 }
                             });
                         }
-                        option  = '<select class="chosen-select" id="rawmCode"'+row.ckId+' onchange="inserNumData(\'rawmCode\','+row.ckId+',this,\'inner\')" style="width: 150px;height:33px;">'+
+                        option  = '<select class="chosen-select" id="rawmCode"'+row.ckId+' onchange="inserNumData(\'rawmCode\','+row.ckId+',this,\'inner\')" style="height:33px;">'+
                             headOption + '</select>';
 
                         return [option].join('');
@@ -672,12 +663,12 @@
 
             $.each(rawList,function(i,obj){
                 if(value == obj.rawmCode){
-                    headOption = headOption + "<option value='"+obj.rawmCode+"' selected>"+obj.rawmName+"</option>";
+                    headOption = headOption + "<option value='"+obj.rawmCode+"' selected>"+ obj.rawmCode + "_"+obj.rawmName+"</option>";
                 }else{
-                    headOption = headOption + "<option value='"+obj.rawmCode+"'>"+obj.rawmName+"</option>";
+                    headOption = headOption + "<option value='"+obj.rawmCode+"'>"+ obj.rawmCode + "_"+obj.rawmName+"</option>";
                 }
             });
-            option  = '<select class="chosen-select" id="rawmCode"'+row.ckId+' onchange="inserNumData(\'rawmCode\','+row.ckId+',this,\'inner\')" style="width: 150px;height:33px;">'+
+            option  = '<select class="chosen-select" id="rawmCode"'+row.ckId+' onchange="inserNumData(\'rawmCode\','+row.ckId+',this,\'inner\')" style="height:33px;">'+
                 headOption + '</select>';
 
             return [option].join('');
@@ -694,7 +685,7 @@
                         if(key == name){
                             if(name == 'rawmCode' && obj.value.length > 0){
                                 outFormuList[i]['rawmCode'] = obj.value;
-                                outFormuList[i]['rawmName'] = obj.selectedOptions[0].text;
+                                outFormuList[i]['rawmName'] = obj.selectedOptions[0].text.split("_")[1];
                             }else{
                                 outFormuList[i][key] = obj.value;
                             }
@@ -713,7 +704,7 @@
                         if(key == name){
                             if(name == 'rawmCode' && obj.value.length > 0){
                                 midderFormuList[i]['rawmCode'] = obj.value;
-                                midderFormuList[i]['rawmName'] = obj.selectedOptions[0].text;
+                                midderFormuList[i]['rawmName'] = obj.selectedOptions[0].text.split("_")[1];
                             }else{
                                 midderFormuList[i][key] = obj.value;
                             }
@@ -731,7 +722,7 @@
                         if(key == name){
                             if(name == 'rawmCode' && obj.value.length > 0){
                                 innerFormuList[i]['rawmCode'] = obj.value;
-                                innerFormuList[i]['rawmName'] = obj.selectedOptions[0].text;
+                                innerFormuList[i]['rawmName'] = obj.selectedOptions[0].text.split("_")[1];
                             }else{
                                 innerFormuList[i][key] = obj.value;
                             }

@@ -30,8 +30,10 @@ public class TMachineInfoController  extends BaseController {
 
     @RequestMapping(value = {"/list", ""})
     public String list(@ModelAttribute("machine")TMachineInfo machine, Model model, HttpServletRequest request, HttpServletResponse response) {
-
-        Page<MachineInfoVo> page = tMachineInfoService.findPage(new Page<>(request, response), machine);
+        Page<MachineInfoVo> page = new Page<>(request, response);
+        List<MachineInfoVo> list = tMachineInfoService.findPage(page, machine);
+        page.setCount(list.size());
+        page.setList(list);
         model.addAttribute("page", page);
 
         return "modules/crm/machineList";

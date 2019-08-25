@@ -21,37 +21,58 @@
                     <input type="hidden" id="ordCode" value="${ordCode}"/>
                     <div class="form-group">
                         <div class="col-md-4">
-                            <label class="col-md-5" style="text-align: right;font-size: 17px;">订单标题:</label>
-                            <label class="col-md-5" style="font-size: 17px;">${order.ordTitle}</label>
+                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
+                                订单标题:
+                            </label>
+                            <label class="col-md-8 control-label">
+                                <input class="form-control" value="${order.ordTitle}" disabled>
+                            </label>
                         </div>
-
                         <div class="col-md-4">
-                            <label class="col-md-5" style="text-align: right;font-size: 16px;">客户名称:</label>
-                            <label class="col-md-5" style="font-size: 17px;">${order.cusName}</label>
+                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
+                                客户名称:
+                            </label>
+                            <label class="col-md-8 control-label">
+                                <input class="form-control"value="${order.cusName}" disabled>
+                            </label>
                         </div>
-
                         <div class="col-md-4">
-                            <label class="col-md-5" style="text-align: right;font-size: 17px;">代理客户:</label>
-                            <label class="col-md-5" style="font-size: 17px;">${order.proxyName}</label>
+                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
+                                代理客户:
+                            </label>
+                            <label class="col-md-8 control-label">
+                                <input class="form-control"value="${order.proxyName}" disabled>
+                            </label>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="hr-line-dashed"></div>
                     <div class="form-group">
                         <div class="col-md-4">
-                            <label class="col-md-5" style="text-align: right;font-size: 16px;">订单类型:</label>
-                            <label class="col-md-5" style="font-size: 17px;">${order.ordTypeValue}</label>
+                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
+                                订单类型:
+                            </label>
+                            <label class="col-md-8 control-label">
+                                <input class="form-control"value="${order.ordTypeValue}" disabled>
+                            </label>
                         </div>
                         <div class="col-md-4">
-                            <label class="col-md-5" style="text-align: right;font-size: 17px;">签单日期:</label>
-                            <label class="col-md-5" style="font-size: 17px;">${order.ordSignDate}</label>
+                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
+                                签单日期:
+                            </label>
+                            <label class="col-md-8 control-label">
+                                <input class="form-control"value="${order.ordSignDate}" disabled>
+                            </label>
                         </div>
                         <div class="col-md-4">
-                            <label class="col-md-5" style="text-align: right;font-size: 16px;">交货日期:</label>
-                            <label class="col-md-5" style="font-size: 17px;">${order.ordDeliveryDate}</label>
+                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
+                                交货日期:
+                            </label>
+                            <label class="col-md-8 control-label">
+                                <input class="form-control"value="${order.ordDeliveryDate}" disabled>
+                            </label>
                         </div>
 
                     </div>
@@ -59,29 +80,38 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="hr-line-dashed"></div>
                     <div class="form-group">
                         <div class="col-md-4">
-                            <label class="col-md-5" style="text-align: right;font-size: 17px;">我方签约:</label>
-                            <label class="col-md-5"
-                                   style="font-size: 17px;">${order.comContractor==null?"":order.comContractor}</label>
+                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
+                                我方签约:
+                            </label>
+                            <label class="col-md-8 control-label">
+                                <input class="form-control"value="${order.comContractor==null?'':order.comContractor}" disabled>
+                            </label>
                         </div>
 
                         <div class="col-md-4">
-                            <label class="col-md-5" style="text-align: right;font-size: 16px;">客户签约:</label>
-                            <label class="col-md-5"
-                                   style="font-size: 17px;">${order.cusContractor==null?"":order.cusContractor}</label>
+                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
+                                客户签约:
+                            </label>
+                            <label class="col-md-8 control-label">
+                                <input class="form-control"value="${order.cusContractor==null?'':order.cusContractor}" disabled>
+                            </label>
                         </div>
                         <div class="col-md-4">
-                            <label class="col-md-5" style="text-align: right;font-size: 17px;">备注:</label>
-                            <label class="col-md-5" style="font-size: 17px;">${order.remarks}</label>
+
+                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
+                                备注:
+                            </label>
+                            <label class="col-md-8 control-label">
+                                <input class="form-control"value="${order.remarks}" disabled>
+                            </label>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="hr-line-dashed"></div>
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-1">
@@ -132,6 +162,7 @@
                         <th style="text-align: center" data-field="itemTotalSq">总面积</th>
                         <th style="text-align: center" data-field="itemYcType">延长方式</th>
                         <th style="text-align: center" data-field="itemYbType">压边类型</th>
+                        <th style="text-align: center" data-field="itemRemarks">备注</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -156,6 +187,7 @@
                             <td>${o.itemTotalSq}</td>
                             <td>${fns:getDictLabel(o.itemYcType,'prod_ycType','无')}</td>
                             <td>${fns:getDictLabel(o.itemYbType,'prod_ybType','无')}</td>
+                            <td>${o.itemRemarks}</td>
                         </tr>
                     </c:forEach>
                     </tbody>

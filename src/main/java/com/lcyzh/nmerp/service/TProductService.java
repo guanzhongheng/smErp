@@ -37,7 +37,7 @@ public interface TProductService {
 
     int delete(TProduct tProduct);
 
-    Page<ProductVo> findPage(Page<ProductVo> tProductPage, TProduct tProduct);
+    List<ProductVo> findPage(Page<ProductVo> tProductPage, TProduct tProduct);
 
     boolean prodCodeIsExistence(String code);
 }

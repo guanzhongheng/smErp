@@ -73,6 +73,16 @@ public class OrderItemVo {
     private String itemStatusValue;
     //产品出库数量
     private Long itemOutNum;
+    // 产品备注
+    private String itemRemarks;
+
+    public String getItemRemarks() {
+        return itemRemarks;
+    }
+
+    public void setItemRemarks(String itemRemarks) {
+        this.itemRemarks = itemRemarks;
+    }
 
     public Long getItemId() {
         return itemId;

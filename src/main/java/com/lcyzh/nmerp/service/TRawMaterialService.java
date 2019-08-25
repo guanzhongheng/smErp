@@ -28,6 +28,6 @@ public interface TRawMaterialService {
 
     boolean rawmCodeIsExistence(String code);
 
-    Page<TRawMaterial> findPage(Page<TRawMaterial> page, TRawMaterial rawMaterial);
+    List<TRawMaterial> findPage(Page<TRawMaterial> page, TRawMaterial rawMaterial);
 
 }

@@ -9,7 +9,7 @@
 
 			if(n) $("#pageNo").val(n);
 			if(s) $("#pageSize").val(s);
-			$("#searchForm").attr("action","${ctx}/tMachineInfo/list");
+			$("#searchForm").attr("action","${ctx}/tRawMaterial/list");
 			$("#searchForm").submit();
 	    	return false;
 	    }

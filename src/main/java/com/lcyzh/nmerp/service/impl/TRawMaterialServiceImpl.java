@@ -65,13 +65,12 @@ public class TRawMaterialServiceImpl implements TRawMaterialService{
     }
 
     @Override
-    public Page<TRawMaterial> findPage(Page<TRawMaterial> page, TRawMaterial rawMaterial) {
+    public List<TRawMaterial> findPage(Page<TRawMaterial> page, TRawMaterial rawMaterial) {
         PageHelper.startPage(page.getPageNo(),page.getPageSize());
         List<TRawMaterial> list = tRawMaterialMapper.findList(rawMaterial);
         PageInfo<TRawMaterial> pageInfo = new PageInfo<>(list);
-        page.setCount(pageInfo.getTotal());
-        page.setList(list);
-        return page;
+        page.setTotal(pageInfo.getTotal());
+        return list;
     }
 
 }

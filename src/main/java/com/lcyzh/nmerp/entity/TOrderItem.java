@@ -52,6 +52,16 @@ public class TOrderItem implements Serializable {
     //产品出库数量
     private Long itemOutNum;
 
+    private String itemRemarks;
+
+    public String getItemRemarks() {
+        return itemRemarks;
+    }
+
+    public void setItemRemarks(String itemRemarks) {
+        this.itemRemarks = itemRemarks;
+    }
+
     public TOrderItem() {
     }
 

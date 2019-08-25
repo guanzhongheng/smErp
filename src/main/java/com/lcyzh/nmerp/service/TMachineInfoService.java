@@ -27,7 +27,7 @@ public interface TMachineInfoService {
 
     int delete(TMachineInfo tMachineInfo);
 
-    Page<MachineInfoVo> findPage(Page<MachineInfoVo> machineInfoVoPage, TMachineInfo tMachineInfo);
+    List<MachineInfoVo> findPage(Page<MachineInfoVo> machineInfoVoPage, TMachineInfo tMachineInfo);
 
     boolean macCodeIsExistence(String code);
 }
