@@ -209,6 +209,17 @@
                                         </div>
                                         <div class="hr-line-dashed"></div>
                                         <div class="form-group">
+                                            <label class="col-sm-2 control-label" style="margin-left: -25px;">备注信息:</label>
+                                            <div class="col-sm-8">
+                                            <form:form id="inputForm" modelAttribute="detail" action=""
+                                                       method="post" class="form-horizontal">
+                                                <form:textarea path="itemRemarks" htmlEscape="false" cssClass="form-control global-input"
+                                                               cssStyle="min-width: 600px;" rows="3" maxlength="255"/>
+                                            </form:form>
+                                            </div>
+                                        </div>
+                                        <div class="hr-line-dashed"></div>
+                                        <div class="form-group">
                                             <div class="row">
                                                 <div class="col-md-12 " >
                                                     <button class="btn btn-primary global-button-style" type="button" id="inStock">入 库</button>

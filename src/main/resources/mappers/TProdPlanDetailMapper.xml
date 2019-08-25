@@ -25,6 +25,7 @@
         <result column="item_color" property="itemColor" jdbcType="VARCHAR"/>
         <result column="mac_code" property="macCode" jdbcType="VARCHAR"/>
         <result column="item_price_type" property="itemPriceType" jdbcType="BIGINT"/>
+        <result column="item_remarks" property="itemRemarks" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="findListByProdPlanCode" parameterType="java.lang.String" resultMap="tProdPlanDetailResultMap">
@@ -87,7 +88,8 @@
         ppd.item_price_type itemPriceType,
         pp.formula formula,
         o.ord_title orderTitle,
-        o.proxy_name proxyName
+        o.proxy_name proxyName,
+        ppd.item_remarks itemRemarks
         FROM t_prod_plan_detail ppd
         left join t_prod_plan pp on ppd.prod_plan_code = pp.prod_plan_code
         left join t_order o on ppd.ord_code = o.ord_code
@@ -194,7 +196,8 @@
         item_owner,
         item_color,
         mac_code,
-        item_price_type
+        item_price_type,
+        item_remarks
         )
         VALUES
         <foreach collection ="list" item="item" separator =",">
@@ -218,7 +221,8 @@
             #{item.itemOwner,jdbcType=VARCHAR},
             #{item.itemColor,jdbcType=VARCHAR},
             #{item.macCode,jdbcType=VARCHAR},
-            #{item.itemPriceType,jdbcType=BIGINT}
+            #{item.itemPriceType,jdbcType=BIGINT},
+            #{item.itemRemarks,jdbcType=VARCHAR}
             )
         </foreach>
     </insert>

@@ -32,6 +32,16 @@ public class TProdPlanDetail implements Serializable {
     private String itemColor;
     private String macCode;
     private Long itemPriceType;
+    // 产品备注
+    private String itemRemarks;
+
+    public String getItemRemarks() {
+        return itemRemarks;
+    }
+
+    public void setItemRemarks(String itemRemarks) {
+        this.itemRemarks = itemRemarks;
+    }
 
     public TProdPlanDetail(){
     }

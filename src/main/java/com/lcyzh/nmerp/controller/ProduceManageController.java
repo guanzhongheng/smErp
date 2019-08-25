@@ -112,7 +112,7 @@ public class ProduceManageController extends BaseController {
      * @Date: 2019/7/16 9:15 AM
      */
     @RequestMapping(value = {"produce/info"})
-    public String prodDetail(Long id, Model model, HttpServletRequest request, HttpServletResponse response){
+    public String prodDetail(Long id, Model model,ProdPlanDetailVo detail, HttpServletRequest request, HttpServletResponse response){
         ProdPlanDetailVo vo = new ProdPlanDetailVo();
         vo.setProdPlanDetailId(id);
         model.addAttribute("detail",prodPlanDetailService.findProdTask(vo));

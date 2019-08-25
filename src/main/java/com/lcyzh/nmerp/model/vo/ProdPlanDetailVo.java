@@ -57,6 +57,17 @@ public class ProdPlanDetailVo{
 
     private int ordSort = 0;
 
+    // 产品备注
+    private String itemRemarks;
+
+    public String getItemRemarks() {
+        return itemRemarks;
+    }
+
+    public void setItemRemarks(String itemRemarks) {
+        this.itemRemarks = itemRemarks;
+    }
+
     public String getSeCode() {
         return seCode;
     }
