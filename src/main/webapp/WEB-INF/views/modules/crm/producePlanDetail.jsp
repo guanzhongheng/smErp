@@ -81,7 +81,7 @@
                                                 <div class="hr-line-dashed"></div>
                                                 <div class="form-group">
                                                     <label class="col-md-2 control-label"
-                                                           style="width: 160px;text-align: right;font-size: 17px;"><i
+                                                           style="width: 140px;text-align: right;font-size: 17px;"><i
                                                             style="color: red"></i>
                                                         请选择配方:
                                                     </label>
@@ -98,11 +98,16 @@
                                                     </div>
                                                     <div class="col-md-2 " style="text-align: left">
                                                         <button class="btn btn-primary"
-                                                                type="button" style="width: 85px" onclick="saveFormu()">保存配方
+                                                                type="button" style="width: 80px" onclick="saveFormu()">保存配方
                                                         </button>
                                                     </div>
                                                     <div class="col-md-2 " style="text-align: left">
-                                                        <a href="/print/remark_print?prodPlanCode=${prodPlan.prodPlanCode}" class="btn btn-primary">配方打印</a>
+                                                        <a href="/print/remark_print?prodPlanCode=${prodPlan.prodPlanCode}" style="width: 80px;" class="btn btn-primary">配方打印</a>
+                                                    </div>
+                                                    <div class="col-md-2 " style="text-align: left">
+                                                        <button class="btn btn-primary"
+                                                                type="button" style="width: 80px" onclick="doProcessData()">还原
+                                                        </button>
                                                     </div>
 
                                                 </div>
@@ -315,6 +320,7 @@
         }
     });
 
+    
     function doProcessData(){
 
         if(FormuInfo != null && FormuInfo.length > 0){
@@ -345,8 +351,7 @@
         }
     }
 
-    $(document).ready(function () {
-        $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",})
+    function initTable(){
         $("#outerTable").bootstrapTable({
             url: '',
             pagination: false,  //表格底部显示分页条
@@ -357,6 +362,7 @@
                 {
                     field: 'ckId',
                     title: '序号',
+                    align: 'center',
                     width: '60px',
                     formatter:function (value,row,index){
                         if(index == 0){
@@ -407,6 +413,7 @@
                 {
                     field: 'ckId',
                     title: '序号',
+                    align: 'center',
                     width: '60px',
                     formatter:function (value,row,index){
                         if(index == 0){
@@ -426,6 +433,7 @@
                 }, {
                     field: 'weight',
                     title: '数量',
+                    align: 'center',
                     width: '20%',
                     formatter:function (value,row,index) {
                         return ['<input type="text" style="width: 100%;" onchange="inserNumData(\'weight\','+row.ckId+',this,\'midder\')" class="form-control" value="'+value+'"/>'].join('');
@@ -498,6 +506,11 @@
                 toastr.error("加载数据失败");
             }
         });
+    }
+
+    $(document).ready(function () {
+        $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",})
+        initTable();
         setTimeout("doProcessData()",600); //();
     });
 
@@ -884,10 +897,12 @@
         }
     }
     function loadTableData(obj) {
+        debugger;
+        $("#outerTable").bootstrapTable("destroy");
+        $("#midderTable").bootstrapTable("destroy");
+        $("#innerTable").bootstrapTable("destroy");
+        initTable();
 
-        $("#outerTable").bootstrapTable({});
-        $("#midderTable").bootstrapTable({});
-        $("#innerTable").bootstrapTable({});
         if(obj != null && obj.value != -1){
             $.ajax({
                 url: "/tRawMaterial/getByFormula",

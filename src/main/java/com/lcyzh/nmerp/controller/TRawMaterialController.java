@@ -59,7 +59,7 @@ public class TRawMaterialController extends BaseController {
     public Map<String, FormulaDetailVo> getByFormula(String fCode) {
         // TODO 流程未通
         FormulaVo formulaVo = formulaService.findByCode(fCode);
-        if(formulaVo.getContext().size() > 0){
+        if(formulaVo.getContext() != null && formulaVo.getContext().size() > 0){
             return formulaVo.getContext();
         }
         return new HashMap<>();
