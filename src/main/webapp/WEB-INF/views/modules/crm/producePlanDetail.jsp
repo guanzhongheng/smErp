@@ -11,7 +11,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-sm-12">
-                        <div style="padding: 15px 20px 20px;">
+                        <div style="padding: 0px 20px 0px;">
                             <form class="form-horizontal" >
                                 <input type="hidden" id="prodPlanCode" value="${prodPlan.prodPlanCode}">
                                 <div class="row">

@@ -34,7 +34,7 @@
                 <input type="hidden" name="type" value="${type}"/>
                 <div class="row">
                     <br/>
-                    <div class="col-sm-6 b-r">
+                    <div class="col-sm-6 b-r" style="min-height: 450px;">
                         <div class="ibox float-e-margins">
                             <form method="get" class="form-horizontal">
                                 <div class="form-group">
@@ -62,9 +62,9 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-6" style="min-height: 450px;">
                         <div class="ibox float-e-margins">
-                            <div class="table-responsive" style="min-height: 300px;">
+                            <div class="table-responsive" style="min-height: 430px;">
                                 <table id="contentTable" class="table table-striped table-bordered table-hover text-nowrap">
                                     <thead>
                                     <tr>
