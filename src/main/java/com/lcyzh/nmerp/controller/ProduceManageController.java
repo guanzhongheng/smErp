@@ -4,8 +4,10 @@ import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.controller.system.util.SysDictUtils;
 import com.lcyzh.nmerp.controller.system.util.UserUtils;
+import com.lcyzh.nmerp.entity.TOrder;
 import com.lcyzh.nmerp.entity.TProdPlan;
 import com.lcyzh.nmerp.entity.TStock;
+import com.lcyzh.nmerp.model.vo.OrderQueryVo;
 import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
 import com.lcyzh.nmerp.model.vo.ProdPlanVo;
 import com.lcyzh.nmerp.service.*;
@@ -47,6 +49,8 @@ public class ProduceManageController extends BaseController {
     private ITFormulaService formulaService;
     @Autowired
     private TRawMaterialService rawMaterialService;
+    @Autowired
+    private TOrderService orderService;
     /**
      * @Description: 跳转到生产计划详情页面
      * @Param: [vo, prodPlanCode, model, request, response]
@@ -183,6 +187,10 @@ public class ProduceManageController extends BaseController {
         TStock stock = stockService.findById(stockId);
         ProdPlanDetailVo print = new ProdPlanDetailVo();
         BeanUtils.copyProperties(stock, print);
+
+        OrderQueryVo order = orderService.findByOrdeCode(stock.getOrdCode());
+        print.setProxyName(order.getProxyName());
+
         print.setItemColorValue(SysDictUtils.getDictLabel(print.getItemColor(), Constants.PROD_COLOR, ""));
         model.addAttribute("user",UserUtils.getUser());
         model.addAttribute("vo",print);

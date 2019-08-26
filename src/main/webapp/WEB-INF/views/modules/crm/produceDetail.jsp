@@ -468,8 +468,8 @@
 
             $("#inStock").attr('disabled',"true");
 
-            var totalWeight = weightFlag == 'auto' ? $("#totalWeightAuto").text():$("#totalWeightHand").val();
-            var tareWeight = weightFlag == 'auto' ? $("#tareWeightAuto").text():$("#tareWeightHand").val();
+            var totalWeight = weightFlag == 'auto' ? parseFloat($("#totalWeightAuto").text()).toFixed(2):parseFloat($("#totalWeightHand").val()).toFixed(2);
+            var tareWeight = weightFlag == 'auto' ? parseFloat($("#tareWeightAuto").text()).toFixed(2):parseFloat($("#tareWeightHand").val()).toFixed(2);
             var seCode;
             if($("#seCode_s").val() != null && $("#seCode_s").val() != ''){
                 seCode = $("#seCode_s").val()+'-'+ $("#seCode_e").val();
@@ -564,9 +564,9 @@
                 debugger;
                 var data = event.data.replace(" ","").replace("+","").replace("kg","");
                 if(weightType == 'total'){
-                    $("#totalWeight").text(data);
+                    $("#totalWeightAuto").text(data);
                 }else if(weightType == 'tare'){
-                    $("#tareWeight").text(data);
+                    $("#tareWeightAuto").text(data);
                 }
             };
             socket.onopen = function(event){
