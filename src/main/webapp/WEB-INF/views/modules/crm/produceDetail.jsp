@@ -489,7 +489,7 @@
                         // var path = 'window.location.href = "/produce/producePlan/info?prodPlanCode='+prodPlanCode+'"';
                     }
                     $("#itemNum").val(result.itemNum);
-                    doPrint($("#macCode").val());
+                    doPrint();
                 }
             });
 
@@ -503,15 +503,15 @@
 
         // 打印逻辑
         $("#rePrint").click(function () {
-            doPrint($("#macCode").val());
+            doPrint();
         });
-        function doPrint(macCode){
+        function doPrint(){
             layer.open({
                 type: 2,
                 title: '打印标签确认',
                 skin: 'layui-layer-rim', //加上边框
                 area: ['450px', '350px'],
-                content: ['/produce/produce/doPrint?macCode='+macCode, 'yes'] //iframe的url，no代表不显示滚动条
+                content: ['/produce/produce/doPrint', 'yes'] //iframe的url，no代表不显示滚动条
             });
         }
         $("#printCertNew").click(function () {
@@ -520,7 +520,7 @@
                 title: '打印合格证确认',
                 skin: 'layui-layer-rim', //加上边框
                 area: ['800px', '800px'],
-                content: ['/produce/produce/printCert?type=new&macCode='+$("#macCode").val(), 'yes'] //iframe的url，no代表不显示滚动条
+                content: ['/produce/produce/printCert?type=new', 'yes'] //iframe的url，no代表不显示滚动条
             });
         });
         $("#printCertRed").click(function () {
@@ -529,7 +529,7 @@
                 title: '打印合格证确认',
                 skin: 'layui-layer-rim', //加上边框
                 area: ['800px', '800px'],
-                content: ['/produce/produce/printCert?type=red&macCode='+$("#macCode").val(), 'yes'] //iframe的url，no代表不显示滚动条
+                content: ['/produce/produce/printCert?type=red', 'yes'] //iframe的url，no代表不显示滚动条
             });
         });
         $("#printCertGreen").click(function () {
@@ -539,7 +539,7 @@
                 title: '打印合格证确认',
                 skin: 'layui-layer-rim', //加上边框
                 area: ['800px', '800px'],
-                content: ['/produce/produce/printCert?type=green&macCode='+$("#macCode").val(), 'yes'] //iframe的url，no代表不显示滚动条
+                content: ['/produce/produce/printCert?type=green', 'yes'] //iframe的url，no代表不显示滚动条
             });
         });
         $("#printCertYellow").click(function () {
@@ -548,7 +548,7 @@
                 title: '打印合格证确认',
                 skin: 'layui-layer-rim', //加上边框
                 area: ['800px', '800px'],
-                content: ['/produce/produce/printCert?type=yellow&macCode='+$("#macCode").val(), 'yes'] //iframe的url，no代表不显示滚动条
+                content: ['/produce/produce/printCert?type=yellow', 'yes'] //iframe的url，no代表不显示滚动条
             });
         });
 

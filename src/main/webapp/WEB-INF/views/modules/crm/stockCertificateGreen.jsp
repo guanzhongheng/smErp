@@ -76,7 +76,7 @@
                             <td colspan="2" style="text-align:left;height:40px" ><font size=4>${vo.itemOwner}</font></td>
                         </tr>
                         <tr>
-                            <td colspan="2"  style="text-align:left;height:40px"><font size=4>${fns:getValueByDictKey(vo.itemUnit)}</font></td>
+                            <td colspan="2"  style="text-align:left;height:40px"><font size=4>${vo.itemWidth}m * ${vo.itemThick}mm</font></td>
                         </tr>
                         <tr>
                             <td colspan="2"  style="text-align:left;height:40px"><font size=4>${vo.itemWeight-vo.itemTareWeight} kg</font></td>

@@ -102,6 +102,9 @@
             <if test="orderTitle!= null">
                 and o.ord_title like concat('%', #{orderTitle,jdbcType=VARCHAR}, '%')
             </if>
+            <if test="barCode!= null">
+                and s.bar_code like concat('%', #{barCode,jdbcType=VARCHAR}, '%')
+            </if>
         </where>
         order by s.create_time desc
     </select>

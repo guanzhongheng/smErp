@@ -25,7 +25,15 @@
                 content: ['/produce/produce/rePrint?stockId='+stockId+'"', 'yes'] //iframe的url，no代表不显示滚动条
             });
         }
-
+        function rePrintCert(stockId,type) {
+            layer.open({
+                type: 2,
+                title: '打印合格证确认',
+                skin: 'layui-layer-rim', //加上边框
+                area: ['800px', '800px'],
+                content: ['/produce/produce/rePrintCert?type='+type+'&stockId='+stockId, 'yes'] //iframe的url，no代表不显示滚动条
+            });
+        };
         function exportInfo() {
             $("#searchForm").attr('action','/export/stock');
             $("#searchForm").submit();
@@ -51,6 +59,10 @@
                 <ul class="ul-form">
                     <li>
                         <form:input path="orderTitle" htmlEscape="false" maxlength="200" class="input-medium" placeholder="订单标题"/>
+                    </li>
+                    <li>
+                        &nbsp;&nbsp;
+                        <form:input path="barCode" htmlEscape="false" maxlength="200" class="input-medium" placeholder="条码值"/>
                     </li>
                     <li>
                         &nbsp;&nbsp;
@@ -113,8 +125,30 @@
                             <td>${fns:getDictLabel(cus.itemYcType,'prod_ycType','无')}</td>
                             <td>${fns:getValueByDictKey(cus.itemUnit)}</td>
                             <%--<td><button class="btn btn-primary" type="button" onclick="rePrint(${cus.stockId})"  >补签</button></td>--%>
-                            <td><a href="#" rel="external nofollow"
-                                   onclick="rePrint(${cus.stockId});return false;"><i class="icon-print">&nbsp;补签</i></a></td>
+                            <td>
+                                <button rel="external nofollow" class="btn btn-primary" style="font-size: 14px"
+                                   onclick="rePrint(${cus.stockId});return false;">补签</button>
+                                <div class="btn-group dropdown">
+                                    <button class="btn btn-success" onclick="rePrintCert(${cus.stockId},'new')" >补合格证(新版)</button>
+                                    <button class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="#" onclick="rePrintCert(${cus.stockId},'new')">合格证(新版)</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" onclick="rePrintCert(${cus.stockId},'red')">合格证(红)</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" onclick="rePrintCert(${cus.stockId},'green')">合格证(绿)</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" onclick="rePrintCert(${cus.stockId},'yellow')">合格证(黄)</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>
@@ -129,7 +163,8 @@
 <script type="text/javascript">
 
     function invenFormReset() {
-        $("#ordCode").val("");
+        $("#orderTitle").val("");
+        $("#barCode").val("");
         $("#itemCgyCode").val("").select2();
         $("#itemVariety").val("").select2();
     }

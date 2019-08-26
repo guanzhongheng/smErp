@@ -153,7 +153,7 @@ public class ProduceManageController extends BaseController {
     }
 
     @RequestMapping(value = {"produce/doPrint"})
-    public String doPrint(String macCode, Model model, HttpServletRequest request, HttpServletResponse response){
+    public String doPrint(Model model, HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
         ProdPlanDetailVo print = (ProdPlanDetailVo)session.getAttribute(UserUtils.getUser().getId());
         model.addAttribute("user",UserUtils.getUser());
@@ -162,7 +162,7 @@ public class ProduceManageController extends BaseController {
     }
 
     @RequestMapping(value = {"produce/printCert"})
-    public String rePrint(String macCode, String type, Model model,
+    public String rePrint(String type, Model model,
                           HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
         ProdPlanDetailVo print = (ProdPlanDetailVo)session.getAttribute(UserUtils.getUser().getId());
@@ -195,5 +195,30 @@ public class ProduceManageController extends BaseController {
         model.addAttribute("user",UserUtils.getUser());
         model.addAttribute("vo",print);
         return "modules/crm/stockPrint";
+    }
+
+    @RequestMapping(value = {"produce/rePrintCert"})
+    public String rePrintCert(Long stockId,String type, Model model,
+                          HttpServletRequest request, HttpServletResponse response){
+        TStock stock = stockService.findById(stockId);
+        ProdPlanDetailVo print = new ProdPlanDetailVo();
+        BeanUtils.copyProperties(stock, print);
+
+        OrderQueryVo order = orderService.findByOrdeCode(stock.getOrdCode());
+        print.setProxyName(order.getProxyName());
+
+        model.addAttribute("user",UserUtils.getUser());
+        model.addAttribute("vo",print);
+        String pageStr = "";
+        if("red".equals(type)){
+            pageStr = "modules/crm/stockCertificateRed";
+        }else if("green".equals(type)){
+            pageStr = "modules/crm/stockCertificateGreen";
+        }else if("yellow".equals(type)){
+            pageStr = "modules/crm/stockCertificateYellow";
+        }else if("new".equals(type)){
+            pageStr = "modules/crm/stockCertificateNew";
+        }
+        return pageStr;
     }
 }

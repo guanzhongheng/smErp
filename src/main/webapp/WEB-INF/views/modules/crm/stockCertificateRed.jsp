@@ -73,7 +73,7 @@
                             <td colspan="2" style="height:1px;"></td>
                         </tr>
                         <tr>
-                            <td colspan="2" style="text-align:left;height:26px" ><font size=4>${fns:getValueByDictKey(vo.itemUnit)}</font></td>
+                            <td colspan="2" style="text-align:left;height:26px" ><font size=4>${vo.itemWidth}m * ${vo.itemThick}mm</font></td>
                         </tr>
                         <tr>
                             <td colspan="2"  style="text-align:left;height:26px"><font size=4>${vo.itemLenth}</font></td>
