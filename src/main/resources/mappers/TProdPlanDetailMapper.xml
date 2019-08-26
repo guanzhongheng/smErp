@@ -234,7 +234,7 @@
                 item_num = #{itemNum,jdbcType=BIGINT}
             </if>
         </set>
-        WHERE prod_plan_code = #{prodPlanCode,jdbcType=VARCHAR}
+        WHERE id = #{id,jdbcType=BIGINT}
     </update>
 
     <delete id="delete"  parameterType="java.lang.Long">

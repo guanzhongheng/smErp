@@ -93,6 +93,7 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
             //该商品还没有生产完，更新计划单明细件数
             TProdPlanDetail prodPlanDetail = new TProdPlanDetail();
             BeanUtils.copyProperties(vo, prodPlanDetail);
+            prodPlanDetail.setId(vo.getProdPlanDetailId());
             tProdPlanDetailMapper.update(prodPlanDetail);
             if(!Constants.ORD_PROD_STATUS_PROCESSING.equals(tOrderItem.getItemStatus())) {
                 tOrderItem.setItemStatus(Constants.ORD_PROD_STATUS_PROCESSING);
