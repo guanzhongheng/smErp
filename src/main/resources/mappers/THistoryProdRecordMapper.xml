@@ -60,6 +60,9 @@
             <if test="ordCode!= null and ordCode!=''">
                 and hpr.ord_code like concat('%', concat(#{ordCode,jdbcType=VARCHAR}, '%'))
             </if>
+            <if test="orderTitle!= null and orderTitle!=''">
+                and o.ord_title like concat('%', concat(#{orderTitle,jdbcType=VARCHAR}, '%'))
+            </if>
             <if test="startDate!= null and startDate !=''">
                 and hpr.create_time between #{startDate} and #{endDate}
             </if>

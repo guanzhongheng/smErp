@@ -64,8 +64,29 @@ public class OrderQueryVo{
     private Double ordTotalWeight;
     //订单产品出库数量
     private Long ordOutNum;
+    // 入库产品数量
+    private Long totalNum = 0L;
+    // 入库产品总价格
+    private Double totalPrice = 0.0000;
+
     //订单产品明细
     private List<OrderItemVo> orderItemVos;
+
+    public Long getTotalNum() {
+        return totalNum;
+    }
+
+    public void setTotalNum(Long totalNum) {
+        this.totalNum = totalNum;
+    }
+
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 
     public OrderQueryVo(){
         super();

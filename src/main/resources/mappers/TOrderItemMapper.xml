@@ -243,4 +243,35 @@
         update T_ORDER_ITEM set item_status = #{status} where ord_code = #{ordCode}
     </update>
 
+
+    <select id="getOrderStockInfo" parameterType="java.lang.String" resultType="java.util.Map" >
+        select
+            count(d.ord_code) totalNum,
+            sum(d.price) as totalPrice
+        from (
+            SELECT
+                t.ord_code,
+                t.item_code,
+                t.item_lenth,
+                t.item_width,
+                t.item_weight,
+                t.item_sq,
+                oi.item_price_type,
+                oi.item_price,
+                case
+                when oi.item_price_type = 141001 then t.item_weight * oi.item_price
+                when oi.item_price_type = 141002 then t.item_lenth * t.item_width * oi.item_price
+                else 0 end as price
+            FROM
+                t_stock t
+                INNER JOIN T_ORDER_ITEM oi ON oi.id = t.order_item_id
+                AND oi.ord_code = t.ord_code
+            WHERE
+                t.ord_code = #{ordCode}
+            order by oi.item_price_type
+            ) d
+            GROUP BY d.ord_code
+
+
+    </select>
 </mapper>

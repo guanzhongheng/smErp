@@ -66,6 +66,15 @@ public class TOrderServiceImpl implements TOrderService {
             vo.setOrdStatusValue(DictUtils.getValueByDictKey(vo.getOrdStatus()));
             vo.setPayTypeValue(DictUtils.getValueByDictKey(vo.getPayType()));
             vo.setPayStatusValue(DictUtils.getValueByDictKey(vo.getPayStatus()));
+            Map<String,Object> res = tOrderItemMapper.getOrderStockInfo(vo.getOrdCode());
+            if(res != null && res.size() > 0){
+                if(res.get("totalNum") != null){
+                    vo.setTotalNum((Long)res.get("totalNum"));
+                }
+                if(res.get("totalPrice") != null){
+                    vo.setTotalPrice((Double) res.get("totalPrice"));
+                }
+            }
         });
         PageInfo<OrderQueryVo> pageInfo = new PageInfo<>(list);
         page.setTotal(pageInfo.getTotal());

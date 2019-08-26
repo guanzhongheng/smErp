@@ -37,8 +37,8 @@
                 <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
                 <ul class="ul-form">
                     <li>
-                        <form:input path="ordCode" htmlEscape="false" maxlength="200"
-                                    class="input-medium" placeholder="订单编号"/>
+                        <form:input path="orderTitle" htmlEscape="false" maxlength="200"
+                                    class="input-medium" placeholder="订单标题"/>
                     </li>
                     <li>
                         &nbsp;&nbsp;

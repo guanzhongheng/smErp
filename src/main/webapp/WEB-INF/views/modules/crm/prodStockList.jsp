@@ -52,8 +52,8 @@
                     <li class="btns"><input class="btn btn-primary" type="button" onclick="prodsFormRest()" value="重置"/></li>
                 </ul>
             </form:form>
-            <div class="control-group">
-                <table id="contentTable" class="table table-striped table-bordered table-condensed">
+            <div class="control-group table-responsive">
+                <table id="contentTable" class="table table-striped table-bordered table-hover text-nowrap">
                     <thead>
                     <tr>
                         <th>客户名称</th>
@@ -61,6 +61,8 @@
                         <th>订单总重量</th>
                         <th>订单总面积</th>
                         <th>订单总数量</th>
+                        <th>入库产品数量</th>
+                        <th>入库产品总金额</th>
                         <th>已出库产品数量</th>
                         <th>未出库产品数量</th>
                     </tr>
@@ -73,6 +75,8 @@
                         <td>${oq.ordTotalWeight}</td>
                         <td>${oq.ordTotalSq}</td>
                         <td>${oq.ordTotalNum}</td>
+                        <td>${oq.totalNum}</td>
+                        <td>${oq.totalPrice}</td>
                         <td>${oq.ordOutNum == null?"0":oq.ordOutNum}</td>
                         <td>${oq.ordTotalNum - oq.ordOutNum}</td>
                         </c:forEach>
