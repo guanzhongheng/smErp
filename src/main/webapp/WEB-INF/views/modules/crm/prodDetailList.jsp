@@ -244,7 +244,7 @@
         "itemUnitValue":"",
         "itemOwner":"",
         "itemPrice":0.00,
-        "itemNum":0,
+        "itemNum":1,
         "itemPriceType":"",
         "itemPriceTypeValue":"",
         "itemWeight":0.000,
@@ -522,10 +522,6 @@
         return [option].join('');
     }
 
-    function operRemarkFormatter(value,row,index) {
-
-    }
-
     function operYcType(value,row,index){
         var option;
         var headOption = "<option value =''>请选择</option>";
@@ -587,7 +583,7 @@
             "itemUnitValue":data.itemUnitValue,
             "itemOwner":"",
             "itemPrice":data.itemPrice,
-            "itemNum":0,
+            "itemNum":1,
             "itemPriceType":data.itemPriceType,
             "itemPriceTypeValue":data.itemPriceTypeValue,
             "itemWeight":0.000,
@@ -635,29 +631,39 @@
 
     
     function saveProd() {
-
+        debugger;
+        var flag = false;
         if($("#ordCode").val() == ''){
             return;
         }
         if(cusProdList.length > 0){
-            $.ajax({
-                url:'${ctx}/order/orderDetailBatchSave/',
-                data: JSON.stringify(cusProdList),
-                dataType:"json",
-                type:"post",
-                contentType:"application/json",
-                error: function(r) {
-                    layer.msg("保存失败！")
-        },
-                success: function(r) {
-
-                    if(r.res == "success"){
-                        window.location.href = "/crm/order/list"
-                    }else{
-                        layer.msg("保存失败！")
-                    }
+            $.each(cusProdList,function (i,obj) {
+                if(obj.itemWidth <= 0 || obj.itemLenth <= 0){
+                    layer.msg("订单产品未填写完整，长宽不能为0！");
+                    flag = true;
+                    return
                 }
-            })
+            });
+            if(!flag){
+                $.ajax({
+                    url:'${ctx}/order/orderDetailBatchSave/',
+                    data: JSON.stringify(cusProdList),
+                    dataType:"json",
+                    type:"post",
+                    contentType:"application/json",
+                    error: function(r) {
+                        layer.msg("保存失败！")
+                    },
+                    success: function(r) {
+
+                        if(r.res == "success"){
+                            window.location.href = "/crm/order/list"
+                        }else{
+                            layer.msg("保存失败！")
+                        }
+                    }
+                });
+            }
         }
     }
 </script>
