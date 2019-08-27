@@ -121,7 +121,7 @@ public class PrintManageController extends BaseController {
 
         if(!StringUtils.isEmpty(outItemVoList)){
             for(OutItemVo vo : outItemVoList){
-                String newName = vo.getOrdCode() + vo.getItemOwner() + vo.getItemName();
+                String newName = vo.getOrdCode() + vo.getItemOwner() + vo.getItemName() + vo.getItemLenth() + vo.getItemWidth() + vo.getItemThick();
                 if(ite.get(newName) == null){
                     ite.put(newName,1L);
                     iteWight.put(newName,vo.getItemWeight());
@@ -135,7 +135,7 @@ public class PrintManageController extends BaseController {
         }
         if(!StringUtils.isEmpty(oldOrderItem)){
             for(OrderItemVo vo : oldOrderItem){
-                String newName = vo.getOrdCode() + vo.getItemOwner() + vo.getItemName();
+                String newName = vo.getOrdCode() + vo.getItemOwner() + vo.getItemName()+ vo.getItemLenth() + vo.getItemWidth()+ vo.getItemThick();
                 if(ite.get(newName) != null && !list.contains(vo)){
                     vo.setItemNum(ite.get(newName));
                     vo.setItemTotalSq(ite.get(newName) * vo.getItemLenth() * vo.getItemWidth());

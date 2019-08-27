@@ -101,10 +101,6 @@
                 </table>
                 <div class="pagination">${page}</div>
 
-                <script>
-
-
-                </script>
             </div>
         </div>
     </div>

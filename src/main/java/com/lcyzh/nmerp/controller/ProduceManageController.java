@@ -6,15 +6,18 @@ import com.lcyzh.nmerp.controller.system.util.SysDictUtils;
 import com.lcyzh.nmerp.controller.system.util.UserUtils;
 import com.lcyzh.nmerp.entity.TOrder;
 import com.lcyzh.nmerp.entity.TProdPlan;
+import com.lcyzh.nmerp.entity.TProdPlanDetail;
 import com.lcyzh.nmerp.entity.TStock;
 import com.lcyzh.nmerp.model.vo.OrderQueryVo;
 import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
 import com.lcyzh.nmerp.model.vo.ProdPlanVo;
 import com.lcyzh.nmerp.service.*;
+import com.lcyzh.nmerp.utils.Arith;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * @Project : nm-erp
@@ -61,7 +65,10 @@ public class ProduceManageController extends BaseController {
      */
     @RequestMapping(value = {"producePlan/info"})
     public String prodPlanDetail(@ModelAttribute("vo") ProdPlanVo vo, String prodPlanCode, Model model, HttpServletRequest request, HttpServletResponse response){
-        model.addAttribute("list",prodPlanDetailService.findListByProdPlanCode(prodPlanCode));
+        List<TProdPlanDetail> list = prodPlanDetailService.findListByProdPlanCode(prodPlanCode);
+        model.addAttribute("list",list);
+        // 统计计算理论重量
+        doTheoryCalculation(list,model);
         model.addAttribute("prodPlan",prodPlanService.findByProdPanCode(prodPlanCode));
         model.addAttribute("macList",machineInfoService.findAllList());
         // add formula by zj 0802
@@ -220,5 +227,21 @@ public class ProduceManageController extends BaseController {
             pageStr = "modules/crm/stockCertificateNew";
         }
         return pageStr;
+    }
+
+    // 计算理论重量值
+    public void doTheoryCalculation(List<TProdPlanDetail> list,Model model){
+        if(!CollectionUtils.isEmpty(list)){
+            Double totalWi = 0d;
+            list.forEach(n->{
+                Double mj = Arith.mul(n.getItemLenth(),n.getItemWidth());
+                Double mjt = Arith.mul(mj,n.getItemNum());
+                Double fm = Arith.div(1,Arith.mul(0.95,n.getItemThick()));
+                Double to = Arith.div(mjt,fm,4);
+                n.setTheoryWeight(to);
+            });
+            totalWi = list.stream().mapToDouble(i->i.getTheoryWeight()).sum();
+            model.addAttribute("theoryTotalWeight",totalWi);
+        }
     }
 }

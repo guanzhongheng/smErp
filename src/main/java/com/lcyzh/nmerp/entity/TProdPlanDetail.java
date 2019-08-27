@@ -1,8 +1,6 @@
 package com.lcyzh.nmerp.entity;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.Date;
 
 /**
  * Author ljk
@@ -34,6 +32,17 @@ public class TProdPlanDetail implements Serializable {
     private Long itemPriceType;
     // 产品备注
     private String itemRemarks;
+
+    // 理论重量
+    private Double theoryWeight;
+
+    public Double getTheoryWeight() {
+        return theoryWeight;
+    }
+
+    public void setTheoryWeight(Double theoryWeight) {
+        this.theoryWeight = theoryWeight;
+    }
 
     public String getItemRemarks() {
         return itemRemarks;

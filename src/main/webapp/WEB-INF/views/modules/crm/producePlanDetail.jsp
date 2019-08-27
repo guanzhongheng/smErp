@@ -213,6 +213,7 @@
                                         <th style="text-align: center">数量</th>
                                         <th style="text-align: center">重量</th>
                                         <th style="text-align: center">面积(㎡)</th>
+                                        <th style="text-align: center">理论重量</th>
                                         <th style="text-align: center">压边类型</th>
                                         <th style="text-align: center">延长米计算方式</th>
                                         <th style="text-align: center">状态</th>
@@ -240,6 +241,7 @@
                                             <td>${vo.itemNum}</td>
                                             <td>${vo.itemTotalWeight}</td>
                                             <td>${vo.itemTotalSq}</td>
+                                            <td>${vo.theoryWeight}</td>
                                             <td>${fns:getDictValue(vo.itemYbType, 'prod_ybType', defaultValue)}</td>
                                             <td>${fns:getDictValue(vo.itemYcType, 'prod_ycType', defaultValue)}</td>
                                             <td style="color: #08c;">
@@ -250,6 +252,11 @@
                                                 <%--<td>按钮：移出机台</td>--%>
                                         </tr>
                                     </c:forEach>
+                                    <tr>
+                                        <td>总计:</td>
+                                        <td colspan="12">注：理论重量计算公式 (长 * 宽 * 数量)/(1/（0.95 * 厚度))</td>
+                                        <td colspan="4">理论总重量:${theoryTotalWeight} kg</td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
