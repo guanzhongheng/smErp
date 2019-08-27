@@ -60,6 +60,17 @@ public class ProdPlanDetailVo{
     // 产品备注
     private String itemRemarks;
 
+    // 理论重量
+    private Double theoryWeight;
+
+    public Double getTheoryWeight() {
+        return theoryWeight;
+    }
+
+    public void setTheoryWeight(Double theoryWeight) {
+        this.theoryWeight = theoryWeight;
+    }
+
     public String getItemRemarks() {
         return itemRemarks;
     }

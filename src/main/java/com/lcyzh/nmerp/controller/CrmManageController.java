@@ -7,13 +7,16 @@ import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.controller.system.util.UserUtils;
 import com.lcyzh.nmerp.entity.TFormula;
 import com.lcyzh.nmerp.entity.TOutStock;
+import com.lcyzh.nmerp.entity.TProdPlanDetail;
 import com.lcyzh.nmerp.entity.sys.User;
 import com.lcyzh.nmerp.model.vo.*;
 import com.lcyzh.nmerp.service.*;
 import com.lcyzh.nmerp.service.security.SystemService;
+import com.lcyzh.nmerp.utils.Arith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -304,6 +307,7 @@ public class CrmManageController extends BaseController {
     public String produceList(@ModelAttribute("vo") ProdPlanDetailVo vo, Model model, HttpServletRequest request, HttpServletResponse response) {
         Page<ProdPlanDetailVo> page = new Page<>(request, response);
         List<ProdPlanDetailVo> list = prodPlanDetailService.findProdTaskPage(page, vo);
+        doTheoryCalculationForPd(list,model);
         page.setCount(list.size());
         page.setList(list);
         model.addAttribute("page", page);
@@ -321,6 +325,22 @@ public class CrmManageController extends BaseController {
         Page<FormulaVo> page = new Page<>(request, response);
         model.addAttribute("page", formulaService.findPage(page,formula));
         return "modules/crm/formulaList";
+    }
+
+    // 计算理论重量值
+    public void doTheoryCalculationForPd(List<ProdPlanDetailVo> list, Model model){
+        if(!CollectionUtils.isEmpty(list)){
+            Double totalWi = 0d;
+            list.forEach(n->{
+                Double mj = Arith.mul(n.getItemLenth(),n.getItemWidth());
+                Double mjt = Arith.mul(mj,n.getItemNum());
+                Double fm = Arith.div(1,Arith.mul(0.95,n.getItemThick()));
+                Double to = Arith.div(mjt,fm,4);
+                n.setTheoryWeight(to);
+            });
+            totalWi = list.stream().mapToDouble(i->i.getTheoryWeight()).sum();
+            model.addAttribute("theoryTotalWeight",totalWi);
+        }
     }
 
 }

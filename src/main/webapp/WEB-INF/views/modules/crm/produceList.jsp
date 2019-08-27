@@ -95,6 +95,7 @@
                         <th style="text-align: center">宽度(m)</th>
                         <th style="text-align: center">厚度(mm)</th>
                         <th style="text-align: center">数量</th>
+                        <th style="text-align: center">理论重量(kg)</th>
                         <%--<th style="text-align: center">重量</th>--%>
                         <%--<th style="text-align: center">面积(㎡)</th>--%>
                         <%--<th style="text-align: center">压边类型</th>--%>
@@ -116,6 +117,7 @@
                             <td><span style="color: #00a2d4">${vo.itemWidth}</span></td>
                             <td>${vo.itemThick}</td>
                             <td>${vo.itemNum}</td>
+                            <td>${vo.theoryWeight}</td>
                             <%--<td>${vo.itemTotalWeight}</td>--%>
                             <%--<td>${vo.itemTotalSq}</td>--%>
                             <%--<td>${fns:getDictValue(vo.itemYbType, 'prod_ybType', defaultValue)}</td>--%>
@@ -132,6 +134,11 @@
                             </td>
                         </tr>
                     </c:forEach>
+                    <tr>
+                        <td>总计:</td>
+                        <td colspan="9"></td>
+                        <td colspan="3">理论总重量:${theoryTotalWeight}</td>
+                    </tr>
                     </tbody>
                 </table>
                 <div class="pagination">${page}</div>
