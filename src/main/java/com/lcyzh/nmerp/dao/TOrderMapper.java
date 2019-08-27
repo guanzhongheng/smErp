@@ -31,4 +31,6 @@ public interface TOrderMapper {
     OrderAddModifyVo findModifyInfoByOrdCode(String ordCode);
 
     int updateBatchOutNumByOrdCode(List<TOrder> orders);
+
+    int updateOrderStatus(TOrder tOrder);
 }

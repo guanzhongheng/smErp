@@ -289,7 +289,7 @@ public class TOrderServiceImpl implements TOrderService {
         } else if (state == 1) {
             order.setOrdStatus(Constants.ORD_STATUS_ABORT);
         }
-        if (tOrderMapper.update(order) > 0 && updateProdStatusByOrdCode(ordCode, Constants.ORD_PROD_STATUS_WAIT) > 0) {
+        if (tOrderMapper.updateOrderStatus(order) > 0 && updateProdStatusByOrdCode(ordCode, Constants.ORD_PROD_STATUS_WAIT) > 0) {
             if (state == 0) {
                 //审批通过，加入生产计划
                 List<OrderItemVo> list = tOrderItemMapper.findByOrdCode(ordCode);

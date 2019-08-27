@@ -318,4 +318,8 @@
         </foreach>
     </update>
 
+    <update id="updateOrderStatus" parameterType="com.lcyzh.nmerp.entity.TOrder">
+        update T_ORDER set ord_status = #{ordStatus} where ord_code = #{ordCode} and ord_status = 100001
+    </update>
+
 </mapper>
