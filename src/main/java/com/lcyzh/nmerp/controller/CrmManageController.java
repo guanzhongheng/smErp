@@ -269,7 +269,6 @@ public class CrmManageController extends BaseController {
         page.setCount(list.size());
         page.setList(list);
         model.addAttribute("page", page);
-        model.addAttribute("page", page);
         return "modules/crm/prodStockList";
     }
 

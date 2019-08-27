@@ -146,8 +146,8 @@
                     <tr>
                         <th style="text-align: center">序号</th>
                         <th style="text-align: center" data-field="itemName">产品名称</th>
-                        <th style="text-align: center" data-field="itemCgyCodeValue">品种</th>
-                        <th style="text-align: center" data-field="itemVaritemValue">类别</th>
+                        <th style="text-align: center" data-field="itemVaritemValue">品种</th>
+                        <th style="text-align: center" data-field="itemCgyCodeValue">类别</th>
                         <th style="text-align: center" data-field="itemLenth">长(m)</th>
                         <th style="text-align: center" data-field="itemWidth">宽(m)</th>
                         <th style="text-align: center" data-field="itemThick">厚度(mm)</th>
@@ -171,8 +171,8 @@
                             <td style="text-align: center">${status.index + 1}</td>
                                 <%--<td>${o.ordCode}</td>--%>
                             <td>${o.itemName}</td>
-                            <td>${o.itemCgyCodeValue}</td>
                             <td>${o.itemVaritemValue}</td>
+                            <td>${o.itemCgyCodeValue}</td>
                             <td>${o.itemLenth}</td>
                             <td>${o.itemWidth}</td>
                             <td>${o.itemThick}</td>

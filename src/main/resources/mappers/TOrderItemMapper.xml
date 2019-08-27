@@ -246,7 +246,11 @@
 
     <select id="getOrderStockInfo" parameterType="java.lang.String" resultType="java.util.Map" >
         select
-            count(d.ord_code) totalNum,
+            count(d.ord_code) as totalNum,
+            sum(d.item_weight) as totalwight,
+            sum(d.item_sq) as totalSq,
+            sum(d.wtPrice) as totalWtPrice,
+            sum(d.sqPrice) as totalSqPrice,
             sum(d.price) as totalPrice
         from (
             SELECT
@@ -255,9 +259,17 @@
                 t.item_lenth,
                 t.item_width,
                 t.item_weight,
-                t.item_sq,
+                case
+                when oi.item_price_type = 141002 then t.item_sq
+                else 0 end as item_sq,
                 oi.item_price_type,
                 oi.item_price,
+                case
+                when oi.item_price_type = 141001 then t.item_weight * oi.item_price
+                else 0 end as wtPrice,
+                case
+                when oi.item_price_type = 141002 then t.item_lenth * t.item_width * oi.item_price
+                else 0 end as sqPrice,
                 case
                 when oi.item_price_type = 141001 then t.item_weight * oi.item_price
                 when oi.item_price_type = 141002 then t.item_lenth * t.item_width * oi.item_price

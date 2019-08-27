@@ -58,13 +58,15 @@
                     <tr>
                         <th>客户名称</th>
                         <th>订单标题</th>
-                        <th>订单总重量</th>
-                        <th>订单总面积</th>
-                        <th>订单总数量</th>
-                        <th>入库产品数量</th>
-                        <th>入库产品总金额</th>
-                        <th>已出库产品数量</th>
-                        <th>未出库产品数量</th>
+                        <th>计价汇总重量</th>
+                        <th>计价汇总面积</th>
+                        <th>订单数量</th>
+                        <th>入库数量</th>
+                        <th>入库金额(重量)</th>
+                        <th>入库金额(面积)</th>
+                        <th>入库总金额</th>
+                        <th>已出库数量</th>
+                        <th>未出库数量</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -76,6 +78,8 @@
                         <td>${oq.ordTotalSq}</td>
                         <td>${oq.ordTotalNum}</td>
                         <td>${oq.totalNum}</td>
+                        <td>${oq.totalWtPrice}</td>
+                        <td>${oq.totalSqPrice}</td>
                         <td>${oq.totalPrice}</td>
                         <td>${oq.ordOutNum == null?"0":oq.ordOutNum}</td>
                         <td>${oq.ordTotalNum - oq.ordOutNum}</td>

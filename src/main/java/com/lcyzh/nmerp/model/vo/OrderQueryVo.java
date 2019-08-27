@@ -69,6 +69,28 @@ public class OrderQueryVo{
     // 入库产品总价格
     private Double totalPrice = 0.0000;
 
+    // 根据入库重量汇总价格
+    private Double totalWtPrice = 0.0000;
+
+    // 根据入库面积汇总价格
+    private Double totalSqPrice = 0.0000;
+
+    public Double getTotalWtPrice() {
+        return totalWtPrice;
+    }
+
+    public void setTotalWtPrice(Double totalWtPrice) {
+        this.totalWtPrice = totalWtPrice;
+    }
+
+    public Double getTotalSqPrice() {
+        return totalSqPrice;
+    }
+
+    public void setTotalSqPrice(Double totalSqPrice) {
+        this.totalSqPrice = totalSqPrice;
+    }
+
     //订单产品明细
     private List<OrderItemVo> orderItemVos;
 

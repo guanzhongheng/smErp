@@ -369,11 +369,11 @@
                     title: '名称',
                     width: '150px'
                 },{
-                    field: 'itemCgyCodeValue',
+                    field: 'itemVaritemValue',
                     title: '品种',
                     width: '80px'
                 },{
-                    field: 'itemVaritemValue',
+                    field: 'itemCgyCodeValue',
                     title: '类别',
                     width: '100px'
                 },{

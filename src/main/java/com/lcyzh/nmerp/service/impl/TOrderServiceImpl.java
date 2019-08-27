@@ -74,6 +74,19 @@ public class TOrderServiceImpl implements TOrderService {
                 if(res.get("totalPrice") != null){
                     vo.setTotalPrice((Double) res.get("totalPrice"));
                 }
+                if(res.get("totalwight") != null){
+                    vo.setOrdTotalWeight((Double) res.get("totalwight"));
+                }
+                if(res.get("totalSq") != null){
+                    vo.setOrdTotalSq((Double) res.get("totalSq"));
+                }
+                if(res.get("totalWtPrice") != null){
+                    vo.setTotalWtPrice((Double) res.get("totalWtPrice"));
+                }
+                if(res.get("totalSqPrice") != null){
+                    vo.setTotalSqPrice((Double) res.get("totalSqPrice"));
+                }
+
             }
         });
         PageInfo<OrderQueryVo> pageInfo = new PageInfo<>(list);
