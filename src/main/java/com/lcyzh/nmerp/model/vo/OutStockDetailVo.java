@@ -39,6 +39,36 @@ public class OutStockDetailVo {
     //0-未扫描 1-已扫描确认过
     private Character isOut;
 
+    private Double itemPrice;
+    // 单个产品计算后价格
+    private Double price;
+    //计价方式-字典
+    private Long itemPriceType;
+
+    public Double getItemPrice() {
+        return itemPrice;
+    }
+
+    public void setItemPrice(Double itemPrice) {
+        this.itemPrice = itemPrice;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Long getItemPriceType() {
+        return itemPriceType;
+    }
+
+    public void setItemPriceType(Long itemPriceType) {
+        this.itemPriceType = itemPriceType;
+    }
+
     public String getOrdTitle() {
         return ordTitle;
     }

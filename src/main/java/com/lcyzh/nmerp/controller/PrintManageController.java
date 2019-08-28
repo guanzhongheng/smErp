@@ -6,7 +6,6 @@ import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.controller.system.util.UserUtils;
 import com.lcyzh.nmerp.dao.TCustomerMapper;
 import com.lcyzh.nmerp.entity.TOutStock;
-import com.lcyzh.nmerp.entity.TProdPlan;
 import com.lcyzh.nmerp.entity.TProdPlanDetail;
 import com.lcyzh.nmerp.entity.sys.User;
 import com.lcyzh.nmerp.model.vo.*;
@@ -184,7 +183,6 @@ public class PrintManageController extends BaseController {
             }).sum();
 
         }
-
         User user = UserUtils.getUser();
         // 获取发货清单表
         model.addAttribute("stock",outStock);
@@ -236,6 +234,23 @@ public class PrintManageController extends BaseController {
         model.addAttribute("name",UserUtils.getUser().getName());
         return "modules/print/produceList";
     }
+
+    /**
+     * 出库单详情打印 可打印带价格和不带价格两种情况
+     * @param outCode
+     * @param isPrice
+     * @param model
+     * @return
+     */
+    @RequestMapping("outStockDetailInfo_print")
+    public String outStockInfos(String outCode,Integer isPrice, Model model){
+        List<OutStockDetailVo> list = outStockService.getOutStockDetailInfos(outCode);
+        model.addAttribute("stockDetails",list);
+        model.addAttribute("isPrice",isPrice);
+        return "modules/print/outStockDetailInfo";
+    }
+
+
 
     /**
      * 统计计算

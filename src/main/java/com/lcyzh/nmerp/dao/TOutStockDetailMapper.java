@@ -28,4 +28,6 @@ public interface TOutStockDetailMapper {
     List<OutStockDetailVo> findOutItemsByOutCode(String outCode);
 
     List<TOutStockDetail> findByBarCode(String barCode);
+
+    List<OutStockDetailVo> getOutStockDetailInfos(String outCode);
 }

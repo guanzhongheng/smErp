@@ -223,4 +223,9 @@ public class TOutStockServiceImpl implements TOutStockService {
         }
         return null;
     }
+
+    @Override
+    public List<OutStockDetailVo> getOutStockDetailInfos(String outCode) {
+        return tOutStockDetailMapper.getOutStockDetailInfos(outCode);
+    }
 }

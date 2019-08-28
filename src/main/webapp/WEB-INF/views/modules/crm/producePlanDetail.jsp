@@ -909,7 +909,9 @@
         $("#midderTable").bootstrapTable("destroy");
         $("#innerTable").bootstrapTable("destroy");
         initTable();
-
+        outFormuList = [];
+        midderFormuList = [];
+        innerFormuList = [];
         if(obj != null && obj.value != -1){
             $.ajax({
                 url: "/tRawMaterial/getByFormula",

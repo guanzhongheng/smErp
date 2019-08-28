@@ -111,4 +111,27 @@
         WHERE id = #{id,jdbcType=BIGINT}
     </update>
 
+    <select id="getOutStockDetailInfos" parameterType="java.lang.String" resultType="com.lcyzh.nmerp.model.vo.OutStockDetailVo">
+        SELECT
+            ts.bar_code as barCode,
+            ts.item_variety as itemVariety,
+	        ti.item_owner as itemOwner,
+            ts.item_color as itemColor,
+            ts.item_lenth as itemLenth,
+            ts.item_width as itemWidth,
+            ts.item_thick as itemThick,
+            ts.item_weight as itemWeight,
+            ti.item_price as itemPrice,
+            case when ti.item_price_type = 141001 then ti.item_price * ts.item_weight
+                     when ti.item_price_type = 141002 then ti.item_price * ts.item_lenth * ts.item_width
+                     else 0 end price,
+            ti.item_price_type as itemPriceType
+        FROM
+            t_out_stock_detail td
+            INNER JOIN t_stock ts ON ts.bar_code = td.bar_code
+            INNER JOIN t_order_item ti ON ti.id = ts.order_item_id
+        where td.out_code = #{outCode}
+        order by ts.item_variety,ts.item_lenth,ts.item_weight
+    </select>
+
 </mapper>

@@ -1,13 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
 
-<link href="${ctxStatic}/hPlugs/css/plugins/bootstrap-table/bootstrap-table.css" rel="stylesheet">
-<link href="${ctxStatic}/hPlugs/css/plugins/bootstrap-table/bootstrap-table-fixed-columns.css" rel="stylesheet">
 <link rel="stylesheet" href="/static/common/customize.css">
-
-
-
-
 
 <div class="tabs-container" style="padding: 0px 20px;">
     <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
@@ -19,7 +13,6 @@
         <div class="panel-body" style="padding: 10px 10px 0px 10px;">
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="hr-line-dashed"></div>
                     <div class="form-group">
                         <input type="hidden" id="outCode" value="${outStock.outCode}"/>
                         <label class="col-md-2 control-label order-detail-label-margin" style="text-align: right"><i style="color: red"></i>
@@ -69,6 +62,23 @@
                                 <button class="btn btn-primary global-button-style" type="button"
                                         onclick="javascript:window.location.replace(document.referrer);">返回
                                 </button>
+                                &nbsp;
+                                <div class="btn-group dropdown" style="height: 40px;">
+                                    <button class="btn btn-primary" style="height: 100%;" onclick="detailPrintInfo(0)" >无价格打印</button>
+                                    <button class="btn btn-primary dropdown-toggle" style="height: 100%;" data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="#" onclick="detailPrintInfo(0)">无价格打印</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" onclick="detailPrintInfo(1)">有价格打印</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                &nbsp;&nbsp;
+
                             </div>
                         </div>
                     </div>
@@ -120,28 +130,12 @@
         </div>
     </div>
 </div>
-<script src="${ctxStatic}/hPlugs/js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
-<script src="${ctxStatic}/hPlugs/js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
-<script src="${ctxStatic}/hPlugs/js/content.min.js?v=1.0.0" type="text/javascript"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/chosen/chosen.jquery.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/jsKnob/jquery.knob.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/jasny/jasny-bootstrap.min.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/datapicker/bootstrap-datepicker.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/switchery/switchery.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/iCheck/icheck.min.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/clockpicker/clockpicker.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/cropper/cropper.min.js"></script>
-<script src="${ctxStatic}/hPlugs/js/demo/form-advanced-demo.min.js"></script>
 
-<script src="${ctxStatic}/hPlugs/js/plugins/layer/layer.min.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/bootstrap-table/bootstrap-table.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/bootstrap-table/bootstrap-table-fixed-columns.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 <script>
+    function detailPrintInfo(type) {
+        window.location.href = "/print/outStockDetailInfo_print?outCode=" + $("#outCode").val() + "&isPrice=" + type;
+    }
+    
     function saveAddress() {
         var receiver = $("#receiver").val();
         var phone = $("#phone").val();

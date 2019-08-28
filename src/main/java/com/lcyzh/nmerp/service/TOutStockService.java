@@ -122,4 +122,12 @@ public interface TOutStockService {
      * @Date: 2019/8/1 11:01 PM
      */
     List<OutItemVo> findItemByOutCode(String outCode);
+
+
+    /**
+     * 获取发货单详情信息列表
+     * @param outCode
+     * @return
+     */
+    List<OutStockDetailVo> getOutStockDetailInfos(String outCode);
 }
