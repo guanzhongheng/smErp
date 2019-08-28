@@ -283,7 +283,10 @@
             order by oi.item_price_type
             ) d
             GROUP BY d.ord_code
-
-
     </select>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM T_ORDER_ITEM
+        WHERE id = #{id}
+    </delete>
 </mapper>

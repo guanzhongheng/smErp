@@ -34,6 +34,8 @@ public class ProdPlanVo{
     //自动下发开关；0-关闭；1-开启
     private Character isAuto;
 
+    private String prodYbType;
+
     //配方内容
     private Map<String, FormulaDetailVo> context;
 
@@ -132,4 +134,8 @@ public class ProdPlanVo{
     public void setContext(Map<String, FormulaDetailVo> context) {
         this.context = context;
     }
+
+    public String getProdYbType() { return prodYbType; }
+
+    public void setProdYbType(String prodYbType) { this.prodYbType = prodYbType; }
 }

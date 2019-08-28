@@ -129,6 +129,26 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
         vo.setCreateTime(date);
         return vo;
     }
+    @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
+    @Override
+    public boolean cancelProdPlanDetailByID(Long id) {
+        TProdPlanDetail ppd = tProdPlanDetailMapper.findById(id);
+        if(ppd.getItemStatus().equals('1')) {
+            //已下发生产的产品无法撤销
+            return false;
+        }
+        //删除生产计划明细
+        tProdPlanDetailMapper.delete(id);
+        //更新生产计划
+        TProdPlan prodPlan = new TProdPlan();
+        prodPlan.setProdPlanCode(ppd.getProdPlanCode());
+        prodPlan.setTotalQuantity(1L);
+        prodPlan.setQuantity(1L);
+        tProdPlanMapper.updateNum(prodPlan);
+        //删除订单明细
+        tOrderItemMapper.deleteById(ppd.getOrderItemId());
+        return true;
+    }
 
     public String getBarCode(String barCode){
         List<TStock> list = tStockMapper.getByBarCode(barCode);

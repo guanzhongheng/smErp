@@ -17,12 +17,14 @@ import com.lcyzh.nmerp.utils.DictUtils;
 import com.lcyzh.nmerp.utils.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Author ljk
@@ -38,7 +40,8 @@ public class TProdPlanServiceImpl implements TProdPlanService {
     private TMachineInfoMapper machineInfoMapper;
     @Autowired
     private TFormulaMapper tFormulaMapper;
-
+    @Value("${yb.type}")
+    private String ybType;
 
 
     @Override
@@ -94,6 +97,16 @@ public class TProdPlanServiceImpl implements TProdPlanService {
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
     @Override
     public int createProdPlan(List<OrderItemVo> items) {
+        List<OrderItemVo> items4Yb = items.stream().filter(item -> item.getItemYbType().equals(ybType)).collect(Collectors.toList());
+        if(items4Yb != null && !items4Yb.isEmpty() && createProdPlan(items4Yb, true) > 0){
+            items = items.stream().filter(item -> !item.getItemYbType().equals(ybType)).collect(Collectors.toList());
+
+           return createProdPlan(items, false);
+        }
+        return -1;
+    }
+
+    public int createProdPlan(List<OrderItemVo> items, boolean flag) {
         int res = -1;
         List<TProdPlan> addList = new ArrayList<>();
         List<TProdPlan> updateList = new ArrayList<>();
@@ -109,8 +122,13 @@ public class TProdPlanServiceImpl implements TProdPlanService {
             Map<String, TProdPlan> ppMap = new HashMap<>(16);
             if(!prodPlans.isEmpty()) {
                 for(TProdPlan prodPlan : prodPlans) {
-                    ppMap.put(prodPlan.getProdCgyCode()+"|"+prodPlan.getProdVariety()+"|"+prodPlan.getProdColor()+"|"+prodPlan.getMacCode(),
-                            prodPlan);
+                    if(flag) {
+                        ppMap.put(prodPlan.getProdCgyCode()+"|"+prodPlan.getProdVariety()+"|"+prodPlan.getProdColor()+"|"+prodPlan.getMacCode()+"|"+prodPlan.getProdYbType(),
+                                prodPlan);
+                    }else{
+                        ppMap.put(prodPlan.getProdCgyCode()+"|"+prodPlan.getProdVariety()+"|"+prodPlan.getProdColor()+"|"+prodPlan.getMacCode(),
+                                prodPlan);
+                    }
                 }
             }
             Map<String, TProdPlan> ppMapNew = new HashMap<>(16);
@@ -119,7 +137,11 @@ public class TProdPlanServiceImpl implements TProdPlanService {
             String macCode;
             for(OrderItemVo item : items) {
                 macCode = getMacCode(macMap,item.getItemWidth());
-                key = item.getItemCgyCode()+"|"+item.getItemVariety()+"|"+item.getItemColor()+"|"+macCode;
+                if(flag) {
+                    key = item.getItemCgyCode()+"|"+item.getItemVariety()+"|"+item.getItemColor()+"|"+macCode+"|"+item.getItemYbType();
+                }else{
+                    key = item.getItemCgyCode()+"|"+item.getItemVariety()+"|"+item.getItemColor()+"|"+macCode;
+                }
                 TProdPlan prodPlan;
                 if(ppMap.containsKey(key)) {
                     //计划单包含该类品种和颜色的产品，更新数量
@@ -157,8 +179,15 @@ public class TProdPlanServiceImpl implements TProdPlanService {
                         prodPlan.setMacCode(macCode);
                         prodPlan.setProdVariety(item.getItemVariety());
                         prodPlan.setProdCgyCode(item.getItemCgyCode());
-                        ppMapNew.put(prodPlan.getProdCgyCode()+"|"+prodPlan.getProdVariety()+"|"+prodPlan.getProdColor()+"|"+prodPlan.getMacCode(),
-                                prodPlan);
+                        if(flag) {
+                            prodPlan.setProdYbType(item.getItemYbType());
+                            ppMapNew.put(prodPlan.getProdCgyCode()+"|"+prodPlan.getProdVariety()+"|"+prodPlan.getProdColor()+"|"+prodPlan.getMacCode()+"|"+prodPlan.getProdYbType(),
+                                    prodPlan);
+                        }else{
+                            ppMapNew.put(prodPlan.getProdCgyCode()+"|"+prodPlan.getProdVariety()+"|"+prodPlan.getProdColor()+"|"+prodPlan.getMacCode(),
+                                    prodPlan);
+
+                        }
                         prodPlanDetails.add(buildProdPlanDetail(macCode,prodPlan.getProdPlanCode(), item, '0'));
                     }
                 }

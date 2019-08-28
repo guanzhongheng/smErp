@@ -19,6 +19,7 @@ public class TProdPlan implements Serializable {
     private Long quantity;
     private String formula;
     private Character isAuto;
+    private String prodYbType;
 
 
     public TProdPlan(){
@@ -42,7 +43,6 @@ public class TProdPlan implements Serializable {
     public String getFormula(){ return formula;}
     public void setIsAuto (Character isAuto) {this.isAuto = isAuto;}
     public Character getIsAuto(){ return isAuto;}
-
-
-
+    public String getProdYbType() { return prodYbType; }
+    public void setProdYbType(String prodYbType) { this.prodYbType = prodYbType; }
 }

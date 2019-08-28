@@ -44,4 +44,9 @@ public interface TProdPlanDetailService {
      * @Description: 货品生产后打标签入库
      */
     ProdPlanDetailVo labelAndInStock(ProdPlanDetailVo vo);
+
+    /**
+     * 根据ID撤销生产计划明细
+     */
+    boolean cancelProdPlanDetailByID(Long id);
 }
