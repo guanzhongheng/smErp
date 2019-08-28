@@ -138,10 +138,10 @@ public class ProduceManageController extends BaseController {
         vo.setProdPlanDetailId(id);
 
         ProdPlanDetailVo voInDB = prodPlanDetailService.findProdTask(vo);
-        if(weight == null){
+        if(weight == null || weight.equals("NaN")){
             weight = Double.valueOf("0.00");
         }
-        if(tare == null){
+        if(tare == null || tare.equals("NaN")){
             tare = Double.valueOf("0.00");
         }
         if(seCode == null){

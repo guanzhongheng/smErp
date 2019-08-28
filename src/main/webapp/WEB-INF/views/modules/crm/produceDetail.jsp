@@ -398,7 +398,7 @@
 
             $("#tareWeightHand").show();
             $("#tareWeightAuto").hide();
-            if(parseInt($("#totalWeightAuto").text()) != 0 && $("#totalWeightAuto").text() != null){
+            if((parseInt($("#totalWeightAuto").text()) != 0 && $("#totalWeightAuto").text() != null) || $("#totalWeightAuto").text() == '0.00'){
                 $("#tareWeightHand").val($("#tareWeightAuto").text());
             }
 
@@ -412,7 +412,7 @@
 
             $("#tareWeightHand").hide();
             $("#tareWeightAuto").show();
-            if(parseInt($("#tareWeightHand").val()) != 0 && $("#tareWeightHand").val() != null){
+            if((parseInt($("#tareWeightHand").val()) != 0 && $("#tareWeightHand").val() != null) || $("#totalWeightAuto").text() == '0.00'){
                 $("#tareWeightAuto").text($("#tareWeightHand").val());
             }
 
@@ -538,7 +538,7 @@
                 type: 2,
                 title: '打印合格证确认',
                 skin: 'layui-layer-rim', //加上边框
-                area: ['800px', '800px'],
+                area: ['1400px', '800px'],
                 content: ['/produce/produce/printCert?type=green', 'yes'] //iframe的url，no代表不显示滚动条
             });
         });

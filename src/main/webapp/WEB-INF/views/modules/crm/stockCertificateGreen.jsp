@@ -20,7 +20,7 @@
         }
         .page
         {
-            width: 21cm;
+            width: 29cm;
             min-height: 29.7cm;
             padding: 2cm;
             margin: 0cm auto;
@@ -68,7 +68,7 @@
             <div class="gray-bg" style="background-color: white">
             <div>
                 <div style="width:100%;padding-left:530px;    padding-top: 20px;margin-top: -18px;">
-                    <table  border="0" cellspacing="0" style="width:30%;height:180px;width: 170px;">
+                    <table  border="0" cellspacing="0" style="height:180px;">
                         <tr>
                             <td colspan="2" style="height:1px;"></td>
                         </tr>
@@ -76,7 +76,7 @@
                             <td colspan="2" style="text-align:left;height:40px" ><font size=4>${vo.itemOwner}</font></td>
                         </tr>
                         <tr>
-                            <td colspan="2"  style="text-align:left;height:40px"><font size=4>${vo.itemWidth}m * ${vo.itemThick}mm</font></td>
+                            <td colspan="2"  style="text-align:left;height:40px"><font size=4>${fns:getValueByDictKey(vo.itemVariety)} ${vo.itemWidth}m * ${vo.itemThick}mm</font></td>
                         </tr>
                         <tr>
                             <td colspan="2"  style="text-align:left;height:40px"><font size=4>${vo.itemWeight-vo.itemTareWeight} kg</font></td>

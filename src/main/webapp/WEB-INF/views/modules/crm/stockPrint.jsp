@@ -24,7 +24,10 @@
                 <td>
                     <img id="imgcode"/>
                 </td>
-                <td style="width:70px;"><b><span style="font-size: 22px;">${vo.itemWeight-vo.itemTareWeight}<br>公斤</span></b></td>
+                <td style="width:70px;"><b>
+                    <span style="font-size: 35px;">${vo.itemWeight-vo.itemTareWeight}<span style="font-size: 15px;">Kg</span></span>
+
+                </b></td>
             </tr>
         </table>
 

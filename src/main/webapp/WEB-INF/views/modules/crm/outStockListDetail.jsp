@@ -120,7 +120,7 @@
                             <td>${fns:getValueByDictKey(cus.itemVariety)}</td>
                             <td>${fns:getValueByDictKey(cus.itemCgyCode)}</td>
                             <td>${fns:getDictLabel(cus.itemColor, 'prod_color', defaultValue)}</td>
-                            <td>${cus.itemLenth}m*${cus.itemWidth}m*${cus.itemThick}cm</td>
+                            <td>${cus.itemLenth}*${cus.itemWidth}*${cus.itemThick}</td>
                             <td>${cus.itemOwner}</td>
                         </tr>
                     </c:forEach>
