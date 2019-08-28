@@ -115,6 +115,12 @@
             <if test="orderTitle!= null and orderTitle!=''">
                 and o.ord_title like concat('%',#{orderTitle,jdbcType=VARCHAR},'%')
             </if>
+            <if test="startLength!= null and startLength > 0">
+                and ppd.item_width &gt;= #{startLength}
+            </if>
+            <if test="endLength!= null and endLength > 0">
+                and ppd.item_width &lt;= #{endLength}
+            </if>
         </where>
         order by ppd.item_width
         <if test="ordSort!= null and ordSort == 1">

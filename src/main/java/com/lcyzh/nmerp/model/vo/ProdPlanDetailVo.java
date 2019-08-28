@@ -63,6 +63,26 @@ public class ProdPlanDetailVo{
     // 理论重量
     private Double theoryWeight;
 
+    private Double startLength;
+
+    private Double endLength;
+
+    public Double getStartLength() {
+        return startLength;
+    }
+
+    public void setStartLength(Double startLength) {
+        this.startLength = startLength;
+    }
+
+    public Double getEndLength() {
+        return endLength;
+    }
+
+    public void setEndLength(Double endLength) {
+        this.endLength = endLength;
+    }
+
     public Double getTheoryWeight() {
         return theoryWeight;
     }

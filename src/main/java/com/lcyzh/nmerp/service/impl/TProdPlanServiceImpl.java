@@ -105,8 +105,7 @@ public class TProdPlanServiceImpl implements TProdPlanService {
                 List<OrderItemVo> items4Yb = items.stream().filter(item -> yb.equals(item.getItemYbType())).collect(Collectors.toList());
                 items.removeAll(items4Yb);
                 if(items4Yb != null && !items4Yb.isEmpty()){
-                    items = items.stream().filter(item -> !item.getItemYbType().equals(ybType)).collect(Collectors.toList());
-                    int r = createProdPlan(items, false);
+                    int r = createProdPlan(items4Yb, false);
                     if(r <= 0){
                         ret = -1;
                         break;
@@ -114,6 +113,7 @@ public class TProdPlanServiceImpl implements TProdPlanService {
                 }
             }
             if(ret > 0 && items.size() > 0){
+                items.forEach(n->n.setItemYbType(""));
                 ret =  createProdPlan(items, true);
             }
             if(ret <= 0){
@@ -121,6 +121,7 @@ public class TProdPlanServiceImpl implements TProdPlanService {
             }
             return 1;
         }else{
+            items.forEach(n->n.setItemYbType(""));
             return createProdPlan(items, true);
         }
 

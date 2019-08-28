@@ -71,6 +71,14 @@
                             <form:options items="${macList}" itemLabel="macCode" itemValue="macCode" htmlEscape="false"/>
                         </form:select>
                     </li>
+                </ul>
+                <ul class="ul-form">
+                    <li>
+                        <input id="startLength" name="startLength" style="width: 100px;" placeholder="起始宽度" class="input-medium" type="number" value="${vo.startLength}" min="0" step="0.01">
+                        ~
+                        <input id="endLength" name="endLength" style="width: 100px;" placeholder="起始宽度" class="input-medium" type="number" value="${vo.endLength}" min="0" step="0.01">
+
+                    </li>
                     <li>
                         &nbsp;&nbsp;
                         <input id="ordSort" name="ordSort" type="checkbox" value="1" ${vo.ordSort == 1?"checked":""}/>宽度倒序

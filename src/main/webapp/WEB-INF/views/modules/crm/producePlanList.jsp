@@ -79,6 +79,7 @@
                         <th style="text-align: center">类别</th>
                         <th style="text-align: center">机台</th>
                         <th style="text-align: center">颜色</th>
+                        <th style="text-align: center">压边类型</th>
                         <th style="text-align: center">总数量</th>
                         <th style="text-align: center">已下发生产数量</th>
                         <th style="text-align: center">操作</th>
@@ -92,6 +93,8 @@
                             <td>${fns:getValueByDictKey(pp.prodCgyCode)}</td>
                             <td>${pp.macCode}</td>
                             <td>${fns:getDictValue(pp.prodColor, 'prod_color', defaultValue)}</td>
+                            <td>${fns:getDictValue(pp.prodYbType, 'prod_ybType', defaultValue)}</td>
+
                             <td>${pp.totalQuantity}</td>
                             <td>${pp.quantity}</td>
                             <td><a href="${ctx}/produce/producePlan/info?prodPlanCode=${pp.prodPlanCode}"><i class="icon-th-list">&nbsp;详情</i></a></td>
