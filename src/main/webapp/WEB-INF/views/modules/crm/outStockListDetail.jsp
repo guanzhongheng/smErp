@@ -104,10 +104,15 @@
                         <th style="text-align: center">序号</th>
                         <th style="text-align: center">条形码号</th>
                         <th style="text-align: center">订单标题</th>
-                        <th style="text-align: center">产品类别</th>
                         <th style="text-align: center">产品品种</th>
+                        <th style="text-align: center">产品类别</th>
                         <th style="text-align: center">产品颜色</th>
                         <th style="text-align: center">产品规格</th>
+                        <th style="text-align: center">厚度</th>
+                        <th style="text-align: center">重量</th>
+                        <th style="text-align: center">单价</th>
+                        <th style="text-align: center">金额</th>
+                        <th style="text-align: center">计价方式</th>
                         <th style="text-align: center">归属人</th>
                     </tr>
                     </thead>
@@ -120,7 +125,12 @@
                             <td>${fns:getValueByDictKey(cus.itemVariety)}</td>
                             <td>${fns:getValueByDictKey(cus.itemCgyCode)}</td>
                             <td>${fns:getDictLabel(cus.itemColor, 'prod_color', defaultValue)}</td>
-                            <td>${cus.itemLenth}*${cus.itemWidth}*${cus.itemThick}</td>
+                            <td>${cus.itemLenth}*${cus.itemWidth}</td>
+                            <td>${cus.itemThick}</td>
+                            <td>${cus.itemWeight}</td>
+                            <td>${cus.itemPrice}</td>
+                            <td>${cus.price}</td>
+                            <td>${fns:getValueByDictKey(cus.itemPriceType)}</td>
                             <td>${cus.itemOwner}</td>
                         </tr>
                     </c:forEach>

@@ -293,7 +293,12 @@ public class TOrderServiceImpl implements TOrderService {
             if (state == 0) {
                 //审批通过，加入生产计划
                 List<OrderItemVo> list = tOrderItemMapper.findByOrdCode(ordCode);
-                return prodPlanService.createProdPlan(list);
+                int re = prodPlanService.createProdPlan(list);
+                if(re <= 0){
+                    // 处理失败抛出异常 保证审核状态的回滚
+                    throw new NullPointerException();
+                }
+                return 1;
             }
             return 1;
         } else {

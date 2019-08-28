@@ -134,7 +134,10 @@ public class CusManageController  extends BaseController {
             addMessage(redirectAttributes, "审批失败");
             return "redirect:/crm/customer/list?repage";
         }
-        orderService.orderAssign(ordCode,ordStatus);
+        try {
+            orderService.orderAssign(ordCode,ordStatus);
+        }catch (Exception e){
+        }
         return "redirect:/crm/approval/list?repage";
     }
 

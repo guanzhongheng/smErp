@@ -602,6 +602,7 @@
             if(cusProdList[i].ckId == index){
                 for(var key in cusProdList[i]){
                     if(key == name){
+                        debugger;
                         if(name == "itemNum"){
                             var totalWeigth = cusProdList[i]['itemWeight'] * obj.value;
                             var totalMj = cusProdList[i]['itemLenth'] * cusProdList[i]['itemWidth'] * obj.value;
@@ -614,6 +615,10 @@
                         }
                         if(name =='itemLenth'){
                             var totalMj = obj.value * cusProdList[i]['itemWidth'] * cusProdList[i]['itemNum'];
+                            cusProdList[i]["itemTotalSq"] = totalMj;
+                        }
+                        if(name =='itemWidth'){
+                            var totalMj = obj.value * cusProdList[i]['itemLenth'] * cusProdList[i]['itemNum'];
                             cusProdList[i]["itemTotalSq"] = totalMj;
                         }
                         cusProdList[i][key] = obj.value;

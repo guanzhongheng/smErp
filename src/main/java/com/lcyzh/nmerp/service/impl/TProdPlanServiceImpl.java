@@ -94,16 +94,36 @@ public class TProdPlanServiceImpl implements TProdPlanService {
         return tProdPlanMapper.update(prodPlan);
     }
 
+
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
     @Override
     public int createProdPlan(List<OrderItemVo> items) {
-        List<OrderItemVo> items4Yb = items.stream().filter(item -> item.getItemYbType().equals(ybType)).collect(Collectors.toList());
-        if(items4Yb != null && !items4Yb.isEmpty() && createProdPlan(items4Yb, true) > 0){
-            items = items.stream().filter(item -> !item.getItemYbType().equals(ybType)).collect(Collectors.toList());
-
-           return createProdPlan(items, false);
+        if(ybType != null && ybType.length() > 0){
+            String[] ybs = ybType.split(",");
+            int ret = 1;
+            for(String yb : ybs){
+                List<OrderItemVo> items4Yb = items.stream().filter(item -> yb.equals(item.getItemYbType())).collect(Collectors.toList());
+                items.removeAll(items4Yb);
+                if(items4Yb != null && !items4Yb.isEmpty()){
+                    items = items.stream().filter(item -> !item.getItemYbType().equals(ybType)).collect(Collectors.toList());
+                    int r = createProdPlan(items, false);
+                    if(r <= 0){
+                        ret = -1;
+                        break;
+                    }
+                }
+            }
+            if(ret > 0 && items.size() > 0){
+                ret =  createProdPlan(items, true);
+            }
+            if(ret <= 0){
+                throw new NullPointerException();
+            }
+            return 1;
+        }else{
+            return createProdPlan(items, true);
         }
-        return -1;
+
     }
 
     public int createProdPlan(List<OrderItemVo> items, boolean flag) {

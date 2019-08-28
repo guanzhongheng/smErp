@@ -252,8 +252,9 @@ public class CrmManageController extends BaseController {
      */
     @RequestMapping(value = {"inventory/outStockDetail"})
     public String outStockDetail(String outCode, Model model) {
+
         TOutStock outStock = outStockService.findByCode(outCode);
-        List<OutStockDetailVo> stockVos = outStockService.findOutItemsByOutCode(outCode);
+        List<OutStockDetailVo> stockVos = outStockService.getOutStockDetailInfos(outCode);
         model.addAttribute("outStock",outStock);
         model.addAttribute("stocks", stockVos);
         return "modules/crm/outStockListDetail";
