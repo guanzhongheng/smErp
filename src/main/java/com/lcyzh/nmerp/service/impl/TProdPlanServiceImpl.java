@@ -6,14 +6,17 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
-import com.lcyzh.nmerp.dao.*;
-import com.lcyzh.nmerp.entity.*;
+import com.lcyzh.nmerp.dao.TFormulaMapper;
+import com.lcyzh.nmerp.dao.TMachineInfoMapper;
+import com.lcyzh.nmerp.dao.TProdPlanDetailMapper;
+import com.lcyzh.nmerp.dao.TProdPlanMapper;
+import com.lcyzh.nmerp.entity.TMachineInfo;
+import com.lcyzh.nmerp.entity.TProdPlan;
+import com.lcyzh.nmerp.entity.TProdPlanDetail;
 import com.lcyzh.nmerp.model.vo.FormulaDetailVo;
-import com.lcyzh.nmerp.model.vo.FormulaVo;
 import com.lcyzh.nmerp.model.vo.OrderItemVo;
 import com.lcyzh.nmerp.model.vo.ProdPlanVo;
 import com.lcyzh.nmerp.service.TProdPlanService;
-import com.lcyzh.nmerp.utils.DictUtils;
 import com.lcyzh.nmerp.utils.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +26,10 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -113,7 +119,7 @@ public class TProdPlanServiceImpl implements TProdPlanService {
                 }
             }
             if(ret > 0 && items.size() > 0){
-                items.forEach(n->n.setItemYbType(""));
+                items.forEach(n->n.setItemYbType("0"));
                 ret =  createProdPlan(items, true);
             }
             if(ret <= 0){
@@ -121,7 +127,7 @@ public class TProdPlanServiceImpl implements TProdPlanService {
             }
             return 1;
         }else{
-            items.forEach(n->n.setItemYbType(""));
+            items.forEach(n->n.setItemYbType("0"));
             return createProdPlan(items, true);
         }
 
@@ -143,13 +149,13 @@ public class TProdPlanServiceImpl implements TProdPlanService {
             Map<String, TProdPlan> ppMap = new HashMap<>(16);
             if(!prodPlans.isEmpty()) {
                 for(TProdPlan prodPlan : prodPlans) {
-                    if(flag) {
+//                    if(flag) {
+//                        ppMap.put(prodPlan.getProdCgyCode()+"|"+prodPlan.getProdVariety()+"|"+prodPlan.getProdColor()+"|"+prodPlan.getMacCode()+"|0",
+//                                prodPlan);
+//                    }else{
                         ppMap.put(prodPlan.getProdCgyCode()+"|"+prodPlan.getProdVariety()+"|"+prodPlan.getProdColor()+"|"+prodPlan.getMacCode()+"|"+prodPlan.getProdYbType(),
                                 prodPlan);
-                    }else{
-                        ppMap.put(prodPlan.getProdCgyCode()+"|"+prodPlan.getProdVariety()+"|"+prodPlan.getProdColor()+"|"+prodPlan.getMacCode(),
-                                prodPlan);
-                    }
+//                    }
                 }
             }
             Map<String, TProdPlan> ppMapNew = new HashMap<>(16);
@@ -159,9 +165,9 @@ public class TProdPlanServiceImpl implements TProdPlanService {
             for(OrderItemVo item : items) {
                 macCode = getMacCode(macMap,item.getItemWidth());
                 if(flag) {
-                    key = item.getItemCgyCode()+"|"+item.getItemVariety()+"|"+item.getItemColor()+"|"+macCode+"|"+item.getItemYbType();
+                    key = item.getItemCgyCode()+"|"+item.getItemVariety()+"|"+item.getItemColor()+"|"+macCode+"|0";
                 }else{
-                    key = item.getItemCgyCode()+"|"+item.getItemVariety()+"|"+item.getItemColor()+"|"+macCode;
+                    key = item.getItemCgyCode()+"|"+item.getItemVariety()+"|"+item.getItemColor()+"|"+macCode+"|"+item.getItemYbType();
                 }
                 TProdPlan prodPlan;
                 if(ppMap.containsKey(key)) {
@@ -201,11 +207,12 @@ public class TProdPlanServiceImpl implements TProdPlanService {
                         prodPlan.setProdVariety(item.getItemVariety());
                         prodPlan.setProdCgyCode(item.getItemCgyCode());
                         if(flag) {
-                            prodPlan.setProdYbType(item.getItemYbType());
-                            ppMapNew.put(prodPlan.getProdCgyCode()+"|"+prodPlan.getProdVariety()+"|"+prodPlan.getProdColor()+"|"+prodPlan.getMacCode()+"|"+prodPlan.getProdYbType(),
+                            prodPlan.setProdYbType("0");
+                            ppMapNew.put(prodPlan.getProdCgyCode()+"|"+prodPlan.getProdVariety()+"|"+prodPlan.getProdColor()+"|"+prodPlan.getMacCode()+"|0",
                                     prodPlan);
                         }else{
-                            ppMapNew.put(prodPlan.getProdCgyCode()+"|"+prodPlan.getProdVariety()+"|"+prodPlan.getProdColor()+"|"+prodPlan.getMacCode(),
+                            prodPlan.setProdYbType(item.getItemYbType());
+                            ppMapNew.put(prodPlan.getProdCgyCode()+"|"+prodPlan.getProdVariety()+"|"+prodPlan.getProdColor()+"|"+prodPlan.getMacCode()+"|"+prodPlan.getProdYbType(),
                                     prodPlan);
 
                         }
