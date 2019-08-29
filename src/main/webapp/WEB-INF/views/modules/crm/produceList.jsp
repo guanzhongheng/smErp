@@ -76,7 +76,7 @@
                     <li>
                         <input id="startLength" name="startLength" style="width: 100px;" placeholder="起始宽度" class="input-medium" type="number" value="${vo.startLength}" min="0" step="0.01">
                         ~
-                        <input id="endLength" name="endLength" style="width: 100px;" placeholder="起始宽度" class="input-medium" type="number" value="${vo.endLength}" min="0" step="0.01">
+                        <input id="endLength" name="endLength" style="width: 100px;" placeholder="结束宽度" class="input-medium" type="number" value="${vo.endLength}" min="0" step="0.01">
 
                     </li>
                     <li>

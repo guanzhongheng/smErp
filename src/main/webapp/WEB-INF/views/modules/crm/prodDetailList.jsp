@@ -169,30 +169,6 @@
         <div class="panel-body" style="padding: 10px 10px 0px 10px;">
             <div class="control-group table-responsive" >
                 <table id="cusProdDetail" data-height="320"  class="table table-striped table-bordered table-hover text-nowrap">
-                    <thead>
-                    <tr>
-                        <th style="text-align: center" data-field="itemCode">编码</th>
-                        <th style="text-align: center" data-field="itemName">名称</th>
-                        <th style="text-align: center" data-field="itemVaritemValue">品种</th>
-                        <th style="text-align: center" data-field="itemCgyCodeValue">类别</th>
-                        <th style="text-align: center" data-field="itemLenth">长(m)</th>
-                        <th style="text-align: center" data-field="itemWidth">宽(m)</th>
-                        <th style="text-align: center" data-field="itemThick">厚度(mm)</th>
-                        <th style="text-align: center" data-field="itemColorValue">颜色</th>
-                        <th style="text-align: center" data-field="itemUnitValue">单位</th>
-                        <th style="text-align: center" data-field="itemOwner">归属人</th>
-                        <th style="text-align: center" data-field="itemPrice">单价</th>
-                        <th style="text-align: center" data-field="itemNum">数量</th>
-                        <th style="text-align: center" data-field="itemPriceTypeValue">计价方式</th>
-                        <th style="text-align: center" data-field="itemWeight">重量</th>
-                        <th style="text-align: center" data-field="itemTotalWeight">总重量</th>
-                        <th style="text-align: center" data-field="itemTotalSq">总面积</th>
-                        <th style="text-align: center" data-field="itemYcType">延长方式</th>
-                        <th style="text-align: center" data-field="itemYbType">压边类型</th>
-                        <th style="text-align: center" data-field="itemRemarks">备注</th>
-                        <th style="text-align: center" data-field="operator">操作</th>
-                    </tr>
-                    </thead>
                 </table>
             </div>
         </div>
@@ -299,8 +275,8 @@
 
         debugger;
         if(prodObj.itemCode != ""){
-            cusProdList.push(tranObject(prodObj));
-            $("#cusProdDetail").bootstrapTable("load",cusProdList);
+            cusProdList.reverse().push(tranObject(prodObj));
+            $("#cusProdDetail").bootstrapTable("load",cusProdList.reverse());
             $('#cusProdDetail .chosen-select').trigger("chosen:updated");
             $('#cusProdDetail .chosen-select').chosen();
         }else{
@@ -377,6 +353,10 @@
                     title: '类别',
                     width: '100px'
                 },{
+                    field: 'itemColorValue',
+                    title: '颜色',
+                    width: '80px'
+                },{
                     field: 'itemLenth',
                     title: '长(m)',
                     width: '80px',
@@ -395,16 +375,8 @@
                     title: '厚度(mm)',
                     width: '60px',
                     formatter:function (value,row,index){
-                        return ['<input type="text"  style="width: 80px" onchange="inserData(\'itemThick\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
+                        return ['<input type="text"  style="width: 75px" onchange="inserData(\'itemThick\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
                     }
-                },{
-                    field: 'itemColorValue',
-                    title: '颜色',
-                    width: '80px'
-                },{
-                    field: 'itemUnitValue',
-                    title: '单位',
-                    width: '50px'
                 },{
                     field: 'itemOwner',
                     title: '归属人',
@@ -427,36 +399,15 @@
                         return ['<input type="number" min="0" style="width: 80px" onchange="inserData(\'itemNum\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
                     }
                 },{
-                    field: 'itemPriceType',
-                    title: '计价方式',
-                    width: '130px',
-                    formatter:operPriceType
-                },
-                {
-                    field: 'itemWeight',
-                    title: '重量',
-                    width: '80px',
-                    formatter:function (value,row,index) {
-                        return ['<input type="number" min="0" step="0.001" style="width: 80px;" onchange="inserData(\'itemWeight\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
-                    }
-                },{
-                    field: 'itemYcType',
-                    title: '延长米方式',
-                    width: '150px',
-                    formatter:operYcType
-                },{
                     field: 'itemYbType',
                     title: '压边类型',
                     width: '150px',
                     formatter:operYbType
                 },{
-                    field: 'itemTotalWeight',
-                    title: '总重量',
-                    width: '100px'
-                },{
-                    field: 'itemTotalSq',
-                    title: '总面积',
-                    width: '100px'
+                    field: 'itemYcType',
+                    title: '延长米方式',
+                    width: '150px',
+                    formatter:operYcType
                 },{
                     field: 'itemRemarks',
                     title: '备注',
@@ -464,6 +415,19 @@
                     formatter:function (value,row,index) {
                         return ['<input type="text"  style="width: 150px" onchange="inserData(\'itemRemarks\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
                     }
+                },{
+                    field: 'itemPriceType',
+                    title: '计价方式',
+                    width: '130px',
+                    formatter:operPriceType
+                },{
+                    field: 'itemUnitValue',
+                    title: '单位',
+                    width: '50px'
+                },{
+                    field: 'itemTotalSq',
+                    title: '总面积',
+                    width: '100px'
                 },
                 {
                     field: 'oper',
@@ -473,7 +437,6 @@
                 }
             ],
             onLoadSuccess:function (data) {
-
                 cusProdList = $('#cusProdDetail').bootstrapTable("getData");
                 $('#cusProdDetail .chosen-select').trigger("chosen:updated");
                 $('#cusProdDetail .chosen-select').chosen();
@@ -487,21 +450,11 @@
 
     function operPriceType(value,row,index) {
         var option;
-        var headOption = "<option value =''>请选择</option>";
         if(value == 141001){
-            headOption = headOption + "<option value='141001' selected>重量</option>";
-        }else{
-            headOption = headOption + "<option value='141001'>重量</option>";
+            return "按重量";
+        }else if(value == 141002){
+            return "按面积";
         }
-        if(value == 141002){
-            headOption = headOption + "<option value='141002' selected>面积</option>";
-        }else{
-            headOption = headOption + "<option value='141002'>面积</option>";
-        }
-        option  = '<select class="chosen-select" id="itemPriceType"'+row.ckId+' onchange="inserData(\'itemPriceType\','+row.ckId+',this)" style="width: 100px;height:33px;">'+
-            headOption + '</select>';
-
-        return [option].join('');
     }
     
     function operYbType(value,row,index){
@@ -555,7 +508,7 @@
                     break;
                 }
             }
-            $("#cusProdDetail").bootstrapTable("load",cusProdList);
+            $("#cusProdDetail").bootstrapTable("load",cusProdList.reverse());
         }
     }
     

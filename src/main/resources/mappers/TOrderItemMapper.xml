@@ -279,7 +279,7 @@
                 INNER JOIN T_ORDER_ITEM oi ON oi.id = t.order_item_id
                 AND oi.ord_code = t.ord_code
             WHERE
-                t.ord_code = #{ordCode}
+                t.ord_code = #{ordCode} and not EXISTS (select ts.bar_code from t_out_stock_detail ts where ts.bar_code = t.bar_code)
             order by oi.item_price_type
             ) d
             GROUP BY d.ord_code

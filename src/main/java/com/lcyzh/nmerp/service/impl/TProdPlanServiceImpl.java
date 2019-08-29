@@ -149,13 +149,8 @@ public class TProdPlanServiceImpl implements TProdPlanService {
             Map<String, TProdPlan> ppMap = new HashMap<>(16);
             if(!prodPlans.isEmpty()) {
                 for(TProdPlan prodPlan : prodPlans) {
-//                    if(flag) {
-//                        ppMap.put(prodPlan.getProdCgyCode()+"|"+prodPlan.getProdVariety()+"|"+prodPlan.getProdColor()+"|"+prodPlan.getMacCode()+"|0",
-//                                prodPlan);
-//                    }else{
-                        ppMap.put(prodPlan.getProdCgyCode()+"|"+prodPlan.getProdVariety()+"|"+prodPlan.getProdColor()+"|"+prodPlan.getMacCode()+"|"+prodPlan.getProdYbType(),
-                                prodPlan);
-//                    }
+                    ppMap.put(prodPlan.getProdCgyCode()+"|"+prodPlan.getProdVariety()+"|"+prodPlan.getProdColor()+"|"+prodPlan.getMacCode()+"|"+prodPlan.getProdYbType(),
+                            prodPlan);
                 }
             }
             Map<String, TProdPlan> ppMapNew = new HashMap<>(16);

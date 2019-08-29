@@ -84,6 +84,18 @@
                         <td>${oq.ordOutNum == null?"0":oq.ordOutNum}</td>
                         <td>${oq.ordTotalNum - oq.ordOutNum}</td>
                         </c:forEach>
+                    <tr>
+                        <td colspan="2">总计:</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
                     </tbody>
                 </table>
                 <div class="pagination">${page}</div>
