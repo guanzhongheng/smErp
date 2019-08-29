@@ -30,10 +30,33 @@
 
     <select id="findListByProdPlanCode" parameterType="java.lang.String" resultMap="tProdPlanDetailResultMap">
         SELECT
-            td.*,od.ord_title
+            td.id,
+            td.prod_plan_code,
+            td.ord_code,
+            td.order_item_id,
+            td.item_code,
+            td.item_lenth,
+            td.item_width,
+            td.item_thick,
+            td.item_num,
+            td.item_total_weight,
+            td.item_total_sq,
+            td.item_status,
+            td.item_cgy_code,
+            td.item_variety,
+            td.item_unit,
+            td.item_owner,
+            td.item_color,
+            td.mac_code,
+            td.item_price_type,
+            td.item_remarks,
+            oi.item_yb_type,
+            oi.item_yc_type,
+            od.ord_title
         FROM
             t_prod_plan_detail td
             inner join T_ORDER od on od.ord_code = td.ord_code
+            inner join t_order_item oi on td.order_item_id = oi.id
         WHERE
             td.prod_plan_code = #{prodPlanCode,jdbcType=VARCHAR}
         ORDER BY
