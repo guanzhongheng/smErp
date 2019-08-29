@@ -86,7 +86,6 @@ public class TOrderServiceImpl implements TOrderService {
                 if(res.get("totalSqPrice") != null){
                     vo.setTotalSqPrice((Double) res.get("totalSqPrice"));
                 }
-
             }
         });
         PageInfo<OrderQueryVo> pageInfo = new PageInfo<>(list);

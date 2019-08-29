@@ -86,15 +86,15 @@
                         </c:forEach>
                     <tr>
                         <td colspan="2">总计:</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>${totalWeight}</td>
+                        <td>${totalMj}</td>
+                        <td>${orderNum}</td>
+                        <td>${invNum}</td>
+                        <td>${invWeightPrice}</td>
+                        <td>${invMjprice}</td>
+                        <td>${invTotalprice}</td>
+                        <td>${outNum}</td>
+                        <td>${unOutNum}</td>
                     </tr>
                     </tbody>
                 </table>

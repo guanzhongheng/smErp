@@ -277,6 +277,8 @@ public class CrmManageController extends BaseController {
         List<OrderQueryVo> list = orderService.findPage(page,orderQueryVo);
         page.setCount(list.size());
         page.setList(list);
+        // 获取统计数据信息
+        doCalculationTotal(list,model);
         model.addAttribute("page", page);
         return "modules/crm/prodStockList";
     }
@@ -349,4 +351,31 @@ public class CrmManageController extends BaseController {
         }
     }
 
+    public void doCalculationTotal(List<OrderQueryVo> list, Model model){
+        Double totalWeight = list.stream().mapToDouble(i->i.getOrdTotalWeight() == null?0:i.getOrdTotalWeight()).sum();
+        Double totalMj = list.stream().mapToDouble(i->i.getOrdTotalSq() == null?0:i.getOrdTotalSq   ()).sum();
+        Double orderNum = list.stream().mapToDouble(i->i.getOrdTotalNum() == null?0:i.getOrdTotalNum()).sum();
+        Double invNum = list.stream().mapToDouble(i->i.getTotalNum() == null?0:i.getTotalNum()).sum();
+
+        Double invWeightPrice = list.stream().mapToDouble(i->i.getTotalWtPrice() == null?0:i.getTotalWtPrice()).sum();
+        Double invMjprice = list.stream().mapToDouble(i->i.getTotalSqPrice() == null?0:i.getTotalSqPrice()).sum();
+        Double invTotalprice = list.stream().mapToDouble(i->i.getTotalPrice() == null?0:i.getTotalPrice()).sum();
+        Double outNum = list.stream().mapToDouble(i->i.getOrdOutNum() == null?0:i.getOrdOutNum()).sum();
+        Double unOutNum = list.stream().mapToDouble(i->{
+            if(Arith.sub(i.getOrdTotalNum(),i.getOrdOutNum()) > 0){
+                return Arith.sub(i.getOrdTotalNum(),i.getOrdOutNum());
+            }else{
+                return 0;
+            }
+        }).sum();
+        model.addAttribute("totalWeight",totalWeight);
+        model.addAttribute("totalMj",totalMj);
+        model.addAttribute("orderNum",orderNum);
+        model.addAttribute("invNum",invNum);
+        model.addAttribute("invWeightPrice",invWeightPrice);
+        model.addAttribute("invMjprice",invMjprice);
+        model.addAttribute("outNum",outNum);
+        model.addAttribute("unOutNum",unOutNum);
+        model.addAttribute("invTotalprice",invTotalprice);
+    }
 }
