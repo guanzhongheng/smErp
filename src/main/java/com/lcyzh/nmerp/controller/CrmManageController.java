@@ -273,6 +273,7 @@ public class CrmManageController extends BaseController {
     @RequestMapping(value = {"inventory/prodStockList"})
     public String prodStockList(@ModelAttribute("orderQueryVo") OrderQueryVo orderQueryVo, Model model, HttpServletRequest request, HttpServletResponse response) {
         Page<OrderQueryVo> page = new Page<>(request, response);
+        orderQueryVo.setIsTj(1);
         List<OrderQueryVo> list = orderService.findPage(page,orderQueryVo);
         page.setCount(list.size());
         page.setList(list);

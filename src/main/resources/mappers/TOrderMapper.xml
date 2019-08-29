@@ -81,7 +81,9 @@
         LEFT JOIN T_CUSTOMER cs ON od.cus_code = cs.cus_code
         LEFT JOIN T_PAYMENT pt ON od.ord_code = pt.ord_code
         <where>
-            od.ord_total_num &lt;&gt; od.ord_out_num
+            <if test="isTj!= null and isTj > 0">
+                and od.ord_total_num &lt;&gt; od.ord_out_num
+            </if>
             <if test="ordCode!= null and ordCode != ''">
                 and od.ord_code like concat('%', #{ordCode,jdbcType=VARCHAR}, '%')
             </if>

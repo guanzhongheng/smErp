@@ -17,11 +17,6 @@
     </script>
 </head>
 <body>
-<%--<ul class="nav nav-tabs">--%>
-    <%--<li class="active"><a href="${ctx}/crm/order/list/">订单列表</a></li>--%>
-<%--</ul>--%>
-
-
 
 <sys:message content="${message}"/>
 <div class="tabs-container" style="padding: 20px 20px;">
@@ -74,6 +69,7 @@
                         <th style="text-align: center">订单编号</th>
                         <th style="text-align: center">订单标题</th>
                         <th style="text-align: center">关联客户</th>
+                        <th style="text-align: center">订单数量</th>
                         <th style="text-align: center">审批状态</th>
                         <th style="text-align: center">签单日期</th>
                         <th style="text-align: center">操作</th>
@@ -86,6 +82,7 @@
                             <td>${ord.ordCode}</td>
                             <td><a href="/cus/order/info?ordCode=${ord.ordCode}">${ord.ordTitle}</a></td>
                             <td>${ord.cusName}</td>
+                            <td>${ord.ordTotalNum}</td>
                             <td>${ord.ordStatusValue}</td>
                             <td>${ord.ordSignDate}</td>
                             <td>

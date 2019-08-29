@@ -75,6 +75,17 @@ public class OrderQueryVo{
     // 根据入库面积汇总价格
     private Double totalSqPrice = 0.0000;
 
+    // 是否用于统计
+    private Integer isTj;
+
+    public Integer getIsTj() {
+        return isTj;
+    }
+
+    public void setIsTj(Integer isTj) {
+        this.isTj = isTj;
+    }
+
     public Double getTotalWtPrice() {
         return totalWtPrice;
     }
