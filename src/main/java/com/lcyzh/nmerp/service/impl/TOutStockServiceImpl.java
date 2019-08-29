@@ -225,6 +225,16 @@ public class TOutStockServiceImpl implements TOutStockService {
     }
 
     @Override
+    public List<OutStockDetailVo> getOutStockDetailInfos(Page<OutStockDetailVo> page,String outCode) {
+        PageHelper.startPage(page.getPageNo(), page.getPageSize());
+        List<OutStockDetailVo> list = tOutStockDetailMapper.getOutStockDetailInfos(outCode);
+
+        PageInfo<OutStockDetailVo> pageInfo = new PageInfo<>(list);
+        page.setTotal(pageInfo.getTotal());
+        return list;
+    }
+
+    @Override
     public List<OutStockDetailVo> getOutStockDetailInfos(String outCode) {
         return tOutStockDetailMapper.getOutStockDetailInfos(outCode);
     }

@@ -180,12 +180,12 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" style="margin-left: -25px;">压边类型:</label>
                                             <div class="col-sm-4">
-                                                <input disabled="ture" placeholder="压边类型" value="${fns:getDictValue(detail.itemYbType, 'prod_ybType', defaultValue)}"
+                                                <input disabled="ture" placeholder="压边类型" value="${fns:getDictValue(orderItem.itemYbType, 'prod_ybType', defaultValue)}"
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
                                             </div>
                                             <label class="col-sm-2 control-label"  style="padding-left: inherit;">延长米计算方式:</label>
                                             <div class="col-sm-4">
-                                                <input disabled="ture" placeholder="延长米计算方式" value="${fns:getDictValue(detail.itemYcType, 'prod_ycType', defaultValue)}"
+                                                <input disabled="ture" placeholder="延长米计算方式" value="${fns:getDictValue(orderItem.itemYcType, 'prod_ycType', defaultValue)}"
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
                                             </div>
                                         </div>

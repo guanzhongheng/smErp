@@ -1,7 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
+<html>
+<head>
 
-<link rel="stylesheet" href="/static/common/customize.css">
+    <link rel="stylesheet" href="/static/common/customize.css">
+</head>
+<body>
 
 <div class="tabs-container" style="padding: 0px 20px;">
     <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
@@ -117,7 +121,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${stocks}" var="cus" varStatus="status">
+                    <c:forEach items="${list}" var="cus" varStatus="status">
                         <tr>
                             <td style="text-align: center">${status.index + 1}</td>
                             <td>${cus.barCode}</td>
@@ -197,3 +201,5 @@
         })
     }
 </script>
+</body>
+</html>

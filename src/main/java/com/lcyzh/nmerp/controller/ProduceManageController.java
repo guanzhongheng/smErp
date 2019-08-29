@@ -55,6 +55,8 @@ public class ProduceManageController extends BaseController {
     private TRawMaterialService rawMaterialService;
     @Autowired
     private TOrderService orderService;
+    @Autowired
+    private TOrderItemService orderItemService;
     /**
      * @Description: 跳转到生产计划详情页面
      * @Param: [vo, prodPlanCode, model, request, response]
@@ -126,7 +128,11 @@ public class ProduceManageController extends BaseController {
     public String prodDetail(Long id, Model model,ProdPlanDetailVo detail, HttpServletRequest request, HttpServletResponse response){
         ProdPlanDetailVo vo = new ProdPlanDetailVo();
         vo.setProdPlanDetailId(id);
-        model.addAttribute("detail",prodPlanDetailService.findProdTask(vo));
+
+        ProdPlanDetailVo voFromDb = prodPlanDetailService.findProdTask(vo);
+        model.addAttribute("detail",voFromDb);
+
+        model.addAttribute("orderItem",orderItemService.getById(voFromDb.getOrderItemId()));
         return "modules/crm/produceDetail";
     }
 

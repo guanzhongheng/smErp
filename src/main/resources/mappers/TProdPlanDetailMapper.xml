@@ -76,8 +76,8 @@
         ppd.item_num itemNum,
         ppd.item_total_weight itemTotalWeight,
         ppd.item_total_sq itemTotalSq,
-        ppd.item_yb_type itemYbType,
-        ppd.item_yc_type itemYcType,
+        oi.item_yb_type itemYbType,
+        oi.item_yc_type itemYcType,
         ppd.item_status itemStatus,
         ppd.item_cgy_code itemCgyCode,
         ppd.item_variety itemVariety,
@@ -93,6 +93,7 @@
         FROM t_prod_plan_detail ppd
         left join t_prod_plan pp on ppd.prod_plan_code = pp.prod_plan_code
         left join t_order o on ppd.ord_code = o.ord_code
+        left join t_order_item oi on ppd.order_item_id = oi.id
         <where>
             <if test="prodPlanDetailId!= null">
                 and ppd.id = #{prodPlanDetailId,jdbcType=BIGINT}
@@ -126,7 +127,7 @@
         <if test="ordSort!= null and ordSort == 1">
             desc
         </if>
-        ,ppd.item_yb_type,ppd.ord_code desc
+        ,oi.item_yb_type,ppd.ord_code desc
     </select>
 
     <select id="findAllList" resultMap="tProdPlanDetailResultMap">

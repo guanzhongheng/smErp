@@ -129,5 +129,7 @@ public interface TOutStockService {
      * @param outCode
      * @return
      */
+    List<OutStockDetailVo> getOutStockDetailInfos(Page<OutStockDetailVo> page,String outCode);
+
     List<OutStockDetailVo> getOutStockDetailInfos(String outCode);
 }

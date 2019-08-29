@@ -106,7 +106,7 @@
                         <th style="text-align: center">理论重量(kg)</th>
                         <%--<th style="text-align: center">重量</th>--%>
                         <%--<th style="text-align: center">面积(㎡)</th>--%>
-                        <%--<th style="text-align: center">压边类型</th>--%>
+                        <th style="text-align: center">压边类型</th>
                         <%--<th style="text-align: center">延长米计算方式</th>--%>
                         <th style="text-align: center">状态</th>
                         <th style="text-align: center">操作</th>
@@ -128,7 +128,7 @@
                             <td>${vo.theoryWeight}</td>
                             <%--<td>${vo.itemTotalWeight}</td>--%>
                             <%--<td>${vo.itemTotalSq}</td>--%>
-                            <%--<td>${fns:getDictValue(vo.itemYbType, 'prod_ybType', defaultValue)}</td>--%>
+                            <td>${fns:getDictValue(vo.itemYbType, 'prod_ybType', defaultValue)}</td>
                             <%--<td>${fns:getDictValue(vo.itemYcType, 'prod_ycType', defaultValue)}</td>--%>
                             <td>
                                 <c:if test="${vo.itemStatus eq '48'}">待确认</c:if>
@@ -145,7 +145,7 @@
                     <tr>
                         <td>总计:</td>
                         <td colspan="9"></td>
-                        <td colspan="3">理论总重量:${theoryTotalWeight}</td>
+                        <td colspan="4">理论总重量:${theoryTotalWeight}</td>
                     </tr>
                     </tbody>
                 </table>

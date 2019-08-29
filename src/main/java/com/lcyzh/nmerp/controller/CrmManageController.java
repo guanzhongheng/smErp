@@ -254,9 +254,13 @@ public class CrmManageController extends BaseController {
     public String outStockDetail(String outCode, Model model) {
 
         TOutStock outStock = outStockService.findByCode(outCode);
-        List<OutStockDetailVo> stockVos = outStockService.getOutStockDetailInfos(outCode);
         model.addAttribute("outStock",outStock);
-        model.addAttribute("stocks", stockVos);
+
+//        Page<OutStockDetailVo> page = new Page<>(request, response);
+//        List<OutStockDetailVo> list = outStockService.getOutStockDetailInfos(page,outCode);
+//        page.setCount(list.size());
+//        page.setList(list);
+        model.addAttribute("list", outStockService.getOutStockDetailInfos(outCode));
         return "modules/crm/outStockListDetail";
     }
 
