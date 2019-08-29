@@ -203,6 +203,22 @@
     var maxDataIndex = 1;
     var prodCgyCodes = new Array();
 
+    var ycType;
+    var ybType
+
+    $.ajax({
+        type: "POST",
+        url: '/crmAjax/ajaxDictInfo',
+        dataType:'json',
+        cache: false,
+        success: function(data){
+            if(data != null){
+                ycType = data.ycType;
+                ybType = data.ybType;
+            }
+        }
+    });
+
     var prodObj = {
         "ckId":"",
         "itemCode":"",
@@ -285,25 +301,8 @@
 
     }
 
-    var ycType;
-    var ybType
-
-    $.ajax({
-        type: "POST",
-        url: '/crmAjax/ajaxDictInfo',
-        dataType:'json',
-        cache: false,
-        success: function(data){
-
-            if(data != null){
-                ycType = data.ycType;
-                ybType = data.ybType;
-            }
-        }
-    });
-
-    $(document).ready(function(){
-       // getItemType();
+    function initTableInfo(){
+        debugger;
         $("#cusProdDetail").bootstrapTable({
             url:'/order/item/findItemsById',
             pagination: false,  //表格底部显示分页条
@@ -443,9 +442,35 @@
             }
         })
         // $(".fixed-table-border")[1].style.height = '230px';
-         $(".fixed-table-border").hide();
+        $(".fixed-table-border").hide();
         $('#cusProdDetail').bootstrapTable('hideColumn', 'itemCode');
         $('#cusProdDetail').bootstrapTable('hideColumn', 'ordCode');
+    }
+
+    $(document).ready(function(){
+       // getItemType();
+       // setTimeout(initTableInfo(),1000)
+        if(ybType == null || ybType == undefined){
+            $.ajax({
+                type: "POST",
+                url: '/crmAjax/ajaxDictInfo',
+                dataType:'json',
+                cache: false,
+                success: function(data){
+                    if(data != null){
+                        ycType = data.ycType;
+                        ybType = data.ybType;
+                        initTableInfo();
+                    }
+                },
+                error:function () {
+                    initTableInfo();
+                }
+            });
+        }else{
+            initTableInfo();
+        }
+
     });
 
     function operPriceType(value,row,index) {
@@ -458,6 +483,7 @@
     }
     
     function operYbType(value,row,index){
+        debugger;
         var option;
         var headOption = "<option value =''>请选择</option>";
         if(ybType != null || ybType != undefined){
