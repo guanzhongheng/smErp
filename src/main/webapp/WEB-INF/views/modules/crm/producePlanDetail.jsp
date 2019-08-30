@@ -4,7 +4,20 @@
 <link href="${ctxStatic}/hPlugs/css/plugins/bootstrap-table/bootstrap-table-fixed-columns.css" rel="stylesheet">
 <link rel="stylesheet" href="/static/common/customize.css">
 
+<style>
+    /*谷歌，去掉input type=number 时框内的加减按钮*/
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        appearance: none;
+        margin: 0;
+    }
+    /* 火狐，去掉input type=number 时框内的加减按钮 */
+    input{
+        -moz-appearance:textfield;
+    }
 
+</style>
 <div class="">
     <div class="tab-content">
         <div id="tab-1" class="tab-pane active">
@@ -67,6 +80,17 @@
                                                     <label class="col-md-4" style="text-align: right;font-size: 17px;">生产机台:</label>
                                                     <label class="col-md-5"
                                                            style="font-size: 17px;">${prodPlan.macCode}</label>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group">
+                                                    <label class="col-md-4" style="text-align: right;font-size: 17px;">标准件上下阈值:</label>
+                                                    <label class="col-md-5" style="font-size: 17px;">
+                                                        <input type="number" placeholder="上阈值" id="thresholdUp" style="width: 85px;display: inline"
+                                                               class="form-control produceDetail-input-readonly">kg
+                                                        一
+                                                        <input placeholder="下阈值" style="width: 85px;display:inline" id="thresholdDown"
+                                                               class="form-control produceDetail-input-readonly"/>kg
+                                                    </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6" style="border-left: 1px solid #e7eaec;">
@@ -212,6 +236,7 @@
                                         <th style="text-align: center">厚度(mm)</th>
                                         <th style="text-align: center">数量</th>
                                         <th style="text-align: center">重量</th>
+                                        <th style="text-align: center">标准件阈值(kg)</th>
                                         <th style="text-align: center">面积(㎡)</th>
                                         <th style="text-align: center">理论重量</th>
                                         <th style="text-align: center">压边类型</th>
@@ -240,6 +265,10 @@
                                             <td>${vo.itemThick}</td>
                                             <td>${vo.itemNum}</td>
                                             <td>${vo.itemTotalWeight}</td>
+                                            <td>
+                                                上:<fmt:formatNumber value="${vo.thresholdUp}" pattern="#.00"/>
+                                                 下:<fmt:formatNumber value="${vo.thresholdDown}" pattern="#.00"/>
+                                            </td>
                                             <td>${vo.itemTotalSq}</td>
                                             <td>${vo.theoryWeight}</td>
                                             <td>${fns:getDictValue(vo.itemYbType, 'prod_ybType', defaultValue)}</td>
@@ -254,7 +283,7 @@
                                     </c:forEach>
                                     <tr>
                                         <td>总计:</td>
-                                        <td colspan="12">注：理论重量计算公式 (长 * 宽 * 数量)/(1/（0.95 * 厚度))</td>
+                                        <td colspan="13">注：理论重量计算公式 (长 * 宽 * 数量)/(1/（0.95 * 厚度))</td>
                                         <td colspan="4">理论总重量:${theoryTotalWeight} kg</td>
                                     </tr>
                                     </tbody>
@@ -854,25 +883,22 @@
         debugger;
         if(isSave && (outFormuList.length > 0 || midderFormuList.length > 0 || innerFormuList.length > 0)){
             var str = getCheckValue();
-            var prodPlanCode = $("#prodPlanCode").val();
-            var path = 'window.location.href = "/produce/producePlan/info?prodPlanCode=' + prodPlanCode + '"';
             if (str.length > 0) {
-                // $.ajax({
-                //     url: "/produce/producePlanDetail/updateBatch",
-                //     type: 'POST',
-                //     data: {ids: str},
-                //     dataType: 'json',
-                //     success: function (result) {
-                //         if (result > 0) {
-                //             top.$.jBox.tip('下发成功');
-                //             console.log("跳转地址:" + path);
-                //             self.setTimeout(gotNewPath(), 2000);
-                //         } else {
-                //             top.$.jBox.tip('下发失败，请联系管理员');
-                //         }
-                //
-                //     }
-                // });
+                $.ajax({
+                    url: "/produce/producePlanDetail/updateBatch",
+                    type: 'POST',
+                    data: {ids: str,thresholdUp:$("#thresholdUp").val(),thresholdDown:$("#thresholdDown").val()},
+                    dataType: 'json',
+                    success: function (result) {
+                        if (result > 0) {
+                            top.$.jBox.tip('下发成功');
+                            self.setTimeout(gotNewPath(), 2000);
+                        } else {
+                            top.$.jBox.tip('下发失败，请联系管理员');
+                        }
+
+                    }
+                });
 
             } else {
                 top.$.jBox.tip('最少选中一条记录');

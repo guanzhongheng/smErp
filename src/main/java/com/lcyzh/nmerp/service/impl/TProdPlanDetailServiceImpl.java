@@ -43,7 +43,7 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
 
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
     @Override
-    public int updateByIds(String id) {
+    public int updateByIds(String id,Double thresholdUp,Double thresholdDown) {
         if(id!=null && id.length() != 0) {
             List<String> ids = Arrays.asList(id.trim().split(","));
             List<TProdPlanDetail> list = tProdPlanDetailMapper.findByIds(ids);
@@ -55,7 +55,7 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
             tProdPlan.setQuantity(quantity);
             tProdPlan.setTotalQuantity(0L);
             tProdPlanMapper.updateAddNum(tProdPlan);
-            return tProdPlanDetailMapper.updateByIds(ids);
+            return tProdPlanDetailMapper.updateByIds(ids,thresholdUp,thresholdDown);
         }else{
             return -1;
         }

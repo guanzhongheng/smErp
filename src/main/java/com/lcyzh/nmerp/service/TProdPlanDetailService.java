@@ -20,7 +20,7 @@ public interface TProdPlanDetailService {
     /**
      * 批量下发生产，状态由待确认改为下发生产
      */
-    int updateByIds(String id);
+    int updateByIds(String id,Double thresholdUp,Double thresholdDown);
 
     /**
      * @Description: 机台查看生产任务列表

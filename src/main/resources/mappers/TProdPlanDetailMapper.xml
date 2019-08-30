@@ -26,6 +26,8 @@
         <result column="mac_code" property="macCode" jdbcType="VARCHAR"/>
         <result column="item_price_type" property="itemPriceType" jdbcType="BIGINT"/>
         <result column="item_remarks" property="itemRemarks" jdbcType="VARCHAR"/>
+        <result column="threshold_up" property="thresholdUp" jdbcType="DOUBLE"/>
+        <result column="threshold_down" property="thresholdDown" jdbcType="DOUBLE"/>
     </resultMap>
 
     <select id="findListByProdPlanCode" parameterType="java.lang.String" resultMap="tProdPlanDetailResultMap">
@@ -52,7 +54,9 @@
             td.item_remarks,
             oi.item_yb_type,
             oi.item_yc_type,
-            od.ord_title
+            od.ord_title,
+            td.threshold_up,
+            td.threshold_down
         FROM
             t_prod_plan_detail td
             inner join T_ORDER od on od.ord_code = td.ord_code
@@ -64,8 +68,17 @@
             td.item_width DESC
     </select>
 
-    <update id="updateByIds" parameterType="java.util.List">
-        update t_prod_plan_detail set item_status = '1' where id in
+    <update id="updateByIds" >
+        update t_prod_plan_detail
+        set
+        item_status = '1'
+        <if test="thresholdUp != null">
+            ,threshold_up = #{thresholdUp,jdbcType=DOUBLE}
+        </if>
+        <if test="thresholdDown != null">
+            ,threshold_down = #{thresholdDown,jdbcType=DOUBLE}
+        </if>
+        where id in
         <foreach item = "id" index = "index" collection = "ids" open = "(" separator = "," close = ")">
           #{id}
         </foreach>
@@ -112,7 +125,9 @@
         pp.formula formula,
         o.ord_title orderTitle,
         o.proxy_name proxyName,
-        ppd.item_remarks itemRemarks
+        ppd.item_remarks itemRemarks,
+        ppd.threshold_up thresholdUp,
+        ppd.threshold_down thresholdDown
         FROM t_prod_plan_detail ppd
         left join t_prod_plan pp on ppd.prod_plan_code = pp.prod_plan_code
         left join t_order o on ppd.ord_code = o.ord_code

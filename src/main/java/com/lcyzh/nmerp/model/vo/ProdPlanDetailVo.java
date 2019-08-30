@@ -67,6 +67,26 @@ public class ProdPlanDetailVo{
 
     private Double endLength;
 
+    // 标准件浮动上下值
+    private Double thresholdUp;
+    private Double thresholdDown;
+
+    public Double getThresholdUp() {
+        return thresholdUp;
+    }
+
+    public void setThresholdUp(Double thresholdUp) {
+        this.thresholdUp = thresholdUp;
+    }
+
+    public Double getThresholdDown() {
+        return thresholdDown;
+    }
+
+    public void setThresholdDown(Double thresholdDown) {
+        this.thresholdDown = thresholdDown;
+    }
+
     public Double getStartLength() {
         return startLength;
     }

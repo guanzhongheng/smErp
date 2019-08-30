@@ -111,8 +111,8 @@ public class ProduceManageController extends BaseController {
      */
     @RequestMapping(value = {"producePlanDetail/updateBatch"})
     @ResponseBody
-    public String producePlanDetailUpdate(String ids){
-        int result = prodPlanDetailService.updateByIds(ids);
+    public String producePlanDetailUpdate(String ids,Double thresholdUp,Double thresholdDown){
+        int result = prodPlanDetailService.updateByIds(ids,thresholdUp,thresholdDown);
         return String.valueOf(result);
     }
 

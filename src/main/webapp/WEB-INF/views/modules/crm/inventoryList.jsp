@@ -140,9 +140,6 @@
                                     </button>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="#" onclick="rePrintCert(${cus.stockId},'new')">合格证(新版)</a>
-                                        </li>
-                                        <li>
                                             <a href="#" onclick="rePrintCert(${cus.stockId},'red')">合格证(红)</a>
                                         </li>
                                         <li>

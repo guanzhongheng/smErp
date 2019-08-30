@@ -94,6 +94,44 @@
                                                 <h3><i style="background-color: blue;width: 10px;">&nbsp;</i> &nbsp;&nbsp;基本信息</h3>
                                             </div>
                                         </div>
+                                        <div class="hr-line-dashed"></div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" style="margin-left: -25px;">生产开关:</label>
+                                            <div class="col-sm-4">
+                                                <input type="checkbox" checked class="checkbox" id="prodCheckbox"/>
+                                            </div>
+                                        </div>
+                                        <c:if test="${detail.thresholdUp != 0.0000 && detail.thresholdDown != 0.0000}">
+                                        <div class="hr-line-dashed"></div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" style="margin-left: -25px;">标准件开关:</label>
+                                            <div class="col-sm-4">
+                                                <input type="checkbox" checked class="checkbox" id="thresholdCheckbox" />
+                                                <input disabled="ture" type="number" placeholder="标准重量" id="standardWeight" style="width: 85px;display: inline"
+                                                       class="form-control produceDetail-input-readonly">kg
+                                                <input type="hidden" value="${detail.thresholdUp}" id="thresholdUp">
+                                                <input type="hidden" value="${detail.thresholdDown}" id="thresholdDown">
+                                            </div>
+                                            <label class="col-sm-2 control-label" >标准件上下阈值:</label>
+                                            <div class="col-sm-4">
+                                                <input disabled="ture" placeholder="标准件上下阈值" value="上:${detail.thresholdUp}kg 下:${detail.thresholdDown}kg"
+                                                       class="form-control produceDetail-input-readonly">
+                                            </div>
+                                        </div>
+                                        </c:if>
+                                        <div class="hr-line-dashed"></div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" style="margin-left: -25px;">压边类型:</label>
+                                            <div class="col-sm-4">
+                                                <input disabled="ture" placeholder="压边类型" value="${fns:getDictValue(orderItem.itemYbType, 'prod_ybType', defaultValue)}"
+                                                       class="form-control produceDetail-input-readonly" readonly="true"/>
+                                            </div>
+                                            <label class="col-sm-2 control-label"  style="padding-left: inherit;">延长米计算方式:</label>
+                                            <div class="col-sm-4">
+                                                <input disabled="ture" placeholder="延长米计算方式" value="${fns:getDictValue(orderItem.itemYcType, 'prod_ycType', defaultValue)}"
+                                                       class="form-control produceDetail-input-readonly" readonly="true"/>
+                                            </div>
+                                        </div>
                                         <div class="hr-line-dashed" ></div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" style="margin-left: -25px;"><i style="color: red"></i>订单标题:</label>
@@ -178,27 +216,14 @@
                                         </div>
                                         <div class="hr-line-dashed"></div>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label" style="margin-left: -25px;">压边类型:</label>
-                                            <div class="col-sm-4">
-                                                <input disabled="ture" placeholder="压边类型" value="${fns:getDictValue(orderItem.itemYbType, 'prod_ybType', defaultValue)}"
-                                                       class="form-control produceDetail-input-readonly" readonly="true"/>
-                                            </div>
-                                            <label class="col-sm-2 control-label"  style="padding-left: inherit;">延长米计算方式:</label>
-                                            <div class="col-sm-4">
-                                                <input disabled="ture" placeholder="延长米计算方式" value="${fns:getDictValue(orderItem.itemYcType, 'prod_ycType', defaultValue)}"
-                                                       class="form-control produceDetail-input-readonly" readonly="true"/>
-                                            </div>
-                                        </div>
-                                        <div class="hr-line-dashed"></div>
-                                        <div class="form-group">
                                             <label class="col-sm-2 control-label" style="margin-left: -25px;">起止码:</label>
                                             <div class="col-sm-4">
-                                                <input type="checkbox" checked class="checkbox" />
-                                                <input type="number" placeholder="起码" id="seCode_s" style="width: 65px;display: inline"
+                                                <input type="checkbox" checked class="checkbox" id="seCheckbox" />
+                                                <input disabled="ture" type="number" placeholder="起码" id="seCode_s" style="width: 65px;display: inline"
                                                        class="form-control produceDetail-input-readonly">
                                                  一
                                                 <input disabled="ture" placeholder="止码" style="width: 65px;display:inline" id="seCode_e"
-                                                       class="form-control produceDetail-input-readonly" readonly="true"/>
+                                                       class="form-control produceDetail-input-readonly" />
                                             </div>
                                             <label class="col-sm-2 control-label"  style="padding-left: inherit;">计价方式:</label>
                                             <div class="col-sm-4">
@@ -220,14 +245,29 @@
                                         </div>
                                         <div class="hr-line-dashed"></div>
                                         <div class="form-group">
-                                            <div class="row">
+                                            <div class="row" id="prodBtns" hidden>
                                                 <div class="col-md-12 " >
                                                     <button class="btn btn-primary global-button-style" type="button" id="inStock">入 库</button>
                                                     <button class="btn btn-warning global-button-style" type="button" id="rePrint" disabled="true">重新打签</button>
-                                                    <button class="btn btn-warning global-button-style" type="button" id="printCertNew" disabled="true">合格证(新版)</button>
-                                                    <button class="btn btn-warning global-button-style" type="button" id="printCertRed" disabled="true">合格证(红)</button>
-                                                    <button class="btn btn-warning global-button-style" type="button" id="printCertGreen" disabled="true">合格证(绿)</button>
-                                                    <button class="btn btn-warning global-button-style" type="button" id="printCertYellow" disabled="true">合格证(黄)</button>
+                                                    <div class="btn-group dropdown">
+                                                        <button class="btn btn-success global-button-style" id="printCertNew" disabled="true" style="width: auto">
+                                                            打印合格证(新版)
+                                                        </button>
+                                                        <button class="btn btn-success dropdown-toggle global-button-style" id="printCertBtns" disabled="true" style="width: auto" data-toggle="dropdown">
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu">
+                                                            <li>
+                                                                <a href="#" id="printCertRed">合格证(红)</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#" id="printCertGreen">合格证(绿)</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#" id="printCertYellow">合格证(黄)</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
                                                     <button class="btn btn-white global-button-style" type="button" onclick="javascript:window.location.replace(document.referrer); ">返回</button>
                                                 </div>
                                             </div>
@@ -359,6 +399,7 @@
         var weightType ;
         var weightFlag = 'auto';
         var openFlag = false;
+        var standardFlag = false;
         $("#totalStart").click(function () {
             debugger;
             weightType = 'total';
@@ -421,7 +462,7 @@
         });
 
         // 起止码逻辑
-        $(".checkbox").bootstrapSwitch({
+        $("#seCheckbox").bootstrapSwitch({
             onText : "开启",      // 设置ON文本  
             offText : "关闭",    // 设置OFF文本  
             onColor : "success",// 设置ON文本颜色     (info/success/warning/danger/primary)  
@@ -431,14 +472,14 @@
             // 当开关状态改变时触发  
             onSwitchChange : function(event, state) {
                 if (state == true) {
-                    $("#seCode_s").removeAttr('disabled');
-                } else {
                     $("#seCode_s").attr('disabled',"true");
                     $("#seCode_s").val("");
                     $("#seCode_e").val("");
+                } else {
+                    $("#seCode_s").removeAttr('disabled');
                 }
             }
-        });  
+        });
 
         $("#seCode_s").bind('input propertychange', function(){
             var itemLenth = $("#itemLenth").val();
@@ -451,25 +492,57 @@
             }
         });
 
+        // 标准件逻辑
+        $("#thresholdCheckbox").bootstrapSwitch({
+            onText : "开启",      // 设置ON文本  
+            offText : "关闭",    // 设置OFF文本  
+            onColor : "success",// 设置ON文本颜色     (info/success/warning/danger/primary)  
+            offColor : "danger",  // 设置OFF文本颜色        (info/success/warning/danger/primary)  
+            size : "normal",    // 设置控件大小,从小到大  (mini/small/normal/large)  
+            handleWidth:"30",//设置控件宽度
+            // 当开关状态改变时触发  
+            onSwitchChange : function(event, state) {
+                if (state == true) {
+                    $("#standardWeight").attr('disabled',"true");
+                    $("#standardWeight").val("");
+                    standardFlag = false;
+                } else {
+                    $("#standardWeight").removeAttr('disabled');
+                    standardFlag = true;
+                }
+            }
+        });
+
+        // 入库逻辑
         $("#inStock").click(function () {
+            var totalWeight = weightFlag == 'auto' ? parseFloat($("#totalWeightAuto").text()).toFixed(2):parseFloat($("#totalWeightHand").val()).toFixed(2);
+            var tareWeight = weightFlag == 'auto' ? parseFloat($("#tareWeightAuto").text()).toFixed(2):parseFloat($("#tareWeightHand").val()).toFixed(2);
             if($("#itemPriceType").val() == 141001){
-                if(weightFlag == 'auto'){
-                    if(parseInt($("#totalWeightAuto").text()) == 0 || $("#totalWeightAuto").text() == null){
-                        top.$.jBox.tip('当前计价方式必须称重后才能入库！');
+                if(totalWeight == 0.00 || totalWeight == null){
+                    top.$.jBox.tip('当前计价方式必须称重后才能入库！');
+                    return;
+                }
+
+                if(standardFlag){
+                    var standardWeight = parseFloat($("#standardWeight").val()).toFixed(2);
+                    if(standardWeight == 0.00 || standardWeight == null){
+                        top.$.jBox.tip('当前为标准件生产模式，请输入标准重量！');
                         return;
-                    }
-                }else{
-                    if(parseInt($("#totalWeightHand").text()) == 0 || $("#totalWeightHand").text() == null){
-                        top.$.jBox.tip('当前计价方式必须称重后才能入库！');
-                        return;
+                    }else{
+                        var thresholdUp = $("#thresholdUp").val();
+                        var thresholdDown = $("#thresholdDown").val();
+                        if(totalWeight>standardWeight+thresholdUp || totalWeight<standardWeight-thresholdDown){
+                            top.$.jBox.tip('当前为标准件生产模式，称量重量超出标准件阈值范围！');
+                            return;
+                        }else{
+                            totalWeight = standardWeight;
+                        }
                     }
                 }
             }
 
             $("#inStock").attr('disabled',"true");
 
-            var totalWeight = weightFlag == 'auto' ? parseFloat($("#totalWeightAuto").text()).toFixed(2):parseFloat($("#totalWeightHand").val()).toFixed(2);
-            var tareWeight = weightFlag == 'auto' ? parseFloat($("#tareWeightAuto").text()).toFixed(2):parseFloat($("#tareWeightHand").val()).toFixed(2);
             var seCode;
             if($("#seCode_s").val() != null && $("#seCode_s").val() != ''){
                 seCode = $("#seCode_s").val()+'-'+ $("#seCode_e").val();
@@ -495,13 +568,30 @@
 
             $("#rePrint").removeAttr('disabled');
             $("#printCertNew").removeAttr('disabled');
-            $("#printCertRed").removeAttr('disabled');
-            $("#printCertGreen").removeAttr('disabled');
-            $("#printCertYellow").removeAttr('disabled');
+            $("#printCertBtns").removeAttr('disabled');
+            // $("#printCertGreen").removeAttr('disabled');
+            // $("#printCertYellow").removeAttr('disabled');
         });
 
 
         // 打印逻辑
+        $("#prodCheckbox").bootstrapSwitch({
+            onText : "开始",      // 设置ON文本  
+            offText : "停止",    // 设置OFF文本  
+            onColor : "success",// 设置ON文本颜色     (info/success/warning/danger/primary)  
+            offColor : "danger",  // 设置OFF文本颜色        (info/success/warning/danger/primary)  
+            size : "normal",    // 设置控件大小,从小到大  (mini/small/normal/large)  
+            handleWidth:"50",//设置控件宽度
+            // 当开关状态改变时触发  
+            onSwitchChange : function(event, state) {
+                if (state == true) {
+                    $("#prodBtns").hide();
+                } else {
+                    $("#prodBtns").show();
+                }
+            }
+        });
+
         $("#rePrint").click(function () {
             doPrint();
         });
@@ -596,9 +686,9 @@
         getTableInfo();
     });
 </script>
-<script src="${ctxStatic}/hPlugs/js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
-<script src="${ctxStatic}/hPlugs/js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
-<script src="${ctxStatic}/hPlugs/js/content.min.js?v=1.0.0" type="text/javascript"></script>
+<%--<script src="${ctxStatic}/hPlugs/js/jquery.min.js?v=2.1.4" type="text/javascript"></script>--%>
+<%--<script src="${ctxStatic}/hPlugs/js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>--%>
+<%--<script src="${ctxStatic}/hPlugs/js/content.min.js?v=1.0.0" type="text/javascript"></script>--%>
 <script src="${ctxStatic}/hPlugs/js/plugins/chosen/chosen.jquery.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/peity/jquery.peity.min.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/jsKnob/jquery.knob.js"></script>
