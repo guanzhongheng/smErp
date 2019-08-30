@@ -83,7 +83,9 @@
           s.item_variety itemVariety,
           s.item_unit itemUnit,
           s.item_color itemColor,
-          s.mac_code macCode
+          s.mac_code macCode,
+          case when (select count(1) from t_out_stock_detail where bar_code = s.bar_code) > 0 then '0'
+          else '1' end outStatus
         FROM t_stock s
         left join t_order o on s.ord_code = o.ord_code
         <where>
@@ -106,7 +108,7 @@
                 and s.bar_code like concat('%', #{barCode,jdbcType=VARCHAR}, '%')
             </if>
         </where>
-        order by s.create_time desc
+        order by s.ord_code,s.item_code,outStatus desc
     </select>
 
     <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TStock" useGeneratedKeys="true" keyProperty="id">

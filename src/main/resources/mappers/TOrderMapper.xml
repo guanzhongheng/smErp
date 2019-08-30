@@ -70,7 +70,7 @@
         od.pay_status payStatus,
         od.ord_type ordType,
         od.ord_total_num ordTotalNum,
-        od.ord_out_num ordOutNum,
+        (select count(ts.bar_code) from t_stock ts inner join t_out_stock_detail tos on tos.bar_code = ts.bar_code where ts.ord_code = od.ord_code) ordOutNum,
         od.ord_total_sq ordTotalSq,
         od.ord_total_weight ordTotalWeight,
         pt.repay_amount repayAmount,

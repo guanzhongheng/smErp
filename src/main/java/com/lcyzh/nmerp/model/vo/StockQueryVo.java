@@ -48,6 +48,16 @@ public class StockQueryVo implements Serializable {
     private String itemColorValue;
     private String macCode;
     private Double itemTareWeight;
+    // 产品出库状态
+    private String outStatus;
+
+    public String getOutStatus() {
+        return outStatus;
+    }
+
+    public void setOutStatus(String outStatus) {
+        this.outStatus = outStatus;
+    }
 
     public Long getStockId() {
         return stockId;

@@ -81,7 +81,8 @@
                         <th style="text-align: center">颜色</th>
                         <th style="text-align: center">压边类型</th>
                         <th style="text-align: center">总数量</th>
-                        <th style="text-align: center">已下发生产数量</th>
+                        <th style="text-align: center">已下发数量</th>
+                        <th style="text-align: center">状态</th>
                         <th style="text-align: center">操作</th>
                     </tr>
                     </thead>
@@ -94,9 +95,14 @@
                             <td>${pp.macCode}</td>
                             <td>${fns:getDictValue(pp.prodColor, 'prod_color', defaultValue)}</td>
                             <td>${fns:getDictValue(pp.prodYbType, 'prod_ybType', defaultValue)}</td>
-
                             <td>${pp.totalQuantity}</td>
                             <td>${pp.quantity}</td>
+                            <c:if test="${(pp.totalQuantity - pp.quantity) > 0}">
+                                <td><span style="color: red">未全部下发</span></td>
+                            </c:if>
+                            <c:if test="${(pp.totalQuantity - pp.quantity) <= 0}">
+                                <td><span style="color: #00b700">已全部下发</span></td>
+                            </c:if>
                             <td><a href="${ctx}/produce/producePlan/info?prodPlanCode=${pp.prodPlanCode}"><i class="icon-th-list">&nbsp;详情</i></a></td>
                         </tr>
                     </c:forEach>

@@ -291,6 +291,8 @@
 
     var FormuInfo = '${prodPlan.formula}';
 
+    var isSave = false;  // 确认配方是否存在
+
     function tranDate(target) {
         var indexInfo = 1;
         if(target == "outer"){
@@ -338,6 +340,7 @@
                 outFormuList = obj.outer.rawMaterialVos;
                 $('#outerTable .chosen-select').chosen();
                 document.getElementsByName("fixed-table-body01")[0].setAttribute("class","");
+                isSave = true;
             }
             if(obj.midder != null){
                 $("#midTemp").text(obj.midder.temperature);
@@ -345,6 +348,7 @@
                 midderFormuList = obj.midder.rawMaterialVos;
                 $('#midderTable .chosen-select').chosen();
                 document.getElementsByName("fixed-table-body01")[1].setAttribute("class","");
+                isSave = true;
             }
             if(obj.inner != null){
                 $("#inTemp").text(obj.inner.temperature);
@@ -352,9 +356,11 @@
                 innerFormuList = obj.inner.rawMaterialVos;
                 $('#innerTable .chosen-select').chosen();
                 document.getElementsByName("fixed-table-body01")[2].setAttribute("class","");
+                isSave = true;
             }
             $(".chosen-container").css('width',"100%");
             $(".loading-text").hide();
+
         }
     }
 
@@ -810,8 +816,8 @@
                 dataType: "json",
                 contentType:"application/json",
                 success: function (msg) {
-
                     if(msg == "1"){
+                        isSave = true;
                         top.$.jBox.tip('保存成功！');
                     }else{
                         top.$.jBox.tip('保存失败！');
@@ -839,34 +845,43 @@
             $('#innerTable .chosen-select').chosen();
             document.getElementsByName("fixed-table-body01")[2].setAttribute("class","");
         }
+        $(".loading-text").hide();
+
     }
 
     $("#distribution").click(function () {
         <!-- 针对选中客户进行操作 -->
-        var str = getCheckValue();
-        var prodPlanCode = $("#prodPlanCode").val();
-        var path = 'window.location.href = "/produce/producePlan/info?prodPlanCode=' + prodPlanCode + '"';
-        if (str.length > 0) {
-            $.ajax({
-                url: "/produce/producePlanDetail/updateBatch",
-                type: 'POST',
-                data: {ids: str},
-                dataType: 'json',
-                success: function (result) {
-                    if (result > 0) {
-                        top.$.jBox.tip('下发成功');
-                        console.log("跳转地址:" + path);
-                        self.setTimeout(gotNewPath(), 2000);
-                    } else {
-                        top.$.jBox.tip('下发失败，请联系管理员');
-                    }
+        debugger;
+        if(isSave && (outFormuList.length > 0 || midderFormuList.length > 0 || innerFormuList.length > 0)){
+            var str = getCheckValue();
+            var prodPlanCode = $("#prodPlanCode").val();
+            var path = 'window.location.href = "/produce/producePlan/info?prodPlanCode=' + prodPlanCode + '"';
+            if (str.length > 0) {
+                // $.ajax({
+                //     url: "/produce/producePlanDetail/updateBatch",
+                //     type: 'POST',
+                //     data: {ids: str},
+                //     dataType: 'json',
+                //     success: function (result) {
+                //         if (result > 0) {
+                //             top.$.jBox.tip('下发成功');
+                //             console.log("跳转地址:" + path);
+                //             self.setTimeout(gotNewPath(), 2000);
+                //         } else {
+                //             top.$.jBox.tip('下发失败，请联系管理员');
+                //         }
+                //
+                //     }
+                // });
 
-                }
-            });
-
-        } else {
-            top.$.jBox.tip('最少选中一条记录');
+            } else {
+                top.$.jBox.tip('最少选中一条记录');
+            }
+        }else{
+            top.$.jBox.tip('请先完善配方信息！');
         }
+
+
 
     });
 

@@ -99,11 +99,11 @@
                         <th style="text-align: center">产品颜色</th>
                         <th style="text-align: center">长(m)</th>
                         <th style="text-align: center">宽(m)</th>
-                        <th style="text-align: center">厚度(mm)</th>
+                        <th style="text-align: center">厚(mm)</th>
                         <th style="text-align: center">重量</th>
                         <th style="text-align: center">压边类型</th>
-                        <th style="text-align: center">延长米方式</th>
-                        <th style="text-align: center">计价方式</th>
+                        <th style="text-align: center">延长米</th>
+                        <th style="text-align: center">状态</th>
                         <th style="text-align: center">操作</th>
                     </tr>
                     </thead>
@@ -123,7 +123,12 @@
                             <td>${cus.itemWeight}</td>
                             <td>${fns:getDictLabel(cus.itemYbType,'prod_ybType','无')}</td>
                             <td>${fns:getDictLabel(cus.itemYcType,'prod_ycType','无')}</td>
-                            <td>${fns:getValueByDictKey(cus.itemUnit)}</td>
+                            <c:if test="${cus.outStatus == '0'}">
+                            		<td><span style="color:green;">已出库</span></td>
+                            </c:if>
+                             <c:if test="${cus.outStatus == '1'}">
+                            		<td><span style="color:brown;">未出库</span></td>
+                            </c:if>
                             <%--<td><button class="btn btn-primary" type="button" onclick="rePrint(${cus.stockId})"  >补签</button></td>--%>
                             <td>
                                 <button rel="external nofollow" class="btn btn-primary" style="font-size: 14px"
