@@ -88,6 +88,7 @@
                 and hpr.item_code = #{itemCode,jdbcType=VARCHAR}
             </if>
         </where>
+        order by hpr.create_time desc
     </select>
 
     <select id="findList" parameterType ="com.lcyzh.nmerp.entity.THistoryProdRecord"  resultMap="tHistoryProdRecordResultMap">

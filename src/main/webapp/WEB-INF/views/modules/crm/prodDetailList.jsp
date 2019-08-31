@@ -291,8 +291,8 @@
 
         debugger;
         if(prodObj.itemCode != ""){
-            cusProdList.reverse().push(tranObject(prodObj));
-            $("#cusProdDetail").bootstrapTable("load",cusProdList.reverse());
+            cusProdList.push(tranObject(prodObj));
+            $("#cusProdDetail").bootstrapTable("load",cusProdList);
             $('#cusProdDetail .chosen-select').trigger("chosen:updated");
             $('#cusProdDetail .chosen-select').chosen();
         }else{
@@ -534,7 +534,7 @@
                     break;
                 }
             }
-            $("#cusProdDetail").bootstrapTable("load",cusProdList.reverse());
+            $("#cusProdDetail").bootstrapTable("load",cusProdList);
         }
     }
     
