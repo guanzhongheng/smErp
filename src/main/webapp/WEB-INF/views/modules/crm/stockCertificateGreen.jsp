@@ -67,34 +67,34 @@
 
             <div class="gray-bg" style="background-color: white">
             <div>
-                <div style="width:100%;padding-left:530px;    padding-top: 20px;margin-top: -18px;">
+                <div style="width:100%;padding-left:420px;    padding-top: 20px;margin-top: -18px;">
                     <table  border="0" cellspacing="0" style="height:180px;">
                         <tr>
                             <td colspan="2" style="height:1px;"></td>
                         </tr>
                         <tr>
-                            <td colspan="2" style="text-align:left;height:40px" ><font size=4>${vo.itemOwner}</font></td>
+                            <td colspan="2" style="text-align:left;height:26px" ><font size=4>${vo.itemOwner}</font></td>
                         </tr>
                         <tr>
-                            <td colspan="2"  style="text-align:left;height:40px"><font size=4>${fns:getValueByDictKey(vo.itemVariety)} ${vo.itemWidth}m * ${vo.itemThick}mm</font></td>
+                            <td colspan="2"  style="text-align:left;height:26px"><font size=4>${fns:getValueByDictKey(vo.itemVariety)} ${vo.itemWidth}m * ${vo.itemThick}mm</font></td>
                         </tr>
                         <tr>
-                            <td colspan="2"  style="text-align:left;height:40px"><font size=4>${vo.itemWeight-vo.itemTareWeight} kg</font></td>
+                            <td colspan="2"  style="text-align:left;height:26px"><font size=4>${vo.itemWeight-vo.itemTareWeight} kg</font></td>
                         </tr>
                         <tr>
-                            <td colspan="2"  style="text-align:left;height:40px"><font size=4>${vo.itemLenth} m</font></td>
+                            <td colspan="2"  style="text-align:left;height:26px"><font size=4>${vo.itemLenth} m</font></td>
                         </tr>
                         <tr>
-                            <td colspan="2" style="text-align:left;height:40px" ><font size=4>${vo.seCode}</font></td>
+                            <td colspan="2" style="text-align:left;height:26px" ><font size=4>${vo.seCode}</font></td>
                         </tr>
                         <tr>
-                            <td colspan="2"  style="text-align:left;height:40px"><font size=4></font></td>
+                            <td colspan="2"  style="text-align:left;height:26px"><font size=4></font></td>
                         </tr>
                         <tr>
-                            <td colspan="2"  style="text-align:left;height:40px"><font size=4>${user.name}</font></td>
+                            <td colspan="2"  style="text-align:left;height:26px"><font size=4>${user.name}</font></td>
                         </tr>
                         <tr>
-                            <td colspan="2"  style="text-align:left;height:40px"><font size=4><fmt:formatDate value="${vo.createTime}" pattern="yyyy年MM月dd日"/></font></td>
+                            <td colspan="2"  style="text-align:left;height:26px"><font size=4><fmt:formatDate value="${vo.createTime}" pattern="yyyy年MM月dd日"/></font></td>
                         </tr>
                     </table>
                     <div style="text-align: center;    margin-top: 5px;">
