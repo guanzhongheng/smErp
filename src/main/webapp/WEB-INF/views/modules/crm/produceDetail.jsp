@@ -525,16 +525,16 @@
                     top.$.jBox.tip('当前计价方式必须称重后才能入库！');
                     return;
                 }
-
+debugger;
                 if(standardFlag){
-                    var standardWeight = parseFloat($("#standardWeight").val()).toFixed(2);
+                    var standardWeight = $("#standardWeight").val();
                     if(standardWeight == 0.00 || standardWeight == null){
                         top.$.jBox.tip('当前为标准件生产模式，请输入标准重量！');
                         return;
                     }else{
-                        var thresholdUp = $("#thresholdUp").val();
-                        var thresholdDown = $("#thresholdDown").val();
-                        if(totalWeight>standardWeight+thresholdUp || totalWeight<standardWeight-thresholdDown){
+                        var thresholdUp = (parseFloat(standardWeight)+parseFloat($("#thresholdUp").val())).toFixed(2);
+                        var thresholdDown = (parseFloat(standardWeight)-parseFloat($("#thresholdDown").val())).toFixed(2);
+                        if(totalWeight>thresholdUp || totalWeight<thresholdDown){
                             top.$.jBox.tip('当前为标准件生产模式，称量重量超出标准件阈值范围！');
                             return;
                         }else{
