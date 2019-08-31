@@ -166,9 +166,9 @@
                 第二步：确认产品定制化属性
             </h3>
         </div>
-        <div class="panel-body" style="padding: 10px 10px 0px 10px;">
+        <div class="panel-body" style="padding: 10px 10px 0px 10px;height: 100%">
             <div class="control-group table-responsive" >
-                <table id="cusProdDetail" data-height="320"  class="table table-striped table-bordered table-hover text-nowrap">
+                <table id="cusProdDetail" class="table table-striped table-bordered table-hover text-nowrap">
                 </table>
             </div>
         </div>
@@ -539,22 +539,27 @@
     }
     
     function tranObject(data) {
+        debugger;
         indexCkId = indexCkId + 1;
         var price = $("#itemPrice").val();
         if(price != null && price != undefined){
             data.itemPrice = price;
+        }
+        var width = '';
+        if(data.itemWidth != null && data.itemWidth != ''){
+            width = data.itemWidth;
         }
         var obj = {
             "ckId":indexCkId,
             "ordCode":$("#ordCode").val(),
             "itemCode":data.itemCode,
             "itemName":data.itemName,
-            "itemLenth":0.00,
+            "itemLenth":'',
             "itemVariety":data.itemVariety,
             "itemVaritemValue":data.itemVaritemValue,
             "itemCgyCode":data.itemCgyCode,
             "itemCgyCodeValue":data.itemCgyCodeValue,
-            "itemWidth":data.itemWidth,
+            "itemWidth":width,
             "itemThick":data.itemThick,
             "itemColor":data.itemColor,
             "itemColorValue":data.itemColorValue,
@@ -607,7 +612,7 @@
             }
         }
 
-        $("#cusProdDetail").bootstrapTable("load",cusProdList);
+        // $("#cusProdDetail").bootstrapTable("load",cusProdList);
         $('#cusProdDetail .chosen-select').trigger("chosen:updated");
         $('#cusProdDetail .chosen-select').chosen();
 
