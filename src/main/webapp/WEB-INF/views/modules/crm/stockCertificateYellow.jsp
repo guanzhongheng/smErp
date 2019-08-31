@@ -20,7 +20,7 @@
         }
         .page
         {
-            width: 21cm;
+            width: 29cm;
             min-height: 29.7cm;
             padding: 2cm;
             margin: 0cm auto;
@@ -56,7 +56,8 @@
             }
         }
         td {
-            text-align:center;
+            text-align:left;
+            height:34px
         }
     </style>
 </head>
@@ -67,37 +68,40 @@
 
             <div class="gray-bg" style="background-color: white">
             <div>
-                <div style="width:100%;padding-left:420px;    padding-top: 20px;margin-top: -18px;">
-                    <table  border="0" cellspacing="0" style="width:30%;height:180px;width: 170px;">
+                <div style="width:100%;padding-left:420px;    padding-top: 40px;margin-top: -18px;">
+                    <table  border="0" cellspacing="0" style="width:30%;height:180px;width: 370px;">
                         <tr>
                             <td colspan="2" style="height:1px;"></td>
                         </tr>
                         <tr>
-                            <td colspan="2" style="text-align:left;height:40px" ><font size=4>${fns:getValueByDictKey(vo.itemVariety)}</font></td>
+                            <td colspan="2" ><font size=4>${fns:getValueByDictKey(vo.itemVariety)}</font></td>
                         </tr>
                         <tr>
-                            <td colspan="2"  style="text-align:left;height:40px"><font size=4>${vo.itemOwner}</font></td>
+                            <td colspan="2" ><font size=4>${vo.itemOwner}</font></td>
                         </tr>
                         <tr>
-                            <td colspan="2"  style="text-align:left;height:40px"><font size=4>${vo.itemWidth}m * ${vo.itemThick}mm</font></td>
+                            <td colspan="2" ><font size=4>${vo.itemWidth}m * ${vo.itemThick}mm</font></td>
                         </tr>
                         <tr>
-                            <td colspan="2"  style="text-align:left;height:40px"><font size=4>${vo.itemLenth} </font></td>
+                            <td colspan="2" ><font size=4>${vo.itemLenth} </font></td>
                         </tr>
                         <tr>
-                            <td colspan="2" style="text-align:left;height:40px" ><font size=4>${vo.itemWeight-vo.itemTareWeight}</font></td>
+                            <td colspan="2" ><font size=4>${vo.itemWeight-vo.itemTareWeight}</font></td>
                         </tr>
                         <tr>
-                            <td colspan="2"  style="text-align:left;height:40px"><font size=4></font></td>
+                            <td colspan="2" ><font size=4></font></td>
                         </tr>
                         <tr>
-                            <td colspan="2"  style="text-align:left;height:40px"><font size=4><fmt:formatDate value="${vo.createTime}" pattern="yyyy年MM月dd日"/></font></td>
+                            <td colspan="2" ><font size=4><fmt:formatDate value="${vo.createTime}" pattern="yyyy年MM月dd日"/></font></td>
                         </tr>
                         <tr>
-                            <td colspan="2"  style="text-align:left;height:40px"><font size=4>生产班</font></td>
+                            <td colspan="2" ><font size=4>生产班</font></td>
                         </tr>
                         <tr>
-                            <td colspan="2"  style="text-align:left;height:40px"><font size=4>${user.name}</font></td>
+                            <td colspan="2" ><font size=4>${user.name}
+                                <c:if test="${vo.seCode ne '' && vo.seCode != null}">
+                                    (${vo.seCode})
+                                </c:if></font></td>
                         </tr>
                     </table>
                     <div style="text-align: center;    margin-top: 5px;">
