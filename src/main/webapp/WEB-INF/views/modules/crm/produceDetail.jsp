@@ -245,8 +245,8 @@
                                         </div>
                                         <div class="hr-line-dashed"></div>
                                         <div class="form-group">
-                                            <div class="row" id="prodBtns" hidden>
-                                                <div class="col-md-12 " >
+                                            <div class="row" >
+                                                <div class="col-md-8 " id="prodBtns" hidden>
                                                     <button class="btn btn-primary global-button-style" type="button" id="inStock">入 库</button>
                                                     <button class="btn btn-warning global-button-style" type="button" id="rePrint" disabled="true">重新打签</button>
                                                     <div class="btn-group dropdown">
@@ -268,7 +268,10 @@
                                                             </li>
                                                         </ul>
                                                     </div>
-                                                    <button class="btn btn-white global-button-style" type="button" onclick="javascript:window.location.replace(document.referrer); ">返回</button>
+
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <button class="btn btn-white global-button-style" type="button" onclick="javascript:history.go(-1) ">返回</button>
                                                 </div>
                                             </div>
                                         </div>
