@@ -37,4 +37,6 @@ public interface TOrderItemMapper {
     Map<String,Object> getOrderStockInfo(String ordCode);
 
     int deleteById(Long id);
+
+    void updateNum(TOrderItem orderItem);
 }

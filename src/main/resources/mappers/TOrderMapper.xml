@@ -310,7 +310,7 @@
             <trim prefix="ord_out_num =case" suffix="end,">
                 <foreach collection="list" item="i" index="index">
                     <if test="i.ordOutNum!=null">
-                        when ord_code = #{i.ordCode} then ord_out_num + #{i.ordOutNum}
+                        when ord_code = #{i.ordCode} and ord_out_num &lt;= ord_total_num then ord_out_num + #{i.ordOutNum}
                     </if>
                 </foreach>
             </trim>

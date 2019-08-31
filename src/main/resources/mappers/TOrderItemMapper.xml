@@ -289,4 +289,10 @@
         DELETE FROM T_ORDER_ITEM
         WHERE id = #{id}
     </delete>
+
+    <update id="updateNum" parameterType="com.lcyzh.nmerp.entity.TOrderItem">
+        update T_ORDER_ITEM
+        set item_num = item_num - #{itemNum}
+        where id = #{id} and item_num &gt;= #{itemNum}
+    </update>
 </mapper>

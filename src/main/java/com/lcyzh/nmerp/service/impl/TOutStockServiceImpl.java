@@ -13,6 +13,7 @@ import com.lcyzh.nmerp.model.vo.*;
 import com.lcyzh.nmerp.service.TOutStockService;
 import com.lcyzh.nmerp.utils.DictUtils;
 import com.lcyzh.nmerp.utils.StringUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -28,6 +29,7 @@ import java.util.stream.Collectors;
  * Author ljk
  * Date  2019-06-06
  */
+@Slf4j
 @Service
 public class TOutStockServiceImpl implements TOutStockService {
     @Autowired
@@ -130,6 +132,15 @@ public class TOutStockServiceImpl implements TOutStockService {
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
     @Override
     public Integer doOutStock(TOutStock tOutStock) {
+        if(tOutStock == null || tOutStock.getOutCode() == null) {
+            log.error("出库参数不能为空！");
+            return -1;
+        }
+        TOutStock outStock = tOutStockMapper.findByOutCode(tOutStock.getOutCode());
+        if(outStock.getOutStatus().equals('2')) {
+            log.info("该出库单已经出库！");
+            return -2;
+        }
         Date date = new Date();
         User currUser = UserUtils.getUser();
         //已审批，出库

@@ -133,20 +133,26 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
     @Override
     public boolean cancelProdPlanDetailByID(Long id) {
         TProdPlanDetail ppd = tProdPlanDetailMapper.findById(id);
-        if(ppd.getItemStatus().equals('1')) {
-            //已下发生产的产品无法撤销
-            return false;
-        }
         //删除生产计划明细
         tProdPlanDetailMapper.delete(id);
         //更新生产计划
         TProdPlan prodPlan = new TProdPlan();
         prodPlan.setProdPlanCode(ppd.getProdPlanCode());
-        prodPlan.setTotalQuantity(1L);
-        prodPlan.setQuantity(1L);
+        prodPlan.setTotalQuantity(ppd.getItemNum());
+        prodPlan.setQuantity(ppd.getItemNum());
         tProdPlanMapper.updateNum(prodPlan);
-        //删除订单明细
-        tOrderItemMapper.deleteById(ppd.getOrderItemId());
+        if(ppd.getItemStatus().equals('0')) {
+            // 未下发生产产品撤销
+            //删除订单明细
+            tOrderItemMapper.deleteById(ppd.getOrderItemId());
+        }else if(ppd.getItemStatus().equals('1')){
+            //已发下生产产品撤销(为生产完成)
+            //更新订单明细
+            TOrderItem orderItem = new TOrderItem();
+            orderItem.setId(ppd.getOrderItemId());
+            orderItem.setItemNum(ppd.getItemNum());
+            tOrderItemMapper.updateNum(orderItem);
+        }
         return true;
     }
 
