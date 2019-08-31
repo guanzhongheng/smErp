@@ -108,7 +108,7 @@
                 and s.bar_code like concat('%', #{barCode,jdbcType=VARCHAR}, '%')
             </if>
         </where>
-        order by s.ord_code,s.item_code,outStatus desc
+        order by s.create_time desc
     </select>
 
     <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TStock" useGeneratedKeys="true" keyProperty="id">
