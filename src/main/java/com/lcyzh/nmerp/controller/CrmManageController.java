@@ -323,6 +323,18 @@ public class CrmManageController extends BaseController {
         return "modules/crm/produceList";
     }
 
+    @RequestMapping(value = {"produceCancle/list","vo"})
+    public String produceCancleList(@ModelAttribute("vo") ProdPlanDetailVo vo, Model model, HttpServletRequest request, HttpServletResponse response) {
+        Page<ProdPlanDetailVo> page = new Page<>(request, response);
+        List<ProdPlanDetailVo> list = prodPlanDetailService.findProdTaskPage(page, vo);
+        doTheoryCalculationForPd(list,model);
+        page.setCount(list.size());
+        page.setList(list);
+        model.addAttribute("page", page);
+        model.addAttribute("macList", machineInfoService.findAllList());
+        return "modules/crm/produceCancleList";
+    }
+
 
     /**========================配方管理相关流转==============================**/
     /**

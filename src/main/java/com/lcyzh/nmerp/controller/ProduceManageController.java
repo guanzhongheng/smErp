@@ -136,6 +136,20 @@ public class ProduceManageController extends BaseController {
         return "modules/crm/produceDetail";
     }
 
+    /**
+     * @Description: 撤销生产任务
+     * @Param: [id]
+     * @return: java.lang.String
+     * @Author: wsm
+     * @Iteration : 1.0
+     * @Date: 2019/9/1 9:57 PM
+     */
+    @RequestMapping(value = {"produce/cancle"})
+    public String prodCancle(Long id){
+        prodPlanDetailService.cancelProdPlanDetailByID(id);
+        return "redirect:/crm/produceCancle/list?repage";
+    }
+
     @RequestMapping(value = {"produce/inStock"})
     @ResponseBody
     public ProdPlanDetailVo doInStock(Long id,Double weight,Double tare,String seCode,

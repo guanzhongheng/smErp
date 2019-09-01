@@ -57,7 +57,7 @@
         }
         td {
             text-align:left;
-            height:34px
+            height:31px
         }
     </style>
 </head>
@@ -68,7 +68,7 @@
 
             <div class="gray-bg" style="background-color: white">
             <div>
-                <div style="width:100%;padding-left:420px;    padding-top: 40px;margin-top: -18px;">
+                <div style="width:100%;padding-left:420px;    padding-top: 30px;margin-top: -18px;">
                     <table  border="0" cellspacing="0" style="width:30%;height:180px;width: 370px;">
                         <tr>
                             <td colspan="2" style="height:1px;"></td>
@@ -80,7 +80,7 @@
                             <td colspan="2" ><font size=4>${vo.itemOwner}</font></td>
                         </tr>
                         <tr>
-                            <td colspan="2" ><font size=4>${vo.itemWidth}m * ${vo.itemThick}mm</font></td>
+                            <td colspan="2" ><font size=4>${vo.itemWidth}m * ${vo.itemThick}</font></td>
                         </tr>
                         <tr>
                             <td colspan="2" ><font size=4>${vo.itemLenth} </font></td>
