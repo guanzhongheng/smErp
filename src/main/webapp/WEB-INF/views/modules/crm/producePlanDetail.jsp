@@ -240,7 +240,8 @@
                                         <th style="text-align: center">面积(㎡)</th>
                                         <th style="text-align: center">理论重量</th>
                                         <th style="text-align: center">压边类型</th>
-                                        <th style="text-align: center">延长米计算方式</th>
+                                        <th style="text-align: center">备注</th>
+                                        <th style="text-align: center">延长米方式</th>
                                         <th style="text-align: center">状态</th>
                                         <%--<th style="width: 50px">操作</th>--%>
                                     </tr>
@@ -272,6 +273,7 @@
                                             <td>${vo.itemTotalSq}</td>
                                             <td>${vo.theoryWeight}</td>
                                             <td>${fns:getDictValue(vo.itemYbType, 'prod_ybType', defaultValue)}</td>
+                                            <td><span style="color: #f3190f;">${vo.itemRemarks}</span></td>
                                             <td>${fns:getDictValue(vo.itemYcType, 'prod_ycType', defaultValue)}</td>
                                             <td style="color: #08c;">
                                                 <c:if test="${vo.itemStatus eq '48'}">待确认</c:if>

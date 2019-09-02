@@ -81,7 +81,7 @@
                         <th style="text-align: center">颜色</th>
                         <th style="text-align: center">压边类型</th>
                         <th style="text-align: center">总数量</th>
-                        <th style="text-align: center">已下发数量</th>
+                        <th style="text-align: center">下发数量</th>
                         <th style="text-align: center">状态</th>
                         <th style="text-align: center">操作</th>
                     </tr>

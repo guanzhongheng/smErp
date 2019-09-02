@@ -239,7 +239,7 @@
                                             <form:form id="inputForm" modelAttribute="detail" action=""
                                                        method="post" class="form-horizontal">
                                                 <form:textarea path="itemRemarks" htmlEscape="false" cssClass="form-control global-input"
-                                                               cssStyle="min-width: 600px;" rows="3" maxlength="255"/>
+                                                               cssStyle="min-width: 600px;color: #f3190f;font-size: 16px;" rows="3" maxlength="255"/>
                                             </form:form>
                                             </div>
                                         </div>
