@@ -36,7 +36,6 @@ public class JxlsExcelView extends AbstractView {
 
         InputStream is = null;
         OutputStream os = null;
-
         os = response.getOutputStream();
         response.setContentType(getContentType());
 
