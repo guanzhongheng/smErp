@@ -63,7 +63,7 @@
         LEFT JOIN T_PRODUCT tt ON toi.item_code = tt.prod_code
     WHERE
 	toi.ord_code = #{ordCode,jdbcType=VARCHAR}
-	order by itemVariety, itemColor, itemWidth desc
+	order by toi.id
     </select>
 
     <select id="findList" resultMap="tOrderItemResultMap">

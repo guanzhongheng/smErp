@@ -65,8 +65,11 @@ public class OrderItemVo {
     private Double itemTotalSq;
     //压边类型
     private String itemYbType;
+    private String itemYbTypeValue;
     //延长类型
     private String itemYcType;
+    private String itemYcTypeValue;
+
     //产品状态字典
     private Long itemStatus;
     //产品状态字典值
@@ -75,6 +78,22 @@ public class OrderItemVo {
     private Long itemOutNum;
     // 产品备注
     private String itemRemarks;
+
+    public String getItemYbTypeValue() {
+        return itemYbTypeValue;
+    }
+
+    public void setItemYbTypeValue(String itemYbTypeValue) {
+        this.itemYbTypeValue = itemYbTypeValue;
+    }
+
+    public String getItemYcTypeValue() {
+        return itemYcTypeValue;
+    }
+
+    public void setItemYcTypeValue(String itemYcTypeValue) {
+        this.itemYcTypeValue = itemYcTypeValue;
+    }
 
     public String getItemRemarks() {
         return itemRemarks;

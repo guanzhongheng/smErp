@@ -1,12 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
+
 <html>
 <head>
     <title>全部客户</title>
     <link rel="stylesheet" href="/static/common/customize.css">
     <script type="text/javascript">
         function page(n,s){
-
             if(n) $("#pageNo").val(n);
             if(s) $("#pageSize").val(s);
             $("#searchForm").attr("action","${ctx}/crm/inventory/outStockList");
@@ -14,6 +14,7 @@
             return false;
         }
     </script>
+    <script src="${ctxStatic}/lodop/LodopFuncs.js" type="text/javascript"></script>
 </head>
 <body>
 
@@ -88,8 +89,8 @@
                             <td><fmt:formatDate value="${cus.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                             <td>
                                 <a href="/crm/inventory/outStockDetail?outCode=${cus.outCode}"><i class="icon-th-list">&nbsp;详情</i></a>
-                                    <a href="/print/outStock_print?outCode=${cus.outCode}"><i class="icon-print">&nbsp;打印</i></a>
-                                    <a href="/print/outStockInvoice_print?outCode=${cus.outCode}"><i class="icon-print">&nbsp;单据</i></a>
+                                <a href="/print/outStock_print?outCode=${cus.outCode}"><i class="icon-print">&nbsp;打印</i></a>
+                                <a href="/print/outStockInvoice_print?outCode=${cus.outCode}"><i class="icon-print">&nbsp;单据</i></a>
                             </td>
                         </tr>
                     </c:forEach>
@@ -107,6 +108,24 @@
         $("#endDate").val("");
         $("#outStatus").val("").select2();
     }
+    // var LODOP;
+    // function clickPrint(strId) {
+    //     debugger;
+    //     LODOP = getLodop();
+    //     LODOP.ADD_PRINT_URL(20,10,"100%","95%","http://192.168.101.74:8090" + strId);
+    //     LODOP.SET_PRINT_STYLEA(0,"HOrient",3);
+    //     LODOP.SET_PRINT_STYLEA(0,"VOrient",3);
+    //     LODOP.PRINT();
+    // }
+    //
+    // function clickPrintV(strId) {
+    //     debugger;
+    //     LODOP = getLodop();
+    //     LODOP.ADD_PRINT_URL(20,10,"100%","95%","http://192.168.101.74:8090" +strId);
+    //     LODOP.SET_PRINT_STYLEA(0,"HOrient",3);
+    //     LODOP.SET_PRINT_STYLEA(0,"VOrient",3);
+    //     LODOP.PREVIEW();
+    // }
 </script>
 
 

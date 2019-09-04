@@ -57,8 +57,8 @@ public class ExportController {
     public ModelAndView orderInfoExport(HttpServletResponse response, String ordCode){
         OrderQueryVo orderQueryVo = reportService.queryOrderInfo(ordCode);
         Context context = new Context();
-        context.putVar("orderInfo", orderQueryVo);
+        context.putVar("orderInfo", orderQueryVo.getOrderItemVos());
         return new ModelAndView(
-                new JxlsExcelView(TEMPLATE_PATH + "orderInfo.xlsx", "订单信息-"+ DateUtil.date2Str(new Date(),"yyyy-MM-dd"), context));
+                new JxlsExcelView(TEMPLATE_PATH + "orderInfo.xlsx", "订单-" +orderQueryVo.getOrdTitle() + "-" + DateUtil.date2Str(new Date(),"yyyy-MM-dd"), context));
     }
 }

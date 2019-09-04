@@ -92,6 +92,7 @@
                                     <a href="/order/order_delete?ordCode=${ord.ordCode}" onclick="return confirmx('确认要删除该订单吗？', this.href)">
                                         <i class="icon-trash">删除</i></a>
                                 </c:if>
+                                <a href="/export/orderInfo?ordCode=${ord.ordCode}"><i class="icon-download">&nbsp;详情导出</i></a>
                             </td>
                         </tr>
                     </c:forEach>

@@ -77,6 +77,8 @@ public class ReportServiceImpl implements IReportService {
                 item.setItemPriceTypeValue(DictUtils.getValueByDictKey(item.getItemPriceType()));
                 item.setItemStatusValue(DictUtils.getValueByDictKey(item.getItemStatus()));
                 item.setItemColorValue(SysDictUtils.getDictLabel(item.getItemColor(), Constants.PROD_COLOR, ""));
+                item.setItemYbTypeValue(SysDictUtils.getDictLabel(item.getItemYbType(), Constants.PROD_YB_TYPE, ""));
+                item.setItemYcTypeValue(SysDictUtils.getDictLabel(item.getItemYcType(), Constants.PROD_YC_TYPE, ""));
             });
             vo.setOrderItemVos(orderItemVos);
             return vo;

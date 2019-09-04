@@ -147,6 +147,9 @@
                                         onclick="doProcess()">添加产品
                                 </button>&nbsp;&nbsp;&nbsp;&nbsp;
                                 <button class="btn btn-primary global-button-style" type="button"
+                                        onclick="oneTrimPrice()">一键调价
+                                </button>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button class="btn btn-primary global-button-style" type="button"
                                         onclick="history.go(-1)">返 回
                                 </button>&nbsp;&nbsp;&nbsp;&nbsp;
                                 <button class="btn btn-primary global-button-style" type="button"
@@ -537,6 +540,34 @@
             $("#cusProdDetail").bootstrapTable("load",cusProdList);
         }
     }
+    
+    function oneTrimPrice() {
+        debugger;
+        if(prodObj.itemCode != "" && cusProdList.length > 0){
+            var flag = false;
+            var price = $("#itemPrice").val();
+            if(price == null || price == undefined){
+                layer.msg("价格不能为空！");
+                return;
+            }
+            $.each(cusProdList,function(index,item){
+            		if(prodObj.itemCode == item.itemCode && prodObj.itemName == item.itemName &&
+	            		prodObj.itemVariety == item.itemVariety && prodObj.itemCgyCode == item.itemCgyCode &&
+	            		prodObj.itemThick == item.itemThick && prodObj.itemColor == item.itemColor){
+            			item.itemPrice = price;
+                        flag = true;
+            		}
+            })
+            if(flag){
+                $("#cusProdDetail").bootstrapTable("load",cusProdList);
+                $('#cusProdDetail .chosen-select').trigger("chosen:updated");
+                $('#cusProdDetail .chosen-select').chosen();
+            }
+        }else{
+            layer.msg("请先选中一个产品！");
+        }
+    }
+    
     
     function tranObject(data) {
         debugger;
