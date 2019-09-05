@@ -57,7 +57,7 @@
         }
         td {
             text-align:left;
-            height:31px
+            height:32px
         }
     </style>
 </head>
@@ -68,7 +68,7 @@
 
             <div class="gray-bg" style="background-color: white">
             <div>
-                <div style="width:100%;padding-left:420px;    padding-top: 30px;margin-top: -18px;">
+                <div style="width:100%;padding-left:420px;    padding-top: 35px;margin-top: -18px;">
                     <table  border="0" cellspacing="0" style="width:30%;height:180px;width: 370px;">
                         <tr>
                             <td colspan="2" style="height:1px;"></td>

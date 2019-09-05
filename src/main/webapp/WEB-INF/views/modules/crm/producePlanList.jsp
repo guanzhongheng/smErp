@@ -103,7 +103,10 @@
                             <c:if test="${(pp.totalQuantity - pp.quantity) <= 0}">
                                 <td><span style="color: #00b700">已全部下发</span></td>
                             </c:if>
-                            <td><a href="${ctx}/produce/producePlan/info?prodPlanCode=${pp.prodPlanCode}"><i class="icon-th-list">&nbsp;详情</i></a></td>
+                            <td>
+                                <a href="${ctx}/produce/producePlan/info?prodPlanCode=${pp.prodPlanCode}"><i class="icon-th-list">&nbsp;详情</i></a>
+                                <a href="/export/prodPlan?prodPlanCode=${pp.prodPlanCode}"><i class="icon-download">&nbsp;详情导出</i></a>
+                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>

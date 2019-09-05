@@ -267,8 +267,8 @@
                                             <td>${vo.itemNum}</td>
                                             <td>${vo.itemTotalWeight}</td>
                                             <td>
-                                                上:<fmt:formatNumber value="${vo.thresholdUp}" pattern="#.00"/>
-                                                 下:<fmt:formatNumber value="${vo.thresholdDown}" pattern="#.00"/>
+                                                上:<fmt:formatNumber value="${vo.thresholdUp}" pattern="0.00"/>
+                                                 下:<fmt:formatNumber value="${vo.thresholdDown}" pattern="0.00"/>
                                             </td>
                                             <td>${vo.itemTotalSq}</td>
                                             <td>${vo.theoryWeight}</td>

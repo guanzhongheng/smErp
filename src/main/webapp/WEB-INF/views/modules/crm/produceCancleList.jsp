@@ -11,7 +11,7 @@
 
             if(n) $("#pageNo").val(n);
             if(s) $("#pageSize").val(s);
-            $("#searchForm").attr("action","${ctx}/crm/produce/list");
+            $("#searchForm").attr("action","${ctx}/crm/produceCancle/list");
             $("#searchForm").submit();
             return false;
         }
@@ -29,7 +29,7 @@
     <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
         <div class="panel-heading" style="background-color: #50B0E6">
             <h3 class="panel-title global-panel-title" >
-                生产任务
+                生产任务管理
             </h3>
         </div>
         <div class="panel-body" style="padding: 10px 10px 0px 10px;">

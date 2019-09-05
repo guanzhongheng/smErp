@@ -2,6 +2,7 @@ package com.lcyzh.nmerp.controller;
 
 import com.lcyzh.nmerp.model.vo.CustomerQueryVo;
 import com.lcyzh.nmerp.model.vo.OrderQueryVo;
+import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
 import com.lcyzh.nmerp.model.vo.StockQueryVo;
 import com.lcyzh.nmerp.service.IReportService;
 import com.lcyzh.nmerp.utils.DateUtil;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ExportController {
@@ -60,5 +62,17 @@ public class ExportController {
         context.putVar("orderInfo", orderQueryVo.getOrderItemVos());
         return new ModelAndView(
                 new JxlsExcelView(TEMPLATE_PATH + "orderInfo.xlsx", "订单-" +orderQueryVo.getOrdTitle() + "-" + DateUtil.date2Str(new Date(),"yyyy-MM-dd"), context));
+    }
+
+    /**
+     * 生产计划导出
+     */
+    @RequestMapping(value = "/export/prodPlan",method = RequestMethod.GET)
+    public ModelAndView prodPlanExport(HttpServletResponse response, String prodPlanCode){
+        Map<String,Object> result = reportService.queryProdPlanDetailList(prodPlanCode);
+        Context context = new Context();
+        context.putVar("result", result);
+        return new ModelAndView(
+                new JxlsExcelView(TEMPLATE_PATH + "prodplan.xlsx", "生产计划-" + DateUtil.date2Str(new Date(),"yyyy-MM-dd HH-mm-ss"), context));
     }
 }

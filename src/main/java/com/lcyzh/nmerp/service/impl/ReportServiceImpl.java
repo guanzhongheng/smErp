@@ -2,20 +2,22 @@ package com.lcyzh.nmerp.service.impl;
 
 import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.controller.system.util.SysDictUtils;
-import com.lcyzh.nmerp.dao.TCustomerMapper;
-import com.lcyzh.nmerp.dao.TOrderItemMapper;
-import com.lcyzh.nmerp.dao.TOrderMapper;
-import com.lcyzh.nmerp.dao.TStockMapper;
-import com.lcyzh.nmerp.model.vo.CustomerQueryVo;
-import com.lcyzh.nmerp.model.vo.OrderItemVo;
-import com.lcyzh.nmerp.model.vo.OrderQueryVo;
-import com.lcyzh.nmerp.model.vo.StockQueryVo;
+import com.lcyzh.nmerp.dao.*;
+import com.lcyzh.nmerp.entity.TProdPlanDetail;
+import com.lcyzh.nmerp.model.vo.*;
 import com.lcyzh.nmerp.service.IReportService;
+import com.lcyzh.nmerp.utils.Arith;
 import com.lcyzh.nmerp.utils.DictUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -28,6 +30,8 @@ public class ReportServiceImpl implements IReportService {
     private TOrderMapper tOrderMapper;
     @Autowired
     private TOrderItemMapper tOrderItemMapper;
+    @Autowired
+    private TProdPlanDetailMapper tProdPlanDetailMapper;
 
     @Override
     public List<StockQueryVo> queryStockList(StockQueryVo vo) {
@@ -82,6 +86,62 @@ public class ReportServiceImpl implements IReportService {
             });
             vo.setOrderItemVos(orderItemVos);
             return vo;
+        }
+        return null;
+    }
+
+    @Override
+    public Map<String,Object> queryProdPlanDetailList(String prodPlanCode) {
+        List<TProdPlanDetail> list = tProdPlanDetailMapper.findListByProdPlanCode(prodPlanCode);
+        List<ProdPlanDetailVo> detailVoList = new ArrayList<>();
+        Map<String,Object> result = new HashMap<>();
+
+        if(list != null && !list.isEmpty()){
+            Double totalWi = doTheoryCalculation(list);
+            list.stream().forEach(model ->{
+                ProdPlanDetailVo vo = new ProdPlanDetailVo();
+                BeanUtils.copyProperties(model, vo);
+                vo.setOrderTitle(model.getOrdTitle());
+                vo.setItemVarietyValue(DictUtils.getValueByDictKey(vo.getItemVariety()));
+                vo.setItemCgyCodeValue(DictUtils.getValueByDictKey(vo.getItemCgyCode()));
+                vo.setItemColorValue(SysDictUtils.getDictLabel(vo.getItemColor(), Constants.PROD_COLOR, ""));
+                vo.setItemYbTypeValue(SysDictUtils.getDictLabel(vo.getItemYbType(), Constants.PROD_YB_TYPE, ""));
+                vo.setItemYcTypeValue(SysDictUtils.getDictLabel(vo.getItemYcType(), Constants.PROD_YC_TYPE, ""));
+                vo.setItemStatusValue(transItemStatus(vo.getItemStatus()));
+                detailVoList.add(vo);
+            });
+            result.put("totalWi",totalWi);
+            result.put("detailVoList",detailVoList);
+        }
+        return result;
+    }
+
+    private String transItemStatus(Character itemStatus){
+        if(itemStatus != null){
+            if(itemStatus == '0'){
+                return "待确认";
+            }else if (itemStatus == '1'){
+                return "已下发";
+            }else if (itemStatus == '2'){
+                return "已完成";
+            }
+        }
+        return null;
+    }
+
+    // 计算理论重量值
+    public Double doTheoryCalculation(List<TProdPlanDetail> list){
+        if(!CollectionUtils.isEmpty(list)){
+            Double totalWi = 0d;
+            list.forEach(n->{
+                Double mj = Arith.mul(n.getItemLenth(),n.getItemWidth());
+                Double mjt = Arith.mul(mj,n.getItemNum());
+                Double fm = Arith.div(1,Arith.mul(0.95,n.getItemThick()));
+                Double to = Arith.div(mjt,fm,4);
+                n.setTheoryWeight(to);
+            });
+            totalWi = list.stream().mapToDouble(i->i.getTheoryWeight()).sum();
+            return totalWi;
         }
         return null;
     }

@@ -165,7 +165,7 @@
         <if test="ordSort!= null and ordSort == 1">
             desc
         </if>
-        ,oi.item_yb_type,ppd.ord_code desc
+        ,ppd.item_thick,oi.item_yb_type,ppd.ord_code desc
     </select>
 
     <select id="findAllList" resultMap="tProdPlanDetailResultMap">

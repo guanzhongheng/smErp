@@ -28,10 +28,16 @@ public class ProdPlanDetailVo{
     private Double itemTotalWeight;
     private Double itemTotalSq;
     private String itemYbType;
+    private String itemYbTypeValue;
     private String itemYcType;
+    private String itemYcTypeValue;
     private Character itemStatus;
+    private String itemStatusValue;
     private Long itemCgyCode;
+    private String itemCgyCodeValue;
     private Long itemVariety;
+    private String itemVarietyValue;
+
     private Long itemUnit;
     private String itemOwner;
     private String itemColor;
@@ -70,6 +76,46 @@ public class ProdPlanDetailVo{
     // 标准件浮动上下值
     private Double thresholdUp;
     private Double thresholdDown;
+
+    public String getItemStatusValue() {
+        return itemStatusValue;
+    }
+
+    public void setItemStatusValue(String itemStatusValue) {
+        this.itemStatusValue = itemStatusValue;
+    }
+
+    public String getItemYbTypeValue() {
+        return itemYbTypeValue;
+    }
+
+    public void setItemYbTypeValue(String itemYbTypeValue) {
+        this.itemYbTypeValue = itemYbTypeValue;
+    }
+
+    public String getItemYcTypeValue() {
+        return itemYcTypeValue;
+    }
+
+    public void setItemYcTypeValue(String itemYcTypeValue) {
+        this.itemYcTypeValue = itemYcTypeValue;
+    }
+
+    public String getItemCgyCodeValue() {
+        return itemCgyCodeValue;
+    }
+
+    public void setItemCgyCodeValue(String itemCgyCodeValue) {
+        this.itemCgyCodeValue = itemCgyCodeValue;
+    }
+
+    public String getItemVarietyValue() {
+        return itemVarietyValue;
+    }
+
+    public void setItemVarietyValue(String itemVarietyValue) {
+        this.itemVarietyValue = itemVarietyValue;
+    }
 
     public Double getThresholdUp() {
         return thresholdUp;
