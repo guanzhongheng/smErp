@@ -84,6 +84,7 @@
           s.item_unit itemUnit,
           s.item_color itemColor,
           s.mac_code macCode,
+          s.create_time createTime,
           case when (select count(1) from t_out_stock_detail where bar_code = s.bar_code) > 0 then '0'
           else '1' end outStatus
         FROM t_stock s
@@ -98,8 +99,11 @@
             <if test="ordCode!= null">
                 and s.ord_code like concat('%', #{ordCode,jdbcType=VARCHAR}, '%')
             </if>
-            <if test="startDate!= null">
-                and s.create_time between #{startDate} and #{endDate}
+            <if test="startDate!= null and startDate != ''">
+                and s.create_time &gt;= #{startDate}
+            </if>
+            <if test="endDate!= null and endDate != ''">
+                and s.create_time &lt;=  #{endDate}
             </if>
             <if test="orderTitle!= null">
                 and o.ord_title like concat('%', #{orderTitle,jdbcType=VARCHAR}, '%')

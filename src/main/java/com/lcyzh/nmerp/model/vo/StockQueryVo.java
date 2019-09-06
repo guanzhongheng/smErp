@@ -51,6 +51,16 @@ public class StockQueryVo implements Serializable {
     // 产品出库状态
     private String outStatus;
 
+    private String createTime;
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
     public String getOutStatus() {
         return outStatus;
     }

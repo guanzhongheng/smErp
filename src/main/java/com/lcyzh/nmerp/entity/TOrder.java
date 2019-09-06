@@ -49,6 +49,7 @@ public class TOrder{
     //订单产品出库数量
     private Long ordOutNum;
 
+
     public String getOrdCode() {
         return ordCode;
     }

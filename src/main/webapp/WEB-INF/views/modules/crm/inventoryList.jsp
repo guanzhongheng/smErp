@@ -25,6 +25,7 @@
                 content: ['/produce/produce/rePrint?stockId='+stockId+'"', 'yes'] //iframe的url，no代表不显示滚动条
             });
         }
+
         function rePrintCert(stockId,type) {
             layer.open({
                 type: 2,
@@ -78,6 +79,16 @@
                             <form:options items="${fns:getCusDictList(148000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                         </form:select>
                     </li>
+
+                </ul>
+                <ul class="ul-form">
+                    <li>
+                        <form:input path="startDate" htmlEscape="false" readonly="readonly" class="input-small Wdate"
+                                    placeholder="开始时间" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
+                        ～
+                        <form:input path="endDate" htmlEscape="false" readonly="readonly" class="input-small Wdate"
+                                    placeholder="结束时间" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
+                    </li>
                     &nbsp;&nbsp;
                     <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 80px" value="查询"/></li>
                     &nbsp;&nbsp;
@@ -102,7 +113,7 @@
                         <th style="text-align: center">厚(mm)</th>
                         <th style="text-align: center">重量</th>
                         <th style="text-align: center">压边类型</th>
-                        <th style="text-align: center">延长米</th>
+                        <th style="text-align: center">入库时间</th>
                         <th style="text-align: center">状态</th>
                         <th style="text-align: center">操作</th>
                     </tr>
@@ -122,7 +133,8 @@
                             <td>${cus.itemThick}</td>
                             <td>${cus.itemWeight}</td>
                             <td>${fns:getDictLabel(cus.itemYbType,'prod_ybType','无')}</td>
-                            <td>${fns:getDictLabel(cus.itemYcType,'prod_ycType','无')}</td>
+                            <td>${cus.createTime}</td>
+                        <%--<td>${fns:getDictLabel(cus.itemYcType,'prod_ycType','无')}</td>--%>
                             <c:if test="${cus.outStatus == '0'}">
                             		<td><span style="color:green;">已出库</span></td>
                             </c:if>
@@ -167,6 +179,8 @@
     function invenFormReset() {
         $("#orderTitle").val("");
         $("#barCode").val("");
+        $("#startDate").val("");
+        $("#endDate").val("");
         $("#itemCgyCode").val("").select2();
         $("#itemVariety").val("").select2();
     }

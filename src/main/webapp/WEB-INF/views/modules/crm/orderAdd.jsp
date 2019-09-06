@@ -32,8 +32,8 @@
                                     <label class="col-md-2 control-label order-label-margin"><i style="color: red">*</i>
                                         订单标题:
                                     </label>
-                                    <label class="col-md-2 control-label order-label-input-width">
-                                        <form:input path="ordTitle" htmlEscape="false" maxlength="255"
+                                    <label class="col-md-2 control-label order-label-input-width" disabled>
+                                        <form:input path="ordTitle" htmlEscape="false" maxlength="255" disabled="${orderAddModifyVo.ordCode == null?'false':'true'}"
                                                     class="form-control global-input" placeholder="订单标题"/>
                                     </label>
 
@@ -41,7 +41,7 @@
                                         关联客户:
                                     </label>
                                     <label class="col-md-2 control-label order-input-width " style="text-align: left">
-                                        <select id="cusCode" name="cusCode" class="chosen-select global-input order-input-width" style="width: 150px; ">
+                                        <select id="cusCode" name="cusCode" class="chosen-select global-input order-input-width" style="width: 150px;" disabled="${orderAddModifyVo.ordCode == null?'disabled':''}" >
                                             <c:forEach  items="${customers}" var="s">
                                                 <option class="order-input-width" value='${s.cusCode}' style="width: 150px;" > ${s.cusName}</option>
                                             </c:forEach>
@@ -136,7 +136,8 @@
                                         </div>
                                         <div class="col-md-6 " >
                                             <button class="btn btn-primary global-button-style" type="submit">保存订单</button>&nbsp;&nbsp;&nbsp;
-                                            <button class="btn btn-primary global-button-style" type="button" onclick="prodlistAdd()">产品添加</button>&nbsp;&nbsp;&nbsp;
+                                            <c:if test="${empty orderAddModifyVo.ordCode}"><button class="btn btn-primary global-button-style" type="button" onclick="prodlistAdd()">产品添加</button>&nbsp;&nbsp;&nbsp;
+                                            </c:if>
                                             <button class="btn btn-primary global-button-style" type="button"
                                                     onclick="gotBackList()">返  回
                                             </button>

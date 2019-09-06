@@ -75,7 +75,8 @@
         od.ord_total_weight ordTotalWeight,
         pt.repay_amount repayAmount,
         pt.invoiced_amount invoicedAmount,
-        pt.overdue_num overdueNum
+        pt.overdue_num overdueNum,
+        od.remarks
         FROM
         T_ORDER od
         LEFT JOIN T_CUSTOMER cs ON od.cus_code = cs.cus_code
@@ -294,6 +295,9 @@
             </if>
             <if test="ordTotalWeight!=null">
                 ord_total_weight = #{ordTotalWeight,jdbcType=DOUBLE},
+            </if>
+            <if test="remarks!=null">
+                remarks = #{remarks,jdbcType=DOUBLE},
             </if>
         </set>
         WHERE ord_code = #{ordCode,jdbcType=VARCHAR}

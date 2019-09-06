@@ -86,15 +86,18 @@
                             <td>${ord.ordTotalNum}</td>
                             <td>${ord.ordStatusValue}</td>
                             <td>${ord.ordSignDate}</td>
-                            <td>${ord.ordSignDate}</td>
+                            <td>${ord.remarks}</td>
                             <td>
                                 <c:if test="${ord.ordStatus ne '100002'&& ord.ordStatus ne '100005' }" >
                                     <a href="/order/prodDetailList?ordCode=${ord.ordCode}"><i class="icon-plus">&nbsp;产品新增</i></a>
+                                </c:if>
+                                <a href="/order/order_add?ordCode=${ord.ordCode}"><i class="icon-pencil">&nbsp;编辑</i></a>
+
+                                <c:if test="${ord.ordStatus ne '100002'&& ord.ordStatus ne '100005' }" >
                                     <a href="/order/order_delete?ordCode=${ord.ordCode}" onclick="return confirmx('确认要删除该订单吗？', this.href)">
                                         <i class="icon-trash">删除</i></a>
                                 </c:if>
-                                <a href="/order/order_add?ordCode=${ord.ordCode}"><i class="icon-pencil">&nbsp;编辑</i></a>
-                                <a href="/export/orderInfo?ordCode=${ord.ordCode}"><i class="icon-download]">&nbsp;详情导出</i></a>
+                                <a href="/export/orderInfo?ordCode=${ord.ordCode}"><i class="icon-download">&nbsp;详情导出</i></a>
                             </td>
                         </tr>
                     </c:forEach>

@@ -53,7 +53,7 @@ public class TStockServiceImpl implements TStockService{
     @Override
     public List<StockQueryVo> findList(Page<StockQueryVo> page, StockQueryVo vo) {
         if(vo.getStartDate() == null || vo.getStartDate().length() == 0) {
-            LocalDate.now().minusDays(7).toString();
+            vo.setStartDate(LocalDate.now().minusMonths(3).toString());
         }
         if(vo.getEndDate() == null || vo.getEndDate().length() == 0) {
             vo.setEndDate(LocalDate.now().plusDays(1).toString());
