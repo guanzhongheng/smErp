@@ -75,8 +75,18 @@ public class OrderQueryVo{
     // 根据入库面积汇总价格
     private Double totalSqPrice = 0.0000;
 
+    private String remarks;
+
     // 是否用于统计
     private Integer isTj;
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
 
     public Integer getIsTj() {
         return isTj;
