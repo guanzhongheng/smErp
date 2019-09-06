@@ -41,7 +41,7 @@
                                         关联客户:
                                     </label>
                                     <label class="col-md-2 control-label order-input-width " style="text-align: left">
-                                        <select id="cusCode" name="cusCode" class="chosen-select global-input order-input-width" style="width: 150px;" disabled="${orderAddModifyVo.ordCode == null?'disabled':''}" >
+                                        <select id="cusCode" name="cusCode" class="chosen-select global-input order-input-width" style="width: 150px;" >
                                             <c:forEach  items="${customers}" var="s">
                                                 <option class="order-input-width" value='${s.cusCode}' style="width: 150px;" > ${s.cusName}</option>
                                             </c:forEach>
