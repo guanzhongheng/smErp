@@ -64,7 +64,9 @@
                 and o.ord_title like concat('%', concat(#{orderTitle,jdbcType=VARCHAR}, '%'))
             </if>
             <if test="startDate!= null and startDate !=''">
-                and hpr.create_time between #{startDate} and #{endDate}
+                <![CDATA[
+                and hpr.create_time >=CONCAT(#{startDate},' 00:00:00') and hpr.create_time <= CONCAT(#{endDate},'23:59:59')
+                ]]>
             </if>
             <if test="macCode!= null and macCode!=''">
                 and hpr.mac_code = #{macCode,jdbcType=VARCHAR}

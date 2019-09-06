@@ -14,6 +14,7 @@ public class OutStockDetailVo {
     private Long outStockDetailId;
     private String outCode;
     private String barCode;
+    private String cusCode;
     private Long stockId;
     private String ordCode;
     private String ordTitle;
@@ -44,6 +45,14 @@ public class OutStockDetailVo {
     private Double price;
     //计价方式-字典
     private Long itemPriceType;
+
+    public String getCusCode() {
+        return cusCode;
+    }
+
+    public void setCusCode(String cusCode) {
+        this.cusCode = cusCode;
+    }
 
     public Double getItemPrice() {
         return itemPrice;

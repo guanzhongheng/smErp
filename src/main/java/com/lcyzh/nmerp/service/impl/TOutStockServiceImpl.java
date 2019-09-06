@@ -117,6 +117,10 @@ public class TOutStockServiceImpl implements TOutStockService {
         vo.setItemUnitValue(DictUtils.getValueByDictKey(vo.getItemUnit()));
         vo.setItemVarietyValue(DictUtils.getValueByDictKey(vo.getItemVariety()));
         BeanUtils.copyProperties(vo, outStockDetailVo);
+
+        OrderQueryVo order = tOrderMapper.findByPrimaryKey(vo.getOrdCode());
+        outStockDetailVo.setCusCode(order.getCusCode());
+
         List<TOutStockDetail> list = tOutStockDetailMapper.findByBarCode(barCode);
         if (!list.isEmpty()) {
             outStockDetailVo.setIsOut('1');

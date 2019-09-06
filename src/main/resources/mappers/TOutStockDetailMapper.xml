@@ -18,6 +18,7 @@
         s.id stockId,
         s.ord_code ordCode,
 		o.ord_title ordTitle,
+		o.cus_code cusCode,
         s.bar_code barCode,
         s.item_code itemCode,
         s.item_lenth itemLenth,
