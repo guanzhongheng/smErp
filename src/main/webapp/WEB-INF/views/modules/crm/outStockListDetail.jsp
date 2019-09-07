@@ -81,8 +81,6 @@
                                         </li>
                                     </ul>
                                 </div>
-                                &nbsp;&nbsp;
-
                             </div>
                         </div>
                     </div>
@@ -138,6 +136,11 @@
                             <td>${cus.itemOwner}</td>
                         </tr>
                     </c:forEach>
+                    <tr>
+                        <td colspan="8">总计:</td>
+                        <td colspan="2">总重量:${totalWeight}</td>
+                        <td colspan="3">总金额:${totalPrice}</td>
+                    </tr>
                     </tbody>
                 </table>
             </div>

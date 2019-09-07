@@ -80,7 +80,7 @@
                                 <td>${ord.itemTotalSq}</td>
                                 <td>${ord.itemTotalWeight}</td>
                                 <td>&yen;${ord.itemPrice}</td>
-                                <td>&yen;${ord.itemPriceType == 141002?ord.itemTotalSq *ord.itemPrice:ord.itemPrice*ord.itemTotalWeight}</td>
+                                <td>&yen;${ord.showTotalPrice}</td>
                             </tr>
                         </c:forEach>
                         </tbody>

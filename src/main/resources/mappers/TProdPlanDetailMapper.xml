@@ -127,11 +127,13 @@
         o.proxy_name proxyName,
         ppd.item_remarks itemRemarks,
         ppd.threshold_up thresholdUp,
-        ppd.threshold_down thresholdDown
+        ppd.threshold_down thresholdDown,
+        ifnull(tp.prod_density,0) itemDensity
         FROM t_prod_plan_detail ppd
         left join t_prod_plan pp on ppd.prod_plan_code = pp.prod_plan_code
         left join t_order o on ppd.ord_code = o.ord_code
         left join t_order_item oi on ppd.order_item_id = oi.id
+        left join t_product tp on tp.prod_code = ppd.item_code
         <where>
             <if test="prodPlanDetailId!= null">
                 and ppd.id = #{prodPlanDetailId,jdbcType=BIGINT}

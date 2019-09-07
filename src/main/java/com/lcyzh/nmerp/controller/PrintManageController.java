@@ -130,7 +130,7 @@ public class PrintManageController extends BaseController {
 
         if(!StringUtils.isEmpty(outItemVoList)){
             for(OutItemVo vo : outItemVoList){
-                String newName = vo.getOrdCode() + vo.getItemOwner() + vo.getItemName() + vo.getItemLenth() + vo.getItemWidth() + vo.getItemThick();
+                String newName = vo.getOrdCode() + vo.getItemOwner() + vo.getProdVarietyValue() + vo.getItemLenth() + vo.getItemWidth() + vo.getItemThick();
                 if(ite.get(newName) == null){
                     ite.put(newName,1L);
                     iteWight.put(newName,vo.getItemWeight());
@@ -144,7 +144,7 @@ public class PrintManageController extends BaseController {
         }
         if(!StringUtils.isEmpty(oldOrderItem)){
             for(OrderItemVo vo : oldOrderItem){
-                String newName = vo.getOrdCode() + vo.getItemOwner() + vo.getItemName()+ vo.getItemLenth() + vo.getItemWidth()+ vo.getItemThick();
+                String newName = vo.getOrdCode() + vo.getItemOwner() + vo.getItemVaritemValue()+ vo.getItemLenth() + vo.getItemWidth()+ vo.getItemThick();
                 if(ite.get(newName) != null && !list.contains(vo)){
                     vo.setItemNum(ite.get(newName));
                     vo.setItemTotalSq(ite.get(newName) * vo.getItemLenth() * vo.getItemWidth());
@@ -171,7 +171,9 @@ public class PrintManageController extends BaseController {
         if(!CollectionUtils.isEmpty(list)){
             totalMj  = list.stream().mapToDouble(i -> {
                 if(i.getItemLenth() != null && i.getItemWidth() != null && i.getItemThick() != null){
-                    return i.getItemLenth() * i.getItemWidth() * i.getItemThick() * i.getItemNum();
+                    Double d1 = Arith.mul(i.getItemLenth(),i.getItemWidth());
+                    Double d2 = Arith.mul(i.getItemThick(),i.getItemNum());
+                    return  Arith.mul(d1,d2);
                 }else{
                     return 0d;
                 }
@@ -196,8 +198,8 @@ public class PrintManageController extends BaseController {
         User user = UserUtils.getUser();
         // 获取发货清单表
         model.addAttribute("stock",outStock);
-        model.addAttribute("totalMj",totalMj);
-        model.addAttribute("totalZl",totalZl);
+        model.addAttribute("totalMj",Arith.round(totalMj,4));
+        model.addAttribute("totalZl",Arith.round(totalZl,4));
         model.addAttribute("totalNum",totalNum);
         model.addAttribute("stockDetails",list);
         model.addAttribute("user",user.getName());
@@ -268,29 +270,35 @@ public class PrintManageController extends BaseController {
      * @param orderItemVos
      */
     public void getTotalInfo(Model model,List<OrderItemVo> orderItemVos){
-
-//        Double totalMj = orderItemVos.stream().mapToDouble(i -> (i.getItemTotalSq()==null?0: i.getItemTotalSq())).sum();
         Double totalMj = orderItemVos.stream().mapToDouble(i->((i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ)&&i.getItemTotalSq()!=null)?i.getItemTotalSq():0)).sum();
-//        Double totalZl = orderItemVos.stream().mapToDouble(i -> i.getItemTotalWeight()==null?0: i.getItemTotalWeight()).sum();
         Double totalZl = orderItemVos.stream().mapToDouble(i -> ((i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)&&i.getItemTotalWeight()!=null)?i.getItemTotalWeight():0)).sum();
         Double totalNum = orderItemVos.stream().mapToDouble(i -> i.getItemNum()==null?0: i.getItemNum()).sum();
+        orderItemVos.forEach(n->{
+            if(n.getItemPriceType() == 141002){
+                n.setShowTotalPrice(Arith.round(Arith.mul(n.getItemTotalSq(),n.getItemPrice()),4));
+            }else{
+                n.setShowTotalPrice(Arith.round(Arith.mul(n.getItemTotalWeight(),n.getItemPrice()),4));
+            }
+        });
+
 
         double totoalPriceByMj = 0d;
         double totalPriceByZL = 0d;
-      if(orderItemVos!=null && !orderItemVos.isEmpty()){
-          for (OrderItemVo item: orderItemVos){
-              if(item.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)){
-                  totalPriceByZL += item.getItemPrice() * item.getItemTotalWeight();
-              }else{
-                  totoalPriceByMj += item.getItemNum() * item.getItemPrice() *(item.getItemLenth()*item.getItemWidth());
+          if(orderItemVos!=null && !orderItemVos.isEmpty()){
+              for (OrderItemVo item: orderItemVos){
+                  if(item.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)){
+                      totalPriceByZL += item.getItemPrice() * item.getItemTotalWeight();
+                  }else{
+                      totoalPriceByMj += item.getItemNum() * item.getItemPrice() *(item.getItemLenth()*item.getItemWidth());
+                  }
               }
           }
-      }
 
-        double totalPrice = totoalPriceByMj + totalPriceByZL;
-        model.addAttribute("totalMj",totalMj);
-        model.addAttribute("totalZl",totalZl);
-        model.addAttribute("totalNum",totalNum);
-        model.addAttribute("totalPrice",totalPrice);
+        double totalPrice = Arith.add(totoalPriceByMj,totalPriceByZL);
+        model.addAttribute("totalMj",Arith.round(totalMj,4));
+        model.addAttribute("totalZl",Arith.round(totalZl,4));
+        model.addAttribute("totalNum",Arith.round(totalNum,4));
+        model.addAttribute("totalPrice",Arith.round(totalPrice,4));
+
     }
 }

@@ -14,6 +14,7 @@
         <result column="prod_unit" property="prodUnit" jdbcType="BIGINT"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="prod_color" property="prodColor" jdbcType="VARCHAR"/>
+        <result column="prod_density" property="prodDensity" jdbcType="DOUBLE"/>
     </resultMap>
 
 
@@ -76,7 +77,8 @@
             prod_price_type,
             prod_unit,
             create_time,
-            prod_color
+            prod_color,
+            prod_density
         )
         VALUES (
             #{prodCode,jdbcType=VARCHAR},
@@ -88,7 +90,8 @@
             #{prodPriceType,jdbcType=BIGINT},
             #{prodUnit,jdbcType=BIGINT},
             #{createTime,jdbcType=TIMESTAMP},
-            #{prodColor,jdbcType=VARCHAR}
+            #{prodColor,jdbcType=VARCHAR},
+            #{tProduct.prodDensity,jdbcType=VARCHAR}
         )
     </insert>
 
@@ -103,7 +106,8 @@
         prod_price_type,
         prod_unit,
         create_time,
-        prod_color
+        prod_color,
+        prod_density
         )
         VALUES
         <foreach collection="list" item="tProduct" separator=",">
@@ -117,7 +121,8 @@
             #{tProduct.prodPriceType,jdbcType=BIGINT},
             #{tProduct.prodUnit,jdbcType=BIGINT},
             #{tProduct.createTime,jdbcType=TIMESTAMP},
-            #{tProduct.prodColor,jdbcType=VARCHAR}
+            #{tProduct.prodColor,jdbcType=VARCHAR},
+            #{tProduct.prodDensity,jdbcType=VARCHAR}
             )
         </foreach>
     </insert>
@@ -151,6 +156,9 @@
             </if>
             <if test="prodColor!=null">
                 prod_color = #{prodColor,jdbcType=VARCHAR},
+            </if>
+            <if test="prodDensity!=null">
+                prod_density = #{prodDensity,jdbcType=VARCHAR},
             </if>
         </set>
         WHERE id = #{id,jdbcType=BIGINT}

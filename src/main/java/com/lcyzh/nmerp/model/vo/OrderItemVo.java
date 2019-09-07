@@ -79,6 +79,16 @@ public class OrderItemVo {
     // 产品备注
     private String itemRemarks;
 
+    private Double showTotalPrice;
+
+    public Double getShowTotalPrice() {
+        return showTotalPrice;
+    }
+
+    public void setShowTotalPrice(Double showTotalPrice) {
+        this.showTotalPrice = showTotalPrice;
+    }
+
     public String getItemYbTypeValue() {
         return itemYbTypeValue;
     }

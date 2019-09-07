@@ -77,6 +77,27 @@ public class ProdPlanDetailVo{
     private Double thresholdUp;
     private Double thresholdDown;
 
+    // 密度
+    private Double itemDensity;
+
+    private Double itemMickWeight;
+
+    public Double getItemMickWeight() {
+        return itemMickWeight;
+    }
+
+    public void setItemMickWeight(Double itemMickWeight) {
+        this.itemMickWeight = itemMickWeight;
+    }
+
+    public Double getItemDensity() {
+        return itemDensity;
+    }
+
+    public void setItemDensity(Double itemDensity) {
+        this.itemDensity = itemDensity;
+    }
+
     public String getItemStatusValue() {
         return itemStatusValue;
     }

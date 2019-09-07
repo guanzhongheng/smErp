@@ -172,7 +172,7 @@
                             <td>${o.itemVaritemValue}</td>
                             <td>${o.itemCgyCodeValue}</td>
                             <td>${o.itemLenth}</td>
-                            <td>${o.itemWidth}</td>
+                            <td><span style="color: #0e9aef">${o.itemWidth}</span></td>
                             <td>${o.itemThick}</td>
                             <td>${o.itemColorValue}</td>
                             <td>${o.itemUnitValue}</td>
@@ -186,6 +186,10 @@
                             <td>${o.itemRemarks}</td>
                         </tr>
                     </c:forEach>
+                    <tr>
+                        <td colspan="15">总计:</td>
+                        <td colspan="2">${totalMj}</td>
+                    </tr>
                     </tbody>
                 </table>
             </div>

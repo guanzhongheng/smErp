@@ -43,6 +43,17 @@ public class ProductVo extends DataEntity<TProduct> {
     //产品颜色-字典值
     private String prodColorValue;
 
+    // 密度
+    private Double prodDensity;
+
+    public Double getProdDensity() {
+        return prodDensity;
+    }
+
+    public void setProdDensity(Double prodDensity) {
+        this.prodDensity = prodDensity;
+    }
+
     public String getProdCode() {
         return prodCode;
     }

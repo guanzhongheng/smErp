@@ -90,7 +90,9 @@
                     <label class="control-label"><i style="color: red">*</i>&nbsp;参考单价:</label>
                     <div class="controls">
                         <form:input path="prodGuidePrice" htmlEscape="false" maxlength="100" class="required"/>
-
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <i style="color: red">*</i>&nbsp;产品密度:&nbsp;&nbsp;&nbsp;&nbsp;
+                        <form:input path="prodDensity" htmlEscape="false" maxlength="100" class="required"/>
                     </div>
                 </div>
                 <div class="">

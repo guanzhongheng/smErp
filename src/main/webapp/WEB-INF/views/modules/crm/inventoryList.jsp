@@ -165,6 +165,10 @@
                             </td>
                         </tr>
                     </c:forEach>
+                    <tr>
+                        <td colspan="10">总计:</td>
+                        <td colspan="5">总重量:${totalWeight} kg</td>
+                    </tr>
                     </tbody>
                 </table>
                 <div class="pagination">${page}</div>

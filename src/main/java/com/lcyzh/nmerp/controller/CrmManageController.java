@@ -211,6 +211,7 @@ public class CrmManageController extends BaseController {
         List<StockQueryVo> list = stockService.findList(page,stockQueryVo);
         page.setCount(list.size());
         page.setList(list);
+        doCalInventoryInfo(list,model);
         model.addAttribute("page", page);
         return "modules/crm/inventoryList";
     }
@@ -255,12 +256,9 @@ public class CrmManageController extends BaseController {
 
         TOutStock outStock = outStockService.findByCode(outCode);
         model.addAttribute("outStock",outStock);
-
-//        Page<OutStockDetailVo> page = new Page<>(request, response);
-//        List<OutStockDetailVo> list = outStockService.getOutStockDetailInfos(page,outCode);
-//        page.setCount(list.size());
-//        page.setList(list);
-        model.addAttribute("list", outStockService.getOutStockDetailInfos(outCode));
+        List<OutStockDetailVo> list = outStockService.getOutStockDetailInfos(outCode);
+        doCalOutStock(list,model);
+        model.addAttribute("list", list);
         return "modules/crm/outStockListDetail";
     }
 
@@ -356,6 +354,13 @@ public class CrmManageController extends BaseController {
                 Double mjt = Arith.mul(mj,n.getItemNum());
                 Double fm = Arith.div(1,Arith.mul(0.95,n.getItemThick()));
                 Double to = Arith.div(mjt,fm,4);
+                if(n.getItemDensity() != null && n.getItemDensity() > 0){
+                    Double mkfm = Arith.div(1,Arith.mul(n.getItemDensity(),n.getItemThick()));
+                    Double mkto = Arith.div(n.getItemWidth(),mkfm,4);
+                    n.setItemMickWeight(Arith.div(mkto,1000));
+                }else{
+                    n.setItemMickWeight(0d);
+                }
                 n.setTheoryWeight(to);
             });
             totalWi = list.stream().mapToDouble(i->i.getTheoryWeight()).sum();
@@ -390,4 +395,17 @@ public class CrmManageController extends BaseController {
         model.addAttribute("unOutNum",unOutNum);
         model.addAttribute("invTotalprice",invTotalprice);
     }
+
+    public void doCalInventoryInfo(List<StockQueryVo> list,Model model){
+        Double totalWeight = list.stream().mapToDouble(i->i.getItemWeight() == null?0:i.getItemWeight()).sum();
+        model.addAttribute("totalWeight",totalWeight);
+    }
+
+    public void doCalOutStock(List<OutStockDetailVo> list,Model model){
+        Double totalWeight = list.stream().mapToDouble(i->i.getItemWeight() == null?0:i.getItemWeight()).sum();
+        Double totalPrice = list.stream().mapToDouble(i->i.getPrice() == null?0:i.getPrice()).sum();
+        model.addAttribute("totalWeight",totalWeight);
+        model.addAttribute("totalPrice",totalPrice);
+    }
+
 }

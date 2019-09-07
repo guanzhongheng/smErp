@@ -108,6 +108,7 @@ public class TProductServiceImpl implements TProductService {
                 prod.setProdPriceType(product.getProdPriceType());
                 prod.setProdThick(product.getProdThick());
                 prod.setProdUnit(product.getProdUnit());
+                prod.setProdDensity(product.getProdDensity());
                 res = tProductMapper.update(prod);
                 if (res > 0) {
                     TProduct po = tProductMapper.get(product.getId());

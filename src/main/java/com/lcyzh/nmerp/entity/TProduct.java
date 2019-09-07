@@ -30,6 +30,16 @@ public class TProduct implements Serializable {
     private Long prodUnit;
     //颜色
     private String prodColor;
+    // 密度
+    private Double prodDensity;
+
+    public Double getProdDensity() {
+        return prodDensity;
+    }
+
+    public void setProdDensity(Double prodDensity) {
+        this.prodDensity = prodDensity;
+    }
 
     public TProduct() {
     }

@@ -105,8 +105,8 @@
                         <th style="text-align: center">数量</th>
                         <th style="text-align: center">理论重量(kg)</th>
                         <th style="text-align: center">压边类型</th>
+                        <th style="text-align: center">米克重</th>
                         <th style="text-align: center">备注</th>
-                        <th style="text-align: center">状态</th>
                         <th style="text-align: center">操作</th>
                     </tr>
                     </thead>
@@ -127,12 +127,8 @@
                             <%--<td>${vo.itemTotalWeight}</td>--%>
                             <%--<td>${vo.itemTotalSq}</td>--%>
                             <td>${fns:getDictValue(vo.itemYbType, 'prod_ybType', defaultValue)}</td>
+                            <td>${vo.itemMickWeight}</td>
                             <td style="min-width: 80px;max-width: 200px;"><span style="color: #f3190f">${vo.itemRemarks}</span></td>
-                            <td>
-                                <c:if test="${vo.itemStatus eq '48'}">待确认</c:if>
-                                <c:if test="${vo.itemStatus eq '49'}">下发生产</c:if>
-                                <c:if test="${vo.itemStatus eq '50'}">已完成</c:if>
-                            </td>
                             <td>
                                 <c:if test="${vo.itemNum ne 0}">
                                     <a href="${ctx}/produce/produce/info?id=${vo.prodPlanDetailId}"><i class="icon-wrench">&nbsp;生产</i></a>

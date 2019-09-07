@@ -271,7 +271,7 @@
 
                                                 </div>
                                                 <div class="col-sm-4">
-                                                    <button class="btn btn-white global-button-style" type="button" onclick="javascript:history.go(-1) ">返回</button>
+                                                    <button class="btn btn-white global-button-style" type="button" onclick="javascript:window.location.replace(document.referrer);">返回</button>
                                                 </div>
                                             </div>
                                         </div>

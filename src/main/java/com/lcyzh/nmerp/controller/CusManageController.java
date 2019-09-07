@@ -119,6 +119,7 @@ public class CusManageController  extends BaseController {
         OrderAddModifyVo orderAddModifyVo = orderService.findModifyInfoByOrdCode(ordCode);
         // 获取订单详情信息
         List<OrderItemVo> list = orderService.findItemsByOrdCode(ordCode);
+        doCalOrderInfoTotal(list,model);
         model.addAttribute("order",orderAddModifyVo);
         model.addAttribute("ordItems",list);
 
@@ -141,4 +142,8 @@ public class CusManageController  extends BaseController {
         return "redirect:/crm/approval/list?repage";
     }
 
+    public void doCalOrderInfoTotal(List<OrderItemVo> list, Model model){
+        Double totalMj = list.stream().mapToDouble(i->i.getItemTotalSq() == null?0:i.getItemTotalSq()).sum();
+        model.addAttribute("totalMj",totalMj);
+    }
 }
