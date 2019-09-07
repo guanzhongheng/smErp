@@ -5,6 +5,7 @@ import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.controller.system.util.UserUtils;
+import com.lcyzh.nmerp.dao.TCustomerMapper;
 import com.lcyzh.nmerp.entity.TFormula;
 import com.lcyzh.nmerp.entity.TOutStock;
 import com.lcyzh.nmerp.entity.TProdPlanDetail;
@@ -55,6 +56,8 @@ public class CrmManageController extends BaseController {
     private SystemService systemService;
     @Autowired
     private ITFormulaService formulaService;
+    @Autowired
+    private TCustomerMapper tCustomerMapper;
     /**========================客户相关流转==============================**/
 
     @RequestMapping(value = {"customer/list"})
@@ -299,6 +302,14 @@ public class CrmManageController extends BaseController {
         model.addAttribute("page", page);
         model.addAttribute("macList",machineInfoService.findAllList());
         return "modules/crm/producePlanList";
+    }
+
+    @RequestMapping("producePlan/export")
+    public String producePlanExport(HttpServletRequest request, ProdPlanExportVo exportVo, Model model){
+        model.addAttribute("exportVo",new ProdPlanExportVo());
+        List<CustomerQueryVo> listPo = tCustomerMapper.findList(null);
+        model.addAttribute("customers",listPo);
+        return "modules/crm/producePlanExport";
     }
 
     /**

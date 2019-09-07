@@ -1,9 +1,6 @@
 package com.lcyzh.nmerp.service;
 
-import com.lcyzh.nmerp.model.vo.CustomerQueryVo;
-import com.lcyzh.nmerp.model.vo.OrderQueryVo;
-import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
-import com.lcyzh.nmerp.model.vo.StockQueryVo;
+import com.lcyzh.nmerp.model.vo.*;
 
 import java.util.List;
 import java.util.Map;
@@ -15,5 +12,5 @@ public interface IReportService {
 
     OrderQueryVo queryOrderInfo(String ordCode);
 
-    Map<String,Object> queryProdPlanDetailList(String prodPlanCode);
+    Map<String,Object> queryProdPlanDetailList(ProdPlanExportVo exportVo);
 }

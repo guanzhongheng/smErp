@@ -31,7 +31,7 @@
                 type: 2,
                 title: '打印合格证确认',
                 skin: 'layui-layer-rim', //加上边框
-                area: ['1400px', '800px'],
+                area: ['1400px', '600px'],
                 content: ['/produce/produce/rePrintCert?type='+type+'&stockId='+stockId, 'yes'] //iframe的url，no代表不显示滚动条
             });
         };

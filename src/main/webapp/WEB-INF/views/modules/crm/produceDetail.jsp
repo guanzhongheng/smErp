@@ -97,12 +97,35 @@
                                         <div class="hr-line-dashed"></div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" style="margin-left: -25px;">生产开关:</label>
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-5">
                                                 <input type="checkbox" checked class="checkbox" id="prodCheckbox"/>
+                                            </div>
+                                            <div class="col-md-5 " id="prodBtns" hidden>
+                                                <button class="btn btn-primary <%--global-button-style--%>" type="button" id="inStock">入 库</button>
+                                                <button class="btn btn-warning " type="button" id="rePrint" disabled="true">重新打签</button>
+                                                <div class="btn-group dropdown">
+                                                    <a class="btn btn-success " id="printCertNew" disabled="true" style="width: auto">
+                                                        打印合格证(新版)
+                                                    </a>
+                                                    <a class="btn btn-success dropdown-toggle " id="printCertBtns" disabled="true" style="width: auto" data-toggle="dropdown">
+                                                        <span class="caret"></span>
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a href="#" id="printCertRed">合格证(红)</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#" id="printCertGreen">合格证(绿)</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#" id="printCertYellow">合格证(黄)</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
                                             </div>
                                         </div>
                                         <c:if test="${detail.thresholdUp != 0.0000 && detail.thresholdDown != 0.0000}">
-                                        <div class="hr-line-dashed"></div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" style="margin-left: -25px;">标准件开关:</label>
                                             <div class="col-sm-4">
@@ -119,7 +142,6 @@
                                             </div>
                                         </div>
                                         </c:if>
-                                        <div class="hr-line-dashed"></div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" style="margin-left: -25px;">压边类型:</label>
                                             <div class="col-sm-4">
@@ -132,7 +154,6 @@
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
                                             </div>
                                         </div>
-                                        <div class="hr-line-dashed" ></div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" style="margin-left: -25px;"><i style="color: red"></i>订单标题:</label>
                                             <div class="col-sm-4">
@@ -147,7 +168,6 @@
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
                                             </div>
                                         </div>
-                                        <div class="hr-line-dashed"></div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" style="margin-left: -25px;"><i style="color: red"></i>机台编号:</label>
                                             <div class="col-sm-4">
@@ -160,7 +180,6 @@
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
                                             </div>
                                         </div>
-                                        <div class="hr-line-dashed"></div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" style="margin-left: -25px;"><i style="color: red"></i>品种:</label>
                                             <div class="col-sm-4">
@@ -174,7 +193,6 @@
                                             </div>
                                         </div>
 
-                                        <div class="hr-line-dashed"></div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" style="margin-left: -25px;">长度(m):</label>
                                             <div class="col-sm-4">
@@ -183,16 +201,15 @@
                                             </div>
                                             <label class="col-sm-2 control-label"><i style="color: red"></i>宽度(m):</label>
                                             <div class="col-sm-4">
-                                                <input disabled="ture" placeholder="宽度" value="${detail.itemWidth}"
+                                                <input disabled="ture" placeholder="宽度" value="${detail.itemWidth}" id="itemWidth"
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
                                             </div>
                                         </div>
 
-                                        <div class="hr-line-dashed"></div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" style="margin-left: -25px;">厚度(mm):</label>
                                             <div class="col-sm-4">
-                                                <input disabled="ture" placeholder="厚度" value="${detail.itemThick}"
+                                                <input disabled="ture" placeholder="厚度" value="${detail.itemThick}" id="itemThick"
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
                                             </div>
                                             <label class="col-sm-2 control-label">数量:</label>
@@ -201,7 +218,6 @@
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
                                             </div>
                                         </div>
-                                        <div class="hr-line-dashed"></div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" style="margin-left: -25px;">重量:</label>
                                             <div class="col-sm-4">
@@ -214,7 +230,18 @@
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
                                             </div>
                                         </div>
-                                        <div class="hr-line-dashed"></div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" style="margin-left: -25px;">密度:</label>
+                                            <div class="col-sm-4">
+                                                <input placeholder="密度" value="${detail.itemDensity}" id="itemDensity"
+                                                       class="form-control produceDetail-input-readonly"/>
+                                            </div>
+                                            <label class="col-sm-2 control-label">米克重:</label>
+                                            <div class="col-sm-4">
+                                                <input disabled="ture" placeholder="米克重" value="${detail.itemMickWeight}" id="itemMickWeight"
+                                                       class="form-control produceDetail-input-readonly" readonly="true"/>
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" style="margin-left: -25px;">起止码:</label>
                                             <div class="col-sm-4">
@@ -232,44 +259,18 @@
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
                                             </div>
                                         </div>
-                                        <div class="hr-line-dashed"></div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" style="margin-left: -25px;">备注信息:</label>
                                             <div class="col-sm-8">
                                             <form:form id="inputForm" modelAttribute="detail" action=""
                                                        method="post" class="form-horizontal">
                                                 <form:textarea path="itemRemarks" htmlEscape="false" cssClass="form-control global-input"
-                                                               cssStyle="min-width: 600px;color: #f3190f;font-size: 16px;" rows="3" maxlength="255"/>
+                                                               cssStyle="width: 705px;color: #f3190f;font-size: 16px;" rows="3" maxlength="255"/>
                                             </form:form>
                                             </div>
                                         </div>
-                                        <div class="hr-line-dashed"></div>
                                         <div class="form-group">
                                             <div class="row" >
-                                                <div class="col-md-8 " id="prodBtns" hidden>
-                                                    <button class="btn btn-primary global-button-style" type="button" id="inStock">入 库</button>
-                                                    <button class="btn btn-warning global-button-style" type="button" id="rePrint" disabled="true">重新打签</button>
-                                                    <div class="btn-group dropdown">
-                                                        <button class="btn btn-success global-button-style" id="printCertNew" disabled="true" style="width: auto">
-                                                            打印合格证(新版)
-                                                        </button>
-                                                        <button class="btn btn-success dropdown-toggle global-button-style" id="printCertBtns" disabled="true" style="width: auto" data-toggle="dropdown">
-                                                            <span class="caret"></span>
-                                                        </button>
-                                                        <ul class="dropdown-menu">
-                                                            <li>
-                                                                <a href="#" id="printCertRed">合格证(红)</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" id="printCertGreen">合格证(绿)</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" id="printCertYellow">合格证(黄)</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-
-                                                </div>
                                                 <div class="col-sm-4">
                                                     <button class="btn btn-white global-button-style" type="button" onclick="javascript:window.location.replace(document.referrer);">返回</button>
                                                 </div>
@@ -525,7 +526,6 @@
                     top.$.jBox.tip('当前计价方式必须称重后才能入库！');
                     return;
                 }
-debugger;
                 if(standardFlag){
                     var standardWeight = $("#standardWeight").val();
                     if(standardWeight == 0.00 || standardWeight == null){
@@ -612,7 +612,7 @@ debugger;
                 type: 2,
                 title: '打印合格证确认',
                 skin: 'layui-layer-rim', //加上边框
-                area: ['800px', '800px'],
+                area: ['800px', '600px'],
                 content: ['/produce/produce/printCert?type=new', 'yes'] //iframe的url，no代表不显示滚动条
             });
         });
@@ -621,7 +621,7 @@ debugger;
                 type: 2,
                 title: '打印合格证确认',
                 skin: 'layui-layer-rim', //加上边框
-                area: ['800px', '800px'],
+                area: ['800px', '600px'],
                 content: ['/produce/produce/printCert?type=red', 'yes'] //iframe的url，no代表不显示滚动条
             });
         });
@@ -631,7 +631,7 @@ debugger;
                 type: 2,
                 title: '打印合格证确认',
                 skin: 'layui-layer-rim', //加上边框
-                area: ['1400px', '800px'],
+                area: ['1400px', '600px'],
                 content: ['/produce/produce/printCert?type=green', 'yes'] //iframe的url，no代表不显示滚动条
             });
         });
@@ -640,9 +640,22 @@ debugger;
                 type: 2,
                 title: '打印合格证确认',
                 skin: 'layui-layer-rim', //加上边框
-                area: ['1400px', '800px'],
+                area: ['1400px', '600px'],
                 content: ['/produce/produce/printCert?type=yellow', 'yes'] //iframe的url，no代表不显示滚动条
             });
+        });
+
+        // 米克重重新计算逻辑
+        var itemWidth = $("#itemWidth").val();
+        var itemThick = $("#itemThick").val();
+        $("#itemDensity").bind('input propertychange', function(){
+            var itemDensity = $("#itemDensity").val();
+            if(itemDensity == null || itemDensity == '' || itemDensity == 0){
+                $("#itemMickWeight").val('0');
+            }else{
+                var itemMickWeight = parseFloat(itemWidth/(1/(itemDensity*itemThick))).toFixed(3);
+                $("#itemMickWeight").val(itemMickWeight);
+            }
         });
 
         // 连接电子秤逻辑

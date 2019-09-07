@@ -13,7 +13,15 @@
             $("#searchForm").submit();
             return false;
         }
+        function exportInfo() {
+            top.$.jBox.open("iframe:${ctx}/crm/producePlan/export", "导出条件", 500, 300, {
+                buttons: { "关闭": true}, submit: function (v, h, f) {
+
+                }
+            });
+        }
     </script>
+
 </head>
 <body>
 <%--<ul class="nav nav-tabs">--%>
@@ -66,6 +74,8 @@
                     &nbsp;&nbsp;
                     <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 80px" value="查询"/></li>
                     &nbsp;&nbsp;
+                    <li class="btns"><input id="btnExport" class="btn btn-primary" type="button" style="width: 80px" value="导出" onclick="exportInfo()"/></li>
+                    &nbsp;&nbsp;
                     <li class="btns"><input class="btn btn-primary" type="button" style="width: 80px" onclick="prodFormReset()" value="重置"/></li>
                 </ul>
             </form:form>
@@ -105,7 +115,7 @@
                             </c:if>
                             <td>
                                 <a href="${ctx}/produce/producePlan/info?prodPlanCode=${pp.prodPlanCode}"><i class="icon-th-list">&nbsp;详情</i></a>
-                                <a href="/export/prodPlan?prodPlanCode=${pp.prodPlanCode}"><i class="icon-download">&nbsp;详情导出</i></a>
+                                <%--<a href="/export/prodPlan?prodPlanCode=${pp.prodPlanCode}"><i class="icon-download">&nbsp;详情导出</i></a>--%>
                             </td>
                         </tr>
                     </c:forEach>

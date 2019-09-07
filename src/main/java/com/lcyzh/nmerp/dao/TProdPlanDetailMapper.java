@@ -2,6 +2,7 @@ package com.lcyzh.nmerp.dao;
 
 import com.lcyzh.nmerp.entity.TProdPlanDetail;
 import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
+import com.lcyzh.nmerp.model.vo.ProdPlanExportVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -25,6 +26,9 @@ public interface TProdPlanDetailMapper {
     int update(TProdPlanDetail tProdPlanDetail);
 
     List<TProdPlanDetail> findListByProdPlanCode(String prodPlanCode);
+
+    List<TProdPlanDetail> findListBySections(ProdPlanExportVo exportVo);
+
     int delete(Long id);
     int updateByIds(@Param("ids") List<String> ids,
                     @Param("thresholdUp") Double thresholdUp,

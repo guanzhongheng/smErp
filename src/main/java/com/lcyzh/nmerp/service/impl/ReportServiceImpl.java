@@ -91,8 +91,8 @@ public class ReportServiceImpl implements IReportService {
     }
 
     @Override
-    public Map<String,Object> queryProdPlanDetailList(String prodPlanCode) {
-        List<TProdPlanDetail> list = tProdPlanDetailMapper.findListByProdPlanCode(prodPlanCode);
+    public Map<String,Object> queryProdPlanDetailList(ProdPlanExportVo exportVo) {
+        List<TProdPlanDetail> list = tProdPlanDetailMapper.findListBySections(exportVo);
         List<ProdPlanDetailVo> detailVoList = new ArrayList<>();
         Map<String,Object> result = new HashMap<>();
 

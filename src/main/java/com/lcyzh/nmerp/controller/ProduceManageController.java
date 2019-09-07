@@ -10,6 +10,7 @@ import com.lcyzh.nmerp.entity.TProdPlanDetail;
 import com.lcyzh.nmerp.entity.TStock;
 import com.lcyzh.nmerp.model.vo.OrderQueryVo;
 import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
+import com.lcyzh.nmerp.model.vo.ProdPlanExportVo;
 import com.lcyzh.nmerp.model.vo.ProdPlanVo;
 import com.lcyzh.nmerp.service.*;
 import com.lcyzh.nmerp.utils.Arith;
@@ -130,6 +131,13 @@ public class ProduceManageController extends BaseController {
         vo.setProdPlanDetailId(id);
 
         ProdPlanDetailVo voFromDb = prodPlanDetailService.findProdTask(vo);
+        if(voFromDb.getItemDensity() != null && voFromDb.getItemDensity() > 0){
+            Double mkfm = Arith.div(1,Arith.mul(voFromDb.getItemDensity(),voFromDb.getItemThick()));
+            Double mkto = Arith.div(voFromDb.getItemWidth(),mkfm,4);
+            voFromDb.setItemMickWeight(mkto * 1000);
+        }else{
+            voFromDb.setItemMickWeight(0d);
+        }
         model.addAttribute("detail",voFromDb);
 
         model.addAttribute("orderItem",orderItemService.getById(voFromDb.getOrderItemId()));
