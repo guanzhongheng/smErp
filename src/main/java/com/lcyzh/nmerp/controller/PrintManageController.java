@@ -90,20 +90,30 @@ public class PrintManageController extends BaseController {
         // 获取出库单关联详情
         List<OutItemVo> outItemVoList = outStockService.findItemByOutCode(outCode);
         if(!CollectionUtils.isEmpty(outItemVoList)){
-            // 获取订单信息
-            OrderQueryVo order = orderService.findByOrdeCode(outItemVoList.get(0).getOrdCode());
+            Map<String,Integer> orderCodes = new HashMap<>();
+            for(OutItemVo vo : outItemVoList){
+                if(orderCodes.get(vo.getOrdCode()) == null){
+                    orderCodes.put(vo.getOrdCode(),1);
+                }
+            }
+            String cusCode = "";
+            List<OrderItemVo> orderItemVos = new ArrayList<>();
+            for(String key : orderCodes.keySet()){
+                // 获取订单信息
+                OrderQueryVo order = orderService.findByOrdeCode(key);
+                cusCode = order.getCusCode();
+                // 获取订单详情
+                List<OrderItemVo> orderItemVo =   orderService.findItemsByOrdCode(key);
+                orderItemVos.addAll(orderItemVo);
+                model.addAttribute("order",order);
+            }
             // 获取客户信息
-            CustomerAddModifyVo customer = tCustomerMapper.findModifyInfoByCusCode(order.getCusCode());
-            // 获取订单详情
-            List<OrderItemVo> orderItemVos =   orderService.findItemsByOrdCode(outItemVoList.get(0).getOrdCode());
-
+            CustomerAddModifyVo customer = tCustomerMapper.findModifyInfoByCusCode(cusCode);
             List<OrderItemVo> newItems = doProcessOrder(outItemVoList,orderItemVos);
             model.addAttribute("customer",customer);
-            model.addAttribute("order",order);
             model.addAttribute("orderItem",newItems);
             getTotalInfo(model,newItems);
         }else{
-
             model.addAttribute("customer",new CustomerAddModifyVo());
             model.addAttribute("order",new OrderQueryVo());
             model.addAttribute("orderItem",new ArrayList<>());
