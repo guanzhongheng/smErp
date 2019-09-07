@@ -357,7 +357,7 @@ public class CrmManageController extends BaseController {
                 if(n.getItemDensity() != null && n.getItemDensity() > 0){
                     Double mkfm = Arith.div(1,Arith.mul(n.getItemDensity(),n.getItemThick()));
                     Double mkto = Arith.div(n.getItemWidth(),mkfm,4);
-                    n.setItemMickWeight(Arith.div(mkto,1000));
+                    n.setItemMickWeight(mkto * 1000);
                 }else{
                     n.setItemMickWeight(0d);
                 }
