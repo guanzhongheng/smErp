@@ -71,6 +71,7 @@
                         <th style="text-align: center">产品颜色</th>
                         <th style="text-align: center">计价方式</th>
                         <th style="text-align: center">指导价格</th>
+                        <th style="text-align: center">密度</th>
                         <th style="text-align: center">操作</th>
                     </tr>
                     </thead>
@@ -87,6 +88,7 @@
                             <td>${fns:getDictLabel(cus.prodColor, 'prod_color', '无')}</td>
                             <td>${fns:getValueByDictKey(cus.prodPriceType)}</td>
                             <td>${cus.prodGuidePrice}</td>
+                            <td>${cus.prodDensity}</td>
                             <td>
                                 <a href="${ctx}/tProduct/get?id=${cus.id}"><i class="icon-pencil">&nbsp;编辑</i></a>
                                 <a href="${ctx}/tProduct/delete?id=${cus.id}"

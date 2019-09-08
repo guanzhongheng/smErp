@@ -41,6 +41,7 @@
             and prod_variety = #{prodVariety,jdbcType=BIGINT}
             </if>
         </where>
+        order by prod_variety
     </select>
 
     <select id="findAllList" resultMap="tFormulaResultMap">

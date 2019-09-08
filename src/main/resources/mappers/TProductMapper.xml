@@ -59,6 +59,7 @@
                 and prod_unit = #{prodUnit}
             </if>
         </where>
+        order by prod_variety
     </select>
 
     <select id="findAllList" resultMap="tProductResultMap">
@@ -91,7 +92,7 @@
             #{prodUnit,jdbcType=BIGINT},
             #{createTime,jdbcType=TIMESTAMP},
             #{prodColor,jdbcType=VARCHAR},
-            #{tProduct.prodDensity,jdbcType=VARCHAR}
+            #{prodDensity,jdbcType=DOUBLE}
         )
     </insert>
 

@@ -72,18 +72,20 @@
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label"><i style="color: red">*</i>&nbsp;产品单位:</label>
+                    <label class="control-label"><i style="color: red">*</i>&nbsp;计价方式:</label>
                     <div class="controls">
-                        <form:select path="prodUnit" class="input-medium" cssStyle="width: 220px" placeholder="产品单位" disabled="${prodId == null?'false':'true'}">
+                        <form:select path="prodPriceType" class="input-medium" cssStyle="width: 220px" placeholder="计价方式" disabled="${prodId == null?'false':'true'}" onchange="getUnit(this)">
                             <form:option value="" label=""/>
-                            <form:options items="${fns:getCusDictList(142000)}" itemLabel="label" itemValue="value" htmlEscape="false" />
+                            <form:options items="${fns:getCusDictList(141000)}" itemLabel="label" itemValue="value" htmlEscape="false" />
                         </form:select>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <i style="color: red">*</i>&nbsp;计价方式:&nbsp;&nbsp;&nbsp;&nbsp;
-                        <form:select path="prodPriceType" class="input-medium" cssStyle="width: 220px" placeholder="计价方式" disabled="${prodId == null?'false':'true'}">
-                            <form:option value="" label=""/>
-                            <form:options items="${fns:getCusDictList(141000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
-                        </form:select>
+                        <i style="color: red">*</i>&nbsp;产品单位:&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="hidden" name="prodUnit" id="prodUnit" value="${tProduct.prodUnit}" />
+                        <input type="text" id="showUnit" value="${tProduct.prodUnit==142001?'平方米':'公斤'}" disabled/>
+                        <%--<form:select path="prodUnit" class="input-medium" cssStyle="width: 220px" placeholder="产品单位" disabled="${prodId == null?'false':'true'}">--%>
+                            <%--<form:option value="" label=""/>--%>
+                            <%--<form:options items="${fns:getCusDictList(142000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
+                        <%--</form:select>--%>
                     </div>
                 </div>
                 <div class="control-group">
@@ -91,8 +93,8 @@
                     <div class="controls">
                         <form:input path="prodGuidePrice" htmlEscape="false" maxlength="100" class="required"/>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <i style="color: red">*</i>&nbsp;产品密度:&nbsp;&nbsp;&nbsp;&nbsp;
-                        <form:input path="prodDensity" htmlEscape="false" maxlength="100" class="required"/>
+                        <i style="color: white;">*</i>&nbsp;产品密度:&nbsp;&nbsp;&nbsp;&nbsp;
+                        <form:input path="prodDensity" htmlEscape="false" maxlength="100"/>
                     </div>
                 </div>
                 <div class="">
@@ -110,6 +112,19 @@
     </div>
 </div>
 <script>
+
+    function getUnit(obj) {
+        debugger;
+        if(obj.value == "141001"){ // 按重量
+            $("#prodUnit").val("142002");
+            $("#showUnit").val("公斤");
+        }
+        if(obj.value == "141002"){ // 按面积
+            $("#prodUnit").val("142001");
+            $("#showUnit").val("平方米");
+        }
+    }
+
     function checkInfo(obj){
         debugger;
         var oldId = $("#oldId").val();
