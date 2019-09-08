@@ -19,9 +19,14 @@
 
 <body class="white-bg">
 <div class="wrapper wrapper-content p-xl">
+    <div class="text-right">
+        <button class="btn btn-primary" onclick="print2()">打印</button>
+        &nbsp;&nbsp;
+        <button class="btn btn-primary" onclick="javascript:history.go(-1);">返回</button>
+    </div>
     <!--startprint-->
     <div class="ibox-content p-xl">
-        <div class="row">
+        <div class="row" style="height: 1100px;" id="wcpf">
             <div class="col-sm-12 text-center">
                 <h2>配方单</h2>
             </div>
@@ -43,7 +48,24 @@
                     </table>
                 </div>
             </div>
+            <br>
+            <div class="row">
+                <p>注意：</p>
+                <p>（随幅宽增减而增减高压和线性的比例！其他比例不变！）</p>
+                <p>1.以上温度仅供参考，随时注意塑化情况，开口情况，</p>
+                <p>2.电晕，涂覆，烘干等严密观察，</p>
+                <p>3.折叠机铺平棍严禁速度过快，以防将涂覆液擦掉！</p>
+                <p>4.注意观察颜色，比去年要深，但不可过深。</p>
+                <p>5.严格检查造粒，严禁添加不合格的造粒（随时汇报）！</p>
 
+            </div>
+
+        </div>
+        <div class="row"  style="height: 1050px;" id="zcpf">
+            <div class="col-sm-12 text-center">
+                <h2>配方单</h2>
+            </div>
+            <div style="height: 5px"></div>
             <div class="row" style="text-align: center;">
                 <label class="control-label">中层配比(<span id="midTemp">0</span>℃)</label>
             </div>
@@ -61,7 +83,23 @@
                     </table>
                 </div>
             </div>
+            <br>
+            <div class="row">
+                <p>注意：</p>
+                <p>（随幅宽增减而增减高压和线性的比例！其他比例不变！）</p>
+                <p>1.以上温度仅供参考，随时注意塑化情况，开口情况，</p>
+                <p>2.电晕，涂覆，烘干等严密观察，</p>
+                <p>3.折叠机铺平棍严禁速度过快，以防将涂覆液擦掉！</p>
+                <p>4.注意观察颜色，比去年要深，但不可过深。</p>
+                <p>5.严格检查造粒，严禁添加不合格的造粒（随时汇报）！</p>
 
+            </div>
+        </div>
+        <div class="row" id="ncpf">
+            <div class="col-sm-12 text-center">
+                <h2>配方单</h2>
+            </div>
+            <div style="height: 5px"></div>
             <div class="row" style="text-align: center;">
                 <label class="control-label">内层配比(<span id="inTemp">0</span>℃)</label>
             </div>
@@ -79,24 +117,20 @@
                     </table>
                 </div>
             </div>
-        </div>
-        <br>
-        <div class="row">
-            <p>注意：</p>
-            <p>（随幅宽增减而增减高压和线性的比例！其他比例不变！）</p>
-            <p>1.以上温度仅供参考，随时注意塑化情况，开口情况，</p>
-            <p>2.电晕，涂覆，烘干等严密观察，</p>
-            <p>3.折叠机铺平棍严禁速度过快，以防将涂覆液擦掉！</p>
-            <p>4.注意观察颜色，比去年要深，但不可过深。</p>
-            <p>5.严格检查造粒，严禁添加不合格的造粒（随时汇报）！</p>
+            <br>
+            <div class="row">
+                <p>注意：</p>
+                <p>（随幅宽增减而增减高压和线性的比例！其他比例不变！）</p>
+                <p>1.以上温度仅供参考，随时注意塑化情况，开口情况，</p>
+                <p>2.电晕，涂覆，烘干等严密观察，</p>
+                <p>3.折叠机铺平棍严禁速度过快，以防将涂覆液擦掉！</p>
+                <p>4.注意观察颜色，比去年要深，但不可过深。</p>
+                <p>5.严格检查造粒，严禁添加不合格的造粒（随时汇报）！</p>
 
+            </div>
         </div>
         <!--endprint-->
-        <div class="text-right">
-            <button class="btn btn-primary" onclick="print2()">打印</button>
-            &nbsp;&nbsp;
-            <button class="btn btn-primary" onclick="javascript:history.go(-1);">返回</button>
-        </div>
+
     </div>
 
 </div>
@@ -141,6 +175,15 @@
             $("#outerTable").append(outerTable);
             $("#midderTable").append(midderTable);
             $("#innerTable").append(innerTable);
+            if(outerTable == "" && outerTable.length <=0){
+                $("#wcpf").hide();
+            }
+            if(midderTable == "" && midderTable.length <=0){
+                $("#zcpf").hide();
+            }
+            if(innerTable == "" && innerTable.length <=0){
+                $("#ncpf").hide();
+            }
         }
     })
 
