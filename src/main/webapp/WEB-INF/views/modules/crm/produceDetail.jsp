@@ -236,7 +236,7 @@
                                                 <input placeholder="密度" value="${detail.itemDensity}" id="itemDensity"
                                                        class="form-control produceDetail-input-readonly" style="border-color: red;"/>
                                             </div>
-                                            <label class="col-sm-2 control-label" style="border: red;">米克重:</label>
+                                            <label class="col-sm-2 control-label" style="color: red;">米克重:</label>
                                             <div class="col-sm-4">
                                                 <input disabled="ture" placeholder="米克重" value="${detail.itemMickWeight}" id="itemMickWeight"
                                                        class="form-control produceDetail-input-readonly" style="border-color: red;" readonly="true"/>
@@ -265,7 +265,7 @@
                                             <form:form id="inputForm" modelAttribute="detail" action=""
                                                        method="post" class="form-horizontal">
                                                 <form:textarea path="itemRemarks" htmlEscape="false" cssClass="form-control global-input"
-                                                               cssStyle="width: 705px;color: #f3190f;font-size: 16px;" rows="3" maxlength="255"/>
+                                                               cssStyle="min-width: 500px;color: #f3190f;font-size: 16px;" rows="3" maxlength="255"/>
                                             </form:form>
                                             </div>
                                         </div>
@@ -653,8 +653,8 @@
             if(itemDensity == null || itemDensity == '' || itemDensity == 0){
                 $("#itemMickWeight").val('0');
             }else{
-                var itemMickWeight = parseFloat(itemWidth/(1/(itemDensity*itemThick))).toFixed(3);
-                $("#itemMickWeight").val(itemMickWeight);
+                var itemMickWeight = parseFloat(itemWidth/(1/(itemDensity*itemThick))).toFixed(4);
+                $("#itemMickWeight").val(itemMickWeight * 1000);
             }
         });
 
