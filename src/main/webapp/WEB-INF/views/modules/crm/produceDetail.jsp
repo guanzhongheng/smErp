@@ -97,11 +97,11 @@
                                         <div class="hr-line-dashed"></div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" style="margin-left: -25px;">生产开关:</label>
-                                            <div class="col-sm-5">
+                                            <div class="col-sm-3">
                                                 <input type="checkbox" checked class="checkbox" id="prodCheckbox"/>
                                             </div>
-                                            <div class="col-md-5 " id="prodBtns" hidden>
-                                                <button class="btn btn-primary <%--global-button-style--%>" type="button" id="inStock">入 库</button>
+                                            <div class="col-md-7 " id="prodBtns" hidden>
+                                                <button class="btn btn-primary <%--global-button-style--%>" type="button" id="inStock" style="width: 95px;">入 库</button>
                                                 <button class="btn btn-warning " type="button" id="rePrint" disabled="true">重新打签</button>
                                                 <div class="btn-group dropdown">
                                                     <a class="btn btn-success " id="printCertNew" disabled="true" style="width: auto">
@@ -231,15 +231,15 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label" style="margin-left: -25px;">密度:</label>
+                                            <label class="col-sm-2 control-label" style="margin-left: -25px;color: red;">密度:</label>
                                             <div class="col-sm-4">
                                                 <input placeholder="密度" value="${detail.itemDensity}" id="itemDensity"
-                                                       class="form-control produceDetail-input-readonly"/>
+                                                       class="form-control produceDetail-input-readonly" style="border-color: red;"/>
                                             </div>
-                                            <label class="col-sm-2 control-label">米克重:</label>
+                                            <label class="col-sm-2 control-label" style="border: red;">米克重:</label>
                                             <div class="col-sm-4">
                                                 <input disabled="ture" placeholder="米克重" value="${detail.itemMickWeight}" id="itemMickWeight"
-                                                       class="form-control produceDetail-input-readonly" readonly="true"/>
+                                                       class="form-control produceDetail-input-readonly" style="border-color: red;" readonly="true"/>
                                             </div>
                                         </div>
                                         <div class="form-group">
