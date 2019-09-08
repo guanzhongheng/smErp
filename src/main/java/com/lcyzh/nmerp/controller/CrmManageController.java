@@ -418,5 +418,4 @@ public class CrmManageController extends BaseController {
         model.addAttribute("totalWeight",Arith.round(totalWeight,4));
         model.addAttribute("totalPrice",Arith.round(totalPrice,4));
     }
-
 }
