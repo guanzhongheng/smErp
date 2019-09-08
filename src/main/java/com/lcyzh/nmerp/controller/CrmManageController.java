@@ -368,14 +368,14 @@ public class CrmManageController extends BaseController {
                 if(n.getItemDensity() != null && n.getItemDensity() > 0){
                     Double mkfm = Arith.div(1,Arith.mul(n.getItemDensity(),n.getItemThick()));
                     Double mkto = Arith.div(n.getItemWidth(),mkfm,4);
-                    n.setItemMickWeight(mkto * 1000);
+                    n.setItemMickWeight(Arith.round((mkto * 1000),4));
                 }else{
                     n.setItemMickWeight(0d);
                 }
                 n.setTheoryWeight(to);
             });
             totalWi = list.stream().mapToDouble(i->i.getTheoryWeight()).sum();
-            model.addAttribute("theoryTotalWeight",totalWi);
+            model.addAttribute("theoryTotalWeight",Arith.round(totalWi,4));
         }
     }
 
@@ -396,27 +396,27 @@ public class CrmManageController extends BaseController {
                 return 0;
             }
         }).sum();
-        model.addAttribute("totalWeight",totalWeight);
-        model.addAttribute("totalMj",totalMj);
-        model.addAttribute("orderNum",orderNum);
-        model.addAttribute("invNum",invNum);
-        model.addAttribute("invWeightPrice",invWeightPrice);
-        model.addAttribute("invMjprice",invMjprice);
-        model.addAttribute("outNum",outNum);
-        model.addAttribute("unOutNum",unOutNum);
-        model.addAttribute("invTotalprice",invTotalprice);
+        model.addAttribute("totalWeight",Arith.round(totalWeight,4));
+        model.addAttribute("totalMj",Arith.round(totalMj,4));
+        model.addAttribute("orderNum",Arith.round(orderNum,4));
+        model.addAttribute("invNum",Arith.round(invNum,4));
+        model.addAttribute("invWeightPrice",Arith.round(invWeightPrice,4));
+        model.addAttribute("invMjprice",Arith.round(invMjprice,4));
+        model.addAttribute("outNum",Arith.round(outNum,4));
+        model.addAttribute("unOutNum",Arith.round(unOutNum,4));
+        model.addAttribute("invTotalprice",Arith.round(invTotalprice,4));
     }
 
     public void doCalInventoryInfo(List<StockQueryVo> list,Model model){
         Double totalWeight = list.stream().mapToDouble(i->i.getItemWeight() == null?0:i.getItemWeight()).sum();
-        model.addAttribute("totalWeight",totalWeight);
+        model.addAttribute("totalWeight",Arith.round(totalWeight,4));
     }
 
     public void doCalOutStock(List<OutStockDetailVo> list,Model model){
         Double totalWeight = list.stream().mapToDouble(i->i.getItemWeight() == null?0:i.getItemWeight()).sum();
         Double totalPrice = list.stream().mapToDouble(i->i.getPrice() == null?0:i.getPrice()).sum();
-        model.addAttribute("totalWeight",totalWeight);
-        model.addAttribute("totalPrice",totalPrice);
+        model.addAttribute("totalWeight",Arith.round(totalWeight,4));
+        model.addAttribute("totalPrice",Arith.round(totalPrice,4));
     }
 
 }
