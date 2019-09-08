@@ -207,9 +207,9 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label" style="margin-left: -25px;">厚度(mm):</label>
+                                            <label class="col-sm-2 control-label" style="margin-left: -25px;">重量:</label>
                                             <div class="col-sm-4">
-                                                <input disabled="ture" placeholder="厚度" value="${detail.itemThick}" id="itemThick"
+                                                <input disabled="ture" placeholder="重量" value="${detail.itemTotalWeight}"
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
                                             </div>
                                             <label class="col-sm-2 control-label">数量:</label>
@@ -219,9 +219,10 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label" style="margin-left: -25px;">重量:</label>
+                                            <label class="col-sm-2 control-label"  style="margin-left: -25px;">计价方式:</label>
                                             <div class="col-sm-4">
-                                                <input disabled="ture" placeholder="重量" value="${detail.itemTotalWeight}"
+                                                <input type="hidden" value="${detail.itemPriceType}" id="itemPriceType">
+                                                <input disabled="ture" placeholder="计价方式" value="${fns:getValueByDictKey(detail.itemPriceType)}"
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
                                             </div>
                                             <label class="col-sm-2 control-label">面积(m&sup2):</label>
@@ -231,10 +232,12 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label" style="margin-left: -25px;color: red;">密度:</label>
+                                            <label class="col-sm-2 control-label" style="margin-left: -25px;color: red;">厚度(mm):</label>
                                             <div class="col-sm-4">
-                                                <input placeholder="密度" value="${detail.itemDensity}" id="itemDensity"
+                                                <input placeholder="厚度" value="${detail.itemThick}" id="itemThick"
                                                        class="form-control produceDetail-input-readonly" style="border-color: red;"/>
+                                                <input placeholder="密度" value="${detail.itemDensity}" id="itemDensity"
+                                                        type="hidden"/>
                                             </div>
                                             <label class="col-sm-2 control-label" style="color: red;">米克重:</label>
                                             <div class="col-sm-4">
@@ -252,12 +255,6 @@
                                                 <input disabled="ture" placeholder="止码" style="width: 65px;display:inline" id="seCode_e"
                                                        class="form-control produceDetail-input-readonly" />
                                             </div>
-                                            <label class="col-sm-2 control-label"  style="padding-left: inherit;">计价方式:</label>
-                                            <div class="col-sm-4">
-                                                <input type="hidden" value="${detail.itemPriceType}" id="itemPriceType">
-                                                <input disabled="ture" placeholder="计价方式" value="${fns:getValueByDictKey(detail.itemPriceType)}"
-                                                       class="form-control produceDetail-input-readonly" readonly="true"/>
-                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" style="margin-left: -25px;">备注信息:</label>
@@ -272,7 +269,7 @@
                                         <div class="form-group">
                                             <div class="row" >
                                                 <div class="col-sm-4">
-                                                    <button class="btn btn-white global-button-style" type="button" onclick="history.go(-1);">返回</button>
+                                                    <button class="btn btn-info global-button-style" type="button" onclick="javascript:history.go(-1)">返回</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -647,10 +644,10 @@
 
         // 米克重重新计算逻辑
         var itemWidth = $("#itemWidth").val();
-        var itemThick = $("#itemThick").val();
-        $("#itemDensity").bind('input propertychange', function(){
-            var itemDensity = $("#itemDensity").val();
-            if(itemDensity == null || itemDensity == '' || itemDensity == 0){
+        var itemDensity = $("#itemDensity").val();
+        $("#itemThick").bind('input propertychange', function(){
+            var itemThick = $("#itemThick").val();
+            if(itemThick == null || itemThick == '' || itemThick == 0){
                 $("#itemMickWeight").val('0');
             }else{
                 var itemMickWeight = parseFloat(itemWidth/(1/(itemDensity*itemThick))).toFixed(4);
