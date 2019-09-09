@@ -7,13 +7,18 @@
 
 
 <div class="tabs-container" style="padding: 0px 20px;">
+
     <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
         <div class="panel-heading" style="background-color: #50B0E6">
             <h3 class="panel-title global-panel-title" >
                 第一步：选择产品
+                <a class="collapse-link" style="font-size: 13px;margin-left: 20px;    color: #337ab7;">
+                    折叠/展开
+                </a>
             </h3>
+
         </div>
-        <div class="panel-body" style="padding: 10px 10px 10px 10px;">
+        <div class="panel-body prod-hide" style="padding: 10px 10px 10px 10px;">
             <div class="row">
                 <div class="col-sm-12">
                     <input type="hidden" id="ordCode" value="${ordCode}"/>
@@ -199,6 +204,20 @@
 <script src="${ctxStatic}/hPlugs/js/plugins/bootstrap-table/bootstrap-table-fixed-columns.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 <script>
+    $(document).ready(function () {
+        $(".collapse-link").click(function() {
+            var o = $(this).closest("div.panel"),
+                i = o.find("div.prod-hide");
+            i.slideToggle(200),
+                o.toggleClass("").toggleClass("border-bottom"),
+                setTimeout(function() {
+                        o.resize(),
+                            o.find("[id^=map-]").resize()
+                    },
+                    50)
+        })
+    })
+
 
     var prodList = [];
     var cusProdList = [];
