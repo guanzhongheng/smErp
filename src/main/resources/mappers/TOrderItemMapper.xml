@@ -261,18 +261,28 @@
                 t.item_weight,
                 case
                 when oi.item_price_type = 141002 then t.item_sq
+                when oi.item_price_type = 141004 then t.item_sq
+                when oi.item_price_type = 141006 then t.item_sq
                 else 0 end as item_sq,
                 oi.item_price_type,
                 oi.item_price,
                 case
                 when oi.item_price_type = 141001 then t.item_weight * oi.item_price
+                when oi.item_price_type = 141003 then t.item_weight * oi.item_price
+                when oi.item_price_type = 141005 then t.item_weight * oi.item_price
                 else 0 end as wtPrice,
                 case
                 when oi.item_price_type = 141002 then t.item_lenth * t.item_width * oi.item_price
+                when oi.item_price_type = 141004 then t.item_lenth * t.item_width * oi.item_price
+                when oi.item_price_type = 141006 then t.item_lenth * t.item_width * oi.item_price
                 else 0 end as sqPrice,
                 case
                 when oi.item_price_type = 141001 then t.item_weight * oi.item_price
+                when oi.item_price_type = 141003 then t.item_weight * oi.item_price
+                when oi.item_price_type = 141005 then t.item_weight * oi.item_price
                 when oi.item_price_type = 141002 then t.item_lenth * t.item_width * oi.item_price
+                when oi.item_price_type = 141004 then t.item_lenth * t.item_width * oi.item_price
+                when oi.item_price_type = 141006 then t.item_lenth * t.item_width * oi.item_price
                 else 0 end as price
             FROM
                 t_stock t
@@ -280,7 +290,7 @@
                 AND oi.ord_code = t.ord_code
             WHERE
                 t.ord_code = #{ordCode} and not EXISTS (select ts.bar_code from t_out_stock_detail ts where ts.bar_code = t.bar_code)
-            order by oi.item_price_type
+            order by oi.item_price_type,oi.id
             ) d
             GROUP BY d.ord_code
     </select>

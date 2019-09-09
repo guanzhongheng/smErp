@@ -81,7 +81,7 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <i style="color: red">*</i>&nbsp;产品单位:&nbsp;&nbsp;&nbsp;&nbsp;
                         <input type="hidden" name="prodUnit" id="prodUnit" value="${tProduct.prodUnit}" />
-                        <input type="text" id="showUnit" value="${tProduct.prodUnit==142001?'平方米':'公斤'}" disabled/>
+                        <input type="text" id="showUnit" value="${(tProduct.prodUnit==142001 || tProduct.prodUnit==142003)?'平方米':'公斤'}" disabled/>
                         <%--<form:select path="prodUnit" class="input-medium" cssStyle="width: 220px" placeholder="产品单位" disabled="${prodId == null?'false':'true'}">--%>
                             <%--<form:option value="" label=""/>--%>
                             <%--<form:options items="${fns:getCusDictList(142000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
@@ -115,11 +115,11 @@
 
     function getUnit(obj) {
         debugger;
-        if(obj.value == "141001"){ // 按重量
+        if(obj.value == "141001" || obj.value == "141003" || obj.value == "141005"){ // 按重量
             $("#prodUnit").val("142002");
             $("#showUnit").val("公斤");
         }
-        if(obj.value == "141002"){ // 按面积
+        if(obj.value == "141002" || obj.value == "141004" || obj.value == "141006"){ // 按面积
             $("#prodUnit").val("142001");
             $("#showUnit").val("平方米");
         }

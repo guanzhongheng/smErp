@@ -270,11 +270,15 @@ public class PrintManageController extends BaseController {
      * @param orderItemVos
      */
     public void getTotalInfo(Model model,List<OrderItemVo> orderItemVos){
-        Double totalMj = orderItemVos.stream().mapToDouble(i->((i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ)&&i.getItemTotalSq()!=null)?i.getItemTotalSq():0)).sum();
-        Double totalZl = orderItemVos.stream().mapToDouble(i -> ((i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)&&i.getItemTotalWeight()!=null)?i.getItemTotalWeight():0)).sum();
+        Double totalMj = orderItemVos.stream().mapToDouble(i->(((i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ)
+                || i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ_JB)
+                || i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ_JH))&&i.getItemTotalSq()!=null)?i.getItemTotalSq():0)).sum();
+        Double totalZl = orderItemVos.stream().mapToDouble(i -> (((i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)
+                || i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JH)
+                || i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JB) )&&i.getItemTotalWeight()!=null)?i.getItemTotalWeight():0)).sum();
         Double totalNum = orderItemVos.stream().mapToDouble(i -> i.getItemNum()==null?0: i.getItemNum()).sum();
         orderItemVos.forEach(n->{
-            if(n.getItemPriceType() == 141002){
+            if(n.getItemPriceType() == 141002 || n.getItemPriceType() == 141004 || n.getItemPriceType() == 141006){
                 n.setShowTotalPrice(Arith.round(Arith.mul(n.getItemTotalSq(),n.getItemPrice()),4));
             }else{
                 n.setShowTotalPrice(Arith.round(Arith.mul(n.getItemTotalWeight(),n.getItemPrice()),4));
@@ -286,7 +290,9 @@ public class PrintManageController extends BaseController {
         double totalPriceByZL = 0d;
           if(orderItemVos!=null && !orderItemVos.isEmpty()){
               for (OrderItemVo item: orderItemVos){
-                  if(item.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)){
+                  if(item.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)
+                          || item.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JB)
+                          || item.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JH)){
                       totalPriceByZL += item.getItemPrice() * item.getItemTotalWeight();
                   }else{
                       totoalPriceByMj += item.getItemNum() * item.getItemPrice() *(item.getItemLenth()*item.getItemWidth());

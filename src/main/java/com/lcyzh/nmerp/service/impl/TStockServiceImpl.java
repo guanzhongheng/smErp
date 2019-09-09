@@ -53,10 +53,10 @@ public class TStockServiceImpl implements TStockService{
     @Override
     public List<StockQueryVo> findList(Page<StockQueryVo> page, StockQueryVo vo) {
         if(vo.getStartDate() == null || vo.getStartDate().length() == 0) {
-            vo.setStartDate(LocalDate.now().minusMonths(3).toString());
+            vo.setStartDate(LocalDate.now().minusMonths(3).toString() + " 00:00:00");
         }
         if(vo.getEndDate() == null || vo.getEndDate().length() == 0) {
-            vo.setEndDate(LocalDate.now().plusDays(1).toString());
+            vo.setEndDate(LocalDate.now().plusDays(1).toString() + " 23:59:59");
         }
         PageHelper.startPage(page.getPageNo(),page.getPageSize());
         List<StockQueryVo> list = tStockMapper.findList(vo);

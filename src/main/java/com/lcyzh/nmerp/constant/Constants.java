@@ -714,6 +714,25 @@ public class Constants {
     public static final long PROD_PRICE_TYPE_SQ = 141002L;
 
     /**
+     * 按重量
+     */
+    public static final long PROD_PRICE_TYPE_WEIGHT_JH = 141003L;
+    /**
+     * 按面积
+     */
+    public static final long PROD_PRICE_TYPE_SQ_JH = 141004L;
+
+    /**
+     * 按重量
+     */
+    public static final long PROD_PRICE_TYPE_WEIGHT_JB = 141005L;
+    /**
+     * 按面积
+     */
+    public static final long PROD_PRICE_TYPE_SQ_JB = 141006L;
+
+
+    /**
      * 产品颜色
      */
     public static final String PROD_COLOR = "prod_color";

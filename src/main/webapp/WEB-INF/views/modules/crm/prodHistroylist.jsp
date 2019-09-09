@@ -21,8 +21,6 @@
     <%--<li class="active"><a href="${ctx}/tProduct/histroyList">产品历史</a></li>--%>
 <%--</ul>--%>
 
-
-
 <div class="tabs-container" style="padding: 20px 20px;">
     <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
         <div class="panel-heading" style="background-color: #50B0E6">
@@ -37,35 +35,33 @@
                 <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
                 <ul class="ul-form">
                     <li>
-                        <form:input path="orderTitle" htmlEscape="false" maxlength="200"
+                        <form:input path="orderTitle" htmlEscape="false" maxlength="200" cssStyle="width: 130px;"
                                     class="input-medium" placeholder="订单标题"/>
                     </li>
                     <li>
                         &nbsp;&nbsp;
-                        <form:select path="itemCgyCode" class="input-medium" placeholder="产品类型">
+                        <form:select path="itemCgyCode" class="input-medium" placeholder="产品类型" cssStyle="width: 130px;">
                             <form:option value="" label=""/>
                             <form:options items="${fns:getCusDictList(149000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                         </form:select>
                     </li>
                     <li>
                         &nbsp;&nbsp;
-                        <form:select path="itemVariety" class="input-medium" placeholder="产品品种">
+                        <form:select path="itemVariety" class="input-medium" placeholder="产品品种" cssStyle="width: 130px;">
                             <form:option value="" label=""/>
                             <form:options items="${fns:getCusDictList(148000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                         </form:select>
                     </li>
                     <li>
                         &nbsp;&nbsp;
-                        <form:input path="startDate" htmlEscape="false" readonly="readonly" class="input-small Wdate"
-                                    placeholder="开始时间" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
+                        <form:input path="startDate" htmlEscape="false" readonly="readonly" class="input-small Wdate" cssStyle="width: 195px;"
+                                    placeholder="开始时间" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
                         ～
-                        <form:input path="endDate" htmlEscape="false" readonly="readonly" class="input-small Wdate"
-                                    placeholder="开始时间" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
+                        <form:input path="endDate" htmlEscape="false" readonly="readonly" class="input-small Wdate" cssStyle="width: 195px;"
+                                    placeholder="开始时间" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
                     </li>
-                    &nbsp;&nbsp;
-                    <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 80px" value="查询"/></li>
-                    &nbsp;&nbsp;
-                    <li class="btns"><input class="btn btn-primary" type="button" style="width: 80px" onclick="histFormReset()" value="重置"/></li>
+                    <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 70px" value="查询"/></li>
+                    <li class="btns"><input class="btn btn-primary" type="button" style="width: 70px" onclick="histFormReset()" value="重置"/></li>
                 </ul>
             </form:form>
             <div class="control-group table-responsive">

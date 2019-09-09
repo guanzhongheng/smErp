@@ -26,10 +26,10 @@ public class THistoryProdRecordServiceImpl implements ITHistoryProdRecordService
     public Page<HistoryPordRecordVo> findPage(Page<HistoryPordRecordVo> page, HistoryPordRecordVo vo) {
         PageHelper.startPage(page.getPageNo(),page.getPageSize());
         if(vo.getStartDate() == null || vo.getStartDate().length() == 0) {
-            vo.setStartDate(LocalDate.now().minusMonths(1).toString());
+            vo.setStartDate(LocalDate.now().minusMonths(1).toString() + " 06:00:00");
         }
         if(vo.getEndDate() == null || vo.getEndDate().length() == 0) {
-            vo.setEndDate(LocalDate.now().plusDays(1).toString());
+            vo.setEndDate(LocalDate.now().plusDays(1).toString() + " 23:59:59");
         }
         List<HistoryPordRecordVo> list = tHistoryProdRecordMapper.findListVo(vo);
 

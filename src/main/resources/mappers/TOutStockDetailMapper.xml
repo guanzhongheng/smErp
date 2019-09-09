@@ -127,8 +127,12 @@
             ts.item_weight as itemWeight,
             ti.item_price as itemPrice,
             case when ti.item_price_type = 141001 then ti.item_price * ts.item_weight
-                     when ti.item_price_type = 141002 then ti.item_price * ts.item_lenth * ts.item_width
-                     else 0 end price,
+                 when ti.item_price_type = 141003 then ti.item_price * ts.item_weight
+                 when ti.item_price_type = 141005 then ti.item_price * ts.item_weight
+                 when ti.item_price_type = 141002 then ti.item_price * ts.item_lenth * ts.item_width
+                 when ti.item_price_type = 141004 then ti.item_price * ts.item_lenth * ts.item_width
+                 when ti.item_price_type = 141006 then ti.item_price * ts.item_lenth * ts.item_width
+                 else 0 end price,
             ti.item_price_type as itemPriceType
         FROM
             t_out_stock_detail td

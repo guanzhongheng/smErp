@@ -33,4 +33,6 @@ public interface TOrderMapper {
     int updateBatchOutNumByOrdCode(List<TOrder> orders);
 
     int updateOrderStatus(TOrder tOrder);
+
+    int updateOrderNum(TOrder tOrder);
 }

@@ -51,6 +51,7 @@ public class ExportController {
 
     /**
      * 订单信息导出
+     * TODO 设计产品编码 待确认
      */
     @RequestMapping(value = "/export/orderInfo",method = RequestMethod.GET)
     public ModelAndView orderInfoExport(HttpServletResponse response, String ordCode){

@@ -89,6 +89,18 @@
                                 <c:if test="${ord.itemPriceType eq '141002'}">
                                     <td>&yen;${(ord.itemNum * (ord.itemPrice*100) * (ord.itemLenth*10) * (ord.itemWidth*10))/10000}</td>
                                 </c:if>
+                                <c:if test="${ord.itemPriceType eq '141003'}">
+                                    <td>&yen;${(ord.itemNum * (ord.itemPrice*100) * (ord.itemWeight*100))/10000}</td>
+                                </c:if>
+                                <c:if test="${ord.itemPriceType eq '141004'}">
+                                    <td>&yen;${(ord.itemNum * (ord.itemPrice*100) * (ord.itemLenth*10) * (ord.itemWidth*10))/10000}</td>
+                                </c:if>
+                                <c:if test="${ord.itemPriceType eq '141005'}">
+                                    <td>&yen;${(ord.itemNum * (ord.itemPrice*100) * (ord.itemWeight*100))/10000}</td>
+                                </c:if>
+                                <c:if test="${ord.itemPriceType eq '141006'}">
+                                    <td>&yen;${(ord.itemNum * (ord.itemPrice*100) * (ord.itemLenth*10) * (ord.itemWidth*10))/10000}</td>
+                                </c:if>
 
                             </tr>
                         </c:forEach>

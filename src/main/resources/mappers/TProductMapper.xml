@@ -59,7 +59,7 @@
                 and prod_unit = #{prodUnit}
             </if>
         </where>
-        order by prod_variety
+        order by prod_variety,id
     </select>
 
     <select id="findAllList" resultMap="tProductResultMap">

@@ -45,7 +45,7 @@
     <select id="findAllList" resultMap="tMachineInfoResultMap">
         SELECT *
         FROM t_machine_info
-        ORDER BY max_width DESC
+        ORDER BY max_width,id DESC
     </select>
 
     <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TMachineInfo"  useGeneratedKeys="true" keyProperty="id">

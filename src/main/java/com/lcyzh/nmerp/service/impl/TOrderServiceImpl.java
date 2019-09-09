@@ -51,7 +51,14 @@ public class TOrderServiceImpl implements TOrderService {
             vo.setItemUnitValue(DictUtils.getValueByDictKey(vo.getItemUnit()));
             vo.setItemCgyCodeValue(DictUtils.getValueByDictKey(vo.getItemCgyCode()));
             vo.setItemVaritemValue(DictUtils.getValueByDictKey(vo.getItemVariety()));
-            vo.setItemPriceTypeValue(DictUtils.getValueByDictKey(vo.getItemPriceType()));
+            if(vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)
+                    || vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JH)
+                    || vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JB)){
+                vo.setItemPriceTypeValue("按重量");
+            }else{
+                vo.setItemPriceTypeValue("按面积");
+            }
+
             vo.setItemStatusValue(DictUtils.getValueByDictKey(vo.getItemStatus()));
             vo.setItemColorValue(SysDictUtils.getDictLabel(vo.getItemColor(), "prod_color", ""));
         });
@@ -154,7 +161,9 @@ public class TOrderServiceImpl implements TOrderService {
                 }
                 tOrderItem.setItemLenth(itv.getItemLenth());
                 if (tOrderItem.getItemPriceType() != null) {
-                    if (tOrderItem.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)) {
+                    if (tOrderItem.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)
+                            || tOrderItem.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JH)
+                            || tOrderItem.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JB)) {
                         if (itv.getItemWeight() != null) {
                             tOrderItem.setItemWeight(itv.getItemWeight());
                             tOrderItem.setItemTotalWeight(itv.getItemWeight() * itv.getItemNum());
@@ -259,10 +268,14 @@ public class TOrderServiceImpl implements TOrderService {
             orderItem.setItemStatus(Constants.ORD_PROD_STATUS_NEW);
             orderItem.setItemOutNum(0L);
             orderItems.add(orderItem);
-            if (vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ)) {
+            if (vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ)
+                    || vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ_JH)
+                    || vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ_JB)) {
                 amount += vo.getItemPrice() * vo.getItemTotalSq();
                 totalSq += orderItem.getItemTotalSq();
-            } else if (vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)) {
+            } else if (vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)
+                    || vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JH)
+                    || vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JB)) {
                 amount += vo.getItemPrice() * vo.getItemTotalWeight();
                 totalWeight += orderItem.getItemTotalWeight();
             }

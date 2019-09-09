@@ -21,7 +21,7 @@
     </update>
 
     <select id="findListNew" resultMap="tOutStockResultMap">
-        select * from t_out_stock where out_status = '0' order by create_time
+        select * from t_out_stock where out_status = '0' order by create_time,out_code
     </select>
 
     <select id="findByOutCode" parameterType="java.lang.String" resultMap="tOutStockResultMap">

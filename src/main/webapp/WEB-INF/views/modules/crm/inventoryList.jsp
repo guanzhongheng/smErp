@@ -83,11 +83,11 @@
                 </ul>
                 <ul class="ul-form">
                     <li>
-                        <form:input path="startDate" htmlEscape="false" readonly="readonly" class="input-small Wdate"
-                                    placeholder="开始时间" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
+                        <form:input path="startDate" htmlEscape="false" readonly="readonly" class="input-small Wdate" cssStyle="width: 195px"
+                                    placeholder="开始时间" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
                         ～
-                        <form:input path="endDate" htmlEscape="false" readonly="readonly" class="input-small Wdate"
-                                    placeholder="结束时间" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
+                        <form:input path="endDate" htmlEscape="false" readonly="readonly" class="input-small Wdate" cssStyle="width: 195px"
+                                    placeholder="结束时间" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
                     </li>
                     &nbsp;&nbsp;
                     <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 80px" value="查询"/></li>

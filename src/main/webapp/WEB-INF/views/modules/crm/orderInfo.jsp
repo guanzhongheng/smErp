@@ -181,7 +181,7 @@
                             <td>${o.itemNum}</td>
                             <td>${fns:getDictLabel(o.itemYbType,'prod_ybType','无')}</td>
                             <td>${fns:getDictLabel(o.itemYcType,'prod_ycType','无')}</td>
-                            <td>${o.itemPriceType==141001?"重量":"面积"}</td>
+                            <td>${(o.itemPriceType==141001 || o.itemPriceType==141003 || o.itemPriceType==141005)?"重量":"面积"}</td>
                             <td>${o.itemTotalSq}</td>
                             <td>${o.itemRemarks}</td>
                         </tr>

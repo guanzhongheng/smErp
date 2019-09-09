@@ -518,7 +518,7 @@
         $("#inStock").click(function () {
             var totalWeight = weightFlag == 'auto' ? parseFloat($("#totalWeightAuto").text()).toFixed(2):parseFloat($("#totalWeightHand").val()).toFixed(2);
             var tareWeight = weightFlag == 'auto' ? parseFloat($("#tareWeightAuto").text()).toFixed(2):parseFloat($("#tareWeightHand").val()).toFixed(2);
-            if($("#itemPriceType").val() == 141001){
+            if($("#itemPriceType").val() == 141001 || $("#itemPriceType").val() == 141003 || $("#itemPriceType").val() == 141005){
                 if(totalWeight == 0.00 || totalWeight == null){
                     top.$.jBox.tip('当前计价方式必须称重后才能入库！');
                     return;

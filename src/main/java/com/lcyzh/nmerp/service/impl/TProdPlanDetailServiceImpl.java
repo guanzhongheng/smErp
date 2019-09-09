@@ -35,6 +35,8 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
     private TProdPlanMapper tProdPlanMapper;
     @Autowired
     private TOrderItemMapper tOrderItemMapper;
+    @Autowired
+    private TOrderMapper tOrderMapper;
 
     @Override
     public List<TProdPlanDetail> findListByProdPlanCode(String prodPlanCode) {
@@ -145,6 +147,11 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
             // 未下发生产产品撤销
             //删除订单明细
             tOrderItemMapper.deleteById(ppd.getOrderItemId());
+            // 更新订单数量
+            TOrder order = new TOrder();
+            order.setOrdCode(ppd.getOrdCode());
+            order.setOrdTotalNum(ppd.getItemNum());
+            tOrderMapper.updateOrderNum(order);
         }else if(ppd.getItemStatus().equals('1')){
             //已发下生产产品撤销(为生产完成)
             //更新订单明细
@@ -152,6 +159,11 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
             orderItem.setId(ppd.getOrderItemId());
             orderItem.setItemNum(ppd.getItemNum());
             tOrderItemMapper.updateNum(orderItem);
+            // 更新订单数量
+            TOrder order = new TOrder();
+            order.setOrdCode(ppd.getOrdCode());
+            order.setOrdTotalNum(ppd.getItemNum());
+            tOrderMapper.updateOrderNum(order);
         }
         return true;
     }

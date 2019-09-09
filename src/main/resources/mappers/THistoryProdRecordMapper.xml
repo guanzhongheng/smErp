@@ -65,7 +65,7 @@
             </if>
             <if test="startDate!= null and startDate !=''">
                 <![CDATA[
-                and hpr.create_time >=CONCAT(#{startDate},' 00:00:00') and hpr.create_time <= CONCAT(#{endDate},'23:59:59')
+                and hpr.create_time >=#{startDate} and hpr.create_time <= #{endDate}
                 ]]>
             </if>
             <if test="macCode!= null and macCode!=''">

@@ -40,7 +40,8 @@
                                                 data-prodguideprice='${p.prodGuidePrice}'
                                                 data-produnit='${p.prodUnit}' data-prodUnitValue='${p.prodUnitValue}'
                                                 data-color="${p.prodColor}" data-colorValue="${p.prodColorValue}"
-                                                value='${p.prodCode}' > ${p.prodCode}</option>
+                                                data-density="${p.prodDensity}"
+                                                value='${p.prodCode}' > ${p.prodCode}_${p.prodDensity==null?"0":p.prodDensity}</option>
                                     </c:forEach>
                                 </select>
                             </label>
@@ -54,11 +55,17 @@
                             </label>
                         </div>
                         <div class="col-md-4">
+                            <%--<label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">--%>
+                                <%--产品名称:--%>
+                            <%--</label>--%>
+                            <%--<label class="col-md-8 control-label" style="text-align: left">--%>
+                                <%--<input class="form-control" id="itemName" disabled>--%>
+                            <%--</label>--%>
                             <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
-                                产品名称:
+                                产品密度:
                             </label>
                             <label class="col-md-8 control-label" style="text-align: left">
-                                <input class="form-control" id="itemName" disabled>
+                                <input class="form-control" id="itemDensity" disabled>
                             </label>
                         </div>
                     </div>
@@ -286,7 +293,7 @@
             prodObj.itemColor = $(obj).find("option:selected").attr("data-color");
             prodObj.itemColorValue = $(obj).find("option:selected").attr("data-colorValue");
 
-            $("#itemName").val($(obj).find("option:selected").attr("data-prodName"));
+            // $("#itemName").val($(obj).find("option:selected").attr("data-prodName"));
             $("#itemCode").val($(obj).find("option:selected").val());
             $("#itemCgyCode").val($(obj).find("option:selected").attr("data-prodCgyCodeValue"));
             $("#itemVariety").val($(obj).find("option:selected").attr("data-prodVarietyValue"));
@@ -295,6 +302,9 @@
             $("#itemPrice").val($(obj).find("option:selected").attr("data-prodguidePrice"));
             $("#itemUnit").val($(obj).find("option:selected").attr("data-prodUnitValue"));
             $("#itemColor").val($(obj).find("option:selected").attr("data-colorValue"));
+
+            $("#itemDensity").val($(obj).find("option:selected").attr("data-density"));
+
 
         }else{
             $("#itemCode").val("");
@@ -497,9 +507,9 @@
 
     function operPriceType(value,row,index) {
         var option;
-        if(value == 141001){
+        if(value == 141001 || value == 141003 || value == 141005){
             return "按重量";
-        }else if(value == 141002){
+        }else if(value == 141002 || value == 141004 || value == 141006){
             return "按面积";
         }
     }

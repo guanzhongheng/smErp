@@ -329,4 +329,8 @@
         update T_ORDER set ord_status = #{ordStatus} where ord_code = #{ordCode} and ord_status = 100001
     </update>
 
+    <update id="updateOrderNum" parameterType="com.lcyzh.nmerp.entity.TOrder">
+        update T_ORDER set ord_total_num = ord_total_num - #{ordTotalNum} where ord_code = #{ordCode}
+    </update>
+
 </mapper>
