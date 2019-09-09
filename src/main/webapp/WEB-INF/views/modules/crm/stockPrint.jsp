@@ -52,12 +52,11 @@
                 <td colspan="2">&nbsp;&nbsp;&nbsp;<font style="font-size: 15px;">质检 : ${user.name}</font></td>
             </tr>
             <tr>
-                <td colspan="4"><font style="font-size: 16px;" >生产时间 : <fmt:formatDate value="${vo.createTime}" pattern="yyyy年MM月dd日 HH:mm"/></font></td>
-            </tr>
-            <tr>
-                <td colspan="4"><font style="font-size: 16px;" >起止码 : ${vo.seCode}</font></td>
+                <td colspan="4"><font style="font-size: 16px;" >压边类型 : ${fns:getDictValue(vo.itemYbType, 'prod_ybType', defaultValue)}</font></td>
             </tr>
         </table>
+        <font style="font-size: 16px;" >时间:<fmt:formatDate value="${vo.createTime}" pattern="yyyy.MM.dd HH:mm"/></font>
+        &nbsp;<font style="font-size: 16px;" >起止:${vo.seCode}</font>
         <div style="text-align: center;    margin-top: 5px;" id="btnArea">
             <button class="btn btn-primary " type="button" id="bth" >打印</button>
         </div>
