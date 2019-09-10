@@ -56,7 +56,25 @@ public class SysDictUtils {
 		}
 		return defaultLabel;
 	}
-	
+
+	/**
+	 * 获取描述信息
+	 * @param label
+	 * @param type
+	 * @param defaultLabel
+	 * @return
+	 */
+	public static String getDictDesc(String label, String type, String defaultLabel){
+		if (StringUtils.isNotBlank(type) && StringUtils.isNotBlank(label)){
+			for (Dict dict : getDictList(type)){
+				if (type.equals(dict.getType()) && label.equals(dict.getValue())){
+					return dict.getDescription();
+				}
+			}
+		}
+		return defaultLabel;
+	}
+
 	public static List<Dict> getDictList(String type){
 		@SuppressWarnings("unchecked")
 		Map<String, List<Dict>> dictMap = (Map<String, List<Dict>>) CacheUtils.get(CACHE_DICT_MAP);

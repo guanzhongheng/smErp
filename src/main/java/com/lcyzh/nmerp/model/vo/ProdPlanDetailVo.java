@@ -82,6 +82,17 @@ public class ProdPlanDetailVo{
 
     private Double itemMickWeight;
 
+    // 延长后长度
+    private Double itemYcLenth;
+
+    public Double getItemYcLenth() {
+        return itemYcLenth;
+    }
+
+    public void setItemYcLenth(Double itemYcLenth) {
+        this.itemYcLenth = itemYcLenth;
+    }
+
     public Double getItemMickWeight() {
         return itemMickWeight;
     }

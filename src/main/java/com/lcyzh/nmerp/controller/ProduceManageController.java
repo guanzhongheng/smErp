@@ -14,6 +14,7 @@ import com.lcyzh.nmerp.model.vo.ProdPlanExportVo;
 import com.lcyzh.nmerp.model.vo.ProdPlanVo;
 import com.lcyzh.nmerp.service.*;
 import com.lcyzh.nmerp.utils.Arith;
+import com.lcyzh.nmerp.utils.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -117,6 +118,18 @@ public class ProduceManageController extends BaseController {
         return String.valueOf(result);
     }
 
+
+    public static void main(String[] args) {
+        String a = "123";
+        String b = "asbv";
+        String c = "12a";
+        String d = "";
+        System.out.println(StringUtils.isNumericZidai(a));
+        System.out.println(StringUtils.isNumericZidai(b));
+        System.out.println(StringUtils.isNumericZidai(c));
+        System.out.println(StringUtils.isNumericZidai(d));
+    }
+
     /**
      * @Description: 跳转到车间机台的生产任务详情页面
      * @Param: [model, request, response]
@@ -131,12 +144,21 @@ public class ProduceManageController extends BaseController {
         vo.setProdPlanDetailId(id);
 
         ProdPlanDetailVo voFromDb = prodPlanDetailService.findProdTask(vo);
+        voFromDb.setItemYcLenth(voFromDb.getItemLenth()); // 默认等于实际长度
+        String n = SysDictUtils.getDictDesc(voFromDb.getItemYcType(),Constants.PROD_YC_TYPE,"");
+        if(n!= null && n.length() > 0 && StringUtils.isNumber(n)){
+            Double d = Double.parseDouble(n);
+            Double sj = Arith.mul(voFromDb.getItemLenth(),d);
+            voFromDb.setItemYcLenth(Arith.round(sj,4));
+        }
+
         if(voFromDb.getItemDensity() != null && voFromDb.getItemDensity() > 0){
             Double mkfm = Arith.div(1,Arith.mul(voFromDb.getItemDensity(),voFromDb.getItemThick()));
             Double mkto = Arith.div(voFromDb.getItemWidth(),mkfm,4);
             voFromDb.setItemMickWeight(mkto * 1000);
         }else{
             voFromDb.setItemMickWeight(0d);
+
         }
         model.addAttribute("detail",voFromDb);
 

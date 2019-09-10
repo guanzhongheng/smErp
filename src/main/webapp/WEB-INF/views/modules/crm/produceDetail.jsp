@@ -180,6 +180,7 @@
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
                                             </div>
                                         </div>
+
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" style="margin-left: -25px;"><i style="color: red"></i>品种:</label>
                                             <div class="col-sm-4">
@@ -194,12 +195,20 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label" style="margin-left: -25px;">长度(m):</label>
+                                            <label class="col-sm-2 control-label" style="margin-left: -25px;">原始长度(m):</label>
                                             <div class="col-sm-4">
                                                 <input disabled="ture" placeholder="长度" value="${detail.itemLenth}" id="itemLenth"
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
                                             </div>
-                                            <label class="col-sm-2 control-label"><i style="color: red"></i>宽度(m):</label>
+                                            <label class="col-sm-2 control-label"><i style="color: red"></i>延长后长度(m):</label>
+                                            <div class="col-sm-4">
+                                                <input disabled="ture" placeholder="宽度" value="${detail.itemYcLenth}"  style="border-color: red;"
+                                                       class="form-control produceDetail-input-readonly" readonly="true"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" style="margin-left: -25px;">宽度(m):</label>
                                             <div class="col-sm-4">
                                                 <input disabled="ture" placeholder="宽度" value="${detail.itemWidth}" id="itemWidth"
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>

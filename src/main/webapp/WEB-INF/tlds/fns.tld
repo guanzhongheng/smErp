@@ -121,6 +121,14 @@
   </function>
 
   <function>
+    <description>获取字典描述</description>
+    <name>getDictDesc</name>
+    <function-class>com.lcyzh.nmerp.controller.system.util.SysDictUtils</function-class>
+    <function-signature>java.lang.String getDictDesc(java.lang.String, java.lang.String, java.lang.String)</function-signature>
+    <example>${fns:getDictDesc(label, type, defaultValue)}</example>
+  </function>
+
+  <function>
     <description>获取字典对象列表</description>
     <name>getDictList</name>
     <function-class>com.lcyzh.nmerp.controller.system.util.SysDictUtils</function-class>
