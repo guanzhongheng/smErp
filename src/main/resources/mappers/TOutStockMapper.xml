@@ -21,7 +21,7 @@
     </update>
 
     <select id="findListNew" resultMap="tOutStockResultMap">
-        select * from t_out_stock where out_status = '0' order by create_time,out_code
+        select * from t_out_stock where out_status = '0' order by create_time desc
     </select>
 
     <select id="findByOutCode" parameterType="java.lang.String" resultMap="tOutStockResultMap">
@@ -53,6 +53,7 @@
                 and create_time between #{startDate} and #{endDate}
             </if>
         </where>
+        order by create_time desc
     </select>
 
     <select id="findAllList" resultMap="tOutStockResultMap">
