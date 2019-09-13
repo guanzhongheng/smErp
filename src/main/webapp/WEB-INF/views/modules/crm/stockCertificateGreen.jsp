@@ -81,7 +81,13 @@
                             <td colspan="2" style="padding-left:70px"><font size=3>${fns:getValueByDictKey(vo.itemVariety)} ${vo.itemWidth}m * ${vo.itemThick}mm</font></td>
                         </tr>
                         <tr>
-                            <td colspan="2"  ><font size=4>${vo.itemWeight-vo.itemTareWeight} kg</font></td>
+                            <td colspan="2"  >
+                                <font size=4>
+                                    <c:if test="${vo.itemPriceType eq 141001 || vo.itemPriceType eq 141003 || vo.itemPriceType eq 141005}">
+                                        ${vo.itemWeight-vo.itemTareWeight} kg
+                                    </c:if>
+                                </font>
+                            </td>
                         </tr>
                         <tr>
                             <td colspan="2" ><font size=4>${vo.itemLenth} m</font></td>

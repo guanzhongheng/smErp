@@ -4,10 +4,7 @@ import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.controller.system.util.SysDictUtils;
 import com.lcyzh.nmerp.controller.system.util.UserUtils;
-import com.lcyzh.nmerp.entity.TOrder;
-import com.lcyzh.nmerp.entity.TProdPlan;
-import com.lcyzh.nmerp.entity.TProdPlanDetail;
-import com.lcyzh.nmerp.entity.TStock;
+import com.lcyzh.nmerp.entity.*;
 import com.lcyzh.nmerp.model.vo.OrderQueryVo;
 import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
 import com.lcyzh.nmerp.model.vo.ProdPlanExportVo;
@@ -248,6 +245,9 @@ public class ProduceManageController extends BaseController {
         OrderQueryVo order = orderService.findByOrdeCode(stock.getOrdCode());
         print.setProxyName(order.getProxyName());
 
+        TOrderItem orderItem = orderItemService.getById(stock.getOrderItemId());
+        print.setItemPriceType(orderItem.getItemPriceType());
+
         print.setItemColorValue(SysDictUtils.getDictLabel(print.getItemColor(), Constants.PROD_COLOR, ""));
         model.addAttribute("user",UserUtils.getUser());
         model.addAttribute("vo",print);
@@ -263,6 +263,9 @@ public class ProduceManageController extends BaseController {
 
         OrderQueryVo order = orderService.findByOrdeCode(stock.getOrdCode());
         print.setProxyName(order.getProxyName());
+
+        TOrderItem orderItem = orderItemService.getById(stock.getOrderItemId());
+        print.setItemPriceType(orderItem.getItemPriceType());
 
         model.addAttribute("user",UserUtils.getUser());
         model.addAttribute("vo",print);
