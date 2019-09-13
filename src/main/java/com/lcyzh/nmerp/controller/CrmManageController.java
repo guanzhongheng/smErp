@@ -135,6 +135,7 @@ public class CrmManageController extends BaseController {
     public String orderList(@ModelAttribute("order") OrderQueryVo order, Model model, HttpServletRequest request, HttpServletResponse response){
         Page<OrderQueryVo> page = new Page<>(request, response);
         List<OrderQueryVo> list = orderService.findPage(page, order);
+        doCalOrderInfo(list,model);
         page.setCount(list.size());
         page.setList(list);
         model.addAttribute("page", page);
@@ -256,7 +257,6 @@ public class CrmManageController extends BaseController {
      */
     @RequestMapping(value = {"inventory/outStockDetail"})
     public String outStockDetail(String outCode, Model model) {
-
         TOutStock outStock = outStockService.findByCode(outCode);
         model.addAttribute("outStock",outStock);
         List<OutStockDetailVo> list = outStockService.getOutStockDetailInfos(outCode);
@@ -379,6 +379,7 @@ public class CrmManageController extends BaseController {
         }
     }
 
+
     public void doCalculationTotal(List<OrderQueryVo> list, Model model){
         Double totalWeight = list.stream().mapToDouble(i->i.getOrdTotalWeight() == null?0:i.getOrdTotalWeight()).sum();
         Double totalMj = list.stream().mapToDouble(i->i.getOrdTotalSq() == null?0:i.getOrdTotalSq   ()).sum();
@@ -396,6 +397,7 @@ public class CrmManageController extends BaseController {
                 return 0;
             }
         }).sum();
+
         model.addAttribute("totalWeight",Arith.round(totalWeight,4));
         model.addAttribute("totalMj",Arith.round(totalMj,4));
         model.addAttribute("orderNum",Arith.round(orderNum,4));
@@ -405,6 +407,11 @@ public class CrmManageController extends BaseController {
         model.addAttribute("outNum",Arith.round(outNum,4));
         model.addAttribute("unOutNum",Arith.round(unOutNum,4));
         model.addAttribute("invTotalprice",Arith.round(invTotalprice,4));
+    }
+
+    public void doCalOrderInfo(List<OrderQueryVo> list,Model model){
+        Double totalPrice = list.stream().mapToDouble(i->i.getOrderPrice() == null?0:i.getOrderPrice()).sum();
+        model.addAttribute("totalPrice",Arith.round(totalPrice,4));
     }
 
     public void doCalInventoryInfo(List<StockQueryVo> list,Model model){

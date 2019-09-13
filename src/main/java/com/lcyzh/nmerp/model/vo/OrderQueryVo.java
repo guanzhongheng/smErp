@@ -80,6 +80,36 @@ public class OrderQueryVo{
     // 是否用于统计
     private Integer isTj;
 
+    private Double orderPrice;
+
+    private String startDate;
+
+    private String endDate;
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public Double getOrderPrice() {
+        return orderPrice;
+    }
+
+    public void setOrderPrice(Double orderPrice) {
+        this.orderPrice = orderPrice;
+    }
+
     public String getRemarks() {
         return remarks;
     }

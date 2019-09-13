@@ -118,6 +118,14 @@
             <if test="followType!= null and followType == 0">
                 and cf.cus_code is null
             </if>
+
+            <if test="startDate!= null and startDate != ''">
+                and ord_sign_date &gt;= #{startDate}
+            </if>
+            <if test="endDate!= null and endDate != ''">
+                and ord_sign_date &lt;= #{endDate}
+            </if>
+
         </where>
         order by od.create_time desc
     </select>

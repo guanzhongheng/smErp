@@ -5,6 +5,8 @@ import com.lcyzh.nmerp.common.utils.CacheUtils;
 import com.lcyzh.nmerp.common.utils.Global;
 import com.lcyzh.nmerp.common.web.CookieUtils;
 import com.lcyzh.nmerp.controller.common.BaseController;
+import com.lcyzh.nmerp.controller.system.util.GetMacAddress;
+import com.lcyzh.nmerp.controller.system.util.UdpGetClientMacAddr;
 import com.lcyzh.nmerp.controller.system.util.UserUtils;
 import com.lcyzh.nmerp.service.security.SystemAuthorizingRealm.Principal;
 import com.lcyzh.nmerp.utils.StringUtils;
@@ -115,5 +117,26 @@ public class LoginController extends BaseController {
             loginFailMap.remove(useruame);
         }
         return loginFailNum >= 3;
+    }
+
+    public String getMacInfo(HttpServletRequest request, HttpServletResponse response){
+        String smac = "";
+        String sip = request.getHeader("x-forwarded-for");
+        if(sip == null || sip.length() == 0 || "unknown".equalsIgnoreCase(sip)) {
+            sip = request.getHeader("Proxy-Client-IP");
+        }
+        if(sip == null || sip.length() == 0 || "unknown".equalsIgnoreCase(sip)) {
+            sip = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if(sip == null || sip.length() == 0 || "unknown".equalsIgnoreCase(sip)) {
+            sip = request.getRemoteAddr();
+        }
+        try {
+            UdpGetClientMacAddr umac = new UdpGetClientMacAddr(sip);
+            smac = umac.GetRemoteMacAddr();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return smac;
     }
 }

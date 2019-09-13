@@ -99,7 +99,6 @@ public class TMachineInfoController  extends BaseController {
     @RequestMapping(value = "/delete")
     public String delete( TMachineInfo tMachineInfo, RedirectAttributes redirectAttributes) {
         if (tMachineInfoService.delete(tMachineInfo) > 0) {
-
             return "redirect:/tMachineInfo/list";
         } else {
             addMessage(redirectAttributes, "删除设备失败");

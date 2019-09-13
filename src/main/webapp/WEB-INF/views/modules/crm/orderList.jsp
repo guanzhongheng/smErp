@@ -48,8 +48,11 @@
                     </li>
                     <li>
                         &nbsp;&nbsp;
-                        <form:input path="ordSignDate" htmlEscape="false" maxlength="20"
-                                    class="input-small Wdate" placeholder="签单日期" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
+                        <form:input path="startDate" htmlEscape="false" maxlength="20"
+                                    class="input-small Wdate" placeholder="开始日期" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
+                        &nbsp;&nbsp;~&nbsp;&nbsp;
+                        <form:input path="endDate" htmlEscape="false" maxlength="20"
+                                    class="input-small Wdate" placeholder="截止日期" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',isShowClear:false});"/>
                     </li>
                     <%--<li>
                         <label for="exception"><input id="exception" name="exception" type="checkbox" value="1"/>跟进状态</label>
@@ -70,6 +73,7 @@
                         <th style="text-align: center">订单标题</th>
                         <th style="text-align: center">关联客户</th>
                         <th style="text-align: center">订单数量</th>
+                        <th style="text-align: center">订单金额</th>
                         <th style="text-align: center">审批状态</th>
                         <th style="text-align: center">签单日期</th>
                         <th >备注</th>
@@ -84,6 +88,7 @@
                             <td><a href="/cus/order/info?ordCode=${ord.ordCode}">${ord.ordTitle}</a></td>
                             <td>${ord.cusName}</td>
                             <td>${ord.ordTotalNum}</td>
+                            <td>${ord.orderPrice}</td>
                             <td>${ord.ordStatusValue}</td>
                             <td>${ord.ordSignDate}</td>
                             <td>${ord.remarks}</td>
@@ -101,6 +106,10 @@
                             </td>
                         </tr>
                     </c:forEach>
+                    <tr>
+                    		<td colspan="5">总计:</td>
+                    		<td colspan="5">金额汇总:${totalPrice}</td>
+                    </tr>
                     </tbody>
                 </table>
                 <div class="pagination">${page}</div>

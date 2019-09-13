@@ -64,6 +64,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 		if (logger.isDebugEnabled()){
 			logger.debug("login submit, active session size: {}, username: {}", activeSessionSize, token.getUsername());
 		}
+
 		//int activeSessionSize = getSystemService().getSessionDao().getActiveSessions(false).size();
 		//if (logger.isDebugEnabled()){
 		//	logger.debug("login submit, active session size: {}, username: {}", activeSessionSize, token.getUsername());

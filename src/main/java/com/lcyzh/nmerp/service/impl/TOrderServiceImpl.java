@@ -18,6 +18,7 @@ import com.lcyzh.nmerp.model.vo.OrderItemVo;
 import com.lcyzh.nmerp.model.vo.OrderQueryVo;
 import com.lcyzh.nmerp.service.TOrderService;
 import com.lcyzh.nmerp.service.TProdPlanService;
+import com.lcyzh.nmerp.utils.Arith;
 import com.lcyzh.nmerp.utils.DateUtils;
 import com.lcyzh.nmerp.utils.DictUtils;
 import com.lcyzh.nmerp.utils.StringUtils;
@@ -92,6 +93,13 @@ public class TOrderServiceImpl implements TOrderService {
                 }
                 if(res.get("totalSqPrice") != null){
                     vo.setTotalSqPrice((Double) res.get("totalSqPrice"));
+                }
+            }
+            Map<String,Object> tp = tOrderItemMapper.getOrderItemInfo(vo.getOrdCode());
+            if(tp != null && tp.size() > 0){
+                if(tp.get("price") != null){
+                    Double showPrice = Arith.add((Double)tp.get("price"),vo.getTotalWtPrice());
+                    vo.setOrderPrice(Arith.round(showPrice,4));
                 }
             }
         });

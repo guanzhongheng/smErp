@@ -305,4 +305,27 @@
         set item_num = item_num - #{itemNum}
         where id = #{id} and item_num &gt;= #{itemNum}
     </update>
+
+    <select id="getOrderItemInfo" parameterType="java.lang.String" resultType="java.util.Map" >
+        select sum(p.sqPrice) price from (
+            SELECT
+                CASE
+                    WHEN oi.item_price_type = 141002 THEN
+                    oi.item_lenth * oi.item_width * oi.item_price * oi.item_num
+                    WHEN oi.item_price_type = 141004 THEN
+                    oi.item_lenth * oi.item_width * oi.item_price * oi.item_num
+                    WHEN oi.item_price_type = 141006 THEN
+                    oi.item_lenth * oi.item_width * oi.item_price  * oi.item_num
+                    ELSE 0
+                    END AS sqPrice
+            FROM
+                t_order t
+                INNER JOIN t_order_item oi ON t.ord_code = oi.ord_code
+            WHERE
+                t.ord_code =  #{ordCode}
+        ) p
+
+
+    </select>
+
 </mapper>

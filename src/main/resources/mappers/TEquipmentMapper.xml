@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lcyzh.nmerp.dao.TEquipmentMapper">
+
+    <resultMap id="tFormulaResultMap" type="com.lcyzh.nmerp.entity.TEquipment">
+        <id column="id" property="eqId" jdbcType="BIGINT"/>
+        <result column="mac_address" property="macAddress" jdbcType="VARCHAR"/>
+        <result column="mac_name" property="macName" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="dev_switch" property="devSwitch" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <select id="findList" parameterType ="com.lcyzh.nmerp.entity.TEquipment"  resultMap="tFormulaResultMap">
+        SELECT *
+        FROM t_equipment
+        <where>
+                del_flag = '0'
+            <if test="macAddress != null and macAddress != ''">
+                and mac_address like concat('%', #{macAddress,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="macName != null and macName != ''">
+                and mac_name like concat('%', #{macName,jdbcType=VARCHAR}, '%')
+            </if>
+        </where>
+    </select>
+
+    <select id="findById" parameterType ="java.lang.Long"  resultMap="tFormulaResultMap">
+        SELECT *
+        FROM t_equipment
+        where del_flag = '0' and id = #{eqId}
+    </select>
+
+    <select id="checkMacAddress" parameterType ="java.lang.String"  resultType="java.lang.Integer">
+        SELECT count(1)
+        FROM t_equipment
+        where del_flag = '0' and mac_address = #{macAddress}
+    </select>
+
+
+    <select id="getCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT count(1)
+        FROM t_equipment
+        where
+            del_flag = '0' and devSwitch = '0'
+            <if test="macAddress != null and macAddress != ''">
+                and mac_address = #{macAddress,jdbcType=VARCHAR}
+            </if>
+    </select>
+
+    <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TEquipment">
+        INSERT INTO t_equipment(
+            mac_name,
+            mac_address,
+            dev_switch,
+            del_flag,
+            create_time
+        )
+        VALUES (
+            #{macName,jdbcType=VARCHAR},
+            #{macAddress,jdbcType=VARCHAR},
+            #{devSwitch},
+           '0',
+            #{createTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <update id="update" parameterType ="com.lcyzh.nmerp.entity.TEquipment">
+        UPDATE t_equipment
+        <set>
+            <if test="macName!= null">
+                mac_name = #{macName,jdbcType=VARCHAR},
+            </if>
+            <if test="macAddress!= null">
+                mac_address = #{macAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="devSwitch!= null">
+                dev_switch = #{devSwitch,jdbcType=CHAR},
+            </if>
+        </set>
+        WHERE id = #{eqId,jdbcType=BIGINT}
+    </update>
+
+    <delete id="delete"  parameterType ="com.lcyzh.nmerp.entity.TEquipment">
+         UPDATE t_equipment set del_flag = '1' WHERE id = #{eqId,jdbcType=BIGINT}
+    </delete>
+
+
+
+
+</mapper>
