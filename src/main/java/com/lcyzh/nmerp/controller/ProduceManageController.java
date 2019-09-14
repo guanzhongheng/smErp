@@ -197,6 +197,10 @@ public class ProduceManageController extends BaseController {
         voInDB.setItemWeight(weight);
         voInDB.setItemTareWeight(tare);
         voInDB.setSeCode(seCode);
+
+        OrderQueryVo order = orderService.findByOrdeCode(voInDB.getOrdCode());
+        voInDB.setCusName(order.getCusName());
+
         ProdPlanDetailVo result = prodPlanDetailService.labelAndInStock(voInDB);
         result.setItemColorValue(SysDictUtils.getDictLabel(result.getItemColor(), Constants.PROD_COLOR, ""));
 
@@ -243,7 +247,7 @@ public class ProduceManageController extends BaseController {
         BeanUtils.copyProperties(stock, print);
 
         OrderQueryVo order = orderService.findByOrdeCode(stock.getOrdCode());
-        print.setProxyName(order.getProxyName());
+        print.setCusName(order.getCusName());
 
         TOrderItem orderItem = orderItemService.getById(stock.getOrderItemId());
         print.setItemPriceType(orderItem.getItemPriceType());

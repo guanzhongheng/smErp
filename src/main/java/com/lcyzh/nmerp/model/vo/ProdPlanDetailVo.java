@@ -19,6 +19,7 @@ public class ProdPlanDetailVo{
     private String ordCode;
     private String orderTitle;
     private String proxyName;
+    private String cusName;
     private Long orderItemId;
     private String itemCode;
     private Double itemLenth;
@@ -84,6 +85,14 @@ public class ProdPlanDetailVo{
 
     // 延长后长度
     private Double itemYcLenth;
+
+    public String getCusName() {
+        return cusName;
+    }
+
+    public void setCusName(String cusName) {
+        this.cusName = cusName;
+    }
 
     public Double getItemYcLenth() {
         return itemYcLenth;

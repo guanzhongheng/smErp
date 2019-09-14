@@ -17,12 +17,12 @@
         <table>
             <tr style="height:30px;">
                 <td colspan="4" style=""><span style="font-size: 22px;">
-                    ${vo.proxyName}
+                    ${vo.cusName}
                     <c:if test="${vo.itemOwner ne '' && vo.itemOwner != null}">
                         -
                     </c:if>
                     ${vo.itemOwner}
-                        -${fns:getValueByDictKey(vo.itemVariety)}</span></td>
+                        - ${fns:getValueByDictKey(vo.itemVariety)}</span></td>
             </tr>
         </table>
         <table>
