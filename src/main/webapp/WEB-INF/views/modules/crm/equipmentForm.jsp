@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label"><i style="color: red">*</i>&nbsp;MAC设备地址:</label>
+                    <label class="control-label"><i style="color: red">*</i>&nbsp;设备IP地址:</label>
                     <div class="controls">
                         <form:input path="macAddress" htmlEscape="false" maxlength="50" class="required"/>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

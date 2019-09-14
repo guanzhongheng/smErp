@@ -45,7 +45,7 @@
                     <tr>
                         <th style="text-align: center">序号</th>
                         <th style="text-align: center">设备名称</th>
-                        <th style="text-align: center">设备MAC地址</th>
+                        <th style="text-align: center">设备IP地址</th>
                         <th style="text-align: center">是否启用</th>
                         <th style="text-align: center">创建时间</th>
                         <th style="text-align: center">操作</th>

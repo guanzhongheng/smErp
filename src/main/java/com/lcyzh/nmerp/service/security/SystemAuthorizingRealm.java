@@ -4,12 +4,14 @@ package com.lcyzh.nmerp.service.security;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lcyzh.nmerp.common.servlet.ValidateCodeServlet;
 import com.lcyzh.nmerp.common.utils.Global;
+import com.lcyzh.nmerp.controller.Servlets;
 import com.lcyzh.nmerp.controller.system.LoginController;
 import com.lcyzh.nmerp.controller.system.util.SpringContextHolder;
 import com.lcyzh.nmerp.controller.system.util.UserUtils;
 import com.lcyzh.nmerp.entity.sys.Menu;
 import com.lcyzh.nmerp.entity.sys.Role;
 import com.lcyzh.nmerp.entity.sys.User;
+import com.lcyzh.nmerp.service.TEquipmentService;
 import com.lcyzh.nmerp.utils.Encodes;
 import com.lcyzh.nmerp.utils.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -49,6 +51,8 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 
 	private SystemService systemService;
 
+	private TEquipmentService equipmentService;
+
 	public SystemAuthorizingRealm() {
 		this.setCachingEnabled(false);
 	}
@@ -81,6 +85,12 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 
 		// 校验用户名密码
 		User user = getSystemService().getUserByLoginName(token.getUsername());
+		// 增加IP访问设置 TODO 待开放
+//		String ip = Servlets.getRequest().getRemoteAddr();
+//		if(getEquipmentService().getCount(ip) <= 0 && !user.getId().equals("1")){
+//			logger.info("当前登录用户:" + user.getName() + " 登录IP：" + ip);
+//			throw new AuthenticationException("msg:该帐号对应IP不在登录权限范围内.");
+//		}
 		if (user != null) {
 			if (Global.NO.equals(user.getLoginFlag())){
 				throw new AuthenticationException("msg:该已帐号禁止登录.");
@@ -247,6 +257,16 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 			systemService = SpringContextHolder.getBean(SystemService.class);
 		}
 		return systemService;
+	}
+
+	/**
+	 * 获取系统业务对象
+	 */
+	public TEquipmentService getEquipmentService() {
+		if (equipmentService == null){
+			equipmentService = SpringContextHolder.getBean(TEquipmentService.class);
+		}
+		return equipmentService;
 	}
 
 	/**

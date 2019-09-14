@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.dao;
 
 import com.lcyzh.nmerp.entity.TEquipment;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,9 +20,9 @@ public interface TEquipmentMapper {
 
     TEquipment findById(Long eqId);
 
-    int getCount(String macAddress);
+    int getCount(@Param("macAddress") String macAddress);
 
-    int checkMacAddress(String macAddress);
+    int checkMacAddress(@Param("macAddress") String macAddress);
 
     int insert(TEquipment tFormula);
 

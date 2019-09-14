@@ -1,14 +1,12 @@
 package com.lcyzh.nmerp.utils;
 
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.net.UnknownHostException;
-import java.sql.SQLOutput;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+
 /**
  * 项目名称：nm-erp
  * 类 名 称：SocketMacUtil
@@ -27,17 +25,20 @@ public class SocketMacUtil {
         sRemoteAddr = strAddr;
         ds = new DatagramSocket();
     }
+
     protected final DatagramPacket send(final byte[] bytes) throws IOException {
         DatagramPacket dp = new DatagramPacket(bytes, bytes.length, InetAddress
                 .getByName(sRemoteAddr), iRemotePort);
         ds.send(dp);
         return dp;
     }
+
     protected final DatagramPacket receive() throws Exception {
         DatagramPacket dp = new DatagramPacket(buffer, buffer.length);
         ds.receive(dp);
         return dp;
     }
+
     // 询问包结构:
     // Transaction ID 两字节（16位） 0x00 0x00
     // Flags 两字节（16位） 0x00 0x10
@@ -75,6 +76,7 @@ public class SocketMacUtil {
         t_ns[49] = 0x01;
         return t_ns;
     }
+
     // 表1 “UDP－NetBIOS－NS”应答包的结构及主要字段一览表
     // 序号 字段名 长度
     // 1 Transaction ID 两字节（16位）
@@ -111,6 +113,7 @@ public class SocketMacUtil {
         }
         return sb.toString();
     }
+
     public final void close() {
         try {
             ds.close();
@@ -118,6 +121,7 @@ public class SocketMacUtil {
             ex.printStackTrace();
         }
     }
+
     public final String getRemoteMacAddr() throws Exception {
         byte[] bqcmd = getQueryCmd();
         send(bqcmd);
@@ -127,16 +131,16 @@ public class SocketMacUtil {
         return smac;
     }
 
-    public static String transBytesToStr(byte[] bytes){
+    public static String transBytesToStr(byte[] bytes) {
         StringBuffer buffer = new StringBuffer();
-        for(int i = 0; i < bytes.length; i++){
-            if(i != 0)
+        for (int i = 0; i < bytes.length; i++) {
+            if (i != 0)
                 buffer.append("-");
             //bytes[i]&0xff将有符号byte数值转换为32位有符号整数，其中高24位为0，低8位为byte[i]
-            int intMac = bytes[i]&0xff;
+            int intMac = bytes[i] & 0xff;
             //toHexString函数将整数类型转换为无符号16进制数字
             String str = Integer.toHexString(intMac);
-            if(str.length() == 0){
+            if (str.length() == 0) {
                 buffer.append("0");
             }
             buffer.append(str);
@@ -151,7 +155,29 @@ public class SocketMacUtil {
     }
 
 
-
-
+    public static String getMACAddress(String ip) {
+        String str = "";
+        String macAddress = "";
+        try {
+            Process p = Runtime.getRuntime().exec("nbtstat -A " + ip);
+            InputStreamReader ir = new InputStreamReader(p.getInputStream());
+            LineNumberReader input = new LineNumberReader(ir);
+            for (int i = 1; i < 100; i++) {
+                str = input.readLine();
+                if (str != null) {
+                    if (str.indexOf("MAC 地址") > 1) {//客户端使用的是中文版操作系统
+                        macAddress = str.substring(str.indexOf("MAC 地址") + 9, str.length());
+                        break;
+                    } else if (str.indexOf("MAC Address") > 1) {//客户端使用的是英文版操作系统
+                        macAddress = str.substring(str.indexOf("MAC Address") + 14, str.length());
+                        break;
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace(System.out);
+        }
+        return macAddress;
+    }
 
 }

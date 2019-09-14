@@ -9,7 +9,10 @@ import com.lcyzh.nmerp.controller.system.util.GetMacAddress;
 import com.lcyzh.nmerp.controller.system.util.UdpGetClientMacAddr;
 import com.lcyzh.nmerp.controller.system.util.UserUtils;
 import com.lcyzh.nmerp.service.security.SystemAuthorizingRealm.Principal;
+import com.lcyzh.nmerp.service.security.SystemService;
+import com.lcyzh.nmerp.utils.SocketMacUtil;
 import com.lcyzh.nmerp.utils.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +31,8 @@ import java.util.Map;
 @Controller
 public class LoginController extends BaseController {
 
+    @Autowired
+    private SystemService systemService;
 
     /**
      * 管理登录
@@ -87,6 +92,11 @@ public class LoginController extends BaseController {
                 return "modules/sys/sysIndex";
             }
             return "redirect:login";
+        }
+        try {
+            systemService.updateUserLoginInfo(UserUtils.getUser());
+        }catch (Exception e){
+            logger.error("用户登录信息更新异常:" + e.getMessage());
         }
 
         return "modules/sys/sysIndex";

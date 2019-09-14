@@ -367,7 +367,7 @@
                     }
                 },{
                     field: 'itemCode',
-                    title: '编号'
+                    title: '产品编码'
                 },{
                     field: 'ordCode',
                     title: '合同编码'
@@ -475,7 +475,7 @@
         })
         // $(".fixed-table-border")[1].style.height = '230px';
         $(".fixed-table-border").hide();
-        $('#cusProdDetail').bootstrapTable('hideColumn', 'itemCode');
+        // $('#cusProdDetail').bootstrapTable('hideColumn', 'itemCode');
         $('#cusProdDetail').bootstrapTable('hideColumn', 'ordCode');
     }
 

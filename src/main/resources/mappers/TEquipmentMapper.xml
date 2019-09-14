@@ -42,10 +42,8 @@
         SELECT count(1)
         FROM t_equipment
         where
-            del_flag = '0' and devSwitch = '0'
-            <if test="macAddress != null and macAddress != ''">
-                and mac_address = #{macAddress,jdbcType=VARCHAR}
-            </if>
+            del_flag = '0' and dev_switch = '0'
+            and mac_address = #{macAddress,jdbcType=VARCHAR}
     </select>
 
     <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TEquipment">
