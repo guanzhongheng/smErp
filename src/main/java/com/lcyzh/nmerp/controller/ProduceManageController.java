@@ -116,17 +116,6 @@ public class ProduceManageController extends BaseController {
     }
 
 
-    public static void main(String[] args) {
-        String a = "123";
-        String b = "asbv";
-        String c = "12a";
-        String d = "";
-        System.out.println(StringUtils.isNumericZidai(a));
-        System.out.println(StringUtils.isNumericZidai(b));
-        System.out.println(StringUtils.isNumericZidai(c));
-        System.out.println(StringUtils.isNumericZidai(d));
-    }
-
     /**
      * @Description: 跳转到车间机台的生产任务详情页面
      * @Param: [model, request, response]

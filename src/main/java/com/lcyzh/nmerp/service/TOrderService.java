@@ -45,28 +45,6 @@ public interface TOrderService {
      */
     int insert(OrderAddBatchVo vo);
 
-    ///**
-    // * @Description: 批量录入订单
-    // * @Param: [voList]
-    // * @return: int
-    // * @Author: lijinku
-    // * @Iteration : 1.0
-    // * @Date: 2019/7/2 10:53 AM
-    // */
-    //int insertBatch(List<OrderAddBatchVo> voList);
-    //
-    ///**
-    // * @Description: 订单更新
-    // * @Param: [tOrder]
-    // * @return: int
-    // * @Author: lijinku
-    // * @Iteration : 1.0
-    // * @Date: 2019/7/4 6:06 PM
-    // */
-    //int update(TOrder tOrder);
-    //
-    //int delete(TOrder tOrder);
-    //
     /**
      * @Description: 手录订单
      * @Param: [ordAddModifyVo]

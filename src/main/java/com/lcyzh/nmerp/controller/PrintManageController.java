@@ -153,7 +153,8 @@ public class PrintManageController extends BaseController {
                     }else{
                         vo.setItemNum(ite.get(newName));
                     }
-                    vo.setItemTotalSq(ite.get(newName) * vo.getItemLenth() * vo.getItemWidth());
+                    Double mj = vo.getItemNum() * vo.getItemLenth() * vo.getItemWidth();
+                    vo.setItemTotalSq(Arith.round(mj,4));
                     vo.setItemTotalWeight(iteWight.get(newName));
                     list.add(vo);
                 }
@@ -178,8 +179,8 @@ public class PrintManageController extends BaseController {
             totalMj  = list.stream().mapToDouble(i -> {
                 if(i.getItemLenth() != null && i.getItemWidth() != null && i.getItemThick() != null){
                     Double d1 = Arith.mul(i.getItemLenth(),i.getItemWidth());
-                    Double d2 = Arith.mul(i.getItemThick(),i.getItemNum());
-                    return  Arith.mul(d1,d2);
+                    // Double d2 = Arith.mul(i.getItemThick(),i.getItemNum());
+                    return  Arith.mul(d1,i.getItemNum());
                 }else{
                     return 0d;
                 }
