@@ -37,6 +37,7 @@
         left join t_stock s on osd.bar_code = s.bar_code
 		inner join T_ORDER o on o.ord_code = s.ord_code
         where osd.out_code = #{outCode}
+        order by osd.id desc 
     </select>
 
     <delete id="deleteByOutCode" parameterType="java.lang.String">
