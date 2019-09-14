@@ -130,7 +130,7 @@ public class PrintManageController extends BaseController {
 
         if(!StringUtils.isEmpty(outItemVoList)){
             for(OutItemVo vo : outItemVoList){
-                String newName = vo.getOrdCode() + vo.getItemOwner() + vo.getProdVarietyValue() + vo.getItemLenth() + vo.getItemWidth() + vo.getItemThick();
+                String newName = vo.getOrdCode() + vo.getItemOwner() + vo.getProdVarietyValue() + vo.getProdCgyCodeValue() + vo.getProdColorValue() + vo.getItemLenth()  + vo.getItemWidth() + vo.getItemThick();
                 if(ite.get(newName) == null){
                     ite.put(newName,1L);
                     iteWight.put(newName,vo.getItemWeight());
@@ -144,9 +144,15 @@ public class PrintManageController extends BaseController {
         }
         if(!StringUtils.isEmpty(oldOrderItem)){
             for(OrderItemVo vo : oldOrderItem){
-                String newName = vo.getOrdCode() + vo.getItemOwner() + vo.getItemVaritemValue()+ vo.getItemLenth() + vo.getItemWidth()+ vo.getItemThick();
+                String newName = vo.getOrdCode() + vo.getItemOwner() + vo.getItemVaritemValue() + vo.getItemCgyCodeValue() + vo.getItemColorValue() + vo.getItemLenth()+ vo.getItemWidth()+ vo.getItemThick();
                 if(ite.get(newName) != null && !list.contains(vo)){
-                    vo.setItemNum(ite.get(newName));
+                    if(ite.get(newName) >= vo.getItemNum()){
+                        // 匹配数量后 直接扣除 针对一个订单会存在重复产品多条记录情况
+                        Long newNum = ite.get(newName) - vo.getItemNum();
+                        ite.put(newName,newNum);
+                    }else{
+                        vo.setItemNum(ite.get(newName));
+                    }
                     vo.setItemTotalSq(ite.get(newName) * vo.getItemLenth() * vo.getItemWidth());
                     vo.setItemTotalWeight(iteWight.get(newName));
                     list.add(vo);
