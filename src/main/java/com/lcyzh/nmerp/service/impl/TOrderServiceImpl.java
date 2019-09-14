@@ -52,11 +52,11 @@ public class TOrderServiceImpl implements TOrderService {
             vo.setItemUnitValue(DictUtils.getValueByDictKey(vo.getItemUnit()));
             vo.setItemCgyCodeValue(DictUtils.getValueByDictKey(vo.getItemCgyCode()));
             vo.setItemVaritemValue(DictUtils.getValueByDictKey(vo.getItemVariety()));
-            if(vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)
+            if (vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)
                     || vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JH)
-                    || vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JB)){
+                    || vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JB)) {
                 vo.setItemPriceTypeValue("按重量");
-            }else{
+            } else {
                 vo.setItemPriceTypeValue("按面积");
             }
 
@@ -74,32 +74,32 @@ public class TOrderServiceImpl implements TOrderService {
             vo.setOrdStatusValue(DictUtils.getValueByDictKey(vo.getOrdStatus()));
             vo.setPayTypeValue(DictUtils.getValueByDictKey(vo.getPayType()));
             vo.setPayStatusValue(DictUtils.getValueByDictKey(vo.getPayStatus()));
-            Map<String,Object> res = tOrderItemMapper.getOrderStockInfo(vo.getOrdCode());
-            if(res != null && res.size() > 0){
-                if(res.get("totalNum") != null){
-                    vo.setTotalNum((Long)res.get("totalNum"));
+            Map<String, Object> res = tOrderItemMapper.getOrderStockInfo(vo.getOrdCode());
+            if (res != null && res.size() > 0) {
+                if (res.get("totalNum") != null) {
+                    vo.setTotalNum((Long) res.get("totalNum"));
                 }
-                if(res.get("totalPrice") != null){
+                if (res.get("totalPrice") != null) {
                     vo.setTotalPrice((Double) res.get("totalPrice"));
                 }
-                if(res.get("totalwight") != null){
+                if (res.get("totalwight") != null) {
                     vo.setOrdTotalWeight((Double) res.get("totalwight"));
                 }
-                if(res.get("totalSq") != null){
+                if (res.get("totalSq") != null) {
                     vo.setOrdTotalSq((Double) res.get("totalSq"));
                 }
-                if(res.get("totalWtPrice") != null){
+                if (res.get("totalWtPrice") != null) {
                     vo.setTotalWtPrice((Double) res.get("totalWtPrice"));
                 }
-                if(res.get("totalSqPrice") != null){
+                if (res.get("totalSqPrice") != null) {
                     vo.setTotalSqPrice((Double) res.get("totalSqPrice"));
                 }
             }
-            Map<String,Object> tp = tOrderItemMapper.getOrderItemInfo(vo.getOrdCode());
-            if(tp != null && tp.size() > 0){
-                if(tp.get("price") != null){
-                    Double showPrice = Arith.add((Double)tp.get("price"),vo.getTotalWtPrice());
-                    vo.setOrderPrice(Arith.round(showPrice,4));
+            Map<String, Object> tp = tOrderItemMapper.getOrderItemInfo(vo.getOrdCode());
+            if (tp != null && tp.size() > 0) {
+                if (tp.get("price") != null) {
+                    Double showPrice = Arith.add((Double) tp.get("price"), vo.getTotalWtPrice());
+                    vo.setOrderPrice(Arith.round(showPrice, 4));
                 }
             }
         });
@@ -149,16 +149,21 @@ public class TOrderServiceImpl implements TOrderService {
             double totalSq = 0.0;
             double totalWeight = 0.0;
             long totalNum = 0;
+            int line = 0;
             List<TOrderItem> orderItems = new ArrayList<>(itemVos.size());
             for (OrderItemVo itv : itemVos) {
+                line++;
                 TOrderItem tOrderItem = new TOrderItem();
                 tOrderItem.setCreateTime(date);
                 String prodCgy = StringUtils.parseDictKey(itv.getItemCgyCodeValue()).toString();
                 String prodVerity = StringUtils.parseDictKey(itv.getItemVaritemValue()).toString();
-                String prodColor = StringUtils.parseColorDictKey(itv.getItemColorValue()).toString();
+                String prodColor = StringUtils.parseColorDictKey(itv.getItemColorValue());
+                String thick = String.valueOf(itv.getItemThick());
+                String priceType = StringUtils.parseDictKey(itv.getItemPriceTypeValue()).toString();
+
 
                 tOrderItem.setOrdCode(tOrder.getOrdCode());
-                TProduct product = DictUtils.getProdCodeByProdCgyAndVari(prodCgy + prodVerity + prodColor);
+                TProduct product = DictUtils.getProdCodeByProdCgyAndVari(prodCgy + prodVerity + prodColor + thick + priceType);
                 if (product != null) {
                     tOrderItem.setItemCode(product.getProdCode());
                     tOrderItem.setItemUnit(product.getProdUnit());
@@ -166,6 +171,13 @@ public class TOrderServiceImpl implements TOrderService {
                     tOrderItem.setItemPriceType(product.getProdPriceType());
                     tOrderItem.setItemColor(prodColor);
 
+                } else {
+                    throw new RuntimeException("第" + line + "行，产品【产品类别：" + itv.getItemCgyCodeValue()
+                            + ",产品品种:" + itv.getItemVaritemValue()
+                            + ",产品颜色:" + itv.getItemColorValue()
+                            + ",产品厚度:" + itv.getItemThick()
+                            + ",产品计价方式:" + itv.getItemPriceTypeValue()
+                            + "】不存在！");
                 }
                 tOrderItem.setItemLenth(itv.getItemLenth());
                 if (tOrderItem.getItemPriceType() != null) {
@@ -198,13 +210,13 @@ public class TOrderServiceImpl implements TOrderService {
                 tOrderItem.setItemStatus(Constants.ORD_PROD_STATUS_NEW);
                 tOrderItem.setItemOutNum(0L);
                 orderItems.add(tOrderItem);
-                if(tOrderItem.getItemTotalSq() != null && tOrderItem.getItemTotalSq() > 0d){
+                if (tOrderItem.getItemTotalSq() != null && tOrderItem.getItemTotalSq() > 0d) {
                     totalSq += tOrderItem.getItemTotalSq();
                 }
-                if(tOrderItem.getItemTotalWeight() != null && tOrderItem.getItemTotalWeight() > 0d){
+                if (tOrderItem.getItemTotalWeight() != null && tOrderItem.getItemTotalWeight() > 0d) {
                     totalWeight += tOrderItem.getItemTotalWeight();
                 }
-                if(tOrderItem.getItemNum() != null && tOrderItem.getItemNum() > 0d){
+                if (tOrderItem.getItemNum() != null && tOrderItem.getItemNum() > 0d) {
                     totalNum += tOrderItem.getItemNum();
                 }
             }
@@ -314,7 +326,7 @@ public class TOrderServiceImpl implements TOrderService {
                 //审批通过，加入生产计划
                 List<OrderItemVo> list = tOrderItemMapper.findByOrdCode(ordCode);
                 int re = prodPlanService.createProdPlan(list);
-                if(re <= 0){
+                if (re <= 0) {
                     // 处理失败抛出异常 保证审核状态的回滚
                     throw new NullPointerException();
                 }

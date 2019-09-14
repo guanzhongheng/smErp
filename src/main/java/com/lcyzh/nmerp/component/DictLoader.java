@@ -6,6 +6,7 @@ import com.lcyzh.nmerp.dao.TProductMapper;
 import com.lcyzh.nmerp.entity.Employee;
 import com.lcyzh.nmerp.entity.TDict;
 import com.lcyzh.nmerp.entity.TProduct;
+import com.lcyzh.nmerp.service.IDictService;
 import com.lcyzh.nmerp.utils.DictEntity;
 import com.lcyzh.nmerp.utils.DictUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ import java.util.stream.Collectors;
 public class DictLoader implements CommandLineRunner {
 
     @Autowired
-    private TDictMapper dictMapper;
+    private IDictService dictService;
     @Autowired
     private EmployeeMapper employeeMapper;
     @Autowired
@@ -44,23 +45,8 @@ public class DictLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        List<TDict> list = dictMapper.findList();
-        if (list != null && !list.isEmpty()) {
-            list.forEach(dict -> {
-                if (dict != null) {
-                    DictUtils.getDictValueMaps().put(dict.getDictKey(), dict.getDictValue());
-                    List<Long> keyList = DictUtils.getDictKeyMaps().get(dict.getDictKey());
-                    if (keyList == null && dict.getSubDictKey() != null) {
-                        keyList = new ArrayList<>();
-                        DictUtils.getDictKeyMaps().put(dict.getDictKey(), keyList);
-                    }
-                    if (dict.getSubDictKey() != null) {
-                        keyList.add(dict.getSubDictKey());
-                        DictUtils.getDictValueMaps().put(dict.getSubDictKey(), dict.getSubDictValue());
-                    }
-                }
-            });
-        }
+        //加载字典数据
+        dictService.loadDictData();
 
         List<Employee> employees = employeeMapper.findAllList();
         if (employees != null && !employees.isEmpty()) {
@@ -68,17 +54,18 @@ public class DictLoader implements CommandLineRunner {
                 List<DictEntity> dictEntities = DictUtils.getEmpMapsByDept().get(emp.getDepartment());
                 if (dictEntities == null) {
                     dictEntities = new ArrayList<>(10);
-                    DictUtils.getEmpMapsByDept().put(emp.getDepartment(),dictEntities);
+                    DictUtils.getEmpMapsByDept().put(emp.getDepartment(), dictEntities);
                 }
                 dictEntities.add(new DictEntity(emp.getEmpCode(), emp.getEmpName()));
             });
         }
 
         List<TProduct> prods = productMapper.findAllList();
-        if(prods!=null && !prods.isEmpty()){
+        if (prods != null && !prods.isEmpty()) {
             Map<String, TProduct> prodMaps = DictUtils.getProdMaps();
-            prods.forEach(prod->{
-              prodMaps.put(String.valueOf(prod.getProdCgyCode())+prod.getProdVariety()+prod.getProdColor(),prod);
+            prods.forEach(prod -> {
+                String key = String.valueOf(prod.getProdCgyCode()) + prod.getProdVariety() + prod.getProdColor() + prod.getProdThick() + prod.getProdPriceType();
+                prodMaps.put(key, prod);
             });
         }
     }
