@@ -18,7 +18,6 @@
 </head>
 <body>
 
-<sys:message content="${message}"/>
 <div class="tabs-container" style="padding: 20px 20px;">
     <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
         <div class="panel-heading" style="background-color: #50B0E6">
@@ -29,6 +28,7 @@
         <div class="panel-body" style="padding: 10px 10px 0px 10px;">
             <form:form id="searchForm" modelAttribute="order" action="${ctx}/crm/order/list" method="post"
                        class="breadcrumb form-search">
+                <sys:message content="${message}"/>
                 <input id="pageNo" name="pageNo" type="hidden" value="${page.pageNo}"/>
                 <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
                 <ul class="ul-form">
@@ -137,12 +137,14 @@
                         processData : false,
                         contentType : false
                     }).done(function(data) {
-                        if (data = "success") {
+                        if (data == "success") {
                             top.$.jBox.tip('上传成功');
+                            window.location.href = "/crm/order/list";
                         } else {
-                            top.$.jBox.tip('上传失败');
+                            top.$.jBox.tip('上传失败:' + data);
                         }
-                    }, 'json').fail(function() {
+                    }, 'json').fail(function(data) {
+                         top.$.jBox.tip('上传失败:');
                     });
                 }
             }, loaded: function (h) {
