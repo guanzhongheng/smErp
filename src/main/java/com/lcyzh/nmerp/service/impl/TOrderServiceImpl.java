@@ -125,6 +125,7 @@ public class TOrderServiceImpl implements TOrderService {
             tCustomer.setCusGrade(Constants.CUS_GRADE_ONE);
             tCustomer.setCreateTime(date);
             tCustomer.setCusAddress(vo.getOrdAddress());
+            tCustomer.setCusStatus(Constants.CUS_STATUS_NEW);
             cusCode = StringUtils.genFixPreFixStr(Constants.CUS_PRE_FIX);
             tCustomer.setCusCode(cusCode);
             tCustomerMapper.insert(tCustomer);

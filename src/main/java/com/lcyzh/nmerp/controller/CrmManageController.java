@@ -139,6 +139,7 @@ public class CrmManageController extends BaseController {
         page.setCount(list.size());
         page.setList(list);
         model.addAttribute("page", page);
+        model.addAttribute("userId",UserUtils.getUser().getId());
         return "modules/crm/orderList";
     }
     /**

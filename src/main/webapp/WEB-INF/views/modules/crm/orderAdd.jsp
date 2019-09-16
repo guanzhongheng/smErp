@@ -23,6 +23,7 @@
                            action="${ctx}/order/order_save"
                            method="post" class="form-horizontal">
                 <form:hidden path="ordCode"/>
+                    <input type="hidden" name="showCusCode" id="showCusCode" value="${orderAddModifyVo.cusCode}">
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="">
@@ -46,6 +47,7 @@
                                                 <option class="order-input-width" value='${s.cusCode}' style="width: 150px;" > ${s.cusName}</option>
                                             </c:forEach>
                                         </select>
+
                                     </label>
                                     <div class="col-md-2 control-label order-input-width">
                                         <a href="/cus/customer_add" class="btn btn-primary" style="width: 100px">客户新增</a>
@@ -66,8 +68,7 @@
                                         订单类型:
                                     </label>
                                     <div class="col-md-2 control-label order-input-width " style="text-align: left">
-                                        <form:select path="ordType" class="chosen-select  global-input order-input-width"
-                                                     cssStyle="min-width: 150px">
+                                        <form:select path="ordType" class="chosen-select  global-input order-input-width" cssStyle="min-width: 150px">
                                             <form:option cssClass="order-input-width" value="" label="" />
                                             <form:options cssClass="order-input-width" items="${fns:getCusDictList(101000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                                         </form:select>
@@ -216,6 +217,11 @@
                 error.appendTo(element.parent());
             },
         });
+
+        if($("#showCusCode").val() != null && $("#showCusCode").val() != undefined && $("#showCusCode").val() != ""){
+            $("#cusCode").val($("#showCusCode").val());
+            $("#cusCode").trigger("chosen:updated");
+        }
     });
     function prodlistAdd() {
         var orderCode = $("#ordCode").val();

@@ -261,6 +261,9 @@
             <if test="ordTitle!=null">
                 ord_title = #{ordTitle,jdbcType=VARCHAR},
             </if>
+            <if test="cusCode!=null">
+                cus_code = #{cusCode,jdbcType=VARCHAR},
+            </if>
             <if test="proxyName!=null">
                 proxy_name = #{proxyName,jdbcType=VARCHAR},
             </if>

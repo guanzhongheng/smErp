@@ -102,6 +102,12 @@
                                     <a href="/order/order_delete?ordCode=${ord.ordCode}" onclick="return confirmx('确认要删除该订单吗？', this.href)">
                                         <i class="icon-trash">删除</i></a>
                                 </c:if>
+
+                                <c:if test="${userId == 1 }" >
+                                    <a href="/order/update_orderPrice?ordCode=${ord.ordCode}">
+                                        <i class="icon-trash">调价</i></a>
+                                </c:if>
+
                                 <a href="/export/orderInfo?ordCode=${ord.ordCode}"><i class="icon-download">&nbsp;详情导出</i></a>
                             </td>
                         </tr>
@@ -122,8 +128,6 @@
     function uploadFile() {
         top.$.jBox.open("iframe:${ctx}/crm/order/upload", "文件上传", 500, $(top.document).height() - 300, {
             buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
-
-
                 var file = h.find("iframe")[0].contentWindow.orderFile;
                 var formData = new FormData();
                 formData.append("file", file.files[0]);
