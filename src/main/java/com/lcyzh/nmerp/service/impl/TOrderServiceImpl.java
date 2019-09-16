@@ -130,7 +130,11 @@ public class TOrderServiceImpl implements TOrderService {
             tCustomerMapper.insert(tCustomer);
         }
         tOrder.setCusCode(cusCode);
-        tOrder.setOrdTitle("新建");
+        if(StringUtils.isEmpty(vo.getOrdTitle())){
+            tOrder.setOrdTitle(vo.getCusName() + "订单");
+        }else{
+            tOrder.setOrdTitle(vo.getOrdTitle());
+        }
         tOrder.setOrdType(Constants.PAY_TYPE_EFT);
         tOrder.setOrdDeliveryDate(vo.getDeliveryDate());
         tOrder.setProxyName(vo.getProxyName());
@@ -208,6 +212,7 @@ public class TOrderServiceImpl implements TOrderService {
                 tOrderItem.setItemWidth(itv.getItemWidth());
                 tOrderItem.setItemYbType(StringUtils.parseDictKey(itv.getItemYbType()).toString());
                 tOrderItem.setItemStatus(Constants.ORD_PROD_STATUS_NEW);
+                tOrderItem.setItemRemarks(itv.getItemRemarks());
                 tOrderItem.setItemOutNum(0L);
                 orderItems.add(tOrderItem);
                 if (tOrderItem.getItemTotalSq() != null && tOrderItem.getItemTotalSq() > 0d) {

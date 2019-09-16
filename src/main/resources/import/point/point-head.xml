@@ -3,24 +3,28 @@
     <worksheet idx="0">
         <!-- 表头开始至结束行 -->
         <section startRow="0" endRow="0">
-            <!-- 客户名称 -->
+            <!-- 订单标题 -->
             <mapping row="0" col="0" nullAllowed="true">
                 excelHead.head
             </mapping>
-            <!-- 客户地址 -->
+            <!-- 客户名称 -->
             <mapping row="0" col="1" nullAllowed="true">
                 excelHead.head
             </mapping>
-            <!-- 联系电话 -->
+            <!-- 客户地址 -->
             <mapping row="0" col="2" nullAllowed="true">
                 excelHead.head
             </mapping>
-            <!-- 订单交付日期 -->
+            <!-- 联系电话 -->
             <mapping row="0" col="3" nullAllowed="true">
                 excelHead.head
             </mapping>
-            <!-- 备注 -->
+            <!-- 订单交付日期 -->
             <mapping row="0" col="4" nullAllowed="true">
+                excelHead.head
+            </mapping>
+            <!-- 备注 -->
+            <mapping row="0" col="5" nullAllowed="true">
                 excelHead.head
             </mapping>
         </section>

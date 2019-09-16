@@ -3,16 +3,18 @@
     <worksheet idx="0">
         <!-- 表头开始至结束行 -->
         <section startRow="0" endRow="5">
+            <!-- 订单标题-->
+            <mapping cell="A2">ord.ordTitle</mapping>
             <!-- 客户名称-->
-            <mapping cell="A2">ord.cusName</mapping>
+            <mapping cell="B2">ord.cusName</mapping>
             <!--客户地址-->
-            <mapping cell="B2">ord.ordAddress</mapping>
+            <mapping cell="C2">ord.ordAddress</mapping>
             <!--联系电话-->
-            <mapping cell="C2">ord.phone</mapping>
+            <mapping cell="D2">ord.phone</mapping>
             <!--交付日期-->
-            <mapping cell="D2">ord.deliveryDate</mapping>
+            <mapping cell="E2">ord.deliveryDate</mapping>
             <!--备注-->
-            <mapping cell="E2">ord.remarks</mapping>
+            <mapping cell="F2">ord.remarks</mapping>
             <!--<mapping row="3" col="4">department.chief.bonus</mapping>-->
         </section>
         <!-- 开始循环读取文件数据，配置开始行，items映射的list var映射的bean varType 类路径
@@ -66,7 +68,7 @@
                 </mapping>
                 <!-- 备注 -->
                 <mapping row="6" col="10" nullAllowed="true">
-                    item.remarks
+                    item.itemRemarks
                 </mapping>
             </section>
             <!-- 结束条件配置 -->

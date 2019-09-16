@@ -14,6 +14,7 @@ import java.util.List;
  * lijinku          2019/06/19    create
  */
 public class OrderAddBatchVo {
+    private String ordTitle;
     //订单收货地址
     private String ordAddress;
     //客户名称
@@ -26,7 +27,16 @@ public class OrderAddBatchVo {
     private String phone;
 
     private String remarks;
+
     private List<OrderItemVo> itemVos = new ArrayList<>();
+
+    public String getOrdTitle() {
+        return ordTitle;
+    }
+
+    public void setOrdTitle(String ordTitle) {
+        this.ordTitle = ordTitle;
+    }
 
     public String getOrdAddress() {
         return ordAddress;
