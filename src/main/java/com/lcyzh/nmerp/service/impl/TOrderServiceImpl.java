@@ -8,6 +8,7 @@ import com.lcyzh.nmerp.controller.system.util.SysDictUtils;
 import com.lcyzh.nmerp.dao.TCustomerMapper;
 import com.lcyzh.nmerp.dao.TOrderItemMapper;
 import com.lcyzh.nmerp.dao.TOrderMapper;
+import com.lcyzh.nmerp.dao.TProductMapper;
 import com.lcyzh.nmerp.entity.Customer;
 import com.lcyzh.nmerp.entity.TOrder;
 import com.lcyzh.nmerp.entity.TOrderItem;
@@ -44,6 +45,8 @@ public class TOrderServiceImpl implements TOrderService {
     private TCustomerMapper tCustomerMapper;
     @Autowired
     private TProdPlanService prodPlanService;
+    @Autowired
+    private TProductMapper tProductMapper;
 
     @Override
     public List<OrderItemVo> findItemsByOrdCode(String ordCode) {
@@ -62,6 +65,12 @@ public class TOrderServiceImpl implements TOrderService {
 
             vo.setItemStatusValue(DictUtils.getValueByDictKey(vo.getItemStatus()));
             vo.setItemColorValue(SysDictUtils.getDictLabel(vo.getItemColor(), "prod_color", ""));
+            Integer num = tProductMapper.checkOrderDetail(vo.getItemId());
+            if(num > 0){
+                vo.setIsShowPrice(1);
+            }else{
+                vo.setIsShowPrice(0);
+            }
         });
         return list;
     }
@@ -314,6 +323,37 @@ public class TOrderServiceImpl implements TOrderService {
         order.setUpdateTime(date);
         tOrderItemMapper.deleteByOrdCode(ordCode);
         tOrderItemMapper.insertBatch(orderItems);
+        return tOrderMapper.update(order);
+    }
+
+    @Override
+    public int updatePrice(List<OrderItemVo> list) {
+        String ordCode = list.get(0).getOrdCode();
+        Date date = new Date();
+        TOrder order = new TOrder();
+        order.setOrdCode(ordCode);
+        Double amount = 0d;
+        List<TOrderItem> orderItems = new ArrayList<>();
+        TOrderItem orderItem;
+        for (OrderItemVo vo : list) {
+            orderItem = new TOrderItem();
+            orderItem.setId(vo.getItemId());
+            orderItem.setItemPrice(vo.getItemPrice());
+            orderItems.add(orderItem);
+
+            if (vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ)
+                    || vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ_JH)
+                    || vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ_JB)) {
+                amount += vo.getItemPrice() * vo.getItemTotalSq();
+            } else if (vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)
+                    || vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JH)
+                    || vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JB)) {
+                amount += vo.getItemPrice() * vo.getItemTotalWeight();
+            }
+        }
+        order.setOrdTotalAmount(amount);
+        order.setUpdateTime(date);
+        tOrderItemMapper.updateBatch(orderItems);
         return tOrderMapper.update(order);
     }
 

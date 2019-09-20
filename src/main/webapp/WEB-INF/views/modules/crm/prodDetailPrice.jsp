@@ -8,153 +8,197 @@
 
 <div class="tabs-container" style="padding: 0px 20px;">
 
-    <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
-        <div class="panel-heading" style="background-color: #50B0E6">
-            <h3 class="panel-title global-panel-title" >
-                第一步：选择产品
-                <a class="collapse-link" style="font-size: 13px;margin-left: 20px;    color: #337ab7;">
-                    折叠/展开
-                </a>
-            </h3>
+    <%--<div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">--%>
+        <%--<div class="panel-heading" style="background-color: #50B0E6">--%>
+            <%--<h3 class="panel-title global-panel-title" >--%>
+                <%--第一步：选择产品--%>
+                <%--<a class="collapse-link" style="font-size: 13px;margin-left: 20px;    color: #337ab7;">--%>
+                    <%--折叠/展开--%>
+                <%--</a>--%>
+            <%--</h3>--%>
 
-        </div>
-        <div class="panel-body prod-hide" style="padding: 10px 10px 10px 10px;">
-            <div class="row">
-                <div class="col-sm-12">
-                    <input type="hidden" id="ordCode" value="${ordCode}"/>
-                    <div class="form-group">
-                        <div class="col-md-4">
-                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
-                                产品选择:
-                            </label>
-                            <label class="col-md-8 control-label">
-                                <select data-placeholder="产品选择" class="chosen-select order-label-input-width" style="width: 209px" id="prodInfo" onchange="getResChange(this)">
-                                    <option value="-1">请选择</option>
-                                    <c:forEach items="${prod}" var="p">
-                                        <option
-                                                data-prodName='${p.prodName}'
-                                                data-prodcgycode='${p.prodCgyCode}' data-prodCgyCodeValue='${p.prodCgyCodeValue}'
-                                                data-prodvariety='${p.prodVariety}' data-prodVarietyValue='${p.prodVarietyValue}'
-                                                data-prodthick='${p.prodThick}'
-                                                data-prodpricetype='${p.prodPriceType}'  data-prodPriceTypeValue='${p.prodPriceTypeValue}'
-                                                data-prodguideprice='${p.prodGuidePrice}'
-                                                data-produnit='${p.prodUnit}' data-prodUnitValue='${p.prodUnitValue}'
-                                                data-color="${p.prodColor}" data-colorValue="${p.prodColorValue}"
-                                                data-density="${p.prodDensity}"
-                                                value='${p.prodCode}' > ${p.prodCode}_${p.prodDensity==null?"0":p.prodDensity}</option>
-                                    </c:forEach>
-                                </select>
-                            </label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
-                                产品编码:
-                            </label>
-                            <label class="col-md-8 control-label">
-                                <input class="form-control" id="itemCode" disabled>
-                            </label>
-                        </div>
-                        <div class="col-md-4">
+        <%--</div>--%>
+        <%--<div class="panel-body prod-hide" style="padding: 10px 10px 10px 10px;">--%>
+            <%--<div class="row">--%>
+                <%--<div class="col-sm-12">--%>
+                    <%----%>
+                    <%--<div class="form-group">--%>
+                        <%--<div class="col-md-4">--%>
                             <%--<label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">--%>
-                            <%--产品名称:--%>
+                                <%--产品选择:--%>
+                            <%--</label>--%>
+                            <%--<label class="col-md-8 control-label">--%>
+                                <%--<select data-placeholder="产品选择" class="chosen-select order-label-input-width" style="width: 209px" id="prodInfo" onchange="getResChange(this)">--%>
+                                    <%--<option value="-1">请选择</option>--%>
+                                    <%--<c:forEach items="${prod}" var="p">--%>
+                                        <%--<option--%>
+                                                <%--data-prodName='${p.prodName}'--%>
+                                                <%--data-prodcgycode='${p.prodCgyCode}' data-prodCgyCodeValue='${p.prodCgyCodeValue}'--%>
+                                                <%--data-prodvariety='${p.prodVariety}' data-prodVarietyValue='${p.prodVarietyValue}'--%>
+                                                <%--data-prodthick='${p.prodThick}'--%>
+                                                <%--data-prodpricetype='${p.prodPriceType}'  data-prodPriceTypeValue='${p.prodPriceTypeValue}'--%>
+                                                <%--data-prodguideprice='${p.prodGuidePrice}'--%>
+                                                <%--data-produnit='${p.prodUnit}' data-prodUnitValue='${p.prodUnitValue}'--%>
+                                                <%--data-color="${p.prodColor}" data-colorValue="${p.prodColorValue}"--%>
+                                                <%--data-density="${p.prodDensity}"--%>
+                                                <%--value='${p.prodCode}' > ${p.prodCode}_${p.prodDensity==null?"0":p.prodDensity}</option>--%>
+                                    <%--</c:forEach>--%>
+                                <%--</select>--%>
+                            <%--</label>--%>
+                        <%--</div>--%>
+                        <%--<div class="col-md-4">--%>
+                            <%--<label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">--%>
+                                <%--产品编码:--%>
+                            <%--</label>--%>
+                            <%--<label class="col-md-8 control-label">--%>
+                                <%--<input class="form-control" id="itemCode" disabled>--%>
+                            <%--</label>--%>
+                        <%--</div>--%>
+                        <%--<div class="col-md-4">--%>
+                            <%--&lt;%&ndash;<label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">&ndash;%&gt;--%>
+                            <%--&lt;%&ndash;产品名称:&ndash;%&gt;--%>
+                            <%--&lt;%&ndash;</label>&ndash;%&gt;--%>
+                            <%--&lt;%&ndash;<label class="col-md-8 control-label" style="text-align: left">&ndash;%&gt;--%>
+                            <%--&lt;%&ndash;<input class="form-control" id="itemName" disabled>&ndash;%&gt;--%>
+                            <%--&lt;%&ndash;</label>&ndash;%&gt;--%>
+                            <%--<label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">--%>
+                                <%--产品密度:--%>
                             <%--</label>--%>
                             <%--<label class="col-md-8 control-label" style="text-align: left">--%>
-                            <%--<input class="form-control" id="itemName" disabled>--%>
+                                <%--<input class="form-control" id="itemDensity" disabled>--%>
                             <%--</label>--%>
-                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
-                                产品密度:
-                            </label>
-                            <label class="col-md-8 control-label" style="text-align: left">
-                                <input class="form-control" id="itemDensity" disabled>
-                            </label>
-                        </div>
-                    </div>
-                    </br>
-                </div>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                    <%--</br>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+
+            <%--<div class="row">--%>
+                <%--<div class="col-sm-12">--%>
+                    <%--<div class="form-group">--%>
+                        <%--<div class="col-md-4">--%>
+                            <%--<label class="col-md-4 control-label order-detail-label-margin" style="text-align: right"><i style="color: red"></i>--%>
+                                <%--颜色:--%>
+                            <%--</label>--%>
+                            <%--<label class="col-md-8 control-label">--%>
+                                <%--<input class="form-control" id="itemColor" disabled>--%>
+                            <%--</label>--%>
+                        <%--</div>--%>
+
+                        <%--<div class="col-md-4">--%>
+                            <%--<label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">--%>
+                                <%--产品品种:--%>
+                            <%--</label>--%>
+                            <%--<label class="col-md-8 control-label" style="text-align: left">--%>
+                                <%--<input class="form-control" id="itemCgyCode" disabled>--%>
+                            <%--</label>--%>
+                        <%--</div>--%>
+
+                        <%--<div class="col-md-4">--%>
+                            <%--<label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">--%>
+                                <%--产品类别:--%>
+                            <%--</label>--%>
+                            <%--<label class="col-md-8 control-label" style="text-align: left">--%>
+                                <%--<input class="form-control" id="itemVariety" disabled>--%>
+                            <%--</label>--%>
+                        <%--</div>--%>
+
+                    <%--</div>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+
+            <%--<div class="row">--%>
+                <%--<div class="col-sm-12">--%>
+                    <%--<div class="form-group">--%>
+                        <%--<div class="col-md-4">--%>
+                            <%--<label class="col-md-4 control-label order-detail-label-margin" style="text-align: right"><i style="color: red"></i>--%>
+                                <%--产品厚度:--%>
+                            <%--</label>--%>
+                            <%--<label class="col-md-8 control-label">--%>
+                                <%--<input class="form-control" id="itemThick" disabled>--%>
+                            <%--</label>--%>
+                        <%--</div>--%>
+                        <%--<div class="col-md-4">--%>
+                            <%--<label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">--%>
+                                <%--计价方式:--%>
+                            <%--</label>--%>
+                            <%--<label class="col-md-8 control-label" style="text-align: left">--%>
+                                <%--<input class="form-control" id="itemPriceType" disabled>--%>
+                            <%--</label>--%>
+                        <%--</div>--%>
+                        <%--<div class="col-md-4">--%>
+                            <%--<label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">--%>
+                                <%--单位:--%>
+                            <%--</label>--%>
+                            <%--<label class="col-md-8 control-label" style="text-align: left">--%>
+                                <%--<input class="form-control" id="itemUnit" disabled>--%>
+                            <%--</label>--%>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+
+            <%--<div class="row">--%>
+                <%--<div class="col-sm-12">--%>
+                    <%--<div class="form-group">--%>
+                        <%--<div class="col-md-4">--%>
+                            <%--<label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">--%>
+                                <%--指导价格:--%>
+                            <%--</label>--%>
+                            <%--<label class="col-md-8 control-label" style="text-align: left">--%>
+                                <%--<input class="form-control" id="itemPrice" >--%>
+                            <%--</label>--%>
+                        <%--</div>--%>
+
+
+                    <%--</div>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+    <div class="tabs-container" >
+        <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
+            <div class="panel-heading" style="background-color: #50B0E6">
+                <h3 class="panel-title global-panel-title" >
+                    订单产品列表
+                </h3>
             </div>
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="form-group">
-                        <div class="col-md-4">
-                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right"><i style="color: red"></i>
-                                颜色:
-                            </label>
-                            <label class="col-md-8 control-label">
-                                <input class="form-control" id="itemColor" disabled>
-                            </label>
-                        </div>
-
-                        <div class="col-md-4">
-                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
-                                产品品种:
-                            </label>
-                            <label class="col-md-8 control-label" style="text-align: left">
-                                <input class="form-control" id="itemCgyCode" disabled>
-                            </label>
-                        </div>
-
-                        <div class="col-md-4">
-                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
-                                产品类别:
-                            </label>
-                            <label class="col-md-8 control-label" style="text-align: left">
-                                <input class="form-control" id="itemVariety" disabled>
-                            </label>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="form-group">
-                        <div class="col-md-4">
-                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right"><i style="color: red"></i>
-                                产品厚度:
-                            </label>
-                            <label class="col-md-8 control-label">
-                                <input class="form-control" id="itemThick" disabled>
-                            </label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
-                                计价方式:
-                            </label>
-                            <label class="col-md-8 control-label" style="text-align: left">
-                                <input class="form-control" id="itemPriceType" disabled>
-                            </label>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
-                                单位:
-                            </label>
-                            <label class="col-md-8 control-label" style="text-align: left">
-                                <input class="form-control" id="itemUnit" disabled>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="form-group">
-                        <div class="col-md-4">
-                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
-                                指导价格:
-                            </label>
-                            <label class="col-md-8 control-label" style="text-align: left">
-                                <input class="form-control" id="itemPrice" >
-                            </label>
-                        </div>
-
-                        <div class="col-md-8">
-                            <div class="col-md-1">
-                                &nbsp;
+            <div class="panel-body" style="padding: 10px 10px 0px 10px;height: 100%">
+                <input type="hidden" id="ordCode" value="${ordCode}"/>
+                <div class="control-group table-responsive">
+                        <div class="col-md-12">
+                            <div class="col-md-7">
+                                <label class="col-md-2 control-label order-detail-label-margin" style="text-align: right;padding-top: 7px;">
+                                    产品选择:
+                                </label>
+                                <div class="col-md-4" style="padding-top: 4px;">
+                                    <select data-placeholder="产品选择" class="chosen-select order-label-input-width" style="width: 209px" id="prodInfo" onchange="getResChange(this)">
+                                        <option value="-1">请选择</option>
+                                        <c:forEach items="${prod}" var="p">
+                                        <option
+                                        data-prodName='${p.prodName}'
+                                        data-prodcgycode='${p.prodCgyCode}' data-prodCgyCodeValue='${p.prodCgyCodeValue}'
+                                        data-prodvariety='${p.prodVariety}' data-prodVarietyValue='${p.prodVarietyValue}'
+                                        data-prodthick='${p.prodThick}'
+                                        data-prodpricetype='${p.prodPriceType}'  data-prodPriceTypeValue='${p.prodPriceTypeValue}'
+                                        data-prodguideprice='${p.prodGuidePrice}'
+                                        data-produnit='${p.prodUnit}' data-prodUnitValue='${p.prodUnitValue}'
+                                        data-color="${p.prodColor}" data-colorValue="${p.prodColorValue}"
+                                        data-density="${p.prodDensity}"
+                                        value='${p.prodCode}' > ${p.prodCode}_${p.prodDensity==null?"0":p.prodDensity}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="col-md-4" style="padding-top: 4px;">
+                                    <label class="col-md-6 control-label order-detail-label-margin" style="text-align: right;padding-top: 3px;">
+                                        指导价格:
+                                    </label>
+                                    <label class="col-md-6 control-label" style="text-align: left">
+                                        <input class="form-control" id="itemPrice" style="width: 120px;">
+                                    </label>
+                                </div>
                             </div>
-                            <div class="col-md-11 " style="text-align: right;">
+                            <div class="col-md-5 " style="text-align: right;">
                                 <button class="btn btn-primary global-button-style" type="button"
                                         onclick="oneTrimPrice()">一键调价
                                 </button>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -166,22 +210,10 @@
                                 </button>
                             </div>
                         </div>
+                    <div style="padding-top: 49px;">
+                        <table id="cusProdDetail" class="table table-striped table-bordered table-hover text-nowrap" >
+                        </table>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="tabs-container" >
-        <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
-            <div class="panel-heading" style="background-color: #50B0E6">
-                <h3 class="panel-title global-panel-title" >
-                    第二步：确认产品定制化属性
-                </h3>
-            </div>
-            <div class="panel-body" style="padding: 10px 10px 0px 10px;height: 100%">
-                <div class="control-group table-responsive" >
-                    <table id="cusProdDetail" class="table table-striped table-bordered table-hover text-nowrap">
-                    </table>
                 </div>
             </div>
         </div>
@@ -232,18 +264,6 @@
         var ycType;
         var ybType
 
-        $.ajax({
-            type: "POST",
-            url: '/crmAjax/ajaxDictInfo',
-            dataType:'json',
-            cache: false,
-            success: function(data){
-                if(data != null){
-                    ycType = data.ycType;
-                    ybType = data.ybType;
-                }
-            }
-        });
 
         var prodObj = {
             "ckId":"",
@@ -291,16 +311,17 @@
                 prodObj.itemColorValue = $(obj).find("option:selected").attr("data-colorValue");
 
                 // $("#itemName").val($(obj).find("option:selected").attr("data-prodName"));
-                $("#itemCode").val($(obj).find("option:selected").val());
-                $("#itemCgyCode").val($(obj).find("option:selected").attr("data-prodCgyCodeValue"));
-                $("#itemVariety").val($(obj).find("option:selected").attr("data-prodVarietyValue"));
-                $("#itemThick").val($(obj).find("option:selected").attr("data-prodthick"));
-                $("#itemPriceType").val($(obj).find("option:selected").attr("data-prodPriceTypeValue"));
-                $("#itemPrice").val($(obj).find("option:selected").attr("data-prodguidePrice"));
-                $("#itemUnit").val($(obj).find("option:selected").attr("data-prodUnitValue"));
-                $("#itemColor").val($(obj).find("option:selected").attr("data-colorValue"));
+                // $("#itemCode").val($(obj).find("option:selected").val());
+                // $("#itemCgyCode").val($(obj).find("option:selected").attr("data-prodCgyCodeValue"));
+                // $("#itemVariety").val($(obj).find("option:selected").attr("data-prodVarietyValue"));
+                // $("#itemThick").val($(obj).find("option:selected").attr("data-prodthick"));
+                // $("#itemPriceType").val($(obj).find("option:selected").attr("data-prodPriceTypeValue"));
+                // $("#itemUnit").val($(obj).find("option:selected").attr("data-prodUnitValue"));
+                // $("#itemColor").val($(obj).find("option:selected").attr("data-colorValue"));
+                // $("#itemDensity").val($(obj).find("option:selected").attr("data-density"));
 
-                $("#itemDensity").val($(obj).find("option:selected").attr("data-density"));
+
+                $("#itemPrice").val($(obj).find("option:selected").attr("data-prodguidePrice"));
 
 
             }else{
@@ -336,18 +357,8 @@
                 },
                 columns :[
                     {
-                        field: 'ckId',
-                        title: '序号',
-                        width: '0px',
-                        formatter:function (value,row,index){
-                            if(index == 0){
-                                maxDataIndex = 1;
-                            }else{
-                                maxDataIndex = maxDataIndex + 1;
-                            }
-                            row.ckId = maxDataIndex;
-                            return maxDataIndex;
-                        }
+                        field: 'itemId',
+                        title: '序号'
                     },{
                         field: 'itemCode',
                         title: '产品编码'
@@ -373,45 +384,35 @@
                     },{
                         field: 'itemLenth',
                         title: '长(m)',
-                        width: '80px',
-                        formatter:function (value,row,index) {
-                            return ['<input type="number" min="0" style="width: 80px" step="0.01" onchange="inserData(\'itemLenth\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
-                        }
+                        width: '80px'
                     },{
                         field: 'itemWidth',
                         title: '宽(m)',
-                        width: '60px',
-                        formatter:function (value,row,index) {
-                            return ['<input type="number" min="0" style="width: 80px" step="0.01" onchange="inserData(\'itemWidth\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
-                        }
+                        width: '60px'
                     },{
                         field: 'itemThick',
                         title: '厚度(mm)',
-                        width: '60px',
-                        formatter:function (value,row,index){
-                            return ['<input type="text"  style="width: 75px" onchange="inserData(\'itemThick\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
-                        }
+                        width: '60px'
                     },{
                         field: 'itemOwner',
                         title: '归属人',
-                        width: '80px',
-                        formatter:function (value,row,index) {
-                            return ['<input type="text"  style="width: 80px" onchange="inserData(\'itemOwner\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
-                        }
+                        width: '80px'
                     },{
                         field: 'itemPrice',
                         title: '单价',
                         width: '90px',
                         formatter:function (value,row,index) {
-                            return ['<input type="number" min="0" style="width: 80px" step="0.01" onchange="inserData(\'itemPrice\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
+                            debugger;
+                            var sh = value;
+                            if(row.isShowPrice == 0){
+                                sh = '<input type="number" min="0" style="width: 80px" step="0.01" onchange="inserData(\'itemPrice\','+row.itemId+',this,'+index+')" class="form-control" value="'+value+'"/>';
+                            }
+                            return [sh].join('');
                         }
                     },{
                         field: 'itemNum',
                         title: '数量',
-                        width: '80px',
-                        formatter:function (value,row,index) {
-                            return ['<input type="number" min="0" style="width: 80px" onchange="inserData(\'itemNum\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
-                        }
+                        width: '80px'
                     },{
                         field: 'itemYbType',
                         title: '压边类型',
@@ -425,10 +426,7 @@
                     },{
                         field: 'itemRemarks',
                         title: '备注',
-                        width: '150px',
-                        formatter:function (value,row,index) {
-                            return ['<input type="text"  style="width: 150px" onchange="inserData(\'itemRemarks\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
-                        }
+                        width: '150px'
                     },{
                         field: 'itemPriceType',
                         title: '计价方式',
@@ -442,12 +440,6 @@
                         field: 'itemTotalSq',
                         title: '总面积',
                         width: '100px'
-                    },
-                    {
-                        field: 'oper',
-                        title: '操作',
-                        events: operateEvents,
-                        formatter: operProdFormatter
                     }
                 ],
                 onLoadSuccess:function (data) {
@@ -462,34 +454,35 @@
             $('#cusProdDetail').bootstrapTable('hideColumn', 'ordCode');
         }
 
-        $(document).ready(function(){
-            // getItemType();
-            // setTimeout(initTableInfo(),1000)
-            if(ybType == null || ybType == undefined){
-                $.ajax({
-                    type: "POST",
-                    url: '/crmAjax/ajaxDictInfo',
-                    dataType:'json',
-                    cache: false,
-                    success: function(data){
-                        if(data != null){
-                            ycType = data.ycType;
-                            ybType = data.ybType;
-                            initTableInfo();
-                        }
-                    },
-                    error:function () {
-                        initTableInfo();
+        function operYbType(value,row,index){
+            debugger;
+            var option;
+            // var headOption = "<option value =''>请选择</option>";
+            // if(ybType != null || ybType != undefined){
+            //     $.each(ybType,function(i,obj){
+            //         if(value == obj.value){
+            //             headOption = headOption + "<option value='"+obj.value+"' selected>"+obj.label+"</option>";
+            //         }else{
+            //             headOption = headOption + "<option value='"+obj.value+"'>"+obj.label+"</option>";
+            //         }
+            //     });
+            // }
+            // option  = '<select class="chosen-select" id="itemYbType"'+row.ckId+' style="width: 150px;height:33px;">'+
+            //     headOption + '</select>';
+
+            if(ybType != null || ybType != undefined){
+                $.each(ybType,function(i,obj){
+                    if(value == obj.value){
+                        option = obj.label;
                     }
                 });
-            }else{
-                initTableInfo();
             }
 
-        });
+            return [option].join('');
+        }
+
 
         function operPriceType(value,row,index) {
-            var option;
             if(value == 141001 || value == 141003 || value == 141005){
                 return "按重量";
             }else if(value == 141002 || value == 141004 || value == 141006){
@@ -497,60 +490,30 @@
             }
         }
 
-        function operYbType(value,row,index){
-            debugger;
-            var option;
-            var headOption = "<option value =''>请选择</option>";
-            if(ybType != null || ybType != undefined){
-                $.each(ybType,function(i,obj){
-                    if(value == obj.value){
-                        headOption = headOption + "<option value='"+obj.value+"' selected>"+obj.label+"</option>";
-                    }else{
-                        headOption = headOption + "<option value='"+obj.value+"'>"+obj.label+"</option>";
-                    }
-                });
-            }
-            option  = '<select class="chosen-select" id="itemYbType"'+row.ckId+' onchange="inserData(\'itemYbType\','+row.ckId+',this)" style="width: 150px;height:33px;">'+
-                headOption + '</select>';
-
-            return [option].join('');
-        }
-
         function operYcType(value,row,index){
             var option;
-            var headOption = "<option value =''>请选择</option>";
+            // var headOption = "<option value =''>请选择</option>";
+            // if(ycType != null || ycType != undefined){
+            //     $.each(ycType,function(i,obj){
+            //         if(value == obj.value){
+            //             headOption = headOption + "<option value='"+obj.value+"' selected>"+obj.label+"</option>";
+            //         }else{
+            //             headOption = headOption + "<option value='"+obj.value+"'>"+obj.label+"</option>";
+            //         }
+            //     });
+            // }
+            // option  = '<select class="chosen-select" id="itemYcType"'+row.ckId+' style="width: 150px;height:33px;">'+
+            //     headOption + '</select>';
+
             if(ycType != null || ycType != undefined){
                 $.each(ycType,function(i,obj){
                     if(value == obj.value){
-                        headOption = headOption + "<option value='"+obj.value+"' selected>"+obj.label+"</option>";
-                    }else{
-                        headOption = headOption + "<option value='"+obj.value+"'>"+obj.label+"</option>";
+                        option = obj.label;
                     }
                 });
             }
-            option  = '<select class="chosen-select" id="itemYcType"'+row.ckId+' onchange="inserData(\'itemYcType\','+row.ckId+',this)" style="width: 150px;height:33px;">'+
-                headOption + '</select>';
+
             return [option].join('');
-        }
-
-        function operProdFormatter(value, row, index) {
-            return [
-                ' <button id="tableRowdelete" type="button" class="btn btn-primary" ">删除</button>'
-            ].join('');
-        };
-
-
-        window.operateEvents = {
-
-            "click #tableRowdelete" : function(e,value,row,index){
-                for(var i=0;i<cusProdList.length;i++){
-                    if(cusProdList[i].ckId == row.ckId){
-                        cusProdList.splice(i,1);
-                        break;
-                    }
-                }
-                $("#cusProdDetail").bootstrapTable("load",cusProdList);
-            }
         }
 
         function oneTrimPrice() {
@@ -580,7 +543,31 @@
             }
         }
 
+        $(document).ready(function(){
+            // getItemType();
+            // setTimeout(initTableInfo(),1000)
+            if(ybType == null || ybType == undefined){
+                $.ajax({
+                    type: "POST",
+                    url: '/crmAjax/ajaxDictInfo',
+                    dataType:'json',
+                    cache: false,
+                    success: function(data){
+                        if(data != null){
+                            ycType = data.ycType;
+                            ybType = data.ybType;
+                            initTableInfo();
+                        }
+                    },
+                    error:function () {
+                        initTableInfo();
+                    }
+                });
+            }else{
+                initTableInfo();
+            }
 
+        });
         function tranObject(data) {
             debugger;
             indexCkId = indexCkId + 1;
@@ -624,9 +611,9 @@
         }
 
         function inserData(name,index,obj,tIndex) {
-
+            debugger;
             for(var i=0;i<cusProdList.length;i++){
-                if(cusProdList[i].ckId == index){
+                if(cusProdList[i].itemId == index){
                     for(var key in cusProdList[i]){
                         if(key == name){
                             debugger;
@@ -678,7 +665,7 @@
                 });
                 if(!flag){
                     $.ajax({
-                        url:'${ctx}/order/orderDetailBatchSave/',
+                        url:'${ctx}/order/orderDetailBatchUpdatePrice/',
                         data: JSON.stringify(cusProdList),
                         dataType:"json",
                         type:"post",

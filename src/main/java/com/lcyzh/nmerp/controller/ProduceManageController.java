@@ -66,11 +66,11 @@ public class ProduceManageController extends BaseController {
      */
     @RequestMapping(value = {"producePlan/info"})
     public String prodPlanDetail(@ModelAttribute("vo") ProdPlanVo vo, String prodPlanCode, Model model, HttpServletRequest request, HttpServletResponse response){
-        List<TProdPlanDetail> list = prodPlanDetailService.findListByProdPlanCode(prodPlanCode);
+        List<TProdPlanDetail> list = prodPlanDetailService.findListByProdPlanCodes(prodPlanCode);
         model.addAttribute("list",list);
         // 统计计算理论重量
         doTheoryCalculation(list,model);
-        model.addAttribute("prodPlan",prodPlanService.findByProdPanCode(prodPlanCode));
+        model.addAttribute("prodPlan",prodPlanService.findByProdPanCodes(prodPlanCode));
         model.addAttribute("macList",machineInfoService.findAllList());
         // add formula by zj 0802
         model.addAttribute("formulaList",formulaService.findAllList());
@@ -85,6 +85,7 @@ public class ProduceManageController extends BaseController {
      * @Author: wsm
      * @Iteration : 1.0
      * @Date: 2019/7/16 9:14 AM
+     * TODO 修改 保存配方信息到订单详情产品中
      */
     @RequestMapping(value = {"producePlan/update"})
     @ResponseBody
@@ -92,10 +93,19 @@ public class ProduceManageController extends BaseController {
         TProdPlan plan = new TProdPlan();
         plan.setProdPlanCode(prodPlan.getProdPlanCode());
         plan.setFormula(prodPlan.getFormula());
-        int result = prodPlanService.update(plan);
-        if(result > 0){
-            return "1";
+        if(StringUtils.isNotEmpty(prodPlan.getPlanDetailIds()) && prodPlan.getPlanDetailIds().endsWith(",")){
+            plan.setPlanDetailIds(prodPlan.getPlanDetailIds().substring(0,prodPlan.getPlanDetailIds().length()-1));
         }else{
+            plan.setPlanDetailIds("");
+        }
+        try {
+            int result = prodPlanService.update(plan);
+            if(result > 0){
+                return "1";
+            }else{
+                return "0";
+            }
+        }catch (Exception e){
             return "0";
         }
     }
@@ -203,6 +213,8 @@ public class ProduceManageController extends BaseController {
     public String doPrint(Model model, HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
         ProdPlanDetailVo print = (ProdPlanDetailVo)session.getAttribute(UserUtils.getUser().getId());
+        Double w = Arith.sub(print.getItemWeight(),print.getItemTareWeight());
+        print.setTrueWeight(Arith.round(w,2));
         model.addAttribute("user",UserUtils.getUser());
         model.addAttribute("vo",print);
         return "modules/crm/stockPrint";
@@ -242,6 +254,9 @@ public class ProduceManageController extends BaseController {
         print.setItemPriceType(orderItem.getItemPriceType());
 
         print.setItemColorValue(SysDictUtils.getDictLabel(print.getItemColor(), Constants.PROD_COLOR, ""));
+
+        Double w = Arith.sub(print.getItemWeight(),print.getItemTareWeight());
+        print.setTrueWeight(Arith.round(w,2));
         model.addAttribute("user",UserUtils.getUser());
         model.addAttribute("vo",print);
         return "modules/crm/stockPrint";
@@ -287,7 +302,7 @@ public class ProduceManageController extends BaseController {
                 n.setTheoryWeight(to);
             });
             totalWi = list.stream().mapToDouble(i->i.getTheoryWeight()).sum();
-            model.addAttribute("theoryTotalWeight",totalWi);
+            model.addAttribute("theoryTotalWeight",Arith.round(totalWi,4));
         }
     }
 }

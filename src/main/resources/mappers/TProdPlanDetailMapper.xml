@@ -28,6 +28,7 @@
         <result column="item_remarks" property="itemRemarks" jdbcType="VARCHAR"/>
         <result column="threshold_up" property="thresholdUp" jdbcType="DOUBLE"/>
         <result column="threshold_down" property="thresholdDown" jdbcType="DOUBLE"/>
+        <result column="cus_name" property="cusName" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="findListByProdPlanCode" parameterType="java.lang.String" resultMap="tProdPlanDetailResultMap">
@@ -68,7 +69,7 @@
             td.item_width DESC
     </select>
 
-    <select id="findListBySections" parameterType="com.lcyzh.nmerp.model.vo.ProdPlanExportVo" resultMap="tProdPlanDetailResultMap">
+    <select id="findListByProdPlanCodes" parameterType="java.lang.String" resultMap="tProdPlanDetailResultMap">
         SELECT
             td.id,
             td.prod_plan_code,
@@ -100,25 +101,74 @@
             inner join T_ORDER od on od.ord_code = td.ord_code
             inner join t_order_item oi on td.order_item_id = oi.id
         WHERE
-            1=1
-        <if test="prodCgyCode!= null">
-            and td.item_cgy_code = #{prodCgyCode,jdbcType=BIGINT}
-        </if>
-        <if test="prodVariety!= null">
-            and td.item_variety = #{prodVariety,jdbcType=BIGINT}
-        </if>
-        <if test="widthMin!= null">
-            and td.item_width >= #{widthMin,jdbcType=BIGINT}
-        </if>
-        <if test="widthMax!= null">
-            and td.item_width &lt;= #{widthMax,jdbcType=BIGINT}
-        </if>
-        <if test="prodColor!= null and prodColor!=''">
-            and td.item_color = #{prodColor,jdbcType=VARCHAR}
-        </if>
-        <if test="cusCode!= null and cusCode!=''">
-            and od.cus_code = #{cusCode,jdbcType=VARCHAR}
-        </if>
+            td.prod_plan_code in
+            <foreach item = "code" index = "index" collection = "planCodes" open = "(" separator = "," close = ")">
+                #{code}
+            </foreach>
+        ORDER BY
+            td.item_status,
+            td.item_width DESC
+    </select>
+
+
+
+    <select id="findListBySections" parameterType="com.lcyzh.nmerp.model.vo.ProdPlanExportVo" resultMap="tProdPlanDetailResultMap">
+        SELECT
+            td.id,
+            td.prod_plan_code,
+            td.ord_code,
+            td.order_item_id,
+            td.item_code,
+            td.item_lenth,
+            td.item_width,
+            td.item_thick,
+            td.item_num,
+            td.item_total_weight,
+            td.item_total_sq,
+            td.item_status,
+            td.item_cgy_code,
+            td.item_variety,
+            td.item_unit,
+            td.item_owner,
+            td.item_color,
+            td.mac_code,
+            td.item_price_type,
+            td.item_remarks,
+            oi.item_yb_type,
+            oi.item_yc_type,
+            od.ord_title,
+            td.threshold_up,
+            td.threshold_down
+        FROM
+            t_prod_plan_detail td
+            inner join T_ORDER od on od.ord_code = td.ord_code
+            inner join t_order_item oi on td.order_item_id = oi.id
+        <where>
+            <if test="prodCgyCode!= null">
+                and td.item_cgy_code = #{prodCgyCode,jdbcType=BIGINT}
+            </if>
+            <if test="prodVariety!= null">
+                and td.item_variety = #{prodVariety,jdbcType=BIGINT}
+            </if>
+            <if test="widthMin!= null">
+                and td.item_width &gt;= #{widthMin,jdbcType=BIGINT}
+            </if>
+            <if test="widthMax!= null">
+                and td.item_width &lt;= #{widthMax,jdbcType=BIGINT}
+            </if>
+            <if test="prodColor!= null and prodColor!=''">
+                and td.item_color = #{prodColor,jdbcType=VARCHAR}
+            </if>
+            <if test="cusCode!= null and cusCode!=''">
+                and od.cus_code = #{cusCode,jdbcType=VARCHAR}
+            </if>
+            <if test="startDate!= null and startDate!=''">
+                and oi.create_time &gt;= #{startDate,jdbcType=VARCHAR}
+            </if>
+            <if test="endDate!= null and endDate!=''">
+                and oi.create_time &lt;= #{endDate,jdbcType=VARCHAR}
+            </if>
+        </where>
         ORDER BY
             td.item_status,
             td.item_width DESC
@@ -141,7 +191,28 @@
     </update>
 
     <select id="findByIds" parameterType="java.util.List" resultMap="tProdPlanDetailResultMap">
-        select * from t_prod_plan_detail where id in
+        select
+        d.item_variety,
+        d.item_cgy_code,
+        d.item_color,
+        d.item_lenth,
+        d.item_owner,
+        d.item_width,
+        d.item_thick,
+        d.item_num,
+        d.item_total_sq,
+        d.item_total_weight,
+        d.item_remarks,
+        d.item_price_type,
+        d.item_status,
+        c.cus_name,
+        t.ord_title,
+        i.item_yb_type
+        from t_prod_plan_detail d
+        inner join t_order_item i on i.id = d.order_item_id
+        inner join t_order t on t.ord_code = d.ord_code
+        left join t_customer c on c.cus_code = t.cus_code
+        where d.id in
         <foreach item = "id" index = "index" collection = "ids" open = "(" separator = "," close = ")">
             #{id}
         </foreach>
@@ -178,7 +249,7 @@
         ppd.item_color itemColor,
         ppd.mac_code macCode,
         ppd.item_price_type itemPriceType,
-        pp.formula formula,
+        oi.formula formula,
         o.ord_title orderTitle,
         o.proxy_name proxyName,
         ppd.item_remarks itemRemarks,

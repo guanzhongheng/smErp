@@ -91,6 +91,11 @@
                 <table class="table invoice-total">
                     <tbody>
                     <tr>
+                        <td><strong>总数量：</strong>
+                        </td>
+                        <td>${totalNum}</td>
+                    </tr>
+                    <tr>
                         <td><strong>计价总面积：</strong>
                         </td>
                         <td>${totalMj} m&sup2</td>

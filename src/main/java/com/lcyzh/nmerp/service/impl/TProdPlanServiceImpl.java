@@ -26,10 +26,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -66,6 +63,14 @@ public class TProdPlanServiceImpl implements TProdPlanService {
         return prodPlanVo;
     }
 
+    @Override
+    public ProdPlanVo findByProdPanCodes(String prodPlanCodes) {
+        String[] codes = prodPlanCodes.split(",");
+        List<String> list = Arrays.asList(codes);
+        return  tProdPlanMapper.findProdPanByCodes(list);
+    }
+
+
     public static FormulaDetailVo toJavaBean(FormulaDetailVo javabean, JSONObject data) {
         Method[] methods = javabean.getClass().getDeclaredMethods();
         for (Method method : methods) {
@@ -89,15 +94,32 @@ public class TProdPlanServiceImpl implements TProdPlanService {
     @Override
     public List<ProdPlanVo> findPage(Page<ProdPlanVo> page, ProdPlanVo vo) {
         PageHelper.startPage(page.getPageNo(),page.getPageSize());
-        List<ProdPlanVo> list = tProdPlanMapper.findList(vo);
+        List<ProdPlanVo> list = tProdPlanMapper.findPlanList(vo);
         PageInfo<ProdPlanVo> pageInfo = new PageInfo<>(list);
         page.setTotal(pageInfo.getTotal());
         return list;
     }
 
+    /**
+     * 增加配方信息存入 订单信息
+     * @param prodPlan
+     * @return
+     */
     @Override
+    @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
     public int update(TProdPlan prodPlan) {
-        return tProdPlanMapper.update(prodPlan);
+        // 更新配方信息到对应订单下产品
+        String[] details = prodPlan.getPlanDetailIds().split(",");
+        if(details != null && details.length > 0){
+            List<String> list = Arrays.asList(details);
+            int re = tFormulaMapper.updateByDetails(list,prodPlan.getFormula());
+            if(re <= 0){
+                throw new RuntimeException("订单配方信息更新失败!");
+            }
+            return 1;
+        }else{
+            return -1;
+        }
     }
 
 
@@ -203,10 +225,12 @@ public class TProdPlanServiceImpl implements TProdPlanService {
                         prodPlan.setProdCgyCode(item.getItemCgyCode());
                         if(flag) {
                             prodPlan.setProdYbType("0");
+                            prodPlan.setIsYb("0");
                             ppMapNew.put(prodPlan.getProdCgyCode()+"|"+prodPlan.getProdVariety()+"|"+prodPlan.getProdColor()+"|"+prodPlan.getMacCode()+"|0",
                                     prodPlan);
                         }else{
                             prodPlan.setProdYbType(item.getItemYbType());
+                            prodPlan.setIsYb("1");
                             ppMapNew.put(prodPlan.getProdCgyCode()+"|"+prodPlan.getProdVariety()+"|"+prodPlan.getProdColor()+"|"+prodPlan.getMacCode()+"|"+prodPlan.getProdYbType(),
                                     prodPlan);
 

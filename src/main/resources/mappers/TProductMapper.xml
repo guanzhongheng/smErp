@@ -191,4 +191,13 @@
         select count(*) cnt from T_PRODUCT where prod_code = #{code}
     </select>
 
+    <select id="checkOrderDetail" parameterType="java.lang.Long" resultType="java.lang.Integer">
+        select count(ts.order_item_id) from t_out_stock t
+        LEFT JOIN t_out_stock_detail td on td.out_code = t.out_code
+        inner join t_stock ts on ts.bar_code = td.bar_code
+        where  t.out_status = 2 and ts.order_item_id = #{orderItemId}
+    </select>
+
+
+
 </mapper>

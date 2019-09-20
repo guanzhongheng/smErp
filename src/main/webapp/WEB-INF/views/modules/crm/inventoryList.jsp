@@ -79,6 +79,15 @@
                             <form:options items="${fns:getCusDictList(148000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                         </form:select>
                     </li>
+                    <li>
+                        &nbsp;&nbsp;
+                        <form:select path="outStatus" class="input-medium" placeholder="状态">
+                            <form:option value="" label=""/>
+                            <form:option value="0" label="已出库"/>
+                            <form:option value="1" label="未出库"/>
+                        </form:select>
+                    </li>
+
 
                 </ul>
                 <ul class="ul-form">
@@ -187,6 +196,7 @@
         $("#endDate").val("");
         $("#itemCgyCode").val("").select2();
         $("#itemVariety").val("").select2();
+        $("#outStatus").val("").select2();
     }
 
 </script>

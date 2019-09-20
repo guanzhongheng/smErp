@@ -39,6 +39,16 @@ public class TProdPlanDetail implements Serializable {
     // 标准件浮动上下值
     private Double thresholdUp;
     private Double thresholdDown;
+    // 关联客户信息
+    private String cusName;
+
+    public String getCusName() {
+        return cusName;
+    }
+
+    public void setCusName(String cusName) {
+        this.cusName = cusName;
+    }
 
     public Double getThresholdUp() {
         return thresholdUp;

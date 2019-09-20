@@ -35,4 +35,6 @@ public interface TProductMapper {
     List<TProduct> findListByCodes(List<String> codes);
 
     Integer getCntByCode(String code);
+
+    Integer checkOrderDetail(Long orderItem);
 }

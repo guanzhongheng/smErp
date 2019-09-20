@@ -14,10 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Service
@@ -93,6 +90,32 @@ public class ReportServiceImpl implements IReportService {
     @Override
     public Map<String,Object> queryProdPlanDetailList(ProdPlanExportVo exportVo) {
         List<TProdPlanDetail> list = tProdPlanDetailMapper.findListBySections(exportVo);
+
+//        List<ProdPlanDetailVo> detailVoList = new ArrayList<>();
+//        Map<String,Object> result = new HashMap<>();
+//
+//        if(list != null && !list.isEmpty()){
+//            Double totalWi = doTheoryCalculation(list);
+//            list.stream().forEach(model ->{
+//                ProdPlanDetailVo vo = new ProdPlanDetailVo();
+//                BeanUtils.copyProperties(model, vo);
+//                vo.setOrderTitle(model.getOrdTitle());
+//                vo.setItemVarietyValue(DictUtils.getValueByDictKey(vo.getItemVariety()));
+//                vo.setItemCgyCodeValue(DictUtils.getValueByDictKey(vo.getItemCgyCode()));
+//                vo.setItemColorValue(SysDictUtils.getDictLabel(vo.getItemColor(), Constants.PROD_COLOR, ""));
+//                vo.setItemYbTypeValue(SysDictUtils.getDictLabel(vo.getItemYbType(), Constants.PROD_YB_TYPE, ""));
+//                vo.setItemYcTypeValue(SysDictUtils.getDictLabel(vo.getItemYcType(), Constants.PROD_YC_TYPE, ""));
+//                vo.setItemStatusValue(transItemStatus(vo.getItemStatus()));
+//                detailVoList.add(vo);
+//            });
+//            result.put("totalWi",totalWi);
+//            result.put("detailVoList",detailVoList);
+//        }
+        return getProdPlanDetailInfs(list);
+    }
+
+    public Map<String, Object> getProdPlanDetailInfs(List<TProdPlanDetail> list){
+
         List<ProdPlanDetailVo> detailVoList = new ArrayList<>();
         Map<String,Object> result = new HashMap<>();
 
@@ -114,6 +137,16 @@ public class ReportServiceImpl implements IReportService {
             result.put("detailVoList",detailVoList);
         }
         return result;
+    }
+
+    @Override
+    public Map<String, Object> getProdPlanDetailList(String ids) {
+        if(ids != null && ids.length() > 0){
+            List<String> idList = Arrays.asList(ids.trim().split(","));
+            List<TProdPlanDetail> list = tProdPlanDetailMapper.findByIds(idList);
+            return getProdPlanDetailInfs(list);
+        }
+        return null;
     }
 
     private String transItemStatus(Character itemStatus){

@@ -22,6 +22,8 @@ public interface TOrderItemMapper {
 
     int insertBatch(List<TOrderItem> tOrderItems);
 
+    int updateBatch(List<TOrderItem> list);
+
     int update(TOrderItem tOrderItem);
 
     int delete(TOrderItem tOrderItem);

@@ -258,7 +258,7 @@
                 t.item_code,
                 t.item_lenth,
                 t.item_width,
-                t.item_weight,
+                (t.item_weight-t.item_tare_weight) as item_weight,
                 case
                 when oi.item_price_type = 141002 then t.item_sq
                 when oi.item_price_type = 141004 then t.item_sq
@@ -267,9 +267,9 @@
                 oi.item_price_type,
                 oi.item_price,
                 case
-                when oi.item_price_type = 141001 then t.item_weight * oi.item_price
-                when oi.item_price_type = 141003 then t.item_weight * oi.item_price
-                when oi.item_price_type = 141005 then t.item_weight * oi.item_price
+                when oi.item_price_type = 141001 then (t.item_weight-t.item_tare_weight) * oi.item_price
+                when oi.item_price_type = 141003 then (t.item_weight-t.item_tare_weight) * oi.item_price
+                when oi.item_price_type = 141005 then (t.item_weight-t.item_tare_weight) * oi.item_price
                 else 0 end as wtPrice,
                 case
                 when oi.item_price_type = 141002 then t.item_lenth * t.item_width * oi.item_price
@@ -277,9 +277,9 @@
                 when oi.item_price_type = 141006 then t.item_lenth * t.item_width * oi.item_price
                 else 0 end as sqPrice,
                 case
-                when oi.item_price_type = 141001 then t.item_weight * oi.item_price
-                when oi.item_price_type = 141003 then t.item_weight * oi.item_price
-                when oi.item_price_type = 141005 then t.item_weight * oi.item_price
+                when oi.item_price_type = 141001 then (t.item_weight-t.item_tare_weight) * oi.item_price
+                when oi.item_price_type = 141003 then (t.item_weight-t.item_tare_weight) * oi.item_price
+                when oi.item_price_type = 141005 then (t.item_weight-t.item_tare_weight) * oi.item_price
                 when oi.item_price_type = 141002 then t.item_lenth * t.item_width * oi.item_price
                 when oi.item_price_type = 141004 then t.item_lenth * t.item_width * oi.item_price
                 when oi.item_price_type = 141006 then t.item_lenth * t.item_width * oi.item_price
@@ -327,5 +327,23 @@
 
 
     </select>
+
+    <update id="updateBatch" parameterType="java.util.List">
+        update T_ORDER_ITEM
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="item_price =case" suffix="end,">
+                <foreach collection="list" item="i" index="index">
+                    <if test="i.itemPrice!=null">
+                        when id = #{i.id} then  #{i.itemPrice}
+                    </if>
+                </foreach>
+            </trim>
+        </trim>
+        where
+        <foreach collection="list" separator="or" item="i" index="index">
+            id = #{i.id}
+        </foreach>
+    </update>
+
 
 </mapper>

@@ -11,6 +11,7 @@ import com.lcyzh.nmerp.entity.*;
 import com.lcyzh.nmerp.entity.sys.User;
 import com.lcyzh.nmerp.model.vo.*;
 import com.lcyzh.nmerp.service.TOutStockService;
+import com.lcyzh.nmerp.utils.Arith;
 import com.lcyzh.nmerp.utils.DictUtils;
 import com.lcyzh.nmerp.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -221,13 +222,15 @@ public class TOutStockServiceImpl implements TOutStockService {
                     outItemVo.setItemLenth(sto.getItemLenth());
                     outItemVo.setItemWidth(sto.getItemWidth());
                     outItemVo.setItemThick(sto.getItemThick());
-                    TProduct prodduct = DictUtils.getProdCodeByProdCgyAndVari(sto.getItemCgyCode().toString() + sto.getItemVariety() + sto.getItemColor());
+                    TProduct prodduct = DictUtils.getProdCodeByProdCgyAndVari(sto.getItemCgyCode().toString() + sto.getItemVariety() + sto.getItemColor() + sto.getItemThick() + sto.getItemPriceType());
                     outItemVo.setItemName(prodduct.getProdName());
                     outItemVo.setProdColorValue(SysDictUtils.getDictLabel(sto.getItemColor(), "prod_color", ""));
                     outItemVo.setProdCgyCodeValue(DictUtils.getValueByDictKey(sto.getItemCgyCode()));
                     outItemVo.setProdVarietyValue(DictUtils.getValueByDictKey(sto.getItemVariety()));
-                    outItemVo.setItemWeight(sto.getItemWeight());
+                    Double weight = Arith.sub(sto.getItemWeight(),sto.getItemTareWeight()); // 获取产品净重信息
+                    outItemVo.setItemWeight(weight);
                     outItemVo.setOrdCode(sto.getOrdCode());
+                    outItemVo.setItemPriceType(sto.getItemPriceType());
                     return outItemVo;
                 }).collect(Collectors.toList());
                 return itemVos;

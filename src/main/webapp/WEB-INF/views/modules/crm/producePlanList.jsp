@@ -14,7 +14,7 @@
             return false;
         }
         function exportInfo() {
-            top.$.jBox.open("iframe:${ctx}/crm/producePlan/export", "导出条件", 500, 300, {
+            top.$.jBox.open("iframe:${ctx}/crm/producePlan/export", "导出条件", 500, 400, {
                 buttons: { "关闭": true}, submit: function (v, h, f) {
 
                 }
@@ -24,11 +24,6 @@
 
 </head>
 <body>
-<%--<ul class="nav nav-tabs">--%>
-    <%--<li class="active"><a href="#">待生产计划</a></li>--%>
-<%--</ul>--%>
-
-
 
 <div class="tabs-container" style="padding: 20px 20px;">
     <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
@@ -104,7 +99,7 @@
                             <td>${fns:getValueByDictKey(pp.prodCgyCode)}</td>
                             <td>${pp.macCode}</td>
                             <td>${fns:getDictValue(pp.prodColor, 'prod_color', defaultValue)}</td>
-                            <td>${fns:getDictValue(pp.prodYbType, 'prod_ybType', defaultValue)}</td>
+                            <td>${pp.isYb == "1"?"特殊压边":""}</td>
                             <td>${pp.totalQuantity}</td>
                             <td>${pp.quantity}</td>
                             <c:if test="${(pp.totalQuantity - pp.quantity) > 0}">
@@ -115,7 +110,6 @@
                             </c:if>
                             <td>
                                 <a href="${ctx}/produce/producePlan/info?prodPlanCode=${pp.prodPlanCode}"><i class="icon-th-list">&nbsp;详情</i></a>
-                                <%--<a href="/export/prodPlan?prodPlanCode=${pp.prodPlanCode}"><i class="icon-download">&nbsp;详情导出</i></a>--%>
                             </td>
                         </tr>
                     </c:forEach>

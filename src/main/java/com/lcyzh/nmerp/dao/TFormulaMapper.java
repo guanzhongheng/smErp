@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.dao;
 
 import com.lcyzh.nmerp.entity.TFormula;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -26,4 +27,5 @@ public interface TFormulaMapper {
 
     int delete(TFormula tFormula);
 
+    int updateByDetails(@Param("planDetails") List<String> planDetails,@Param("formula") String formula);
 }

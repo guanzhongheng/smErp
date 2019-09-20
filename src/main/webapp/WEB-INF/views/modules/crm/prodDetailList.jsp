@@ -404,10 +404,7 @@
                 },{
                     field: 'itemThick',
                     title: '厚度(mm)',
-                    width: '60px',
-                    formatter:function (value,row,index){
-                        return ['<input type="text"  style="width: 75px" onchange="inserData(\'itemThick\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
-                    }
+                    width: '60px'
                 },{
                     field: 'itemOwner',
                     title: '归属人',
@@ -480,8 +477,6 @@
     }
 
     $(document).ready(function(){
-       // getItemType();
-       // setTimeout(initTableInfo(),1000)
         if(ybType == null || ybType == undefined){
             $.ajax({
                 type: "POST",

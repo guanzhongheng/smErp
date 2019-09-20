@@ -81,6 +81,16 @@ public class OrderItemVo {
 
     private Double showTotalPrice;
 
+    private int isShowPrice; //是否同意价格修改
+
+    public int getIsShowPrice() {
+        return isShowPrice;
+    }
+
+    public void setIsShowPrice(int isShowPrice) {
+        this.isShowPrice = isShowPrice;
+    }
+
     public Double getShowTotalPrice() {
         return showTotalPrice;
     }

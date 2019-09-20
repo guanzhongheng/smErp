@@ -138,4 +138,12 @@
         WHERE f_code = #{fCode,jdbcType=VARCHAR}
     </delete>
 
+
+    <update id="updateByDetails"  parameterType ="com.lcyzh.nmerp.entity.TFormula">
+        update t_order_item t inner join t_prod_plan_detail d on t.id = d.order_item_id set t.formula = #{formula}
+        where d.id in
+        <foreach item = "id" index = "index" collection = "planDetails" open = "(" separator = "," close = ")">
+            #{id}
+        </foreach>
+    </update>
 </mapper>

@@ -62,6 +62,8 @@ public class OrderManageController extends BaseController {
         return "modules/crm/orderAdd";
     }
 
+
+
     @RequestMapping(value = {"order_save"})
     public String orderAdd(OrderAddModifyVo ordAddModifyVo, Model model, RedirectAttributes redirectAttributes){
         if (!beanValidator(model, ordAddModifyVo)){
@@ -94,6 +96,15 @@ public class OrderManageController extends BaseController {
         return "modules/crm/prodDetailList";
     }
 
+    @RequestMapping(value = "update_orderPrice")
+    public String updateOrderPrice(String ordCode,Model model){
+        model.addAttribute("ordCode", ordCode);
+        List<ProductVo> list = productService.findAllList();
+        model.addAttribute("prod",list);
+        return "modules/crm/prodDetailPrice";
+    }
+
+
     /**
      * 订单详情-产品添加
      * @return
@@ -107,6 +118,26 @@ public class OrderManageController extends BaseController {
             map.put("res","error");
         }else{
             int res = orderService.save(list);
+            if(res < 1){
+                map.put("res","error");
+            }
+        }
+        return map;
+    }
+
+    /**
+     * 订单详情-产品添加
+     * @return
+     */
+    @RequestMapping(value = {"orderDetailBatchUpdatePrice"})
+    @ResponseBody
+    public Map<String,Object> orderDetailBatchUpdatePrice(@RequestBody List<OrderItemVo> list){
+        Map<String,Object> map = new HashMap<>();
+        map.put("res","success");
+        if(CollectionUtils.isEmpty(list)){
+            map.put("res","error");
+        }else{
+            int res = orderService.updatePrice(list);
             if(res < 1){
                 map.put("res","error");
             }

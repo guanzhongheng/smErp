@@ -32,13 +32,11 @@
                 </td>
                 <c:if test="${vo.itemPriceType eq 141001 || vo.itemPriceType eq 141003 || vo.itemPriceType eq 141005}">
                     <td style="width:70px;"><b>
-                        <span style="font-size: 35px;">${vo.itemWeight-vo.itemTareWeight}<span style="font-size: 15px;">Kg</span></span>
-
+                        <span style="font-size: 35px;">${vo.trueWeight}<span style="font-size: 15px;">Kg</span></span>
                     </b></td>
                 </c:if>
             </tr>
         </table>
-
 
         <table>
             <tr>

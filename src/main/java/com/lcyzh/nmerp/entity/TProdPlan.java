@@ -20,9 +20,27 @@ public class TProdPlan implements Serializable {
     private String formula;
     private Character isAuto;
     private String prodYbType;
+    private String isYb;
 
+    private String planDetailIds;
 
     public TProdPlan(){
+    }
+
+    public String getPlanDetailIds() {
+        return planDetailIds;
+    }
+
+    public void setPlanDetailIds(String planDetailIds) {
+        this.planDetailIds = planDetailIds;
+    }
+
+    public String getIsYb() {
+        return isYb;
+    }
+
+    public void setIsYb(String isYb) {
+        this.isYb = isYb;
     }
 
     public void setProdPlanCode (String prodPlanCode) {this.prodPlanCode = prodPlanCode;}

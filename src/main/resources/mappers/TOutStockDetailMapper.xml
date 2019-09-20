@@ -125,11 +125,11 @@
             ts.item_lenth as itemLenth,
             ts.item_width as itemWidth,
             ts.item_thick as itemThick,
-            ts.item_weight as itemWeight,
+            (ts.item_weight-ts.item_tare_weight) as itemWeight,
             ti.item_price as itemPrice,
-            case when ti.item_price_type = 141001 then ti.item_price * ts.item_weight
-                 when ti.item_price_type = 141003 then ti.item_price * ts.item_weight
-                 when ti.item_price_type = 141005 then ti.item_price * ts.item_weight
+            case when ti.item_price_type = 141001 then ti.item_price * (ts.item_weight-ts.item_tare_weight)
+                 when ti.item_price_type = 141003 then ti.item_price * (ts.item_weight-ts.item_tare_weight)
+                 when ti.item_price_type = 141005 then ti.item_price * (ts.item_weight-ts.item_tare_weight)
                  when ti.item_price_type = 141002 then ti.item_price * ts.item_lenth * ts.item_width
                  when ti.item_price_type = 141004 then ti.item_price * ts.item_lenth * ts.item_width
                  when ti.item_price_type = 141006 then ti.item_price * ts.item_lenth * ts.item_width

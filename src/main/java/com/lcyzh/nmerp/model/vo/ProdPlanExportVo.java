@@ -17,6 +17,24 @@ public class ProdPlanExportVo {
     private String cusCode;
     private Double widthMin;
     private Double widthMax;
+    private String startDate;
+    private String endDate;
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
 
     public String getCusCode() {
         return cusCode;

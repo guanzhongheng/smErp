@@ -13,4 +13,8 @@ public interface IReportService {
     OrderQueryVo queryOrderInfo(String ordCode);
 
     Map<String,Object> queryProdPlanDetailList(ProdPlanExportVo exportVo);
+
+    Map<String,Object> getProdPlanDetailList(String ids);
+
+
 }

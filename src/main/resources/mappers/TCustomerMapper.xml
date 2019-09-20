@@ -64,9 +64,9 @@
 
 
     <select id="findByCusName" parameterType="java.lang.String" resultMap="tCustomerResultMap">
-        SELECT *
+        SELECT distinct *
         FROM T_CUSTOMER
-       where cus_name = #{cusName,jdbcType=VARCHAR}
+       where cus_name = #{cusName,jdbcType=VARCHAR} and cus_status &lt;= 104004
     </select>
 
     <select id="findList" resultType="com.lcyzh.nmerp.model.vo.CustomerQueryVo"

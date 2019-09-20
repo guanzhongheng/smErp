@@ -71,6 +71,11 @@ public interface TOrderService {
     int save(List<OrderItemVo> list);
 
     /**
+     * 订单明细添加
+     */
+    int updatePrice(List<OrderItemVo> list);
+
+    /**
      * @Description: 订单审批
      * @Param: ordCode：订单编号
      * ordCode: state 0-审批通过 1-审批不通过

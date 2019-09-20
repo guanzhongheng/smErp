@@ -33,6 +33,15 @@ public class TStock implements Serializable {
     private String macCode;
     private Double itemTareWeight;
     private String seCode;
+    private Long itemPriceType;
+
+    public Long getItemPriceType() {
+        return itemPriceType;
+    }
+
+    public void setItemPriceType(Long itemPriceType) {
+        this.itemPriceType = itemPriceType;
+    }
 
     public TStock(){
     }

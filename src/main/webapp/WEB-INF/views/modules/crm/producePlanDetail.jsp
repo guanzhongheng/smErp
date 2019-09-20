@@ -128,11 +128,11 @@
                                                     <div class="col-md-2 " style="text-align: left">
                                                         <a href="/print/remark_print?prodPlanCode=${prodPlan.prodPlanCode}" style="width: 80px;" class="btn btn-primary">配方打印</a>
                                                     </div>
-                                                    <div class="col-md-2 " style="text-align: left">
-                                                        <button class="btn btn-primary"
-                                                                type="button" style="width: 80px" onclick="doProcessData()">还原
-                                                        </button>
-                                                    </div>
+                                                    <%--<div class="col-md-2 " style="text-align: left">--%>
+                                                        <%--<button class="btn btn-primary"--%>
+                                                                <%--type="button" style="width: 80px" onclick="doProcessData()">还原--%>
+                                                        <%--</button>--%>
+                                                    <%--</div>--%>
 
                                                 </div>
                                                 <div class="hr-line-dashed"></div>
@@ -298,6 +298,11 @@
                                         id="distribution">下发生产
                                 </button>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
+                                <button class="btn btn-primary global-button-style"
+                                        style="margin-left: 0px;margin-bottom: 10px;" type="button"
+                                        id="exportProd">导出
+                                </button>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
                                 <button class="btn btn-white global-button-style" style="margin-bottom: 10px;"
                                         type="button" id="backHistory" >返回
                                 </button>
@@ -362,7 +367,6 @@
 
     
     function doProcessData(){
-
         if(FormuInfo != null && FormuInfo.length > 0){
             var obj = JSON.parse(FormuInfo);
             if(obj.outer != null){
@@ -391,7 +395,6 @@
             }
             $(".chosen-container").css('width',"100%");
             $(".loading-text").hide();
-
         }
     }
 
@@ -555,7 +558,7 @@
     $(document).ready(function () {
         $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",})
         initTable();
-        setTimeout("doProcessData()",600); //();
+        // setTimeout("doProcessData()",600); //();
     });
 
     window.operatePdEvents = {
@@ -812,12 +815,20 @@
         ].join('');
     }
 
+    // 修改配方信息到订单产品中 根据选中产品进行配方设置
     function saveFormu(){
         debugger;
         var outTem = $("#outTemp").text();
         var midTem = $("#midTemp").text();
         var inTem = $("#inTemp").text();
         var prodPlanCode = $("#prodPlanCode").val();
+
+        var str = getCheckValue();
+
+        if (str.length <= 0) {
+            top.$.jBox.tip('最少选中一条记录进行配方设置');
+            return;
+        }
 
         if(prodPlanCode != null){
             var formula =
@@ -838,6 +849,7 @@
                 };
             var reqData = {
                 "prodPlanCode":prodPlanCode,
+                "planDetailIds":str,
                 "formula": JSON.stringify(formula)
             }
             $.ajax({
@@ -882,7 +894,6 @@
 
     $("#distribution").click(function () {
         <!-- 针对选中客户进行操作 -->
-        debugger;
         if(isSave && (outFormuList.length > 0 || midderFormuList.length > 0 || innerFormuList.length > 0)){
             var str = getCheckValue();
             if (str.length > 0) {
@@ -908,10 +919,15 @@
         }else{
             top.$.jBox.tip('请先完善配方信息！');
         }
-
-
-
     });
+	$("#exportProd").click(function(){
+        var str = getCheckValue();
+        if (str.length > 0) {
+           window.location.href = "/export/prodPlanDetail?ids=" + str;
+        } else {
+            top.$.jBox.tip('最少选中一条记录');
+        }
+	})
 
     function gotNewPath(){
         window.location.href = "/produce/producePlan/info?prodPlanCode=" + $("#prodPlanCode").val();

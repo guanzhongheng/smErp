@@ -1,7 +1,8 @@
-package com.lcyzh.nmerp.service;
+package com.lcyzh.nmerp.service.impl;
 
 import com.lcyzh.nmerp.dao.TOrderItemMapper;
 import com.lcyzh.nmerp.entity.TOrderItem;
+import com.lcyzh.nmerp.service.TOrderItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

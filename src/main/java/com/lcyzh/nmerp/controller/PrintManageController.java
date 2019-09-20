@@ -127,10 +127,9 @@ public class PrintManageController extends BaseController {
         List<OrderItemVo> list = new ArrayList<>();
         Map<String,Long> ite = new HashMap<>();
         Map<String,Double> iteWight = new HashMap<>();
-
         if(!StringUtils.isEmpty(outItemVoList)){
             for(OutItemVo vo : outItemVoList){
-                String newName = vo.getOrdCode() + vo.getItemOwner() + vo.getProdVarietyValue() + vo.getProdCgyCodeValue() + vo.getProdColorValue() + vo.getItemLenth()  + vo.getItemWidth() + vo.getItemThick();
+                String newName = vo.getOrdCode() + vo.getItemOwner() + vo.getProdVarietyValue() + vo.getProdCgyCodeValue() + vo.getProdColorValue() + vo.getItemLenth()  + vo.getItemWidth() + vo.getItemThick()+vo.getItemPriceType();
                 if(ite.get(newName) == null){
                     ite.put(newName,1L);
                     iteWight.put(newName,vo.getItemWeight());
@@ -144,9 +143,9 @@ public class PrintManageController extends BaseController {
         }
         if(!StringUtils.isEmpty(oldOrderItem)){
             for(OrderItemVo vo : oldOrderItem){
-                String newName = vo.getOrdCode() + vo.getItemOwner() + vo.getItemVaritemValue() + vo.getItemCgyCodeValue() + vo.getItemColorValue() + vo.getItemLenth()+ vo.getItemWidth()+ vo.getItemThick();
+                String newName = vo.getOrdCode() + vo.getItemOwner() + vo.getItemVaritemValue() + vo.getItemCgyCodeValue() + vo.getItemColorValue() + vo.getItemLenth()+ vo.getItemWidth()+ vo.getItemThick() + vo.getItemPriceType();
                 if(ite.get(newName) != null && !list.contains(vo)){
-                    if(ite.get(newName) >= vo.getItemNum()){
+                    if(ite.get(newName) > vo.getItemNum()){
                         // 匹配数量后 直接扣除 针对一个订单会存在重复产品多条记录情况
                         Long newNum = ite.get(newName) - vo.getItemNum();
                         ite.put(newName,newNum);
@@ -157,6 +156,8 @@ public class PrintManageController extends BaseController {
                     vo.setItemTotalSq(Arith.round(mj,4));
                     vo.setItemTotalWeight(iteWight.get(newName));
                     list.add(vo);
+                }else{
+                    logger.error("出库列表与订单列表信息不匹配：订单key" + newName + " 出库单号:");
                 }
             }
         }
@@ -277,13 +278,15 @@ public class PrintManageController extends BaseController {
      * @param orderItemVos
      */
     public void getTotalInfo(Model model,List<OrderItemVo> orderItemVos){
+
+
         Double totalMj = orderItemVos.stream().mapToDouble(i->(((i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ)
                 || i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ_JB)
                 || i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ_JH))&&i.getItemTotalSq()!=null)?i.getItemTotalSq():0)).sum();
         Double totalZl = orderItemVos.stream().mapToDouble(i -> (((i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)
                 || i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JH)
                 || i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JB) )&&i.getItemTotalWeight()!=null)?i.getItemTotalWeight():0)).sum();
-        Double totalNum = orderItemVos.stream().mapToDouble(i -> i.getItemNum()==null?0: i.getItemNum()).sum();
+        Long totalNum = orderItemVos.stream().mapToLong(i -> i.getItemNum()==null?0: i.getItemNum()).sum();
         orderItemVos.forEach(n->{
             if(n.getItemPriceType() == 141002 || n.getItemPriceType() == 141004 || n.getItemPriceType() == 141006){
                 n.setShowTotalPrice(Arith.round(Arith.mul(n.getItemTotalSq(),n.getItemPrice()),4));
@@ -310,8 +313,7 @@ public class PrintManageController extends BaseController {
         double totalPrice = Arith.add(totoalPriceByMj,totalPriceByZL);
         model.addAttribute("totalMj",Arith.round(totalMj,4));
         model.addAttribute("totalZl",Arith.round(totalZl,4));
-        model.addAttribute("totalNum",Arith.round(totalNum,4));
+        model.addAttribute("totalNum",totalNum);
         model.addAttribute("totalPrice",Arith.round(totalPrice,4));
-
     }
 }

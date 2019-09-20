@@ -47,6 +47,20 @@
             </label>
         </li>
     </ul>
+
+    <ul class="ul-form" style="margin-bottom: 10px">
+    <li>
+        &nbsp;&nbsp;
+        <form:input path="startDate" htmlEscape="false" readonly="readonly" class="input-small Wdate" cssStyle="width: 150px"
+                    placeholder="开始时间" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+        ～
+        <form:input path="endDate" htmlEscape="false" readonly="readonly" class="input-small Wdate" cssStyle="width: 150px"
+                    placeholder="结束时间" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',isShowClear:false});"/>
+    </li>
+    <li>
+
+    </li>
+</ul>
     <ul class="ul-form" style="margin-bottom: 10px">
         <input  type="number" placeholder="最小宽度" name="widthMin" id="widthMin" style="margin-left: 12px;width: 140px;display: inline"
                class="form-control produceDetail-input-readonly">
@@ -70,6 +84,8 @@
         $("#cusCode").val("").select2();
         $("#widthMin").val("");
         $("#widthMax").val("");
+        $("#startDate").val("");
+        $("#endDate").val("");
     }
 </script>
 </body>

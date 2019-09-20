@@ -18,6 +18,13 @@ public interface TProdPlanDetailService {
     List<TProdPlanDetail> findListByProdPlanCode(String prodPlanCode);
 
     /**
+     * 获取计划单号明细 根据多个计划单号
+     * @param prodPlanCodes
+     * @return
+     */
+    List<TProdPlanDetail> findListByProdPlanCodes(String prodPlanCodes);
+
+    /**
      * 批量下发生产，状态由待确认改为下发生产
      */
     int updateByIds(String id,Double thresholdUp,Double thresholdDown);

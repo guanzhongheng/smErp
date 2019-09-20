@@ -9,12 +9,14 @@ import com.lcyzh.nmerp.entity.*;
 import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
 import com.lcyzh.nmerp.service.TProdPlanDetailService;
 import com.lcyzh.nmerp.utils.IdGen;
+import com.lcyzh.nmerp.utils.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -42,6 +44,18 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
     public List<TProdPlanDetail> findListByProdPlanCode(String prodPlanCode) {
         return tProdPlanDetailMapper.findListByProdPlanCode(prodPlanCode);
     }
+
+    @Override
+    public List<TProdPlanDetail> findListByProdPlanCodes(String prodPlanCodes) {
+        if(StringUtils.isNotEmpty(prodPlanCodes)){
+            String[] str = prodPlanCodes.split(",");
+            List<String> list = Arrays.asList(str);
+
+            return tProdPlanDetailMapper.findListByProdPlanCodes(list);
+        }
+        return new ArrayList<>();
+    }
+
 
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
     @Override

@@ -35,4 +35,7 @@ public interface TProdPlanDetailMapper {
                     @Param("thresholdDown") Double thresholdDown);
 
     List<TProdPlanDetail> findByIds(@Param("ids") List<String> ids);
+
+
+    List<TProdPlanDetail> findListByProdPlanCodes(@Param("planCodes") List<String> planCodes);
 }

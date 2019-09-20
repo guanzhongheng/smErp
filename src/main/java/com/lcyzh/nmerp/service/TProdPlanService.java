@@ -32,6 +32,9 @@ public interface TProdPlanService {
      * @Date: 2019/7/4 10:54 PM
      */
     ProdPlanVo findByProdPanCode(String prodPlanCode);
+
+
+    ProdPlanVo findByProdPanCodes(String prodPlanCodes);
     //
     //
     ///**

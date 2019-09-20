@@ -34,6 +34,26 @@ public class OutItemVo {
     // 产品重量
     private Double itemWeight;
 
+    private Long itemPriceType;
+
+    private Long num;
+
+    public Long getNum() {
+        return num;
+    }
+
+    public void setNum(Long num) {
+        this.num = num;
+    }
+
+    public Long getItemPriceType() {
+        return itemPriceType;
+    }
+
+    public void setItemPriceType(Long itemPriceType) {
+        this.itemPriceType = itemPriceType;
+    }
+
     public Double getItemWeight() {
         return itemWeight;
     }

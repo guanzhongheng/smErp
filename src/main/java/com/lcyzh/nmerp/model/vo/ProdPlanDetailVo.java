@@ -86,6 +86,16 @@ public class ProdPlanDetailVo{
     // 延长后长度
     private Double itemYcLenth;
 
+    private Double trueWeight;
+
+    public Double getTrueWeight() {
+        return trueWeight;
+    }
+
+    public void setTrueWeight(Double trueWeight) {
+        this.trueWeight = trueWeight;
+    }
+
     public String getCusName() {
         return cusName;
     }

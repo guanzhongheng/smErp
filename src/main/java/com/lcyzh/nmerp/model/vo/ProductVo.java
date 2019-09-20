@@ -46,6 +46,17 @@ public class ProductVo extends DataEntity<TProduct> {
     // 密度
     private Double prodDensity;
 
+    private int isShow;
+
+
+    public int getIsShow() {
+        return isShow;
+    }
+
+    public void setIsShow(int isShow) {
+        this.isShow = isShow;
+    }
+
     public Double getProdDensity() {
         return prodDensity;
     }

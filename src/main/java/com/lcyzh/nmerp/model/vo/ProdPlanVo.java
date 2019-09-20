@@ -36,6 +36,26 @@ public class ProdPlanVo{
 
     private String prodYbType;
 
+    private String isYb;
+
+    private String planDetailIds;
+
+    public String getPlanDetailIds() {
+        return planDetailIds;
+    }
+
+    public void setPlanDetailIds(String planDetailIds) {
+        this.planDetailIds = planDetailIds;
+    }
+
+    public String getIsYb() {
+        return isYb;
+    }
+
+    public void setIsYb(String isYb) {
+        this.isYb = isYb;
+    }
+
     //配方内容
     private Map<String, FormulaDetailVo> context;
 
