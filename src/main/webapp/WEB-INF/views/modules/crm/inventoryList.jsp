@@ -21,20 +21,11 @@
                 type: 2,
                 title: '打印标签确认',
                 skin: 'layui-layer-rim', //加上边框
-                area: ['450px', '350px'],
+                area: ['170mm', '50mm'],
                 content: ['/produce/produce/rePrint?stockId='+stockId+'"', 'yes'] //iframe的url，no代表不显示滚动条
             });
         }
 
-        function rePrintCert(stockId,type) {
-            layer.open({
-                type: 2,
-                title: '打印合格证确认',
-                skin: 'layui-layer-rim', //加上边框
-                area: ['1400px', '600px'],
-                content: ['/produce/produce/rePrintCert?type='+type+'&stockId='+stockId, 'yes'] //iframe的url，no代表不显示滚动条
-            });
-        };
         function exportInfo() {
             $("#searchForm").attr('action','/export/stock');
             $("#searchForm").submit();
@@ -143,34 +134,15 @@
                             <td>${cus.itemWeight}</td>
                             <td>${fns:getDictLabel(cus.itemYbType,'prod_ybType','无')}</td>
                             <td>${cus.createTime}</td>
-                        <%--<td>${fns:getDictLabel(cus.itemYcType,'prod_ycType','无')}</td>--%>
                             <c:if test="${cus.outStatus == '0'}">
                             		<td><span style="color:green;">已出库</span></td>
                             </c:if>
                              <c:if test="${cus.outStatus == '1'}">
                             		<td><span style="color:brown;">未出库</span></td>
                             </c:if>
-                            <%--<td><button class="btn btn-primary" type="button" onclick="rePrint(${cus.stockId})"  >补签</button></td>--%>
                             <td>
                                 <button rel="external nofollow" class="btn btn-primary" style="font-size: 14px"
-                                   onclick="rePrint(${cus.stockId});return false;">补签</button>
-                                <div class="btn-group dropdown">
-                                    <button class="btn btn-success" onclick="rePrintCert(${cus.stockId},'new')" >补合格证(新版)</button>
-                                    <button class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <a href="#" onclick="rePrintCert(${cus.stockId},'red')">合格证(红)</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" onclick="rePrintCert(${cus.stockId},'green')">合格证(绿)</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" onclick="rePrintCert(${cus.stockId},'yellow')">合格证(黄)</a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                   onclick="rePrint(${cus.stockId});return false;">重新打印</button>
                             </td>
                         </tr>
                     </c:forEach>

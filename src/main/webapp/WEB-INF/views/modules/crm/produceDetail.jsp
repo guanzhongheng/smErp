@@ -97,33 +97,16 @@
                                         <div class="hr-line-dashed"></div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" style="margin-left: -25px;">生产开关:</label>
-                                            <div class="col-sm-3">
-                                                <input type="checkbox" checked class="checkbox" id="prodCheckbox"/>
-                                            </div>
-                                            <div class="col-md-7 " id="prodBtns" hidden>
-                                                <button class="btn btn-primary <%--global-button-style--%>" type="button" id="inStock" style="width: 95px;">入 库</button>
-                                                <button class="btn btn-warning " type="button" id="rePrint" disabled="true">重新打签</button>
-                                                <div class="btn-group dropdown">
-                                                    <a class="btn btn-success " id="printCertNew" disabled="true" style="width: auto">
-                                                        打印合格证(新版)
-                                                    </a>
-                                                    <a class="btn btn-success dropdown-toggle " id="printCertBtns" disabled="true" style="width: auto" data-toggle="dropdown">
-                                                        <span class="caret"></span>
-                                                    </a>
-                                                    <ul class="dropdown-menu">
-                                                        <li>
-                                                            <a href="#" id="printCertRed">合格证(红)</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" id="printCertGreen">合格证(绿)</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#" id="printCertYellow">合格证(黄)</a>
-                                                        </li>
-                                                    </ul>
+                                            <div class="col-sm-5" >
+                                                <div class="col-sm-4" style="padding: 0px">
+                                                    <input type="checkbox" checked class="checkbox" id="prodCheckbox"/>
                                                 </div>
-
+                                                <div class="col-sm-6" style="padding: 0px" id="prodBtns" hidden>
+                                                    <button class="btn btn-primary " type="button" id="inStock" style="width: 95px;">入 库</button>
+                                                    <button class="btn btn-warning " type="button" id="rePrint" style="width: 95px;" disabled="true">重新打印</button>
+                                                </div>
                                             </div>
+
                                         </div>
                                         <c:if test="${detail.thresholdUp != 0.0000 && detail.thresholdDown != 0.0000}">
                                         <div class="form-group">
@@ -576,10 +559,6 @@
             });
 
             $("#rePrint").removeAttr('disabled');
-            $("#printCertNew").removeAttr('disabled');
-            $("#printCertBtns").removeAttr('disabled');
-            // $("#printCertGreen").removeAttr('disabled');
-            // $("#printCertYellow").removeAttr('disabled');
         });
 
 
@@ -609,47 +588,10 @@
                 type: 2,
                 title: '打印标签确认',
                 skin: 'layui-layer-rim', //加上边框
-                area: ['450px', '350px'],
+                area: ['180mm', '50mm'],
                 content: ['/produce/produce/doPrint', 'yes'] //iframe的url，no代表不显示滚动条
             });
         }
-        $("#printCertNew").click(function () {
-            layer.open({
-                type: 2,
-                title: '打印合格证确认',
-                skin: 'layui-layer-rim', //加上边框
-                area: ['800px', '600px'],
-                content: ['/produce/produce/printCert?type=new', 'yes'] //iframe的url，no代表不显示滚动条
-            });
-        });
-        $("#printCertRed").click(function () {
-            layer.open({
-                type: 2,
-                title: '打印合格证确认',
-                skin: 'layui-layer-rim', //加上边框
-                area: ['800px', '600px'],
-                content: ['/produce/produce/printCert?type=red', 'yes'] //iframe的url，no代表不显示滚动条
-            });
-        });
-        $("#printCertGreen").click(function () {
-
-            layer.open({
-                type: 2,
-                title: '打印合格证确认',
-                skin: 'layui-layer-rim', //加上边框
-                area: ['1400px', '600px'],
-                content: ['/produce/produce/printCert?type=green', 'yes'] //iframe的url，no代表不显示滚动条
-            });
-        });
-        $("#printCertYellow").click(function () {
-            layer.open({
-                type: 2,
-                title: '打印合格证确认',
-                skin: 'layui-layer-rim', //加上边框
-                area: ['1400px', '600px'],
-                content: ['/produce/produce/printCert?type=yellow', 'yes'] //iframe的url，no代表不显示滚动条
-            });
-        });
 
         // 米克重重新计算逻辑
         var itemWidth = $("#itemWidth").val();
@@ -708,9 +650,6 @@
         getTableInfo();
     });
 </script>
-<%--<script src="${ctxStatic}/hPlugs/js/jquery.min.js?v=2.1.4" type="text/javascript"></script>--%>
-<%--<script src="${ctxStatic}/hPlugs/js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>--%>
-<%--<script src="${ctxStatic}/hPlugs/js/content.min.js?v=1.0.0" type="text/javascript"></script>--%>
 <script src="${ctxStatic}/hPlugs/js/plugins/chosen/chosen.jquery.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/peity/jquery.peity.min.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/jsKnob/jquery.knob.js"></script>
@@ -728,3 +667,4 @@
 <script src="${ctxStatic}/hPlugs/js/plugins/JsBarcode/JsBarcode.all.min.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/layer/layer.min.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/switch/bootstrap-switch.min.js"></script>
+<script src="${ctxStatic}/hPlugs/js/LodopFuncs.js"></script>

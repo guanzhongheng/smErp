@@ -217,29 +217,29 @@ public class ProduceManageController extends BaseController {
         print.setTrueWeight(Arith.round(w,2));
         model.addAttribute("user",UserUtils.getUser());
         model.addAttribute("vo",print);
-        return "modules/crm/stockPrint";
+        return "modules/print/stockPrint";
     }
 
-    @RequestMapping(value = {"produce/printCert"})
-    public String rePrint(String type, Model model,
-                          HttpServletRequest request, HttpServletResponse response){
-        HttpSession session = request.getSession();
-        ProdPlanDetailVo print = (ProdPlanDetailVo)session.getAttribute(UserUtils.getUser().getId());
-
-        model.addAttribute("user",UserUtils.getUser());
-        model.addAttribute("vo",print);
-        String pageStr = "";
-        if("red".equals(type)){
-            pageStr = "modules/crm/stockCertificateRed";
-        }else if("green".equals(type)){
-            pageStr = "modules/crm/stockCertificateGreen";
-        }else if("yellow".equals(type)){
-            pageStr = "modules/crm/stockCertificateYellow";
-        }else if("new".equals(type)){
-            pageStr = "modules/crm/stockCertificateNew";
-        }
-        return pageStr;
-    }
+//    @RequestMapping(value = {"produce/printCert"})
+//    public String rePrint(String type, Model model,
+//                          HttpServletRequest request, HttpServletResponse response){
+//        HttpSession session = request.getSession();
+//        ProdPlanDetailVo print = (ProdPlanDetailVo)session.getAttribute(UserUtils.getUser().getId());
+//
+//        model.addAttribute("user",UserUtils.getUser());
+//        model.addAttribute("vo",print);
+//        String pageStr = "";
+//        if("red".equals(type)){
+//            pageStr = "modules/crm/stockCertificateRed";
+//        }else if("green".equals(type)){
+//            pageStr = "modules/crm/stockCertificateGreen";
+//        }else if("yellow".equals(type)){
+//            pageStr = "modules/crm/stockCertificateYellow";
+//        }else if("new".equals(type)){
+//            pageStr = "modules/crm/stockCertificateNew";
+//        }
+//        return pageStr;
+//    }
 
     @RequestMapping(value = {"produce/rePrint"})
     public String rePrint(Long stockId, Model model, HttpServletRequest request, HttpServletResponse response){
@@ -259,36 +259,36 @@ public class ProduceManageController extends BaseController {
         print.setTrueWeight(Arith.round(w,2));
         model.addAttribute("user",UserUtils.getUser());
         model.addAttribute("vo",print);
-        return "modules/crm/stockPrint";
+        return "modules/print/stockPrint";
     }
 
-    @RequestMapping(value = {"produce/rePrintCert"})
-    public String rePrintCert(Long stockId,String type, Model model,
-                          HttpServletRequest request, HttpServletResponse response){
-        TStock stock = stockService.findById(stockId);
-        ProdPlanDetailVo print = new ProdPlanDetailVo();
-        BeanUtils.copyProperties(stock, print);
-
-        OrderQueryVo order = orderService.findByOrdeCode(stock.getOrdCode());
-        print.setProxyName(order.getProxyName());
-
-        TOrderItem orderItem = orderItemService.getById(stock.getOrderItemId());
-        print.setItemPriceType(orderItem.getItemPriceType());
-
-        model.addAttribute("user",UserUtils.getUser());
-        model.addAttribute("vo",print);
-        String pageStr = "";
-        if("red".equals(type)){
-            pageStr = "modules/crm/stockCertificateRed";
-        }else if("green".equals(type)){
-            pageStr = "modules/crm/stockCertificateGreen";
-        }else if("yellow".equals(type)){
-            pageStr = "modules/crm/stockCertificateYellow";
-        }else if("new".equals(type)){
-            pageStr = "modules/crm/stockCertificateNew";
-        }
-        return pageStr;
-    }
+//    @RequestMapping(value = {"produce/rePrintCert"})
+//    public String rePrintCert(Long stockId,String type, Model model,
+//                          HttpServletRequest request, HttpServletResponse response){
+//        TStock stock = stockService.findById(stockId);
+//        ProdPlanDetailVo print = new ProdPlanDetailVo();
+//        BeanUtils.copyProperties(stock, print);
+//
+//        OrderQueryVo order = orderService.findByOrdeCode(stock.getOrdCode());
+//        print.setProxyName(order.getProxyName());
+//
+//        TOrderItem orderItem = orderItemService.getById(stock.getOrderItemId());
+//        print.setItemPriceType(orderItem.getItemPriceType());
+//
+//        model.addAttribute("user",UserUtils.getUser());
+//        model.addAttribute("vo",print);
+//        String pageStr = "";
+//        if("red".equals(type)){
+//            pageStr = "modules/crm/stockCertificateRed";
+//        }else if("green".equals(type)){
+//            pageStr = "modules/crm/stockCertificateGreen";
+//        }else if("yellow".equals(type)){
+//            pageStr = "modules/crm/stockCertificateYellow";
+//        }else if("new".equals(type)){
+//            pageStr = "modules/crm/stockCertificateNew";
+//        }
+//        return pageStr;
+//    }
 
     // 计算理论重量值
     public void doTheoryCalculation(List<TProdPlanDetail> list,Model model){
