@@ -16,6 +16,8 @@ public class StockQueryVo implements Serializable {
     private String ordCode;
     //订单标题
     private String orderTitle;
+    // 关联客户名称
+    private String cusName;
     //产品类别-字典
     private Long itemCgyCode;
     //产品类型-字典值
@@ -52,6 +54,14 @@ public class StockQueryVo implements Serializable {
     private String outStatus;
 
     private String createTime;
+
+    public String getCusName() {
+        return cusName;
+    }
+
+    public void setCusName(String cusName) {
+        this.cusName = cusName;
+    }
 
     public String getCreateTime() {
         return createTime;

@@ -78,7 +78,7 @@
                                 <td>${ord.itemNum}</td>
                                 <td>${ord.itemPriceTypeValue}</td>
                                 <td>${ord.itemTotalSq}</td>
-                                <td>${ord.itemTotalWeight}</td>
+                                <td>${ord.itemPriceTypeValue eq '按面积'?0:ord.itemTotalWeight}</td>
                                 <td>&yen;${ord.itemPrice}</td>
                                 <td>&yen;${ord.showTotalPrice}</td>
                             </tr>

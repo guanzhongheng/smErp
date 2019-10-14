@@ -425,5 +425,14 @@ public class CrmManageController extends BaseController {
         Double totalPrice = list.stream().mapToDouble(i->i.getPrice() == null?0:i.getPrice()).sum();
         model.addAttribute("totalWeight",Arith.round(totalWeight,4));
         model.addAttribute("totalPrice",Arith.round(totalPrice,4));
+
     }
+
+    @RequestMapping(value = "updateStockInfo")
+    public String updateStockInfo(HttpServletRequest request, Model model){
+        model.addAttribute("stockId",request.getParameter("stockId"));
+        return "modules/crm/stockWeightUp";
+    }
+
+
 }

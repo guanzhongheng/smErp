@@ -145,8 +145,11 @@
                             <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
                                 指导价格:
                             </label>
-                            <label class="col-md-8 control-label" style="text-align: left">
+                            <label class="col-md-4 control-label" style="text-align: left">
                                 <input class="form-control" id="itemPrice" >
+                            </label>
+                            <label class="col-md-4 control-label" style="text-align: left">
+                                <input class="form-control" id="addNum" placeholder="添加次数" value="1">
                             </label>
                         </div>
 
@@ -318,12 +321,21 @@
             $("#itemColor").val("");
         }
     }
-
+    // 添加产品
     function doProcess() {
-
+        var num = $("#addNum").val();
+        if(num == '' || num == undefined || num == null){
+            num = 1;
+        }
         debugger;
         if(prodObj.itemCode != ""){
-            cusProdList.push(tranObject(prodObj));
+
+            for(var i=0;i<num;i++){
+                cusProdList.push(tranObject(prodObj));
+            }
+            // cusProdList.push(tranObject(prodObj));
+
+
             $("#cusProdDetail").bootstrapTable("load",cusProdList);
             $('#cusProdDetail .chosen-select').trigger("chosen:updated");
             $('#cusProdDetail .chosen-select').chosen();

@@ -24,6 +24,8 @@ public interface TOrderService {
      */
     List<OrderItemVo> findItemsByOrdCode(String ordCode);
 
+    List<OrderItemVo> findItemsByOrdCodeForPrint(String ordCode);
+
 
     /**
      * @Description: 多条件分页查询

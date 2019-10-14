@@ -30,6 +30,9 @@ public interface TOrderItemMapper {
 
     List<OrderItemVo> findByOrdCode(String ordCode);
 
+    List<OrderItemVo> findByOrdCodeForPrint(String ordCode);
+
+
     int deleteByOrdCode(String ordCode);
 
     TOrderItem get(Long id);

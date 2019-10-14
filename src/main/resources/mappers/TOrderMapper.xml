@@ -125,6 +125,13 @@
             <if test="endDate!= null and endDate != ''">
                 and ord_sign_date &lt;= #{endDate}
             </if>
+            <if test="isOver != null and isOver == '1'.toString()">
+                and od.ord_status &lt; 100005
+            </if>
+            <if test="isOver != null and isOver == '2'.toString()">
+                and od.ord_status = 100005
+            </if>
+
 
         </where>
         order by od.create_time desc
@@ -326,6 +333,16 @@
                 <foreach collection="list" item="i" index="index">
                     <if test="i.ordOutNum!=null">
                         when ord_code = #{i.ordCode} and ord_out_num &lt;= ord_total_num then ord_out_num + #{i.ordOutNum}
+                    </if>
+                </foreach>
+            </trim>
+            <trim prefix="ord_status =case" suffix="end,">
+                <foreach collection="list" item="i" index="index">
+                    <if test="i.ordStatus!=null and i.ordStatus > 0">
+                        when ord_code = #{i.ordCode}  then  #{i.ordStatus}
+                    </if>
+                    <if test="i.ordStatus == null ">
+                        when ord_code = #{i.ordCode}  then  ord_status
                     </if>
                 </foreach>
             </trim>

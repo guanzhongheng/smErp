@@ -7,6 +7,7 @@ import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.dao.*;
 import com.lcyzh.nmerp.entity.*;
 import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
+import com.lcyzh.nmerp.model.vo.ProdPlanListVo;
 import com.lcyzh.nmerp.service.TProdPlanDetailService;
 import com.lcyzh.nmerp.utils.IdGen;
 import com.lcyzh.nmerp.utils.StringUtils;
@@ -15,11 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.*;
 
 /**
 * Author ljk
@@ -46,16 +49,22 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
     }
 
     @Override
-    public List<TProdPlanDetail> findListByProdPlanCodes(String prodPlanCodes) {
-        if(StringUtils.isNotEmpty(prodPlanCodes)){
-            String[] str = prodPlanCodes.split(",");
+    public List<TProdPlanDetail> findListByProdPlanCodes(ProdPlanListVo vo) {
+        if(StringUtils.isNotEmpty(vo.getProdPlanCode())){
+            String[] str = vo.getProdPlanCode().split(",");
             List<String> list = Arrays.asList(str);
-
-            return tProdPlanDetailMapper.findListByProdPlanCodes(list);
+            vo.setPlanCodes(list);
+            return tProdPlanDetailMapper.findListByProdPlanCodes(vo);
         }
         return new ArrayList<>();
     }
 
+
+    @Override
+    public List<TProdPlanDetail> findListByProdPlanCodDetailList(ProdPlanListVo vo) {
+
+        return null;
+    }
 
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
     @Override
@@ -63,14 +72,28 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
         if(id!=null && id.length() != 0) {
             List<String> ids = Arrays.asList(id.trim().split(","));
             List<TProdPlanDetail> list = tProdPlanDetailMapper.findByIds(ids);
-            TProdPlan tProdPlan = tProdPlanMapper.findByProdPanCode(list.get(0).getProdPlanCode());
-            long quantity = 0;
-            for(TProdPlanDetail ppd : list) {
-                quantity += ppd.getItemNum();
+
+            if(!CollectionUtils.isEmpty(list)){
+                Map<String,String> map = new HashMap<>();
+                for(TProdPlanDetail td : list){
+                    if(map.get(td.getProdPlanCode()) == null || map.get(td.getProdPlanCode()).length() == 0){
+                        map.put(td.getProdPlanCode(),"1");
+                    }
+                }
+                for(String key : map.keySet()){
+                    TProdPlan tProdPlan = tProdPlanMapper.findByProdPanCode(key);
+                    long quantity = 0;
+                    for(TProdPlanDetail ppd : list) {
+                        if(ppd.getProdPlanCode().equals(key)){
+                            quantity += ppd.getItemNum();
+                        }
+                    }
+                    tProdPlan.setQuantity(quantity);
+                    tProdPlan.setTotalQuantity(0L);
+                    tProdPlanMapper.updateAddNum(tProdPlan);
+                }
             }
-            tProdPlan.setQuantity(quantity);
-            tProdPlan.setTotalQuantity(0L);
-            tProdPlanMapper.updateAddNum(tProdPlan);
+            // TODO 增加校验计划单试试全部完成 如果完成 清空 下发数量
             return tProdPlanDetailMapper.updateByIds(ids,thresholdUp,thresholdDown);
         }else{
             return -1;

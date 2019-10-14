@@ -86,7 +86,18 @@ public class ExportController {
         return new ModelAndView(
                 new JxlsExcelView(TEMPLATE_PATH + "prodplan.xlsx", "自选生产计划-" + DateUtil.date2Str(new Date(),"yyyy-MM-dd HH:mm:ss"), context));
     }
+    /**
+     * 生产计划导出
+     */
+    @RequestMapping(value = "/export/prodPlanOverDetail",method = RequestMethod.GET)
+    public ModelAndView prodPlanOverExport(HttpServletResponse response, String prodPlanCode){
 
+        Map<String,Object> result = reportService.getProdPlanOverList(prodPlanCode);
+        Context context = new Context();
+        context.putVar("result", result);
+        return new ModelAndView(
+                new JxlsExcelView(TEMPLATE_PATH + "prodplan.xlsx", "自选生产计划-" + DateUtil.date2Str(new Date(),"yyyy-MM-dd HH:mm:ss"), context));
+    }
 //    /**
 //     * 生产计划导出
 //     */

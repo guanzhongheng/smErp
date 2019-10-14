@@ -5,10 +5,7 @@ import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.controller.system.util.SysDictUtils;
 import com.lcyzh.nmerp.controller.system.util.UserUtils;
 import com.lcyzh.nmerp.entity.*;
-import com.lcyzh.nmerp.model.vo.OrderQueryVo;
-import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
-import com.lcyzh.nmerp.model.vo.ProdPlanExportVo;
-import com.lcyzh.nmerp.model.vo.ProdPlanVo;
+import com.lcyzh.nmerp.model.vo.*;
 import com.lcyzh.nmerp.service.*;
 import com.lcyzh.nmerp.utils.Arith;
 import com.lcyzh.nmerp.utils.StringUtils;
@@ -65,12 +62,38 @@ public class ProduceManageController extends BaseController {
      * @Date: 2019/7/16 9:14 AM
      */
     @RequestMapping(value = {"producePlan/info"})
-    public String prodPlanDetail(@ModelAttribute("vo") ProdPlanVo vo, String prodPlanCode, Model model, HttpServletRequest request, HttpServletResponse response){
-        List<TProdPlanDetail> list = prodPlanDetailService.findListByProdPlanCodes(prodPlanCode);
+    public String prodPlanDetail(String prodPlanCode, Model model, HttpServletRequest request, HttpServletResponse response){
+        ProdPlanListVo prodPlanList = new ProdPlanListVo();
+        prodPlanList.setProdPlanCode(prodPlanCode);
+        List<TProdPlanDetail> list = prodPlanDetailService.findListByProdPlanCodes(prodPlanList);
         model.addAttribute("list",list);
         // 统计计算理论重量
         doTheoryCalculation(list,model);
         model.addAttribute("prodPlan",prodPlanService.findByProdPanCodes(prodPlanCode));
+        model.addAttribute("macList",machineInfoService.findAllList());
+        // add formula by zj 0802
+        model.addAttribute("formulaList",formulaService.findAllList());
+
+        return "modules/crm/producePlanDetail";
+    }
+
+    /**
+     * @Description: 跳转到生产计划详情页面
+     * @Param: [vo, prodPlanCode, model, request, response]
+     * @return: java.lang.String
+     * @Author: wsm
+     * @Iteration : 1.0
+     * @Date: 2019/7/16 9:14 AM
+     */
+    @RequestMapping(value = {"producePlan/detailList"})
+    public String prodPlanDetailList(@ModelAttribute("vo") ProdPlanListVo vo, Model model, HttpServletRequest request, HttpServletResponse response){
+
+        List<TProdPlanDetail> list = prodPlanDetailService.findListByProdPlanCodes(vo);
+        model.addAttribute("list",list);
+        // 统计计算理论重量
+        doTheoryCalculation(list,model);
+        model.addAttribute("prodPlan",prodPlanService.findByProdPanCodes(vo.getProdPlanCode()));
+
         model.addAttribute("macList",machineInfoService.findAllList());
         // add formula by zj 0802
         model.addAttribute("formulaList",formulaService.findAllList());
@@ -289,6 +312,10 @@ public class ProduceManageController extends BaseController {
         }
         return pageStr;
     }
+
+
+
+
 
     // 计算理论重量值
     public void doTheoryCalculation(List<TProdPlanDetail> list,Model model){

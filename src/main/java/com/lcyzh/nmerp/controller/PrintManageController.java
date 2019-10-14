@@ -103,7 +103,7 @@ public class PrintManageController extends BaseController {
                 OrderQueryVo order = orderService.findByOrdeCode(key);
                 cusCode = order.getCusCode();
                 // 获取订单详情
-                List<OrderItemVo> orderItemVo =   orderService.findItemsByOrdCode(key);
+                List<OrderItemVo> orderItemVo =   orderService.findItemsByOrdCodeForPrint(key);
                 orderItemVos.addAll(orderItemVo);
                 model.addAttribute("order",order);
             }
@@ -155,6 +155,8 @@ public class PrintManageController extends BaseController {
                     Double mj = vo.getItemNum() * vo.getItemLenth() * vo.getItemWidth();
                     vo.setItemTotalSq(Arith.round(mj,4));
                     vo.setItemTotalWeight(iteWight.get(newName));
+                    String priceTypeValue = vo.getItemPriceTypeValue().replace("(加厚)","").replace("(减薄)","");
+                    vo.setItemPriceTypeValue(priceTypeValue);
                     list.add(vo);
                 }else{
                     logger.error("出库列表与订单列表信息不匹配：订单key" + newName + " 出库单号:");
@@ -265,12 +267,42 @@ public class PrintManageController extends BaseController {
     @RequestMapping("outStockDetailInfo_print")
     public String outStockInfos(String outCode,Integer isPrice, Model model){
         List<OutStockDetailVo> list = outStockService.getOutStockDetailInfos(outCode);
+        getTotalForDetail(model,list);
+        model.addAttribute("total",list.size());
         model.addAttribute("stockDetails",list);
         model.addAttribute("isPrice",isPrice);
         return "modules/print/outStockDetailInfo";
     }
 
 
+    public void getTotalForDetail(Model model,List<OutStockDetailVo> orderItemVos){
+        Double totalMj = orderItemVos.stream().mapToDouble(i->(((i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ)
+                || i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ_JB)
+                || i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ_JH)))?(Arith.mul(i.getItemLenth(),i.getItemWidth())):0)).sum();
+
+        Double totalZl = orderItemVos.stream().mapToDouble(i -> (((i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)
+                || i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JH)
+                || i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JB) )&&i.getItemWeight()!=null)?i.getItemWeight():0)).sum();
+
+        double totoalPriceByMj = 0d;
+        double totalPriceByZL = 0d;
+        if(orderItemVos!=null && !orderItemVos.isEmpty()){
+            for (OutStockDetailVo item: orderItemVos){
+                if(item.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)
+                        || item.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JB)
+                        || item.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JH)){
+                    totalPriceByZL += item.getItemPrice() * item.getItemWeight();
+                }else{
+                    item.setItemWeight(0d);
+                    totoalPriceByMj += item.getItemPrice() *(item.getItemLenth()*item.getItemWidth());
+                }
+            }
+        }
+        double totalPrice = Arith.add(totoalPriceByMj,totalPriceByZL);
+        model.addAttribute("totalMj",Arith.round(totalMj,4));
+        model.addAttribute("totalZl",Arith.round(totalZl,4));
+        model.addAttribute("totalPrice",Arith.round(totalPrice,4));
+    }
 
     /**
      * 统计计算
@@ -278,8 +310,6 @@ public class PrintManageController extends BaseController {
      * @param orderItemVos
      */
     public void getTotalInfo(Model model,List<OrderItemVo> orderItemVos){
-
-
         Double totalMj = orderItemVos.stream().mapToDouble(i->(((i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ)
                 || i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ_JB)
                 || i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ_JH))&&i.getItemTotalSq()!=null)?i.getItemTotalSq():0)).sum();
@@ -294,7 +324,6 @@ public class PrintManageController extends BaseController {
                 n.setShowTotalPrice(Arith.round(Arith.mul(n.getItemTotalWeight(),n.getItemPrice()),4));
             }
         });
-
 
         double totoalPriceByMj = 0d;
         double totalPriceByZL = 0d;

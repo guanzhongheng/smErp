@@ -16,6 +16,30 @@
             return false;
         }
 
+        function updateWeight(stockId) {
+            top.$.jBox.open("iframe:${ctx}/crm/updateStockInfo?stockId="+stockId, "重量修改", 500, 400, {
+                buttons: {"确定": "ok", "关闭": true}, submit: function (v, h, f) {
+
+                    var stockId = h.find("iframe")[0].contentWindow.stockId;
+                    var weight = h.find("iframe")[0].contentWindow.stockWeight;
+                    if (v == "ok") {
+                        $.post('${ctx}/crmAjax/updateStock/', {
+                            stockId: stockId.value,
+                            weight: weight.value
+                        }, function (data) {
+                            if (data = "success") {
+                                top.$.jBox.tip('保存成功');
+                            } else {
+                                top.$.jBox.tip('保存失败');
+                            }
+                        })
+                    }
+                }, loaded: function (h) {
+
+                    $(".jbox-content", top.document).css("overflow-y", "hidden");
+                }
+            });
+        }
         function rePrint(stockId){
             layer.open({
                 type: 2,
@@ -59,11 +83,19 @@
                 <input id="pageSize" name="pageSize" type="hidden" value="${page.pageSize}"/>
                 <ul class="ul-form">
                     <li>
-                        <form:input path="orderTitle" htmlEscape="false" maxlength="200" class="input-medium" placeholder="订单标题"/>
+                        <form:input path="orderTitle" htmlEscape="false" maxlength="200" class="input-medium" placeholder="订单标题" cssStyle="width: 125px;"/>
                     </li>
                     <li>
                         &nbsp;&nbsp;
-                        <form:input path="barCode" htmlEscape="false" maxlength="200" class="input-medium" placeholder="条码值"/>
+                        <form:input path="barCode" htmlEscape="false" maxlength="200" class="input-medium" placeholder="条码值" cssStyle="width: 125px;"/>
+                    </li>
+                    <li>
+                        &nbsp;&nbsp;
+                        <form:input path="cusName" htmlEscape="false" maxlength="200" class="input-medium" placeholder="关联客户" cssStyle="width: 125px;"/>
+                    </li>
+                    <li>
+                        &nbsp;&nbsp;
+                        <form:input path="itemOwner" htmlEscape="false" maxlength="120" class="input-medium" placeholder="归属人" cssStyle="width: 125px;"/>
                     </li>
                     <li>
                         &nbsp;&nbsp;
@@ -153,9 +185,11 @@
                             <%--<td><button class="btn btn-primary" type="button" onclick="rePrint(${cus.stockId})"  >补签</button></td>--%>
                             <td>
                                 <button rel="external nofollow" class="btn btn-primary" style="font-size: 14px"
+                                   onclick="updateWeight(${cus.stockId});return false;">修改</button>
+                                <button rel="external nofollow" class="btn btn-primary" style="font-size: 14px"
                                    onclick="rePrint(${cus.stockId});return false;">补签</button>
                                 <div class="btn-group dropdown">
-                                    <button class="btn btn-success" onclick="rePrintCert(${cus.stockId},'new')" >补合格证(新版)</button>
+                                    <button class="btn btn-success" onclick="rePrintCert(${cus.stockId},'new')" >补合格证</button>
                                     <button class="btn btn-success dropdown-toggle" data-toggle="dropdown">
                                         <span class="caret"></span>
                                     </button>

@@ -86,6 +86,17 @@ public class OrderQueryVo{
 
     private String endDate;
 
+    // 订单状态判定 是否出库完成
+    private String isOver;
+
+    public String getIsOver() {
+        return isOver;
+    }
+
+    public void setIsOver(String isOver) {
+        this.isOver = isOver;
+    }
+
     public String getStartDate() {
         return startDate;
     }

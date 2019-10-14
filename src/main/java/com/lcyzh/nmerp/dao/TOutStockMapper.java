@@ -1,6 +1,7 @@
 package com.lcyzh.nmerp.dao;
 
 import com.lcyzh.nmerp.entity.TOutStock;
+import com.lcyzh.nmerp.model.vo.CommonVo;
 import com.lcyzh.nmerp.model.vo.OutStockVo;
 import com.lcyzh.nmerp.model.vo.StockRecordVo;
 import org.springframework.stereotype.Repository;
@@ -36,4 +37,6 @@ public interface TOutStockMapper {
     List<TOutStock> findListNew();
 
     int updateStatus(Map<String, Object> map);
+
+    List<CommonVo> checkOrderStatus(String outCode);
 }

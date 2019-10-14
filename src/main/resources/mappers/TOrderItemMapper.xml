@@ -66,6 +66,36 @@
 	order by toi.id
     </select>
 
+    <select id="findByOrdCodeForPrint" parameterType="java.lang.String" resultType="com.lcyzh.nmerp.model.vo.OrderItemVo">
+        SELECT
+            tt.prod_code itemCode,
+            tt.prod_name itemName,
+            tt.prod_cgy_code itemCgyCode,
+            tt.prod_unit itemUnit,
+            tt.prod_variety  itemVariety,
+            toi.ord_code ordCode,
+            toi.item_lenth itemLenth,
+            toi.item_thick itemThick,
+            toi.item_width itemWidth,
+            toi.item_color itemColor,
+            sum(toi.item_num) itemNum,
+            toi.item_owner itemOwner,
+            toi.item_price itemPrice,
+            toi.item_price_type itemPriceType,
+            toi.item_yb_type itemYbType,
+            toi.item_yc_type itemYcType,
+            toi.item_status itemStatus
+        FROM
+            T_ORDER_ITEM toi
+            LEFT JOIN T_PRODUCT tt ON toi.item_code = tt.prod_code
+        WHERE toi.ord_code = #{ordCode,jdbcType=VARCHAR}
+        group by tt.prod_code,tt.prod_name,tt.prod_cgy_code,tt.prod_unit,
+        tt.prod_variety,toi.ord_code,toi.item_lenth,toi.item_thick, toi.item_width,
+        toi.item_color,toi.item_owner,toi.item_price,toi.item_price_type,
+        toi.item_yb_type,toi.item_yc_type,toi.item_status
+    </select>
+
+
     <select id="findList" resultMap="tOrderItemResultMap">
         SELECT *
         FROM T_ORDER_ITEM

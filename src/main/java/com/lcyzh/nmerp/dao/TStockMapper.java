@@ -34,4 +34,6 @@ public interface TStockMapper {
     int updateByOutCode(Map<String, Object> map);
 
     List<TStock> findByOutCode(String outCode);
+
+    int updateStock(TStock tStock);
 }

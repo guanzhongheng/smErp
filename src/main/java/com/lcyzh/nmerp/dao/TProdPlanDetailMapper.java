@@ -3,6 +3,7 @@ package com.lcyzh.nmerp.dao;
 import com.lcyzh.nmerp.entity.TProdPlanDetail;
 import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
 import com.lcyzh.nmerp.model.vo.ProdPlanExportVo;
+import com.lcyzh.nmerp.model.vo.ProdPlanListVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -36,6 +37,7 @@ public interface TProdPlanDetailMapper {
 
     List<TProdPlanDetail> findByIds(@Param("ids") List<String> ids);
 
+    List<TProdPlanDetail> findByProdPlanCode(@Param("code") String code);
 
-    List<TProdPlanDetail> findListByProdPlanCodes(@Param("planCodes") List<String> planCodes);
+    List<TProdPlanDetail> findListByProdPlanCodes(ProdPlanListVo vo);
 }

@@ -51,6 +51,11 @@ public class TStockServiceImpl implements TStockService{
     }
 
     @Override
+    public int updateStock(TStock tStock) {
+        return tStockMapper.updateStock(tStock);
+    }
+
+    @Override
     public List<StockQueryVo> findList(Page<StockQueryVo> page, StockQueryVo vo) {
         if(vo.getStartDate() == null || vo.getStartDate().length() == 0) {
             vo.setStartDate(LocalDate.now().minusMonths(3).toString() + " 00:00:00");

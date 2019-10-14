@@ -93,6 +93,11 @@
             else '1' end outStatus
             FROM t_stock s
             left join t_order o on s.ord_code = o.ord_code
+            inner join t_customer tc on tc.cus_code = o.cus_code
+            <if test="cusName!= null and cusName != ''">
+                and tc.cus_name like concat('%', #{cusName,jdbcType=VARCHAR}, '%')
+            </if>
+
             <where>
                 <if test="itemCgyCode!= null">
                     and s.item_cgy_code = #{itemCgyCode,jdbcType=BIGINT}
@@ -108,6 +113,9 @@
                 </if>
                 <if test="endDate!= null and endDate != ''">
                     and s.create_time &lt;=  #{endDate}
+                </if>
+                <if test="itemOwner!= null and itemOwner != ''">
+                    and s.item_owner like concat('%', #{itemOwner,jdbcType=VARCHAR}, '%')
                 </if>
                 <if test="orderTitle!= null">
                     and o.ord_title like concat('%', #{orderTitle,jdbcType=VARCHAR}, '%')
@@ -259,5 +267,9 @@
             INNER JOIN t_product tp ON tp.prod_code = s.item_code
         where osd.out_code = #{outCode}
     </select>
+
+    <update id="updateStock" parameterType="com.lcyzh.nmerp.entity.TStock">
+        update t_stock set item_weight = #{itemWeight} where id = #{id}
+    </update>
 
 </mapper>

@@ -21,6 +21,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -153,8 +154,21 @@ public class TOutStockServiceImpl implements TOutStockService {
         tOutStock.setUpdateTime(date);
         tOutStock.setUpdateBy(currUser.getLoginName());
         tOutStockMapper.update(tOutStock);
-        //更新订单出库数量
+        //更新订单出库数量 + 增加订单状态判定
         List<TStock> list = tStockMapper.findByOutCode(tOutStock.getOutCode());
+
+        List<CommonVo> stList = tOutStockMapper.checkOrderStatus(tOutStock.getOutCode());
+        Map<String,Integer> stMap = new HashMap<>();
+        if(!CollectionUtils.isEmpty(stList)){
+            for(CommonVo c : stList){
+                if (stMap.containsKey(c.getCode())) {
+                    stMap.put(c.getCode(), stMap.get(c.getCode()) + c.getNum());
+                } else {
+                    stMap.put(c.getCode(), c.getNum());
+                }
+            }
+        }
+
         Map<String, Long> ordMap = new HashMap<>(list.size());
         String ordCode;
         for (TStock tStock : list) {
@@ -170,6 +184,9 @@ public class TOutStockServiceImpl implements TOutStockService {
             TOrder order = new TOrder();
             order.setOrdCode(entry.getKey());
             order.setOrdOutNum(entry.getValue());
+            if(stMap.get(entry.getKey()) != null && stMap.get(entry.getKey()) == 0L){
+                order.setOrdStatus(100005L); //标记订单完成
+            }
             orders.add(order);
         }
         tOrderMapper.updateBatchOutNumByOrdCode(orders);

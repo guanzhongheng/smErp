@@ -198,7 +198,7 @@
         prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr));
         window.document.body.innerHTML = prnhtml;
         window.print();
-        window.location.href = "/produce/producePlan/info?prodPlanCode=" + prodPlanFormula;
+        window.location.href = "/produce/producePlan/detailList?prodPlanCode=" + prodPlanFormula;
     }
 </script>
 </body>

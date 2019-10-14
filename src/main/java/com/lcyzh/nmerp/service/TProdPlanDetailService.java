@@ -3,6 +3,7 @@ package com.lcyzh.nmerp.service;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.entity.TProdPlanDetail;
 import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
+import com.lcyzh.nmerp.model.vo.ProdPlanListVo;
 
 import java.util.List;
 
@@ -19,10 +20,17 @@ public interface TProdPlanDetailService {
 
     /**
      * 获取计划单号明细 根据多个计划单号
-     * @param prodPlanCodes
+     * @param vo
      * @return
      */
-    List<TProdPlanDetail> findListByProdPlanCodes(String prodPlanCodes);
+    List<TProdPlanDetail> findListByProdPlanCodes(ProdPlanListVo vo);
+
+    /**
+     * 获取计划单号明细 根据多个计划单号
+     * @param vo
+     * @return
+     */
+    List<TProdPlanDetail> findListByProdPlanCodDetailList(ProdPlanListVo vo);
 
     /**
      * 批量下发生产，状态由待确认改为下发生产

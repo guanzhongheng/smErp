@@ -1,7 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/WEB-INF/views/include/taglib.jsp" %>
-<link href="${ctxStatic}/hPlugs/css/plugins/bootstrap-table/bootstrap-table.css" rel="stylesheet">
-<link href="${ctxStatic}/hPlugs/css/plugins/bootstrap-table/bootstrap-table-fixed-columns.css" rel="stylesheet">
 <link rel="stylesheet" href="/static/common/customize.css">
 
 <style>
@@ -26,16 +24,19 @@
                     <div class="col-sm-12">
                         <div style="padding: 0px 20px 0px;">
                             <form class="form-horizontal" >
-                                <input type="hidden" id="prodPlanCode" value="${prodPlan.prodPlanCode}">
+                                <%--<input type="hidden" id="prodPlanCode" value="${prodPlan.prodPlanCode}">--%>
                                 <div class="row">
                                     <div class="panel panel-default"
                                          style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
                                         <div class="panel-heading" style="background-color: #50B0E6">
                                             <h3 class="panel-title global-panel-title">
                                                 生产计划详情
+                                                 <a class="collapse-link" style="font-size: 14px;margin-left: 20px;    color: #337ab7;">
+								                    折叠/展开
+								                </a>
                                             </h3>
                                         </div>
-                                        <div class="panel-body">
+                                        <div class="panel-body prod-hide">
                                             <div class="col-sm-6 b-r">
                                                 <div>
                                                     <div class="col-sm-1" style="text-align: right">
@@ -51,37 +52,31 @@
                                                     <label class="col-md-5"
                                                            style="font-size: 17px;">${fns:getValueByDictKey(prodPlan.prodVariety)}</label>
                                                 </div>
-                                                <div class="hr-line-dashed"></div>
                                                 <div class="form-group">
                                                     <label class="col-md-4" style="text-align: right;font-size: 17px;">产品种类:</label>
                                                     <label class="col-md-5"
                                                            style="font-size: 17px;">${fns:getValueByDictKey(prodPlan.prodCgyCode)}</label>
                                                 </div>
-                                                <div class="hr-line-dashed"></div>
                                                 <div class="form-group">
                                                     <label class="col-md-4" style="text-align: right;font-size: 17px;">产品颜色:</label>
                                                     <label class="col-md-5"
                                                            style="font-size: 17px;">${fns:getDictValue(prodPlan.prodColor, 'prod_color', defaultValue)}</label>
                                                 </div>
-                                                <div class="hr-line-dashed"></div>
                                                 <div class="form-group">
                                                     <label class="col-md-4" style="text-align: right;font-size: 17px;">总数量:</label>
                                                     <label class="col-md-5"
                                                            style="font-size: 17px;">${prodPlan.totalQuantity}</label>
                                                 </div>
-                                                <div class="hr-line-dashed"></div>
                                                 <div class="form-group">
                                                     <label class="col-md-4" style="text-align: right;font-size: 17px;">已下发生产数量:</label>
                                                     <label class="col-md-5"
                                                            style="font-size: 17px;">${prodPlan.quantity}</label>
                                                 </div>
-                                                <div class="hr-line-dashed"></div>
                                                 <div class="form-group">
                                                     <label class="col-md-4" style="text-align: right;font-size: 17px;">生产机台:</label>
                                                     <label class="col-md-5"
                                                            style="font-size: 17px;">${prodPlan.macCode}</label>
                                                 </div>
-                                                <div class="hr-line-dashed"></div>
                                                 <div class="form-group">
                                                     <label class="col-md-4" style="text-align: right;font-size: 17px;">标准件上下阈值:</label>
                                                     <label class="col-md-5" style="font-size: 17px;">
@@ -150,7 +145,7 @@
                                                     </ul>
                                                     <div class="tab-content">
                                                         <div id="tab-out" class="tab-pane active">
-                                                            <div class="panel-body" style="min-height: 300px">
+                                                            <div class="panel-body" style="min-height: 200px">
                                                                 <div class="row" style="height: 20px;">
                                                                     <div class="col-sm-7" style="text-align: right">
                                                                         <h3>摄氏温度(<span id="outTemp">0</span>度)</h3>
@@ -166,7 +161,7 @@
                                                             </div>
                                                         </div>
                                                         <div id="tab-middle" class="tab-pane">
-                                                            <div class="panel-body" style="min-height: 300px">
+                                                            <div class="panel-body" style="min-height: 200px">
                                                                 <div class="row" style="height: 20px;">
                                                                     <div class="col-sm-7" style="text-align: right">
                                                                         <h3>摄氏温度(<span id="midTemp">0</span>度)</h3>
@@ -182,7 +177,7 @@
                                                             </div>
                                                         </div>
                                                         <div id="tab-in" class="tab-pane">
-                                                            <div class="panel-body" style="min-height: 300px">
+                                                            <div class="panel-body" style="min-height: 200px">
                                                                 <div class="row" style="height: 20px;">
                                                                     <div class="col-sm-7" style="text-align: right">
                                                                         <h3>摄氏温度(<span id="inTemp">0</span>度)</h3>
@@ -216,98 +211,135 @@
                             </h3>
                         </div>
                         <div class="panel-body" style="padding: 10px 10px 0px 10px;">
-                            <%--<div class="ibox-content timeline" style="overflow-x: auto; overflow-y: auto;">--%>
-                            <div class="control-group table-responsive">
-                                <table id="contentTable" data-height="300"
-                                       class="table table-striped table-bordered table-hover text-nowrap">
-                                    <thead>
-                                    <tr>
-                                        <th style="text-align: center"><input type="checkbox" id="checkAll"
-                                                                              onchange="checkedAll(this)"/></th>
-                                        <th style="text-align: center">订单标题</th>
-                                        <%--<th style="text-align: center">产品名称</th>--%>
-                                        <th style="text-align: center">品种</th>
-                                        <th style="text-align: center">类别</th>
-                                        <th style="text-align: center">颜色</th>
-                                        <th style="text-align: center">所属人</th>
-                                        <th style="text-align: center">机台编号</th>
-                                        <th style="text-align: center">长度(m)</th>
-                                        <th style="text-align: center">宽度(m)</th>
-                                        <th style="text-align: center">厚度(mm)</th>
-                                        <th style="text-align: center">数量</th>
-                                        <th style="text-align: center">重量</th>
-                                        <th style="text-align: center">标准件阈值(kg)</th>
-                                        <th style="text-align: center">面积(㎡)</th>
-                                        <th style="text-align: center">理论重量</th>
-                                        <th style="text-align: center">压边类型</th>
-                                        <th style="text-align: center">备注</th>
-                                        <th style="text-align: center">延长米方式</th>
-                                        <th style="text-align: center">状态</th>
-                                        <%--<th style="width: 50px">操作</th>--%>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <c:forEach items="${list}" var="vo">
-                                        <tr>
-                                            <td>
-                                                <c:if test="${vo.itemStatus eq '48'}">
-                                                    <input type="checkbox" name="detailId" value="${vo.id}">
-                                                </c:if>
-                                            </td>
-                                            <td>${vo.ordTitle}</td>
-                                            <%--<td>${vo.itemCode}</td>--%>
-                                            <td>${fns:getValueByDictKey(vo.itemVariety)}</td>
-                                            <td>${fns:getValueByDictKey(vo.itemCgyCode)}</td>
-                                            <td>${fns:getDictValue(vo.itemColor, 'prod_color', defaultValue)}</td>
-                                            <td>${vo.itemOwner}</td>
-                                            <td>${vo.macCode}</td>
-                                            <td>${vo.itemLenth}</td>
-                                            <td>${vo.itemWidth}</td>
-                                            <td>${vo.itemThick}</td>
-                                            <td>${vo.itemNum}</td>
-                                            <td>${vo.itemTotalWeight}</td>
-                                            <td>
-                                                上:<fmt:formatNumber value="${vo.thresholdUp}" pattern="0.00"/>
-                                                 下:<fmt:formatNumber value="${vo.thresholdDown}" pattern="0.00"/>
-                                            </td>
-                                            <td>${vo.itemTotalSq}</td>
-                                            <td>${vo.theoryWeight}</td>
-                                            <td>${fns:getDictValue(vo.itemYbType, 'prod_ybType', defaultValue)}</td>
-                                            <td><span style="color: #f3190f;">${vo.itemRemarks}</span></td>
-                                            <td>${fns:getDictValue(vo.itemYcType, 'prod_ycType', defaultValue)}</td>
-                                            <td style="color: #08c;">
-                                                <c:if test="${vo.itemStatus eq '48'}">待确认</c:if>
-                                                <c:if test="${vo.itemStatus eq '49'}">已下发</c:if>
-                                                <c:if test="${vo.itemStatus eq '50'}">已完成</c:if>
-                                            </td>
-                                                <%--<td>按钮：移出机台</td>--%>
-                                        </tr>
-                                    </c:forEach>
-                                    <tr>
-                                        <td>总计:</td>
-                                        <td colspan="13">注：理论重量计算公式 (长 * 宽 * 数量)/(1/（0.95 * 厚度))</td>
-                                        <td colspan="5">理论总重量:${theoryTotalWeight} kg</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="row">
-                                <br/>
-                                <button class="btn btn-primary global-button-style"
-                                        style="margin-left: 100px;margin-bottom: 10px;" type="button"
-                                        id="distribution">下发生产
-                                </button>
-                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                <button class="btn btn-primary global-button-style"
-                                        style="margin-left: 0px;margin-bottom: 10px;" type="button"
-                                        id="exportProd">导出
-                                </button>
-                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                <button class="btn btn-white global-button-style" style="margin-bottom: 10px;"
-                                        type="button" id="backHistory" >返回
-                                </button>
-                                <br/>
-                            </div>
+
+                                <div class="row">
+	                                	<form:form id="searchForm" modelAttribute="vo" action="${ctx}/produce/producePlan/detailList" method="post"
+	                                           class="breadcrumb form-search">
+	                                    <input type="hidden" id="prodPlanCode" name="prodPlanCode" value="${prodPlan.prodPlanCode}">
+	                                       <div class="col-md-2" style="text-align: left;width:140px ">
+	                                            <form:input path="orderTitle" htmlEscape="false" maxlength="200" cssStyle="width: 130px;"
+	                                                        class="form-control" placeholder="订单标题"/>
+	                                        </div>
+	                                        <div class="col-md-2" style="text-align: left;width:110px ">
+	                                            <form:input path="cusName" htmlEscape="false" maxlength="200" cssStyle="width: 100px;"
+	                                                        class="form-control" placeholder="归属客户"/>
+	                                        </div>
+	                                        <div class="col-md-2" style="text-align: left;width:110px ">
+	                                            <input id="startLength" name="startLength" style="width: 100px;" placeholder="起始宽度" class="form-control" type="number" value="${vo.startLength}" min="0" step="0.01">
+		                                      </div>
+		                                      <div class="col-md-2" style="text-align: left;width:110px ">
+	                                            <input id="endLength" name="endLength" style="width: 100px;" placeholder="结束宽度" class="form-control" type="number" value="${vo.endLength}" min="0" step="0.01">
+	                                        </div>
+	                                        <div class="col-md-2" style="text-align: left;width:100px ">
+	                                        		<input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 90px" value="查询"/>
+	                                       </div>
+	                                       <div class="col-md-2" style="text-align: left;width:100px ">
+	                                        <input class="btn btn-primary" type="button" id="distribution" style="width: 90px" value="下发生产"/>
+	                                       </div>
+                                            <div class="col-md-2" style="text-align: left;width:100px ">
+                                                <input class="btn btn-primary" type="button" id="exportProd" style="width: 90px" value="导出"/>
+                                            </div>
+                                            <div class="col-md-2" style="text-align: left;width:110px ">
+                                                <input class="btn btn-primary" type="button" id="exportOverProd" style="width: 100px" value="导出已下发"/>
+                                            </div>
+	                                       <div class="col-md-2" style="text-align: left;width:100px ">
+	                                        <input class="btn btn-primary" type="button" style="width: 90px" id="backHistory" value="返回"/>
+	                                       </div>
+	                                </form:form>
+                                </div>
+                              	<div style="10px;">&nbsp;</div>
+                            		<div class="control-group table-responsive">
+                            		
+	                                <table id="contentTable" data-height="300"
+	                                       class="table table-striped table-bordered table-hover text-nowrap">
+	                                    <thead>
+	                                    <tr>
+	                                        <th style="text-align: center"><input type="checkbox" id="checkAll"
+	                                                                              onchange="checkedAll(this)"/></th>
+	                                        <th style="text-align: center">订单标题</th>
+	                                        <th style="text-align: center">关联客户</th>
+	                                        <th style="text-align: center">品种</th>
+	                                        <th style="text-align: center">类别</th>
+	                                        <th style="text-align: center">颜色</th>
+	                                        <th style="text-align: center">所属人</th>
+	                                        <th style="text-align: center">机台编号</th>
+	                                        <th style="text-align: center">长度(m)</th>
+	                                        <th style="text-align: center">宽度(m)</th>
+	                                        <th style="text-align: center">厚度(mm)</th>
+	                                        <th style="text-align: center">数量</th>
+	                                        <th style="text-align: center">重量</th>
+	                                        <th style="text-align: center">标准件阈值(kg)</th>
+	                                        <th style="text-align: center">面积(㎡)</th>
+	                                        <th style="text-align: center">理论重量</th>
+	                                        <th style="text-align: center">压边类型</th>
+	                                        <th style="text-align: center">备注</th>
+	                                        <th style="text-align: center">延长米方式</th>
+	                                        <th style="text-align: center">状态</th>
+	                                        <%--<th style="width: 50px">操作</th>--%>
+	                                    </tr>
+	                                    </thead>
+	                                    <tbody>
+	                                    <c:forEach items="${list}" var="vo">
+	                                        <tr>
+	                                            <td>
+	                                                <c:if test="${vo.itemStatus eq '48'}">
+	                                                    <input type="checkbox" name="detailId" value="${vo.id}">
+	                                                </c:if>
+	                                            </td>
+	                                            <td>${vo.ordTitle}</td>
+	                                            <td>${vo.cusName}</td>
+	                                            <td>${fns:getValueByDictKey(vo.itemVariety)}</td>
+	                                            <td>${fns:getValueByDictKey(vo.itemCgyCode)}</td>
+	                                            <td>${fns:getDictValue(vo.itemColor, 'prod_color', defaultValue)}</td>
+	                                            <td>${vo.itemOwner}</td>
+	                                            <td>${vo.macCode}</td>
+	                                            <td>${vo.itemLenth}</td>
+	                                            <td>${vo.itemWidth}</td>
+	                                            <td>${vo.itemThick}</td>
+	                                            <td>${vo.itemNum}</td>
+	                                            <td>${vo.itemTotalWeight}</td>
+	                                            <td>
+	                                                上:<fmt:formatNumber value="${vo.thresholdUp}" pattern="0.00"/>
+	                                                 下:<fmt:formatNumber value="${vo.thresholdDown}" pattern="0.00"/>
+	                                            </td>
+	                                            <td>${vo.itemTotalSq}</td>
+	                                            <td>${vo.theoryWeight}</td>
+	                                            <td>${fns:getDictValue(vo.itemYbType, 'prod_ybType', defaultValue)}</td>
+	                                            <td><span style="color: #f3190f;">${vo.itemRemarks}</span></td>
+	                                            <td>${fns:getDictValue(vo.itemYcType, 'prod_ycType', defaultValue)}</td>
+	                                            <td style="color: #08c;">
+	                                                <c:if test="${vo.itemStatus eq '48'}">待确认</c:if>
+	                                                <c:if test="${vo.itemStatus eq '49'}">已下发</c:if>
+	                                                <c:if test="${vo.itemStatus eq '50'}">已完成</c:if>
+	                                            </td>
+	                                                <%--<td>按钮：移出机台</td>--%>
+	                                        </tr>
+	                                    </c:forEach>
+	                                    <tr>
+	                                        <td>总计:</td>
+	                                        <td colspan="13">注：理论重量计算公式 (长 * 宽 * 数量)/(1/（0.95 * 厚度))</td>
+	                                        <td colspan="5">理论总重量:${theoryTotalWeight} kg</td>
+	                                    </tr>
+	                                    </tbody>
+	                                </table>
+	                            </div>
+                            <%--<div class="row">--%>
+                                <%--<br/>--%>
+                                <%--<button class="btn btn-primary global-button-style"--%>
+                                        <%--style="margin-left: 100px;margin-bottom: 10px;" type="button"--%>
+                                        <%--id="distribution">下发生产--%>
+                                <%--</button>--%>
+                                <%--&nbsp;&nbsp;&nbsp;&nbsp;--%>
+                                <%--<button class="btn btn-primary global-button-style"--%>
+                                        <%--style="margin-left: 0px;margin-bottom: 10px;" type="button"--%>
+                                        <%--id="exportProd">导出--%>
+                                <%--</button>--%>
+                                <%--&nbsp;&nbsp;&nbsp;&nbsp;--%>
+                                <%--<button class="btn btn-white global-button-style" style="margin-bottom: 10px;"--%>
+                                        <%--type="button" id="backHistory" >返回--%>
+                                <%--</button>--%>
+                                <%--<br/>--%>
+                            <%--</div>--%>
                         </div>
                     </div>
                 </div>
@@ -556,9 +588,19 @@
     }
 
     $(document).ready(function () {
+    		$(".collapse-link").click(function() {
+            var o = $(this).closest("div.panel"),
+                i = o.find("div.prod-hide");
+            i.slideToggle(200),
+                o.toggleClass("").toggleClass("border-bottom"),
+                setTimeout(function() {
+                        o.resize(),
+                            o.find("[id^=map-]").resize()
+                    },
+                    50)
+      	});
         $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",})
         initTable();
-        // setTimeout("doProcessData()",600); //();
     });
 
     window.operatePdEvents = {
@@ -927,10 +969,14 @@
         } else {
             top.$.jBox.tip('最少选中一条记录');
         }
+	});
+    $("#exportOverProd").click(function(){
+       window.location.href = "/export/prodPlanOverDetail?prodPlanCode=" + $("#prodPlanCode").val();
+
 	})
 
     function gotNewPath(){
-        window.location.href = "/produce/producePlan/info?prodPlanCode=" + $("#prodPlanCode").val();
+        window.location.href = "/produce/producePlan/detailList?prodPlanCode=" + $("#prodPlanCode").val();
     }
 
 

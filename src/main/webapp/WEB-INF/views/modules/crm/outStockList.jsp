@@ -14,7 +14,7 @@
             return false;
         }
     </script>
-    <script src="${ctxStatic}/lodop/LodopFuncs.js" type="text/javascript"></script>
+    <%--<script src="${ctxStatic}/lodop/LodopFuncs.js" type="text/javascript"></script>--%>
 </head>
 <body>
 

@@ -16,5 +16,7 @@ public interface IReportService {
 
     Map<String,Object> getProdPlanDetailList(String ids);
 
+    Map<String,Object> getProdPlanOverList(String prodPlanCode);
+
 
 }

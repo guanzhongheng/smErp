@@ -173,7 +173,7 @@
             #{quantity,jdbcType=BIGINT},
             #{formula,jdbcType=VARCHAR},
             #{isAuto,jdbcType=CHAR},
-            #{prodYbType,jdbcType=VARCHAR}
+            #{prodYbType,jdbcType=VARCHAR},
             #{isYb,jdbcType=VARCHAR}
         )
     </insert>
@@ -204,7 +204,7 @@
             #{item.quantity,jdbcType=BIGINT},
             #{item.formula,jdbcType=VARCHAR},
             #{item.isAuto,jdbcType=CHAR},
-            #{item.prodYbType,jdbcType=VARCHAR}
+            #{item.prodYbType,jdbcType=VARCHAR},
             #{item.isYb,jdbcType=VARCHAR}
             )
         </foreach>

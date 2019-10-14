@@ -34,17 +34,25 @@
                 <ul class="ul-form">
                     <li>
                         <form:input path="ordCode" htmlEscape="false" maxlength="200"
-                                    class="input-medium" placeholder="订单编号"/>
+                                    class="input-medium" placeholder="订单编号" cssStyle="width: 150px;"/>
                     </li>
                     <li>
                         &nbsp;&nbsp;
                         <form:input path="ordTitle" htmlEscape="false" maxlength="200"
-                                    class="input-medium" placeholder="订单标题"/>
+                                    class="input-medium" placeholder="订单标题" cssStyle="width: 120px;"/>
                     </li>
                     <li>
                         &nbsp;&nbsp;
                         <form:input path="cusName" htmlEscape="false" maxlength="200"
-                                    class="input-medium" placeholder="关联客户"/>
+                                    class="input-medium" placeholder="关联客户" cssStyle="width: 120px;"/>
+                    </li>
+                    <li>
+                        &nbsp;&nbsp;
+                        <form:select path="isOver" class="input-medium" placeholder="订单状态" cssStyle="width: 120px;">
+                            <form:option value="0" label="全部订单"/>
+                            <form:option value="1" label="未完结订单"/>
+                            <form:option value="2" label="完结订单"/>
+                        </form:select>
                     </li>
                     <li>
                         &nbsp;&nbsp;
@@ -162,6 +170,8 @@
         $("#ordTitle").val("");
         $("#cusName").val("");
         $("#ordSignDate").val("");
+        $("#isOver").val("0").select2();
+
     }
 </script>
 </body>

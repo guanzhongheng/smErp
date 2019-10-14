@@ -3,12 +3,14 @@ package com.lcyzh.nmerp.controller.system;
 import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.controller.system.util.SysDictUtils;
 import com.lcyzh.nmerp.controller.system.util.UserUtils;
+import com.lcyzh.nmerp.entity.TStock;
 import com.lcyzh.nmerp.entity.sys.Dict;
 import com.lcyzh.nmerp.model.vo.CusFollowDetailVo;
 import com.lcyzh.nmerp.model.vo.CustomerUpdateVo;
 import com.lcyzh.nmerp.service.ICusFollowService;
 import com.lcyzh.nmerp.service.TCustomerService;
 import com.lcyzh.nmerp.service.TProductService;
+import com.lcyzh.nmerp.service.TStockService;
 import com.lcyzh.nmerp.service.security.SystemAuthorizingRealm.Principal;
 import com.lcyzh.nmerp.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,9 +39,11 @@ public class CrmAjaxManageController extends BaseController {
     private TCustomerService customerService;
     @Autowired
     private ICusFollowService cusFollowService;
-
     @Autowired
     private TProductService productService;
+    @Autowired
+    private TStockService tStockService;
+
 
     /**
      * 添加归属人
@@ -74,8 +78,6 @@ public class CrmAjaxManageController extends BaseController {
     /**
      * 转移公海-保存
      *
-     * @param cusIds
-     * @param remarks
      * @return
      */
     @RequestMapping(value = "savePoolCustomer")
@@ -171,5 +173,26 @@ public class CrmAjaxManageController extends BaseController {
         return "0";
     }
 
+    /**
+     * 更新库存重量
+     *
+     * @return
+     */
+    @RequestMapping(value = "updateStock")
+    @ResponseBody
+    public String saveFlowEmp(Long stockId, Double weight) {
+        if(stockId == null || stockId == 0L || weight == null){
+            return "error";
+        }
+
+        TStock tStock = new TStock();
+        tStock.setId(stockId);
+        tStock.setItemWeight(weight);
+        int res = tStockService.updateStock(tStock);
+        if (res < 1) {
+            return "error";
+        }
+        return "success";
+    }
 
 }

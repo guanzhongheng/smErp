@@ -76,6 +76,33 @@ public class TOrderServiceImpl implements TOrderService {
     }
 
     @Override
+    public List<OrderItemVo> findItemsByOrdCodeForPrint(String ordCode) {
+        List<OrderItemVo> list = tOrderItemMapper.findByOrdCodeForPrint(ordCode);
+        list.stream().forEach(vo -> {
+            vo.setItemUnitValue(DictUtils.getValueByDictKey(vo.getItemUnit()));
+            vo.setItemCgyCodeValue(DictUtils.getValueByDictKey(vo.getItemCgyCode()));
+            vo.setItemVaritemValue(DictUtils.getValueByDictKey(vo.getItemVariety()));
+            if (vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)
+                    || vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JH)
+                    || vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JB)) {
+                vo.setItemPriceTypeValue("按重量");
+            } else {
+                vo.setItemPriceTypeValue("按面积");
+            }
+
+            vo.setItemStatusValue(DictUtils.getValueByDictKey(vo.getItemStatus()));
+            vo.setItemColorValue(SysDictUtils.getDictLabel(vo.getItemColor(), "prod_color", ""));
+            Integer num = tProductMapper.checkOrderDetail(vo.getItemId());
+            if(num > 0){
+                vo.setIsShowPrice(1);
+            }else{
+                vo.setIsShowPrice(0);
+            }
+        });
+        return list;
+    }
+
+    @Override
     public List<OrderQueryVo> findPage(Page<OrderQueryVo> page, OrderQueryVo order) {
         PageHelper.startPage(page.getPageNo(), page.getPageSize());
         List<OrderQueryVo> list = tOrderMapper.findList(order);

@@ -25,4 +25,6 @@ public interface TStockService {
     //补标签查询
     List<StockQueryVo> findList(Page<StockQueryVo> page, StockQueryVo vo);
 
+    int updateStock(TStock tStock);
+
 }

@@ -149,6 +149,12 @@ public class ReportServiceImpl implements IReportService {
         return null;
     }
 
+    @Override
+    public Map<String, Object> getProdPlanOverList(String prodPlanCode) {
+
+        return getProdPlanDetailInfs(tProdPlanDetailMapper.findByProdPlanCode(prodPlanCode));
+    }
+
     private String transItemStatus(Character itemStatus){
         if(itemStatus != null){
             if(itemStatus == '0'){

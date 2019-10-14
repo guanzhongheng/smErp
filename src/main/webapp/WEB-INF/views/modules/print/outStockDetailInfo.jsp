@@ -66,9 +66,42 @@
                         <td>${s.itemPrice}</td>
                         <td>${s.price}</td>
                     </c:if>
-                    <td>${fns:getValueByDictKey(s.itemPriceType)}</td>
+                    <c:if test="${s.itemPriceType eq '141001'}" >
+                        <td>按重量</td>
+                    </c:if>
+                    <c:if test="${s.itemPriceType eq '141003'}" >
+                        <td>按重量</td>
+                    </c:if>
+                    <c:if test="${s.itemPriceType eq '141005'}" >
+                        <td>按重量</td>
+                    </c:if>
+                    <c:if test="${s.itemPriceType eq '141002'}" >
+                        <td>按面积</td>
+                    </c:if>
+                    <c:if test="${s.itemPriceType eq '141004'}" >
+                        <td>按面积</td>
+                    </c:if>
+                    <c:if test="${s.itemPriceType eq '141006'}" >
+                        <td>按面积</td>
+                    </c:if>
+                    <c:if test="${s.itemPriceType eq ''}" >
+                        <td></td>
+                    </c:if>
                 </tr>
             </c:forEach>
+                <tr>
+                    <td>总计:</td>
+                    <td colspan="2">数量:${total}</td>
+                    <td colspan="2">计价总面积:${totalMj}</td>
+                    <td colspan="2">计价总重量:${totalZl}</td>
+                    <c:if test="${isPrice eq '1'}" >
+                        <td colspan="5">总价:${totalPrice}</td>
+                    </c:if>
+
+                    <c:if test="${isPrice ne '1'}" >
+                        <td colspan="3"></td>
+                    </c:if>
+                </tr>
             </tbody>
         </table>
     </div>

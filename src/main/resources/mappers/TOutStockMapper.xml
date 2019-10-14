@@ -61,6 +61,9 @@
         FROM t_out_stock
     </select>
 
+
+
+
     <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TOutStock">
         INSERT INTO t_out_stock(
             out_code,
@@ -202,5 +205,16 @@
             ts.item_owner,
             ts.ord_code
     </select>
+
+    <select id="checkOrderStatus" parameterType="java.lang.String" resultType="com.lcyzh.nmerp.model.vo.CommonVo">
+        select
+            t.ord_code as code,((select sum(item_num) from t_order_item where ord_code = t.ord_code ) - sum(outCount)) as num
+        from (
+        select t.ord_code,count(t.bar_code) outCount from t_stock t
+        inner join t_out_stock_detail d on d.bar_code = t.bar_code and out_code = #{outCode}
+        group by t.ord_code,t.bar_code ) t group by t.ord_code
+
+    </select>
+
 
 </mapper>

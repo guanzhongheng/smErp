@@ -69,9 +69,10 @@
             td.item_width DESC
     </select>
 
-    <select id="findListByProdPlanCodes" parameterType="java.lang.String" resultMap="tProdPlanDetailResultMap">
+    <select id="findListByProdPlanCodes" parameterType="com.lcyzh.nmerp.model.vo.ProdPlanListVo" resultMap="tProdPlanDetailResultMap">
         SELECT
             td.id,
+            tc.cus_name,
             td.prod_plan_code,
             td.ord_code,
             td.order_item_id,
@@ -100,11 +101,24 @@
             t_prod_plan_detail td
             inner join T_ORDER od on od.ord_code = td.ord_code
             inner join t_order_item oi on td.order_item_id = oi.id
+            left join t_customer tc on tc.cus_code = od.cus_code
         WHERE
             td.prod_plan_code in
             <foreach item = "code" index = "index" collection = "planCodes" open = "(" separator = "," close = ")">
                 #{code}
             </foreach>
+            <if test="startLength != null and startLength != ''">
+                and td.item_width &gt;= #{startLength}
+            </if>
+            <if test="endLength != null and endLength != ''">
+                and td.item_width &lt;= #{endLength}
+            </if>
+            <if test="cusName != null and cusName != ''">
+                and tc.cus_name like concat('%',#{cusName},'%')
+            </if>
+            <if test="orderTitle != null and orderTitle != ''">
+                and od.ord_title like concat('%',#{orderTitle},'%')
+            </if>
         ORDER BY
             td.item_status,
             td.item_width DESC
@@ -193,6 +207,7 @@
     <select id="findByIds" parameterType="java.util.List" resultMap="tProdPlanDetailResultMap">
         select
         d.item_variety,
+        d.prod_plan_code,
         d.item_cgy_code,
         d.item_color,
         d.item_lenth,
@@ -216,6 +231,32 @@
         <foreach item = "id" index = "index" collection = "ids" open = "(" separator = "," close = ")">
             #{id}
         </foreach>
+    </select>
+
+    <select id="findByProdPlanCode" parameterType="java.lang.String" resultMap="tProdPlanDetailResultMap">
+        select
+        d.item_variety,
+        d.prod_plan_code,
+        d.item_cgy_code,
+        d.item_color,
+        d.item_lenth,
+        d.item_owner,
+        d.item_width,
+        d.item_thick,
+        d.item_num,
+        d.item_total_sq,
+        d.item_total_weight,
+        d.item_remarks,
+        d.item_price_type,
+        d.item_status,
+        c.cus_name,
+        t.ord_title,
+        i.item_yb_type
+        from t_prod_plan_detail d
+        inner join t_order_item i on i.id = d.order_item_id
+        inner join t_order t on t.ord_code = d.ord_code
+        left join t_customer c on c.cus_code = t.cus_code
+        where d.item_status = '1' and d.prod_plan_code = #{code}
     </select>
 
 

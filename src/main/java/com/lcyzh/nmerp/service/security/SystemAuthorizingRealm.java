@@ -86,9 +86,10 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 		// 校验用户名密码
 		User user = getSystemService().getUserByLoginName(token.getUsername());
 		// 增加IP访问设置 TODO 待开放
-//		String ip = Servlets.getRequest().getRemoteAddr();
-//		if(getEquipmentService().getCount(ip) <= 0 && !user.getId().equals("1")){
-//			logger.info("当前登录用户:" + user.getName() + " 登录IP：" + ip);
+		String ip = Servlets.getRequest().getRemoteAddr();
+        logger.info("当前登录用户:" + user.getName() + " 登录IP：" + ip);
+//		if(getEquipmentService().getCount(ip) <= 0 && !user.getId().equals("1")
+//				&& !user.getId().equals("c055e0153fa3486a811cb02f1bcf2d88")){
 //			throw new AuthenticationException("msg:该帐号对应IP不在登录权限范围内.");
 //		}
 		if (user != null) {
