@@ -94,6 +94,19 @@ public class TOutStockController {
     }
 
     /**
+     * 出库
+     * @param barCode
+     * @param carNo
+     * @return -1 （无关联出库单）or 0（出库单中已存在）or 1（加入出库单成功）
+     */
+    @RequestMapping(value = {"/doOutStockNew"}, method = RequestMethod.POST)
+    @ResponseBody
+    public String doOutStockNew(String barCode, String carNo) {
+        int result = tOutStockService.doOutStockDetailNew(barCode, carNo);
+        return String.valueOf(result);
+    }
+
+    /**
      * @Description: 根据传入的code删除对应的资源
      * @Param: [barCode, outCode]
      * @return: java.lang.String

@@ -144,4 +144,7 @@
         order by ts.item_variety,ts.item_lenth,ts.item_weight
     </select>
 
+    <select id="findOne" parameterType="java.util.Map" resultMap="tOutStockDetailResultMap">
+        select * from t_out_stock_detail where bar_code = #{barCode} and out_code = #{outCode}
+    </select>
 </mapper>

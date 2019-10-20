@@ -20,6 +20,18 @@
         update t_out_stock set out_status = #{outStatus} where out_code = #{outCode}
     </update>
 
+    <select id="isOutStockExist" parameterType="java.util.Map" resultMap="tOutStockResultMap">
+        select os.* from
+        t_stock s,
+        t_order o,
+        t_out_stock os
+        where s.bar_code = #{barCode}
+        and os.car_no = #{carNo}
+        and os.out_status &lt; 2
+        and s.ord_code = o.ord_code
+        and o.cus_code = os.cus_code
+    </select>
+
     <select id="findListNew" resultMap="tOutStockResultMap">
         select * from t_out_stock where out_status = '0' order by create_time desc
     </select>

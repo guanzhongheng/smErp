@@ -208,6 +208,28 @@ public class TOutStockServiceImpl implements TOutStockService {
     }
 
     @Override
+    public int doOutStockDetailNew(String barCode, String carNo) {
+        Map<String, Object> map = new HashMap<>(8);
+        map.put("barCode", barCode);
+        map.put("carNo", carNo);
+        TOutStock outStock = tOutStockMapper.isOutStockExist(map);
+        if(outStock != null) {
+            map.put("outCode", outStock.getOutCode());
+            TOutStockDetail outStockDetail = tOutStockDetailMapper.findOne(map);
+            if(outStockDetail != null) {
+                return 0;
+            }else{
+                outStockDetail = new TOutStockDetail();
+                outStockDetail.setBarCode(barCode);
+                outStockDetail.setOutCode(outStock.getOutCode());
+                return tOutStockDetailMapper.insert(outStockDetail);
+            }
+        }else{
+            return -1;
+        }
+    }
+
+    @Override
     public int delete(String outCode) {
         tOutStockDetailMapper.deleteByOutCode(outCode);
         return tOutStockMapper.delete(outCode);
@@ -273,4 +295,5 @@ public class TOutStockServiceImpl implements TOutStockService {
     public List<OutStockDetailVo> getOutStockDetailInfos(String outCode) {
         return tOutStockDetailMapper.getOutStockDetailInfos(outCode);
     }
+
 }

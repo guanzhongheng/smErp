@@ -5,6 +5,7 @@ import com.lcyzh.nmerp.model.vo.OutStockDetailVo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Author ljk
@@ -30,4 +31,6 @@ public interface TOutStockDetailMapper {
     List<TOutStockDetail> findByBarCode(String barCode);
 
     List<OutStockDetailVo> getOutStockDetailInfos(String outCode);
+
+    TOutStockDetail findOne(Map<String, Object> map);
 }

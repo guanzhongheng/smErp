@@ -39,4 +39,6 @@ public interface TOutStockMapper {
     int updateStatus(Map<String, Object> map);
 
     List<CommonVo> checkOrderStatus(String outCode);
+
+    TOutStock isOutStockExist(Map<String, Object> map);
 }
