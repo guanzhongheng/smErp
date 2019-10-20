@@ -114,7 +114,7 @@
 <script>
 
     function getUnit(obj) {
-        debugger;
+
         if(obj.value == "141001" || obj.value == "141003" || obj.value == "141005"){ // 按重量
             $("#prodUnit").val("142002");
             $("#showUnit").val("公斤");
@@ -126,7 +126,7 @@
     }
 
     function checkInfo(obj){
-        debugger;
+
         var oldId = $("#oldId").val();
         if(obj.value.length > 0 && oldId != obj.value){
             $.post('${ctx}/crmAjax/checkProdCode', {

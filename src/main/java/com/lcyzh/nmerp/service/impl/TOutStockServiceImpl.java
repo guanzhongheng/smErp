@@ -112,6 +112,21 @@ public class TOutStockServiceImpl implements TOutStockService {
     }
 
     @Override
+    public String createOutCodeForApp(String cusCode,String cusName, String carNo, String applyUserId) {
+        TOutStock tOutStock = new TOutStock();
+        String outCode = StringUtils.genFixPreFixStr(Constants.OUT_STORE_PRE_FIX);
+        tOutStock.setOutCode(outCode);
+        tOutStock.setCusName(cusName);
+        tOutStock.setCusCode(cusCode);
+        tOutStock.setCarNo(carNo);
+        tOutStock.setOutStatus('0');
+        tOutStock.setCreateTime(new Date());
+        tOutStock.setCreateBy(applyUserId);
+        tOutStockMapper.insert(tOutStock);
+        return outCode;
+    }
+
+    @Override
     public OutStockDetailVo findByBarCode(String barCode) {
         OutStockDetailVo outStockDetailVo = new OutStockDetailVo();
         StockVo vo = tStockMapper.findByBarCode(barCode);

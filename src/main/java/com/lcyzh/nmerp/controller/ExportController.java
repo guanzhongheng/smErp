@@ -1,26 +1,37 @@
 package com.lcyzh.nmerp.controller;
 
+import com.lcyzh.nmerp.constant.Constants;
+import com.lcyzh.nmerp.dao.TCustomerMapper;
 import com.lcyzh.nmerp.model.vo.*;
 import com.lcyzh.nmerp.service.IReportService;
+import com.lcyzh.nmerp.service.TOrderService;
+import com.lcyzh.nmerp.service.TOutStockService;
+import com.lcyzh.nmerp.utils.Arith;
 import com.lcyzh.nmerp.utils.DateUtil;
 import com.lcyzh.nmerp.utils.JxlsExcelView;
 import org.jxls.common.Context;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class ExportController {
     private static String TEMPLATE_PATH = "jxls/template/";
     @Autowired
     private IReportService reportService;
+    @Autowired
+    private TOrderService orderService;
+    @Autowired
+    private TOutStockService outStockService;
+    @Autowired
+    private TCustomerMapper tCustomerMapper;
 
     /**
      * 库存列表信息导出
@@ -109,4 +120,112 @@ public class ExportController {
 //        return new ModelAndView(
 //                new JxlsExcelView(TEMPLATE_PATH + "prodplan.xlsx", "生产计划-" + DateUtil.date2Str(new Date(),"yyyy-MM-dd HH-mm-ss"), context));
 //    }
+
+
+    @RequestMapping(value = "/export/outOrderInfo", method = RequestMethod.GET)
+    public ModelAndView outOrderImportExcel(String outCode, HttpServletResponse response){
+        List<OrderItemVo> newItems = new ArrayList<>();
+        // 获取出库单关联详情
+        List<OutItemVo> outItemVoList = outStockService.findItemByOutCode(outCode);
+        if(!CollectionUtils.isEmpty(outItemVoList)){
+            Map<String,Integer> orderCodes = new HashMap<>();
+            for(OutItemVo vo : outItemVoList){
+                if(orderCodes.get(vo.getOrdCode()) == null){
+                    orderCodes.put(vo.getOrdCode(),1);
+                }
+            }
+            List<OrderItemVo> orderItemVos = new ArrayList<>();
+            for(String key : orderCodes.keySet()){
+                // 获取订单详情
+                List<OrderItemVo> orderItemVo =   orderService.findItemsByOrdCodeForPrint(key);
+                orderItemVos.addAll(orderItemVo);
+            }
+            newItems = doProcessOrderInfo(outItemVoList,orderItemVos);
+        }
+        Map<String,Object> result = new HashMap<>();
+        result.put("orderInfo",newItems);
+        getTotalInfo(result,newItems);
+
+        Context context = new Context();
+        context.putVar("result", result);
+        return new ModelAndView(
+                new JxlsExcelView(TEMPLATE_PATH + "outOrderInfo.xlsx", "出库单据-" + DateUtil.date2Str(new Date(),"yyyy-MM-dd HH:mm:ss"), context));
+    }
+
+    public List<OrderItemVo> doProcessOrderInfo(List<OutItemVo> outItemList,List<OrderItemVo> oldOrderItem){
+        List<OrderItemVo> orderList = new ArrayList<>();
+        Map<String,Long> ite = new HashMap<>();
+        Map<String,Double> iteWightInfo = new HashMap<>();
+        if(!StringUtils.isEmpty(outItemList)){
+            for(OutItemVo vo : outItemList){
+                String newName = vo.getOrdCode() + vo.getItemOwner() + vo.getProdVarietyValue() + vo.getProdCgyCodeValue() + vo.getProdColorValue() + vo.getItemLenth()  + vo.getItemWidth() + vo.getItemThick()+vo.getItemPriceType();
+                if(ite.get(newName) == null){
+                    ite.put(newName,1L);
+                    iteWightInfo.put(newName,vo.getItemWeight());
+                }else{
+                    Long n = ite.get(newName) + 1L;
+                    Double d = Arith.add(iteWightInfo.get(newName),vo.getItemWeight());
+                    ite.put(newName,n);
+                    iteWightInfo.put(newName,d);
+                }
+            }
+        }
+        if(!StringUtils.isEmpty(oldOrderItem)){
+            for(OrderItemVo vo : oldOrderItem){
+                String newName = vo.getOrdCode() + vo.getItemOwner() + vo.getItemVaritemValue() + vo.getItemCgyCodeValue() + vo.getItemColorValue() + vo.getItemLenth()+ vo.getItemWidth()+ vo.getItemThick() + vo.getItemPriceType();
+                if(ite.get(newName) != null && !orderList.contains(vo)){
+                    if(ite.get(newName) > vo.getItemNum()){
+                        Long newNum = ite.get(newName) - vo.getItemNum();
+                        ite.put(newName,newNum);
+                    }else{
+                        vo.setItemNum(ite.get(newName));
+                    }
+                    Double mj = vo.getItemNum() * vo.getItemLenth() * vo.getItemWidth();
+                    vo.setItemTotalSq(Arith.round(mj,4));
+                    vo.setItemTotalWeight(iteWightInfo.get(newName));
+                    String priceTypeValue = vo.getItemPriceTypeValue().replace("(加厚)","").replace("(减薄)","");
+                    vo.setItemPriceTypeValue(priceTypeValue);
+                    orderList.add(vo);
+                }
+            }
+        }
+        return orderList;
+    }
+
+    public void getTotalInfo(Map<String,Object> result,List<OrderItemVo> orderItemVos){
+        Double totalMj = orderItemVos.stream().mapToDouble(i->(((i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ)
+                || i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ_JB)
+                || i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ_JH))&&i.getItemTotalSq()!=null)?i.getItemTotalSq():0)).sum();
+        Double totalZl = orderItemVos.stream().mapToDouble(i -> (((i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)
+                || i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JH)
+                || i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JB) )&&i.getItemTotalWeight()!=null)?i.getItemTotalWeight():0)).sum();
+        Long totalNum = orderItemVos.stream().mapToLong(i -> i.getItemNum()==null?0: i.getItemNum()).sum();
+        orderItemVos.forEach(n->{
+            if(n.getItemPriceType() == 141002 || n.getItemPriceType() == 141004 || n.getItemPriceType() == 141006){
+                n.setShowTotalPrice(Arith.round(Arith.mul(n.getItemTotalSq(),n.getItemPrice()),4));
+            }else{
+                n.setShowTotalPrice(Arith.round(Arith.mul(n.getItemTotalWeight(),n.getItemPrice()),4));
+            }
+        });
+
+        double totoalPriceByMj = 0d;
+        double totalPriceByZL = 0d;
+        if(orderItemVos!=null && !orderItemVos.isEmpty()){
+            for (OrderItemVo item: orderItemVos){
+                if(item.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)
+                        || item.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JB)
+                        || item.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JH)){
+                    totalPriceByZL += item.getItemPrice() * item.getItemTotalWeight();
+                }else{
+                    totoalPriceByMj += item.getItemNum() * item.getItemPrice() *(item.getItemLenth()*item.getItemWidth());
+                }
+            }
+        }
+
+        double totalPrice = Arith.add(totoalPriceByMj,totalPriceByZL);
+        result.put("totalMj",Arith.round(totalMj,4));
+        result.put("totalZl",Arith.round(totalZl,4));
+        result.put("totalNum",totalNum);
+        result.put("totalPrice",Arith.round(totalPrice,4));
+    }
 }

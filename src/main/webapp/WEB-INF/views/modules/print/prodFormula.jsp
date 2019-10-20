@@ -171,7 +171,7 @@
                     })
                 }
             }
-            debugger;
+
             $("#outerTable").append(outerTable);
             $("#midderTable").append(midderTable);
             $("#innerTable").append(innerTable);

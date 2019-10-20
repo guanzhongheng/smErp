@@ -5,6 +5,8 @@
     <resultMap id="tOutStockResultMap" type="com.lcyzh.nmerp.entity.TOutStock">
         <id column="out_code" property="outCode" jdbcType="VARCHAR"/>
         <result column="cus_name" property="cusName" jdbcType="VARCHAR"/>
+        <result column="cus_code" property="cusCode" jdbcType="VARCHAR"/>
+        <result column="car_no" property="carNo" jdbcType="VARCHAR"/>
         <result column="receiver" property="receiver" jdbcType="VARCHAR"/>
         <result column="phone" property="phone" jdbcType="VARCHAR"/>
         <result column="address" property="address" jdbcType="VARCHAR"/>
@@ -80,6 +82,8 @@
         INSERT INTO t_out_stock(
             out_code,
             cus_name,
+            cus_code,
+            car_no,
             receiver,
             phone,
             address,
@@ -93,6 +97,8 @@
         VALUES (
             #{outCode,jdbcType=VARCHAR},
             #{cusName,jdbcType=VARCHAR},
+            #{cusCode,jdbcType=VARCHAR},
+            #{carNo,jdbcType=VARCHAR},
             #{receiver,jdbcType=VARCHAR},
             #{phone,jdbcType=VARCHAR},
             #{address,jdbcType=VARCHAR},

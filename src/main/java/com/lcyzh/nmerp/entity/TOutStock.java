@@ -12,6 +12,8 @@ public class TOutStock implements Serializable {
     private static final long serialVersionUID = 1L;
     private String outCode;
     private String cusName;
+    private String cusCode;
+    private String carNo;
     private String receiver;
     private String phone;
     private String address;
@@ -26,7 +28,23 @@ public class TOutStock implements Serializable {
     public TOutStock(){
     }
 
-    public void setOutCode (String outCode) {this.outCode = outCode;} 
+    public String getCusCode() {
+        return cusCode;
+    }
+
+    public void setCusCode(String cusCode) {
+        this.cusCode = cusCode;
+    }
+
+    public String getCarNo() {
+        return carNo;
+    }
+
+    public void setCarNo(String carNo) {
+        this.carNo = carNo;
+    }
+
+    public void setOutCode (String outCode) {this.outCode = outCode;}
     public String getOutCode(){ return outCode;} 
     public void setCusName (String cusName) {this.cusName = cusName;} 
     public String getCusName(){ return cusName;} 

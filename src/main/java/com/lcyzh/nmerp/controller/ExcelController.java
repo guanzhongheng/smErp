@@ -4,8 +4,8 @@ import com.lcyzh.nmerp.component.ParseExcelService;
 import com.lcyzh.nmerp.controller.common.BaseController;
 import com.lcyzh.nmerp.entity.ExcelHead;
 import com.lcyzh.nmerp.model.vo.OrderAddBatchVo;
-import com.lcyzh.nmerp.model.vo.OrderQueryVo;
 import com.lcyzh.nmerp.service.TOrderService;
+import com.lcyzh.nmerp.service.TOutStockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -77,4 +77,8 @@ public class ExcelController extends BaseController {
             return e.getMessage();
         }
     }
+
+
+
+
 }

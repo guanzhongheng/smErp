@@ -91,6 +91,7 @@
                                 <a href="/crm/inventory/outStockDetail?outCode=${cus.outCode}"><i class="icon-th-list">&nbsp;详情</i></a>
                                 <a href="/print/outStock_print?outCode=${cus.outCode}"><i class="icon-print">&nbsp;打印</i></a>
                                 <a href="/print/outStockInvoice_print?outCode=${cus.outCode}"><i class="icon-print">&nbsp;单据</i></a>
+                                <a href="/export/outOrderInfo?outCode=${cus.outCode}"><i class="icon-print">&nbsp;导出单据</i></a>
                             </td>
                         </tr>
                     </c:forEach>
@@ -110,7 +111,7 @@
     }
     // var LODOP;
     // function clickPrint(strId) {
-    //     debugger;
+    //
     //     LODOP = getLodop();
     //     LODOP.ADD_PRINT_URL(20,10,"100%","95%","http://192.168.101.74:8090" + strId);
     //     LODOP.SET_PRINT_STYLEA(0,"HOrient",3);
@@ -119,7 +120,7 @@
     // }
     //
     // function clickPrintV(strId) {
-    //     debugger;
+    //
     //     LODOP = getLodop();
     //     LODOP.ADD_PRINT_URL(20,10,"100%","95%","http://192.168.101.74:8090" +strId);
     //     LODOP.SET_PRINT_STYLEA(0,"HOrient",3);

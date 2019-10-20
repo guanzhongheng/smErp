@@ -72,6 +72,9 @@ public interface TOutStockService {
      */
     String createAndReturnOutCode(String applyUserId, String remark);
 
+
+    String createOutCodeForApp(String cusCode,String cusName,String carNo, String applyUserId);
+
     /**
      * @Description: 根据条形码查看具体的信息
      * @Param: [barCode]

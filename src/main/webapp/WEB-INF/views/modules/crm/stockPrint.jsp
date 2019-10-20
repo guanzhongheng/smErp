@@ -94,7 +94,7 @@
         var jump = '${jump}';
         JsBarcode("#imgcode", barCode,{
             format: "CODE128",//选择要使用的条形码类型
-            height:26,//高度
+            height:26,//高度d
             width:1.5,
             displayValue:true,//是否在条形码下方显示文字
             fontSize:12,//设置文本的大小

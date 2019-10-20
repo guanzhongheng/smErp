@@ -327,7 +327,7 @@
         if(num == '' || num == undefined || num == null){
             num = 1;
         }
-        debugger;
+
         if(prodObj.itemCode != ""){
 
             for(var i=0;i<num;i++){
@@ -346,7 +346,7 @@
     }
 
     function initTableInfo(){
-        debugger;
+
         $("#cusProdDetail").bootstrapTable({
             url:'/order/item/findItemsById',
             pagination: false,  //表格底部显示分页条
@@ -522,7 +522,7 @@
     }
     
     function operYbType(value,row,index){
-        debugger;
+
         var option;
         var headOption = "<option value =''>请选择</option>";
         if(ybType != null || ybType != undefined){
@@ -578,7 +578,7 @@
     }
     
     function oneTrimPrice() {
-        debugger;
+
         if(prodObj.itemCode != "" && cusProdList.length > 0){
             var flag = false;
             var price = $("#itemPrice").val();
@@ -606,7 +606,7 @@
     
     
     function tranObject(data) {
-        debugger;
+
         indexCkId = indexCkId + 1;
         var price = $("#itemPrice").val();
         if(price != null && price != undefined){
@@ -653,7 +653,7 @@
             if(cusProdList[i].ckId == index){
                 for(var key in cusProdList[i]){
                     if(key == name){
-                        debugger;
+
                         if(name == "itemNum"){
                             var totalWeigth = cusProdList[i]['itemWeight'] * obj.value;
                             var totalMj = cusProdList[i]['itemLenth'] * cusProdList[i]['itemWidth'] * obj.value;
@@ -687,7 +687,7 @@
 
     
     function saveProd() {
-        debugger;
+
         var flag = false;
         if($("#ordCode").val() == ''){
             return;

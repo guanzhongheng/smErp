@@ -859,7 +859,7 @@
 
     // 修改配方信息到订单产品中 根据选中产品进行配方设置
     function saveFormu(){
-        debugger;
+
         var outTem = $("#outTemp").text();
         var midTem = $("#midTemp").text();
         var inTem = $("#inTemp").text();
@@ -982,7 +982,9 @@
 
     <!-- 返回 -->
     $("#backHistory").click(function () {
-        window.location.href = "/crm/producePlan/list";
+        window.history.go(-1);
+       // window.location.href = "/crm/producePlan/list";
+
     });
     
     function getCheckValue() {
@@ -1009,7 +1011,7 @@
         }
     }
     function loadTableData(obj) {
-        debugger;
+
         $("#outerTable").bootstrapTable("destroy");
         $("#midderTable").bootstrapTable("destroy");
         $("#innerTable").bootstrapTable("destroy");
@@ -1026,7 +1028,7 @@
                 },
                 dataType: 'json',
                 success: function (result) {
-                    debugger;
+
                     if(result.outer != null && result.outer != undefined && result.outer.rawMaterialVos != null){
                         $("#outTemp").text(result.outer.temperature);
                         $("#outerTable").bootstrapTable("load",result.outer.rawMaterialVos);

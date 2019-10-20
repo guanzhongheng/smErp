@@ -115,32 +115,31 @@
     <select id="findPlanList" parameterType ="com.lcyzh.nmerp.model.vo.ProdPlanVo"
             resultType="com.lcyzh.nmerp.model.vo.ProdPlanVo">
         SELECT
-            GROUP_CONCAT(prod_plan_code) prodPlanCode,
-            prod_variety prodVariety,
-            prod_cgy_code prodCgyCode,
-            prod_color prodColor,
-            mac_code macCode,
-            sum(total_quantity) totalQuantity,
-            sum(quantity) quantity,
+            GROUP_CONCAT(p.prod_plan_code) prodPlanCode,
+            p.prod_variety prodVariety,
+            p.prod_cgy_code prodCgyCode,
+            p.prod_color prodColor,
+            p.mac_code macCode,
+            sum(p.total_quantity) totalQuantity,
+            sum(ifnull(p.waitNum,0)) quantity,
             isYb
-        FROM t_prod_plan
+        FROM (select tp.*,(select sum(item_num) from t_prod_plan_detail where prod_plan_code = tp.prod_plan_code and item_status = 1) waitNum from t_prod_plan tp) p
         <where>
-            total_quantity &gt; 0
+            p.total_quantity &gt; 0
             <if test="prodVariety!= null">
-                and prod_variety = #{prodVariety,jdbcType=BIGINT}
+                and p.prod_variety = #{prodVariety,jdbcType=BIGINT}
             </if>
             <if test="prodCgyCode!= null">
-                and prod_cgy_code = #{prodCgyCode,jdbcType=BIGINT}
+                and p.prod_cgy_code = #{prodCgyCode,jdbcType=BIGINT}
             </if>
             <if test="prodColor!= null and prodColor!=''">
-                and prod_color = #{prodColor,jdbcType=VARCHAR}
+                and p.prod_color = #{prodColor,jdbcType=VARCHAR}
             </if>
             <if test="macCode!= null and macCode!=''">
-                and mac_code = #{macCode,jdbcType=VARCHAR}
+                and p.mac_code = #{macCode,jdbcType=VARCHAR}
             </if>
         </where>
-        group by prod_variety,prod_cgy_code,prod_color,mac_code,isYb
-
+        group by p.prod_variety,p.prod_cgy_code,p.prod_color,p.mac_code,p.isYb
         order by totalQuantity desc, prodVariety, prodColor, macCode
     </select>
 
