@@ -54,6 +54,20 @@ public class TOutStockController {
         return tCustomerMapper.findList(null);
     }
 
+   /**
+     * @Description: 查询未用户信息
+     * @Param: []
+     * @return: java.util.List<com.lcyzh.nmerp.entity.TOutStock>
+     * @Author: wsm
+     * @Iteration : 1.0
+     * @Date: 2019/7/3 11:41 PM
+     */
+    @RequestMapping(value = {"/getCarList"})
+    public List<String> getCarList(){
+        return tOutStockService.findOutCarList();
+
+    }
+
     /**
      * @Description: 新增出库单
      * @Param: []
@@ -209,8 +223,6 @@ public class TOutStockController {
         Integer result = tOutStockService.updateStatus(outCode,'0');
         return String.valueOf(result);
     }
-
-
 
 
 

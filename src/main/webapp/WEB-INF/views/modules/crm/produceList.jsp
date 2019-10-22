@@ -87,12 +87,15 @@
                     <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 80px" value="查询"/></li>
                     &nbsp;&nbsp;
                     <li class="btns"><input class="btn btn-primary" type="button" style="width: 80px" onclick="produceFormReset()" value="重置"/></li>
+                    &nbsp;&nbsp;
+                    <li class="btns"><input class="btn btn-primary" type="button" style="width: 80px" onclick="doProdWork()" value="批量生产"/></li>
                 </ul>
             </form:form>
             <div class="control-group  table-responsive">
                 <table id="contentTable" class="table table-striped table-bordered table-hover text-nowrap">
                     <thead>
                     <tr>
+                        <th><input type="checkbox" name="checkAll" id="checkAll" onchange="checkedAll(this)"></th>
                         <th style="text-align: center">订单标题</th>
                         <th style="text-align: center">所属人</th>
                         <th style="text-align: center">机台编号</th>
@@ -113,6 +116,7 @@
                     <tbody>
                     <c:forEach items="${page.list}" var="vo">
                         <tr>
+                            <td><input type="checkbox" name="checkProdPlanDetail" value="${vo.prodPlanDetailId}"></td>
                             <td>${vo.orderTitle}</td>
                             <td>${vo.itemOwner}</td>
                             <td>${vo.macCode}</td>
@@ -145,10 +149,6 @@
                 </table>
                 <div class="pagination">${page}</div>
 
-                <script>
-
-
-                </script>
             </div>
         </div>
     </div>
@@ -160,6 +160,25 @@
         $("#itemColor").val("").select2();
         $("#macCode").val("").select2();
     }
+
+    function checkedAll(obj) {
+        var codes = document.getElementsByName("checkProdPlanDetail")
+        if (obj.checked) {
+            for (var i = 0; i < codes.length; i++) {
+                codes[i].checked = true;
+            }
+        } else {
+            for (var i = 0; i < codes.length; i++) {
+                codes[i].checked = false;
+            }
+        }
+    }
+
+    function doProdWork() {
+        debugger;
+
+    }
+    
 </script>
 
 

@@ -113,6 +113,11 @@ public class TOutStockServiceImpl implements TOutStockService {
 
     @Override
     public String createOutCodeForApp(String cusCode,String cusName, String carNo, String applyUserId) {
+        // 校验当前车牌号+关联用户是否存在 如果存在则不能创建出库单
+        int num = tOutStockMapper.checkInfo(cusCode,carNo);
+        if(num > 0){
+            return "-1";
+        }
         TOutStock tOutStock = new TOutStock();
         String outCode = StringUtils.genFixPreFixStr(Constants.OUT_STORE_PRE_FIX);
         tOutStock.setOutCode(outCode);
@@ -309,6 +314,11 @@ public class TOutStockServiceImpl implements TOutStockService {
     @Override
     public List<OutStockDetailVo> getOutStockDetailInfos(String outCode) {
         return tOutStockDetailMapper.getOutStockDetailInfos(outCode);
+    }
+
+    @Override
+    public List<String> findOutCarList() {
+        return tOutStockMapper.findOutCarList();
     }
 
 }

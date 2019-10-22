@@ -235,4 +235,12 @@
     </select>
 
 
+    <select id="findOutCarList" resultType="java.lang.String" >
+        select car_no from t_out_stock where out_status &lt; 2 and car_no is not null
+    </select>
+
+    <select id="checkInfo" resultType="java.lang.Integer">
+        select count(1) from t_out_stock where out_status &lt; 2 and car_no = #{carNo} and cus_code = #{cusCode}
+    </select>
+
 </mapper>

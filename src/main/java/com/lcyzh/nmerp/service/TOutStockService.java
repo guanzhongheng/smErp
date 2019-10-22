@@ -134,7 +134,11 @@ public interface TOutStockService {
      */
     List<OutStockDetailVo> getOutStockDetailInfos(Page<OutStockDetailVo> page,String outCode);
 
+
     List<OutStockDetailVo> getOutStockDetailInfos(String outCode);
 
     int doOutStockDetailNew(String barCode, String carNo);
+
+    List<String> findOutCarList();
+
 }

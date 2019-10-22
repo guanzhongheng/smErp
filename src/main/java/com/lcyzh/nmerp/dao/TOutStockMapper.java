@@ -4,6 +4,7 @@ import com.lcyzh.nmerp.entity.TOutStock;
 import com.lcyzh.nmerp.model.vo.CommonVo;
 import com.lcyzh.nmerp.model.vo.OutStockVo;
 import com.lcyzh.nmerp.model.vo.StockRecordVo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -41,4 +42,8 @@ public interface TOutStockMapper {
     List<CommonVo> checkOrderStatus(String outCode);
 
     TOutStock isOutStockExist(Map<String, Object> map);
+
+    List<String> findOutCarList();
+
+    int checkInfo(@Param("cusCode") String cusCode,@Param("carNo") String carNo);
 }
