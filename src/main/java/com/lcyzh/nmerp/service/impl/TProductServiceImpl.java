@@ -126,7 +126,6 @@ public class TProductServiceImpl implements TProductService {
                 }
                 product.setCreateTime(current);
                 res = tProductMapper.insert(product);
-
             }
             if (res > 0) {
                 DictUtils.getProdMaps().put(String.valueOf(product.getProdCgyCode()) + product.getProdVariety() + product.getProdColor(), product);

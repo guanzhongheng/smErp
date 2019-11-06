@@ -225,18 +225,19 @@
     </select>
 
     <select id="checkOrderStatus" parameterType="java.lang.String" resultType="com.lcyzh.nmerp.model.vo.CommonVo">
-        select
-            t.ord_code as code,((select sum(item_num) from t_order_item where ord_code = t.ord_code ) - sum(outCount)) as num
-        from (
-        select t.ord_code,count(t.bar_code) outCount from t_stock t
-        inner join t_out_stock_detail d on d.bar_code = t.bar_code and out_code = #{outCode}
-        group by t.ord_code,t.bar_code ) t group by t.ord_code
-
+        select so.ord_code code,(so.ordNum - so.outNum) num from (
+            select
+                s.ord_code,
+                (select sum(item_num) from t_order_item where ord_code = s.ord_code) ordNum,
+                (select count(1) from t_stock where `status` = '1' and ord_code = s.ord_code) outNum
+            from t_out_stock_detail t
+            inner join t_stock s on s.bar_code = t.bar_code
+            where t.out_code = #{outCode}  group by s.ord_code
+        ) so
     </select>
 
-
     <select id="findOutCarList" resultType="java.lang.String" >
-        select car_no from t_out_stock where out_status &lt; 2 and car_no is not null
+        select distinct car_no from t_out_stock where out_status &lt; 2 and car_no is not null
     </select>
 
     <select id="checkInfo" resultType="java.lang.Integer">

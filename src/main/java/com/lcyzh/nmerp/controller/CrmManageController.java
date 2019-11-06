@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -375,6 +376,7 @@ public class CrmManageController extends BaseController {
                 }
                 n.setTheoryWeight(to);
             });
+            list.sort(Comparator.comparing(ProdPlanDetailVo::getItemWidth).thenComparing(ProdPlanDetailVo::getItemMickWeight));
             totalWi = list.stream().mapToDouble(i->i.getTheoryWeight()).sum();
             model.addAttribute("theoryTotalWeight",Arith.round(totalWi,4));
         }

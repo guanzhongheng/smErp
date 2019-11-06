@@ -88,14 +88,14 @@
                     &nbsp;&nbsp;
                     <li class="btns"><input class="btn btn-primary" type="button" style="width: 80px" onclick="produceFormReset()" value="重置"/></li>
                     &nbsp;&nbsp;
-                    <li class="btns"><input class="btn btn-primary" type="button" style="width: 80px" onclick="doProdWork()" value="批量生产"/></li>
+                    <li class="btns"><input class="btn btn-primary" type="button" style="width: 94px" onclick="doProdWork()" value="批量生产"/></li>
                 </ul>
             </form:form>
             <div class="control-group  table-responsive">
                 <table id="contentTable" class="table table-striped table-bordered table-hover text-nowrap">
                     <thead>
                     <tr>
-                        <th><input type="checkbox" name="checkAll" id="checkAll" onchange="checkedAll(this)"></th>
+                        <th style="width: 10px;"><input type="checkbox" name="checkAll" id="checkAll" onchange="checkedAll(this)"></th>
                         <th style="text-align: center">订单标题</th>
                         <th style="text-align: center">所属人</th>
                         <th style="text-align: center">机台编号</th>

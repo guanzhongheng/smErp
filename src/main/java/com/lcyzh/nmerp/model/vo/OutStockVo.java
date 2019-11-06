@@ -16,7 +16,9 @@ public class OutStockVo {
     private String startDate;
     private String endDate;
     private String outCode;
+    private String cusCode;
     private String cusName;
+    private String carNo;
     private String receiver;
     private String phone;
     private String address;
@@ -26,6 +28,22 @@ public class OutStockVo {
     private Date updateTime;
     private String updateBy;
     private String remarks;
+
+    public String getCusCode() {
+        return cusCode;
+    }
+
+    public void setCusCode(String cusCode) {
+        this.cusCode = cusCode;
+    }
+
+    public String getCarNo() {
+        return carNo;
+    }
+
+    public void setCarNo(String carNo) {
+        this.carNo = carNo;
+    }
 
     public String getStartDate() {
         return startDate;

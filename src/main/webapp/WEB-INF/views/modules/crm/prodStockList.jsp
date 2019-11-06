@@ -73,7 +73,7 @@
                     <c:forEach items="${page.list}" var="oq">
                     <tr>
                         <td>${oq.cusName}</td>
-                        <td>${oq.ordTitle}</td>
+                        <td><a href="/cus/order/info?ordCode=${oq.ordCode}">${oq.ordTitle}</a></td>
                         <td>${oq.ordTotalWeight}</td>
                         <td>${oq.ordTotalSq}</td>
                         <td>${oq.ordTotalNum}</td>

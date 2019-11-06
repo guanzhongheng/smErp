@@ -145,11 +145,17 @@
                             <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
                                 指导价格:
                             </label>
-                            <label class="col-md-4 control-label" style="text-align: left">
-                                <input class="form-control" id="itemPrice" >
+                            <label class="col-md-3 control-label" style="text-align: left;">
+                                <input class="form-control" id="itemPrice" style="width: 80px;">
                             </label>
-                            <label class="col-md-4 control-label" style="text-align: left">
-                                <input class="form-control" id="addNum" placeholder="添加次数" value="1">
+                            <label class="col-md-2 control-label" style="text-align: left;">
+                                <input class="form-control" id="addNum" placeholder="次数" value="1" style="width: 55px;">
+                            </label>
+                            <label class="col-md-3 control-label" style="text-align: left;">
+                                <select data-placeholder="延长米方式" class="chosen-select order-label-input-width" style="width: 160px" id="SelectycType" >
+                                    <option value="-1">延长米选择</option>
+
+                                </select>
                             </label>
                         </div>
 
@@ -246,6 +252,7 @@
         success: function(data){
             if(data != null){
                 ycType = data.ycType;
+                initSelectYcType(ycType);
                 ybType = data.ybType;
             }
         }
@@ -278,6 +285,21 @@
         "itemYbType":"",
         "itemRemarks":""
     }
+    
+    function initSelectYcType(obj) {
+        debugger;
+        if(obj != null || obj != undefined){
+            var ycTp = $("#SelectycType");
+            var headOption = "";
+            $.each(ycType,function(i,obj){
+                headOption = headOption + "<option value='"+obj.value+"'>"+obj.label+"</option>";
+            });
+            ycTp.append(headOption);
+            ycTp.trigger("chosen:updated");
+        }
+    }
+    
+    
     function getResChange(obj) {
         if($(obj).find("option:selected").val() != -1){
 
@@ -328,10 +350,13 @@
             num = 1;
         }
 
+        var ycm = $("#SelectycType").val();
+
+
         if(prodObj.itemCode != ""){
 
             for(var i=0;i<num;i++){
-                cusProdList.push(tranObject(prodObj));
+                cusProdList.push(tranObject(prodObj,ycm));
             }
             // cusProdList.push(tranObject(prodObj));
 
@@ -605,7 +630,7 @@
     }
     
     
-    function tranObject(data) {
+    function tranObject(data,ycm) {
 
         indexCkId = indexCkId + 1;
         var price = $("#itemPrice").val();
@@ -640,7 +665,7 @@
             "itemWeight":0.000,
             "itemTotalWeight":0,
             "itemTotalSq":0,
-            "itemYcType":"",
+            "itemYcType":ycm,
             "itemYbType":"",
             "itemRemarks":""
         }
