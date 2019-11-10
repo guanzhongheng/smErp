@@ -115,7 +115,6 @@ public class TProductController extends BaseController {
     @RequestMapping(value = "/delete")
     public String delete(TProduct tProduct, RedirectAttributes redirectAttributes) {
         if (tProductService.delete(tProduct) > 0) {
-
             return "redirect:/tProduct/list";
         } else {
             addMessage(redirectAttributes, "删除失败");

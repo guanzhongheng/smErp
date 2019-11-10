@@ -31,6 +31,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="box">
+                        <input type="hidden" id="allPlanIds" value="${allPlanIds}" />
                         <%--<div class="box-header with-border">--%>
                             <%--<h3 class="box-title">计重设备</h3>--%>
                         <%--</div>--%>
@@ -277,8 +278,9 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="row" >
-                                                <div class="col-sm-4">
-                                                    <button class="btn btn-info global-button-style" type="button" onclick="javascript:history.go(-1)">返回</button>
+                                                <div class="col-sm-8">
+                                                    <button class="btn btn-info global-button-style" type="button" onclick="goBackPageList()">返回</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <button class="btn btn-info global-button-style" id="nextProd" type="button" onclick="goToNextPage()">下个产品</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -357,12 +359,80 @@
                 </div>
             </div>
         </div>
+        <div class="panel-body" style="padding: 10px 10px 0px 10px;">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div>
+                        <div style="width: 170px">
+                            <h3><i style="background-color: blue;width: 10px;">&nbsp;</i> &nbsp;&nbsp;待生产信息</h3>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="control-group table-responsive" style="text-align: center;" >
+                        <table  class="table table-striped table-bordered table-hover text-nowrap" >
+                            <thead>
+                            <tr>
+                                <th style="text-align: center">订单标题</th>
+                                <th style="text-align: center">所属人</th>
+                                <th style="text-align: center">品种</th>
+                                <th style="text-align: center">类别</th>
+                                <th style="text-align: center">颜色</th>
+                                <th style="text-align: center">长度</th>
+                                <th style="text-align: center">宽度</th>
+                                <th style="text-align: center">厚度</th>
+                                <th style="text-align: center">计划单数量</th>
+                                <th style="text-align: center">理论重量</th>
+                                <th style="text-align: center">压边类型</th>
+                                <th style="text-align: center">米克重</th>
+                                <th style="text-align: center">备注</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${planList}" var="p">
+								<tr>
+	                                <td>${p.orderTitle}</td>
+		                            <td>${p.itemOwner}</td>
+		                            <td>${fns:getValueByDictKey(p.itemVariety)}</td>
+		                            <td>${fns:getValueByDictKey(p.itemCgyCode)}</td>
+		                            <td>${fns:getDictValue(p.itemColor, 'prod_color', defaultValue)}</td>
+		                            <td>${p.itemLenth}</td>
+		                            <td><span style="color: #00a2d4">${p.itemWidth}</span></td>
+		                            <td>${p.itemThick}</td>
+		                            <td>${p.itemNum}</td>
+		                            <td>${p.theoryWeight}</td>
+		                            <td>${fns:getDictValue(p.itemYbType, 'prod_ybType', defaultValue)}</td>
+		                            <td>${p.itemMickWeight}</td>
+		                            <td style="min-width: 80px;max-width: 200px;"><span style="color: #f3190f">${vo.itemRemarks}</span></td>
+	                            </tr>
+                            </c:forEach>
+
+                            
+                            
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 <script>
 
     var FormuInfo = '${detail.formula}';
+
+    function goBackPageList() {
+        window.location.href = "/crm/produce/list";
+    }
+    
+    // 页面流转
+    function goToNextPage(){
+        debugger;
+        var allPlanIds = $("#allPlanIds").val();
+        var newStr = allPlanIds.replace(($("#prodPlanDetailId").val() + ","),"");
+        window.location.href = "/produce/produce/infoList?ids=" + newStr;
+
+    };
 
     function getTableInfo(){
 
@@ -395,7 +465,6 @@
                     })
                 }
             }
-
             $("#outerTable").append(outerTable);
             $("#midderTable").append(midderTable);
             $("#innerTable").append(innerTable);
@@ -404,7 +473,7 @@
     }
 
     $(document).ready(function () {
-
+        $("#nextProd").hide();
         /*计重相关逻辑*/
         var weightType ;
         var weightFlag = 'auto';
@@ -470,6 +539,8 @@
             $("#weightAuto").hide();
             $("#weightHand").show();
         });
+
+
 
         // 起止码逻辑
         $("#seCheckbox").bootstrapSwitch({
@@ -551,12 +622,12 @@
             }
 
             $("#inStock").attr('disabled',"true");
-
             var seCode;
             if($("#seCode_s").val() != null && $("#seCode_s").val() != ''){
                 seCode = $("#seCode_s").val()+'-'+ $("#seCode_e").val();
             }
-
+            var allPlanIds = $("#allPlanIds").val();
+            var doFlag = false;
             $.ajax({
                 url: "/produce/produce/inStock",
                 type: 'POST',
@@ -567,11 +638,20 @@
                         top.$.jBox.tip('入库成功');
                         $("#inStock").removeAttr('disabled');
                     } else if (result.itemNum == 0) {
-                        top.$.jBox.tip('入库成功,请在完成打印操作后点击返回按钮');
+                        debugger;
+                        // 当全部入库完成后处理
+						if(allPlanIds == $("#prodPlanDetailId").val() || allPlanIds == ($("#prodPlanDetailId").val() + ",")){
+							 top.$.jBox.tip('入库成功,请在完成打印操作后点击返回按钮');
+						}else{
+							// 开放下一个按钮权限
+                            $("#nextProd").show();
+						}
+                       
                         // var path = 'window.location.href = "/produce/producePlan/info?prodPlanCode='+prodPlanCode+'"';
                     }
                     $("#itemNum").val(result.itemNum);
                     doPrint();
+
                 }
             });
 

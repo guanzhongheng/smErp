@@ -64,4 +64,18 @@ public interface TProdPlanDetailService {
      * 根据ID撤销生产计划明细
      */
     boolean cancelProdPlanDetailByID(Long id);
+
+
+    /**
+     * 根据IDs撤销生产计划明细
+     */
+    boolean cancelProdPlanDetailByIds(String ids);
+
+    /**
+     * 根据产品计划详情IDS获取响应记录信息
+     * @param ids
+     * @return
+     */
+    List<ProdPlanDetailVo> getTaskDetailInfos(List<String> ids);
+
 }

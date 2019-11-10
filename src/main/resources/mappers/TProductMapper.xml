@@ -34,6 +34,7 @@
         SELECT *
         FROM T_PRODUCT
         <where>
+            del_flag = '0'
             <if test="prodCode != null and prodCode != ''">
                 and prod_code like concat(concat('%', #{prodCode}),'%')
             </if>
@@ -199,5 +200,8 @@
     </select>
 
 
+    <update id="deleteForUpdate" parameterType="com.lcyzh.nmerp.entity.TProduct">
+        update T_PRODUCT set del_flag = '-1' where id = #{id}
+    </update>
 
 </mapper>

@@ -12,7 +12,7 @@
 </style>
 
 <div class="gray-bg" >
-    <div style="width:90%;padding:7px 8px 5px 32px;">
+    <div style="width:100%;padding:2px 0px 2px 10px;">
 
         <table>
             <tr style="height:30px;">
@@ -28,7 +28,9 @@
         <table>
             <tr>
                 <td>
-                    <img id="imgcode"/>
+                    <%--<img id="imgcode"/>--%>
+
+                    <div id="imgcode"></div>
                 </td>
                 <c:if test="${vo.itemPriceType eq 141001 || vo.itemPriceType eq 141003 || vo.itemPriceType eq 141005}">
                     <td style="width:70px;"><b>
@@ -63,6 +65,9 @@
     </div>
 </div>
 <script src="${ctxStatic}/hPlugs/js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
+<script src="${ctxStatic}/hPlugs/js/jquery.qrcode.js"></script>
+<script src="${ctxStatic}/hPlugs/js/qrcode.js"></script>
+
 <script src="${ctxStatic}/hPlugs/js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
 <script src="${ctxStatic}/hPlugs/js/content.min.js?v=1.0.0" type="text/javascript"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/chosen/chosen.jquery.js"></script>
@@ -79,7 +84,8 @@
 <script src="${ctxStatic}/hPlugs/js/plugins/clockpicker/clockpicker.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/cropper/cropper.min.js"></script>
 <script src="${ctxStatic}/hPlugs/js/demo/form-advanced-demo.min.js"></script>
-<script src="${ctxStatic}/hPlugs/js/plugins/JsBarcode/JsBarcode.all.min.js"></script>
+<%--<script src="${ctxStatic}/hPlugs/js/plugins/JsBarcode/JsBarcode.all.min.js"></script>--%>
+
 <script type="text/javascript">
     $(document).ready(function () {
         // var LODOP = getLodop();
@@ -92,14 +98,17 @@
 
         var barCode = '${vo.barCode}';
         var jump = '${jump}';
-        JsBarcode("#imgcode", barCode,{
-            format: "CODE128",//选择要使用的条形码类型
-            height:26,//高度d
-            width:1.5,
-            displayValue:true,//是否在条形码下方显示文字
-            fontSize:12,//设置文本的大小
-            textPosition:"top",//设置文本的垂直位置
-        });
+
+        $("#imgcode").qrcode(barCode);
+
+        // JsBarcode("#imgcode", barCode,{
+        //     format: "CODE128",//选择要使用的条形码类型
+        //     height:26,//高度
+        //     width:1.5,
+        //     displayValue:true,//是否在条形码下方显示文字
+        //     fontSize:12,//设置文本的大小
+        //     textPosition:"top",//设置文本的垂直位置
+        // });
 
         $("#bth").click(function () {
             $("#btnArea").hide();
@@ -111,8 +120,4 @@
         });
     });
 
-
-    function print33(){
-
-    }
 </script>

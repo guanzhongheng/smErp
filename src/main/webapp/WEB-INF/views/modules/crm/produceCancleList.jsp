@@ -87,12 +87,16 @@
                     <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 80px" value="查询"/></li>
                     &nbsp;&nbsp;
                     <li class="btns"><input class="btn btn-primary" type="button" style="width: 80px" onclick="produceFormReset()" value="重置"/></li>
+                    &nbsp;&nbsp;
+                    <li class="btns"><input class="btn btn-primary" type="button" style="width: 94px" onclick="doPrcoessList()" value="批量撤销"/></li>
                 </ul>
             </form:form>
             <div class="control-group  table-responsive">
                 <table id="contentTable" class="table table-striped table-bordered table-hover text-nowrap">
                     <thead>
                     <tr>
+                        <th style="width: 10px;"><input type="checkbox" id="ProdcheckAll"
+                                                              onchange="checkedAll(this)"/></th>
                         <th style="text-align: center">订单标题</th>
                         <th style="text-align: center">所属人</th>
                         <th style="text-align: center">机台编号</th>
@@ -115,6 +119,10 @@
                     <tbody>
                     <c:forEach items="${page.list}" var="vo">
                         <tr>
+
+                            <td>
+                                <input type="checkbox" name="ProdDetailId" value="${vo.prodPlanDetailId}">
+                            </td>
                             <td>${vo.orderTitle}</td>
                             <td>${vo.itemOwner}</td>
                             <td>${vo.macCode}</td>
@@ -171,6 +179,38 @@
         $("#itemColor").val("").select2();
         $("#macCode").val("").select2();
     }
+
+    function checkedAll(obj) {
+        var codes = document.getElementsByName("ProdDetailId")
+        if (obj.checked) {
+            for (var i = 0; i < codes.length; i++) {
+                codes[i].checked = true;
+            }
+        } else {
+            for (var i = 0; i < codes.length; i++) {
+                codes[i].checked = false;
+            }
+        }
+    }
+
+    function getCheckAllValue() {
+        var obj = document.getElementsByName("ProdDetailId");
+        var check_val = '';
+        for (k in obj) {
+            if (obj[k].checked)
+                check_val = check_val + obj[k].value + ",";
+        }
+        check_val = check_val.replace(",,", ",");
+        return check_val;
+    }
+
+    function doPrcoessList(obj) {
+        debugger;
+        // 获取批量处理的ID信息
+        var str = getCheckAllValue();
+        window.location.href = "/produce/produce/cancleList?ids="+str;
+    }
+    
 </script>
 
 

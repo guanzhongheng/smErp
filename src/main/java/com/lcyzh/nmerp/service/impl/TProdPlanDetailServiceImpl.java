@@ -205,6 +205,23 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
         return true;
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
+    @Override
+    public boolean cancelProdPlanDetailByIds(String ids) {
+        if(StringUtils.isNotEmpty(ids)){
+            String[] newIds = ids.substring(0,ids.length()-1).split(",");
+            for(String s : newIds){
+                Long nId = Long.parseLong(s);
+                boolean b = cancelProdPlanDetailByID(nId);
+                if(!b){
+                    throw new RuntimeException("处理异常");
+                }
+            }
+        }
+        return false;
+
+    }
+
     public String getBarCode(String barCode){
         List<TStock> list = tStockMapper.getByBarCode(barCode);
         if(!list.isEmpty()) {
@@ -213,6 +230,15 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
         return barCode;
     }
 
+    /**
+     * 根据计划单ID获取参数信息
+     * @param ids
+     * @return
+     */
+    @Override
+    public List<ProdPlanDetailVo> getTaskDetailInfos(List<String> ids) {
+        return tProdPlanDetailMapper.getTaskDetailInfos(ids);
+    }
 
     //@Override
     //public List<TProdPlanDetail> findList(TProdPlanDetail tProdPlanDetail) {

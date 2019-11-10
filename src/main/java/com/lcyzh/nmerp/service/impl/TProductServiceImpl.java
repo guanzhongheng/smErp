@@ -139,9 +139,15 @@ public class TProductServiceImpl implements TProductService {
         return tProductMapper.update(tProduct);
     }
 
+    /**
+     * TODO 修改物理删除为逻辑删除
+     * @param tProduct
+     * @return
+     */
     @Override
     public int delete(TProduct tProduct) {
-        return tProductMapper.delete(tProduct);
+        return tProductMapper.deleteForUpdate(tProduct);
+       // return tProductMapper.delete(tProduct);
     }
 
     @Override

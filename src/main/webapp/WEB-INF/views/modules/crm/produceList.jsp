@@ -142,13 +142,12 @@
                     </c:forEach>
                     <tr>
                         <td>总计:</td>
-                        <td colspan="9"></td>
+                        <td colspan="10"></td>
                         <td colspan="5">理论总重量:${theoryTotalWeight}</td>
                     </tr>
                     </tbody>
                 </table>
                 <div class="pagination">${page}</div>
-
             </div>
         </div>
     </div>
@@ -174,9 +173,24 @@
         }
     }
 
-    function doProdWork() {
-        debugger;
+    function getCheckAllValue() {
+        var obj = document.getElementsByName("checkProdPlanDetail");
+        var check_val = '';
+        for (k in obj) {
+            if (obj[k].checked)
+                check_val = check_val + obj[k].value + ",";
+        }
+        check_val = check_val.replace(",,", ",");
+        return check_val;
+    }
 
+    function doProdWork() {
+        var str = getCheckAllValue();
+        if(str == undefined || str.length == 0){
+            top.$.jBox.tip('最少选中一条记录');
+            return;
+        }
+        window.location.href = "/produce/produce/infoList?ids=" + str;
     }
     
 </script>

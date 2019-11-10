@@ -457,4 +457,46 @@
         WHERE id = #{id,jdbcType=BIGINT}
     </delete>
 
+    <select id="getTaskDetailInfos" parameterType="java.util.List" resultType="com.lcyzh.nmerp.model.vo.ProdPlanDetailVo">
+        SELECT
+        ppd.id prodPlanDetailId,
+        ppd.prod_plan_code prodPlanCode,
+        ppd.ord_code ordCode,
+        ppd.order_item_id orderItemId,
+        ppd.item_code itemCode,
+        ppd.item_lenth itemLenth,
+        ppd.item_width itemWidth,
+        ppd.item_thick itemThick,
+        ppd.item_num itemNum,
+        ppd.item_total_weight itemTotalWeight,
+        ppd.item_total_sq itemTotalSq,
+        oi.item_yb_type itemYbType,
+        oi.item_yc_type itemYcType,
+        ppd.item_status itemStatus,
+        ppd.item_cgy_code itemCgyCode,
+        ppd.item_variety itemVariety,
+        ppd.item_unit itemUnit,
+        ppd.item_owner itemOwner,
+        ppd.item_color itemColor,
+        ppd.mac_code macCode,
+        ppd.item_price_type itemPriceType,
+        oi.formula formula,
+        o.ord_title orderTitle,
+        o.proxy_name proxyName,
+        ppd.item_remarks itemRemarks,
+        ppd.threshold_up thresholdUp,
+        ppd.threshold_down thresholdDown,
+        ifnull(tp.prod_density,0) itemDensity
+        FROM t_prod_plan_detail ppd
+        left join t_prod_plan pp on ppd.prod_plan_code = pp.prod_plan_code
+        left join t_order o on ppd.ord_code = o.ord_code
+        left join t_order_item oi on ppd.order_item_id = oi.id
+        left join t_product tp on tp.prod_code = ppd.item_code
+        where ppd.item_status = '1' and ppd.id in
+        <foreach item = "id" index = "index" collection = "ids" open = "(" separator = "," close = ")">
+            #{id}
+        </foreach>
+        order by ppd.item_thick,oi.item_yb_type,ppd.ord_code desc
+    </select>
+
 </mapper>

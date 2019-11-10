@@ -40,4 +40,6 @@ public interface TProdPlanDetailMapper {
     List<TProdPlanDetail> findByProdPlanCode(@Param("code") String code);
 
     List<TProdPlanDetail> findListByProdPlanCodes(ProdPlanListVo vo);
+
+    List<ProdPlanDetailVo> getTaskDetailInfos(@Param("ids") List<String> ids);
 }

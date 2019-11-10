@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -159,9 +162,26 @@ public class ProduceManageController extends BaseController {
      */
     @RequestMapping(value = {"produce/info"})
     public String prodDetail(Long id, Model model,ProdPlanDetailVo detail, HttpServletRequest request, HttpServletResponse response){
+        List<String> nList = new ArrayList<>();
+        nList.add(id.toString());
+        // 获取任务列表
+        List<ProdPlanDetailVo> prodPlanDetails = prodPlanDetailService.getTaskDetailInfos(nList);
+        // 获取生产任务产品信息
+        doSetObjectInfo(id,model);
+        doTheoryCalculationForPdNew(prodPlanDetails);
+        model.addAttribute("planList",prodPlanDetails);
+        model.addAttribute("allPlanIds",id);
+        return "modules/crm/produceDetail";
+    }
+
+    /**
+     * 获取生产界面第一个处理的产品类型
+     * @param id
+     * @param model
+     */
+    public void doSetObjectInfo(Long id, Model model){
         ProdPlanDetailVo vo = new ProdPlanDetailVo();
         vo.setProdPlanDetailId(id);
-
         ProdPlanDetailVo voFromDb = prodPlanDetailService.findProdTask(vo);
         voFromDb.setItemYcLenth(voFromDb.getItemLenth()); // 默认等于实际长度
         String n = SysDictUtils.getDictDesc(voFromDb.getItemYcType(),Constants.PROD_YC_TYPE,"");
@@ -170,7 +190,6 @@ public class ProduceManageController extends BaseController {
             Double sj = Arith.mul(voFromDb.getItemLenth(),d);
             voFromDb.setItemYcLenth(Arith.round(sj,4));
         }
-
         if(voFromDb.getItemDensity() != null && voFromDb.getItemDensity() > 0){
             Double mkfm = Arith.div(1,Arith.mul(voFromDb.getItemDensity(),voFromDb.getItemThick()));
             Double mkto = Arith.div(voFromDb.getItemWidth(),mkfm,4);
@@ -180,10 +199,35 @@ public class ProduceManageController extends BaseController {
 
         }
         model.addAttribute("detail",voFromDb);
-
         model.addAttribute("orderItem",orderItemService.getById(voFromDb.getOrderItemId()));
-        return "modules/crm/produceDetail";
     }
+
+    /**
+     * @Description: 批量选择任务单处理方式
+     * @Param: [model, request, response]
+     * @return: java.lang.String
+     * @Author: wsm
+     * @Iteration : 1.0
+     * @Date: 2019/7/16 9:15 AM
+     */
+    @RequestMapping(value = {"produce/infoList"})
+    public String prodDetails(String ids, Model model,HttpServletRequest request, HttpServletResponse response){
+        // 判定获取信息
+        if(StringUtils.isNotEmpty(ids) && ids.length() > 1){
+            String[] nIds = ids.split(",");
+            List<ProdPlanDetailVo> prodPlanDetails = prodPlanDetailService.getTaskDetailInfos(Arrays.asList(nIds));
+            Long oldId = Long.parseLong(nIds[0]);
+            doSetObjectInfo(oldId,model);
+            doTheoryCalculationForPdNew(prodPlanDetails);
+            model.addAttribute("planList",prodPlanDetails);
+            model.addAttribute("allPlanIds",ids);
+            return "modules/crm/produceDetail";
+        }else{
+            return "redirect:crm/produce/list";
+        }
+    }
+
+
 
     /**
      * @Description: 撤销生产任务
@@ -198,6 +242,22 @@ public class ProduceManageController extends BaseController {
         prodPlanDetailService.cancelProdPlanDetailByID(id);
         return "redirect:/crm/produceCancle/list?repage";
     }
+
+    /**
+     * @Description: 批量撤销生产任务
+     * @Param: [id]
+     * @return: java.lang.String
+     * @Author: wsm
+     * @Iteration : 1.0
+     * @Date: 2019/9/1 9:57 PM
+     */
+    @RequestMapping(value = {"produce/cancleList"})
+    public String prodListCancle(String ids){
+        prodPlanDetailService.cancelProdPlanDetailByIds(ids);
+        return "redirect:/crm/produceCancle/list?repage";
+    }
+
+
 
     @RequestMapping(value = {"produce/inStock"})
     @ResponseBody
@@ -313,10 +373,6 @@ public class ProduceManageController extends BaseController {
         return pageStr;
     }
 
-
-
-
-
     // 计算理论重量值
     public void doTheoryCalculation(List<TProdPlanDetail> list,Model model){
         if(!CollectionUtils.isEmpty(list)){
@@ -330,6 +386,28 @@ public class ProduceManageController extends BaseController {
             });
             totalWi = list.stream().mapToDouble(i->i.getTheoryWeight()).sum();
             model.addAttribute("theoryTotalWeight",Arith.round(totalWi,4));
+        }
+    }
+
+    // 计算理论重量值
+    public void doTheoryCalculationForPdNew(List<ProdPlanDetailVo> list){
+        if(!CollectionUtils.isEmpty(list)){
+            Double totalWi = 0d;
+            list.forEach(n->{
+                Double mj = Arith.mul(n.getItemLenth(),n.getItemWidth());
+                Double mjt = Arith.mul(mj,n.getItemNum());
+                Double fm = Arith.div(1,Arith.mul(0.95,n.getItemThick()));
+                Double to = Arith.div(mjt,fm,4);
+                if(n.getItemDensity() != null && n.getItemDensity() > 0){
+                    Double mkfm = Arith.div(1,Arith.mul(n.getItemDensity(),n.getItemThick()));
+                    Double mkto = Arith.div(n.getItemWidth(),mkfm,4);
+                    n.setItemMickWeight(Arith.round((mkto * 1000),4));
+                }else{
+                    n.setItemMickWeight(0d);
+                }
+                n.setTheoryWeight(to);
+            });
+            list.sort(Comparator.comparing(ProdPlanDetailVo::getItemWidth).thenComparing(ProdPlanDetailVo::getItemMickWeight));
         }
     }
 }

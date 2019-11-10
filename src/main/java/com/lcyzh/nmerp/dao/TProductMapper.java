@@ -30,6 +30,8 @@ public interface TProductMapper {
 
     int delete(TProduct tProduct);
 
+    int deleteForUpdate(TProduct tProduct);
+
     TProduct findByUqKey(TProduct tProduct);
 
     List<TProduct> findListByCodes(List<String> codes);
