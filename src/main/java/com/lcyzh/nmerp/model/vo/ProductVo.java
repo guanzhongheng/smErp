@@ -48,7 +48,6 @@ public class ProductVo extends DataEntity<TProduct> {
 
     private int isShow;
 
-
     public int getIsShow() {
         return isShow;
     }

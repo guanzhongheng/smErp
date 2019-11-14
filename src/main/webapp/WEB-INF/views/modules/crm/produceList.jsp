@@ -135,7 +135,7 @@
                             <td style="min-width: 80px;max-width: 200px;"><span style="color: #f3190f">${vo.itemRemarks}</span></td>
                             <td>
                                 <c:if test="${vo.itemNum ne 0}">
-                                    <a href="${ctx}/produce/produce/info?id=${vo.prodPlanDetailId}"><i class="icon-wrench">&nbsp;生产</i></a>
+                                    <a onclick="goToProduce(${vo.prodPlanDetailId})"><i class="icon-wrench">&nbsp;生产</i></a>
                                 </c:if>
                             </td>
                         </tr>
@@ -153,6 +153,22 @@
     </div>
 </div>
 <script>
+
+    function goToProduce(id) {
+        debugger;
+        var orderTitle = $("#orderTitle").val();
+        var itemVariety = $("#itemVariety").val();
+        var itemCgyCode = $("#itemCgyCode").val();
+        var itemColor = $("#itemColor").val();
+        var macCode = $("#macCode").val();
+        var startLength = $("#startLength").val();
+        var endLength = $("#endLength").val();
+        var ordSort = $("#ordSort").val();
+        window.location.href = "/produce/produce/info?prodPlanDetailId=" + id + "&orderTitle=" + orderTitle
+            + "&itemVariety=" + itemVariety+ "&itemCgyCode=" + itemCgyCode+ "&itemColor=" + itemColor+ "&macCode=" + macCode
+            + "&startLength=" + startLength+ "&endLength=" + endLength+ "&ordSort=" + ordSort;
+    }
+
     function produceFormReset() {
         $("#itemVariety").val("").select2();
         $("#itemCgyCode").val("").select2();
@@ -190,7 +206,17 @@
             top.$.jBox.tip('最少选中一条记录');
             return;
         }
-        window.location.href = "/produce/produce/infoList?ids=" + str;
+        var orderTitle = $("#orderTitle").val();
+        var itemVariety = $("#itemVariety").val();
+        var itemCgyCode = $("#itemCgyCode").val();
+        var itemColor = $("#itemColor").val();
+        var macCode = $("#macCode").val();
+        var startLength = $("#startLength").val();
+        var endLength = $("#endLength").val();
+        var ordSort = $("#ordSort").val();
+        window.location.href = "/produce/produce/infoList?prodPlanDetailIds=" + str + "&orderTitle=" + orderTitle
+            + "&itemVariety=" + itemVariety+ "&itemCgyCode=" + itemCgyCode+ "&itemColor=" + itemColor+ "&macCode=" + macCode
+            + "&startLength=" + startLength+ "&endLength=" + endLength+ "&ordSort=" + ordSort;
     }
     
 </script>

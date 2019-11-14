@@ -15,6 +15,7 @@ import java.util.Date;
  */
 public class ProdPlanDetailVo{
     private Long prodPlanDetailId;
+    private String prodPlanDetailIds;
     private String prodPlanCode;
     private String ordCode;
     private String orderTitle;
@@ -87,6 +88,14 @@ public class ProdPlanDetailVo{
     private Double itemYcLenth;
 
     private Double trueWeight;
+
+    public String getProdPlanDetailIds() {
+        return prodPlanDetailIds;
+    }
+
+    public void setProdPlanDetailIds(String prodPlanDetailIds) {
+        this.prodPlanDetailIds = prodPlanDetailIds;
+    }
 
     public Double getTrueWeight() {
         return trueWeight;

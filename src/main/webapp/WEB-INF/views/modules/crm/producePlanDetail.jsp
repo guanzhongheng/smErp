@@ -254,7 +254,7 @@
 	                                       class="table table-striped table-bordered table-hover text-nowrap">
 	                                    <thead>
 	                                    <tr>
-	                                        <th style="text-align: center"><input type="checkbox" id="checkAll"
+	                                        <th style="text-align: center;width: 10px;"><input type="checkbox" id="checkAll"
 	                                                                              onchange="checkedAll(this)"/></th>
 	                                        <th style="text-align: center">订单标题</th>
 	                                        <th style="text-align: center">关联客户</th>
@@ -859,7 +859,7 @@
 
     // 修改配方信息到订单产品中 根据选中产品进行配方设置
     function saveFormu(){
-
+        debugger;
         var outTem = $("#outTemp").text();
         var midTem = $("#midTemp").text();
         var inTem = $("#inTemp").text();

@@ -148,6 +148,10 @@ public class OrderManageController extends BaseController {
     @RequestMapping(value = "order_delete")
     public String delete(String ordCode, RedirectAttributes redirectAttributes) {
         int res = orderService.detele(ordCode);
+        if(res == -2){
+            addMessage(redirectAttributes, "已经下发,已经存在生产入库不能删除！");
+            return "redirect:/crm/order/list";
+        }
         if(res < 1){
             addMessage(redirectAttributes, "删除失败");
             return "redirect:/crm/order/list";

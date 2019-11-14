@@ -204,7 +204,8 @@ public class TOutStockServiceImpl implements TOutStockService {
             TOrder order = new TOrder();
             order.setOrdCode(entry.getKey());
             order.setOrdOutNum(entry.getValue());
-            if(stMap.get(entry.getKey()) != null && stMap.get(entry.getKey()) == 0L){
+            // 出库的数量等于订单剩余未出库数量 则更新订单状态
+            if(stMap.get(entry.getKey()) != null && (stMap.get(entry.getKey())-entry.getValue()) == 0L){
                 order.setOrdStatus(100005L); //标记订单完成
             }
             orders.add(order);

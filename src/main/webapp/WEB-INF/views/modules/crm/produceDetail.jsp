@@ -159,7 +159,7 @@
                                             <label class="col-sm-2 control-label" style="margin-left: -25px;"><i style="color: red"></i>订单标题:</label>
                                             <div class="col-sm-4">
                                                 <input id="prodPlanDetailId" value="${detail.prodPlanDetailId}" type="hidden">
-                                                <input disabled="ture" placeholder="订单标题" value="${detail.orderTitle}"
+                                                <input disabled="ture" placeholder="订单标题" id="orderTitle" value="${detail.orderTitle}"
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
 
                                             </div>
@@ -415,6 +415,13 @@
             </div>
         </div>
     </div>
+    <input type="hidden" id="norderTitle" value="${planDetail.orderTitle}"/>
+    <input type="hidden" id="itemVariety" value="${planDetail.itemVariety}"/>
+    <input type="hidden" id="itemCgyCode"  value="${planDetail.itemCgyCode}"/>
+    <input type="hidden" id="itemColor" value="${planDetail.itemColor}"/>
+    <input type="hidden" id="nmacCode" value="${planDetail.macCode}"/>
+    <input type="hidden" id="startLength" value="${planDetail.startLength}"/>
+    <input type="hidden" id="endLength" value="${planDetail.endLength}"/>
 </div>
 
 <script>
@@ -422,7 +429,16 @@
     var FormuInfo = '${detail.formula}';
 
     function goBackPageList() {
-        window.location.href = "/crm/produce/list";
+        var orderTitle = $("#norderTitle").val();
+        var itemVariety = $("#itemVariety").val();
+        var itemCgyCode = $("#itemCgyCode").val();
+        var itemColor = $("#itemColor").val();
+        var macCode = $("#nmacCode").val();
+        var startLength = $("#startLength").val();
+        var endLength = $("#endLength").val();
+        window.location.href = "/crm/produce/list?orderTitle=" + orderTitle
+            + "&itemVariety=" + itemVariety+ "&itemCgyCode=" + itemCgyCode+ "&itemColor=" + itemColor+ "&macCode=" + macCode
+            + "&startLength=" + startLength+ "&endLength=" + endLength;
     }
     
     // 页面流转

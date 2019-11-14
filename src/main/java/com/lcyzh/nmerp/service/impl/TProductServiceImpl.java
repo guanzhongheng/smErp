@@ -96,6 +96,7 @@ public class TProductServiceImpl implements TProductService {
         if (product.getProdCode() == null) {
             return -3;
         }
+
         Date current = new Date();
         int res;
         if (product.getId() != null) {
@@ -166,4 +167,8 @@ public class TProductServiceImpl implements TProductService {
         return count > 0;
     }
 
+    @Override
+    public int getBackForUpdate(TProduct tProduct) {
+        return tProductMapper.update(tProduct);
+    }
 }

@@ -12,7 +12,7 @@
 </style>
 
 <div class="gray-bg" >
-    <div style="width:100%;padding:2px 0px 2px 10px;">
+    <div style="width:100%;padding:2px 0px 2px 18px;">
 
         <table>
             <tr style="height:30px;">
@@ -26,17 +26,32 @@
             </tr>
         </table>
         <table>
-            <tr>
+            <tr >
                 <td>
                     <%--<img id="imgcode"/>--%>
 
                     <div id="imgcode"></div>
                 </td>
-                <c:if test="${vo.itemPriceType eq 141001 || vo.itemPriceType eq 141003 || vo.itemPriceType eq 141005}">
-                    <td style="width:70px;"><b>
-                        <span style="font-size: 35px;">${vo.trueWeight}<span style="font-size: 15px;">Kg</span></span>
-                    </b></td>
-                </c:if>
+                <td style="width: 30px;">
+                </td>
+                <td>
+                </td>
+                <td style="width:70%">
+                    <table>
+                        <tr>
+                            <td style="height: 40px;">
+                                <c:if test="${vo.itemPriceType eq 141001 || vo.itemPriceType eq 141003 || vo.itemPriceType eq 141005}">
+                                    <span style="font-size: 35px;">${vo.trueWeight}<span style="font-size: 15px;">Kg</span></span>
+                                </c:if>
+                                &nbsp;
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>条码值:${vo.barCode}</td>
+                        </tr>
+                    </table>
+
+                </td>
             </tr>
         </table>
 

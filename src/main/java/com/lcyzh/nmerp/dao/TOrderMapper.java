@@ -35,4 +35,10 @@ public interface TOrderMapper {
     int updateOrderStatus(TOrder tOrder);
 
     int updateOrderNum(TOrder tOrder);
+
+    int checkOrderItemPaln(String ordCode);
+
+    int checkOrderItemInfo(String ordCode);
+
+
 }

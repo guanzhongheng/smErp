@@ -361,4 +361,12 @@
         update T_ORDER set ord_total_num = ord_total_num - #{ordTotalNum} where ord_code = #{ordCode}
     </update>
 
+    <select id="checkOrderItemPaln" resultType="java.lang.Integer" >
+        select count(1) from t_prod_plan_detail where ord_code = #{ordCode} and item_status = '1'
+    </select>
+
+    <select id="checkOrderItemInfo" resultType="java.lang.Integer" >
+        select count(1) from t_stock where ord_code = #{ordCode}
+    </select>
+
 </mapper>

@@ -418,12 +418,19 @@ public class TOrderServiceImpl implements TOrderService {
         return tOrderItemMapper.updateProdStatusByOrdCode(map);
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
     @Override
     public int detele(String ordCode) {
         int res = -1;
-        res = tOrderMapper.delete(ordCode);
-        if (res > 0) {
-            tOrderItemMapper.deleteByOrdCode(ordCode);
+        // 判定是否可以删除 可删除逻辑1、订单下发产品，或者已经存在入库产品的则不给予删除
+        if(tOrderMapper.checkOrderItemPaln(ordCode) > 0 || tOrderMapper.checkOrderItemInfo(ordCode) > 0){
+            //不给予删除
+            res = -2;
+        }else{
+            res = tOrderMapper.delete(ordCode);
+            if (res > 0) {
+                tOrderItemMapper.deleteByOrdCode(ordCode);
+            }
         }
         return res;
     }

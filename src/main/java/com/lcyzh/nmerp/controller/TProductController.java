@@ -71,6 +71,8 @@ public class TProductController extends BaseController {
     }
 
 
+
+
     @RequestMapping("insert")
     public String insert(TProduct tProduct, Model model, RedirectAttributes redirectAttributes) {
         if (!beanValidator(model, tProduct)) {
@@ -121,6 +123,20 @@ public class TProductController extends BaseController {
             return "redirect:/tProduct/list";
         }
     }
+
+    /**
+     * 启用产品
+     *
+     * @param
+     * @return
+     */
+    @RequestMapping(value = {"getBackProd"})
+    public String getBackProd(TProduct tProduct, RedirectAttributes redirectAttributes) {
+        tProduct.setDelFlag("0");
+        tProductService.update(tProduct);
+        return "redirect:/tProduct/list";
+    }
+
 
     /**
      * 历史列表页面流转

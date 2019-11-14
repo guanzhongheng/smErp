@@ -41,5 +41,6 @@ public interface TProductService {
 
     boolean prodCodeIsExistence(String code);
 
+    int getBackForUpdate(TProduct tProduct);
 
 }

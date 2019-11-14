@@ -15,6 +15,7 @@
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="prod_color" property="prodColor" jdbcType="VARCHAR"/>
         <result column="prod_density" property="prodDensity" jdbcType="DOUBLE"/>
+        <result column="del_flag" property="delFlag" jdbcType="VARCHAR"/>
     </resultMap>
 
 
@@ -34,7 +35,9 @@
         SELECT *
         FROM T_PRODUCT
         <where>
-            del_flag = '0'
+            <if test="delFlag != null and delFlag != ''">
+                and del_flag = #{delFlag}
+            </if>
             <if test="prodCode != null and prodCode != ''">
                 and prod_code like concat(concat('%', #{prodCode}),'%')
             </if>
@@ -65,7 +68,7 @@
 
     <select id="findAllList" resultMap="tProductResultMap">
         SELECT *
-        FROM T_PRODUCT
+        FROM T_PRODUCT where del_flag = '0'
     </select>
 
     <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TProduct" useGeneratedKeys="true" keyProperty="id">
@@ -161,6 +164,9 @@
             </if>
             <if test="prodDensity!=null">
                 prod_density = #{prodDensity,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlag!=null">
+                del_flag = '0',
             </if>
         </set>
         WHERE id = #{id,jdbcType=BIGINT}

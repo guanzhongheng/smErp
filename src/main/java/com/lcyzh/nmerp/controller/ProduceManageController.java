@@ -161,16 +161,17 @@ public class ProduceManageController extends BaseController {
      * @Date: 2019/7/16 9:15 AM
      */
     @RequestMapping(value = {"produce/info"})
-    public String prodDetail(Long id, Model model,ProdPlanDetailVo detail, HttpServletRequest request, HttpServletResponse response){
+    public String prodDetail(Model model,ProdPlanDetailVo detail, HttpServletRequest request, HttpServletResponse response){
         List<String> nList = new ArrayList<>();
-        nList.add(id.toString());
+        nList.add(detail.getProdPlanDetailId().toString());
         // 获取任务列表
         List<ProdPlanDetailVo> prodPlanDetails = prodPlanDetailService.getTaskDetailInfos(nList);
         // 获取生产任务产品信息
-        doSetObjectInfo(id,model);
+        doSetObjectInfo(detail.getProdPlanDetailId(),model);
         doTheoryCalculationForPdNew(prodPlanDetails);
         model.addAttribute("planList",prodPlanDetails);
-        model.addAttribute("allPlanIds",id);
+        model.addAttribute("planDetail",detail);
+        model.addAttribute("allPlanIds",detail.getProdPlanDetailId());
         return "modules/crm/produceDetail";
     }
 
@@ -211,16 +212,17 @@ public class ProduceManageController extends BaseController {
      * @Date: 2019/7/16 9:15 AM
      */
     @RequestMapping(value = {"produce/infoList"})
-    public String prodDetails(String ids, Model model,HttpServletRequest request, HttpServletResponse response){
+    public String prodDetails(Model model,ProdPlanDetailVo detail,HttpServletRequest request, HttpServletResponse response){
         // 判定获取信息
-        if(StringUtils.isNotEmpty(ids) && ids.length() > 1){
-            String[] nIds = ids.split(",");
+        if(StringUtils.isNotEmpty(detail.getProdPlanDetailIds()) && detail.getProdPlanDetailIds().length() > 1){
+            String[] nIds = detail.getProdPlanDetailIds().split(",");
             List<ProdPlanDetailVo> prodPlanDetails = prodPlanDetailService.getTaskDetailInfos(Arrays.asList(nIds));
             Long oldId = Long.parseLong(nIds[0]);
             doSetObjectInfo(oldId,model);
             doTheoryCalculationForPdNew(prodPlanDetails);
             model.addAttribute("planList",prodPlanDetails);
-            model.addAttribute("allPlanIds",ids);
+            model.addAttribute("allPlanIds",detail.getProdPlanDetailIds());
+            model.addAttribute("planDetail",detail);
             return "modules/crm/produceDetail";
         }else{
             return "redirect:crm/produce/list";

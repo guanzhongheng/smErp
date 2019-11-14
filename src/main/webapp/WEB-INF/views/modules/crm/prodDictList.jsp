@@ -49,6 +49,14 @@
                             <form:options items="${fns:getCusDictList(149000)}" itemLabel="label" itemValue="value" htmlEscape="false"/>
                         </form:select>
                     </li>
+                    <li>
+                        &nbsp;&nbsp;
+                        <form:select path="delFlag" class="input-medium">
+                            <form:option value="0" label="有效"/>
+                            <form:option value="-1" label="无效"/>
+                            <form:option value="" label="全部"/>
+                        </form:select>
+                    </li>
                     &nbsp;&nbsp;
                     <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" style="width: 80px" value="查询"/></li>
                     &nbsp;&nbsp;
@@ -72,6 +80,7 @@
                         <th style="text-align: center">计价方式</th>
                         <th style="text-align: center">指导价格</th>
                         <th style="text-align: center">密度</th>
+                        <th style="text-align: center">状态</th>
                         <th style="text-align: center">操作</th>
                     </tr>
                     </thead>
@@ -89,10 +98,15 @@
                             <td>${fns:getValueByDictKey(cus.prodPriceType)}</td>
                             <td>${cus.prodGuidePrice}</td>
                             <td>${cus.prodDensity}</td>
+                            <td>${cus.delFlag == "0"?"有效":"无效"}
+                            </td>
                             <td>
                                 <a href="${ctx}/tProduct/get?id=${cus.id}"><i class="icon-pencil">&nbsp;编辑</i></a>
                                 <a href="${ctx}/tProduct/delete?id=${cus.id}"
                                    onclick="return confirmx('确认要删除该产品吗？', this.href)"><i class="icon-trash">&nbsp;删除</i></a>
+                                <c:if test="${cus.delFlag eq '-1'}">
+                                    <a href="${ctx}/tProduct/getBackProd?id=${cus.id}"><i class="icon-pencil">&nbsp;启用</i></a>
+                                </c:if>
                             </td>
                         </tr>
                     </c:forEach>

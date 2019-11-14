@@ -33,6 +33,16 @@ public class TProduct implements Serializable {
     // 密度
     private Double prodDensity;
 
+    private String delFlag;
+
+    public String getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(String delFlag) {
+        this.delFlag = delFlag;
+    }
+
     public Double getProdDensity() {
         return prodDensity;
     }
