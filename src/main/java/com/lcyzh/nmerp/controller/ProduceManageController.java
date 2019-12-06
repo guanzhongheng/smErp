@@ -375,6 +375,17 @@ public class ProduceManageController extends BaseController {
         return pageStr;
     }
 
+    // 产品信息追踪
+    @RequestMapping(value = {"produce/history/find"})
+    public String findProdForHistory(String barCode,Model model){
+        if(StringUtils.isNotEmpty(barCode)){
+            ProduceHistoryVo vo = prodPlanDetailService.findProdForHistory(barCode);
+            model.addAttribute("prod",vo);
+        }
+        return  "";
+    }
+
+
     // 计算理论重量值
     public void doTheoryCalculation(List<TProdPlanDetail> list,Model model){
         if(!CollectionUtils.isEmpty(list)){
@@ -382,7 +393,7 @@ public class ProduceManageController extends BaseController {
             list.forEach(n->{
                 Double mj = Arith.mul(n.getItemLenth(),n.getItemWidth());
                 Double mjt = Arith.mul(mj,n.getItemNum());
-                Double fm = Arith.div(1,Arith.mul(0.95,n.getItemThick()));
+                Double fm = Arith.div(1,Arith.mul(n.getItemDensity(),n.getItemThick()));
                 Double to = Arith.div(mjt,fm,4);
                 n.setTheoryWeight(to);
             });
@@ -398,7 +409,7 @@ public class ProduceManageController extends BaseController {
             list.forEach(n->{
                 Double mj = Arith.mul(n.getItemLenth(),n.getItemWidth());
                 Double mjt = Arith.mul(mj,n.getItemNum());
-                Double fm = Arith.div(1,Arith.mul(0.95,n.getItemThick()));
+                Double fm = Arith.div(1,Arith.mul(n.getItemDensity(),n.getItemThick()));
                 Double to = Arith.div(mjt,fm,4);
                 if(n.getItemDensity() != null && n.getItemDensity() > 0){
                     Double mkfm = Arith.div(1,Arith.mul(n.getItemDensity(),n.getItemThick()));

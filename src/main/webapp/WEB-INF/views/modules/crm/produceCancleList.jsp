@@ -119,8 +119,7 @@
                     <tbody>
                     <c:forEach items="${page.list}" var="vo">
                         <tr>
-
-                            <td>
+                            <td style="text-align: center">
                                 <input type="checkbox" name="ProdDetailId" value="${vo.prodPlanDetailId}">
                             </td>
                             <td>${vo.orderTitle}</td>

@@ -42,6 +42,8 @@ public class TOutStockServiceImpl implements TOutStockService {
     private TOutStockDetailMapper tOutStockDetailMapper;
     @Autowired
     private TOrderMapper tOrderMapper;
+    @Autowired
+    private TProductMapper productMapper;
 
     @Override
     public List<TOutStock> findListNew() {
@@ -283,6 +285,9 @@ public class TOutStockServiceImpl implements TOutStockService {
                     outItemVo.setItemWidth(sto.getItemWidth());
                     outItemVo.setItemThick(sto.getItemThick());
                     TProduct prodduct = DictUtils.getProdCodeByProdCgyAndVari(sto.getItemCgyCode().toString() + sto.getItemVariety() + sto.getItemColor() + sto.getItemThick() + sto.getItemPriceType());
+                    if(prodduct == null){
+                        prodduct = reloadProdAndGetProd(sto);
+                    }
                     outItemVo.setItemName(prodduct.getProdName());
                     outItemVo.setProdColorValue(SysDictUtils.getDictLabel(sto.getItemColor(), "prod_color", ""));
                     outItemVo.setProdCgyCodeValue(DictUtils.getValueByDictKey(sto.getItemCgyCode()));
@@ -322,4 +327,17 @@ public class TOutStockServiceImpl implements TOutStockService {
         return tOutStockMapper.findOutCarList();
     }
 
+    public TProduct reloadProdAndGetProd(TStock sto){
+        DictUtils.getProdMaps().clear();
+        List<TProduct> prods = productMapper.findAllList();
+        if (prods != null && !prods.isEmpty()) {
+            Map<String, TProduct> prodMaps = DictUtils.getProdMaps();
+            prods.forEach(prod -> {
+                String key = String.valueOf(prod.getProdCgyCode()) + prod.getProdVariety() + prod.getProdColor() + prod.getProdThick() + prod.getProdPriceType();
+                prodMaps.put(key, prod);
+            });
+        }
+        TProduct prodduct = DictUtils.getProdCodeByProdCgyAndVari(sto.getItemCgyCode().toString() + sto.getItemVariety() + sto.getItemColor() + sto.getItemThick() + sto.getItemPriceType());
+        return prodduct;
+    }
 }

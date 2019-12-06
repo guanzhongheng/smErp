@@ -34,6 +34,24 @@ public class TStock implements Serializable {
     private Double itemTareWeight;
     private String seCode;
     private Long itemPriceType;
+    private String createBy;
+    private String updateBy;
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
 
     public Long getItemPriceType() {
         return itemPriceType;

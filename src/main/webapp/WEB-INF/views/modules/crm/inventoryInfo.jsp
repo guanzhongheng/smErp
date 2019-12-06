@@ -25,7 +25,7 @@
         </li>
         <li>
             &nbsp;&nbsp;
-            <form:input path="itemName" htmlEscape="false" maxlength="200" class="input-medium" placeholder="条形码号"/>
+            <form:input path="itemName" htmlEscape="false" maxlength="200" class="input-medium" placeholder="二维码号"/>
         </li>
         &nbsp;&nbsp;
         <li class="btns"><input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/></li>
@@ -40,7 +40,7 @@
             <th>产品编码</th>
             <th>产品规格</th>
             <th>出库数量</th>
-            <th>条形码号</th>
+            <th>二维码号</th>
         </tr>
         </thead>
         <tbody>

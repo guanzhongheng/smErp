@@ -365,7 +365,7 @@ public class CrmManageController extends BaseController {
             list.forEach(n->{
                 Double mj = Arith.mul(n.getItemLenth(),n.getItemWidth());
                 Double mjt = Arith.mul(mj,n.getItemNum());
-                Double fm = Arith.div(1,Arith.mul(0.95,n.getItemThick()));
+                Double fm = Arith.div(1,Arith.mul(n.getItemDensity(),n.getItemThick()));
                 Double to = Arith.div(mjt,fm,4);
                 if(n.getItemDensity() != null && n.getItemDensity() > 0){
                     Double mkfm = Arith.div(1,Arith.mul(n.getItemDensity(),n.getItemThick()));

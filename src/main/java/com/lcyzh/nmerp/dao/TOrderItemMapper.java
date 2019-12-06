@@ -46,6 +46,4 @@ public interface TOrderItemMapper {
     int deleteById(Long id);
 
     void updateNum(TOrderItem orderItem);
-
-
 }

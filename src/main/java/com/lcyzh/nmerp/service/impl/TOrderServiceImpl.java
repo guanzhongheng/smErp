@@ -5,14 +5,13 @@ import com.github.pagehelper.PageInfo;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
 import com.lcyzh.nmerp.controller.system.util.SysDictUtils;
-import com.lcyzh.nmerp.dao.TCustomerMapper;
-import com.lcyzh.nmerp.dao.TOrderItemMapper;
-import com.lcyzh.nmerp.dao.TOrderMapper;
-import com.lcyzh.nmerp.dao.TProductMapper;
+import com.lcyzh.nmerp.controller.system.util.UserUtils;
+import com.lcyzh.nmerp.dao.*;
 import com.lcyzh.nmerp.entity.Customer;
 import com.lcyzh.nmerp.entity.TOrder;
 import com.lcyzh.nmerp.entity.TOrderItem;
 import com.lcyzh.nmerp.entity.TProduct;
+import com.lcyzh.nmerp.entity.sys.User;
 import com.lcyzh.nmerp.model.vo.OrderAddBatchVo;
 import com.lcyzh.nmerp.model.vo.OrderAddModifyVo;
 import com.lcyzh.nmerp.model.vo.OrderItemVo;
@@ -47,6 +46,8 @@ public class TOrderServiceImpl implements TOrderService {
     private TProdPlanService prodPlanService;
     @Autowired
     private TProductMapper tProductMapper;
+    @Autowired
+    private TProdPlanDetailMapper tProdPlanDetailMapper;
 
     @Override
     public List<OrderItemVo> findItemsByOrdCode(String ordCode) {
@@ -150,7 +151,9 @@ public class TOrderServiceImpl implements TOrderService {
         //生成订单信息，及订单明细;如果合同号不存在，则生成新的合同，存在则关联合同号
         Date date = new Date();
         TOrder tOrder = new TOrder();
-
+        User sysUser = UserUtils.getUser();
+        tOrder.setCreateBy(sysUser.getId());
+        tOrder.setUpdateBy(sysUser.getId());
         Customer cus = tCustomerMapper.findByCusName(vo.getCusName());
         String cusCode;
         if (cus != null) {
@@ -277,10 +280,12 @@ public class TOrderServiceImpl implements TOrderService {
     public int save(OrderAddModifyVo ordAddModifyVo) {
         int res = -1;
         if (ordAddModifyVo != null) {
+            User sysUser = UserUtils.getUser();
             String ordCode = StringUtils.genFixPreFixStr(Constants.ORD_PRE_FIX);
             Date current = new Date();
             TOrder order = buildOrderPoFromVo(ordAddModifyVo, current);
             if (StringUtils.isNotEmpty(ordAddModifyVo.getOrdCode())) {
+                order.setUpdateBy(sysUser.getId());
                 res = tOrderMapper.update(order);
             } else {
                 order.setOrdCode(ordCode);
@@ -290,6 +295,8 @@ public class TOrderServiceImpl implements TOrderService {
                 order.setOrdTotalSq(0d);
                 order.setOrdTotalNum(0L);
                 order.setOrdOutNum(0L);
+                order.setCreateBy(sysUser.getId());
+                order.setUpdateBy(sysUser.getId());
                 res = tOrderMapper.insert(order);
             }
             if (res > 0) {
@@ -314,6 +321,7 @@ public class TOrderServiceImpl implements TOrderService {
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
     @Override
     public int save(List<OrderItemVo> list) {
+        User sysUser = UserUtils.getUser();
         String ordCode = list.get(0).getOrdCode();
         Date date = new Date();
         TOrder order = new TOrder();
@@ -348,6 +356,7 @@ public class TOrderServiceImpl implements TOrderService {
         order.setOrdTotalWeight(totalWeight);
         order.setOrdTotalAmount(amount);
         order.setUpdateTime(date);
+        order.setUpdateBy(sysUser.getId());
         tOrderItemMapper.deleteByOrdCode(ordCode);
         tOrderItemMapper.insertBatch(orderItems);
         return tOrderMapper.update(order);
@@ -355,6 +364,7 @@ public class TOrderServiceImpl implements TOrderService {
 
     @Override
     public int updatePrice(List<OrderItemVo> list) {
+        User sysUser = UserUtils.getUser();
         String ordCode = list.get(0).getOrdCode();
         Date date = new Date();
         TOrder order = new TOrder();
@@ -380,6 +390,7 @@ public class TOrderServiceImpl implements TOrderService {
         }
         order.setOrdTotalAmount(amount);
         order.setUpdateTime(date);
+        order.setUpdateBy(sysUser.getId());
         tOrderItemMapper.updateBatch(orderItems);
         return tOrderMapper.update(order);
     }
@@ -387,8 +398,10 @@ public class TOrderServiceImpl implements TOrderService {
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
     @Override
     public int orderAssign(String ordCode, int state) {
+        User sysUser = UserUtils.getUser();
         TOrder order = new TOrder();
         order.setOrdCode(ordCode);
+        order.setApprovalBy(sysUser.getId());
         if (state == 0) {
             order.setOrdStatus(Constants.ORD_STATUS_ASSIGNED);
         } else if (state == 1) {
@@ -430,6 +443,10 @@ public class TOrderServiceImpl implements TOrderService {
             res = tOrderMapper.delete(ordCode);
             if (res > 0) {
                 tOrderItemMapper.deleteByOrdCode(ordCode);
+            }
+            // 同步减少待生产信息
+            if(tProdPlanDetailMapper.updateNumForDelete(ordCode) > 0) {
+                tProdPlanDetailMapper.deleteForOrdCode(ordCode);
             }
         }
         return res;

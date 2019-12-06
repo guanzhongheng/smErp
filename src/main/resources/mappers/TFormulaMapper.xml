@@ -41,12 +41,12 @@
             and prod_variety = #{prodVariety,jdbcType=BIGINT}
             </if>
         </where>
-        order by prod_variety,f_code
+        order by f_name
     </select>
 
     <select id="findAllList" resultMap="tFormulaResultMap">
         SELECT *
-        FROM t_formula
+        FROM t_formula order by prod_variety
     </select>
 
     <insert id="insert" parameterType ="com.lcyzh.nmerp.entity.TFormula">
@@ -139,8 +139,9 @@
     </delete>
 
 
-    <update id="updateByDetails"  parameterType ="com.lcyzh.nmerp.entity.TFormula">
-        update t_order_item t inner join t_prod_plan_detail d on t.id = d.order_item_id set t.formula = #{formula}
+    <update id="updateByDetails" >
+        update t_order_item t inner join t_prod_plan_detail d on t.id = d.order_item_id
+        set t.formula = #{formula}, t.formula_by = #{formulaBy}
         where d.id in
         <foreach item = "id" index = "index" collection = "planDetails" open = "(" separator = "," close = ")">
             #{id}

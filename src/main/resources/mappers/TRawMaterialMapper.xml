@@ -31,11 +31,12 @@
                 and rawm_name like concat(concat('%', #{rawmName}),'%')
             </if>
         </where>
+        order by rawm_code
     </select>
 
     <select id="findAllList" resultMap="tRawMaterialResultMap">
         SELECT *
-        FROM T_RAW_MATERIAL
+        FROM T_RAW_MATERIAL order by rawm_code
     </select>
 
     <insert id="insert" parameterType="com.lcyzh.nmerp.entity.TRawMaterial" useGeneratedKeys="true" keyProperty="id">

@@ -36,11 +36,22 @@ public class TProdPlanDetail implements Serializable {
     // 理论重量
     private Double theoryWeight;
 
+    // 密度
+    private Double itemDensity;
+
     // 标准件浮动上下值
     private Double thresholdUp;
     private Double thresholdDown;
     // 关联客户信息
     private String cusName;
+
+    public Double getItemDensity() {
+        return itemDensity;
+    }
+
+    public void setItemDensity(Double itemDensity) {
+        this.itemDensity = itemDensity;
+    }
 
     public String getCusName() {
         return cusName;

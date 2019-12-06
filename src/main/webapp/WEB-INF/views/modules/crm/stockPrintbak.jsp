@@ -72,7 +72,7 @@
         var barCode = '${vo.barCode}';
         var jump = '${jump}';
         JsBarcode("#imgcode", barCode,{
-            format: "CODE128",//选择要使用的条形码类型
+            format: "CODE128",//选择要使用的二维码类型
             height:26,//高度
             width:1.5,
             displayValue:true,//是否在条形码下方显示文字

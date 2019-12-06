@@ -4,6 +4,7 @@ import com.lcyzh.nmerp.entity.TProdPlanDetail;
 import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
 import com.lcyzh.nmerp.model.vo.ProdPlanExportVo;
 import com.lcyzh.nmerp.model.vo.ProdPlanListVo;
+import com.lcyzh.nmerp.model.vo.ProduceHistoryVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -42,4 +43,10 @@ public interface TProdPlanDetailMapper {
     List<TProdPlanDetail> findListByProdPlanCodes(ProdPlanListVo vo);
 
     List<ProdPlanDetailVo> getTaskDetailInfos(@Param("ids") List<String> ids);
+
+    int updateNumForDelete(String ordCode);
+
+    int deleteForOrdCode(String ordCode);
+
+    ProduceHistoryVo getProdInfobybarCode(@Param("barCode") String barCode);
 }

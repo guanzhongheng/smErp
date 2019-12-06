@@ -28,6 +28,7 @@
         <result column="item_remarks" property="itemRemarks" jdbcType="VARCHAR"/>
         <result column="threshold_up" property="thresholdUp" jdbcType="DOUBLE"/>
         <result column="threshold_down" property="thresholdDown" jdbcType="DOUBLE"/>
+        <result column="itemDensity" property="itemDensity" jdbcType="DOUBLE"/>
         <result column="cus_name" property="cusName" jdbcType="VARCHAR"/>
     </resultMap>
 
@@ -96,12 +97,14 @@
             oi.item_yc_type,
             od.ord_title,
             td.threshold_up,
-            td.threshold_down
+            td.threshold_down,
+            ifnull(tp.prod_density,0) itemDensity
         FROM
             t_prod_plan_detail td
             inner join T_ORDER od on od.ord_code = td.ord_code
             inner join t_order_item oi on td.order_item_id = oi.id
             left join t_customer tc on tc.cus_code = od.cus_code
+            inner join t_product tp on oi.item_code = tp.prod_code
         WHERE
             td.prod_plan_code in
             <foreach item = "code" index = "index" collection = "planCodes" open = "(" separator = "," close = ")">
@@ -152,11 +155,14 @@
             oi.item_yc_type,
             od.ord_title,
             td.threshold_up,
-            td.threshold_down
+            td.threshold_down,
+            ifnull(tp.prod_density,0) itemDensity
         FROM
             t_prod_plan_detail td
             inner join T_ORDER od on od.ord_code = td.ord_code
             inner join t_order_item oi on td.order_item_id = oi.id
+            inner join t_product tp on oi.item_code = tp.prod_code
+
         <where>
             <if test="prodCgyCode!= null">
                 and td.item_cgy_code = #{prodCgyCode,jdbcType=BIGINT}
@@ -499,4 +505,57 @@
         order by ppd.item_thick,oi.item_yb_type,ppd.ord_code desc
     </select>
 
+    <update id="updateNumForDelete" parameterType="java.lang.String" >
+        update t_prod_plan tp inner join
+        (select prod_plan_code,ord_code,sum(item_num) num from t_prod_plan_detail group by prod_plan_code,ord_code) tc
+        on tc.prod_plan_code = tp.prod_plan_code set tp.total_quantity = tp.total_quantity - tc.num,tp.quantity = tp.quantity - tc.num
+        where tc.ord_code = #{ordCode}
+    </update>
+
+    <update id="deleteForOrdCode" parameterType="java.lang.String">
+        delete from t_prod_plan_detail where ord_code = #{ordCode}
+    </update>
+
+
+    <select id="getProdInfobybarCode" parameterType="java.lang.String" resultType="com.lcyzh.nmerp.model.vo.ProduceHistoryVo">
+        SELECT
+            t.ord_title as ordTitle,
+            t.ord_code as ordCode,
+            t.proxy_name as proxyName,
+            t.create_by as ordCreateBy,
+            t.update_by as ordUpdateBy,
+            t.approval_by as ordApprovalBy,
+            ts.bar_code as barCode,
+            ts.se_code as seCode,
+            ts.item_weight as itemWeight,
+            ts.item_tare_weight as itemTareWeight,
+            ts.create_by AS stockCreateBy,
+            ts.update_by AS stockUpdateBy,
+            ts.`status` as 'status',
+            ts.item_cgy_code as itemCgyCode,
+            ts.item_variety as itemVariety,
+            ts.item_color as itemColor,
+            ts.item_lenth as itemLenth,
+            ts.item_width as itemWidth,
+            ts.item_owner as itemOwner,
+            ts.item_thick as itemThick,
+            ts.item_yb_type as itemYbType,
+            ts.item_yc_type itemYcType,
+            ti.item_code as itemCode,
+            ti.item_price as itemPrice,
+            ti.remarks,
+            ti.item_price_type as itemPriceType,
+            ti.formula,
+            tos.car_no as carNo,
+            tos.receiver,
+            tos.phone
+        FROM
+            t_stock ts
+            INNER JOIN t_order_item ti ON ti.id = ts.order_item_id
+            INNER JOIN t_order t ON t.ord_code = ts.ord_code
+            left join t_out_stock_detail tsd on tsd.bar_code = ts.bar_code
+            left join t_out_stock tos on tos.out_code = tsd.out_code
+        WHERE
+            ts.bar_code = #{barCode}
+    </select>
 </mapper>

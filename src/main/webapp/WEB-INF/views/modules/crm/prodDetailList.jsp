@@ -141,39 +141,46 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <div class="col-md-4">
-                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
+                        <div class="col-md-6">
+                            <label class="col-md-1 control-label order-detail-label-margin" style="text-align: right;width: 100px;">
                                 指导价格:
                             </label>
-                            <label class="col-md-3 control-label" style="text-align: left;">
+                            <label class="col-md-2 control-label" style="text-align: left;">
                                 <input class="form-control" id="itemPrice" style="width: 80px;">
                             </label>
-                            <label class="col-md-2 control-label" style="text-align: left;">
+                            <label class="col-md-1 control-label" style="text-align: left;margin-left: -6px;">
                                 <input class="form-control" id="addNum" placeholder="次数" value="1" style="width: 55px;">
                             </label>
-                            <label class="col-md-3 control-label" style="text-align: left;">
-                                <select data-placeholder="延长米方式" class="chosen-select order-label-input-width" style="width: 160px" id="SelectycType" >
-                                    <option value="-1">延长米选择</option>
+                            <label class="col-md-6 control-label" style="text-align: left;">
+                                <div class="col-md-3" >
+                                    <select data-placeholder="延长米方式" class="chosen-select order-label-input-width" style="width: 160px" id="SelectycType" >
+                                        <option value="-1">延长米选择</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3" style="margin-left: 105px;">
+                                    <select data-placeholder="压边类型" class="chosen-select order-label-input-width" style="width: 160px" id="SelectybType" >
+                                        <option value="-1">压边类型选择</option>
+                                    </select>
+                                </div>
 
-                                </select>
                             </label>
                         </div>
 
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <div class="col-md-1">
                                 &nbsp;
                             </div>
                             <div class="col-md-11 " style="text-align: right;">
-                                <button class="btn btn-primary global-button-style" type="button"
+                                <button class="btn btn-primary global-button-style" type="button" style="width: 100px;"
                                         onclick="doProcess()">添加产品
                                 </button>&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button class="btn btn-primary global-button-style" type="button"
+                                <button class="btn btn-primary global-button-style" type="button" style="width: 100px;"
                                         onclick="oneTrimPrice()">一键调价
                                 </button>&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button class="btn btn-primary global-button-style" type="button"
+                                <button class="btn btn-primary global-button-style" type="button" style="width: 100px;"
                                         onclick="history.go(-1)">返 回
                                 </button>&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button class="btn btn-primary global-button-style" type="button"
+                                <button class="btn btn-primary global-button-style" type="button" style="width: 100px;"
                                         onclick="saveProd()">保存订单
                                 </button>
                             </div>
@@ -191,8 +198,8 @@
             </h3>
         </div>
         <div class="panel-body" style="padding: 10px 10px 0px 10px;height: 100%">
-            <div class="control-group table-responsive" >
-                <table id="cusProdDetail" class="table table-striped table-bordered table-hover text-nowrap">
+            <div class="control-group table-responsive" style="min-height: 300px;">
+                <table id="cusProdDetail" class="table table-striped table-bordered table-hover text-nowrap" style="height: 100%">
                 </table>
             </div>
         </div>
@@ -254,6 +261,7 @@
                 ycType = data.ycType;
                 initSelectYcType(ycType);
                 ybType = data.ybType;
+                initSelectYbType(ybType);
             }
         }
     });
@@ -291,18 +299,38 @@
         if(obj != null || obj != undefined){
             var ycTp = $("#SelectycType");
             var headOption = "";
-            $.each(ycType,function(i,obj){
-                headOption = headOption + "<option value='"+obj.value+"'>"+obj.label+"</option>";
+            $.each(obj,function(i,o){
+                headOption = headOption + "<option value='"+o.value+"'>"+o.label+"</option>";
             });
             ycTp.append(headOption);
             ycTp.trigger("chosen:updated");
         }
     }
+    function initSelectYbType(obj) {
+        debugger;
+        if(obj != null || obj != undefined){
+            var ybTp = $("#SelectybType");
+            var headOption = "";
+            $.each(obj,function(i,o){
+                headOption = headOption + "<option value='"+o.value+"'>"+o.label+"</option>";
+            });
+            ybTp.append(headOption);
+            ybTp.trigger("chosen:updated");
+        }
+    }
     
+    function initSelectAndNum() {
+        $("#addNum").val(1);
+        $("#SelectycType").val("-1");
+        $("#SelectybType").val("-1");
+        $("#SelectycType").trigger("chosen:updated");
+        $("#SelectybType").trigger("chosen:updated");
+    }
     
     function getResChange(obj) {
+        debugger;
+        initSelectAndNum();
         if($(obj).find("option:selected").val() != -1){
-
             prodObj.itemName = $(obj).find("option:selected").attr("data-prodName");
             prodObj.itemCode = $(obj).find("option:selected").val();
             prodObj.itemCgyCode = $(obj).find("option:selected").attr("data-prodcgyCode");
@@ -327,9 +355,7 @@
             $("#itemPrice").val($(obj).find("option:selected").attr("data-prodguidePrice"));
             $("#itemUnit").val($(obj).find("option:selected").attr("data-prodUnitValue"));
             $("#itemColor").val($(obj).find("option:selected").attr("data-colorValue"));
-
             $("#itemDensity").val($(obj).find("option:selected").attr("data-density"));
-
 
         }else{
             $("#itemCode").val("");
@@ -352,11 +378,12 @@
 
         var ycm = $("#SelectycType").val();
 
+        var ybfs = $("#SelectybType").val();
 
         if(prodObj.itemCode != ""){
 
             for(var i=0;i<num;i++){
-                cusProdList.push(tranObject(prodObj,ycm));
+                cusProdList.push(tranObject(prodObj,ycm,ybfs));
             }
             // cusProdList.push(tranObject(prodObj));
 
@@ -630,7 +657,7 @@
     }
     
     
-    function tranObject(data,ycm) {
+    function tranObject(data,ycm,ybfs) {
 
         indexCkId = indexCkId + 1;
         var price = $("#itemPrice").val();
@@ -666,7 +693,7 @@
             "itemTotalWeight":0,
             "itemTotalSq":0,
             "itemYcType":ycm,
-            "itemYbType":"",
+            "itemYbType":ybfs,
             "itemRemarks":""
         }
         return obj;

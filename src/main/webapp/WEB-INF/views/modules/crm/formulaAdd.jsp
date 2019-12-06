@@ -122,7 +122,7 @@
         $(".i-checks").iCheck({checkboxClass: "icheckbox_square-green", radioClass: "iradio_square-green",});
         var fCode = '${fCode}';
         if(fCode != '' && fCode != undefined){
-            $("#fName").attr("readonly","readonly");
+           // $("#fName").attr("readonly","readonly");
         }
 
         $("select").change(function(){

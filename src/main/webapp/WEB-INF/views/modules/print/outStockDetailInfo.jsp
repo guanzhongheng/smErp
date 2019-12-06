@@ -34,7 +34,7 @@
             <thead>
             <tr>
                 <th>序号</th>
-                <th>条形码</th>
+                <th>二维码</th>
                 <th>归属人</th>
                 <th>品种</th>
                 <th>颜色</th>

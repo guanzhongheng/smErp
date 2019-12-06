@@ -184,7 +184,6 @@ public class CrmAjaxManageController extends BaseController {
         if(stockId == null || stockId == 0L || weight == null){
             return "error";
         }
-
         TStock tStock = new TStock();
         tStock.setId(stockId);
         tStock.setItemWeight(weight);

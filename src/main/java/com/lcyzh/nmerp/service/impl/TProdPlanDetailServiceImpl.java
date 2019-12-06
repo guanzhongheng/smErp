@@ -4,10 +4,13 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
+import com.lcyzh.nmerp.controller.system.util.UserUtils;
 import com.lcyzh.nmerp.dao.*;
 import com.lcyzh.nmerp.entity.*;
+import com.lcyzh.nmerp.entity.sys.User;
 import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
 import com.lcyzh.nmerp.model.vo.ProdPlanListVo;
+import com.lcyzh.nmerp.model.vo.ProduceHistoryVo;
 import com.lcyzh.nmerp.service.TProdPlanDetailService;
 import com.lcyzh.nmerp.utils.IdGen;
 import com.lcyzh.nmerp.utils.StringUtils;
@@ -123,6 +126,7 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
     @Override
     public ProdPlanDetailVo labelAndInStock(ProdPlanDetailVo vo) {
         Date date = new Date();
+        User sysUser = UserUtils.getUser();
         //生成条形码字符串
         String barCode = getBarCode(IdGen.getNetBarCode(11));
         vo.setBarCode(barCode);
@@ -160,6 +164,8 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
         BeanUtils.copyProperties(vo, tStock);
         tStock.setCreateTime(date);
         tStock.setStatus('0');
+        tStock.setCreateBy(sysUser.getId());
+        tStock.setUpdateBy(sysUser.getId());
         if(vo.getItemSq() == null || vo.getItemSq().length() == 0) {
             tStock.setItemSq(vo.getItemLenth() * vo.getItemWidth());
         }
@@ -238,6 +244,11 @@ public class TProdPlanDetailServiceImpl implements TProdPlanDetailService{
     @Override
     public List<ProdPlanDetailVo> getTaskDetailInfos(List<String> ids) {
         return tProdPlanDetailMapper.getTaskDetailInfos(ids);
+    }
+
+    @Override
+    public ProduceHistoryVo findProdForHistory(String barCode) {
+        return tProdPlanDetailMapper.getProdInfobybarCode(barCode);
     }
 
     //@Override

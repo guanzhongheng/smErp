@@ -4,6 +4,7 @@ import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.entity.TProdPlanDetail;
 import com.lcyzh.nmerp.model.vo.ProdPlanDetailVo;
 import com.lcyzh.nmerp.model.vo.ProdPlanListVo;
+import com.lcyzh.nmerp.model.vo.ProduceHistoryVo;
 
 import java.util.List;
 
@@ -78,4 +79,8 @@ public interface TProdPlanDetailService {
      */
     List<ProdPlanDetailVo> getTaskDetailInfos(List<String> ids);
 
+    /**
+     * 产品信息追踪
+     */
+    ProduceHistoryVo findProdForHistory(String barCode);
 }

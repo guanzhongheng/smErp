@@ -49,6 +49,36 @@ public class TOrder{
     //订单产品出库数量
     private Long ordOutNum;
 
+    //订单创建者
+    private String createBy;
+    //订单修改者
+    private String updateBy;
+    // 审批人员
+    private String approvalBy;
+
+    public String getApprovalBy() {
+        return approvalBy;
+    }
+
+    public void setApprovalBy(String approvalBy) {
+        this.approvalBy = approvalBy;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
 
     public String getOrdCode() {
         return ordCode;

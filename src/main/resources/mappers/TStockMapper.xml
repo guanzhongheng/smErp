@@ -26,6 +26,8 @@
         <result column="mac_code" property="macCode" jdbcType="VARCHAR"/>
         <result column="se_code" property="seCode" jdbcType="VARCHAR"/>
         <result column="item_price_type" property="itemPriceType" jdbcType="BIGINT"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
 
     </resultMap>
 
@@ -159,7 +161,9 @@
             item_color,
             mac_code,
             item_tare_weight,
-            se_code
+            se_code,
+            create_by,
+            update_by
         )
         VALUES (
             #{barCode,jdbcType=VARCHAR},
@@ -183,7 +187,9 @@
             #{itemColor,jdbcType=VARCHAR},
             #{macCode,jdbcType=VARCHAR},
             #{itemTareWeight,jdbcType=DOUBLE},
-            #{seCode,jdbcType=VARCHAR}
+            #{seCode,jdbcType=VARCHAR},
+            #{createBy,jdbcType=VARCHAR},
+            #{updateBy,jdbcType=VARCHAR}
         )
     </insert>
 
@@ -209,7 +215,9 @@
             item_variety,
             item_unit,
             item_color,
-            mac_code
+            mac_code,
+            create_by,
+            update_by
         )
         VALUES
         <foreach collection ="list" item="item" separator =",">
@@ -234,7 +242,9 @@
             #{item.itemVariety,jdbcType=BIGINT},
             #{item.itemUnit,jdbcType=BIGINT},
             #{item.itemColor,jdbcType=VARCHAR},
-            #{item.macCode,jdbcType=VARCHAR}
+            #{item.macCode,jdbcType=VARCHAR},
+            #{item.createBy,jdbcType=VARCHAR},
+            #{item.updateBy,jdbcType=VARCHAR}
         )
         </foreach>
     </insert>
@@ -269,7 +279,7 @@
     </select>
 
     <update id="updateStock" parameterType="com.lcyzh.nmerp.entity.TStock">
-        update t_stock set item_weight = #{itemWeight} where id = #{id}
+        update t_stock set item_weight = #{itemWeight},update_by = #{updateBy} where id = #{id}
     </update>
 
 </mapper>

@@ -317,8 +317,8 @@
 	                                    </c:forEach>
 	                                    <tr>
 	                                        <td>总计:</td>
-	                                        <td colspan="13">注：理论重量计算公式 (长 * 宽 * 数量)/(1/（0.95 * 厚度))</td>
-	                                        <td colspan="5">理论总重量:${theoryTotalWeight} kg</td>
+	                                        <td colspan="13"></td>
+	                                        <td colspan="7">理论总重量:${theoryTotalWeight} kg</td>
 	                                    </tr>
 	                                    </tbody>
 	                                </table>

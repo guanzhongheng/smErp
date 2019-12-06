@@ -13,4 +13,5 @@ package com.lcyzh.nmerp.service;
 public interface IDictService {
 
     void loadDictData();
+
 }

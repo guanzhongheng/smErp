@@ -24,6 +24,8 @@
         <result column="ord_out_num" property="ordOutNum" jdbcType="BIGINT"/>
         <result column="ord_total_sq" property="ordTotalSq" jdbcType="DOUBLE"/>
         <result column="ord_total_weight" property="ordTotalWeight" jdbcType="DOUBLE"/>
+        <result column="create_by" property="createBy" jdbcType="VARCHAR"/>
+        <result column="update_by" property="updateBy" jdbcType="VARCHAR"/>
     </resultMap>
 
 
@@ -185,7 +187,9 @@
             ord_total_num,
             ord_out_num,
             ord_total_sq,
-            ord_total_weight
+            ord_total_weight,
+            create_by,
+            update_by
         )
         VALUES (
             #{ordCode,jdbcType=VARCHAR},
@@ -208,7 +212,9 @@
             #{ordTotalNum,jdbcType=BIGINT},
             #{ordOutNum,jdbcType=BIGINT},
             #{ordTotalSq,jdbcType=DOUBLE},
-            #{ordTotalWeight,jdbcType=DOUBLE}
+            #{ordTotalWeight,jdbcType=DOUBLE},
+            #{createBy,jdbcType=VARCHAR},
+            #{updateBy,jdbcType=VARCHAR}
         )
     </insert>
 
@@ -233,7 +239,9 @@
         ord_total_num,
         ord_out_num,
         ord_total_sq,
-        ord_total_weight
+        ord_total_weight,
+        create_by,
+        update_by
         )
         VALUES
         <foreach collection="list" item="item" separator=",">
@@ -257,7 +265,9 @@
             #{item.ordTotalNum,jdbcType=BIGINT},
             #{item.ordOutNum,jdbcType=BIGINT},
             #{item.ordTotalSq,jdbcType=DOUBLE},
-            #{item.ordTotalWeight,jdbcType=DOUBLE}
+            #{item.ordTotalWeight,jdbcType=DOUBLE},
+            #{createBy,jdbcType=VARCHAR},
+            #{updateBy,jdbcType=VARCHAR}
             )
         </foreach>
     </insert>
@@ -292,7 +302,6 @@
             <if test="comContractor!=null">
                 com_contractor = #{comContractor,jdbcType=VARCHAR},
             </if>
-
             <if test="contAttachUrl!=null">
                 cont_attach_url = #{contAttachUrl,jdbcType=VARCHAR},
             </if>
@@ -315,7 +324,10 @@
                 ord_total_weight = #{ordTotalWeight,jdbcType=DOUBLE},
             </if>
             <if test="remarks!=null">
-                remarks = #{remarks,jdbcType=DOUBLE},
+                remarks = #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="updateBy!=null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
             </if>
         </set>
         WHERE ord_code = #{ordCode,jdbcType=VARCHAR}
@@ -354,7 +366,7 @@
     </update>
 
     <update id="updateOrderStatus" parameterType="com.lcyzh.nmerp.entity.TOrder">
-        update T_ORDER set ord_status = #{ordStatus} where ord_code = #{ordCode} and ord_status = 100001
+        update T_ORDER set ord_status = #{ordStatus},approval_by = #{approvalBy} where ord_code = #{ordCode} and ord_status = 100001
     </update>
 
     <update id="updateOrderNum" parameterType="com.lcyzh.nmerp.entity.TOrder">

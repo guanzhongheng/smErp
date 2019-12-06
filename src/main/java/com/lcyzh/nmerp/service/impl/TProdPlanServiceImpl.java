@@ -6,6 +6,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lcyzh.nmerp.common.persistence.Page;
 import com.lcyzh.nmerp.constant.Constants;
+import com.lcyzh.nmerp.controller.system.util.UserUtils;
 import com.lcyzh.nmerp.dao.TFormulaMapper;
 import com.lcyzh.nmerp.dao.TMachineInfoMapper;
 import com.lcyzh.nmerp.dao.TProdPlanDetailMapper;
@@ -13,6 +14,7 @@ import com.lcyzh.nmerp.dao.TProdPlanMapper;
 import com.lcyzh.nmerp.entity.TMachineInfo;
 import com.lcyzh.nmerp.entity.TProdPlan;
 import com.lcyzh.nmerp.entity.TProdPlanDetail;
+import com.lcyzh.nmerp.entity.sys.User;
 import com.lcyzh.nmerp.model.vo.FormulaDetailVo;
 import com.lcyzh.nmerp.model.vo.OrderItemVo;
 import com.lcyzh.nmerp.model.vo.ProdPlanVo;
@@ -109,10 +111,11 @@ public class TProdPlanServiceImpl implements TProdPlanService {
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
     public int update(TProdPlan prodPlan) {
         // 更新配方信息到对应订单下产品
+        User sysUser = UserUtils.getUser();
         String[] details = prodPlan.getPlanDetailIds().split(",");
         if(details != null && details.length > 0){
             List<String> list = Arrays.asList(details);
-            int re = tFormulaMapper.updateByDetails(list,prodPlan.getFormula());
+            int re = tFormulaMapper.updateByDetails(list,prodPlan.getFormula(),sysUser.getId());
             if(re <= 0){
                 throw new RuntimeException("订单配方信息更新失败!");
             }

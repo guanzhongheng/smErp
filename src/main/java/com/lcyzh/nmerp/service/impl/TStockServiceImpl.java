@@ -3,8 +3,10 @@ package com.lcyzh.nmerp.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lcyzh.nmerp.common.persistence.Page;
+import com.lcyzh.nmerp.controller.system.util.UserUtils;
 import com.lcyzh.nmerp.dao.TStockMapper;
 import com.lcyzh.nmerp.entity.TStock;
+import com.lcyzh.nmerp.entity.sys.User;
 import com.lcyzh.nmerp.model.vo.StockQueryVo;
 import com.lcyzh.nmerp.service.TStockService;
 import org.springframework.beans.BeanUtils;
@@ -42,6 +44,9 @@ public class TStockServiceImpl implements TStockService{
 
     @Override
     public int insert(TStock tStock) {
+        User sysUser = UserUtils.getUser();
+        tStock.setCreateBy(sysUser.getId());
+        tStock.setUpdateBy(sysUser.getId());
         return tStockMapper.insert(tStock);
     }
 
@@ -52,6 +57,8 @@ public class TStockServiceImpl implements TStockService{
 
     @Override
     public int updateStock(TStock tStock) {
+        User sysUser = UserUtils.getUser();
+        tStock.setUpdateBy(sysUser.getId());
         return tStockMapper.updateStock(tStock);
     }
 

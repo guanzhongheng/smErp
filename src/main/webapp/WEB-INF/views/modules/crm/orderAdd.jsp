@@ -137,7 +137,7 @@
                                         </div>
                                         <div class="col-md-6 " >
                                             <button class="btn btn-primary global-button-style" type="submit">保存订单</button>&nbsp;&nbsp;&nbsp;
-                                            <c:if test="${empty orderAddModifyVo.ordCode}"><button class="btn btn-primary global-button-style" type="button" onclick="prodlistAdd()">产品添加</button>&nbsp;&nbsp;&nbsp;
+                                            <c:if test="${not empty orderAddModifyVo.ordCode}"><button class="btn btn-primary global-button-style" type="button" onclick="prodlistAdd()">产品添加</button>&nbsp;&nbsp;&nbsp;
                                             </c:if>
                                             <button class="btn btn-primary global-button-style" type="button"
                                                     onclick="gotBackList()">返  回

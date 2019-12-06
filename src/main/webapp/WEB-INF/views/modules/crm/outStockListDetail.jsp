@@ -104,7 +104,7 @@
                     <thead>
                     <tr>
                         <th style="text-align: center">序号</th>
-                        <th style="text-align: center">条形码号</th>
+                        <th style="text-align: center">二维码号</th>
                         <th style="text-align: center">订单标题</th>
                         <th style="text-align: center">产品品种</th>
                         <th style="text-align: center">产品类别</th>

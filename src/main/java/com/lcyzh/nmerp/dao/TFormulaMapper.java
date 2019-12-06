@@ -27,5 +27,5 @@ public interface TFormulaMapper {
 
     int delete(TFormula tFormula);
 
-    int updateByDetails(@Param("planDetails") List<String> planDetails,@Param("formula") String formula);
+    int updateByDetails(@Param("planDetails") List<String> planDetails,@Param("formula") String formula,@Param("formulaBy") String formulaBy);
 }

@@ -30,9 +30,9 @@
                 <td>
                     <%--<img id="imgcode"/>--%>
 
-                    <div id="imgcode"></div>
+                    <div id="imgcode" style="padding-left: 15px;"></div>
                 </td>
-                <td style="width: 30px;">
+                <td style="width: 20px;">
                 </td>
                 <td>
                 </td>
@@ -117,10 +117,10 @@
         $("#imgcode").qrcode(barCode);
 
         // JsBarcode("#imgcode", barCode,{
-        //     format: "CODE128",//选择要使用的条形码类型
+        //     format: "CODE128",//选择要使用的二维码类型
         //     height:26,//高度
         //     width:1.5,
-        //     displayValue:true,//是否在条形码下方显示文字
+        //     displayValue:true,//是否在二维码下方显示文字
         //     fontSize:12,//设置文本的大小
         //     textPosition:"top",//设置文本的垂直位置
         // });

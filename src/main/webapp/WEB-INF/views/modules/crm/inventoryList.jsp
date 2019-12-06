@@ -72,7 +72,7 @@
     <div class="panel panel-default" style="border-color: #50B0E6; border-style: solid; border-width: 1px; border-radius:5px 5px 5px 5px;">
         <div class="panel-heading" style="background-color: #50B0E6">
             <h3 class="panel-title global-panel-title" >
-                条形码列表
+                码值列表
             </h3>
         </div>
         <div class="panel-body" style="padding: 10px 10px 0px 10px;">
@@ -144,7 +144,7 @@
                     <tr>
                         <th style="text-align: center">序号</th>
                         <th style="text-align: center">订单标题</th>
-                        <th style="text-align: center">条形码号</th>
+                        <th style="text-align: center">二维码号</th>
                         <th style="text-align: center">归属人</th>
                         <th style="text-align: center">产品类别</th>
                         <th style="text-align: center">产品品种</th>
