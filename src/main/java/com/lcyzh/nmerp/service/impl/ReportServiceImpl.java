@@ -80,6 +80,13 @@ public class ReportServiceImpl implements IReportService {
                 item.setItemColorValue(SysDictUtils.getDictLabel(item.getItemColor(), Constants.PROD_COLOR, ""));
                 item.setItemYbTypeValue(SysDictUtils.getDictLabel(item.getItemYbType(), Constants.PROD_YB_TYPE, ""));
                 item.setItemYcTypeValue(SysDictUtils.getDictLabel(item.getItemYcType(), Constants.PROD_YC_TYPE, ""));
+                if(item.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)
+                        || item.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JH)
+                        || item.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JB)){
+                    item.setTotalPrice(Arith.round(item.getItemPrice()*item.getTotalStocktWeight(),4));
+                }else{
+                    item.setTotalPrice(Arith.round(item.getItemNum()*item.getItemPrice()*item.getItemLenth()*item.getItemWidth(),4));
+                }
             });
             vo.setOrderItemVos(orderItemVos);
             return vo;
@@ -175,11 +182,16 @@ public class ReportServiceImpl implements IReportService {
             list.forEach(n->{
                 Double mj = Arith.mul(n.getItemLenth(),n.getItemWidth());
                 Double mjt = Arith.mul(mj,n.getItemNum());
-                Double fm = Arith.div(1,Arith.mul(n.getItemDensity(),n.getItemThick()));
-                Double to = Arith.div(mjt,fm,4);
-                n.setTheoryWeight(to);
+                Double fm = 0d;
+                if(n.getItemDensity() == null || n.getItemThick() == null){
+                    fm = 0d;
+                }else{
+                    fm = Arith.div(1,Arith.mul(n.getItemDensity(),n.getItemThick()));
+                    Double to = Arith.div(mjt,fm,4);
+                    n.setTheoryWeight(to);
+                }
             });
-            totalWi = list.stream().mapToDouble(i->i.getTheoryWeight()).sum();
+            totalWi = list.stream().mapToDouble(i->i.getTheoryWeight() == null?0:i.getTheoryWeight()).sum();
             return totalWi;
         }
         return null;

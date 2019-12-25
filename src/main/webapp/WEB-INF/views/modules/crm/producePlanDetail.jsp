@@ -281,7 +281,7 @@
 	                                    <tbody>
 	                                    <c:forEach items="${list}" var="vo">
 	                                        <tr>
-	                                            <td>
+	                                            <td style="text-align: center">
 	                                                <c:if test="${vo.itemStatus eq '48'}">
 	                                                    <input type="checkbox" name="detailId" value="${vo.id}">
 	                                                </c:if>

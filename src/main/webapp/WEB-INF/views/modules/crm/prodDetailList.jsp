@@ -491,6 +491,14 @@
                         return ['<input type="number" min="0" style="width: 80px" onchange="inserData(\'itemNum\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
                     }
                 },{
+                    field: 'itemWeight',
+                    title: '标准重量',
+                    width: '150px',
+                    formatter:function (value,row,index) {
+                        return ['<input type="number" min="0" style="width: 80px" onchange="inserData(\'itemWeight\','+row.ckId+',this,'+index+')" class="form-control" value="'+value+'"/>'].join('');
+                    }
+                },
+                {
                     field: 'itemYbType',
                     title: '压边类型',
                     width: '150px',
@@ -617,7 +625,6 @@
 
 
     window.operateEvents = {
-
         "click #tableRowdelete" : function(e,value,row,index){
             for(var i=0;i<cusProdList.length;i++){
                 if(cusProdList[i].ckId == row.ckId){

@@ -69,10 +69,11 @@ public class ExportController {
         OrderQueryVo orderQueryVo = reportService.queryOrderInfo(ordCode);
         Context context = new Context();
         context.putVar("orderInfo", orderQueryVo.getOrderItemVos());
-        Double totalPrice = orderQueryVo.getOrderItemVos().stream().mapToDouble(i -> (i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)
+        Double totalPrice = orderQueryVo.getOrderItemVos().stream().mapToDouble(i -> (
+                i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)
                 || i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JH)
-                || i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JB))?0:(
-                        Arith.round(i.getItemNum()*i.getItemPrice()*i.getItemLenth()*i.getItemWidth(),4)
+                || i.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JB))?
+                (Arith.round(i.getItemPrice()*i.getTotalStocktWeight(),4)):(Arith.round(i.getItemNum()*i.getItemPrice()*i.getItemLenth()*i.getItemWidth(),4)
         )).sum();
         context.putVar("totalPrice", totalPrice);
         return new ModelAndView(

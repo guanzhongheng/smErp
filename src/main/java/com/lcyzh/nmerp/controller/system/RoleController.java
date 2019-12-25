@@ -68,7 +68,7 @@ public class RoleController extends BaseController {
 	
 	@RequestMapping(value = "save")
 	public String save(Role role, Model model, RedirectAttributes redirectAttributes) {
-		if(!UserUtils.getUser().isAdmin()&&role.getSysData().equals(Global.YES)){
+		if(!UserUtils.getUser().isAdmin()){
 			addMessage(redirectAttributes, "越权操作，只有超级管理员才能修改此数据！");
 			return "redirect:/sys/role/?repage";
 		}

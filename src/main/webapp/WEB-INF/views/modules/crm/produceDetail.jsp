@@ -128,11 +128,10 @@
                                         </div>
                                         <c:if test="${detail.thresholdUp != 0.0000 && detail.thresholdDown != 0.0000}">
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label" style="margin-left: -25px;">标准件开关:</label>
-                                            <div class="col-sm-4">
-                                                <input type="checkbox" checked class="checkbox" id="thresholdCheckbox" />
-                                                <input disabled="ture" type="number" placeholder="标准重量" id="standardWeight" style="width: 85px;display: inline"
-                                                       class="form-control produceDetail-input-readonly">kg
+                                            <div class="col-sm-4" id="resultUd">
+                                                <%--<input type="checkbox" checked class="checkbox" id="thresholdCheckbox" />--%>
+                                                <input type="number" placeholder="标准重量" id="standardWeight" style="width: 85px;display: inline"
+                                                       class="form-control produceDetail-input-readonly" value="${detail.itemWeight}">
                                                 <input type="hidden" value="${detail.thresholdUp}" id="thresholdUp">
                                                 <input type="hidden" value="${detail.thresholdDown}" id="thresholdDown">
                                             </div>
@@ -214,12 +213,17 @@
                                                 <input disabled="ture" placeholder="宽度" value="${detail.itemWidth}" id="itemWidth"
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
                                             </div>
+                                            <label class="col-sm-2 control-label">标准重量:</label>
+                                            <div class="col-sm-4">
+                                                <input disabled="ture"  value="${detail.itemWeight}"
+                                                       class="form-control produceDetail-input-readonly" readonly="true"/>
+                                            </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label" style="margin-left: -25px;">重量:</label>
+                                            <label class="col-sm-2 control-label" style="margin-left: -25px;">总重量:</label>
                                             <div class="col-sm-4">
-                                                <input disabled="ture" placeholder="重量" value="${detail.itemTotalWeight}"
+                                                <input disabled="ture" placeholder="总重量" value="${detail.itemTotalWeight}"
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
                                             </div>
                                             <label class="col-sm-2 control-label">数量:</label>
@@ -489,12 +493,21 @@
     }
 
     $(document).ready(function () {
+        // 判定会否标准重量 如果是开启标准重量判定
+        $("#resultUd").hide();
+        var nStandardWeight = $("#standardWeight").val();
+
+
         $("#nextProd").hide();
         /*计重相关逻辑*/
         var weightType ;
         var weightFlag = 'auto';
         var openFlag = false;
         var standardFlag = false;
+        if(nStandardWeight != undefined && nStandardWeight > 0){
+            standardFlag = true;
+            $("#weightHand").attr("disabled",true).css("pointer-events","none");
+        }
         $("#totalStart").click(function () {
 
             weightType = 'total';
@@ -620,6 +633,7 @@
                     return;
                 }
                 if(standardFlag){
+
                     var standardWeight = $("#standardWeight").val();
                     if(standardWeight == 0.00 || standardWeight == null){
                         top.$.jBox.tip('当前为标准件生产模式，请输入标准重量！');

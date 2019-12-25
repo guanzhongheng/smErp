@@ -39,6 +39,56 @@ public class ProduceHistoryVo extends StockVo{
 
     private String phone;
 
+    private String orderCreateTime;
+
+    private String stockCreateTime;
+
+    private String outStockCreateTime;
+
+    private Double prodDensity;
+
+    private Double itemMickWeight;
+
+    public Double getItemMickWeight() {
+        return itemMickWeight;
+    }
+
+    public void setItemMickWeight(Double itemMickWeight) {
+        this.itemMickWeight = itemMickWeight;
+    }
+
+    public String getOrderCreateTime() {
+        return orderCreateTime;
+    }
+
+    public void setOrderCreateTime(String orderCreateTime) {
+        this.orderCreateTime = orderCreateTime;
+    }
+
+    public String getStockCreateTime() {
+        return stockCreateTime;
+    }
+
+    public void setStockCreateTime(String stockCreateTime) {
+        this.stockCreateTime = stockCreateTime;
+    }
+
+    public String getOutStockCreateTime() {
+        return outStockCreateTime;
+    }
+
+    public void setOutStockCreateTime(String outStockCreateTime) {
+        this.outStockCreateTime = outStockCreateTime;
+    }
+
+    public Double getProdDensity() {
+        return prodDensity;
+    }
+
+    public void setProdDensity(Double prodDensity) {
+        this.prodDensity = prodDensity;
+    }
+
     public String getProxyName() {
         return proxyName;
     }

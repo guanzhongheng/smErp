@@ -9,6 +9,7 @@ import com.lcyzh.nmerp.dao.TCustomerMapper;
 import com.lcyzh.nmerp.entity.TFormula;
 import com.lcyzh.nmerp.entity.TOutStock;
 import com.lcyzh.nmerp.entity.TProdPlanDetail;
+import com.lcyzh.nmerp.entity.sys.Role;
 import com.lcyzh.nmerp.entity.sys.User;
 import com.lcyzh.nmerp.model.vo.*;
 import com.lcyzh.nmerp.service.*;
@@ -218,6 +219,10 @@ public class CrmManageController extends BaseController {
         page.setCount(list.size());
         page.setList(list);
         doCalInventoryInfo(list,model);
+        User user = UserUtils.getUser();
+        if(!CollectionUtils.isEmpty(user.getRoleList())){
+            model.addAttribute("role", user.getRoleList().get(0));
+        }
         model.addAttribute("page", page);
         return "modules/crm/inventoryList";
     }

@@ -184,8 +184,11 @@
                             </c:if>
                             <%--<td><button class="btn btn-primary" type="button" onclick="rePrint(${cus.stockId})"  >补签</button></td>--%>
                             <td>
-                                <button rel="external nofollow" class="btn btn-primary" style="font-size: 14px"
-                                   onclick="updateWeight(${cus.stockId});return false;">修改</button>
+                                <c:if test="${role != null &&role.roleType ne 'user'}" >
+                                    <button rel="external nofollow" class="btn btn-primary" style="font-size: 14px"
+                                       onclick="updateWeight(${cus.stockId});return false;">修改</button>
+                                </c:if>
+
                                 <button rel="external nofollow" class="btn btn-primary" style="font-size: 14px"
                                    onclick="rePrint(${cus.stockId});return false;">补签</button>
                                 <div class="btn-group dropdown">

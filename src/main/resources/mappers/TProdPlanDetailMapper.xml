@@ -228,11 +228,13 @@
         d.item_status,
         c.cus_name,
         t.ord_title,
-        i.item_yb_type
+        i.item_yb_type,
+        ifnull(tp.prod_density,0) itemDensity
         from t_prod_plan_detail d
         inner join t_order_item i on i.id = d.order_item_id
         inner join t_order t on t.ord_code = d.ord_code
         left join t_customer c on c.cus_code = t.cus_code
+        left join t_product tp on tp.prod_code = d.item_code
         where d.id in
         <foreach item = "id" index = "index" collection = "ids" open = "(" separator = "," close = ")">
             #{id}
@@ -257,11 +259,13 @@
         d.item_status,
         c.cus_name,
         t.ord_title,
-        i.item_yb_type
+        i.item_yb_type,
+        ifnull(tp.prod_density,0) itemDensity
         from t_prod_plan_detail d
         inner join t_order_item i on i.id = d.order_item_id
         inner join t_order t on t.ord_code = d.ord_code
         left join t_customer c on c.cus_code = t.cus_code
+        left join t_product tp on tp.prod_code = d.item_code
         where d.item_status = '1' and d.prod_plan_code = #{code}
     </select>
 
@@ -299,6 +303,7 @@
         oi.formula formula,
         o.ord_title orderTitle,
         o.proxy_name proxyName,
+        oi.item_weight itemWeight,
         ppd.item_remarks itemRemarks,
         ppd.threshold_up thresholdUp,
         ppd.threshold_down thresholdDown,
@@ -518,44 +523,50 @@
 
 
     <select id="getProdInfobybarCode" parameterType="java.lang.String" resultType="com.lcyzh.nmerp.model.vo.ProduceHistoryVo">
-        SELECT
-            t.ord_title as ordTitle,
-            t.ord_code as ordCode,
-            t.proxy_name as proxyName,
-            t.create_by as ordCreateBy,
-            t.update_by as ordUpdateBy,
-            t.approval_by as ordApprovalBy,
-            ts.bar_code as barCode,
-            ts.se_code as seCode,
-            ts.item_weight as itemWeight,
-            ts.item_tare_weight as itemTareWeight,
-            ts.create_by AS stockCreateBy,
-            ts.update_by AS stockUpdateBy,
-            ts.`status` as 'status',
-            ts.item_cgy_code as itemCgyCode,
-            ts.item_variety as itemVariety,
-            ts.item_color as itemColor,
-            ts.item_lenth as itemLenth,
-            ts.item_width as itemWidth,
-            ts.item_owner as itemOwner,
-            ts.item_thick as itemThick,
-            ts.item_yb_type as itemYbType,
-            ts.item_yc_type itemYcType,
-            ti.item_code as itemCode,
-            ti.item_price as itemPrice,
-            ti.remarks,
-            ti.item_price_type as itemPriceType,
-            ti.formula,
-            tos.car_no as carNo,
-            tos.receiver,
-            tos.phone
-        FROM
-            t_stock ts
-            INNER JOIN t_order_item ti ON ti.id = ts.order_item_id
-            INNER JOIN t_order t ON t.ord_code = ts.ord_code
-            left join t_out_stock_detail tsd on tsd.bar_code = ts.bar_code
-            left join t_out_stock tos on tos.out_code = tsd.out_code
-        WHERE
+            SELECT
+                t.ord_title as ordTitle,
+                t.ord_code as ordCode,
+                tc.cus_name as proxyName,
+                (select name from t_sys_user where id = t.create_by) as ordCreateBy,
+                (select name from t_sys_user where id = t.update_by) as ordUpdateBy,
+                (select name from t_sys_user where id = t.approval_by) as ordApprovalBy,
+                t.create_time as orderCreateTime,
+                ts.bar_code as barCode,
+                ts.se_code as seCode,
+                ts.item_weight as itemWeight,
+                ts.item_tare_weight as itemTareWeight,
+                (select name from t_sys_user where id = ts.create_by) AS stockCreateBy,
+                (select name from t_sys_user where id = ts.update_by) AS stockUpdateBy,
+                ts.create_time as stockCreateTime,
+                ts.`status` as 'status',
+                ts.item_cgy_code as itemCgyCode,
+                ts.item_variety as itemVariety,
+                ts.item_color as itemColor,
+                ts.item_lenth as itemLenth,
+                ts.item_width as itemWidth,
+                ti.item_owner as itemOwner,
+                ts.item_thick as itemThick,
+                ts.item_yb_type as itemYbType,
+                ts.item_yc_type itemYcType,
+                ti.item_code as itemCode,
+                ti.item_price as itemPrice,
+                ti.item_remarks as remarks,
+                ti.item_price_type as itemPriceType,
+                ti.formula,
+                tos.car_no as carNo,
+                tos.receiver,
+                tos.phone,
+                tos.create_time as outStockCreateTime,
+                tp.prod_density as prodDensity
+            FROM
+                t_stock ts
+                INNER JOIN t_order_item ti ON ti.id = ts.order_item_id
+                INNER JOIN t_order t ON t.ord_code = ts.ord_code
+                INNER JOIN t_customer tc on tc.cus_code = t.cus_code
+                LEFT JOIN t_product tp on tp.prod_code = ti.item_code
+                left join t_out_stock_detail tsd on tsd.bar_code = ts.bar_code
+                left join t_out_stock tos on tos.out_code = tsd.out_code
+            WHERE
             ts.bar_code = #{barCode}
     </select>
 </mapper>

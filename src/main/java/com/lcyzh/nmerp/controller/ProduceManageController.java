@@ -376,13 +376,21 @@ public class ProduceManageController extends BaseController {
     }
 
     // 产品信息追踪
-    @RequestMapping(value = {"produce/history/find"})
-    public String findProdForHistory(String barCode,Model model){
-        if(StringUtils.isNotEmpty(barCode)){
-            ProduceHistoryVo vo = prodPlanDetailService.findProdForHistory(barCode);
-            model.addAttribute("prod",vo);
+    @RequestMapping(value = {"history/find"})
+    public String findProdForHistory(@ModelAttribute("vo") ProduceHistoryVo vo,Model model){
+        if(StringUtils.isNotEmpty(vo.getBarCode())){
+            ProduceHistoryVo prodInfo = prodPlanDetailService.findProdForHistory(vo.getBarCode());
+            // itemWidth/(1/(itemDensity*itemThick))
+            if(prodInfo != null && prodInfo.getProdDensity() != null && prodInfo.getItemThick() != null && prodInfo.getItemWidth() != null){
+                Double mkfm = Arith.div(1,Arith.mul(prodInfo.getProdDensity(),prodInfo.getItemThick()));
+                Double mkto = Arith.div(prodInfo.getItemWidth(),mkfm,4);
+                prodInfo.setItemMickWeight(Arith.round((mkto * 1000),4));
+            }
+            model.addAttribute("prod",prodInfo);
+        }else{
+            model.addAttribute("prod",new ProduceHistoryVo());
         }
-        return  "";
+        return  "modules/crm/prodHistoryInfo";
     }
 
 

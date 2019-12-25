@@ -57,7 +57,9 @@
         toi.item_status itemStatus,
         toi.item_out_num itemOutNum,
         toi.item_remarks itemRemarks,
-        toi.create_time createTime
+        toi.create_time createTime,
+        (select count(1) from t_stock where order_item_id = toi.id) as stockNum,
+        (select sum(item_weight - item_tare_weight) from t_stock where order_item_id = toi.id) as totalStocktWeight
     FROM
         T_ORDER_ITEM toi
         LEFT JOIN T_PRODUCT tt ON toi.item_code = tt.prod_code

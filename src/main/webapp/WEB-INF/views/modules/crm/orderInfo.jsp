@@ -156,6 +156,7 @@
                         <th style="text-align: center" data-field="itemOwner">归属人</th>
                         <th style="text-align: center" data-field="itemPrice">单价</th>
                         <th style="text-align: center" data-field="itemNum">数量</th>
+                        <th style="text-align: center" data-field="itemWeight">标准重量</th>
                         <th style="text-align: center" data-field="itemYbType">压边类型</th>
                         <th style="text-align: center" data-field="itemYcType">延长方式</th>
                         <th style="text-align: center" data-field="itemPriceTypeValue">计价方式</th>
@@ -179,6 +180,7 @@
                             <td>${o.itemOwner}</td>
                             <td>${o.itemPrice}</td>
                             <td>${o.itemNum}</td>
+                            <td>${o.itemWeight}</td>
                             <td>${fns:getDictLabel(o.itemYbType,'prod_ybType','无')}</td>
                             <td>${fns:getDictLabel(o.itemYcType,'prod_ycType','无')}</td>
                             <td>${(o.itemPriceType==141001 || o.itemPriceType==141003 || o.itemPriceType==141005)?"重量":"面积"}</td>
@@ -187,7 +189,7 @@
                         </tr>
                     </c:forEach>
                     <tr>
-                        <td colspan="15">总计:</td>
+                        <td colspan="16">总计:</td>
                         <td colspan="2">${totalMj}</td>
                     </tr>
                     </tbody>

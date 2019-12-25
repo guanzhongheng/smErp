@@ -81,6 +81,36 @@ public class OrderItemVo {
 
     private Double showTotalPrice;
 
+    private Integer stockNum;
+
+    private Double totalStocktWeight = 0d;
+
+    private Double totalPrice = 0d;
+
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public Integer getStockNum() {
+        return stockNum;
+    }
+
+    public void setStockNum(Integer stockNum) {
+        this.stockNum = stockNum;
+    }
+
+    public Double getTotalStocktWeight() {
+        return totalStocktWeight;
+    }
+
+    public void setTotalStocktWeight(Double totalStocktWeight) {
+        this.totalStocktWeight = totalStocktWeight;
+    }
+
     private int isShowPrice; //是否同意价格修改
 
     public int getIsShowPrice() {
