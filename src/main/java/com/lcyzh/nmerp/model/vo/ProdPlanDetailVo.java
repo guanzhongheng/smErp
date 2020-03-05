@@ -1,8 +1,5 @@
 package com.lcyzh.nmerp.model.vo;
 
-import com.lcyzh.nmerp.common.persistence.DataEntity;
-import com.lcyzh.nmerp.common.persistence.Page;
-
 import java.util.Date;
 
 /**
@@ -88,6 +85,16 @@ public class ProdPlanDetailVo{
     private Double itemYcLenth;
 
     private Double trueWeight;
+
+    private Integer isYb;
+
+    public Integer getIsYb() {
+        return isYb;
+    }
+
+    public void setIsYb(Integer isYb) {
+        this.isYb = isYb;
+    }
 
     public String getProdPlanDetailIds() {
         return prodPlanDetailIds;

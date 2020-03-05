@@ -39,6 +39,7 @@ public class DictServiceImpl implements IDictService {
                         DictUtils.getDictKeyMaps().put(dict.getDictKey(), keyList);
                     }
                     if (dict.getSubDictKey() != null) {
+
                         keyList.add(dict.getSubDictKey());
                         DictUtils.getDictValueMaps().put(dict.getSubDictKey(), dict.getSubDictValue());
                     }

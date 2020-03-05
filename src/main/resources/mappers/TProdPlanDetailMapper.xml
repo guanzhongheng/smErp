@@ -341,6 +341,9 @@
             <if test="endLength!= null and endLength > 0">
                 and ppd.item_width &lt;= #{endLength}
             </if>
+            <if test="isYb!= null and isYb >= 0">
+                and pp.isYb = #{isYb}
+            </if>
         </where>
         order by ppd.item_width
         <if test="ordSort!= null and ordSort == 1">

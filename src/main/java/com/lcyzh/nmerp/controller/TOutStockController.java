@@ -223,7 +223,4 @@ public class TOutStockController {
         Integer result = tOutStockService.updateStatus(outCode,'0');
         return String.valueOf(result);
     }
-
-
-
 }

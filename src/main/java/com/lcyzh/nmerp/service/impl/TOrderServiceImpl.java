@@ -228,13 +228,15 @@ public class TOrderServiceImpl implements TOrderService {
                     if (tOrderItem.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT)
                             || tOrderItem.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JH)
                             || tOrderItem.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_WEIGHT_JB)) {
-                        if (itv.getItemWeight() != null) {
+                        if (itv.getItemWeight() != null || "".equals(itv.getItemWeight())) {
                             tOrderItem.setItemWeight(itv.getItemWeight());
                             tOrderItem.setItemTotalWeight(itv.getItemWeight() * itv.getItemNum());
                             if (product != null) {
                                 totalAmount += product.getProdGuidePrice() * tOrderItem.getItemTotalWeight();
                             }
-
+                        }else{
+                            tOrderItem.setItemWeight(0d);
+                            tOrderItem.setItemTotalWeight(0d);
                         }
                     } else {
                         if (itv.getItemLenth() != null && itv.getItemWidth() != null) {
@@ -338,6 +340,9 @@ public class TOrderServiceImpl implements TOrderService {
             orderItem.setItemStatus(Constants.ORD_PROD_STATUS_NEW);
             orderItem.setItemOutNum(0L);
             orderItems.add(orderItem);
+            if(vo.getItemTotalWeight() == null){
+                vo.setItemTotalWeight(0d);
+            }
             if (vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ)
                     || vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ_JH)
                     || vo.getItemPriceType().equals(Constants.PROD_PRICE_TYPE_SQ_JB)) {

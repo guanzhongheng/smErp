@@ -71,6 +71,14 @@
                             <form:options items="${macList}" itemLabel="macCode" itemValue="macCode" htmlEscape="false"/>
                         </form:select>
                     </li>
+                    <li>
+                        &nbsp;&nbsp;
+                        <select id="isYb" name="isYb" placeholder="生产类型" style="width: 163px;">
+                            <option value="-1" >全类型</option>
+                            <option value="0" ${vo.isYb eq '0'?"selected":""}>普通类型</option>
+                            <option value="1" ${vo.isYb eq '1'?"selected":""}>特殊压边类型</option>
+                        </select>
+                    </li>
                 </ul>
                 <ul class="ul-form">
                     <li>
