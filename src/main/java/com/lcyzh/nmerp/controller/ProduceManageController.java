@@ -8,6 +8,7 @@ import com.lcyzh.nmerp.entity.*;
 import com.lcyzh.nmerp.model.vo.*;
 import com.lcyzh.nmerp.service.*;
 import com.lcyzh.nmerp.utils.Arith;
+import com.lcyzh.nmerp.utils.DictUtils;
 import com.lcyzh.nmerp.utils.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -310,7 +311,7 @@ public class ProduceManageController extends BaseController {
                           HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();
         ProdPlanDetailVo print = (ProdPlanDetailVo)session.getAttribute(UserUtils.getUser().getId());
-
+        setUseTime(print);
         model.addAttribute("user",UserUtils.getUser());
         model.addAttribute("vo",print);
         String pageStr = "";
@@ -322,6 +323,8 @@ public class ProduceManageController extends BaseController {
             pageStr = "modules/crm/stockCertificateYellow";
         }else if("new".equals(type)){
             pageStr = "modules/crm/stockCertificateNew";
+        }else if("light".equals(type)){
+            pageStr = "modules/crm/stockCertificateLight";
         }
         return pageStr;
     }
@@ -359,7 +362,7 @@ public class ProduceManageController extends BaseController {
 
         TOrderItem orderItem = orderItemService.getById(stock.getOrderItemId());
         print.setItemPriceType(orderItem.getItemPriceType());
-
+        setUseTime(print);
         model.addAttribute("user",UserUtils.getUser());
         model.addAttribute("vo",print);
         String pageStr = "";
@@ -371,10 +374,28 @@ public class ProduceManageController extends BaseController {
             pageStr = "modules/crm/stockCertificateYellow";
         }else if("new".equals(type)){
             pageStr = "modules/crm/stockCertificateNew";
+        }else if("light".equals(type)){
+            pageStr = "modules/crm/stockCertificateLight";
         }
         return pageStr;
     }
-
+    // 获取产品推荐使用时间
+    public void setUseTime(ProdPlanDetailVo print){
+        if(print.getItemVariety() != null){
+           String name = DictUtils.getValueByDictKey(print.getItemVariety());
+           if(name.indexOf("两年") > -1){
+               print.setUseTime("24个月");
+           }else if(name.indexOf("超长寿") > -1){
+               print.setUseTime("36个月");
+           }else if(name.indexOf("大姜膜") > -1){
+               print.setUseTime("6个月");
+           }else if(name.indexOf("单防膜") > -1 || name.indexOf("普通地膜") > -1){
+               print.setUseTime("3个月");
+           }else{
+               print.setUseTime("12个月");
+           }
+        }
+    }
     // 产品信息追踪
     @RequestMapping(value = {"history/find"})
     public String findProdForHistory(@ModelAttribute("vo") ProduceHistoryVo vo,Model model){

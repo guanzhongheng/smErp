@@ -8,7 +8,7 @@ import java.util.Date;
  * @Author :
  * @Iteration :
  * @Date :
- * @ModificationHistory Who          When          What
+ * @ModificationHistory Who          When          WhatitemVariety
  */
 public class ProdPlanDetailVo{
     private Long prodPlanDetailId;
@@ -37,6 +37,7 @@ public class ProdPlanDetailVo{
     private Long itemVariety;
     private String itemVarietyValue;
 
+    private String useTime;
     private Long itemUnit;
     private String itemOwner;
     private String itemColor;
@@ -88,6 +89,13 @@ public class ProdPlanDetailVo{
 
     private Integer isYb;
 
+    public String getUseTime() {
+        return useTime;
+    }
+
+    public void setUseTime(String useTime) {
+        this.useTime = useTime;
+    }
     public Integer getIsYb() {
         return isYb;
     }

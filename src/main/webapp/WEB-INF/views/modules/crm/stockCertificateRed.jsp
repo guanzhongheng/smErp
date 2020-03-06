@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>A4纸</title>
+    <title>通用膜_A4纸打印</title>
     <style type="text/css">
         body
         {
@@ -33,7 +33,8 @@
         {
             padding: 1cm;
             border: 5px rgba(0,0,0,0) solid;
-            height: 256mm;
+            height: 150mm;
+            width:200mm;
             outline: 2cm rgba(0,0,0,0) solid;
         }
         @page
@@ -68,16 +69,14 @@
 
             <div class="gray-bg" style="background-color: white">
             <div>
-                <div style="width:100%;padding-left:0px;    padding-top: 33px;margin-top: 40px;">
+                <div style="text-align: right;"><div id="imgcode" style="margin-right: 40px;margin-top: -90px;"></div></div>
+                <div style="width:100%;padding-left:0px;padding-top: 30px;margin-top: 0px;">
                     <table  border="0" cellspacing="0" style="height:180px;">
                         <tr>
-                            <td colspan="2" style="height:1px;"></td>
+                            <td colspan="2"><font size=4>${fns:getValueByDictKey(vo.itemVariety)} ${vo.itemWidth}m * ${vo.itemThick}mm</font></td>
                         </tr>
                         <tr>
-                            <td colspan="2" ><font size=4>${fns:getValueByDictKey(vo.itemVariety)} ${vo.itemWidth}m * ${vo.itemThick}mm</font></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><font size=4>${vo.itemLenth}</font></td>
+                            <td colspan="2" ><font size=4>${vo.itemLenth}</font></td>
                         </tr>
                         <tr>
                             <td colspan="2">
@@ -107,17 +106,31 @@
                             <td colspan="2"><font size=4></font></td>
                         </tr>
                         <tr>
-                            <td colspan="2"><font size=4>jr<fmt:formatDate value="${vo.createTime}" pattern="yyyyMMddHHmm"/></font></td>
+                            <td colspan="2"><font size=4>${vo.barCode}</font></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><font size=4>${vo.seCode}</font></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><font size=4>${vo.useTime}</font></td>
                         </tr>
                     </table>
                     <div style="text-align: center;    margin-top: 5px;">
-                        <button class="btn btn-primary global-button-style" type="button" id="bth" >打印</button>
+                        <button class="btn btn-primary global-button-style" type="button" id="bth" onclick="" >打印</button>
                     </div>
                 </div>
             </div>
             <script src="js/jquery.min.js?v=2.1.4"></script>
             <script src="js/bootstrap.min.js?v=3.3.6"></script>
-            <script type="text/javascript">
+            <script src="${ctxStatic}/hPlugs/js/jquery.qrcode.js"></script>
+            <script src="${ctxStatic}/hPlugs/js/qrcode.js"></script>
+
+
+                <script type="text/javascript">
+                $(document).ready(function () {
+                    var barCode = '${vo.barCode}';
+                    $("#imgcode").qrcode(barCode);
+                })
                 $("#bth").click(function () {
                     $("#bth").hide();
                     window.print();

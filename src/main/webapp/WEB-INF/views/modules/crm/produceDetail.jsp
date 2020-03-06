@@ -50,7 +50,7 @@
                                 <a class="btn btn-info" id="tareStart" style="width: 120px;">
                                     <i class="fa fa-circle-o"></i> 去皮
                                 </a>
-                                <a class="btn btn-primary" id="weightHand" style="width: 120px;">
+                                <a class="btn btn-primary" id="weightHand" style="width: 120px;" >
                                     <i class="fa fa-hand-pointer-o"></i> 手录重量
                                 </a>
                                 <a class="btn btn-primary" id="weightAuto" style="width: 120px;display: none;">
@@ -104,7 +104,7 @@
                                             <div class="col-md-7 " id="prodBtns" hidden>
                                                 <button class="btn btn-primary <%--global-button-style--%>" type="button" id="inStock" style="width: 95px;">入 库</button>
                                                 <button class="btn btn-warning " type="button" id="rePrint" disabled="true">重新打签</button>
-                                                <div class="btn-group dropdown">
+                                                <div id="printInfos" class="btn-group dropdown"  disabled="true">
                                                     <a class="btn btn-success " id="printCertNew" disabled="true" style="width: auto">
                                                         打印合格证(新版)
                                                     </a>
@@ -113,13 +113,16 @@
                                                     </a>
                                                     <ul class="dropdown-menu">
                                                         <li>
-                                                            <a href="#" id="printCertRed">合格证(红)</a>
+                                                            <a href="#" id="printCertRed">通用合格证</a>
                                                         </li>
                                                         <li>
-                                                            <a href="#" id="printCertGreen">合格证(绿)</a>
+                                                            <a href="#" id="printCertGreen">PO膜合格证</a>
                                                         </li>
                                                         <li>
-                                                            <a href="#" id="printCertYellow">合格证(黄)</a>
+                                                            <a href="#" id="printCertYellow">姜膜合格证</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#" id="printCertLight">灌浆膜合格证</a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -215,7 +218,7 @@
                                             </div>
                                             <label class="col-sm-2 control-label">标准重量:</label>
                                             <div class="col-sm-4">
-                                                <input disabled="ture"  value="${detail.itemWeight}"
+                                                <input disabled="ture" id="pdStandWeight"  value="${detail.itemWeight}"
                                                        class="form-control produceDetail-input-readonly" readonly="true"/>
                                             </div>
                                         </div>
@@ -495,9 +498,9 @@
     $(document).ready(function () {
         // 判定会否标准重量 如果是开启标准重量判定
         $("#resultUd").hide();
-        var nStandardWeight = $("#standardWeight").val();
+        var nStandardWeight = $("#pdStandWeight").val();
 
-
+        debugger
         $("#nextProd").hide();
         /*计重相关逻辑*/
         var weightType ;
@@ -686,6 +689,7 @@
             });
 
             $("#rePrint").removeAttr('disabled');
+            $("#printInfos").removeAttr('disabled');
             $("#printCertNew").removeAttr('disabled');
             $("#printCertBtns").removeAttr('disabled');
             // $("#printCertGreen").removeAttr('disabled');
@@ -729,7 +733,7 @@
                 title: '打印合格证确认',
                 skin: 'layui-layer-rim', //加上边框
                 area: ['800px', '600px'],
-                content: ['/produce/produce/printCert?type=new', 'yes'] //iframe的url，no代表不显示滚动条
+                content: ['/produce/produce/printCert?type=light', 'yes'] //iframe的url，no代表不显示滚动条
             });
         });
         $("#printCertRed").click(function () {
@@ -758,6 +762,16 @@
                 skin: 'layui-layer-rim', //加上边框
                 area: ['1400px', '600px'],
                 content: ['/produce/produce/printCert?type=yellow', 'yes'] //iframe的url，no代表不显示滚动条
+            });
+        });
+
+        $("#printCertLight").click(function () {
+            layer.open({
+                type: 2,
+                title: '打印合格证确认',
+                skin: 'layui-layer-rim', //加上边框
+                area: ['1400px', '600px'],
+                content: ['/produce/produce/printCert?type=light', 'yes'] //iframe的url，no代表不显示滚动条
             });
         });
 
@@ -834,7 +848,6 @@
 <script src="${ctxStatic}/hPlugs/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/clockpicker/clockpicker.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/cropper/cropper.min.js"></script>
-<script src="${ctxStatic}/hPlugs/js/demo/form-advanced-demo.min.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/JsBarcode/JsBarcode.all.min.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/layer/layer.min.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/switch/bootstrap-switch.min.js"></script>

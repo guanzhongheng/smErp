@@ -57,7 +57,8 @@
         }
         td {
             text-align:left;
-            height:32px
+            height:33px;
+            padding-left:90px;
         }
     </style>
 </head>
@@ -68,19 +69,13 @@
 
             <div class="gray-bg" style="background-color: white">
             <div>
-                <div style="width:100%;padding-left:420px;    padding-top: 35px;margin-top: -18px;">
+                <div style="width:100%;padding-left:400px;    padding-top: 27px;margin-top: -8px;">
                     <table  border="0" cellspacing="0" style="width:30%;height:180px;width: 370px;">
                         <tr>
                             <td colspan="2" style="height:1px;"></td>
                         </tr>
                         <tr>
                             <td colspan="2" ><font size=4>${fns:getValueByDictKey(vo.itemVariety)}</font></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" ><font size=4>${vo.itemOwner}</font></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" ><font size=4>${vo.itemWidth}m * ${vo.itemThick}</font></td>
                         </tr>
                         <tr>
                             <td colspan="2" ><font size=4>${vo.itemLenth} </font></td>
@@ -95,19 +90,19 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="2" ><font size=4></font></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" ><font size=4><fmt:formatDate value="${vo.createTime}" pattern="yyyy年MM月dd日"/></font></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" ><font size=4>生产班</font></td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" ><font size=4>${user.name}
+                            <td colspan="2" ><font size=4>
                                 <c:if test="${vo.seCode ne '' && vo.seCode != null}">
                                     (${vo.seCode})
                                 </c:if></font></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" ><font size=4></font></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" ><font size=4>${user.name}</font></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" ><font size=4><fmt:formatDate value="${vo.createTime}" pattern="yyyy年MM月dd日"/></font></td>
                         </tr>
                     </table>
                     <div style="text-align: center;    margin-top: 5px;">
@@ -115,8 +110,6 @@
                     </div>
                 </div>
             </div>
-            <script src="${ctxStatic}/hPlugs/js/jquery.min.js?v=2.1.4" type="text/javascript"></script>
-            <script src="${ctxStatic}/hPlugs/js/bootstrap.min.js?v=3.3.6" type="text/javascript"></script>
             <script type="text/javascript">
                 $("#bth").click(function () {
                     $("#bth").hide();

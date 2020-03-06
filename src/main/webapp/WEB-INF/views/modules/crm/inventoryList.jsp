@@ -192,19 +192,22 @@
                                 <button rel="external nofollow" class="btn btn-primary" style="font-size: 14px"
                                    onclick="rePrint(${cus.stockId});return false;">补签</button>
                                 <div class="btn-group dropdown">
-                                    <button class="btn btn-success" onclick="rePrintCert(${cus.stockId},'new')" >补合格证</button>
+                                    <button class="btn btn-success" onclick="rePrintCert(${cus.stockId},'light')" >补合格证</button>
                                     <button class="btn btn-success dropdown-toggle" data-toggle="dropdown">
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="#" onclick="rePrintCert(${cus.stockId},'red')">合格证(红)</a>
+                                            <a href="#" onclick="rePrintCert(${cus.stockId},'red')">通用合格证</a>
                                         </li>
                                         <li>
-                                            <a href="#" onclick="rePrintCert(${cus.stockId},'green')">合格证(绿)</a>
+                                            <a href="#" onclick="rePrintCert(${cus.stockId},'green')">PO膜合格证</a>
                                         </li>
                                         <li>
-                                            <a href="#" onclick="rePrintCert(${cus.stockId},'yellow')">合格证(黄)</a>
+                                            <a href="#" onclick="rePrintCert(${cus.stockId},'yellow')">姜膜合格证</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" onclick="rePrintCert(${cus.stockId},'light')">灌浆膜合格证</a>
                                         </li>
                                     </ul>
                                 </div>

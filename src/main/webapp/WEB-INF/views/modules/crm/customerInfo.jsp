@@ -353,6 +353,5 @@
 <script src="${ctxStatic}/hPlugs/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/clockpicker/clockpicker.js"></script>
 <script src="${ctxStatic}/hPlugs/js/plugins/cropper/cropper.min.js"></script>
-<script src="${ctxStatic}/hPlugs/js/demo/form-advanced-demo.min.js"></script>
 
 <link rel="stylesheet" href="/static/common/customize.css">
