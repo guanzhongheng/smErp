@@ -389,8 +389,10 @@ public class ProduceManageController extends BaseController {
                print.setUseTime("36个月");
            }else if(name.indexOf("大姜膜") > -1){
                print.setUseTime("6个月");
-           }else if(name.indexOf("单防膜") > -1 || name.indexOf("普通地膜") > -1){
+           }else if(name.indexOf("单防膜") > -1 || name.indexOf("耐老化地膜") > -1){
                print.setUseTime("3个月");
+           }else if(name.indexOf("普通地膜") > -1){
+               print.setUseTime("1个月");
            }else{
                print.setUseTime("12个月");
            }

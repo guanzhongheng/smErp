@@ -859,7 +859,6 @@
 
     // 修改配方信息到订单产品中 根据选中产品进行配方设置
     function saveFormu(){
-        debugger;
         var outTem = $("#outTemp").text();
         var midTem = $("#midTemp").text();
         var inTem = $("#inTemp").text();

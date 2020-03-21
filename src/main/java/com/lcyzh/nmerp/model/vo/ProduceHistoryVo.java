@@ -33,6 +33,8 @@ public class ProduceHistoryVo extends StockVo{
 
     private String formula;
 
+    private String outCode;
+
     private String carNo;
 
     private String receiver;
@@ -48,6 +50,14 @@ public class ProduceHistoryVo extends StockVo{
     private Double prodDensity;
 
     private Double itemMickWeight;
+
+    public String getOutCode() {
+        return outCode;
+    }
+
+    public void setOutCode(String outCode) {
+        this.outCode = outCode;
+    }
 
     public Double getItemMickWeight() {
         return itemMickWeight;

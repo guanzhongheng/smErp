@@ -295,7 +295,6 @@
     }
     
     function initSelectYcType(obj) {
-        debugger;
         if(obj != null || obj != undefined){
             var ycTp = $("#SelectycType");
             var headOption = "";
@@ -307,7 +306,6 @@
         }
     }
     function initSelectYbType(obj) {
-        debugger;
         if(obj != null || obj != undefined){
             var ybTp = $("#SelectybType");
             var headOption = "";
@@ -328,7 +326,6 @@
     }
     
     function getResChange(obj) {
-        debugger;
         initSelectAndNum();
         if($(obj).find("option:selected").val() != -1){
             prodObj.itemName = $(obj).find("option:selected").attr("data-prodName");

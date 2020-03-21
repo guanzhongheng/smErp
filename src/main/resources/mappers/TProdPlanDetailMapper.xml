@@ -556,6 +556,7 @@
                 ti.item_remarks as remarks,
                 ti.item_price_type as itemPriceType,
                 ti.formula,
+				tos.out_code as outCode,
                 tos.car_no as carNo,
                 tos.receiver,
                 tos.phone,

@@ -356,7 +356,21 @@
                     </div>
                 </div>
             </div>
-       
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <label class="col-md-4 control-label order-detail-label-margin" style="text-align: right">
+                                出库单号:
+                            </label>
+                            <label class="col-md-8 control-label">
+                                <input class="form-control"value="${prod.outCode}" disabled>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <hr/>
             <div class="row">
             	 	<div class="col-sm-12">

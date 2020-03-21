@@ -50,6 +50,9 @@
                                 <a class="btn btn-info" id="tareStart" style="width: 120px;">
                                     <i class="fa fa-circle-o"></i> 去皮
                                 </a>
+                                <a class="btn btn-info" id="itemTareStart" style="width: 120px;">
+                                    <i class="fa fa-circle-o"></i> <span id="openWeight">打开标重去皮</span>
+                                </a>
                                 <a class="btn btn-primary" id="weightHand" style="width: 120px;" >
                                     <i class="fa fa-hand-pointer-o"></i> 手录重量
                                 </a>
@@ -72,6 +75,11 @@
                                 <input id="totalWeightHand" hidden type="number" style="background-color: #4f4b19;width: 100px;height: 40px;"/>
                                 KG
                             </div>
+                            <div>
+                                <div style="min-width: 270px;background-color: black;color:green; font-size: 30px;float:left;text-align: center;margin-left:15px;">
+                                    净重：<span id="realWeightAuto">0.00</span>
+                                    KG
+                                </div>
                             <div>
                                 
                             </div>
@@ -129,19 +137,19 @@
 
                                             </div>
                                         </div>
-                                        <c:if test="${detail.thresholdUp != 0.0000 && detail.thresholdDown != 0.0000}">
+                                        <c:if test="${detail.thresholdUp != 0.0000 || detail.thresholdDown != 0.0000}">
                                         <div class="form-group">
-                                            <div class="col-sm-4" id="resultUd">
-                                                <%--<input type="checkbox" checked class="checkbox" id="thresholdCheckbox" />--%>
-                                                <input type="number" placeholder="标准重量" id="standardWeight" style="width: 85px;display: inline"
-                                                       class="form-control produceDetail-input-readonly" value="${detail.itemWeight}">
-                                                <input type="hidden" value="${detail.thresholdUp}" id="thresholdUp">
-                                                <input type="hidden" value="${detail.thresholdDown}" id="thresholdDown">
-                                            </div>
-                                            <label class="col-sm-2 control-label" >标准件上下阈值:</label>
+                                            <label class="col-sm-2 control-label" style="margin-left: -25px;">标准件阈值:</label>
                                             <div class="col-sm-4">
-                                                <input disabled="ture" placeholder="标准件上下阈值" value="上:${detail.thresholdUp}kg 下:${detail.thresholdDown}kg"
+                                                <input disabled="ture" placeholder="标准件阈值" value="上:${detail.thresholdUp}kg 下:${detail.thresholdDown}kg"
                                                        class="form-control produceDetail-input-readonly">
+                                            </div>
+                                            <div class="col-sm-4" id="resultUd">
+                                                    <%--<input type="checkbox" checked class="checkbox" id="thresholdCheckbox" />--%>
+                                                <input type="hidden" placeholder="标准重量" id="standardWeight" style="width: 85px;display: inline"
+                                                       class="form-control produceDetail-input-readonly" value="${detail.itemWeight}">
+                                                    <input type="hidden" value="${detail.thresholdUp}" id="thresholdUp">
+                                                    <input type="hidden" value="${detail.thresholdDown}" id="thresholdDown">
                                             </div>
                                         </div>
                                         </c:if>
@@ -450,7 +458,6 @@
     
     // 页面流转
     function goToNextPage(){
-        debugger;
         var allPlanIds = $("#allPlanIds").val();
         var newStr = allPlanIds.replace(($("#prodPlanDetailId").val() + ","),"");
         window.location.href = "/produce/produce/infoList?ids=" + newStr;
@@ -497,10 +504,8 @@
 
     $(document).ready(function () {
         // 判定会否标准重量 如果是开启标准重量判定
-        $("#resultUd").hide();
         var nStandardWeight = $("#pdStandWeight").val();
 
-        debugger
         $("#nextProd").hide();
         /*计重相关逻辑*/
         var weightType ;
@@ -510,6 +515,8 @@
         if(nStandardWeight != undefined && nStandardWeight > 0){
             standardFlag = true;
             $("#weightHand").attr("disabled",true).css("pointer-events","none");
+        }else{
+            $("#itemTareStart").attr("disabled",true).css("pointer-events","none");
         }
         $("#totalStart").click(function () {
 
@@ -530,6 +537,7 @@
             weightType ='';
             send("stop");
             $("#totalWeightAuto").text("0.00");
+            $("#realWeightAuto").text("0.00");
             $("#tareWeightAuto").text("0.00");
             $("#tareStart").removeAttr('disabled');
             $("#totalStart").show();
@@ -542,7 +550,22 @@
             // }
             $("#tareStart").attr('disabled',"true");
         });
+        $("#itemTareStart").click(function(){
+            if(weightFlag != 'bzhand'){
+                weightFlag = 'bzhand';
+                $("#tareWeightHand").show();
+                $("#tareWeightAuto").hide();
+                $("#openWeight").text("关闭标重去皮")
+                $("#tareWeightAuto").text("0.00")
+            }else{
+                weightFlag = 'auto';
+                $("#tareWeightHand").hide();
+                $("#tareWeightAuto").show();
+                $("#openWeight").text("打开标重去皮")
+            }
 
+
+        });
         $("#weightHand").click(function () {
             weightFlag = 'hand';
             $("#totalWeightHand").show();
@@ -628,27 +651,53 @@
 
         // 入库逻辑
         $("#inStock").click(function () {
-            var totalWeight = weightFlag == 'auto' ? parseFloat($("#totalWeightAuto").text()).toFixed(2):parseFloat($("#totalWeightHand").val()).toFixed(2);
-            var tareWeight = weightFlag == 'auto' ? parseFloat($("#tareWeightAuto").text()).toFixed(2):parseFloat($("#tareWeightHand").val()).toFixed(2);
+            // var totalWeight = (weightFlag == 'auto' || weightFlag == 'bzhand') ? parseFloat($("#totalWeightAuto").text()).toFixed(2):parseFloat($("#totalWeightHand").val()).toFixed(2);
+            // var tareWeight = weightFlag == 'auto' ? parseFloat($("#tareWeightAuto").text()).toFixed(2):parseFloat($("#tareWeightHand").val()).toFixed(2);
+            var totalWeight = 0;
+            var tareWeight = 0;
+            if(weightFlag == 'hand'){
+                totalWeight = parseFloat($("#totalWeightHand").val()).toFixed(2);
+            }else{
+                totalWeight = parseFloat($("#totalWeightAuto").text()).toFixed(2);
+            }
+            if(weightFlag == 'auto'){
+                tareWeight = parseFloat($("#tareWeightAuto").text()).toFixed(2);
+            }else{
+                tareWeight = parseFloat($("#tareWeightHand").val()).toFixed(2);
+            }
+            console.log("称重重量：" + totalWeight + " 皮重:" + tareWeight);
             if($("#itemPriceType").val() == 141001 || $("#itemPriceType").val() == 141003 || $("#itemPriceType").val() == 141005){
                 if(totalWeight == 0.00 || totalWeight == null){
                     top.$.jBox.tip('当前计价方式必须称重后才能入库！');
                     return;
                 }
                 if(standardFlag){
-
                     var standardWeight = $("#standardWeight").val();
+                    console.log("标准重量：" + standardWeight);
                     if(standardWeight == 0.00 || standardWeight == null){
                         top.$.jBox.tip('当前为标准件生产模式，请输入标准重量！');
                         return;
                     }else{
                         var thresholdUp = (parseFloat(standardWeight)+parseFloat($("#thresholdUp").val())).toFixed(2);
                         var thresholdDown = (parseFloat(standardWeight)-parseFloat($("#thresholdDown").val())).toFixed(2);
-                        if(totalWeight>thresholdUp || totalWeight<thresholdDown){
-                            top.$.jBox.tip('当前为标准件生产模式，称量重量超出标准件阈值范围！');
+                        var realWeight = (parseFloat(totalWeight)-parseFloat(tareWeight)).toFixed(2);
+
+                        console.log("上限重量：" + thresholdUp + "下限重量：" + thresholdDown + "真实重量：" + realWeight);
+
+                        if(realWeight <= standardWeight && realWeight < thresholdDown){
+                            console.log("超出原因：" + realWeight <= standardWeight + " || " + realWeight < thresholdUp);
+                            top.$.jBox.tip('当前产品净重低于标准件阈值范围！');
                             return;
+                        }else if(realWeight >= standardWeight && realWeight > thresholdUp){
+                            console.log("超出原因：" + realWeight >= standardWeight + " || " +  realWeight > thresholdUp);
+                            top.$.jBox.tip('当前产品净重超出标准件阈值范围！');
+                            return;
+                        }
+                        if(totalWeight < standardWeight){
+                            totalWeight = (parseFloat(standardWeight)-parseFloat(tareWeight)).toFixed(2);
+                            tareWeight = -1 * (parseFloat(tareWeight).toFixed(2));
                         }else{
-                            totalWeight = standardWeight;
+                            totalWeight = (parseFloat(standardWeight)+parseFloat(tareWeight)).toFixed(2);
                         }
                     }
                 }
@@ -671,7 +720,6 @@
                         top.$.jBox.tip('入库成功');
                         $("#inStock").removeAttr('disabled');
                     } else if (result.itemNum == 0) {
-                        debugger;
                         // 当全部入库完成后处理
 						if(allPlanIds == $("#prodPlanDetailId").val() || allPlanIds == ($("#prodPlanDetailId").val() + ",")){
 							 top.$.jBox.tip('入库成功,请在完成打印操作后点击返回按钮');
@@ -679,7 +727,7 @@
 							// 开放下一个按钮权限
                             $("#nextProd").show();
 						}
-                       
+
                         // var path = 'window.location.href = "/produce/producePlan/info?prodPlanCode='+prodPlanCode+'"';
                     }
                     $("#itemNum").val(result.itemNum);
@@ -801,9 +849,13 @@
                 var data = event.data.replace(" ","").replace("+","").replace("kg","");
                 if(weightType == 'total'){
                     $("#totalWeightAuto").text(data);
+                    $("#realWeightAuto").text(data - parseFloat($("#tareWeightAuto").text()).toFixed(2));
                 }else if(weightType == 'tare'){
                     $("#tareWeightAuto").text(data);
+                }else if(weightType == 'bzhand'){
+                    $("#realWeightAuto").text(data - parseFloat($("#tareWeightHand").val()).toFixed(2) - parseFloat($("#tareWeightAuto").text()).toFixed(2));
                 }
+
             };
             socket.onopen = function(event){
                 openFlag = true;

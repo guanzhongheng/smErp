@@ -163,7 +163,6 @@
 <script>
 
     function goToProduce(id) {
-        debugger;
         var orderTitle = $("#orderTitle").val();
         var itemVariety = $("#itemVariety").val();
         var itemCgyCode = $("#itemCgyCode").val();

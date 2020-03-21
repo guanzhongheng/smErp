@@ -204,7 +204,6 @@
     }
 
     function doPrcoessList(obj) {
-        debugger;
         // 获取批量处理的ID信息
         var str = getCheckAllValue();
         window.location.href = "/produce/produce/cancleList?ids="+str;

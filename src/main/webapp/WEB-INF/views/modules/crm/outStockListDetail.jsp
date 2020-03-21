@@ -64,7 +64,7 @@
                                     <button class="btn btn-danger global-button-style" type="button" onclick="getBack()">审核驳回</button>
                                 </c:if>
                                 <button class="btn btn-primary global-button-style" type="button"
-                                        onclick="javascript:window.location.replace(document.referrer);">返回
+                                        onclick="window.history.go(-1);">返回
                                 </button>
                                 &nbsp;
                                 <div class="btn-group dropdown" style="height: 40px;">
