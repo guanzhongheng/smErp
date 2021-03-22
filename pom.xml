@@ -38,7 +38,7 @@
         <shiro.version>1.4.0</shiro.version>
         <sitemesh.version>3.0.1</sitemesh.version>
         <UserAgentUtils.version>1.21</UserAgentUtils.version>
-        <xstream.version>1.4.7</xstream.version>
+        <xstream.version>1.4.16</xstream.version>
         <activiti.version>6.0.0</activiti.version>
 
     </properties>
