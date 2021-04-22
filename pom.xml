@@ -35,7 +35,7 @@
         <activation.version>1.1.1</activation.version>
         <jmimemagic.version>0.1.5</jmimemagic.version>
         <pinyin4j.version>2.5.1</pinyin4j.version>
-        <shiro.version>1.4.0</shiro.version>
+        <shiro.version>1.7.1</shiro.version>
         <sitemesh.version>3.0.1</sitemesh.version>
         <UserAgentUtils.version>1.21</UserAgentUtils.version>
         <xstream.version>1.4.7</xstream.version>
