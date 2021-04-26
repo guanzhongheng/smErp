@@ -20,7 +20,7 @@
         <skipTests>true</skipTests>
 
         <commons-codec.version>1.9</commons-codec.version>
-        <commons-io.version>2.6</commons-io.version>
+        <commons-io.version>2.7</commons-io.version>
         <commons-fileupload.version>1.3.3</commons-fileupload.version>
         <commons-beanutils.version>1.9.3</commons-beanutils.version>
         <commons-text.version>1.3</commons-text.version>
